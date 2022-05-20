@@ -1,2 +1,5 @@
 # Crowbar-CSharp-Test
-(0.71 version) Test convert (with Tangible Software Solutions software) &amp; fixes to able running
+Test convert (with Tangible Software Solutions software) &amp; fixes to able running
+(`Based on 0.71 version`)
+
+Original repo: https://github.com/ZeqMacaw/Crowbar
