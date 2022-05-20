@@ -1,0 +1,928 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{632B4ABC-9AF3-480D-8640-FDA6FB637AD7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Crowbar.MainCROWBAR</StartupObject>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Crowbar</RootNamespace>
+    <AssemblyName>Crowbar</AssemblyName>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <ApplicationIcon>Resources\crowbar_icon.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG;WindowsFormsWithCustomSubMain</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>Full</DebugType>
+    <DefineConstants>TRACE;WindowsFormsWithCustomSubMain</DefineConstants>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DebugSymbols>true</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;DEBUG;WindowsFormsWithCustomSubMain</DefineConstants>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>TRACE;WindowsFormsWithCustomSubMain</DefineConstants>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Steamworks.NET, Version=12.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\Steamworks.NET.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\GameModel\UncompiledFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MyApplication.cs" />
+    <Compile Include="ConversionHelper.cs" />
+    <Compile Include="NumericHelper.cs" />
+    <Compile Include="Core\- Application\App.cs" />
+    <Compile Include="Core\- Application\AppConstants.cs" />
+    <Compile Include="Core\- Application\AppEnums.cs" />
+    <Compile Include="Core\- Application\AppExceptionHandler.cs" />
+    <Compile Include="Core\- Application\SingleInstanceApplication.cs" />
+    <Compile Include="Core\- Application\SingleInstanceEventArgs.cs" />
+    <Compile Include="Core\- Application\VersionModule.cs" />
+    <Compile Include="Core\- General\BackgroundWorkerEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\- General\Bitmap\BitmapFile.cs" />
+    <Compile Include="Core\- General\Bitmap\BitmapFileHeader.cs" />
+    <Compile Include="Core\- General\Bitmap\BitmapInfoHeader.cs" />
+    <Compile Include="Core\- General\Bitmap\BitmapRgbQuad.cs" />
+    <Compile Include="Core\- General\Workarounds.cs" />
+    <Compile Include="Core\- General\XmlColor.cs" />
+    <Compile Include="Core\- General\DuplicateKeyComparer.cs" />
+    <Compile Include="Core\- General\EnumHelper.cs" />
+    <Compile Include="Core\- General\GenericsModule.cs" />
+    <Compile Include="Core\- General\StringClass.cs" />
+    <Compile Include="Core\Compiler\CompilerOutputInfo.cs" />
+    <Compile Include="Core\Compiler\ParseMeshSmdInfo.cs" />
+    <Compile Include="Core\Compiler\ParseSMD.cs" />
+    <Compile Include="Core\GamePackage\ApkFile\ApkDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\ApkFile\ApkFile.cs" />
+    <Compile Include="Core\GamePackage\ApkFile\ApkFileData.cs" />
+    <Compile Include="Core\GameSetup\GameInfoTxtFile.cs" />
+    <Compile Include="Core\GameSetup\SteamLibraryPath.cs" />
+    <Compile Include="Core\- Application\AppSettings.cs" />
+    <Compile Include="Core\Compiler\Compiler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\Compiler\CompilerInputInfo.cs" />
+    <Compile Include="Core\DebugLog\DebugFormatModule.cs" />
+    <Compile Include="Core\DebugLog\FileSeekLog.cs" />
+    <Compile Include="Core\GameSetup\GameSetup.cs" />
+    <Compile Include="Core\DebugLog\UnknownValue.cs" />
+    <Compile Include="Core\- General\BindingListEx.cs" />
+    <Compile Include="Core\- General\BindingListExAutoSort.cs" />
+    <Compile Include="Core\- General\FileManager.cs" />
+    <Compile Include="Core\- General\IntermediateExpression.cs" />
+    <Compile Include="Core\- General\MathModule.cs" />
+    <Compile Include="Core\- General\PropertyComparer.cs" />
+    <Compile Include="Core\- General\Win32Api.cs" />
+    <Compile Include="Core\- General\WindowsJob.cs" />
+    <Compile Include="Core\Decompiler\DecompilerOutputInfo.cs" />
+    <Compile Include="Core\Decompiler\DecompilerInputInfo.cs" />
+    <Compile Include="Core\Decompiler\Decompiler.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\Packer\Packer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\Packer\PackerInputInfo.cs" />
+    <Compile Include="Core\Packer\PackerOutputInfo.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFile14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlBodyPart14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlFileData14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlMesh14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlModel14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlTexture14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlWeightingBoneData14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlWeightingHeader14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceMdlFileData\SourceMdlWeighting14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceModel14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceQcFile14.cs" />
+    <Compile Include="Core\GameModel\SourceModel14\SourceSmdFile14.cs" />
+    <Compile Include="Core\GamePackage\- Base\BasePackageFile.cs" />
+    <Compile Include="Core\GamePackage\- Base\BasePackageDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\- Base\BasePackageFileData.cs" />
+    <Compile Include="Core\GamePackage\HfsFile\HfsDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\HfsFile\HfsFile.cs" />
+    <Compile Include="Core\GamePackage\HfsFile\HfsFileData.cs" />
+    <Compile Include="Core\GamePackage\GmaFile\GmaFile.cs" />
+    <Compile Include="Core\GamePackage\GmaFile\GmaDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\GmaFile\GmaFileData.cs" />
+    <Compile Include="Core\MappingTool\MappingTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\MappingTool\MappingToolInfo.cs" />
+    <Compile Include="Core\GameApp\GameApp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\GameApp\GameAppInfo.cs" />
+    <Compile Include="Core\GameModel\- Base\Common.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceMdlAnimationDescBase.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceMdlFileDataBase.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceMdlSequenceDescBase.cs" />
+    <Compile Include="Core\DebugLog\AccessedBytesDebugFile.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceModelProgressEventArgs.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceModelProgressEventHandler.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceFileNamesModule.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAimAtBone.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlBoneTransform.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlLinearBone.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlCompressedIkError.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceFileData.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceFloat8bits.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion48bitsAssumedW.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion48bitsViaBytes.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion48bitsSmallest3.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceVector4D.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlBodyPart04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlFaceVertexInfo04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlFace04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlMesh04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlModel04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlNormal04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlSequence04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlSequenceDesc04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlBone04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlFileData04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFile04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlSequenceValue04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceMdlFileData\SourceMdlVertex04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceModel04.cs" />
+    <Compile Include="Core\GameModel\SourceModel04\SourceSmdFile04.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceBonePostionAndRotation06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceBoneTransform06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlAnimation06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlBodyPart06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlFileData06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlBone06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlBoneController06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlBonePosition06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlBoneRotation06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlEvent06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlMesh06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlModel06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlModelData06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlPivot06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlSequenceDesc06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlTexture06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFileData\SourceMdlTriangleVertex06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceMdlFile06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceModule06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceQcFile06.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceSmdFile06.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceBoneTransform10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMeshTriangleStripOrFan10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceModule10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlAnimation10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlAnimationValue10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlAttachment10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlBodyPart10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlBone10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlBoneController10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlEvent10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlHitbox10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlMesh10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlModel10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlPivot10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlSequenceDesc10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlSequenceGroup10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlSequenceGroupFileHeader10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlTexture10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlVertexInfo10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFile10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceMdlFileData\SourceMdlFileData10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceQcFile10.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceSmdFile10.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\FlexFrame2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlFileData2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel06\SourceModel06.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlAnimation2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlAnimationDesc2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlAnimationValue2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlAttachment2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlAxisInterpBone2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlBodyPart2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlBone2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlBoneController2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlEyeball2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlFlex2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlHitbox2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlHitboxSet2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlIncludeModel2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlMesh2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlModel2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlPoseParamDesc2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlQuatInterpBone2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlSequenceDesc2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlSequenceGroup2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlTangent2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlTexture2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlQuatInterpInfo2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlType1Vertex2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlType2Vertex2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlType0Vertex2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFileData\SourceMdlVertAnim2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceModule2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceQcFile2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceVtaFile2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFile31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlAnimation31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlAnimationDesc31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlAnimGroup31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlBodyPart31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlBone31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlBoneWeight31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlFileData31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlHitbox31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlHitboxSet31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlMesh31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlModel31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlSequenceDesc31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlSequenceGroup31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlTexture31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceMdlFileData\SourceMdlVertex31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceModel31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceQcFile31.cs" />
+    <Compile Include="Core\GameModel\SourceModel31\SourceSmdFile31.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFile32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlAnimationDesc32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlBoneController32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlFileData32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlHitbox32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlHitboxSet32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceMdlFileData\SourceMdlSequenceDesc32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceModel32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceQcFile32.cs" />
+    <Compile Include="Core\GameModel\SourceModel32\SourceSmdFile32.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceMdlFile36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceMdlFileData\SourceMdlAnimationDesc36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceMdlFileData\SourceMdlFileData36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceMdlFileData\SourceMdlSequenceDesc36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceModel36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceQcFile36.cs" />
+    <Compile Include="Core\GameModel\SourceModel36\SourceSmdFile36.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\FlexFrame37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceVrdFile37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceVtaFile37.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceAniFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceAniFileData\SourceAniFrameAnim52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceMdlFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceMdlFileData\SourceMdlAnimationDesc52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceMdlFileData\SourceMdlFileData52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceModel52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceQcFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceSmdFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceVrdFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel52\SourceVtaFile52.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceMdlFile53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceMdlFileData\SourceMdlFileData53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceModel53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceQcFile53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceSmdFile53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceVrdFile53.cs" />
+    <Compile Include="Core\GameModel\SourceModel53\SourceVtaFile53.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxMaterialReplacement06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxMaterialReplacementList06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxMaterialReplacement07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxMaterialReplacementList07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxFileData107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxBodyPart107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxBoneStateChange107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxMesh107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxModel107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxModelLod107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxStrip107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxStripGroup107.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxVertex107.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceMdlFile2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceSmdFile2531.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile107\SourceVtxFile107.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFile37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlAnimation37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlAnimationDesc37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlAnimGroup37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlAttachment37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlAutoLayer37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlBodyPart37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlBone37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlBoneController37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlBoneDesc37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlBoneWeight37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlEvent37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlEyeball37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlFileData37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlFlex37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlHitbox37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlHitboxSet37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlIkChain37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlIkError37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlIkLink37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlIkLock37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlIkRule37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlMesh37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlModel37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlSequenceDesc37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlSequenceGroup37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlTexture37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlVertAnim37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceMdlFileData\SourceMdlVertex37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceModel37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceQcFile37.cs" />
+    <Compile Include="Core\GameModel\SourceModel37\SourceSmdFile37.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxFile06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxBodyPart06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxBoneStateChange06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxFileData06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxMesh06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxModel06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxModelLod06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxStrip06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxStripGroup06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile06\SourceVtxVertex06.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VvdFile\VvdFile04\SourceVvdFile04.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlLocalHierarchy.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlWeightList.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceModel.cs" />
+    <Compile Include="Core\GameModel\SourceModel10\SourceModel10.cs" />
+    <Compile Include="Core\GameModel\SourceModel2531\SourceModel2531.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceMdlFileData\SourceMdlAnimationDesc49.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceMdlFileData\SourceMdlFileData49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxFileData07.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceModel49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\AniFile\AniFile49\SourceAniFile49.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceMdlFile49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyFile.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceQcFile49.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceSmdFile49.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceVrdFile49.cs" />
+    <Compile Include="Core\GameModel\SourceModel49\SourceVtaFile49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxFile07.cs" />
+    <Compile Include="Core\GamePackage\HfsFile\HfsMainDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\SourcePackageEventArgs.cs" />
+    <Compile Include="Core\SteamAppInfos\AnarchyArcadeSteamAppInfo.cs" />
+    <Compile Include="Core\SteamAppInfos\BlackMesaSteamAppInfo.cs" />
+    <Compile Include="Core\SteamAppInfos\ContagionSteamAppInfo.cs" />
+    <Compile Include="Core\SteamAppInfos\GarrysModSteamAppInfo.cs" />
+    <Compile Include="Core\SteamAppInfos\Left4Dead2SteamAppInfo.cs" />
+    <Compile Include="Core\SteamAppInfos\SteamAppInfoBase.cs" />
+    <Compile Include="Core\SteamAppInfos\GarrysMod_AddonJson.cs" />
+    <Compile Include="Core\SteamAppInfos\ZombiePanicSourceSteamAppInfo.cs" />
+    <Compile Include="Core\Steam\BackgroundSteamPipe.cs" />
+    <Compile Include="Core\Steam\SteamAppUserInfo.cs" />
+    <Compile Include="Core\Steam\SteamPipe.cs" />
+    <Compile Include="Core\Steam\SteamPipeEventArgs.cs" />
+    <Compile Include="Core\Steam\SteamRemoteStorage_PublishedFileDetails_Json.cs" />
+    <Compile Include="Core\Steam\WorkshopItem.cs" />
+    <Compile Include="Core\Steam\WorkshopItemBindingList.cs" />
+    <Compile Include="Core\Unpacker\UnpackerInputInfo.cs" />
+    <Compile Include="Core\Unpacker\SearchOutputInfo.cs" />
+    <Compile Include="Core\Unpacker\UnpackerOutputInfo.cs" />
+    <Compile Include="Core\Unpacker\Unpacker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\Unpacker\PackageResourceFileNameInfo.cs" />
+    <Compile Include="Core\Unpacker\PackagePathFileNameInfo.cs" />
+    <Compile Include="Core\Updater\Updater.cs" />
+    <Compile Include="Core\Viewer\Viewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\Viewer\ViewerInfo.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\AniFile\AniFile49\BoneConstantInfo49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\AniFile\AniFile49\BoneFrameDataInfo49.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\AniFile\AniFile49\SourceAniFrameAnim49.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceConstants.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceFloat16bits.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion48bits.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceQuaternion64bits.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceVector48bits.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\AnimationFrameLine.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlActivityModifier.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\LodQcInfo.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimBlock.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\FlexFrame.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAutoLayer.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAxisInterpBone.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlBoneController.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlEvent.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlEyeball.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlex.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlIkLock.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlexOp.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimation.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimationSection.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimationValue.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimationValuePointer.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlexControllerUi.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlHitbox.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlHitboxSet.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlIkRule.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlJiggleBone.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlMovement.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlQuatInterpBone.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlQuatInterpBoneInfo.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlVertAnim.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlVertAnimWrinkle.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyFaceSection.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyFace.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyVertex.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VvdFile\VvdFile04\SourceVvdFileData04.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxBoneStateChange07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxBodyPart07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxModel07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxModelLod07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxMesh07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxStripGroup07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxStrip07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VtxFile\VtxFile07\SourceVtxVertex07.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\VvdFile\VvdFile04\SourceVvdFixup04.cs" />
+    <Compile Include="Core\GamePackage\VpkFile\VpkDirectoryEntry.cs" />
+    <Compile Include="Core\GamePackage\VpkFile\VpkFile.cs" />
+    <Compile Include="Core\GamePackage\VpkFile\VpkFileData.cs" />
+    <Compile Include="Widgets\- Application\AgreementRequiresAcceptanceForm.Designer.cs">
+      <DependentUpon>AgreementRequiresAcceptanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\- Application\AgreementRequiresAcceptanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\- Application\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\BaseUserControl.Designer.cs">
+      <DependentUpon>BaseUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\- Application\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\DeleteItemForm.Designer.cs">
+      <DependentUpon>DeleteItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\- Application\DeleteItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\FolderAndFileListViewItemComparer.cs" />
+    <Compile Include="Widgets\- Application\NodeSorter.cs" />
+    <Compile Include="Widgets\- General\CheckBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\DateTimeTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\FileDragDropHelper.cs" />
+    <Compile Include="Widgets\- General\GroupBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\TreeViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\ProgressBarEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\MacroDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\SplitContainerEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\- General\ToolStripSpringTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\AboutUserControl.Designer.cs">
+      <DependentUpon>AboutUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\AboutUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\CompileUserControl.Designer.cs">
+      <DependentUpon>CompileUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\CompileUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\DownloadUserControl.Designer.cs">
+      <DependentUpon>DownloadUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\DownloadUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PublishUserControl.Designer.cs">
+      <DependentUpon>PublishUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PublishUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\SetUpGamesUserControl.Designer.cs">
+      <DependentUpon>SetUpGamesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\SetUpGamesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\UnpackUserControl.Designer.cs">
+      <DependentUpon>UnpackUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\UnpackUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PackUserControl.Designer.cs">
+      <DependentUpon>PackUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PackUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\ReleaseUserControl.Designer.cs">
+      <DependentUpon>ReleaseUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\ReleaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\EditUserControl.Designer.cs">
+      <DependentUpon>EditUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\EditUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\OptionsUserControl.Designer.cs">
+      <DependentUpon>OptionsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\OptionsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PatchUserControl.Designer.cs">
+      <DependentUpon>PatchUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\PatchUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\UpdateUserControl.Designer.cs">
+      <DependentUpon>UpdateUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\UpdateUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\ViewUserControl.Designer.cs">
+      <DependentUpon>ViewUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\ViewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\DecompileUserControl.Designer.cs">
+      <DependentUpon>DecompileUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\DecompileUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\HelpUserControl.Designer.cs">
+      <DependentUpon>HelpUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Main Tabs\HelpUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Widgets\- Application\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\- Application\MainCROWBAR.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Core\GameModel\- Base\SourceMdlFile.cs" />
+    <Compile Include="Core\GameModel\- Base\SourceQcFile.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyCollisionPair.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyEditParamsSection.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyRagdollConstraint.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyCollisionData.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhyFileData.cs" />
+    <Compile Include="Core\GameModel\CompiledFiles\PhyFile\SourcePhysCollisionModel.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlSkinFamily.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceVector.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimationDesc.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAttachment.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlBone.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceBoneWeight.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlexController.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlexDesc.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFlexRule.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlFileData.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlBodyPart.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlIkChain.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlIkLink.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlMesh.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlMeshVertexData.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlModel.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlModelGroup.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlModelVertexData.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlMouth.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlPoseParamDesc.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlSequenceDesc.cs" />
+    <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlTexture.cs" />
+    <Compile Include="Core\GameModel\SourceGlobal\SourceVertex.cs" />
+    <Compile Include="Widgets\- Application\UnhandledExceptionWindow.Designer.cs">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\- Application\UnhandledExceptionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\AnarchyArcadeTagsUserControl.Designer.cs">
+      <DependentUpon>AnarchyArcadeTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\AnarchyArcadeTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\Base\Base_TagsUserControl.Designer.cs">
+      <DependentUpon>Base_TagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\Base\Base_TagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\BlackMesaTagsUserControl.Designer.cs">
+      <DependentUpon>BlackMesaTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\BlackMesaTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\ContagionTagsUserControl.Designer.cs">
+      <DependentUpon>ContagionTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\ContagionTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\EstrangedActITagsUserControl.Designer.cs">
+      <DependentUpon>EstrangedActITagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\EstrangedActITagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\GarrysModTagsUserControl.Designer.cs">
+      <DependentUpon>GarrysModTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\GarrysModTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\Left4Dead2TagsUserControl.Designer.cs">
+      <DependentUpon>Left4Dead2TagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\Left4Dead2TagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\SourceFilmmakerTagsUserControl.Designer.cs">
+      <DependentUpon>SourceFilmmakerTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\SourceFilmmakerTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\ZombiePanicSourceTagsUserControl.Designer.cs">
+      <DependentUpon>ZombiePanicSourceTagsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Publish SteamApp Tags\ZombiePanicSourceTagsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Widgets\- Application\AgreementRequiresAcceptanceForm.resx">
+      <DependentUpon>AgreementRequiresAcceptanceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\DeleteItemForm.resx">
+      <DependentUpon>DeleteItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\MainForm.de-DE.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\MacroDataGridView.resx">
+      <DependentUpon>MacroDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- General\TreeViewEx.resx">
+      <DependentUpon>TreeViewEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\AboutUserControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\CompileUserControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CompileUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\DownloadUserControl.resx">
+      <DependentUpon>DownloadUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\PublishUserControl.resx">
+      <DependentUpon>PublishUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\SetUpGamesUserControl.resx">
+      <DependentUpon>SetUpGamesUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\UnpackUserControl.resx">
+      <DependentUpon>UnpackUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\PackUserControl.resx">
+      <DependentUpon>PackUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\ReleaseUserControl.resx">
+      <DependentUpon>ReleaseUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\EditUserControl.resx">
+      <DependentUpon>EditUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\OptionsUserControl.resx">
+      <DependentUpon>OptionsUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\PatchUserControl.resx">
+      <DependentUpon>PatchUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\UpdateUserControl.resx">
+      <DependentUpon>UpdateUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\ViewUserControl.resx">
+      <DependentUpon>ViewUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\DecompileUserControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DecompileUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Main Tabs\HelpUserControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HelpUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\- Application\UnhandledExceptionWindow.resx">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\Base\Base_TagsUserControl.resx">
+      <DependentUpon>Base_TagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\BlackMesaTagsUserControl.resx">
+      <DependentUpon>BlackMesaTagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\ContagionTagsUserControl.resx">
+      <DependentUpon>ContagionTagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\GarrysModTagsUserControl.resx">
+      <DependentUpon>GarrysModTagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\Left4Dead2TagsUserControl.resx">
+      <DependentUpon>Left4Dead2TagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\SourceFilmmakerTagsUserControl.resx">
+      <DependentUpon>SourceFilmmakerTagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Publish SteamApp Tags\ZombiePanicSourceTagsUserControl.resx">
+      <DependentUpon>ZombiePanicSourceTagsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="- Documents\Development.txt" />
+    <Content Include="- Documents\History 2013.txt" />
+    <Content Include="- Documents\License.txt" />
+    <Content Include="- Documents\History 2014.txt" />
+    <Content Include="- Documents\Specifications.txt" />
+    <None Include="Resources\26_Grey_PayPal_Pill_Button.png" />
+    <Content Include="Resources\WordWrap.png" />
+    <None Include="Resources\WordWrapOff.png" />
+    <None Include="Resources\CrowbarSteamPipe.exe" />
+    <Content Include="Resources\7zr.exe" />
+    <Content Include="Resources\CrowbarLauncher.exe" />
+    <Content Include="Resources\Steamworks.NET.dll" />
+    <Content Include="Resources\steam_api.dll" />
+    <None Include="Resources\Crowbar Settings.xml" />
+    <None Include="Resources\CancelRefresh.png" />
+    <None Include="Resources\CancelSearch.png" />
+    <Content Include="Resources\CrowbarGuideBanner.png" />
+    <Content Include="Resources\Find.png" />
+    <Content Include="Resources\lzma.exe" />
+    <Content Include="Resources\Refresh.png" />
+    <None Include="Resources\EnterArrow.png" />
+    <None Include="Resources\FindPrevious.png" />
+    <None Include="Resources\FindNext.png" />
+    <None Include="Resources\crowbar_icon_large.png" />
+    <None Include="Resources\macaw.png" />
+    <None Include="Resources\crowbar_icon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
