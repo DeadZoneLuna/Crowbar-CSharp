@@ -189,36 +189,32 @@ namespace Crowbar
 					missingComponentSign = 1;
 				}
 
-				double a = 0;
-				double b = 0;
-				double c = 0;
+				double a = (uIntegerA - 16384L) / 23168d;
+				double b = (uIntegerB - 16384L) / 23168d;
+				double c = (uIntegerC - 16384L) / 23168d;
 
-				a = (uIntegerA - 16384) / 23168.0;
-				b = (uIntegerB - 16384) / 23168.0;
-				c = (uIntegerC - 16384) / 23168.0;
-
-				if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_X)
+				if (missingComponentIndex == MISSING_COMPONENT_X)
 				{
 					theQuaternion.x = GetMissingComponent(a, b, c, missingComponentSign);
 					theQuaternion.y = a;
 					theQuaternion.z = b;
 					theQuaternion.w = c;
 				}
-				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_Y)
+				else if (missingComponentIndex == MISSING_COMPONENT_Y)
 				{
 					theQuaternion.x = c;
 					theQuaternion.y = GetMissingComponent(a, b, c, missingComponentSign);
 					theQuaternion.z = a;
 					theQuaternion.w = b;
 				}
-				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_Z)
+				else if (missingComponentIndex == MISSING_COMPONENT_Z)
 				{
 					theQuaternion.x = b;
 					theQuaternion.y = c;
 					theQuaternion.z = GetMissingComponent(a, b, c, missingComponentSign);
 					theQuaternion.w = a;
 				}
-				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_W)
+				else if (missingComponentIndex == MISSING_COMPONENT_W)
 				{
 					theQuaternion.x = a;
 					theQuaternion.y = b;
