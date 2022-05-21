@@ -17,14 +17,12 @@ namespace CrowbarSteamPipe
 {
 	public static class CrowbarSteamPipe
 	{
-
 		public static void Main()
 		{
 			string pipeNameSuffix = "";
 			if (ConversionHelper.CommandLineArgs.Count > 0)
-			{
 				pipeNameSuffix = ConversionHelper.CommandLineArgs[0];
-			}
+
 			NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, PipeOptions.WriteThrough);
 
 			// Connect to the pipe or wait until the pipe is available.

@@ -781,7 +781,7 @@ namespace Crowbar
 		{
 			theStreamWriter.WriteLine("SteamUser_GetSteamID");
 			string idText = theStreamReader.ReadLine();
-			return ulong.Parse(idText);
+			return !string.IsNullOrEmpty(idText) ? ulong.Parse(idText) : 0ul;
 		}
 
 #endregion
