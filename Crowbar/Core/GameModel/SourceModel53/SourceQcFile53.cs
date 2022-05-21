@@ -2781,7 +2781,7 @@ namespace Crowbar
 			{
 				line = "\t";
 				line += "posecycle ";
-				line += aSequenceDesc.cyclePoseIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.thePoseParamDescs[aSequenceDesc.cyclePoseIndex].theName;
 				theOutputFileStreamWriter.WriteLine(line);
 			}
 
