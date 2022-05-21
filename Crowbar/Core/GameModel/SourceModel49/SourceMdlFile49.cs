@@ -456,7 +456,12 @@ namespace Crowbar
 						{
 							aBone.theName = "";
 						}
-						theMdlFileData.theBoneNameToBoneIndexMap.Add(aBone.theName, boneIndex);
+
+						// DeadZone:
+						// Fixed decompile when name already exist in SortedList (https://github.com/ZeqMacaw/Crowbar/issues/17)
+						// TODO: Not sure if it's correct
+						if (!theMdlFileData.theBoneNameToBoneIndexMap.ContainsKey(aBone.theName)) 
+							theMdlFileData.theBoneNameToBoneIndexMap.Add(aBone.theName, boneIndex);
 
 						if (aBone.proceduralRuleOffset != 0)
 						{
