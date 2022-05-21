@@ -42,51 +42,50 @@ namespace CrowbarLauncher
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			TextBox1 = new System.Windows.Forms.TextBox();
-			TextBox2 = new System.Windows.Forms.TextBox();
-			SuspendLayout();
-			//
-			//TextBox1
-			//
-			TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			TextBox1.Location = new System.Drawing.Point(12, 12);
-			TextBox1.Name = "TextBox1";
-			TextBox1.ReadOnly = true;
-			TextBox1.Size = new System.Drawing.Size(268, 13);
-			TextBox1.TabIndex = 0;
-			TextBox1.Text = "Updating Crowbar.";
-			//
-			//TextBox2
-			//
-			TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			TextBox2.Location = new System.Drawing.Point(12, 31);
-			TextBox2.Name = "TextBox2";
-			TextBox2.ReadOnly = true;
-			TextBox2.Size = new System.Drawing.Size(268, 13);
-			TextBox2.TabIndex = 1;
-			TextBox2.Text = "This should only take a few moments.";
-			//
-			//MainForm
-			//
-			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(292, 97);
-			Controls.Add(TextBox2);
-			Controls.Add(TextBox1);
-			Icon = (System.Drawing.Icon)resources.GetObject("$Icon");
-			MaximizeBox = false;
-			MinimizeBox = false;
-			Name = "MainForm";
-			SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			Text = "Crowbar Launcher";
-			TopMost = true;
-			ResumeLayout(false);
-			PerformLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.TextBox2 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // TextBox1
+            // 
+            this.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox1.Location = new System.Drawing.Point(12, 12);
+            this.TextBox1.Name = "TextBox1";
+            this.TextBox1.ReadOnly = true;
+            this.TextBox1.Size = new System.Drawing.Size(268, 13);
+            this.TextBox1.TabIndex = 0;
+            this.TextBox1.Text = "Updating Crowbar.";
+            // 
+            // TextBox2
+            // 
+            this.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox2.Location = new System.Drawing.Point(12, 31);
+            this.TextBox2.Name = "TextBox2";
+            this.TextBox2.ReadOnly = true;
+            this.TextBox2.Size = new System.Drawing.Size(268, 13);
+            this.TextBox2.TabIndex = 1;
+            this.TextBox2.Text = "This should only take a few moments.";
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(292, 97);
+            this.Controls.Add(this.TextBox2);
+            this.Controls.Add(this.TextBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Crowbar Launcher";
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
-			Load += new System.EventHandler(MainForm_Load);
 		}
 
 		internal TextBox TextBox1;

@@ -42,6 +42,9 @@ namespace Crowbar
 			AuthorLinkLabel.Text = Application.CompanyName;
 			AuthorLinkLabel.Links.Add(0, Application.CompanyName.Length, Properties.Resources.About_AuthorLink);
 
+			ModifiedAuthorName.Links.Add(0, ModifiedAuthorName.Text.Length, Properties.Resources.About_ModifiedAuthorSteam);
+			ModifiedGithub.Links.Add(0, ModifiedGithub.Text.Length, Properties.Resources.About_ModifiedGithub);
+
 			GotoSteamProfileLinkLabel.Text = Properties.Resources.About_GotoSteamProfileText;
 			GotoSteamProfileLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamProfileText.Length, Properties.Resources.About_AuthorLink);
 
