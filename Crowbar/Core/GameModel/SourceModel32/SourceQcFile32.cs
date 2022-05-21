@@ -4163,124 +4163,7 @@ namespace Crowbar
 			}
 		}
 
-		public void WriteKeyValues(string keyValuesText, string commandOrOptionText)
-		{
-			string line = "";
-			string startText = "mdlkeyvalue" + "\n";
-			string text = null;
-
-			//$keyvalues
-			//{
-			//	"particles"
-			//	{
-			//		"effect"
-			//		{
-			//		name("sparks_head")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("Head_sparks")
-			//		}
-			//		"effect"
-			//		{
-			//		name("sparks_head_wire1")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("Head_Wire_1")
-			//		}
-			//		"effect"
-			//		{
-			//		name("sparks_knee_wire1")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("R_Knee_Wire_1")
-			//		}
-			//		"effect"
-			//		{
-			//		name("sparks_knee_wire2")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("R_Knee_Wire_2")
-			//		}
-			//		"effect"
-			//		{
-			//		name("sparks_ankle_wire1")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("L_Ankle_Wire_1")
-			//		}
-			//		"effect"
-			//		{
-			//		name("sparks_ankle_wire2")
-			//		attachment_type("follow_attachment")
-			//		attachment_point("L_Ankle_Wire_2")
-			//		}			
-			//	}
-			//}
-			try
-			{
-				if (keyValuesText != null && keyValuesText.Length > 0)
-				{
-					line = "";
-					theOutputFileStreamWriter.WriteLine(line);
-
-					line = commandOrOptionText;
-					theOutputFileStreamWriter.WriteLine(line);
-
-					if (keyValuesText.StartsWith(startText))
-					{
-						text = keyValuesText.Remove(0, startText.Length);
-					}
-					else
-					{
-						text = keyValuesText;
-					}
-
-					//lengthToRemove = 0
-					//While True
-					//	stopIndex = text.IndexOf(openBraceText)
-					//	If stopIndex > -1 Then
-					//		If stopIndex > 0 Then
-					//			line = text.Substring(0, stopIndex)
-					//			Me.theOutputFileStreamWriter.WriteLine(line)
-					//		End If
-
-					//		line = "{"
-					//		lengthToRemove = stopIndex + openBraceText.Length
-					//	Else
-					//		stopIndex = text.IndexOf(closeBraceText)
-					//		If stopIndex > -1 Then
-					//			If stopIndex > 0 Then
-					//				line = text.Substring(0, stopIndex)
-					//				Me.theOutputFileStreamWriter.WriteLine(line)
-					//			End If
-
-					//			line = "}"
-					//			lengthToRemove = stopIndex + closeBraceText.Length
-					//		Else
-					//			stopIndex = text.IndexOf(linefeedCharText)
-					//			If stopIndex > -1 Then
-					//				line = text.Substring(0, stopIndex)
-					//				lengthToRemove = stopIndex + linefeedCharText.Length
-					//			Else
-					//				line = text
-					//			End If
-					//		End If
-					//	End If
-					//	Me.theOutputFileStreamWriter.WriteLine(line)
-
-					//	If stopIndex > -1 Then
-					//		text = text.Remove(0, lengthToRemove)
-					//		If text = "" Then
-					//			Exit While
-					//		End If
-					//	End If
-					//End While
-
-					WriteTextLines(text, 0);
-				}
-			}
-			catch (Exception ex)
-			{
-
-			}
-		}
-
-		private void WriteTextLines(string text, int indentCount)
+		internal override void WriteTextLines(string text, int indentCount)
 		{
 			string line = "";
 			char textChar = '\0';
@@ -4381,9 +4264,6 @@ namespace Crowbar
 #endregion
 
 #region Data
-
-		//Private theModel As SourceModel
-		private StreamWriter theOutputFileStreamWriter;
 		private SourceMdlFileData32 theMdlFileData;
 		private SourcePhyFileData thePhyFileData;
 		private SourceVtxFileData06 theVtxFileData;
@@ -4391,7 +4271,6 @@ namespace Crowbar
 
 		private string theOutputPath;
 		private string theOutputFileNameWithoutExtension;
-
 #endregion
 
 	}

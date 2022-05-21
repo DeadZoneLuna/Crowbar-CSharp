@@ -14,9 +14,7 @@ namespace Crowbar
 {
 	public class SourceQcFile
 	{
-
-#region Methods
-
+		#region Methods
 		public string GetQcModelName(string qcPathFileName)
 		{
 			string qcModelName = "";
@@ -98,111 +96,94 @@ namespace Crowbar
 			return line;
 		}
 
-#endregion
+		public void WriteKeyValues(string keyValuesText, string commandOrOptionText, int indentLevel = 0)
+        {
+			string lineLevel = new string('\t', indentLevel);
+			string startText = "mdlkeyvalue" + "\n";
+			string startText2 = "\"mdlkeyvalue\"";
+			string text = null;
 
-#region Private Delegates
+			//$keyvalues
+			//{
+			//	"particles"
+			//	{
+			//		"effect"
+			//		{
+			//		name("sparks_head")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("Head_sparks")
+			//		}
+			//		"effect"
+			//		{
+			//		name("sparks_head_wire1")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("Head_Wire_1")
+			//		}
+			//		"effect"
+			//		{
+			//		name("sparks_knee_wire1")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("R_Knee_Wire_1")
+			//		}
+			//		"effect"
+			//		{
+			//		name("sparks_knee_wire2")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("R_Knee_Wire_2")
+			//		}
+			//		"effect"
+			//		{
+			//		name("sparks_ankle_wire1")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("L_Ankle_Wire_1")
+			//		}
+			//		"effect"
+			//		{
+			//		name("sparks_ankle_wire2")
+			//		attachment_type("follow_attachment")
+			//		attachment_point("L_Ankle_Wire_2")
+			//		}			
+			//	}
+			//}
+			try
+			{
+				if (keyValuesText != null && keyValuesText.Length > 0)
+				{
+					theOutputFileStreamWriter.WriteLine(lineLevel);
+					theOutputFileStreamWriter.WriteLine(lineLevel + commandOrOptionText);
 
-		//Private Delegate Sub WriteGroupDelegate()
+					keyValuesText = keyValuesText.TrimStart();
+					if (keyValuesText.StartsWith(startText))
+					{
+						text = keyValuesText.Remove(0, startText.Length);
+					}
+					else if (keyValuesText.StartsWith(startText2))
+					{
+						text = keyValuesText.Remove(0, startText2.Length);
+					}
+					else
+					{
+						text = keyValuesText;
+					}
+					text = text.TrimStart();
 
-#endregion
+					theOutputFileStreamWriter.WriteLine(lineLevel + "{");
+					WriteTextLines(text, indentLevel + 1);
+					theOutputFileStreamWriter.WriteLine(lineLevel + "}");
+				}
+			}
+			catch (Exception ex)
+			{
 
-#region Private Methods
+			}
+		}
+		#endregion
 
-		//Private Sub WriteHeaderComment()
-		//	Dim line As String = ""
+		#region Private Methods
+		internal virtual void WriteTextLines(string text, int indentCount)
+        {
 
-		//	line = "// "
-		//	line += TheApp.GetHeaderComment()
-		//	Me.theOutputFileStream.WriteLine(line)
-		//End Sub
-
-		//Private Sub WriteModelNameCommand()
-		//	Dim line As String = ""
-		//	'Dim modelPath As String
-		//	Dim modelPathFileName As String
-
-		//	'modelPath = FileManager.GetPath(CStr(theSourceEngineModel.theMdlFileHeader.name).Trim(Chr(0)))
-		//	'modelPathFileName = Path.Combine(modelPath, theSourceEngineModel.ModelName + ".mdl")
-		//	'modelPathFileName = CStr(theSourceEngineModel.MdlFileHeader.name).Trim(Chr(0))
-		//	modelPathFileName = theSourceEngineModel.MdlFileHeader.theName
-
-		//	Me.theOutputFileStream.WriteLine()
-
-		//	'$modelname "survivors/survivor_producer.mdl"
-		//	'$modelname "custom/survivor_producer.mdl"
-		//If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
-		//	line = "$ModelName "
-		//Else
-		//	line = "$modelname "
-		//End If
-		//	line += """"
-		//	line += modelPathFileName
-		//	line += """"
-		//	Me.theOutputFileStream.WriteLine(line)
-		//End Sub
-
-		//Private Sub WriteGroup(ByVal qciGroupName As String, ByVal writeGroupAction As WriteGroupDelegate, ByVal includeLineIsCommented As Boolean, ByVal includeLineIsIndented As Boolean)
-		//	If TheApp.Settings.DecompileGroupIntoQciFilesIsChecked Then
-		//		Dim qciFileName As String
-		//		Dim qciPathFileName As String
-		//		Dim mainOutputFileStream As StreamWriter
-
-		//		mainOutputFileStream = Me.theOutputFileStream
-
-		//		Try
-		//			'qciPathFileName = Path.Combine(Me.theOutputPathName, Me.theOutputFileNameWithoutExtension + "_flexes.qci")
-		//			qciFileName = Me.theOutputFileNameWithoutExtension + "_" + qciGroupName + ".qci"
-		//			qciPathFileName = Path.Combine(Me.theOutputPathName, qciFileName)
-
-		//			Me.theOutputFileStream = File.CreateText(qciPathFileName)
-
-		//			'Me.WriteFlexLines()
-		//			'Me.WriteFlexControllerLines()
-		//			'Me.WriteFlexRuleLines()
-		//			writeGroupAction.Invoke()
-		//		Catch ex As Exception
-		//			Throw
-		//		Finally
-		//			If Me.theOutputFileStream IsNot Nothing Then
-		//				Me.theOutputFileStream.Flush()
-		//				Me.theOutputFileStream.Close()
-
-		//				Me.theOutputFileStream = mainOutputFileStream
-		//			End If
-		//		End Try
-
-		//		Try
-		//			If File.Exists(qciPathFileName) Then
-		//				Dim qciFileInfo As New FileInfo(qciPathFileName)
-		//				If qciFileInfo.Length > 0 Then
-		//					Dim line As String = ""
-
-		//					Me.theOutputFileStream.WriteLine()
-
-		//					If includeLineIsCommented Then
-		//						line += "// "
-		//					End If
-		//					If includeLineIsIndented Then
-		//						line += vbTab
-		//					End If
-		//					line += "$Include"
-		//					line += " "
-		//					line += """"
-		//					line += qciFileName
-		//					line += """"
-		//					Me.theOutputFileStream.WriteLine(line)
-		//				End If
-		//			End If
-		//		Catch ex As Exception
-		//			Throw
-		//		End Try
-		//	Else
-		//		'Me.WriteFlexLines()
-		//		'Me.WriteFlexControllerLines()
-		//		'Me.WriteFlexRuleLines()
-		//		writeGroupAction.Invoke()
-		//	End If
-		//End Sub
+        }
 
 		protected List<List<short>> GetSkinFamiliesOfChangedMaterials(List<List<short>> iSkinFamilies)
 		{
@@ -345,17 +326,11 @@ namespace Crowbar
 			return lines;
 		}
 
-#endregion
+		#endregion
 
-#region Data
-
-		//Private theSourceEngineModel As SourceModel_Old
-		//Private theOutputFileStream As StreamWriter
-		//Private theOutputPathName As String
-		//Private theOutputFileNameWithoutExtension As String
-
-#endregion
-
+		#region Data
+		internal StreamWriter theOutputFileStreamWriter;
+		#endregion
 	}
 
 }

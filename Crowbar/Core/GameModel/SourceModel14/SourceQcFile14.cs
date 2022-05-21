@@ -1021,14 +1021,11 @@ namespace Crowbar
 #endregion
 
 #region Data
-
-		private StreamWriter theOutputFileStreamWriter;
 		private SourceMdlFileData14 theMdlFileData;
 		private string theModelName;
 
 		private string theOutputPath;
 		private string theOutputFileNameWithoutExtension;
-
 #endregion
 
 	}

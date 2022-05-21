@@ -1364,8 +1364,6 @@ namespace Crowbar
 #endregion
 
 #region Data
-
-		private StreamWriter theOutputFileStreamWriter;
 		private SourceMdlFileData2531 theMdlFileData;
 		private SourcePhyFileData thePhyFileData;
 		private SourceVtxFileData107 theVtxFileData;
@@ -1373,7 +1371,6 @@ namespace Crowbar
 
 		private string theOutputPath;
 		private string theOutputFileNameWithoutExtension;
-
 #endregion
 
 	}
