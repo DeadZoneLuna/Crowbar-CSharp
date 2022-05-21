@@ -60,7 +60,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			char[] ivpsId = new char[4];
+			string ivpsId;
 			int triangleCount = 0;
 			int triangleIndex = 0;
 			List<int> vertices = null;
@@ -89,10 +89,9 @@ namespace Crowbar
 
 				phyDataStreamPosition = theInputFileReader.BaseStream.Position;
 				//56 50 48 59   VPHY
-				char[] vphyId = new char[4];
-				vphyId = theInputFileReader.ReadChars(4);
+				string vphyId = new string(theInputFileReader.ReadChars(4));
 				theInputFileReader.BaseStream.Seek(phyDataStreamPosition, SeekOrigin.Begin);
-				if (vphyId != "VPHY".ToCharArray())
+				if(vphyId != "VPHY")
 				{
 					ReadPhyData_VERSION37();
 				}
@@ -102,7 +101,7 @@ namespace Crowbar
 				}
 
 				//49 56 50 53   IVPS
-				ivpsId = theInputFileReader.ReadChars(4);
+				ivpsId = new string(theInputFileReader.ReadChars(4));
 
 				vertices = new List<int>();
 				vertexDataStreamPosition = theInputFileReader.BaseStream.Position + collisionData.size;
@@ -118,7 +117,7 @@ namespace Crowbar
 					vertexDataOffset = theInputFileReader.ReadInt32();
 					vertexDataStreamPosition = faceDataStreamPosition + vertexDataOffset;
 
-					if (vphyId != "VPHY".ToCharArray())
+					if (vphyId != "VPHY")
 					{
 						// This is MDL v37 model, so use different code.
 						faceSection.theBoneIndex = theInputFileReader.ReadInt32();
