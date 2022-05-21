@@ -17,11 +17,11 @@ using System.Runtime.InteropServices;
 
 // Review the values of the assembly attributes
 
-[assembly: AssemblyTitle("Crowbar")]
+[assembly: AssemblyTitle("Crowbar-CSharp")]
 [assembly: AssemblyDescription("Source Engine Modding Tool")]
 [assembly: AssemblyCompany("ZeqMacaw")]
-[assembly: AssemblyProduct("Crowbar")]
-[assembly: AssemblyCopyright("Copyright 2020")]
+[assembly: AssemblyProduct("Crowbar-CSharp")]
+[assembly: AssemblyCopyright("Copyright 2022")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: ComVisible(false)]

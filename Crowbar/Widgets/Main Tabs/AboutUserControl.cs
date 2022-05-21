@@ -29,18 +29,18 @@ namespace Crowbar
 			//NOTE: Customize the application's assembly information in the "Application" pane of the project 
 			//    properties dialog (under the "Project" menu).
 
-			ProductNameLinkLabel.Text = Application.ProductName;
-			ProductNameLinkLabel.Links.Add(0, Application.ProductName.Length, Properties.Resources.About_ProductLink);
+			ProductNameLinkLabel.Text = ConversionHelper.AssemblyProduct;
+			ProductNameLinkLabel.Links.Add(0, ConversionHelper.AssemblyProduct.Length, Properties.Resources.About_ProductLink);
 
 			GotoSteamGroupLinkLabel.Text = Properties.Resources.About_GotoSteamGroupText;
 			GotoSteamGroupLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamGroupText.Length, Properties.Resources.About_ProductLink);
 
-			ProductInfoTextBox.Text = "Version " + Version.Parse(Application.ProductVersion).ToString(2) + "\r\n";
+			ProductInfoTextBox.Text = "Version " + ConversionHelper.VersionName + "\r\n";
 			ProductInfoTextBox.Text += ConversionHelper.AssemblyCopyright + "\r\n";
-			ProductInfoTextBox.Text += Application.CompanyName;
+			ProductInfoTextBox.Text += ConversionHelper.AssemblyCompany;
 
-			AuthorLinkLabel.Text = Application.CompanyName;
-			AuthorLinkLabel.Links.Add(0, Application.CompanyName.Length, Properties.Resources.About_AuthorLink);
+			AuthorLinkLabel.Text = ConversionHelper.AssemblyCompany;
+			AuthorLinkLabel.Links.Add(0, ConversionHelper.AssemblyCompany.Length, Properties.Resources.About_AuthorLink);
 
 			ModifiedAuthorName.Links.Add(0, ModifiedAuthorName.Text.Length, Properties.Resources.About_ModifiedAuthorSteam);
 			ModifiedGithub.Links.Add(0, ModifiedGithub.Text.Length, Properties.Resources.About_ModifiedGithub);

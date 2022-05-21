@@ -10,16 +10,96 @@ using System.Reflection;
 
 public static class ConversionHelper
 {
+	static string m_assemblyTitle;
+	public static string AssemblyTitle
+	{
+		get
+		{
+			if (!string.IsNullOrEmpty(m_assemblyTitle))
+				return m_assemblyTitle;
+
+			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+			if (attributes.Length == 0)
+				return string.Empty;
+
+			return m_assemblyTitle = ((AssemblyTitleAttribute)attributes[0]).Title;
+		}
+	}
+
+	static string m_assemblyCompany;
+	public static string AssemblyCompany
+	{
+		get
+		{
+			if (!string.IsNullOrEmpty(m_assemblyCompany))
+				return m_assemblyCompany;
+
+			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+			if (attributes.Length == 0)
+				return string.Empty;
+
+			return m_assemblyCompany = ((AssemblyCompanyAttribute)attributes[0]).Company;
+		}
+	}
+
+	static string m_assemblyProduct;
+	public static string AssemblyProduct
+	{
+		get
+		{
+			if (!string.IsNullOrEmpty(m_assemblyProduct))
+				return m_assemblyProduct;
+
+			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+			if (attributes.Length == 0)
+				return string.Empty;
+
+			return m_assemblyProduct = ((AssemblyProductAttribute)attributes[0]).Product;
+		}
+	}
+
+	static string m_assemblyCopyright;
 	public static string AssemblyCopyright
 	{
 		get
 		{
+			if (!string.IsNullOrEmpty(m_assemblyCopyright))
+				return m_assemblyCopyright;
+
 			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
 			if (attributes.Length == 0)
-			{
-				return "";
-			}
-			return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+				return string.Empty;
+
+			return m_assemblyCopyright = ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+		}
+	}
+
+	static Version m_appVersion;
+	public static Version Version
+	{
+		get
+		{
+			if (m_appVersion != null)
+				return m_appVersion;
+
+			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+			Console.WriteLine(attributes.Length);
+			if (attributes.Length == 0)
+				return new Version(0, 0, 0, 0);
+
+			return m_appVersion = new Version(((AssemblyFileVersionAttribute)attributes[0]).Version);
+		}
+	}
+
+	static string m_appVersionName;
+	public static string VersionName
+	{
+		get
+		{
+			if (!string.IsNullOrEmpty(m_appVersionName))
+				return m_appVersionName;
+
+			return m_appVersionName = Version.ToString(2);
 		}
 	}
 
