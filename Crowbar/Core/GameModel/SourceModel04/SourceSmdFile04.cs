@@ -17,8 +17,8 @@ namespace Crowbar
 
 		public SourceSmdFile04(StreamWriter outputFileStream, SourceMdlFileData04 mdlFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
 		}
 
 #endregion
@@ -27,7 +27,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteHeaderSection()
@@ -36,7 +36,7 @@ namespace Crowbar
 
 			//version 1
 			line = "version 1";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteNodesSection()
@@ -46,9 +46,9 @@ namespace Crowbar
 
 			//nodes
 			line = "nodes";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
 				name = "bone" + boneIndex.ToString();
 
@@ -57,12 +57,12 @@ namespace Crowbar
 				line += " \"";
 				line += name;
 				line += "\" ";
-				line += this.theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSection()
@@ -74,7 +74,7 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -84,10 +84,10 @@ namespace Crowbar
 			{
 				line = "  time 0";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			theOutputFileStreamWriter.WriteLine(line);
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				aBone = this.theMdlFileData.theBones[boneIndex];
+				aBone = theMdlFileData.theBones[boneIndex];
 
 				if (aBone.parentBoneIndex == -1)
 				{
@@ -145,11 +145,11 @@ namespace Crowbar
 				line += rotation.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
 				line += rotation.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSectionForAnimation(SourceMdlSequenceDesc04 aSequenceDesc)
@@ -162,7 +162,7 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			for (int frameIndex = 0; frameIndex < aSequenceDesc.frameCount; frameIndex++)
 			{
@@ -175,12 +175,12 @@ namespace Crowbar
 					line = "  time ";
 				}
 				line += frameIndex.ToString();
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				aSequence = aSequenceDesc.theSequences[frameIndex];
-				for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+				for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 				{
-					aBone = this.theMdlFileData.theBones[boneIndex];
+					aBone = theMdlFileData.theBones[boneIndex];
 
 					if (aBone.parentBoneIndex == -1)
 					{
@@ -229,12 +229,12 @@ namespace Crowbar
 					//	line += aFrameLine.rotation.debug_text
 					//End If
 
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteTrianglesSection(SourceMdlModel04 aBodyModel)
@@ -249,7 +249,7 @@ namespace Crowbar
 
 			//triangles
 			line = "triangles";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			try
 			{
@@ -266,9 +266,9 @@ namespace Crowbar
 							{
 								materialLine = materialName;
 
-								vertex1Line = this.GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[2]);
-								vertex2Line = this.GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[1]);
-								vertex3Line = this.GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[0]);
+								vertex1Line = GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[2]);
+								vertex2Line = GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[1]);
+								vertex3Line = GetVertexLine(aBodyModel, aMesh, aMesh.theFaces[faceIndex].vertexInfo[0]);
 
 								if (vertex1Line.StartsWith("// ") || vertex2Line.StartsWith("// ") || vertex3Line.StartsWith("// "))
 								{
@@ -286,10 +286,10 @@ namespace Crowbar
 										vertex3Line = "// " + vertex3Line;
 									}
 								}
-								this.theOutputFileStreamWriter.WriteLine(materialLine);
-								this.theOutputFileStreamWriter.WriteLine(vertex1Line);
-								this.theOutputFileStreamWriter.WriteLine(vertex2Line);
-								this.theOutputFileStreamWriter.WriteLine(vertex3Line);
+								theOutputFileStreamWriter.WriteLine(materialLine);
+								theOutputFileStreamWriter.WriteLine(vertex1Line);
+								theOutputFileStreamWriter.WriteLine(vertex2Line);
+								theOutputFileStreamWriter.WriteLine(vertex3Line);
 							}
 						}
 					}
@@ -301,7 +301,7 @@ namespace Crowbar
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion
@@ -326,7 +326,7 @@ namespace Crowbar
 			try
 			{
 				boneIndex = aBodyModel.theVertexes[aVertexInfo.vertexIndex].boneIndex;
-				aBone = this.theMdlFileData.theBones[boneIndex];
+				aBone = theMdlFileData.theBones[boneIndex];
 
 				//position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
 				//position.y = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y

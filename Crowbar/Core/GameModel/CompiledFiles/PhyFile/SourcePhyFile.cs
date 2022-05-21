@@ -19,11 +19,11 @@ namespace Crowbar
 
 		public SourcePhyFile(BinaryReader phyFileReader, SourcePhyFileData phyFileData, long endOffset = 0)
 		{
-			this.theInputFileReader = phyFileReader;
-			this.thePhyFileData = phyFileData;
-			this.thePhyEndOffset = endOffset;
+			theInputFileReader = phyFileReader;
+			thePhyFileData = phyFileData;
+			thePhyEndOffset = endOffset;
 
-			this.thePhyFileData.theFileSeekLog.FileSize = this.theInputFileReader.BaseStream.Length;
+			thePhyFileData.theFileSeekLog.FileSize = theInputFileReader.BaseStream.Length;
 		}
 
 #endregion
@@ -35,7 +35,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			// Offsets: 0x00, 0x04, 0x08, 0x0C (12)
 			//FROM: Zoey_TeenAngst
@@ -43,16 +43,16 @@ namespace Crowbar
 			//00 00 00 00 
 			//12 00 00 00 
 			//1f de 9d 20 
-			this.thePhyFileData.size = this.theInputFileReader.ReadInt32();
-			this.thePhyFileData.id = this.theInputFileReader.ReadInt32();
-			this.thePhyFileData.solidCount = this.theInputFileReader.ReadInt32();
-			this.thePhyFileData.checksum = this.theInputFileReader.ReadInt32();
+			thePhyFileData.size = theInputFileReader.ReadInt32();
+			thePhyFileData.id = theInputFileReader.ReadInt32();
+			thePhyFileData.solidCount = theInputFileReader.ReadInt32();
+			thePhyFileData.checksum = theInputFileReader.ReadInt32();
 
 			//NOTE: If header size ever increases, this will at least skip over extra stuff.
-			this.theInputFileReader.BaseStream.Seek(fileOffsetStart + this.thePhyFileData.size, SeekOrigin.Begin);
+			theInputFileReader.BaseStream.Seek(fileOffsetStart + thePhyFileData.size, SeekOrigin.Begin);
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Header");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Header");
 		}
 
 		public void ReadSourceCollisionData()
@@ -71,77 +71,77 @@ namespace Crowbar
 			long vertexDataOffset = 0;
 			SourcePhyFaceSection faceSection = null;
 
-			this.thePhyFileData.theSourcePhyMaxConvexPieces = 0;
-			this.thePhyFileData.theSourcePhyCollisionDatas = new List<SourcePhyCollisionData>();
+			thePhyFileData.theSourcePhyMaxConvexPieces = 0;
+			thePhyFileData.theSourcePhyCollisionDatas = new List<SourcePhyCollisionData>();
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 			double w = 0;
-			for (int solidIndex = 0; solidIndex < this.thePhyFileData.solidCount; solidIndex++)
+			for (int solidIndex = 0; solidIndex < thePhyFileData.solidCount; solidIndex++)
 			{
 				SourcePhyCollisionData collisionData = new SourcePhyCollisionData();
 				collisionData.theFaceSections = new List<SourcePhyFaceSection>();
 				collisionData.theVertices = new List<SourcePhyVertex>();
 
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				//b8 01 00 00   size
-				collisionData.size = this.theInputFileReader.ReadInt32();
-				nextSolidDataStreamPosition = this.theInputFileReader.BaseStream.Position + collisionData.size;
+				collisionData.size = theInputFileReader.ReadInt32();
+				nextSolidDataStreamPosition = theInputFileReader.BaseStream.Position + collisionData.size;
 
-				phyDataStreamPosition = this.theInputFileReader.BaseStream.Position;
+				phyDataStreamPosition = theInputFileReader.BaseStream.Position;
 				//56 50 48 59   VPHY
 				char[] vphyId = new char[4];
-				vphyId = this.theInputFileReader.ReadChars(4);
-				this.theInputFileReader.BaseStream.Seek(phyDataStreamPosition, SeekOrigin.Begin);
+				vphyId = theInputFileReader.ReadChars(4);
+				theInputFileReader.BaseStream.Seek(phyDataStreamPosition, SeekOrigin.Begin);
 				if (vphyId != "VPHY".ToCharArray())
 				{
-					this.ReadPhyData_VERSION37();
+					ReadPhyData_VERSION37();
 				}
 				else
 				{
-					this.ReadPhyData_VERSION48();
+					ReadPhyData_VERSION48();
 				}
 
 				//49 56 50 53   IVPS
-				ivpsId = this.theInputFileReader.ReadChars(4);
+				ivpsId = theInputFileReader.ReadChars(4);
 
 				vertices = new List<int>();
-				vertexDataStreamPosition = this.theInputFileReader.BaseStream.Position + collisionData.size;
-				while (this.theInputFileReader.BaseStream.Position < vertexDataStreamPosition)
+				vertexDataStreamPosition = theInputFileReader.BaseStream.Position + collisionData.size;
+				while (theInputFileReader.BaseStream.Position < vertexDataStreamPosition)
 				{
 					faceSection = new SourcePhyFaceSection();
 
-					faceDataStreamPosition = this.theInputFileReader.BaseStream.Position;
+					faceDataStreamPosition = theInputFileReader.BaseStream.Position;
 
 					//d0 00 00 00 
 					//29 00 00 00 
 					//04 15 00 00 
-					vertexDataOffset = this.theInputFileReader.ReadInt32();
+					vertexDataOffset = theInputFileReader.ReadInt32();
 					vertexDataStreamPosition = faceDataStreamPosition + vertexDataOffset;
 
 					if (vphyId != "VPHY".ToCharArray())
 					{
 						// This is MDL v37 model, so use different code.
-						faceSection.theBoneIndex = this.theInputFileReader.ReadInt32();
-						if (this.thePhyFileData.solidCount == 1)
+						faceSection.theBoneIndex = theInputFileReader.ReadInt32();
+						if (thePhyFileData.solidCount == 1)
 						{
-							this.thePhyFileData.theSourcePhyIsCollisionModel = true;
+							thePhyFileData.theSourcePhyIsCollisionModel = true;
 						}
 					}
 					else
 					{
 						//TODO: Verify why this is using "- 1". Needed for L4D2 survivor_teenangst.
-						faceSection.theBoneIndex = this.theInputFileReader.ReadInt32() - 1;
+						faceSection.theBoneIndex = theInputFileReader.ReadInt32() - 1;
 						if (faceSection.theBoneIndex < 0)
 						{
 							faceSection.theBoneIndex = 0;
-							this.thePhyFileData.theSourcePhyIsCollisionModel = true;
+							thePhyFileData.theSourcePhyIsCollisionModel = true;
 						}
 					}
 
-					this.theInputFileReader.ReadInt32();
+					theInputFileReader.ReadInt32();
 
 					//0c 00 00 00    count of lines after this (00 - 0b)
-					triangleCount = this.theInputFileReader.ReadInt32();
+					triangleCount = theInputFileReader.ReadInt32();
 
 					//00 b0 00 00 
 					//	00 00 06 00   ' vertex index 00
@@ -199,14 +199,14 @@ namespace Crowbar
 					for (int i = 0; i < triangleCount; i++)
 					{
 						SourcePhyFace phyTriangle = new SourcePhyFace();
-						triangleIndex = this.theInputFileReader.ReadByte();
-						this.theInputFileReader.ReadByte();
-						this.theInputFileReader.ReadUInt16();
+						triangleIndex = theInputFileReader.ReadByte();
+						theInputFileReader.ReadByte();
+						theInputFileReader.ReadUInt16();
 
 						for (int j = 0; j <= 2; j++)
 						{
-							phyTriangle.vertexIndex[j] = this.theInputFileReader.ReadUInt16();
-							this.theInputFileReader.ReadUInt16();
+							phyTriangle.vertexIndex[j] = theInputFileReader.ReadUInt16();
+							theInputFileReader.ReadUInt16();
 							if (!vertices.Contains(phyTriangle.vertexIndex[j]))
 							{
 								vertices.Add(phyTriangle.vertexIndex[j]);
@@ -217,12 +217,12 @@ namespace Crowbar
 					collisionData.theFaceSections.Add(faceSection);
 				}
 
-				if (this.thePhyFileData.theSourcePhyMaxConvexPieces < collisionData.theFaceSections.Count)
+				if (thePhyFileData.theSourcePhyMaxConvexPieces < collisionData.theFaceSections.Count)
 				{
-					this.thePhyFileData.theSourcePhyMaxConvexPieces = collisionData.theFaceSections.Count;
+					thePhyFileData.theSourcePhyMaxConvexPieces = collisionData.theFaceSections.Count;
 				}
 
-				this.theInputFileReader.BaseStream.Seek(vertexDataStreamPosition, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(vertexDataStreamPosition, SeekOrigin.Begin);
 
 				// Vertex data section.
 				//	' 8 distinct vertices
@@ -240,10 +240,10 @@ namespace Crowbar
 				{
 					SourcePhyVertex phyVertex = new SourcePhyVertex();
 
-					phyVertex.vertex.x = this.theInputFileReader.ReadSingle();
-					phyVertex.vertex.y = this.theInputFileReader.ReadSingle();
-					phyVertex.vertex.z = this.theInputFileReader.ReadSingle();
-					w = this.theInputFileReader.ReadSingle();
+					phyVertex.vertex.x = theInputFileReader.ReadSingle();
+					phyVertex.vertex.y = theInputFileReader.ReadSingle();
+					phyVertex.vertex.z = theInputFileReader.ReadSingle();
+					w = theInputFileReader.ReadSingle();
 
 					faceSection0Vertices.Add(phyVertex);
 				}
@@ -297,14 +297,14 @@ namespace Crowbar
 
 
 
-				this.thePhyFileData.theSourcePhyCollisionDatas.Add(collisionData);
+				thePhyFileData.theSourcePhyCollisionDatas.Add(collisionData);
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Solid(" + solidIndex.ToString() + ")");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Solid(" + solidIndex.ToString() + ")");
 
-				this.theInputFileReader.BaseStream.Seek(nextSolidDataStreamPosition, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(nextSolidDataStreamPosition, SeekOrigin.Begin);
 			}
-			this.thePhyFileData.theSourcePhyKeyValueDataOffset = this.theInputFileReader.BaseStream.Position;
+			thePhyFileData.theSourcePhyKeyValueDataOffset = theInputFileReader.BaseStream.Position;
 		}
 
 		public void ReadPhyData_VERSION37()
@@ -321,17 +321,17 @@ namespace Crowbar
 			//00 03 00 00 
 			//00 00 00 00 
 			//00 00 00 00
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
 		}
 
 		public void ReadPhyData_VERSION48()
@@ -340,26 +340,26 @@ namespace Crowbar
 
 			//56 50 48 59   VPHY
 			char[] vphyId = new char[4];
-			vphyId = this.theInputFileReader.ReadChars(4);
+			vphyId = theInputFileReader.ReadChars(4);
 
 			//00 01         version?
 			//00 00         model type?
-			tempInt = this.theInputFileReader.ReadUInt16();
-			tempInt = this.theInputFileReader.ReadUInt16();
+			tempInt = theInputFileReader.ReadUInt16();
+			tempInt = theInputFileReader.ReadUInt16();
 
 			//9c 01 00 00   surface size? might be size of remaining solid struct after "axisMapSize?" field
 			//              Seems to be size of data struct from VPHY field to last section of CollisionData.
-			this.theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
 
 
 			//00 00 30 3f   dragAxisAreas x?
 			//00 00 80 3f   dragAxisAreas y?
 			//00 00 80 3f   dragAxisAreas z?
 			//00 00 00 00   axisMapSize?
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
 
 			//2c fe 80 3d 
 			//a5 85 83 39 
@@ -372,17 +372,17 @@ namespace Crowbar
 			//80 01 00 00   size of something? add this to address right after it = address right after the next VPHY
 			//00 00 00 00 
 			//00 00 00 00 
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
-			this.theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
+			theInputFileReader.ReadInt32();
 		}
 
 		public void CalculateVertexNormals()
@@ -391,11 +391,11 @@ namespace Crowbar
 			SourcePhyFace aTriangle = null;
 			SourcePhyFaceSection faceSection = null;
 
-			if (this.thePhyFileData.theSourcePhyCollisionDatas != null)
+			if (thePhyFileData.theSourcePhyCollisionDatas != null)
 			{
-				for (int collisionDataIndex = 0; collisionDataIndex < this.thePhyFileData.theSourcePhyCollisionDatas.Count; collisionDataIndex++)
+				for (int collisionDataIndex = 0; collisionDataIndex < thePhyFileData.theSourcePhyCollisionDatas.Count; collisionDataIndex++)
 				{
-					collisionData = this.thePhyFileData.theSourcePhyCollisionDatas[collisionDataIndex];
+					collisionData = thePhyFileData.theSourcePhyCollisionDatas[collisionDataIndex];
 
 					for (int faceSectionIndex = 0; faceSectionIndex < collisionData.theFaceSections.Count; faceSectionIndex++)
 					{
@@ -405,7 +405,7 @@ namespace Crowbar
 						{
 							aTriangle = faceSection.theFaces[triangleIndex];
 
-							this.CalculateFaceNormal(faceSection, aTriangle);
+							CalculateFaceNormal(faceSection, aTriangle);
 						}
 					}
 				}
@@ -417,7 +417,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			try
 			{
@@ -427,24 +427,24 @@ namespace Crowbar
 				string value = "";
 				long tempStreamOffset = 0;
 				SourcePhyPhysCollisionModel aSourcePhysCollisionModel = null;
-				this.thePhyFileData.theSourcePhyPhysCollisionModels = new List<SourcePhyPhysCollisionModel>();
-				this.theDampingToCountMap = new SortedList<float, int>();
-				this.theInertiaToCountMap = new SortedList<float, int>();
-				this.theRotDampingToCountMap = new SortedList<float, int>();
+				thePhyFileData.theSourcePhyPhysCollisionModels = new List<SourcePhyPhysCollisionModel>();
+				theDampingToCountMap = new SortedList<float, int>();
+				theInertiaToCountMap = new SortedList<float, int>();
+				theRotDampingToCountMap = new SortedList<float, int>();
 				do
 				{
 					aSourcePhysCollisionModel = new SourcePhyPhysCollisionModel();
-					tempStreamOffset = this.theInputFileReader.BaseStream.Position;
-					line = FileManager.ReadTextLine(this.theInputFileReader);
+					tempStreamOffset = theInputFileReader.BaseStream.Position;
+					line = FileManager.ReadTextLine(theInputFileReader);
 					if (line == null || line != "solid {")
 					{
-						this.theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
 						break;
 					}
 
 					while (thereIsAValue)
 					{
-						thereIsAValue = FileManager.ReadKeyValueLine(this.theInputFileReader, ref key, ref value);
+						thereIsAValue = FileManager.ReadKeyValueLine(theInputFileReader, ref key, ref value);
 						if (thereIsAValue)
 						{
 							if (key == "index")
@@ -471,25 +471,25 @@ namespace Crowbar
 							else if (key == "damping")
 							{
 								aSourcePhysCollisionModel.theDamping = float.Parse(value, MainCROWBAR.TheApp.InternalNumberFormat);
-								if (this.theDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theDamping))
+								if (theDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theDamping))
 								{
-									this.theDampingToCountMap[aSourcePhysCollisionModel.theDamping] += 1;
+									theDampingToCountMap[aSourcePhysCollisionModel.theDamping] += 1;
 								}
 								else
 								{
-									this.theDampingToCountMap.Add(aSourcePhysCollisionModel.theDamping, 1);
+									theDampingToCountMap.Add(aSourcePhysCollisionModel.theDamping, 1);
 								}
 							}
 							else if (key == "rotdamping")
 							{
 								aSourcePhysCollisionModel.theRotDamping = float.Parse(value, MainCROWBAR.TheApp.InternalNumberFormat);
-								if (this.theRotDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theRotDamping))
+								if (theRotDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theRotDamping))
 								{
-									this.theRotDampingToCountMap[aSourcePhysCollisionModel.theRotDamping] += 1;
+									theRotDampingToCountMap[aSourcePhysCollisionModel.theRotDamping] += 1;
 								}
 								else
 								{
-									this.theRotDampingToCountMap.Add(aSourcePhysCollisionModel.theRotDamping, 1);
+									theRotDampingToCountMap.Add(aSourcePhysCollisionModel.theRotDamping, 1);
 								}
 							}
 							else if (key == "drag")
@@ -505,13 +505,13 @@ namespace Crowbar
 							else if (key == "inertia")
 							{
 								aSourcePhysCollisionModel.theInertia = float.Parse(value, MainCROWBAR.TheApp.InternalNumberFormat);
-								if (this.theInertiaToCountMap.ContainsKey(aSourcePhysCollisionModel.theInertia))
+								if (theInertiaToCountMap.ContainsKey(aSourcePhysCollisionModel.theInertia))
 								{
-									this.theInertiaToCountMap[aSourcePhysCollisionModel.theInertia] += 1;
+									theInertiaToCountMap[aSourcePhysCollisionModel.theInertia] += 1;
 								}
 								else
 								{
-									this.theInertiaToCountMap.Add(aSourcePhysCollisionModel.theInertia, 1);
+									theInertiaToCountMap.Add(aSourcePhysCollisionModel.theInertia, 1);
 								}
 							}
 							else if (key == "volume")
@@ -531,42 +531,42 @@ namespace Crowbar
 					{
 						break;
 					}
-					this.thePhyFileData.theSourcePhyPhysCollisionModels.Add(aSourcePhysCollisionModel);
+					thePhyFileData.theSourcePhyPhysCollisionModels.Add(aSourcePhysCollisionModel);
 					thereIsAValue = true;
 				} while (line != null);
 
 				float maxValue = 0;
 				int maxCount = 0;
-				this.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues = new SourcePhyPhysCollisionModel();
-				for (int i = 0; i < this.theDampingToCountMap.Count; i++)
+				thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues = new SourcePhyPhysCollisionModel();
+				for (int i = 0; i < theDampingToCountMap.Count; i++)
 				{
-					if (maxCount <= this.theDampingToCountMap.Values[i])
+					if (maxCount <= theDampingToCountMap.Values[i])
 					{
-						maxValue = this.theDampingToCountMap.Keys[i];
-						maxCount = this.theDampingToCountMap.Values[i];
+						maxValue = theDampingToCountMap.Keys[i];
+						maxCount = theDampingToCountMap.Values[i];
 					}
 				}
-				this.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping = maxValue;
+				thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping = maxValue;
 				maxCount = 0;
-				for (int i = 0; i < this.theInertiaToCountMap.Count; i++)
+				for (int i = 0; i < theInertiaToCountMap.Count; i++)
 				{
-					if (maxCount <= this.theInertiaToCountMap.Values[i])
+					if (maxCount <= theInertiaToCountMap.Values[i])
 					{
-						maxValue = this.theInertiaToCountMap.Keys[i];
-						maxCount = this.theInertiaToCountMap.Values[i];
+						maxValue = theInertiaToCountMap.Keys[i];
+						maxCount = theInertiaToCountMap.Values[i];
 					}
 				}
-				this.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia = maxValue;
+				thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia = maxValue;
 				maxCount = 0;
-				for (int i = 0; i < this.theRotDampingToCountMap.Count; i++)
+				for (int i = 0; i < theRotDampingToCountMap.Count; i++)
 				{
-					if (maxCount <= this.theRotDampingToCountMap.Values[i])
+					if (maxCount <= theRotDampingToCountMap.Values[i])
 					{
-						maxValue = this.theRotDampingToCountMap.Keys[i];
-						maxCount = this.theRotDampingToCountMap.Values[i];
+						maxValue = theRotDampingToCountMap.Keys[i];
+						maxCount = theRotDampingToCountMap.Values[i];
 					}
 				}
-				this.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping = maxValue;
+				thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping = maxValue;
 			}
 			catch (Exception ex)
 			{
@@ -574,8 +574,8 @@ namespace Crowbar
 				//Finally
 			}
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Properties");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Properties");
 		}
 
 		public void ReadSourcePhyRagdollConstraintDescs()
@@ -583,7 +583,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			try
 			{
@@ -593,21 +593,21 @@ namespace Crowbar
 				string value = "";
 				long tempStreamOffset = 0;
 				SourcePhyRagdollConstraint aSourceRagdollConstraintDesc = null;
-				this.thePhyFileData.theSourcePhyRagdollConstraintDescs = new SortedList<int, SourcePhyRagdollConstraint>();
+				thePhyFileData.theSourcePhyRagdollConstraintDescs = new SortedList<int, SourcePhyRagdollConstraint>();
 				do
 				{
 					aSourceRagdollConstraintDesc = new SourcePhyRagdollConstraint();
-					tempStreamOffset = this.theInputFileReader.BaseStream.Position;
-					line = FileManager.ReadTextLine(this.theInputFileReader);
+					tempStreamOffset = theInputFileReader.BaseStream.Position;
+					line = FileManager.ReadTextLine(theInputFileReader);
 					if (line == null || line != "ragdollconstraint {")
 					{
-						this.theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
 						break;
 					}
 
 					while (thereIsAValue)
 					{
-						thereIsAValue = FileManager.ReadKeyValueLine(this.theInputFileReader, ref key, ref value);
+						thereIsAValue = FileManager.ReadKeyValueLine(theInputFileReader, ref key, ref value);
 						if (thereIsAValue)
 						{
 							if (key == "parent")
@@ -662,7 +662,7 @@ namespace Crowbar
 					{
 						break;
 					}
-					this.thePhyFileData.theSourcePhyRagdollConstraintDescs.Add(aSourceRagdollConstraintDesc.theChildIndex, aSourceRagdollConstraintDesc);
+					thePhyFileData.theSourcePhyRagdollConstraintDescs.Add(aSourceRagdollConstraintDesc.theChildIndex, aSourceRagdollConstraintDesc);
 					thereIsAValue = true;
 				} while (line != null);
 			}
@@ -674,10 +674,10 @@ namespace Crowbar
 			{
 			}
 
-			if (fileOffsetStart < this.theInputFileReader.BaseStream.Position)
+			if (fileOffsetStart < theInputFileReader.BaseStream.Position)
 			{
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Ragdoll constraints");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Ragdoll constraints");
 			}
 		}
 
@@ -686,7 +686,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			try
 			{
@@ -696,14 +696,14 @@ namespace Crowbar
 				string value = "";
 				long tempStreamOffset = 0;
 				SourcePhyCollisionPair aSourcePhyCollisionPair = null;
-				this.thePhyFileData.theSourcePhyCollisionPairs = new List<SourcePhyCollisionPair>();
+				thePhyFileData.theSourcePhyCollisionPairs = new List<SourcePhyCollisionPair>();
 				do
 				{
-					tempStreamOffset = this.theInputFileReader.BaseStream.Position;
-					line = FileManager.ReadTextLine(this.theInputFileReader);
+					tempStreamOffset = theInputFileReader.BaseStream.Position;
+					line = FileManager.ReadTextLine(theInputFileReader);
 					if (line == null || line != "collisionrules {")
 					{
-						this.theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
 						break;
 					}
 
@@ -711,7 +711,7 @@ namespace Crowbar
 					string[] tokens = {""};
 					while (thereIsAValue)
 					{
-						thereIsAValue = FileManager.ReadKeyValueLine(this.theInputFileReader, ref key, ref value);
+						thereIsAValue = FileManager.ReadKeyValueLine(theInputFileReader, ref key, ref value);
 						if (thereIsAValue)
 						{
 							if (key == "collisionpair")
@@ -722,12 +722,12 @@ namespace Crowbar
 									aSourcePhyCollisionPair = new SourcePhyCollisionPair();
 									aSourcePhyCollisionPair.obj0 = int.Parse(tokens[0], MainCROWBAR.TheApp.InternalNumberFormat);
 									aSourcePhyCollisionPair.obj1 = int.Parse(tokens[1], MainCROWBAR.TheApp.InternalNumberFormat);
-									this.thePhyFileData.theSourcePhyCollisionPairs.Add(aSourcePhyCollisionPair);
+									thePhyFileData.theSourcePhyCollisionPairs.Add(aSourcePhyCollisionPair);
 								}
 							}
 							else if (key == "selfcollisions")
 							{
-								this.thePhyFileData.theSourcePhySelfCollides = false;
+								thePhyFileData.theSourcePhySelfCollides = false;
 							}
 						}
 					}
@@ -748,10 +748,10 @@ namespace Crowbar
 			{
 			}
 
-			if (fileOffsetStart < this.theInputFileReader.BaseStream.Position)
+			if (fileOffsetStart < theInputFileReader.BaseStream.Position)
 			{
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Collision rules");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Collision rules");
 			}
 		}
 
@@ -760,7 +760,7 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			try
 			{
@@ -769,14 +769,14 @@ namespace Crowbar
 				string key = "";
 				string value = "";
 				long tempStreamOffset = 0;
-				this.thePhyFileData.theSourcePhyEditParamsSection = new SourcePhyEditParamsSection();
+				thePhyFileData.theSourcePhyEditParamsSection = new SourcePhyEditParamsSection();
 				do
 				{
-					tempStreamOffset = this.theInputFileReader.BaseStream.Position;
-					line = FileManager.ReadTextLine(this.theInputFileReader);
+					tempStreamOffset = theInputFileReader.BaseStream.Position;
+					line = FileManager.ReadTextLine(theInputFileReader);
 					if (line == null || line != "editparams {")
 					{
-						this.theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(tempStreamOffset, SeekOrigin.Begin);
 						break;
 					}
 
@@ -784,13 +784,13 @@ namespace Crowbar
 					string[] tokens = {""};
 					while (thereIsAValue)
 					{
-						thereIsAValue = FileManager.ReadKeyValueLine(this.theInputFileReader, ref key, ref value);
+						thereIsAValue = FileManager.ReadKeyValueLine(theInputFileReader, ref key, ref value);
 						if (key == "rootname")
 						{
 							thereIsAValue = true;
 							if (key != value)
 							{
-								this.thePhyFileData.theSourcePhyEditParamsSection.rootName = value;
+								thePhyFileData.theSourcePhyEditParamsSection.rootName = value;
 								//Else
 								//	Me.theSourceEngineModel.thePhyFileHeader.theSourcePhyEditParamsSection.rootName = ""
 							}
@@ -799,11 +799,11 @@ namespace Crowbar
 						{
 							if (key == "concave")
 							{
-								this.thePhyFileData.theSourcePhyEditParamsSection.concave = value;
+								thePhyFileData.theSourcePhyEditParamsSection.concave = value;
 							}
 							else if (key == "totalmass")
 							{
-								this.thePhyFileData.theSourcePhyEditParamsSection.totalMass = float.Parse(value, MainCROWBAR.TheApp.InternalNumberFormat);
+								thePhyFileData.theSourcePhyEditParamsSection.totalMass = float.Parse(value, MainCROWBAR.TheApp.InternalNumberFormat);
 							}
 						}
 					}
@@ -824,10 +824,10 @@ namespace Crowbar
 			{
 			}
 
-			if (fileOffsetStart < this.theInputFileReader.BaseStream.Position)
+			if (fileOffsetStart < theInputFileReader.BaseStream.Position)
 			{
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Edit params");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Edit params");
 			}
 		}
 
@@ -836,21 +836,21 @@ namespace Crowbar
 			long fileOffsetStart = 0;
 			long fileOffsetEnd = 0;
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 			try
 			{
 				long endOffset = 0;
-				if (this.thePhyEndOffset == 0)
+				if (thePhyEndOffset == 0)
 				{
-					endOffset = this.theInputFileReader.BaseStream.Length - 1;
+					endOffset = theInputFileReader.BaseStream.Length - 1;
 				}
 				else
 				{
-					endOffset = this.thePhyEndOffset;
+					endOffset = thePhyEndOffset;
 				}
 
-				this.thePhyFileData.theSourcePhyCollisionText = Common.ReadPhyCollisionTextSection(this.theInputFileReader, endOffset);
+				thePhyFileData.theSourcePhyCollisionText = Common.ReadPhyCollisionTextSection(theInputFileReader, endOffset);
 			}
 			catch (Exception ex)
 			{
@@ -860,16 +860,16 @@ namespace Crowbar
 			{
 			}
 
-			if (fileOffsetStart < this.theInputFileReader.BaseStream.Position)
+			if (fileOffsetStart < theInputFileReader.BaseStream.Position)
 			{
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Collision text");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				thePhyFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "Collision text");
 			}
 		}
 
 		public void ReadUnreadBytes()
 		{
-			this.thePhyFileData.theFileSeekLog.LogUnreadBytes(this.theInputFileReader);
+			thePhyFileData.theFileSeekLog.LogUnreadBytes(theInputFileReader);
 		}
 
 #endregion

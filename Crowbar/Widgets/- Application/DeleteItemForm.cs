@@ -19,14 +19,14 @@ namespace Crowbar
 
 		private void DeleteButton_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.Close();
+			DialogResult = System.Windows.Forms.DialogResult.OK;
+			Close();
 		}
 
 		private void CancelDeleteButton_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.Close();
+			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			Close();
 		}
 
 	}

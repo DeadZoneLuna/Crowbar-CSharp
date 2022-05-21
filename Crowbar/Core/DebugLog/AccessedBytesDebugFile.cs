@@ -17,7 +17,7 @@ namespace Crowbar
 
 		public AccessedBytesDebugFile(StreamWriter outputFileStream)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
+			theOutputFileStreamWriter = outputFileStream;
 		}
 
 #endregion
@@ -30,20 +30,20 @@ namespace Crowbar
 
 			line = "// ";
 			line += MainCROWBAR.TheApp.GetHeaderComment();
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteFileSeekLog(FileSeekLog aFileSeekLog)
 		{
 			string line = "====== File Size ======";
 
-			this.WriteLogLine(0, line);
+			WriteLogLine(0, line);
 
 			line = aFileSeekLog.theFileSize.ToString("N0");
-			this.WriteLogLine(1, line);
+			WriteLogLine(1, line);
 
 			line = "====== File Seek Log ======";
-			this.WriteLogLine(0, line);
+			WriteLogLine(0, line);
 
 			//line = "--- Summary ---"
 			//Me.WriteLogLine(0, line)
@@ -89,11 +89,11 @@ namespace Crowbar
 				offsetEnd = aFileSeekLog.theFileSeekList.Values[i];
 
 				line = offsetStart.ToString("N0") + " - " + offsetEnd.ToString("N0") + " " + aFileSeekLog.theFileSeekDescriptionList.Values[i];
-				this.WriteLogLine(1, line);
+				WriteLogLine(1, line);
 			}
 
 			line = "========================";
-			this.WriteLogLine(0, line);
+			WriteLogLine(0, line);
 		}
 
 #endregion
@@ -104,12 +104,12 @@ namespace Crowbar
 		{
 			string line = null;
 
-			this.WriteLogLine(0, "");
-			this.WriteLogLine(0, "");
+			WriteLogLine(0, "");
+			WriteLogLine(0, "");
 			line = "################################################################################";
-			this.WriteLogLine(0, line);
-			this.WriteLogLine(0, "");
-			this.WriteLogLine(0, "");
+			WriteLogLine(0, line);
+			WriteLogLine(0, "");
+			WriteLogLine(0, "");
 		}
 
 		private void WriteLogLine(int indentLevel, string line)
@@ -120,8 +120,8 @@ namespace Crowbar
 				indentedLine += "\t";
 			}
 			indentedLine += line;
-			this.theOutputFileStreamWriter.WriteLine(indentedLine);
-			this.theOutputFileStreamWriter.Flush();
+			theOutputFileStreamWriter.WriteLine(indentedLine);
+			theOutputFileStreamWriter.Flush();
 		}
 
 #endregion

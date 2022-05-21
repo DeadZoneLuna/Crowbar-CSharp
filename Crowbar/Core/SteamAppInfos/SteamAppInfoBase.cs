@@ -84,7 +84,7 @@ namespace Crowbar
 
 		public SteamAppInfoBase()
 		{
-			this.ContentFileExtensionsAndDescriptions = new SortedList<string, string>();
+			ContentFileExtensionsAndDescriptions = new SortedList<string, string>();
 		}
 
 		public virtual string ProcessFileAfterDownload(string givenPathFileName, BackgroundWorkerEx bw)

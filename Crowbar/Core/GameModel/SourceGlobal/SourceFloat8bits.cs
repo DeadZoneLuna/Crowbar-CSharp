@@ -23,7 +23,7 @@ namespace Crowbar
 
 				int sign = 0;
 				int floatSign = 0;
-				sign = this.GetSign(this.the8BitValue);
+				sign = GetSign(the8BitValue);
 				if (sign == 1)
 				{
 					floatSign = -1;
@@ -33,20 +33,20 @@ namespace Crowbar
 					floatSign = 1;
 				}
 
-				if (this.IsInfinity(this.the8BitValue))
+				if (IsInfinity(the8BitValue))
 				{
 					return maxfloat8bits * floatSign;
 				}
 
-				if (this.IsNaN(this.the8BitValue))
+				if (IsNaN(the8BitValue))
 				{
 					return 0;
 				}
 
 				int mantissa = 0;
 				int biased_exponent = 0;
-				mantissa = this.GetMantissa(this.the8BitValue);
-				biased_exponent = this.GetBiasedExponent(this.the8BitValue);
+				mantissa = GetMantissa(the8BitValue);
+				biased_exponent = GetBiasedExponent(the8BitValue);
 				if (biased_exponent == 0 && mantissa != 0)
 				{
 					float floatMantissa = mantissa / 8.0F;
@@ -54,7 +54,7 @@ namespace Crowbar
 				}
 				else
 				{
-					result = this.GetSingle(this.the8BitValue);
+					result = GetSingle(the8BitValue);
 
 					// For debugging the conversion.
 					//result = CType(anInteger32, Single)
@@ -102,9 +102,9 @@ namespace Crowbar
 			int resultSign = 0;
 			bitsResult.i = 0;
 
-			mantissa = this.GetMantissa(this.the8BitValue);
-			biased_exponent = this.GetBiasedExponent(this.the8BitValue);
-			sign = this.GetSign(this.the8BitValue);
+			mantissa = GetMantissa(the8BitValue);
+			biased_exponent = GetBiasedExponent(the8BitValue);
+			sign = GetSign(the8BitValue);
 
 			resultMantissa = mantissa << (23 - 3);
 			if (biased_exponent == 0)
@@ -144,8 +144,8 @@ namespace Crowbar
 			int mantissa = 0;
 			int biased_exponent = 0;
 
-			mantissa = this.GetMantissa(value);
-			biased_exponent = this.GetBiasedExponent(value);
+			mantissa = GetMantissa(value);
+			biased_exponent = GetBiasedExponent(value);
 			return ((biased_exponent == 15) && (mantissa == 0));
 		}
 
@@ -154,8 +154,8 @@ namespace Crowbar
 			int mantissa = 0;
 			int biased_exponent = 0;
 
-			mantissa = this.GetMantissa(value);
-			biased_exponent = this.GetBiasedExponent(value);
+			mantissa = GetMantissa(value);
+			biased_exponent = GetBiasedExponent(value);
 			return ((biased_exponent == 15) && (mantissa != 0));
 		}
 

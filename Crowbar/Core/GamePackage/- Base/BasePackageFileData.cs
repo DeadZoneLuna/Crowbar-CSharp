@@ -14,8 +14,8 @@ namespace Crowbar
 		public BasePackageFileData() : base()
 		{
 
-			this.theEntries = new List<BasePackageDirectoryEntry>();
-			this.theEntryDataOutputTexts = new List<string>();
+			theEntries = new List<BasePackageDirectoryEntry>();
+			theEntryDataOutputTexts = new List<string>();
 		}
 
 		public abstract bool IsSourcePackage {get;}

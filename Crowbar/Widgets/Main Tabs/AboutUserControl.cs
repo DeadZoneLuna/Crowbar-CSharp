@@ -29,23 +29,23 @@ namespace Crowbar
 			//NOTE: Customize the application's assembly information in the "Application" pane of the project 
 			//    properties dialog (under the "Project" menu).
 
-			this.ProductNameLinkLabel.Text = Application.ProductName;
-			this.ProductNameLinkLabel.Links.Add(0, Application.ProductName.Length, Properties.Resources.About_ProductLink);
+			ProductNameLinkLabel.Text = Application.ProductName;
+			ProductNameLinkLabel.Links.Add(0, Application.ProductName.Length, Properties.Resources.About_ProductLink);
 
-			this.GotoSteamGroupLinkLabel.Text = Properties.Resources.About_GotoSteamGroupText;
-			this.GotoSteamGroupLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamGroupText.Length, Properties.Resources.About_ProductLink);
+			GotoSteamGroupLinkLabel.Text = Properties.Resources.About_GotoSteamGroupText;
+			GotoSteamGroupLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamGroupText.Length, Properties.Resources.About_ProductLink);
 
-			this.ProductInfoTextBox.Text = "Version " + Version.Parse(Application.ProductVersion).ToString(2) + "\r\n";
-			this.ProductInfoTextBox.Text += ConversionHelper.AssemblyCopyright + "\r\n";
-			this.ProductInfoTextBox.Text += Application.CompanyName;
+			ProductInfoTextBox.Text = "Version " + Version.Parse(Application.ProductVersion).ToString(2) + "\r\n";
+			ProductInfoTextBox.Text += ConversionHelper.AssemblyCopyright + "\r\n";
+			ProductInfoTextBox.Text += Application.CompanyName;
 
-			this.AuthorLinkLabel.Text = Application.CompanyName;
-			this.AuthorLinkLabel.Links.Add(0, Application.CompanyName.Length, Properties.Resources.About_AuthorLink);
+			AuthorLinkLabel.Text = Application.CompanyName;
+			AuthorLinkLabel.Links.Add(0, Application.CompanyName.Length, Properties.Resources.About_AuthorLink);
 
-			this.GotoSteamProfileLinkLabel.Text = Properties.Resources.About_GotoSteamProfileText;
-			this.GotoSteamProfileLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamProfileText.Length, Properties.Resources.About_AuthorLink);
+			GotoSteamProfileLinkLabel.Text = Properties.Resources.About_GotoSteamProfileText;
+			GotoSteamProfileLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamProfileText.Length, Properties.Resources.About_AuthorLink);
 
-			this.ProductDescriptionTextBox.Text = Properties.Resources.About_ProductDescription;
+			ProductDescriptionTextBox.Text = Properties.Resources.About_ProductDescription;
 
 			//Me.Panel1.DataBindings.Add("BackColor", TheApp.Settings, "AboutTabBackgroundColor", False, DataSourceUpdateMode.OnPropertyChanged)
 		}
@@ -64,9 +64,9 @@ namespace Crowbar
 
 		private void AboutUserControl_Load(object sender, EventArgs e)
 		{
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 

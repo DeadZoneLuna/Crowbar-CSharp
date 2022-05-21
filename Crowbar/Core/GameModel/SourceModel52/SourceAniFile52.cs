@@ -16,14 +16,14 @@ namespace Crowbar
 
 		public SourceAniFile52(BinaryReader aniFileReader, SourceFileData aniFileData, SourceFileData mdlFileData)
 		{
-			this.theInputFileReader = aniFileReader;
-			this.theMdlFileData = (SourceMdlFileData52)aniFileData;
-			this.theRealMdlFileData = (SourceMdlFileData52)mdlFileData;
+			theInputFileReader = aniFileReader;
+			theMdlFileData = (SourceMdlFileData52)aniFileData;
+			theRealMdlFileData = (SourceMdlFileData52)mdlFileData;
 
-			this.theMdlFileData.theFileSeekLog.FileSize = this.theInputFileReader.BaseStream.Length;
+			theMdlFileData.theFileSeekLog.FileSize = theInputFileReader.BaseStream.Length;
 
 			//NOTE: Need the bone data from the real MDL file because SourceAniFile inherits SourceMdlFile.ReadMdlAnimation() that uses the data.
-			this.theMdlFileData.theBones = this.theRealMdlFileData.theBones;
+			theMdlFileData.theBones = theRealMdlFileData.theBones;
 		}
 
 #endregion
@@ -34,7 +34,7 @@ namespace Crowbar
 		//Public Sub ReadAniBlocks(ByVal delegateReadAniAnimation As ReadAniAnimationDelegate)
 		public void ReadAnimationAniBlocks()
 		{
-			if (this.theRealMdlFileData.theAnimationDescs != null)
+			if (theRealMdlFileData.theAnimationDescs != null)
 			{
 				long animBlockInputFileStreamPosition = 0;
 				long animBlockInputFileStreamEndPosition = 0;
@@ -44,12 +44,12 @@ namespace Crowbar
 				int sectionIndex = 0;
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				int sectionFrameCount = 0;
-				for (int anAnimDescIndex = 0; anAnimDescIndex < this.theRealMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
+				for (int anAnimDescIndex = 0; anAnimDescIndex < theRealMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
 				{
-					anAnimationDesc = this.theRealMdlFileData.theAnimationDescs[anAnimDescIndex];
+					anAnimationDesc = theRealMdlFileData.theAnimationDescs[anAnimDescIndex];
 
-					animBlockInputFileStreamPosition = this.theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
-					animBlockInputFileStreamEndPosition = this.theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataEnd;
+					animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
+					animBlockInputFileStreamEndPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataEnd;
 
 					try
 					{
@@ -74,9 +74,9 @@ namespace Crowbar
 										sectionFrameCount = anAnimationDesc.frameCount - ((sectionCount - 2) * anAnimationDesc.sectionFrameCount);
 									}
 
-									animBlockInputFileStreamPosition = this.theRealMdlFileData.theAnimBlocks[anAnimationDesc.theSections[sectionIndex].animBlock].dataStart;
-									animBlockInputFileStreamEndPosition = this.theRealMdlFileData.theAnimBlocks[anAnimationDesc.theSections[sectionIndex].animBlock].dataEnd;
-									this.ReadAniAnimation(animBlockInputFileStreamPosition + anAnimationDesc.theSections[sectionIndex].animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.theSections[sectionIndex].animOffset, anAnimationDesc, sectionFrameCount, sectionIndex, (sectionIndex >= sectionCount - 2) || (anAnimationDesc.frameCount == (sectionIndex + 1) * anAnimationDesc.sectionFrameCount));
+									animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.theSections[sectionIndex].animBlock].dataStart;
+									animBlockInputFileStreamEndPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.theSections[sectionIndex].animBlock].dataEnd;
+									ReadAniAnimation(animBlockInputFileStreamPosition + anAnimationDesc.theSections[sectionIndex].animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.theSections[sectionIndex].animOffset, anAnimationDesc, sectionFrameCount, sectionIndex, (sectionIndex >= sectionCount - 2) || (anAnimationDesc.frameCount == (sectionIndex + 1) * anAnimationDesc.sectionFrameCount));
 									//delegateReadAniAnimation.Invoke(animBlockInputFileStreamPosition + anAnimationDesc.theSections(sectionIndex).animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.theSections(sectionIndex).animOffset, anAnimationDesc, sectionFrameCount, sectionIndex)
 								}
 							}
@@ -84,14 +84,14 @@ namespace Crowbar
 						else if (anAnimationDesc.animBlock > 0)
 						{
 							sectionIndex = 0;
-							this.ReadAniAnimation(animBlockInputFileStreamPosition + anAnimationDesc.animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.animOffset, anAnimationDesc, anAnimationDesc.frameCount, sectionIndex, true);
+							ReadAniAnimation(animBlockInputFileStreamPosition + anAnimationDesc.animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.animOffset, anAnimationDesc, anAnimationDesc.frameCount, sectionIndex, true);
 							//delegateReadAniAnimation.Invoke(animBlockInputFileStreamPosition + anAnimationDesc.animOffset, animBlockInputFileStreamEndPosition + anAnimationDesc.animOffset, anAnimationDesc, anAnimationDesc.frameCount, sectionIndex)
 						}
 
 						if (anAnimationDesc.animBlock > 0)
 						{
-							this.ReadMdlIkRules(animBlockInputFileStreamPosition + anAnimationDesc.animblockIkRuleOffset, anAnimationDesc);
-							this.ReadLocalHierarchies(animBlockInputFileStreamPosition, anAnimationDesc);
+							ReadMdlIkRules(animBlockInputFileStreamPosition + anAnimationDesc.animblockIkRuleOffset, anAnimationDesc);
+							ReadLocalHierarchies(animBlockInputFileStreamPosition, anAnimationDesc);
 						}
 					}
 					catch (Exception ex)
@@ -108,7 +108,7 @@ namespace Crowbar
 
 		private void ReadAniAnimation(long aniFileInputFileStreamPosition, long aniFileStreamEndPosition, SourceMdlAnimationDesc52 anAnimationDesc, int sectionFrameCount, int sectionIndex, bool lastSectionIsBeingRead)
 		{
-			this.ReadAnimationFrameByBone(aniFileInputFileStreamPosition, anAnimationDesc, sectionFrameCount, sectionIndex, lastSectionIsBeingRead);
+			ReadAnimationFrameByBone(aniFileInputFileStreamPosition, anAnimationDesc, sectionFrameCount, sectionIndex, lastSectionIsBeingRead);
 		}
 
 #endregion

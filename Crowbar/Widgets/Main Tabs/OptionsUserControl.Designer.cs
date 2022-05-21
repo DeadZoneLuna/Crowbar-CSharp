@@ -31,963 +31,963 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.IntegrateContextMenuItemsCheckBox = new System.Windows.Forms.CheckBox();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.IntegrateAsSubmenuCheckBox = new System.Windows.Forms.CheckBox();
-			this.GroupBox1 = new System.Windows.Forms.GroupBox();
-			this.Panel7 = new System.Windows.Forms.Panel();
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuCompileFolderCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuCompileQcFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuDecompileFolderCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuDecompileMdlFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuViewMdlFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsContextMenuOpenWithCrowbarCheckBox = new System.Windows.Forms.CheckBox();
-			this.ContextMenuUseDefaultsButton = new System.Windows.Forms.Button();
-			this.AutoOpenMdlFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.AutoOpenQcFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.GroupBox2 = new System.Windows.Forms.GroupBox();
-			this.Panel2 = new System.Windows.Forms.Panel();
-			this.AutoOpenGmaFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenGmaFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenVpkPanel = new System.Windows.Forms.Panel();
-			this.AutoOpenVpkFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenVpkFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.Label14 = new System.Windows.Forms.Label();
-			this.AutoOpenFpxFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.AutoOpenGmaFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.Label5 = new System.Windows.Forms.Label();
-			this.AutoOpenFolderPanel = new System.Windows.Forms.Panel();
-			this.AutoOpenFolderForPackRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenFolderForCompileRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenFolderForDecompileRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenFolderForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.Label4 = new System.Windows.Forms.Label();
-			this.Label2 = new System.Windows.Forms.Label();
-			this.AutoOpenUseDefaultsButton = new System.Windows.Forms.Button();
-			this.Panel1 = new System.Windows.Forms.Panel();
-			this.Label9 = new System.Windows.Forms.Label();
-			this.Label8 = new System.Windows.Forms.Label();
-			this.AutoOpenMdlFileForDecompileCheckBox = new System.Windows.Forms.CheckBox();
-			this.AutoOpenMdlFileForViewCheckBox = new System.Windows.Forms.CheckBox();
-			this.AutoOpenMdlFileForPreviewCheckBox = new System.Windows.Forms.CheckBox();
-			this.AutoOpenMdlFileForViewingRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenMdlFileForPreviewingRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenMdlFileForDecompilingRadioButton = new System.Windows.Forms.RadioButton();
-			this.AutoOpenVpkFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.GroupBox3 = new System.Windows.Forms.GroupBox();
-			this.Panel5 = new System.Windows.Forms.Panel();
-			this.DragAndDropGmaFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropGmaFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.Panel6 = new System.Windows.Forms.Panel();
-			this.DragAndDropVpkFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropVpkFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.Label7 = new System.Windows.Forms.Label();
-			this.Label6 = new System.Windows.Forms.Label();
-			this.Label13 = new System.Windows.Forms.Label();
-			this.Label12 = new System.Windows.Forms.Label();
-			this.Panel3 = new System.Windows.Forms.Panel();
-			this.Label10 = new System.Windows.Forms.Label();
-			this.Label11 = new System.Windows.Forms.Label();
-			this.DragAndDropMdlFileForDecompileCheckBox = new System.Windows.Forms.CheckBox();
-			this.DragAndDropMdlFileForViewCheckBox = new System.Windows.Forms.CheckBox();
-			this.DragAndDropMdlFileForPreviewCheckBox = new System.Windows.Forms.CheckBox();
-			this.DragAndDropMdlFileForPreviewingRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropMdlFileForDecompilingRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropMdlFileForViewingRadioButton = new System.Windows.Forms.RadioButton();
-			this.Label3 = new System.Windows.Forms.Label();
-			this.DragAndDropUseDefaultsButton = new System.Windows.Forms.Button();
-			this.Panel4 = new System.Windows.Forms.Panel();
-			this.DragAndDropFolderForPackRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropFolderForCompileRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropFolderForDecompileRadioButton = new System.Windows.Forms.RadioButton();
-			this.DragAndDropFolderForUnpackRadioButton = new System.Windows.Forms.RadioButton();
-			this.ApplyLabel = new System.Windows.Forms.Label();
-			this.ApplyButton = new System.Windows.Forms.Button();
-			this.ApplyPanel = new System.Windows.Forms.Panel();
-			this.SingleInstanceCheckBox = new System.Windows.Forms.CheckBox();
-			this.GroupBox1.SuspendLayout();
-			this.Panel7.SuspendLayout();
-			this.GroupBox2.SuspendLayout();
-			this.Panel2.SuspendLayout();
-			this.AutoOpenVpkPanel.SuspendLayout();
-			this.AutoOpenFolderPanel.SuspendLayout();
-			this.Panel1.SuspendLayout();
-			this.GroupBox3.SuspendLayout();
-			this.Panel5.SuspendLayout();
-			this.Panel6.SuspendLayout();
-			this.Panel3.SuspendLayout();
-			this.Panel4.SuspendLayout();
-			this.ApplyPanel.SuspendLayout();
-			this.SuspendLayout();
+			IntegrateContextMenuItemsCheckBox = new System.Windows.Forms.CheckBox();
+			Label1 = new System.Windows.Forms.Label();
+			IntegrateAsSubmenuCheckBox = new System.Windows.Forms.CheckBox();
+			GroupBox1 = new System.Windows.Forms.GroupBox();
+			Panel7 = new System.Windows.Forms.Panel();
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuCompileFolderCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuCompileQcFileCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuDecompileFolderCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuDecompileMdlFileCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuViewMdlFileCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsContextMenuOpenWithCrowbarCheckBox = new System.Windows.Forms.CheckBox();
+			ContextMenuUseDefaultsButton = new System.Windows.Forms.Button();
+			AutoOpenMdlFileCheckBox = new System.Windows.Forms.CheckBox();
+			AutoOpenQcFileCheckBox = new System.Windows.Forms.CheckBox();
+			GroupBox2 = new System.Windows.Forms.GroupBox();
+			Panel2 = new System.Windows.Forms.Panel();
+			AutoOpenGmaFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenGmaFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenVpkPanel = new System.Windows.Forms.Panel();
+			AutoOpenVpkFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenVpkFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			Label14 = new System.Windows.Forms.Label();
+			AutoOpenFpxFileCheckBox = new System.Windows.Forms.CheckBox();
+			AutoOpenGmaFileCheckBox = new System.Windows.Forms.CheckBox();
+			Label5 = new System.Windows.Forms.Label();
+			AutoOpenFolderPanel = new System.Windows.Forms.Panel();
+			AutoOpenFolderForPackRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenFolderForCompileRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenFolderForDecompileRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenFolderForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			Label4 = new System.Windows.Forms.Label();
+			Label2 = new System.Windows.Forms.Label();
+			AutoOpenUseDefaultsButton = new System.Windows.Forms.Button();
+			Panel1 = new System.Windows.Forms.Panel();
+			Label9 = new System.Windows.Forms.Label();
+			Label8 = new System.Windows.Forms.Label();
+			AutoOpenMdlFileForDecompileCheckBox = new System.Windows.Forms.CheckBox();
+			AutoOpenMdlFileForViewCheckBox = new System.Windows.Forms.CheckBox();
+			AutoOpenMdlFileForPreviewCheckBox = new System.Windows.Forms.CheckBox();
+			AutoOpenMdlFileForViewingRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenMdlFileForPreviewingRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenMdlFileForDecompilingRadioButton = new System.Windows.Forms.RadioButton();
+			AutoOpenVpkFileCheckBox = new System.Windows.Forms.CheckBox();
+			GroupBox3 = new System.Windows.Forms.GroupBox();
+			Panel5 = new System.Windows.Forms.Panel();
+			DragAndDropGmaFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropGmaFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			Panel6 = new System.Windows.Forms.Panel();
+			DragAndDropVpkFileForPublishRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropVpkFileForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			Label7 = new System.Windows.Forms.Label();
+			Label6 = new System.Windows.Forms.Label();
+			Label13 = new System.Windows.Forms.Label();
+			Label12 = new System.Windows.Forms.Label();
+			Panel3 = new System.Windows.Forms.Panel();
+			Label10 = new System.Windows.Forms.Label();
+			Label11 = new System.Windows.Forms.Label();
+			DragAndDropMdlFileForDecompileCheckBox = new System.Windows.Forms.CheckBox();
+			DragAndDropMdlFileForViewCheckBox = new System.Windows.Forms.CheckBox();
+			DragAndDropMdlFileForPreviewCheckBox = new System.Windows.Forms.CheckBox();
+			DragAndDropMdlFileForPreviewingRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropMdlFileForDecompilingRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropMdlFileForViewingRadioButton = new System.Windows.Forms.RadioButton();
+			Label3 = new System.Windows.Forms.Label();
+			DragAndDropUseDefaultsButton = new System.Windows.Forms.Button();
+			Panel4 = new System.Windows.Forms.Panel();
+			DragAndDropFolderForPackRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropFolderForCompileRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropFolderForDecompileRadioButton = new System.Windows.Forms.RadioButton();
+			DragAndDropFolderForUnpackRadioButton = new System.Windows.Forms.RadioButton();
+			ApplyLabel = new System.Windows.Forms.Label();
+			ApplyButton = new System.Windows.Forms.Button();
+			ApplyPanel = new System.Windows.Forms.Panel();
+			SingleInstanceCheckBox = new System.Windows.Forms.CheckBox();
+			GroupBox1.SuspendLayout();
+			Panel7.SuspendLayout();
+			GroupBox2.SuspendLayout();
+			Panel2.SuspendLayout();
+			AutoOpenVpkPanel.SuspendLayout();
+			AutoOpenFolderPanel.SuspendLayout();
+			Panel1.SuspendLayout();
+			GroupBox3.SuspendLayout();
+			Panel5.SuspendLayout();
+			Panel6.SuspendLayout();
+			Panel3.SuspendLayout();
+			Panel4.SuspendLayout();
+			ApplyPanel.SuspendLayout();
+			SuspendLayout();
 			//
 			//IntegrateContextMenuItemsCheckBox
 			//
-			this.IntegrateContextMenuItemsCheckBox.AutoSize = true;
-			this.IntegrateContextMenuItemsCheckBox.Location = new System.Drawing.Point(6, 19);
-			this.IntegrateContextMenuItemsCheckBox.Name = "IntegrateContextMenuItemsCheckBox";
-			this.IntegrateContextMenuItemsCheckBox.Size = new System.Drawing.Size(223, 17);
-			this.IntegrateContextMenuItemsCheckBox.TabIndex = 0;
-			this.IntegrateContextMenuItemsCheckBox.Text = "Integrate Crowbar context menu items";
-			this.IntegrateContextMenuItemsCheckBox.UseVisualStyleBackColor = true;
+			IntegrateContextMenuItemsCheckBox.AutoSize = true;
+			IntegrateContextMenuItemsCheckBox.Location = new System.Drawing.Point(6, 19);
+			IntegrateContextMenuItemsCheckBox.Name = "IntegrateContextMenuItemsCheckBox";
+			IntegrateContextMenuItemsCheckBox.Size = new System.Drawing.Size(223, 17);
+			IntegrateContextMenuItemsCheckBox.TabIndex = 0;
+			IntegrateContextMenuItemsCheckBox.Text = "Integrate Crowbar context menu items";
+			IntegrateContextMenuItemsCheckBox.UseVisualStyleBackColor = true;
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Location = new System.Drawing.Point(24, 68);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(112, 13);
-			this.Label1.TabIndex = 2;
-			this.Label1.Text = "Context menu items:";
+			Label1.AutoSize = true;
+			Label1.Location = new System.Drawing.Point(24, 68);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(112, 13);
+			Label1.TabIndex = 2;
+			Label1.Text = "Context menu items:";
 			//
 			//IntegrateAsSubmenuCheckBox
 			//
-			this.IntegrateAsSubmenuCheckBox.AutoSize = true;
-			this.IntegrateAsSubmenuCheckBox.Location = new System.Drawing.Point(24, 42);
-			this.IntegrateAsSubmenuCheckBox.Name = "IntegrateAsSubmenuCheckBox";
-			this.IntegrateAsSubmenuCheckBox.Size = new System.Drawing.Size(202, 17);
-			this.IntegrateAsSubmenuCheckBox.TabIndex = 4;
-			this.IntegrateAsSubmenuCheckBox.Text = "Integrate as a \"Crowbar\" submenu";
-			this.IntegrateAsSubmenuCheckBox.UseVisualStyleBackColor = true;
+			IntegrateAsSubmenuCheckBox.AutoSize = true;
+			IntegrateAsSubmenuCheckBox.Location = new System.Drawing.Point(24, 42);
+			IntegrateAsSubmenuCheckBox.Name = "IntegrateAsSubmenuCheckBox";
+			IntegrateAsSubmenuCheckBox.Size = new System.Drawing.Size(202, 17);
+			IntegrateAsSubmenuCheckBox.TabIndex = 4;
+			IntegrateAsSubmenuCheckBox.Text = "Integrate as a \"Crowbar\" submenu";
+			IntegrateAsSubmenuCheckBox.UseVisualStyleBackColor = true;
 			//
 			//GroupBox1
 			//
-			this.GroupBox1.Controls.Add(this.Panel7);
-			this.GroupBox1.Controls.Add(this.ContextMenuUseDefaultsButton);
-			this.GroupBox1.Controls.Add(this.IntegrateContextMenuItemsCheckBox);
-			this.GroupBox1.Controls.Add(this.Label1);
-			this.GroupBox1.Controls.Add(this.IntegrateAsSubmenuCheckBox);
-			this.GroupBox1.Location = new System.Drawing.Point(415, 26);
-			this.GroupBox1.Name = "GroupBox1";
-			this.GroupBox1.Size = new System.Drawing.Size(309, 467);
-			this.GroupBox1.TabIndex = 2;
-			this.GroupBox1.TabStop = false;
-			this.GroupBox1.Text = "Windows Explorer Context Menu";
-			this.GroupBox1.Visible = false;
+			GroupBox1.Controls.Add(Panel7);
+			GroupBox1.Controls.Add(ContextMenuUseDefaultsButton);
+			GroupBox1.Controls.Add(IntegrateContextMenuItemsCheckBox);
+			GroupBox1.Controls.Add(Label1);
+			GroupBox1.Controls.Add(IntegrateAsSubmenuCheckBox);
+			GroupBox1.Location = new System.Drawing.Point(415, 26);
+			GroupBox1.Name = "GroupBox1";
+			GroupBox1.Size = new System.Drawing.Size(309, 467);
+			GroupBox1.TabIndex = 2;
+			GroupBox1.TabStop = false;
+			GroupBox1.Text = "Windows Explorer Context Menu";
+			GroupBox1.Visible = false;
 			//
 			//Panel7
 			//
-			this.Panel7.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel7.Controls.Add(this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuCompileFolderCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuCompileQcFileCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuDecompileFolderCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuDecompileMdlFileCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuViewMdlFileCheckBox);
-			this.Panel7.Controls.Add(this.OptionsContextMenuOpenWithCrowbarCheckBox);
-			this.Panel7.Location = new System.Drawing.Point(27, 84);
-			this.Panel7.Name = "Panel7";
-			this.Panel7.Size = new System.Drawing.Size(270, 124);
-			this.Panel7.TabIndex = 20;
+			Panel7.BackColor = System.Drawing.SystemColors.Control;
+			Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel7.Controls.Add(OptionsContextMenuCompileFolderAndSubfoldersCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuCompileFolderCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuCompileQcFileCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuDecompileFolderAndSubfoldersCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuDecompileFolderCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuDecompileMdlFileCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuViewMdlFileCheckBox);
+			Panel7.Controls.Add(OptionsContextMenuOpenWithCrowbarCheckBox);
+			Panel7.Location = new System.Drawing.Point(27, 84);
+			Panel7.Name = "Panel7";
+			Panel7.Size = new System.Drawing.Size(270, 124);
+			Panel7.TabIndex = 20;
 			//
 			//OptionsContextMenuCompileFolderAndSubfoldersCheckBox
 			//
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.AutoSize = true;
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Location = new System.Drawing.Point(3, 106);
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Name = "OptionsContextMenuCompileFolderAndSubfoldersCheckBox";
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Size = new System.Drawing.Size(247, 17);
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.TabIndex = 7;
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Text = "Compile folder and subfolders to <folder>";
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.AutoSize = true;
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Location = new System.Drawing.Point(3, 106);
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Name = "OptionsContextMenuCompileFolderAndSubfoldersCheckBox";
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Size = new System.Drawing.Size(247, 17);
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.TabIndex = 7;
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.Text = "Compile folder and subfolders to <folder>";
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuCompileFolderCheckBox
 			//
-			this.OptionsContextMenuCompileFolderCheckBox.AutoSize = true;
-			this.OptionsContextMenuCompileFolderCheckBox.Location = new System.Drawing.Point(3, 91);
-			this.OptionsContextMenuCompileFolderCheckBox.Name = "OptionsContextMenuCompileFolderCheckBox";
-			this.OptionsContextMenuCompileFolderCheckBox.Size = new System.Drawing.Size(166, 17);
-			this.OptionsContextMenuCompileFolderCheckBox.TabIndex = 6;
-			this.OptionsContextMenuCompileFolderCheckBox.Text = "Compile folder to <folder>";
-			this.OptionsContextMenuCompileFolderCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuCompileFolderCheckBox.AutoSize = true;
+			OptionsContextMenuCompileFolderCheckBox.Location = new System.Drawing.Point(3, 91);
+			OptionsContextMenuCompileFolderCheckBox.Name = "OptionsContextMenuCompileFolderCheckBox";
+			OptionsContextMenuCompileFolderCheckBox.Size = new System.Drawing.Size(166, 17);
+			OptionsContextMenuCompileFolderCheckBox.TabIndex = 6;
+			OptionsContextMenuCompileFolderCheckBox.Text = "Compile folder to <folder>";
+			OptionsContextMenuCompileFolderCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuCompileQcFileCheckBox
 			//
-			this.OptionsContextMenuCompileQcFileCheckBox.AutoSize = true;
-			this.OptionsContextMenuCompileQcFileCheckBox.Location = new System.Drawing.Point(3, 76);
-			this.OptionsContextMenuCompileQcFileCheckBox.Name = "OptionsContextMenuCompileQcFileCheckBox";
-			this.OptionsContextMenuCompileQcFileCheckBox.Size = new System.Drawing.Size(105, 17);
-			this.OptionsContextMenuCompileQcFileCheckBox.TabIndex = 5;
-			this.OptionsContextMenuCompileQcFileCheckBox.Text = "Compile QC file";
-			this.OptionsContextMenuCompileQcFileCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuCompileQcFileCheckBox.AutoSize = true;
+			OptionsContextMenuCompileQcFileCheckBox.Location = new System.Drawing.Point(3, 76);
+			OptionsContextMenuCompileQcFileCheckBox.Name = "OptionsContextMenuCompileQcFileCheckBox";
+			OptionsContextMenuCompileQcFileCheckBox.Size = new System.Drawing.Size(105, 17);
+			OptionsContextMenuCompileQcFileCheckBox.TabIndex = 5;
+			OptionsContextMenuCompileQcFileCheckBox.Text = "Compile QC file";
+			OptionsContextMenuCompileQcFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuDecompileFolderAndSubfoldersCheckBox
 			//
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.AutoSize = true;
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Location = new System.Drawing.Point(3, 61);
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Name = "OptionsContextMenuDecompileFolderAndSubfoldersCheckBox";
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Size = new System.Drawing.Size(259, 17);
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.TabIndex = 4;
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Text = "Decompile folder and subfolders to <folder>";
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.AutoSize = true;
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Location = new System.Drawing.Point(3, 61);
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Name = "OptionsContextMenuDecompileFolderAndSubfoldersCheckBox";
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Size = new System.Drawing.Size(259, 17);
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.TabIndex = 4;
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.Text = "Decompile folder and subfolders to <folder>";
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuDecompileFolderCheckBox
 			//
-			this.OptionsContextMenuDecompileFolderCheckBox.AutoSize = true;
-			this.OptionsContextMenuDecompileFolderCheckBox.Location = new System.Drawing.Point(3, 46);
-			this.OptionsContextMenuDecompileFolderCheckBox.Name = "OptionsContextMenuDecompileFolderCheckBox";
-			this.OptionsContextMenuDecompileFolderCheckBox.Size = new System.Drawing.Size(178, 17);
-			this.OptionsContextMenuDecompileFolderCheckBox.TabIndex = 3;
-			this.OptionsContextMenuDecompileFolderCheckBox.Text = "Decompile folder to <folder>";
-			this.OptionsContextMenuDecompileFolderCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuDecompileFolderCheckBox.AutoSize = true;
+			OptionsContextMenuDecompileFolderCheckBox.Location = new System.Drawing.Point(3, 46);
+			OptionsContextMenuDecompileFolderCheckBox.Name = "OptionsContextMenuDecompileFolderCheckBox";
+			OptionsContextMenuDecompileFolderCheckBox.Size = new System.Drawing.Size(178, 17);
+			OptionsContextMenuDecompileFolderCheckBox.TabIndex = 3;
+			OptionsContextMenuDecompileFolderCheckBox.Text = "Decompile folder to <folder>";
+			OptionsContextMenuDecompileFolderCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuDecompileMdlFileCheckBox
 			//
-			this.OptionsContextMenuDecompileMdlFileCheckBox.AutoSize = true;
-			this.OptionsContextMenuDecompileMdlFileCheckBox.Location = new System.Drawing.Point(3, 31);
-			this.OptionsContextMenuDecompileMdlFileCheckBox.Name = "OptionsContextMenuDecompileMdlFileCheckBox";
-			this.OptionsContextMenuDecompileMdlFileCheckBox.Size = new System.Drawing.Size(189, 17);
-			this.OptionsContextMenuDecompileMdlFileCheckBox.TabIndex = 2;
-			this.OptionsContextMenuDecompileMdlFileCheckBox.Text = "Decompile MDL file to <folder>";
-			this.OptionsContextMenuDecompileMdlFileCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuDecompileMdlFileCheckBox.AutoSize = true;
+			OptionsContextMenuDecompileMdlFileCheckBox.Location = new System.Drawing.Point(3, 31);
+			OptionsContextMenuDecompileMdlFileCheckBox.Name = "OptionsContextMenuDecompileMdlFileCheckBox";
+			OptionsContextMenuDecompileMdlFileCheckBox.Size = new System.Drawing.Size(189, 17);
+			OptionsContextMenuDecompileMdlFileCheckBox.TabIndex = 2;
+			OptionsContextMenuDecompileMdlFileCheckBox.Text = "Decompile MDL file to <folder>";
+			OptionsContextMenuDecompileMdlFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuViewMdlFileCheckBox
 			//
-			this.OptionsContextMenuViewMdlFileCheckBox.AutoSize = true;
-			this.OptionsContextMenuViewMdlFileCheckBox.Location = new System.Drawing.Point(3, 16);
-			this.OptionsContextMenuViewMdlFileCheckBox.Name = "OptionsContextMenuViewMdlFileCheckBox";
-			this.OptionsContextMenuViewMdlFileCheckBox.Size = new System.Drawing.Size(96, 17);
-			this.OptionsContextMenuViewMdlFileCheckBox.TabIndex = 1;
-			this.OptionsContextMenuViewMdlFileCheckBox.Text = "View MDL file";
-			this.OptionsContextMenuViewMdlFileCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuViewMdlFileCheckBox.AutoSize = true;
+			OptionsContextMenuViewMdlFileCheckBox.Location = new System.Drawing.Point(3, 16);
+			OptionsContextMenuViewMdlFileCheckBox.Name = "OptionsContextMenuViewMdlFileCheckBox";
+			OptionsContextMenuViewMdlFileCheckBox.Size = new System.Drawing.Size(96, 17);
+			OptionsContextMenuViewMdlFileCheckBox.TabIndex = 1;
+			OptionsContextMenuViewMdlFileCheckBox.Text = "View MDL file";
+			OptionsContextMenuViewMdlFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsContextMenuOpenWithCrowbarCheckBox
 			//
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.AutoSize = true;
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.Location = new System.Drawing.Point(3, 1);
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.Name = "OptionsContextMenuOpenWithCrowbarCheckBox";
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.Size = new System.Drawing.Size(128, 17);
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.TabIndex = 0;
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.Text = "Open with Crowbar";
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.UseVisualStyleBackColor = true;
+			OptionsContextMenuOpenWithCrowbarCheckBox.AutoSize = true;
+			OptionsContextMenuOpenWithCrowbarCheckBox.Location = new System.Drawing.Point(3, 1);
+			OptionsContextMenuOpenWithCrowbarCheckBox.Name = "OptionsContextMenuOpenWithCrowbarCheckBox";
+			OptionsContextMenuOpenWithCrowbarCheckBox.Size = new System.Drawing.Size(128, 17);
+			OptionsContextMenuOpenWithCrowbarCheckBox.TabIndex = 0;
+			OptionsContextMenuOpenWithCrowbarCheckBox.Text = "Open with Crowbar";
+			OptionsContextMenuOpenWithCrowbarCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ContextMenuUseDefaultsButton
 			//
-			this.ContextMenuUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
-			this.ContextMenuUseDefaultsButton.Location = new System.Drawing.Point(104, 438);
-			this.ContextMenuUseDefaultsButton.Name = "ContextMenuUseDefaultsButton";
-			this.ContextMenuUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
-			this.ContextMenuUseDefaultsButton.TabIndex = 19;
-			this.ContextMenuUseDefaultsButton.Text = "Use Defaults";
-			this.ContextMenuUseDefaultsButton.UseVisualStyleBackColor = true;
+			ContextMenuUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+			ContextMenuUseDefaultsButton.Location = new System.Drawing.Point(104, 438);
+			ContextMenuUseDefaultsButton.Name = "ContextMenuUseDefaultsButton";
+			ContextMenuUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
+			ContextMenuUseDefaultsButton.TabIndex = 19;
+			ContextMenuUseDefaultsButton.Text = "Use Defaults";
+			ContextMenuUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileCheckBox
 			//
-			this.AutoOpenMdlFileCheckBox.AutoSize = true;
-			this.AutoOpenMdlFileCheckBox.Location = new System.Drawing.Point(6, 214);
-			this.AutoOpenMdlFileCheckBox.Name = "AutoOpenMdlFileCheckBox";
-			this.AutoOpenMdlFileCheckBox.Size = new System.Drawing.Size(71, 17);
-			this.AutoOpenMdlFileCheckBox.TabIndex = 2;
-			this.AutoOpenMdlFileCheckBox.Text = "MDL file:";
-			this.AutoOpenMdlFileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileCheckBox.AutoSize = true;
+			AutoOpenMdlFileCheckBox.Location = new System.Drawing.Point(6, 214);
+			AutoOpenMdlFileCheckBox.Name = "AutoOpenMdlFileCheckBox";
+			AutoOpenMdlFileCheckBox.Size = new System.Drawing.Size(71, 17);
+			AutoOpenMdlFileCheckBox.TabIndex = 2;
+			AutoOpenMdlFileCheckBox.Text = "MDL file:";
+			AutoOpenMdlFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenQcFileCheckBox
 			//
-			this.AutoOpenQcFileCheckBox.AutoSize = true;
-			this.AutoOpenQcFileCheckBox.Location = new System.Drawing.Point(6, 307);
-			this.AutoOpenQcFileCheckBox.Name = "AutoOpenQcFileCheckBox";
-			this.AutoOpenQcFileCheckBox.Size = new System.Drawing.Size(63, 17);
-			this.AutoOpenQcFileCheckBox.TabIndex = 4;
-			this.AutoOpenQcFileCheckBox.Text = "QC file:";
-			this.AutoOpenQcFileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenQcFileCheckBox.AutoSize = true;
+			AutoOpenQcFileCheckBox.Location = new System.Drawing.Point(6, 307);
+			AutoOpenQcFileCheckBox.Name = "AutoOpenQcFileCheckBox";
+			AutoOpenQcFileCheckBox.Size = new System.Drawing.Size(63, 17);
+			AutoOpenQcFileCheckBox.TabIndex = 4;
+			AutoOpenQcFileCheckBox.Text = "QC file:";
+			AutoOpenQcFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//GroupBox2
 			//
-			this.GroupBox2.Controls.Add(this.Panel2);
-			this.GroupBox2.Controls.Add(this.AutoOpenVpkPanel);
-			this.GroupBox2.Controls.Add(this.Label14);
-			this.GroupBox2.Controls.Add(this.AutoOpenFpxFileCheckBox);
-			this.GroupBox2.Controls.Add(this.AutoOpenGmaFileCheckBox);
-			this.GroupBox2.Controls.Add(this.Label5);
-			this.GroupBox2.Controls.Add(this.AutoOpenFolderPanel);
-			this.GroupBox2.Controls.Add(this.Label4);
-			this.GroupBox2.Controls.Add(this.Label2);
-			this.GroupBox2.Controls.Add(this.AutoOpenUseDefaultsButton);
-			this.GroupBox2.Controls.Add(this.Panel1);
-			this.GroupBox2.Controls.Add(this.AutoOpenMdlFileCheckBox);
-			this.GroupBox2.Controls.Add(this.AutoOpenQcFileCheckBox);
-			this.GroupBox2.Controls.Add(this.AutoOpenVpkFileCheckBox);
-			this.GroupBox2.Location = new System.Drawing.Point(3, 26);
-			this.GroupBox2.Name = "GroupBox2";
-			this.GroupBox2.Size = new System.Drawing.Size(200, 467);
-			this.GroupBox2.TabIndex = 0;
-			this.GroupBox2.TabStop = false;
-			this.GroupBox2.Text = "Windows Explorer Auto-Open";
+			GroupBox2.Controls.Add(Panel2);
+			GroupBox2.Controls.Add(AutoOpenVpkPanel);
+			GroupBox2.Controls.Add(Label14);
+			GroupBox2.Controls.Add(AutoOpenFpxFileCheckBox);
+			GroupBox2.Controls.Add(AutoOpenGmaFileCheckBox);
+			GroupBox2.Controls.Add(Label5);
+			GroupBox2.Controls.Add(AutoOpenFolderPanel);
+			GroupBox2.Controls.Add(Label4);
+			GroupBox2.Controls.Add(Label2);
+			GroupBox2.Controls.Add(AutoOpenUseDefaultsButton);
+			GroupBox2.Controls.Add(Panel1);
+			GroupBox2.Controls.Add(AutoOpenMdlFileCheckBox);
+			GroupBox2.Controls.Add(AutoOpenQcFileCheckBox);
+			GroupBox2.Controls.Add(AutoOpenVpkFileCheckBox);
+			GroupBox2.Location = new System.Drawing.Point(3, 26);
+			GroupBox2.Name = "GroupBox2";
+			GroupBox2.Size = new System.Drawing.Size(200, 467);
+			GroupBox2.TabIndex = 0;
+			GroupBox2.TabStop = false;
+			GroupBox2.Text = "Windows Explorer Auto-Open";
 			//
 			//Panel2
 			//
-			this.Panel2.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel2.Controls.Add(this.AutoOpenGmaFileForPublishRadioButton);
-			this.Panel2.Controls.Add(this.AutoOpenGmaFileForUnpackRadioButton);
-			this.Panel2.Location = new System.Drawing.Point(81, 149);
-			this.Panel2.Name = "Panel2";
-			this.Panel2.Size = new System.Drawing.Size(89, 36);
-			this.Panel2.TabIndex = 17;
+			Panel2.BackColor = System.Drawing.SystemColors.Control;
+			Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel2.Controls.Add(AutoOpenGmaFileForPublishRadioButton);
+			Panel2.Controls.Add(AutoOpenGmaFileForUnpackRadioButton);
+			Panel2.Location = new System.Drawing.Point(81, 149);
+			Panel2.Name = "Panel2";
+			Panel2.Size = new System.Drawing.Size(89, 36);
+			Panel2.TabIndex = 17;
 			//
 			//AutoOpenGmaFileForPublishRadioButton
 			//
-			this.AutoOpenGmaFileForPublishRadioButton.AutoSize = true;
-			this.AutoOpenGmaFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.AutoOpenGmaFileForPublishRadioButton.Name = "AutoOpenGmaFileForPublishRadioButton";
-			this.AutoOpenGmaFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
-			this.AutoOpenGmaFileForPublishRadioButton.TabIndex = 13;
-			this.AutoOpenGmaFileForPublishRadioButton.TabStop = true;
-			this.AutoOpenGmaFileForPublishRadioButton.Text = "Publish";
-			this.AutoOpenGmaFileForPublishRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenGmaFileForPublishRadioButton.AutoSize = true;
+			AutoOpenGmaFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
+			AutoOpenGmaFileForPublishRadioButton.Name = "AutoOpenGmaFileForPublishRadioButton";
+			AutoOpenGmaFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
+			AutoOpenGmaFileForPublishRadioButton.TabIndex = 13;
+			AutoOpenGmaFileForPublishRadioButton.TabStop = true;
+			AutoOpenGmaFileForPublishRadioButton.Text = "Publish";
+			AutoOpenGmaFileForPublishRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenGmaFileForUnpackRadioButton
 			//
-			this.AutoOpenGmaFileForUnpackRadioButton.AutoSize = true;
-			this.AutoOpenGmaFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.AutoOpenGmaFileForUnpackRadioButton.Name = "AutoOpenGmaFileForUnpackRadioButton";
-			this.AutoOpenGmaFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.AutoOpenGmaFileForUnpackRadioButton.TabIndex = 12;
-			this.AutoOpenGmaFileForUnpackRadioButton.TabStop = true;
-			this.AutoOpenGmaFileForUnpackRadioButton.Text = "Unpack";
-			this.AutoOpenGmaFileForUnpackRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenGmaFileForUnpackRadioButton.AutoSize = true;
+			AutoOpenGmaFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			AutoOpenGmaFileForUnpackRadioButton.Name = "AutoOpenGmaFileForUnpackRadioButton";
+			AutoOpenGmaFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			AutoOpenGmaFileForUnpackRadioButton.TabIndex = 12;
+			AutoOpenGmaFileForUnpackRadioButton.TabStop = true;
+			AutoOpenGmaFileForUnpackRadioButton.Text = "Unpack";
+			AutoOpenGmaFileForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenVpkPanel
 			//
-			this.AutoOpenVpkPanel.BackColor = System.Drawing.SystemColors.Control;
-			this.AutoOpenVpkPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.AutoOpenVpkPanel.Controls.Add(this.AutoOpenVpkFileForPublishRadioButton);
-			this.AutoOpenVpkPanel.Controls.Add(this.AutoOpenVpkFileForUnpackRadioButton);
-			this.AutoOpenVpkPanel.Location = new System.Drawing.Point(81, 107);
-			this.AutoOpenVpkPanel.Name = "AutoOpenVpkPanel";
-			this.AutoOpenVpkPanel.Size = new System.Drawing.Size(89, 36);
-			this.AutoOpenVpkPanel.TabIndex = 16;
+			AutoOpenVpkPanel.BackColor = System.Drawing.SystemColors.Control;
+			AutoOpenVpkPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			AutoOpenVpkPanel.Controls.Add(AutoOpenVpkFileForPublishRadioButton);
+			AutoOpenVpkPanel.Controls.Add(AutoOpenVpkFileForUnpackRadioButton);
+			AutoOpenVpkPanel.Location = new System.Drawing.Point(81, 107);
+			AutoOpenVpkPanel.Name = "AutoOpenVpkPanel";
+			AutoOpenVpkPanel.Size = new System.Drawing.Size(89, 36);
+			AutoOpenVpkPanel.TabIndex = 16;
 			//
 			//AutoOpenVpkFileForPublishRadioButton
 			//
-			this.AutoOpenVpkFileForPublishRadioButton.AutoSize = true;
-			this.AutoOpenVpkFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.AutoOpenVpkFileForPublishRadioButton.Name = "AutoOpenVpkFileForPublishRadioButton";
-			this.AutoOpenVpkFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
-			this.AutoOpenVpkFileForPublishRadioButton.TabIndex = 13;
-			this.AutoOpenVpkFileForPublishRadioButton.TabStop = true;
-			this.AutoOpenVpkFileForPublishRadioButton.Text = "Publish";
-			this.AutoOpenVpkFileForPublishRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenVpkFileForPublishRadioButton.AutoSize = true;
+			AutoOpenVpkFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
+			AutoOpenVpkFileForPublishRadioButton.Name = "AutoOpenVpkFileForPublishRadioButton";
+			AutoOpenVpkFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
+			AutoOpenVpkFileForPublishRadioButton.TabIndex = 13;
+			AutoOpenVpkFileForPublishRadioButton.TabStop = true;
+			AutoOpenVpkFileForPublishRadioButton.Text = "Publish";
+			AutoOpenVpkFileForPublishRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenVpkFileForUnpackRadioButton
 			//
-			this.AutoOpenVpkFileForUnpackRadioButton.AutoSize = true;
-			this.AutoOpenVpkFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.AutoOpenVpkFileForUnpackRadioButton.Name = "AutoOpenVpkFileForUnpackRadioButton";
-			this.AutoOpenVpkFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.AutoOpenVpkFileForUnpackRadioButton.TabIndex = 12;
-			this.AutoOpenVpkFileForUnpackRadioButton.TabStop = true;
-			this.AutoOpenVpkFileForUnpackRadioButton.Text = "Unpack";
-			this.AutoOpenVpkFileForUnpackRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenVpkFileForUnpackRadioButton.AutoSize = true;
+			AutoOpenVpkFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			AutoOpenVpkFileForUnpackRadioButton.Name = "AutoOpenVpkFileForUnpackRadioButton";
+			AutoOpenVpkFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			AutoOpenVpkFileForUnpackRadioButton.TabIndex = 12;
+			AutoOpenVpkFileForUnpackRadioButton.TabStop = true;
+			AutoOpenVpkFileForUnpackRadioButton.Text = "Unpack";
+			AutoOpenVpkFileForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//Label14
 			//
-			this.Label14.BackColor = System.Drawing.SystemColors.Control;
-			this.Label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Label14.Location = new System.Drawing.Point(81, 192);
-			this.Label14.Margin = new System.Windows.Forms.Padding(3);
-			this.Label14.Name = "Label14";
-			this.Label14.Size = new System.Drawing.Size(89, 17);
-			this.Label14.TabIndex = 18;
-			this.Label14.Text = "Unpack";
+			Label14.BackColor = System.Drawing.SystemColors.Control;
+			Label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Label14.Location = new System.Drawing.Point(81, 192);
+			Label14.Margin = new System.Windows.Forms.Padding(3);
+			Label14.Name = "Label14";
+			Label14.Size = new System.Drawing.Size(89, 17);
+			Label14.TabIndex = 18;
+			Label14.Text = "Unpack";
 			//
 			//AutoOpenFpxFileCheckBox
 			//
-			this.AutoOpenFpxFileCheckBox.AutoSize = true;
-			this.AutoOpenFpxFileCheckBox.Location = new System.Drawing.Point(6, 191);
-			this.AutoOpenFpxFileCheckBox.Name = "AutoOpenFpxFileCheckBox";
-			this.AutoOpenFpxFileCheckBox.Size = new System.Drawing.Size(66, 17);
-			this.AutoOpenFpxFileCheckBox.TabIndex = 17;
-			this.AutoOpenFpxFileCheckBox.Text = "FPX file:";
-			this.AutoOpenFpxFileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenFpxFileCheckBox.AutoSize = true;
+			AutoOpenFpxFileCheckBox.Location = new System.Drawing.Point(6, 191);
+			AutoOpenFpxFileCheckBox.Name = "AutoOpenFpxFileCheckBox";
+			AutoOpenFpxFileCheckBox.Size = new System.Drawing.Size(66, 17);
+			AutoOpenFpxFileCheckBox.TabIndex = 17;
+			AutoOpenFpxFileCheckBox.Text = "FPX file:";
+			AutoOpenFpxFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenGmaFileCheckBox
 			//
-			this.AutoOpenGmaFileCheckBox.AutoSize = true;
-			this.AutoOpenGmaFileCheckBox.Location = new System.Drawing.Point(6, 151);
-			this.AutoOpenGmaFileCheckBox.Name = "AutoOpenGmaFileCheckBox";
-			this.AutoOpenGmaFileCheckBox.Size = new System.Drawing.Size(73, 17);
-			this.AutoOpenGmaFileCheckBox.TabIndex = 15;
-			this.AutoOpenGmaFileCheckBox.Text = "GMA file:";
-			this.AutoOpenGmaFileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenGmaFileCheckBox.AutoSize = true;
+			AutoOpenGmaFileCheckBox.Location = new System.Drawing.Point(6, 151);
+			AutoOpenGmaFileCheckBox.Name = "AutoOpenGmaFileCheckBox";
+			AutoOpenGmaFileCheckBox.Size = new System.Drawing.Size(73, 17);
+			AutoOpenGmaFileCheckBox.TabIndex = 15;
+			AutoOpenGmaFileCheckBox.Text = "GMA file:";
+			AutoOpenGmaFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//Label5
 			//
-			this.Label5.AutoSize = true;
-			this.Label5.Location = new System.Drawing.Point(6, 330);
-			this.Label5.Margin = new System.Windows.Forms.Padding(3);
-			this.Label5.Name = "Label5";
-			this.Label5.Size = new System.Drawing.Size(43, 13);
-			this.Label5.TabIndex = 6;
-			this.Label5.Text = "Folder:";
+			Label5.AutoSize = true;
+			Label5.Location = new System.Drawing.Point(6, 330);
+			Label5.Margin = new System.Windows.Forms.Padding(3);
+			Label5.Name = "Label5";
+			Label5.Size = new System.Drawing.Size(43, 13);
+			Label5.TabIndex = 6;
+			Label5.Text = "Folder:";
 			//
 			//AutoOpenFolderPanel
 			//
-			this.AutoOpenFolderPanel.BackColor = System.Drawing.SystemColors.Control;
-			this.AutoOpenFolderPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.AutoOpenFolderPanel.Controls.Add(this.AutoOpenFolderForPackRadioButton);
-			this.AutoOpenFolderPanel.Controls.Add(this.AutoOpenFolderForCompileRadioButton);
-			this.AutoOpenFolderPanel.Controls.Add(this.AutoOpenFolderForDecompileRadioButton);
-			this.AutoOpenFolderPanel.Controls.Add(this.AutoOpenFolderForUnpackRadioButton);
-			this.AutoOpenFolderPanel.Location = new System.Drawing.Point(81, 330);
-			this.AutoOpenFolderPanel.Name = "AutoOpenFolderPanel";
-			this.AutoOpenFolderPanel.Size = new System.Drawing.Size(89, 66);
-			this.AutoOpenFolderPanel.TabIndex = 7;
+			AutoOpenFolderPanel.BackColor = System.Drawing.SystemColors.Control;
+			AutoOpenFolderPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			AutoOpenFolderPanel.Controls.Add(AutoOpenFolderForPackRadioButton);
+			AutoOpenFolderPanel.Controls.Add(AutoOpenFolderForCompileRadioButton);
+			AutoOpenFolderPanel.Controls.Add(AutoOpenFolderForDecompileRadioButton);
+			AutoOpenFolderPanel.Controls.Add(AutoOpenFolderForUnpackRadioButton);
+			AutoOpenFolderPanel.Location = new System.Drawing.Point(81, 330);
+			AutoOpenFolderPanel.Name = "AutoOpenFolderPanel";
+			AutoOpenFolderPanel.Size = new System.Drawing.Size(89, 66);
+			AutoOpenFolderPanel.TabIndex = 7;
 			//
 			//AutoOpenFolderForPackRadioButton
 			//
-			this.AutoOpenFolderForPackRadioButton.AutoSize = true;
-			this.AutoOpenFolderForPackRadioButton.Location = new System.Drawing.Point(3, 45);
-			this.AutoOpenFolderForPackRadioButton.Name = "AutoOpenFolderForPackRadioButton";
-			this.AutoOpenFolderForPackRadioButton.Size = new System.Drawing.Size(48, 17);
-			this.AutoOpenFolderForPackRadioButton.TabIndex = 15;
-			this.AutoOpenFolderForPackRadioButton.TabStop = true;
-			this.AutoOpenFolderForPackRadioButton.Text = "Pack";
-			this.AutoOpenFolderForPackRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenFolderForPackRadioButton.AutoSize = true;
+			AutoOpenFolderForPackRadioButton.Location = new System.Drawing.Point(3, 45);
+			AutoOpenFolderForPackRadioButton.Name = "AutoOpenFolderForPackRadioButton";
+			AutoOpenFolderForPackRadioButton.Size = new System.Drawing.Size(48, 17);
+			AutoOpenFolderForPackRadioButton.TabIndex = 15;
+			AutoOpenFolderForPackRadioButton.TabStop = true;
+			AutoOpenFolderForPackRadioButton.Text = "Pack";
+			AutoOpenFolderForPackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenFolderForCompileRadioButton
 			//
-			this.AutoOpenFolderForCompileRadioButton.AutoSize = true;
-			this.AutoOpenFolderForCompileRadioButton.Location = new System.Drawing.Point(3, 30);
-			this.AutoOpenFolderForCompileRadioButton.Name = "AutoOpenFolderForCompileRadioButton";
-			this.AutoOpenFolderForCompileRadioButton.Size = new System.Drawing.Size(67, 17);
-			this.AutoOpenFolderForCompileRadioButton.TabIndex = 14;
-			this.AutoOpenFolderForCompileRadioButton.TabStop = true;
-			this.AutoOpenFolderForCompileRadioButton.Text = "Compile";
-			this.AutoOpenFolderForCompileRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenFolderForCompileRadioButton.AutoSize = true;
+			AutoOpenFolderForCompileRadioButton.Location = new System.Drawing.Point(3, 30);
+			AutoOpenFolderForCompileRadioButton.Name = "AutoOpenFolderForCompileRadioButton";
+			AutoOpenFolderForCompileRadioButton.Size = new System.Drawing.Size(67, 17);
+			AutoOpenFolderForCompileRadioButton.TabIndex = 14;
+			AutoOpenFolderForCompileRadioButton.TabStop = true;
+			AutoOpenFolderForCompileRadioButton.Text = "Compile";
+			AutoOpenFolderForCompileRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenFolderForDecompileRadioButton
 			//
-			this.AutoOpenFolderForDecompileRadioButton.AutoSize = true;
-			this.AutoOpenFolderForDecompileRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.AutoOpenFolderForDecompileRadioButton.Name = "AutoOpenFolderForDecompileRadioButton";
-			this.AutoOpenFolderForDecompileRadioButton.Size = new System.Drawing.Size(79, 17);
-			this.AutoOpenFolderForDecompileRadioButton.TabIndex = 13;
-			this.AutoOpenFolderForDecompileRadioButton.TabStop = true;
-			this.AutoOpenFolderForDecompileRadioButton.Text = "Decompile";
-			this.AutoOpenFolderForDecompileRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenFolderForDecompileRadioButton.AutoSize = true;
+			AutoOpenFolderForDecompileRadioButton.Location = new System.Drawing.Point(3, 15);
+			AutoOpenFolderForDecompileRadioButton.Name = "AutoOpenFolderForDecompileRadioButton";
+			AutoOpenFolderForDecompileRadioButton.Size = new System.Drawing.Size(79, 17);
+			AutoOpenFolderForDecompileRadioButton.TabIndex = 13;
+			AutoOpenFolderForDecompileRadioButton.TabStop = true;
+			AutoOpenFolderForDecompileRadioButton.Text = "Decompile";
+			AutoOpenFolderForDecompileRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenFolderForUnpackRadioButton
 			//
-			this.AutoOpenFolderForUnpackRadioButton.AutoSize = true;
-			this.AutoOpenFolderForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.AutoOpenFolderForUnpackRadioButton.Name = "AutoOpenFolderForUnpackRadioButton";
-			this.AutoOpenFolderForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.AutoOpenFolderForUnpackRadioButton.TabIndex = 12;
-			this.AutoOpenFolderForUnpackRadioButton.TabStop = true;
-			this.AutoOpenFolderForUnpackRadioButton.Text = "Unpack";
-			this.AutoOpenFolderForUnpackRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenFolderForUnpackRadioButton.AutoSize = true;
+			AutoOpenFolderForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			AutoOpenFolderForUnpackRadioButton.Name = "AutoOpenFolderForUnpackRadioButton";
+			AutoOpenFolderForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			AutoOpenFolderForUnpackRadioButton.TabIndex = 12;
+			AutoOpenFolderForUnpackRadioButton.TabStop = true;
+			AutoOpenFolderForUnpackRadioButton.Text = "Unpack";
+			AutoOpenFolderForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//Label4
 			//
-			this.Label4.BackColor = System.Drawing.SystemColors.Control;
-			this.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Label4.Location = new System.Drawing.Point(81, 307);
-			this.Label4.Margin = new System.Windows.Forms.Padding(3);
-			this.Label4.Name = "Label4";
-			this.Label4.Size = new System.Drawing.Size(89, 17);
-			this.Label4.TabIndex = 5;
-			this.Label4.Text = "Compile";
+			Label4.BackColor = System.Drawing.SystemColors.Control;
+			Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Label4.Location = new System.Drawing.Point(81, 307);
+			Label4.Margin = new System.Windows.Forms.Padding(3);
+			Label4.Name = "Label4";
+			Label4.Size = new System.Drawing.Size(89, 17);
+			Label4.TabIndex = 5;
+			Label4.Text = "Compile";
 			//
 			//Label2
 			//
-			this.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.Label2.Location = new System.Drawing.Point(6, 20);
-			this.Label2.Margin = new System.Windows.Forms.Padding(3);
-			this.Label2.Name = "Label2";
-			this.Label2.Size = new System.Drawing.Size(188, 83);
-			this.Label2.TabIndex = 14;
-			this.Label2.Text = "Change the default program to Crowbar for the following file extensions and which" + " tab to set up. This includes when files or folders are dragged onto the \"Crowba" + "r.exe\" file.";
+			Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			Label2.Location = new System.Drawing.Point(6, 20);
+			Label2.Margin = new System.Windows.Forms.Padding(3);
+			Label2.Name = "Label2";
+			Label2.Size = new System.Drawing.Size(188, 83);
+			Label2.TabIndex = 14;
+			Label2.Text = "Change the default program to Crowbar for the following file extensions and which" + " tab to set up. This includes when files or folders are dragged onto the \"Crowba" + "r.exe\" file.";
 			//
 			//AutoOpenUseDefaultsButton
 			//
-			this.AutoOpenUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
-			this.AutoOpenUseDefaultsButton.Location = new System.Drawing.Point(44, 438);
-			this.AutoOpenUseDefaultsButton.Name = "AutoOpenUseDefaultsButton";
-			this.AutoOpenUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
-			this.AutoOpenUseDefaultsButton.TabIndex = 8;
-			this.AutoOpenUseDefaultsButton.Text = "Use Defaults";
-			this.AutoOpenUseDefaultsButton.UseVisualStyleBackColor = true;
+			AutoOpenUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+			AutoOpenUseDefaultsButton.Location = new System.Drawing.Point(44, 438);
+			AutoOpenUseDefaultsButton.Name = "AutoOpenUseDefaultsButton";
+			AutoOpenUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
+			AutoOpenUseDefaultsButton.TabIndex = 8;
+			AutoOpenUseDefaultsButton.Text = "Use Defaults";
+			AutoOpenUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//Panel1
 			//
-			this.Panel1.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel1.Controls.Add(this.Label9);
-			this.Panel1.Controls.Add(this.Label8);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForViewCheckBox);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForDecompileCheckBox);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForPreviewCheckBox);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForViewingRadioButton);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForPreviewingRadioButton);
-			this.Panel1.Controls.Add(this.AutoOpenMdlFileForDecompilingRadioButton);
-			this.Panel1.Location = new System.Drawing.Point(25, 231);
-			this.Panel1.Name = "Panel1";
-			this.Panel1.Size = new System.Drawing.Size(145, 70);
-			this.Panel1.TabIndex = 3;
+			Panel1.BackColor = System.Drawing.SystemColors.Control;
+			Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel1.Controls.Add(Label9);
+			Panel1.Controls.Add(Label8);
+			Panel1.Controls.Add(AutoOpenMdlFileForViewCheckBox);
+			Panel1.Controls.Add(AutoOpenMdlFileForDecompileCheckBox);
+			Panel1.Controls.Add(AutoOpenMdlFileForPreviewCheckBox);
+			Panel1.Controls.Add(AutoOpenMdlFileForViewingRadioButton);
+			Panel1.Controls.Add(AutoOpenMdlFileForPreviewingRadioButton);
+			Panel1.Controls.Add(AutoOpenMdlFileForDecompilingRadioButton);
+			Panel1.Location = new System.Drawing.Point(25, 231);
+			Panel1.Name = "Panel1";
+			Panel1.Size = new System.Drawing.Size(145, 70);
+			Panel1.TabIndex = 3;
 			//
 			//Label9
 			//
-			this.Label9.AutoSize = true;
-			this.Label9.Location = new System.Drawing.Point(2, 2);
-			this.Label9.Name = "Label9";
-			this.Label9.Size = new System.Drawing.Size(44, 13);
-			this.Label9.TabIndex = 20;
-			this.Label9.Text = "Set Up:";
+			Label9.AutoSize = true;
+			Label9.Location = new System.Drawing.Point(2, 2);
+			Label9.Name = "Label9";
+			Label9.Size = new System.Drawing.Size(44, 13);
+			Label9.TabIndex = 20;
+			Label9.Text = "Set Up:";
 			//
 			//Label8
 			//
-			this.Label8.AutoSize = true;
-			this.Label8.Location = new System.Drawing.Point(94, 2);
-			this.Label8.Name = "Label8";
-			this.Label8.Size = new System.Drawing.Size(39, 13);
-			this.Label8.TabIndex = 19;
-			this.Label8.Text = "Open:";
+			Label8.AutoSize = true;
+			Label8.Location = new System.Drawing.Point(94, 2);
+			Label8.Name = "Label8";
+			Label8.Size = new System.Drawing.Size(39, 13);
+			Label8.TabIndex = 19;
+			Label8.Text = "Open:";
 			//
 			//AutoOpenMdlFileForDecompileCheckBox
 			//
-			this.AutoOpenMdlFileForDecompileCheckBox.AutoSize = true;
-			this.AutoOpenMdlFileForDecompileCheckBox.Location = new System.Drawing.Point(3, 33);
-			this.AutoOpenMdlFileForDecompileCheckBox.Name = "AutoOpenMdlFileForDecompileCheckBox";
-			this.AutoOpenMdlFileForDecompileCheckBox.Size = new System.Drawing.Size(80, 17);
-			this.AutoOpenMdlFileForDecompileCheckBox.TabIndex = 1;
-			this.AutoOpenMdlFileForDecompileCheckBox.Text = "Decompile";
-			this.AutoOpenMdlFileForDecompileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForDecompileCheckBox.AutoSize = true;
+			AutoOpenMdlFileForDecompileCheckBox.Location = new System.Drawing.Point(3, 33);
+			AutoOpenMdlFileForDecompileCheckBox.Name = "AutoOpenMdlFileForDecompileCheckBox";
+			AutoOpenMdlFileForDecompileCheckBox.Size = new System.Drawing.Size(80, 17);
+			AutoOpenMdlFileForDecompileCheckBox.TabIndex = 1;
+			AutoOpenMdlFileForDecompileCheckBox.Text = "Decompile";
+			AutoOpenMdlFileForDecompileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileForViewCheckBox
 			//
-			this.AutoOpenMdlFileForViewCheckBox.AutoSize = true;
-			this.AutoOpenMdlFileForViewCheckBox.Location = new System.Drawing.Point(3, 48);
-			this.AutoOpenMdlFileForViewCheckBox.Name = "AutoOpenMdlFileForViewCheckBox";
-			this.AutoOpenMdlFileForViewCheckBox.Size = new System.Drawing.Size(51, 17);
-			this.AutoOpenMdlFileForViewCheckBox.TabIndex = 2;
-			this.AutoOpenMdlFileForViewCheckBox.Text = "View";
-			this.AutoOpenMdlFileForViewCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForViewCheckBox.AutoSize = true;
+			AutoOpenMdlFileForViewCheckBox.Location = new System.Drawing.Point(3, 48);
+			AutoOpenMdlFileForViewCheckBox.Name = "AutoOpenMdlFileForViewCheckBox";
+			AutoOpenMdlFileForViewCheckBox.Size = new System.Drawing.Size(51, 17);
+			AutoOpenMdlFileForViewCheckBox.TabIndex = 2;
+			AutoOpenMdlFileForViewCheckBox.Text = "View";
+			AutoOpenMdlFileForViewCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileForPreviewCheckBox
 			//
-			this.AutoOpenMdlFileForPreviewCheckBox.AutoSize = true;
-			this.AutoOpenMdlFileForPreviewCheckBox.Location = new System.Drawing.Point(3, 18);
-			this.AutoOpenMdlFileForPreviewCheckBox.Name = "AutoOpenMdlFileForPreviewCheckBox";
-			this.AutoOpenMdlFileForPreviewCheckBox.Size = new System.Drawing.Size(65, 17);
-			this.AutoOpenMdlFileForPreviewCheckBox.TabIndex = 0;
-			this.AutoOpenMdlFileForPreviewCheckBox.Text = "Preview";
-			this.AutoOpenMdlFileForPreviewCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForPreviewCheckBox.AutoSize = true;
+			AutoOpenMdlFileForPreviewCheckBox.Location = new System.Drawing.Point(3, 18);
+			AutoOpenMdlFileForPreviewCheckBox.Name = "AutoOpenMdlFileForPreviewCheckBox";
+			AutoOpenMdlFileForPreviewCheckBox.Size = new System.Drawing.Size(65, 17);
+			AutoOpenMdlFileForPreviewCheckBox.TabIndex = 0;
+			AutoOpenMdlFileForPreviewCheckBox.Text = "Preview";
+			AutoOpenMdlFileForPreviewCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileForViewingRadioButton
 			//
-			this.AutoOpenMdlFileForViewingRadioButton.Location = new System.Drawing.Point(104, 49);
-			this.AutoOpenMdlFileForViewingRadioButton.Name = "AutoOpenMdlFileForViewingRadioButton";
-			this.AutoOpenMdlFileForViewingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.AutoOpenMdlFileForViewingRadioButton.TabIndex = 5;
-			this.AutoOpenMdlFileForViewingRadioButton.TabStop = true;
-			this.AutoOpenMdlFileForViewingRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForViewingRadioButton.Location = new System.Drawing.Point(104, 49);
+			AutoOpenMdlFileForViewingRadioButton.Name = "AutoOpenMdlFileForViewingRadioButton";
+			AutoOpenMdlFileForViewingRadioButton.Size = new System.Drawing.Size(14, 13);
+			AutoOpenMdlFileForViewingRadioButton.TabIndex = 5;
+			AutoOpenMdlFileForViewingRadioButton.TabStop = true;
+			AutoOpenMdlFileForViewingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileForPreviewingRadioButton
 			//
-			this.AutoOpenMdlFileForPreviewingRadioButton.Location = new System.Drawing.Point(104, 19);
-			this.AutoOpenMdlFileForPreviewingRadioButton.Name = "AutoOpenMdlFileForPreviewingRadioButton";
-			this.AutoOpenMdlFileForPreviewingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.AutoOpenMdlFileForPreviewingRadioButton.TabIndex = 3;
-			this.AutoOpenMdlFileForPreviewingRadioButton.TabStop = true;
-			this.AutoOpenMdlFileForPreviewingRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForPreviewingRadioButton.Location = new System.Drawing.Point(104, 19);
+			AutoOpenMdlFileForPreviewingRadioButton.Name = "AutoOpenMdlFileForPreviewingRadioButton";
+			AutoOpenMdlFileForPreviewingRadioButton.Size = new System.Drawing.Size(14, 13);
+			AutoOpenMdlFileForPreviewingRadioButton.TabIndex = 3;
+			AutoOpenMdlFileForPreviewingRadioButton.TabStop = true;
+			AutoOpenMdlFileForPreviewingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenMdlFileForDecompilingRadioButton
 			//
-			this.AutoOpenMdlFileForDecompilingRadioButton.Location = new System.Drawing.Point(104, 34);
-			this.AutoOpenMdlFileForDecompilingRadioButton.Name = "AutoOpenMdlFileForDecompilingRadioButton";
-			this.AutoOpenMdlFileForDecompilingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.AutoOpenMdlFileForDecompilingRadioButton.TabIndex = 4;
-			this.AutoOpenMdlFileForDecompilingRadioButton.TabStop = true;
-			this.AutoOpenMdlFileForDecompilingRadioButton.UseVisualStyleBackColor = true;
+			AutoOpenMdlFileForDecompilingRadioButton.Location = new System.Drawing.Point(104, 34);
+			AutoOpenMdlFileForDecompilingRadioButton.Name = "AutoOpenMdlFileForDecompilingRadioButton";
+			AutoOpenMdlFileForDecompilingRadioButton.Size = new System.Drawing.Size(14, 13);
+			AutoOpenMdlFileForDecompilingRadioButton.TabIndex = 4;
+			AutoOpenMdlFileForDecompilingRadioButton.TabStop = true;
+			AutoOpenMdlFileForDecompilingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//AutoOpenVpkFileCheckBox
 			//
-			this.AutoOpenVpkFileCheckBox.AutoSize = true;
-			this.AutoOpenVpkFileCheckBox.Location = new System.Drawing.Point(6, 108);
-			this.AutoOpenVpkFileCheckBox.Name = "AutoOpenVpkFileCheckBox";
-			this.AutoOpenVpkFileCheckBox.Size = new System.Drawing.Size(67, 17);
-			this.AutoOpenVpkFileCheckBox.TabIndex = 0;
-			this.AutoOpenVpkFileCheckBox.Text = "VPK file:";
-			this.AutoOpenVpkFileCheckBox.UseVisualStyleBackColor = true;
+			AutoOpenVpkFileCheckBox.AutoSize = true;
+			AutoOpenVpkFileCheckBox.Location = new System.Drawing.Point(6, 108);
+			AutoOpenVpkFileCheckBox.Name = "AutoOpenVpkFileCheckBox";
+			AutoOpenVpkFileCheckBox.Size = new System.Drawing.Size(67, 17);
+			AutoOpenVpkFileCheckBox.TabIndex = 0;
+			AutoOpenVpkFileCheckBox.Text = "VPK file:";
+			AutoOpenVpkFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//GroupBox3
 			//
-			this.GroupBox3.Controls.Add(this.Panel5);
-			this.GroupBox3.Controls.Add(this.Panel6);
-			this.GroupBox3.Controls.Add(this.Label7);
-			this.GroupBox3.Controls.Add(this.Label6);
-			this.GroupBox3.Controls.Add(this.Label13);
-			this.GroupBox3.Controls.Add(this.Label12);
-			this.GroupBox3.Controls.Add(this.Panel3);
-			this.GroupBox3.Controls.Add(this.Label3);
-			this.GroupBox3.Controls.Add(this.DragAndDropUseDefaultsButton);
-			this.GroupBox3.Controls.Add(this.Panel4);
-			this.GroupBox3.Location = new System.Drawing.Point(209, 26);
-			this.GroupBox3.Name = "GroupBox3";
-			this.GroupBox3.Size = new System.Drawing.Size(200, 467);
-			this.GroupBox3.TabIndex = 1;
-			this.GroupBox3.TabStop = false;
-			this.GroupBox3.Text = "Windows Explorer Drag-and-Drop";
+			GroupBox3.Controls.Add(Panel5);
+			GroupBox3.Controls.Add(Panel6);
+			GroupBox3.Controls.Add(Label7);
+			GroupBox3.Controls.Add(Label6);
+			GroupBox3.Controls.Add(Label13);
+			GroupBox3.Controls.Add(Label12);
+			GroupBox3.Controls.Add(Panel3);
+			GroupBox3.Controls.Add(Label3);
+			GroupBox3.Controls.Add(DragAndDropUseDefaultsButton);
+			GroupBox3.Controls.Add(Panel4);
+			GroupBox3.Location = new System.Drawing.Point(209, 26);
+			GroupBox3.Name = "GroupBox3";
+			GroupBox3.Size = new System.Drawing.Size(200, 467);
+			GroupBox3.TabIndex = 1;
+			GroupBox3.TabStop = false;
+			GroupBox3.Text = "Windows Explorer Drag-and-Drop";
 			//
 			//Panel5
 			//
-			this.Panel5.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel5.Controls.Add(this.DragAndDropGmaFileForPublishRadioButton);
-			this.Panel5.Controls.Add(this.DragAndDropGmaFileForUnpackRadioButton);
-			this.Panel5.Location = new System.Drawing.Point(81, 149);
-			this.Panel5.Name = "Panel5";
-			this.Panel5.Size = new System.Drawing.Size(89, 36);
-			this.Panel5.TabIndex = 23;
+			Panel5.BackColor = System.Drawing.SystemColors.Control;
+			Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel5.Controls.Add(DragAndDropGmaFileForPublishRadioButton);
+			Panel5.Controls.Add(DragAndDropGmaFileForUnpackRadioButton);
+			Panel5.Location = new System.Drawing.Point(81, 149);
+			Panel5.Name = "Panel5";
+			Panel5.Size = new System.Drawing.Size(89, 36);
+			Panel5.TabIndex = 23;
 			//
 			//DragAndDropGmaFileForPublishRadioButton
 			//
-			this.DragAndDropGmaFileForPublishRadioButton.AutoSize = true;
-			this.DragAndDropGmaFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.DragAndDropGmaFileForPublishRadioButton.Name = "DragAndDropGmaFileForPublishRadioButton";
-			this.DragAndDropGmaFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
-			this.DragAndDropGmaFileForPublishRadioButton.TabIndex = 13;
-			this.DragAndDropGmaFileForPublishRadioButton.TabStop = true;
-			this.DragAndDropGmaFileForPublishRadioButton.Text = "Publish";
-			this.DragAndDropGmaFileForPublishRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropGmaFileForPublishRadioButton.AutoSize = true;
+			DragAndDropGmaFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
+			DragAndDropGmaFileForPublishRadioButton.Name = "DragAndDropGmaFileForPublishRadioButton";
+			DragAndDropGmaFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
+			DragAndDropGmaFileForPublishRadioButton.TabIndex = 13;
+			DragAndDropGmaFileForPublishRadioButton.TabStop = true;
+			DragAndDropGmaFileForPublishRadioButton.Text = "Publish";
+			DragAndDropGmaFileForPublishRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropGmaFileForUnpackRadioButton
 			//
-			this.DragAndDropGmaFileForUnpackRadioButton.AutoSize = true;
-			this.DragAndDropGmaFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.DragAndDropGmaFileForUnpackRadioButton.Name = "DragAndDropGmaFileForUnpackRadioButton";
-			this.DragAndDropGmaFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.DragAndDropGmaFileForUnpackRadioButton.TabIndex = 12;
-			this.DragAndDropGmaFileForUnpackRadioButton.TabStop = true;
-			this.DragAndDropGmaFileForUnpackRadioButton.Text = "Unpack";
-			this.DragAndDropGmaFileForUnpackRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropGmaFileForUnpackRadioButton.AutoSize = true;
+			DragAndDropGmaFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			DragAndDropGmaFileForUnpackRadioButton.Name = "DragAndDropGmaFileForUnpackRadioButton";
+			DragAndDropGmaFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			DragAndDropGmaFileForUnpackRadioButton.TabIndex = 12;
+			DragAndDropGmaFileForUnpackRadioButton.TabStop = true;
+			DragAndDropGmaFileForUnpackRadioButton.Text = "Unpack";
+			DragAndDropGmaFileForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//Panel6
 			//
-			this.Panel6.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel6.Controls.Add(this.DragAndDropVpkFileForPublishRadioButton);
-			this.Panel6.Controls.Add(this.DragAndDropVpkFileForUnpackRadioButton);
-			this.Panel6.Location = new System.Drawing.Point(81, 107);
-			this.Panel6.Name = "Panel6";
-			this.Panel6.Size = new System.Drawing.Size(89, 36);
-			this.Panel6.TabIndex = 22;
+			Panel6.BackColor = System.Drawing.SystemColors.Control;
+			Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel6.Controls.Add(DragAndDropVpkFileForPublishRadioButton);
+			Panel6.Controls.Add(DragAndDropVpkFileForUnpackRadioButton);
+			Panel6.Location = new System.Drawing.Point(81, 107);
+			Panel6.Name = "Panel6";
+			Panel6.Size = new System.Drawing.Size(89, 36);
+			Panel6.TabIndex = 22;
 			//
 			//DragAndDropVpkFileForPublishRadioButton
 			//
-			this.DragAndDropVpkFileForPublishRadioButton.AutoSize = true;
-			this.DragAndDropVpkFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.DragAndDropVpkFileForPublishRadioButton.Name = "DragAndDropVpkFileForPublishRadioButton";
-			this.DragAndDropVpkFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
-			this.DragAndDropVpkFileForPublishRadioButton.TabIndex = 13;
-			this.DragAndDropVpkFileForPublishRadioButton.TabStop = true;
-			this.DragAndDropVpkFileForPublishRadioButton.Text = "Publish";
-			this.DragAndDropVpkFileForPublishRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropVpkFileForPublishRadioButton.AutoSize = true;
+			DragAndDropVpkFileForPublishRadioButton.Location = new System.Drawing.Point(3, 15);
+			DragAndDropVpkFileForPublishRadioButton.Name = "DragAndDropVpkFileForPublishRadioButton";
+			DragAndDropVpkFileForPublishRadioButton.Size = new System.Drawing.Size(63, 17);
+			DragAndDropVpkFileForPublishRadioButton.TabIndex = 13;
+			DragAndDropVpkFileForPublishRadioButton.TabStop = true;
+			DragAndDropVpkFileForPublishRadioButton.Text = "Publish";
+			DragAndDropVpkFileForPublishRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropVpkFileForUnpackRadioButton
 			//
-			this.DragAndDropVpkFileForUnpackRadioButton.AutoSize = true;
-			this.DragAndDropVpkFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.DragAndDropVpkFileForUnpackRadioButton.Name = "DragAndDropVpkFileForUnpackRadioButton";
-			this.DragAndDropVpkFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.DragAndDropVpkFileForUnpackRadioButton.TabIndex = 12;
-			this.DragAndDropVpkFileForUnpackRadioButton.TabStop = true;
-			this.DragAndDropVpkFileForUnpackRadioButton.Text = "Unpack";
-			this.DragAndDropVpkFileForUnpackRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropVpkFileForUnpackRadioButton.AutoSize = true;
+			DragAndDropVpkFileForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			DragAndDropVpkFileForUnpackRadioButton.Name = "DragAndDropVpkFileForUnpackRadioButton";
+			DragAndDropVpkFileForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			DragAndDropVpkFileForUnpackRadioButton.TabIndex = 12;
+			DragAndDropVpkFileForUnpackRadioButton.TabStop = true;
+			DragAndDropVpkFileForUnpackRadioButton.Text = "Unpack";
+			DragAndDropVpkFileForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//Label7
 			//
-			this.Label7.AutoSize = true;
-			this.Label7.Location = new System.Drawing.Point(6, 152);
-			this.Label7.Margin = new System.Windows.Forms.Padding(3);
-			this.Label7.Name = "Label7";
-			this.Label7.Size = new System.Drawing.Size(54, 13);
-			this.Label7.TabIndex = 21;
-			this.Label7.Text = "GMA file:";
+			Label7.AutoSize = true;
+			Label7.Location = new System.Drawing.Point(6, 152);
+			Label7.Margin = new System.Windows.Forms.Padding(3);
+			Label7.Name = "Label7";
+			Label7.Size = new System.Drawing.Size(54, 13);
+			Label7.TabIndex = 21;
+			Label7.Text = "GMA file:";
 			//
 			//Label6
 			//
-			this.Label6.AutoSize = true;
-			this.Label6.Location = new System.Drawing.Point(6, 109);
-			this.Label6.Margin = new System.Windows.Forms.Padding(3);
-			this.Label6.Name = "Label6";
-			this.Label6.Size = new System.Drawing.Size(48, 13);
-			this.Label6.TabIndex = 20;
-			this.Label6.Text = "VPK file:";
+			Label6.AutoSize = true;
+			Label6.Location = new System.Drawing.Point(6, 109);
+			Label6.Margin = new System.Windows.Forms.Padding(3);
+			Label6.Name = "Label6";
+			Label6.Size = new System.Drawing.Size(48, 13);
+			Label6.TabIndex = 20;
+			Label6.Text = "VPK file:";
 			//
 			//Label13
 			//
-			this.Label13.AutoSize = true;
-			this.Label13.Location = new System.Drawing.Point(6, 287);
-			this.Label13.Margin = new System.Windows.Forms.Padding(3);
-			this.Label13.Name = "Label13";
-			this.Label13.Size = new System.Drawing.Size(43, 13);
-			this.Label13.TabIndex = 2;
-			this.Label13.Text = "Folder:";
+			Label13.AutoSize = true;
+			Label13.Location = new System.Drawing.Point(6, 287);
+			Label13.Margin = new System.Windows.Forms.Padding(3);
+			Label13.Name = "Label13";
+			Label13.Size = new System.Drawing.Size(43, 13);
+			Label13.TabIndex = 2;
+			Label13.Text = "Folder:";
 			//
 			//Label12
 			//
-			this.Label12.AutoSize = true;
-			this.Label12.Location = new System.Drawing.Point(6, 192);
-			this.Label12.Margin = new System.Windows.Forms.Padding(3);
-			this.Label12.Name = "Label12";
-			this.Label12.Size = new System.Drawing.Size(52, 13);
-			this.Label12.TabIndex = 0;
-			this.Label12.Text = "MDL file:";
+			Label12.AutoSize = true;
+			Label12.Location = new System.Drawing.Point(6, 192);
+			Label12.Margin = new System.Windows.Forms.Padding(3);
+			Label12.Name = "Label12";
+			Label12.Size = new System.Drawing.Size(52, 13);
+			Label12.TabIndex = 0;
+			Label12.Text = "MDL file:";
 			//
 			//Panel3
 			//
-			this.Panel3.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel3.Controls.Add(this.Label10);
-			this.Panel3.Controls.Add(this.Label11);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForViewCheckBox);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForDecompileCheckBox);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForPreviewCheckBox);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForPreviewingRadioButton);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForDecompilingRadioButton);
-			this.Panel3.Controls.Add(this.DragAndDropMdlFileForViewingRadioButton);
-			this.Panel3.Location = new System.Drawing.Point(25, 207);
-			this.Panel3.Name = "Panel3";
-			this.Panel3.Size = new System.Drawing.Size(145, 70);
-			this.Panel3.TabIndex = 1;
+			Panel3.BackColor = System.Drawing.SystemColors.Control;
+			Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel3.Controls.Add(Label10);
+			Panel3.Controls.Add(Label11);
+			Panel3.Controls.Add(DragAndDropMdlFileForViewCheckBox);
+			Panel3.Controls.Add(DragAndDropMdlFileForDecompileCheckBox);
+			Panel3.Controls.Add(DragAndDropMdlFileForPreviewCheckBox);
+			Panel3.Controls.Add(DragAndDropMdlFileForPreviewingRadioButton);
+			Panel3.Controls.Add(DragAndDropMdlFileForDecompilingRadioButton);
+			Panel3.Controls.Add(DragAndDropMdlFileForViewingRadioButton);
+			Panel3.Location = new System.Drawing.Point(25, 207);
+			Panel3.Name = "Panel3";
+			Panel3.Size = new System.Drawing.Size(145, 70);
+			Panel3.TabIndex = 1;
 			//
 			//Label10
 			//
-			this.Label10.AutoSize = true;
-			this.Label10.Location = new System.Drawing.Point(2, 2);
-			this.Label10.Name = "Label10";
-			this.Label10.Size = new System.Drawing.Size(44, 13);
-			this.Label10.TabIndex = 20;
-			this.Label10.Text = "Set Up:";
+			Label10.AutoSize = true;
+			Label10.Location = new System.Drawing.Point(2, 2);
+			Label10.Name = "Label10";
+			Label10.Size = new System.Drawing.Size(44, 13);
+			Label10.TabIndex = 20;
+			Label10.Text = "Set Up:";
 			//
 			//Label11
 			//
-			this.Label11.AutoSize = true;
-			this.Label11.Location = new System.Drawing.Point(94, 2);
-			this.Label11.Name = "Label11";
-			this.Label11.Size = new System.Drawing.Size(39, 13);
-			this.Label11.TabIndex = 19;
-			this.Label11.Text = "Open:";
+			Label11.AutoSize = true;
+			Label11.Location = new System.Drawing.Point(94, 2);
+			Label11.Name = "Label11";
+			Label11.Size = new System.Drawing.Size(39, 13);
+			Label11.TabIndex = 19;
+			Label11.Text = "Open:";
 			//
 			//DragAndDropMdlFileForDecompileCheckBox
 			//
-			this.DragAndDropMdlFileForDecompileCheckBox.AutoSize = true;
-			this.DragAndDropMdlFileForDecompileCheckBox.Location = new System.Drawing.Point(3, 33);
-			this.DragAndDropMdlFileForDecompileCheckBox.Name = "DragAndDropMdlFileForDecompileCheckBox";
-			this.DragAndDropMdlFileForDecompileCheckBox.Size = new System.Drawing.Size(80, 17);
-			this.DragAndDropMdlFileForDecompileCheckBox.TabIndex = 1;
-			this.DragAndDropMdlFileForDecompileCheckBox.Text = "Decompile";
-			this.DragAndDropMdlFileForDecompileCheckBox.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForDecompileCheckBox.AutoSize = true;
+			DragAndDropMdlFileForDecompileCheckBox.Location = new System.Drawing.Point(3, 33);
+			DragAndDropMdlFileForDecompileCheckBox.Name = "DragAndDropMdlFileForDecompileCheckBox";
+			DragAndDropMdlFileForDecompileCheckBox.Size = new System.Drawing.Size(80, 17);
+			DragAndDropMdlFileForDecompileCheckBox.TabIndex = 1;
+			DragAndDropMdlFileForDecompileCheckBox.Text = "Decompile";
+			DragAndDropMdlFileForDecompileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropMdlFileForViewCheckBox
 			//
-			this.DragAndDropMdlFileForViewCheckBox.AutoSize = true;
-			this.DragAndDropMdlFileForViewCheckBox.Location = new System.Drawing.Point(3, 48);
-			this.DragAndDropMdlFileForViewCheckBox.Name = "DragAndDropMdlFileForViewCheckBox";
-			this.DragAndDropMdlFileForViewCheckBox.Size = new System.Drawing.Size(51, 17);
-			this.DragAndDropMdlFileForViewCheckBox.TabIndex = 2;
-			this.DragAndDropMdlFileForViewCheckBox.Text = "View";
-			this.DragAndDropMdlFileForViewCheckBox.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForViewCheckBox.AutoSize = true;
+			DragAndDropMdlFileForViewCheckBox.Location = new System.Drawing.Point(3, 48);
+			DragAndDropMdlFileForViewCheckBox.Name = "DragAndDropMdlFileForViewCheckBox";
+			DragAndDropMdlFileForViewCheckBox.Size = new System.Drawing.Size(51, 17);
+			DragAndDropMdlFileForViewCheckBox.TabIndex = 2;
+			DragAndDropMdlFileForViewCheckBox.Text = "View";
+			DragAndDropMdlFileForViewCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropMdlFileForPreviewCheckBox
 			//
-			this.DragAndDropMdlFileForPreviewCheckBox.AutoSize = true;
-			this.DragAndDropMdlFileForPreviewCheckBox.Location = new System.Drawing.Point(3, 18);
-			this.DragAndDropMdlFileForPreviewCheckBox.Name = "DragAndDropMdlFileForPreviewCheckBox";
-			this.DragAndDropMdlFileForPreviewCheckBox.Size = new System.Drawing.Size(65, 17);
-			this.DragAndDropMdlFileForPreviewCheckBox.TabIndex = 0;
-			this.DragAndDropMdlFileForPreviewCheckBox.Text = "Preview";
-			this.DragAndDropMdlFileForPreviewCheckBox.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForPreviewCheckBox.AutoSize = true;
+			DragAndDropMdlFileForPreviewCheckBox.Location = new System.Drawing.Point(3, 18);
+			DragAndDropMdlFileForPreviewCheckBox.Name = "DragAndDropMdlFileForPreviewCheckBox";
+			DragAndDropMdlFileForPreviewCheckBox.Size = new System.Drawing.Size(65, 17);
+			DragAndDropMdlFileForPreviewCheckBox.TabIndex = 0;
+			DragAndDropMdlFileForPreviewCheckBox.Text = "Preview";
+			DragAndDropMdlFileForPreviewCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropMdlFileForPreviewingRadioButton
 			//
-			this.DragAndDropMdlFileForPreviewingRadioButton.Location = new System.Drawing.Point(104, 19);
-			this.DragAndDropMdlFileForPreviewingRadioButton.Name = "DragAndDropMdlFileForPreviewingRadioButton";
-			this.DragAndDropMdlFileForPreviewingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.DragAndDropMdlFileForPreviewingRadioButton.TabIndex = 3;
-			this.DragAndDropMdlFileForPreviewingRadioButton.TabStop = true;
-			this.DragAndDropMdlFileForPreviewingRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForPreviewingRadioButton.Location = new System.Drawing.Point(104, 19);
+			DragAndDropMdlFileForPreviewingRadioButton.Name = "DragAndDropMdlFileForPreviewingRadioButton";
+			DragAndDropMdlFileForPreviewingRadioButton.Size = new System.Drawing.Size(14, 13);
+			DragAndDropMdlFileForPreviewingRadioButton.TabIndex = 3;
+			DragAndDropMdlFileForPreviewingRadioButton.TabStop = true;
+			DragAndDropMdlFileForPreviewingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropMdlFileForDecompilingRadioButton
 			//
-			this.DragAndDropMdlFileForDecompilingRadioButton.Location = new System.Drawing.Point(104, 34);
-			this.DragAndDropMdlFileForDecompilingRadioButton.Name = "DragAndDropMdlFileForDecompilingRadioButton";
-			this.DragAndDropMdlFileForDecompilingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.DragAndDropMdlFileForDecompilingRadioButton.TabIndex = 4;
-			this.DragAndDropMdlFileForDecompilingRadioButton.TabStop = true;
-			this.DragAndDropMdlFileForDecompilingRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForDecompilingRadioButton.Location = new System.Drawing.Point(104, 34);
+			DragAndDropMdlFileForDecompilingRadioButton.Name = "DragAndDropMdlFileForDecompilingRadioButton";
+			DragAndDropMdlFileForDecompilingRadioButton.Size = new System.Drawing.Size(14, 13);
+			DragAndDropMdlFileForDecompilingRadioButton.TabIndex = 4;
+			DragAndDropMdlFileForDecompilingRadioButton.TabStop = true;
+			DragAndDropMdlFileForDecompilingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropMdlFileForViewingRadioButton
 			//
-			this.DragAndDropMdlFileForViewingRadioButton.Location = new System.Drawing.Point(104, 49);
-			this.DragAndDropMdlFileForViewingRadioButton.Name = "DragAndDropMdlFileForViewingRadioButton";
-			this.DragAndDropMdlFileForViewingRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.DragAndDropMdlFileForViewingRadioButton.TabIndex = 5;
-			this.DragAndDropMdlFileForViewingRadioButton.TabStop = true;
-			this.DragAndDropMdlFileForViewingRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropMdlFileForViewingRadioButton.Location = new System.Drawing.Point(104, 49);
+			DragAndDropMdlFileForViewingRadioButton.Name = "DragAndDropMdlFileForViewingRadioButton";
+			DragAndDropMdlFileForViewingRadioButton.Size = new System.Drawing.Size(14, 13);
+			DragAndDropMdlFileForViewingRadioButton.TabIndex = 5;
+			DragAndDropMdlFileForViewingRadioButton.TabStop = true;
+			DragAndDropMdlFileForViewingRadioButton.UseVisualStyleBackColor = true;
 			//
 			//Label3
 			//
-			this.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.Label3.Location = new System.Drawing.Point(6, 20);
-			this.Label3.Margin = new System.Windows.Forms.Padding(3);
-			this.Label3.Name = "Label3";
-			this.Label3.Size = new System.Drawing.Size(188, 83);
-			this.Label3.TabIndex = 19;
-			this.Label3.Text = "Choose which tabs Crowbar sets up and which tab opens when a file or folder is dr" + "opped on Crowbar. Dropping on any tab left unset below will only set up that tab" + ".";
+			Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			Label3.Location = new System.Drawing.Point(6, 20);
+			Label3.Margin = new System.Windows.Forms.Padding(3);
+			Label3.Name = "Label3";
+			Label3.Size = new System.Drawing.Size(188, 83);
+			Label3.TabIndex = 19;
+			Label3.Text = "Choose which tabs Crowbar sets up and which tab opens when a file or folder is dr" + "opped on Crowbar. Dropping on any tab left unset below will only set up that tab" + ".";
 			//
 			//DragAndDropUseDefaultsButton
 			//
-			this.DragAndDropUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
-			this.DragAndDropUseDefaultsButton.Location = new System.Drawing.Point(50, 438);
-			this.DragAndDropUseDefaultsButton.Name = "DragAndDropUseDefaultsButton";
-			this.DragAndDropUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
-			this.DragAndDropUseDefaultsButton.TabIndex = 4;
-			this.DragAndDropUseDefaultsButton.Text = "Use Defaults";
-			this.DragAndDropUseDefaultsButton.UseVisualStyleBackColor = true;
+			DragAndDropUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+			DragAndDropUseDefaultsButton.Location = new System.Drawing.Point(50, 438);
+			DragAndDropUseDefaultsButton.Name = "DragAndDropUseDefaultsButton";
+			DragAndDropUseDefaultsButton.Size = new System.Drawing.Size(100, 23);
+			DragAndDropUseDefaultsButton.TabIndex = 4;
+			DragAndDropUseDefaultsButton.Text = "Use Defaults";
+			DragAndDropUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//Panel4
 			//
-			this.Panel4.BackColor = System.Drawing.SystemColors.Control;
-			this.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Panel4.Controls.Add(this.DragAndDropFolderForPackRadioButton);
-			this.Panel4.Controls.Add(this.DragAndDropFolderForCompileRadioButton);
-			this.Panel4.Controls.Add(this.DragAndDropFolderForDecompileRadioButton);
-			this.Panel4.Controls.Add(this.DragAndDropFolderForUnpackRadioButton);
-			this.Panel4.Location = new System.Drawing.Point(81, 283);
-			this.Panel4.Name = "Panel4";
-			this.Panel4.Size = new System.Drawing.Size(89, 66);
-			this.Panel4.TabIndex = 3;
+			Panel4.BackColor = System.Drawing.SystemColors.Control;
+			Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			Panel4.Controls.Add(DragAndDropFolderForPackRadioButton);
+			Panel4.Controls.Add(DragAndDropFolderForCompileRadioButton);
+			Panel4.Controls.Add(DragAndDropFolderForDecompileRadioButton);
+			Panel4.Controls.Add(DragAndDropFolderForUnpackRadioButton);
+			Panel4.Location = new System.Drawing.Point(81, 283);
+			Panel4.Name = "Panel4";
+			Panel4.Size = new System.Drawing.Size(89, 66);
+			Panel4.TabIndex = 3;
 			//
 			//DragAndDropFolderForPackRadioButton
 			//
-			this.DragAndDropFolderForPackRadioButton.AutoSize = true;
-			this.DragAndDropFolderForPackRadioButton.Location = new System.Drawing.Point(3, 45);
-			this.DragAndDropFolderForPackRadioButton.Name = "DragAndDropFolderForPackRadioButton";
-			this.DragAndDropFolderForPackRadioButton.Size = new System.Drawing.Size(48, 17);
-			this.DragAndDropFolderForPackRadioButton.TabIndex = 3;
-			this.DragAndDropFolderForPackRadioButton.TabStop = true;
-			this.DragAndDropFolderForPackRadioButton.Text = "Pack";
-			this.DragAndDropFolderForPackRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropFolderForPackRadioButton.AutoSize = true;
+			DragAndDropFolderForPackRadioButton.Location = new System.Drawing.Point(3, 45);
+			DragAndDropFolderForPackRadioButton.Name = "DragAndDropFolderForPackRadioButton";
+			DragAndDropFolderForPackRadioButton.Size = new System.Drawing.Size(48, 17);
+			DragAndDropFolderForPackRadioButton.TabIndex = 3;
+			DragAndDropFolderForPackRadioButton.TabStop = true;
+			DragAndDropFolderForPackRadioButton.Text = "Pack";
+			DragAndDropFolderForPackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropFolderForCompileRadioButton
 			//
-			this.DragAndDropFolderForCompileRadioButton.AutoSize = true;
-			this.DragAndDropFolderForCompileRadioButton.Location = new System.Drawing.Point(3, 30);
-			this.DragAndDropFolderForCompileRadioButton.Name = "DragAndDropFolderForCompileRadioButton";
-			this.DragAndDropFolderForCompileRadioButton.Size = new System.Drawing.Size(67, 17);
-			this.DragAndDropFolderForCompileRadioButton.TabIndex = 2;
-			this.DragAndDropFolderForCompileRadioButton.TabStop = true;
-			this.DragAndDropFolderForCompileRadioButton.Text = "Compile";
-			this.DragAndDropFolderForCompileRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropFolderForCompileRadioButton.AutoSize = true;
+			DragAndDropFolderForCompileRadioButton.Location = new System.Drawing.Point(3, 30);
+			DragAndDropFolderForCompileRadioButton.Name = "DragAndDropFolderForCompileRadioButton";
+			DragAndDropFolderForCompileRadioButton.Size = new System.Drawing.Size(67, 17);
+			DragAndDropFolderForCompileRadioButton.TabIndex = 2;
+			DragAndDropFolderForCompileRadioButton.TabStop = true;
+			DragAndDropFolderForCompileRadioButton.Text = "Compile";
+			DragAndDropFolderForCompileRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropFolderForDecompileRadioButton
 			//
-			this.DragAndDropFolderForDecompileRadioButton.AutoSize = true;
-			this.DragAndDropFolderForDecompileRadioButton.Location = new System.Drawing.Point(3, 15);
-			this.DragAndDropFolderForDecompileRadioButton.Name = "DragAndDropFolderForDecompileRadioButton";
-			this.DragAndDropFolderForDecompileRadioButton.Size = new System.Drawing.Size(79, 17);
-			this.DragAndDropFolderForDecompileRadioButton.TabIndex = 1;
-			this.DragAndDropFolderForDecompileRadioButton.TabStop = true;
-			this.DragAndDropFolderForDecompileRadioButton.Text = "Decompile";
-			this.DragAndDropFolderForDecompileRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropFolderForDecompileRadioButton.AutoSize = true;
+			DragAndDropFolderForDecompileRadioButton.Location = new System.Drawing.Point(3, 15);
+			DragAndDropFolderForDecompileRadioButton.Name = "DragAndDropFolderForDecompileRadioButton";
+			DragAndDropFolderForDecompileRadioButton.Size = new System.Drawing.Size(79, 17);
+			DragAndDropFolderForDecompileRadioButton.TabIndex = 1;
+			DragAndDropFolderForDecompileRadioButton.TabStop = true;
+			DragAndDropFolderForDecompileRadioButton.Text = "Decompile";
+			DragAndDropFolderForDecompileRadioButton.UseVisualStyleBackColor = true;
 			//
 			//DragAndDropFolderForUnpackRadioButton
 			//
-			this.DragAndDropFolderForUnpackRadioButton.AutoSize = true;
-			this.DragAndDropFolderForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
-			this.DragAndDropFolderForUnpackRadioButton.Name = "DragAndDropFolderForUnpackRadioButton";
-			this.DragAndDropFolderForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
-			this.DragAndDropFolderForUnpackRadioButton.TabIndex = 0;
-			this.DragAndDropFolderForUnpackRadioButton.TabStop = true;
-			this.DragAndDropFolderForUnpackRadioButton.Text = "Unpack";
-			this.DragAndDropFolderForUnpackRadioButton.UseVisualStyleBackColor = true;
+			DragAndDropFolderForUnpackRadioButton.AutoSize = true;
+			DragAndDropFolderForUnpackRadioButton.Location = new System.Drawing.Point(3, 0);
+			DragAndDropFolderForUnpackRadioButton.Name = "DragAndDropFolderForUnpackRadioButton";
+			DragAndDropFolderForUnpackRadioButton.Size = new System.Drawing.Size(64, 17);
+			DragAndDropFolderForUnpackRadioButton.TabIndex = 0;
+			DragAndDropFolderForUnpackRadioButton.TabStop = true;
+			DragAndDropFolderForUnpackRadioButton.Text = "Unpack";
+			DragAndDropFolderForUnpackRadioButton.UseVisualStyleBackColor = true;
 			//
 			//ApplyLabel
 			//
-			this.ApplyLabel.AutoSize = true;
-			this.ApplyLabel.Location = new System.Drawing.Point(6, 8);
-			this.ApplyLabel.Name = "ApplyLabel";
-			this.ApplyLabel.Size = new System.Drawing.Size(509, 13);
-			this.ApplyLabel.TabIndex = 18;
-			this.ApplyLabel.Text = "Windows is not using what is specified above. Click the Apply button to apply the" + " options above.";
+			ApplyLabel.AutoSize = true;
+			ApplyLabel.Location = new System.Drawing.Point(6, 8);
+			ApplyLabel.Name = "ApplyLabel";
+			ApplyLabel.Size = new System.Drawing.Size(509, 13);
+			ApplyLabel.TabIndex = 18;
+			ApplyLabel.Text = "Windows is not using what is specified above. Click the Apply button to apply the" + " options above.";
 			//
 			//ApplyButton
 			//
-			this.ApplyButton.Location = new System.Drawing.Point(521, 3);
-			this.ApplyButton.Name = "ApplyButton";
-			this.ApplyButton.Size = new System.Drawing.Size(50, 23);
-			this.ApplyButton.TabIndex = 20;
-			this.ApplyButton.Text = "Apply";
-			this.ApplyButton.UseVisualStyleBackColor = true;
+			ApplyButton.Location = new System.Drawing.Point(521, 3);
+			ApplyButton.Name = "ApplyButton";
+			ApplyButton.Size = new System.Drawing.Size(50, 23);
+			ApplyButton.TabIndex = 20;
+			ApplyButton.Text = "Apply";
+			ApplyButton.UseVisualStyleBackColor = true;
 			//
 			//ApplyPanel
 			//
-			this.ApplyPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.ApplyPanel.Controls.Add(this.ApplyLabel);
-			this.ApplyPanel.Controls.Add(this.ApplyButton);
-			this.ApplyPanel.Location = new System.Drawing.Point(3, 499);
-			this.ApplyPanel.Name = "ApplyPanel";
-			this.ApplyPanel.Size = new System.Drawing.Size(585, 34);
-			this.ApplyPanel.TabIndex = 3;
-			this.ApplyPanel.Visible = false;
+			ApplyPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			ApplyPanel.Controls.Add(ApplyLabel);
+			ApplyPanel.Controls.Add(ApplyButton);
+			ApplyPanel.Location = new System.Drawing.Point(3, 499);
+			ApplyPanel.Name = "ApplyPanel";
+			ApplyPanel.Size = new System.Drawing.Size(585, 34);
+			ApplyPanel.TabIndex = 3;
+			ApplyPanel.Visible = false;
 			//
 			//SingleInstanceCheckBox
 			//
-			this.SingleInstanceCheckBox.AutoSize = true;
-			this.SingleInstanceCheckBox.Location = new System.Drawing.Point(3, 3);
-			this.SingleInstanceCheckBox.Name = "SingleInstanceCheckBox";
-			this.SingleInstanceCheckBox.Size = new System.Drawing.Size(336, 17);
-			this.SingleInstanceCheckBox.TabIndex = 4;
-			this.SingleInstanceCheckBox.Text = "Restrict to single instance (only one Crowbar open at a time)";
-			this.SingleInstanceCheckBox.UseVisualStyleBackColor = true;
+			SingleInstanceCheckBox.AutoSize = true;
+			SingleInstanceCheckBox.Location = new System.Drawing.Point(3, 3);
+			SingleInstanceCheckBox.Name = "SingleInstanceCheckBox";
+			SingleInstanceCheckBox.Size = new System.Drawing.Size(336, 17);
+			SingleInstanceCheckBox.TabIndex = 4;
+			SingleInstanceCheckBox.Text = "Restrict to single instance (only one Crowbar open at a time)";
+			SingleInstanceCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.SingleInstanceCheckBox);
-			this.Controls.Add(this.ApplyPanel);
-			this.Controls.Add(this.GroupBox3);
-			this.Controls.Add(this.GroupBox2);
-			this.Controls.Add(this.GroupBox1);
-			this.Name = "OptionsUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.GroupBox1.ResumeLayout(false);
-			this.GroupBox1.PerformLayout();
-			this.Panel7.ResumeLayout(false);
-			this.Panel7.PerformLayout();
-			this.GroupBox2.ResumeLayout(false);
-			this.GroupBox2.PerformLayout();
-			this.Panel2.ResumeLayout(false);
-			this.Panel2.PerformLayout();
-			this.AutoOpenVpkPanel.ResumeLayout(false);
-			this.AutoOpenVpkPanel.PerformLayout();
-			this.AutoOpenFolderPanel.ResumeLayout(false);
-			this.AutoOpenFolderPanel.PerformLayout();
-			this.Panel1.ResumeLayout(false);
-			this.Panel1.PerformLayout();
-			this.GroupBox3.ResumeLayout(false);
-			this.GroupBox3.PerformLayout();
-			this.Panel5.ResumeLayout(false);
-			this.Panel5.PerformLayout();
-			this.Panel6.ResumeLayout(false);
-			this.Panel6.PerformLayout();
-			this.Panel3.ResumeLayout(false);
-			this.Panel3.PerformLayout();
-			this.Panel4.ResumeLayout(false);
-			this.Panel4.PerformLayout();
-			this.ApplyPanel.ResumeLayout(false);
-			this.ApplyPanel.PerformLayout();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(SingleInstanceCheckBox);
+			Controls.Add(ApplyPanel);
+			Controls.Add(GroupBox3);
+			Controls.Add(GroupBox2);
+			Controls.Add(GroupBox1);
+			Name = "OptionsUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			GroupBox1.ResumeLayout(false);
+			GroupBox1.PerformLayout();
+			Panel7.ResumeLayout(false);
+			Panel7.PerformLayout();
+			GroupBox2.ResumeLayout(false);
+			GroupBox2.PerformLayout();
+			Panel2.ResumeLayout(false);
+			Panel2.PerformLayout();
+			AutoOpenVpkPanel.ResumeLayout(false);
+			AutoOpenVpkPanel.PerformLayout();
+			AutoOpenFolderPanel.ResumeLayout(false);
+			AutoOpenFolderPanel.PerformLayout();
+			Panel1.ResumeLayout(false);
+			Panel1.PerformLayout();
+			GroupBox3.ResumeLayout(false);
+			GroupBox3.PerformLayout();
+			Panel5.ResumeLayout(false);
+			Panel5.PerformLayout();
+			Panel6.ResumeLayout(false);
+			Panel6.PerformLayout();
+			Panel3.ResumeLayout(false);
+			Panel3.PerformLayout();
+			Panel4.ResumeLayout(false);
+			Panel4.PerformLayout();
+			ApplyPanel.ResumeLayout(false);
+			ApplyPanel.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
-			this.Disposed += new System.EventHandler(OptionsUserControl_Disposed);
+			Disposed += new System.EventHandler(OptionsUserControl_Disposed);
 			AutoOpenVpkFileForUnpackRadioButton.CheckedChanged += new System.EventHandler(AutoOpenVpkFileRadioButton_CheckedChanged);
 			AutoOpenVpkFileForPublishRadioButton.CheckedChanged += new System.EventHandler(AutoOpenVpkFileRadioButton_CheckedChanged);
 			AutoOpenGmaFileForUnpackRadioButton.CheckedChanged += new System.EventHandler(AutoOpenGmaFileRadioButton_CheckedChanged);

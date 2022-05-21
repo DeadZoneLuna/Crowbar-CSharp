@@ -19,9 +19,9 @@ namespace Crowbar
 
 		public VpkFile(BinaryReader archiveDirectoryFileReader, BinaryReader vpkFileReader, VpkFileData vpkFileData)
 		{
-			this.theArchiveDirectoryInputFileReader = archiveDirectoryFileReader;
-			this.theInputFileReader = vpkFileReader;
-			this.theVpkFileData = vpkFileData;
+			theArchiveDirectoryInputFileReader = archiveDirectoryFileReader;
+			theInputFileReader = vpkFileReader;
+			theVpkFileData = vpkFileData;
 		}
 
 #endregion
@@ -32,7 +32,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theVpkFileData;
+				return theVpkFileData;
 			}
 		}
 
@@ -48,85 +48,85 @@ namespace Crowbar
 			//Dim fileOffsetStart2 As Long
 			//Dim fileOffsetEnd2 As Long
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-			this.theVpkFileData.id = this.theInputFileReader.ReadUInt32();
+			theVpkFileData.id = theInputFileReader.ReadUInt32();
 
 			//NOTE: The arrangement of this 'if" block is weird, but it keeps the order of checks like this: Valve VPK, Vtmb VPK, non-directory multi-file Valve VPK.
-			inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-			if (this.theVpkFileData.PackageHasID)
+			inputFileStreamPosition = theInputFileReader.BaseStream.Position;
+			if (theVpkFileData.PackageHasID)
 			{
-				this.ReadValveVpkHeader();
+				ReadValveVpkHeader();
 			}
-			else if (!this.IsVtmbVpk())
+			else if (!IsVtmbVpk())
 			{
-				this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
-				this.ReadValveVpkHeader();
+				theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+				ReadValveVpkHeader();
 			}
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.theVpkFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "VPK File Header");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			theVpkFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "VPK File Header");
 		}
 
 		private void ReadValveVpkHeader()
 		{
-			this.theVpkFileData.version = this.theInputFileReader.ReadUInt32();
-			this.theVpkFileData.directoryLength = this.theInputFileReader.ReadUInt32();
+			theVpkFileData.version = theInputFileReader.ReadUInt32();
+			theVpkFileData.directoryLength = theInputFileReader.ReadUInt32();
 
-			if (this.theVpkFileData.version == 2)
+			if (theVpkFileData.version == 2)
 			{
-				this.theVpkFileData.unused01 = this.theInputFileReader.ReadUInt32();
-				this.theVpkFileData.archiveHashLength = this.theInputFileReader.ReadUInt32();
-				this.theVpkFileData.extraLength = this.theInputFileReader.ReadUInt32();
-				this.theVpkFileData.unused01 = this.theInputFileReader.ReadUInt32();
+				theVpkFileData.unused01 = theInputFileReader.ReadUInt32();
+				theVpkFileData.archiveHashLength = theInputFileReader.ReadUInt32();
+				theVpkFileData.extraLength = theInputFileReader.ReadUInt32();
+				theVpkFileData.unused01 = theInputFileReader.ReadUInt32();
 			}
-			else if (this.theVpkFileData.version == 196610)
+			else if (theVpkFileData.version == 196610)
 			{
-				this.theVpkFileData.unused01 = this.theInputFileReader.ReadUInt32();
+				theVpkFileData.unused01 = theInputFileReader.ReadUInt32();
 			}
 
-			this.theVpkFileData.theDirectoryOffset = this.theInputFileReader.BaseStream.Position;
+			theVpkFileData.theDirectoryOffset = theInputFileReader.BaseStream.Position;
 		}
 
 		private bool IsVtmbVpk()
 		{
 			bool theVpkIsVtmb = false;
 
-			this.theInputFileReader.BaseStream.Seek(-1, SeekOrigin.End);
-			int vtmbVpkType = this.theInputFileReader.ReadByte();
+			theInputFileReader.BaseStream.Seek(-1, SeekOrigin.End);
+			int vtmbVpkType = theInputFileReader.ReadByte();
 			//NOTE: Skip reading vtmbVpkType = 1 because it is just a directory of entries with no data.
 			if (vtmbVpkType == 0 || vtmbVpkType == 1)
 			{
-				long directoryEndOffset = this.theInputFileReader.BaseStream.Seek(-9, SeekOrigin.End);
-				this.theVpkFileData.theEntryCount = this.theInputFileReader.ReadUInt32();
-				this.theVpkFileData.theDirectoryOffset = this.theInputFileReader.ReadUInt32();
+				long directoryEndOffset = theInputFileReader.BaseStream.Seek(-9, SeekOrigin.End);
+				theVpkFileData.theEntryCount = theInputFileReader.ReadUInt32();
+				theVpkFileData.theDirectoryOffset = theInputFileReader.ReadUInt32();
 				//TODO: It is VTMB VPK package if offsets and lengths match in the directory at end of file.
 				//      Would need to check that offsets and lengths are within file length boundaries.
 				theVpkIsVtmb = true;
 				uint entryPathFileNameLength = 0;
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(this.theVpkFileData.theEntryCount - 1) for every iteration:
-					uint tempVar = (uint)(this.theVpkFileData.theEntryCount - 1);
+					theInputFileReader.BaseStream.Seek(theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theVpkFileData.theEntryCount - 1) for every iteration:
+					uint tempVar = (uint)(theVpkFileData.theEntryCount - 1);
 					for (uint i = 0; i <= tempVar; i++)
 					{
-						entryPathFileNameLength = this.theInputFileReader.ReadUInt32();
+						entryPathFileNameLength = theInputFileReader.ReadUInt32();
 						//entry.thePathFileName = Me.theInputFileReader.ReadChars(CInt(entryPathFileNameLength))
 						//entry.dataOffset = Me.theInputFileReader.ReadUInt32()
 						//entry.dataLength = Me.theInputFileReader.ReadUInt32()
-						this.theInputFileReader.BaseStream.Seek(entryPathFileNameLength + 8, SeekOrigin.Current);
+						theInputFileReader.BaseStream.Seek(entryPathFileNameLength + 8, SeekOrigin.Current);
 					}
 					//NOTE: Do not accept 'vtmbVpkType = 1' as a valid VtmbVpk because it is just a directory of entries with no data.
-					if (this.theInputFileReader.BaseStream.Position != directoryEndOffset || vtmbVpkType == 1)
+					if (theInputFileReader.BaseStream.Position != directoryEndOffset || vtmbVpkType == 1)
 					{
-						this.theVpkFileData.theEntryCount = 0;
+						theVpkFileData.theEntryCount = 0;
 						theVpkIsVtmb = false;
 					}
 				}
 				catch (Exception ex)
 				{
-					this.theVpkFileData.theEntryCount = 0;
+					theVpkFileData.theEntryCount = 0;
 					theVpkIsVtmb = false;
 				}
 			}
@@ -154,12 +154,12 @@ namespace Crowbar
 			//If Me.theVpkFileData.id <> VpkFileData.VPK_ID OrElse Me.theVpkFileData.id <> VpkFileData.FPX_ID Then
 			//	Exit Sub
 			//End If
-			if (!this.theVpkFileData.IsSourcePackage)
+			if (!theVpkFileData.IsSourcePackage)
 			{
 				return;
 			}
 
-			if (!this.theVpkFileData.PackageHasID)
+			if (!theVpkFileData.PackageHasID)
 			{
 				ReadVtmbEntries(bw);
 				return;
@@ -175,7 +175,7 @@ namespace Crowbar
 			{
 				try
 				{
-					entryExtension = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+					entryExtension = FileManager.ReadNullTerminatedString(theInputFileReader);
 					if (string.IsNullOrEmpty(entryExtension))
 					{
 						break;
@@ -195,7 +195,7 @@ namespace Crowbar
 				{
 					try
 					{
-						entryPath = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+						entryPath = FileManager.ReadNullTerminatedString(theInputFileReader);
 						if (string.IsNullOrEmpty(entryPath))
 						{
 							break;
@@ -215,7 +215,7 @@ namespace Crowbar
 					{
 						try
 						{
-							entryFileName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							entryFileName = FileManager.ReadNullTerminatedString(theInputFileReader);
 							if (string.IsNullOrEmpty(entryFileName))
 							{
 								break;
@@ -232,10 +232,10 @@ namespace Crowbar
 						}
 
 						entry = new VpkDirectoryEntry();
-						entry.crc = this.theInputFileReader.ReadUInt32();
-						entry.preloadByteCount = this.theInputFileReader.ReadUInt16();
-						entry.archiveIndex = this.theInputFileReader.ReadUInt16();
-						if (this.theVpkFileData.version == 196610)
+						entry.crc = theInputFileReader.ReadUInt32();
+						entry.preloadByteCount = theInputFileReader.ReadUInt16();
+						entry.archiveIndex = theInputFileReader.ReadUInt16();
+						if (theVpkFileData.version == 196610)
 						{
 							//TODO: Exit for now so Crowbar does not freeze.
 							return;
@@ -254,15 +254,15 @@ namespace Crowbar
 						}
 						else
 						{
-							entry.dataOffset = this.theInputFileReader.ReadUInt32();
-							entry.dataLength = this.theInputFileReader.ReadUInt32();
-							entry.endBytes = this.theInputFileReader.ReadUInt16();
+							entry.dataOffset = theInputFileReader.ReadUInt32();
+							entry.dataLength = theInputFileReader.ReadUInt32();
+							entry.endBytes = theInputFileReader.ReadUInt16();
 
 							if (entry.preloadByteCount > 0)
 							{
-								entry.preloadBytesOffset = this.theInputFileReader.BaseStream.Position;
+								entry.preloadBytesOffset = theInputFileReader.BaseStream.Position;
 								//Me.theInputFileReader.ReadBytes(entry.preloadByteCount)
-								this.theInputFileReader.BaseStream.Position += entry.preloadByteCount;
+								theInputFileReader.BaseStream.Position += entry.preloadByteCount;
 
 								if (entry.dataLength == 0)
 								{
@@ -280,7 +280,7 @@ namespace Crowbar
 						{
 							entry.thePathFileName = entryPath + "/" + entryFileName + "." + entryExtension;
 						}
-						this.theVpkFileData.theEntries.Add(entry);
+						theVpkFileData.theEntries.Add(entry);
 
 						entryDataOutputText.Append(entry.thePathFileName);
 						entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -289,7 +289,7 @@ namespace Crowbar
 						entryDataOutputText.Append(" ofs=0x" + entry.dataOffset.ToString("X8"));
 						entryDataOutputText.Append(" sz=" + (entry.preloadByteCount + entry.dataLength).ToString("G0"));
 
-						this.theVpkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+						theVpkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 						NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 
 						entryDataOutputText.Clear();
@@ -313,17 +313,17 @@ namespace Crowbar
 			VpkDirectoryEntry entry = null;
 			StringBuilder entryDataOutputText = new StringBuilder();
 
-			this.theInputFileReader.BaseStream.Seek(this.theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(this.theVpkFileData.theEntryCount - 1) for every iteration:
-			uint tempVar = (uint)(this.theVpkFileData.theEntryCount - 1);
+			theInputFileReader.BaseStream.Seek(theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theVpkFileData.theEntryCount - 1) for every iteration:
+			uint tempVar = (uint)(theVpkFileData.theEntryCount - 1);
 			for (uint i = 0; i <= tempVar; i++)
 			{
 				entry = new VpkDirectoryEntry();
 
-				entryPathFileNameLength = this.theInputFileReader.ReadUInt32();
-				entry.thePathFileName = new string(this.theInputFileReader.ReadChars((int)entryPathFileNameLength));
-				entry.dataOffset = this.theInputFileReader.ReadUInt32();
-				entry.dataLength = this.theInputFileReader.ReadUInt32();
+				entryPathFileNameLength = theInputFileReader.ReadUInt32();
+				entry.thePathFileName = new string(theInputFileReader.ReadChars((int)entryPathFileNameLength));
+				entry.dataOffset = theInputFileReader.ReadUInt32();
+				entry.dataLength = theInputFileReader.ReadUInt32();
 
 				entry.crc = 0;
 				entry.preloadByteCount = 0;
@@ -331,7 +331,7 @@ namespace Crowbar
 				entry.endBytes = 0;
 				entry.isVtmbVpk = true;
 
-				this.theVpkFileData.theEntries.Add(entry);
+				theVpkFileData.theEntries.Add(entry);
 
 				entryDataOutputText.Append(entry.thePathFileName);
 				entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -340,7 +340,7 @@ namespace Crowbar
 				entryDataOutputText.Append(" ofs=0x" + entry.dataOffset.ToString("X8"));
 				entryDataOutputText.Append(" sz=" + (entry.preloadByteCount + entry.dataLength).ToString("G0"));
 
-				this.theVpkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+				theVpkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 				NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 
 				entryDataOutputText.Clear();
@@ -364,24 +364,24 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
+						theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
 
 						if (entry.preloadByteCount > 0)
 						{
-							this.theArchiveDirectoryInputFileReader.BaseStream.Seek(entry.preloadBytesOffset, SeekOrigin.Begin);
-							byte[] preloadBytes = this.theArchiveDirectoryInputFileReader.ReadBytes((int)entry.preloadByteCount);
-							this.theOutputFileWriter.Write(preloadBytes);
+							theArchiveDirectoryInputFileReader.BaseStream.Seek(entry.preloadBytesOffset, SeekOrigin.Begin);
+							byte[] preloadBytes = theArchiveDirectoryInputFileReader.ReadBytes((int)entry.preloadByteCount);
+							theOutputFileWriter.Write(preloadBytes);
 						}
 						if (entry.archiveIndex == 0x7FFF && !entry.isVtmbVpk)
 						{
-							this.theInputFileReader.BaseStream.Seek(this.theVpkFileData.theDirectoryOffset + this.theVpkFileData.directoryLength + entry.dataOffset, SeekOrigin.Begin);
+							theInputFileReader.BaseStream.Seek(theVpkFileData.theDirectoryOffset + theVpkFileData.directoryLength + entry.dataOffset, SeekOrigin.Begin);
 						}
 						else
 						{
-							this.theInputFileReader.BaseStream.Seek(entry.dataOffset, SeekOrigin.Begin);
+							theInputFileReader.BaseStream.Seek(entry.dataOffset, SeekOrigin.Begin);
 						}
-						byte[] bytes = this.theInputFileReader.ReadBytes((int)entry.dataLength);
-						this.theOutputFileWriter.Write(bytes);
+						byte[] bytes = theInputFileReader.ReadBytes((int)entry.dataLength);
+						theOutputFileWriter.Write(bytes);
 					}
 					catch (Exception ex)
 					{
@@ -389,9 +389,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theOutputFileWriter != null)
+						if (theOutputFileWriter != null)
 						{
-							this.theOutputFileWriter.Close();
+							theOutputFileWriter.Close();
 						}
 					}
 				}

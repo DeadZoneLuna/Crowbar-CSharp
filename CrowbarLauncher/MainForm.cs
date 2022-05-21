@@ -108,7 +108,7 @@ namespace CrowbarLauncher
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			this.Init();
+			Init();
 		}
 
 

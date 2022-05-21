@@ -15,11 +15,11 @@ namespace Crowbar
 		{
 
 			// Set to -1 so versions without fileSize field will have this value.
-			this.fileSize = -1;
+			fileSize = -1;
 
-			this.theChecksumIsValid = true;
-			this.theMdlFileOnlyHasAnimations = false;
-			this.theUpAxisYCommandWasUsed = false;
+			theChecksumIsValid = true;
+			theMdlFileOnlyHasAnimations = false;
+			theUpAxisYCommandWasUsed = false;
 		}
 
 		public char[] id = new char[4];

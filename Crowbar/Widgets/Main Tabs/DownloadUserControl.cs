@@ -53,19 +53,19 @@ namespace Crowbar
 		{
 			MainCROWBAR.TheApp.InitAppInfo();
 
-			this.ItemIdTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DownloadItemIdOrLink", false, DataSourceUpdateMode.OnValidation);
+			ItemIdTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DownloadItemIdOrLink", false, DataSourceUpdateMode.OnValidation);
 
-			this.InitOutputPathComboBox();
-			this.DocumentsOutputPathTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DownloadOutputWorkPath", false, DataSourceUpdateMode.OnValidation);
-			this.UpdateOutputPathWidgets();
+			InitOutputPathComboBox();
+			DocumentsOutputPathTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DownloadOutputWorkPath", false, DataSourceUpdateMode.OnValidation);
+			UpdateOutputPathWidgets();
 
-			this.InitDownloadOptions();
-			this.UpdateExampleOutputFileNameTextBox();
+			InitDownloadOptions();
+			UpdateExampleOutputFileNameTextBox();
 
-			this.theBackgroundSteamPipe = new BackgroundSteamPipe();
+			theBackgroundSteamPipe = new BackgroundSteamPipe();
 
-			this.OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
 		}
@@ -76,20 +76,20 @@ namespace Crowbar
 
 			//Me.CancelDownload()
 
-			if (this.theBackgroundSteamPipe != null)
+			if (theBackgroundSteamPipe != null)
 			{
-				this.theBackgroundSteamPipe.Kill();
+				theBackgroundSteamPipe.Kill();
 			}
 
-			this.OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
 
-			this.FreeDownloadOptions();
+			FreeDownloadOptions();
 
-			this.FreeOutputPathComboBox();
+			FreeOutputPathComboBox();
 
-			this.ItemIdTextBox.DataBindings.Clear();
+			ItemIdTextBox.DataBindings.Clear();
 		}
 
 		private void InitOutputPathComboBox()
@@ -98,10 +98,10 @@ namespace Crowbar
 
 			try
 			{
-				this.OutputPathComboBox.DisplayMember = "Value";
-				this.OutputPathComboBox.ValueMember = "Key";
-				this.OutputPathComboBox.DataSource = anEnumList;
-				this.OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DownloadOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
+				OutputPathComboBox.DisplayMember = "Value";
+				OutputPathComboBox.ValueMember = "Key";
+				OutputPathComboBox.DataSource = anEnumList;
+				OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DownloadOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
 			}
 			catch (Exception ex)
 			{
@@ -111,25 +111,25 @@ namespace Crowbar
 
 		private void FreeOutputPathComboBox()
 		{
-			this.OutputPathComboBox.DataBindings.Clear();
+			OutputPathComboBox.DataBindings.Clear();
 		}
 
 		private void InitDownloadOptions()
 		{
-			this.UseIdCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadUseItemIdIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.PrependTitleCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadPrependItemTitleIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AppendDateTimeCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadAppendItemUpdateDateTimeIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.ReplaceSpacesWithUnderscoresCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadReplaceSpacesWithUnderscoresIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.ConvertToExpectedFileOrFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UseIdCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadUseItemIdIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			PrependTitleCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadPrependItemTitleIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AppendDateTimeCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadAppendItemUpdateDateTimeIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			ReplaceSpacesWithUnderscoresCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadReplaceSpacesWithUnderscoresIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			ConvertToExpectedFileOrFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void FreeDownloadOptions()
 		{
-			this.UseIdCheckBox.DataBindings.Clear();
-			this.PrependTitleCheckBox.DataBindings.Clear();
-			this.AppendDateTimeCheckBox.DataBindings.Clear();
-			this.ReplaceSpacesWithUnderscoresCheckBox.DataBindings.Clear();
-			this.ConvertToExpectedFileOrFolderCheckBox.DataBindings.Clear();
+			UseIdCheckBox.DataBindings.Clear();
+			PrependTitleCheckBox.DataBindings.Clear();
+			AppendDateTimeCheckBox.DataBindings.Clear();
+			ReplaceSpacesWithUnderscoresCheckBox.DataBindings.Clear();
+			ConvertToExpectedFileOrFolderCheckBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -139,14 +139,14 @@ namespace Crowbar
 		private void DownloadUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.ItemIdTextBox, this.OpenWorkshopPageButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.OutputPathTextBox, this.BrowseForOutputPathButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.DocumentsOutputPathTextBox, this.BrowseForOutputPathButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.DownloadProgressBar, this.DownloadProgressBar.Parent, true);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(ItemIdTextBox, OpenWorkshopPageButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(OutputPathTextBox, BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(DocumentsOutputPathTextBox, BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(DownloadProgressBar, DownloadProgressBar.Parent, true);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -156,7 +156,7 @@ namespace Crowbar
 
 		private void OpenWorkshopPageButton_Click(object sender, EventArgs e)
 		{
-			this.OpenWorkshopPage();
+			OpenWorkshopPage();
 		}
 
 		private void OutputPathTextBox_DragDrop(object sender, DragEventArgs e)
@@ -179,17 +179,17 @@ namespace Crowbar
 
 		private void OutputPathTextBox_Validated(object sender, EventArgs e)
 		{
-			this.UpdateOutputPathTextBox();
+			UpdateOutputPathTextBox();
 		}
 
 		private void BrowseForOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForOutputPath();
+			BrowseForOutputPath();
 		}
 
 		private void GotoOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.GotoOutputPath();
+			GotoOutputPath();
 		}
 
 		private void OptionsUseDefaultsButton_Click(object sender, EventArgs e)
@@ -199,27 +199,27 @@ namespace Crowbar
 
 		private void DownloadButton_Click(object sender, EventArgs e)
 		{
-			this.DownloadFromLink();
+			DownloadFromLink();
 		}
 
 		private void CancelDownloadButton_Click(object sender, EventArgs e)
 		{
-			this.CancelDownload();
+			CancelDownload();
 		}
 
 		private void UseInUnpackButton_Click(object sender, EventArgs e)
 		{
-			this.UseInUnpack();
+			UseInUnpack();
 		}
 
 		private void GotoDownloadedItemButton_Click(object sender, EventArgs e)
 		{
-			this.GotoDownloadedItem();
+			GotoDownloadedItem();
 		}
 
 		private void Timer1_Tick(object sender, EventArgs e)
 		{
-			this.LogTextBox.AppendText(".");
+			LogTextBox.AppendText(".");
 		}
 
 #endregion
@@ -230,23 +230,23 @@ namespace Crowbar
 		{
 			if (e.PropertyName == "DownloadOutputFolderOption")
 			{
-				this.UpdateOutputPathWidgets();
+				UpdateOutputPathWidgets();
 			}
 			else if (e.PropertyName == "DownloadUseItemIdIsChecked")
 			{
-				this.UpdateExampleOutputFileNameTextBox();
+				UpdateExampleOutputFileNameTextBox();
 			}
 			else if (e.PropertyName == "DownloadPrependItemTitleIsChecked")
 			{
-				this.UpdateExampleOutputFileNameTextBox();
+				UpdateExampleOutputFileNameTextBox();
 			}
 			else if (e.PropertyName == "DownloadAppendItemUpdateDateTimeIsChecked")
 			{
-				this.UpdateExampleOutputFileNameTextBox();
+				UpdateExampleOutputFileNameTextBox();
 			}
 			else if (e.PropertyName == "DownloadReplaceSpacesWithUnderscoresIsChecked")
 			{
-				this.UpdateExampleOutputFileNameTextBox();
+				UpdateExampleOutputFileNameTextBox();
 			}
 		}
 
@@ -264,7 +264,7 @@ namespace Crowbar
 		{
 			//Me.DownloadProgressBar.Text = e.BytesReceived.ToString("N0") + " / " + e.TotalBytesToReceive.ToString("N0") + " bytes   " + e.ProgressPercentage.ToString() + " %"
 			//Me.DownloadProgressBar.Value = CInt(e.BytesReceived * Me.DownloadProgressBar.Maximum / e.TotalBytesToReceive)
-			this.UpdateProgressBar(e.BytesReceived, e.TotalBytesToReceive);
+			UpdateProgressBar(e.BytesReceived, e.TotalBytesToReceive);
 		}
 
 		private void WebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -273,9 +273,9 @@ namespace Crowbar
 
 			if (e.Cancelled)
 			{
-				this.LogTextBox.AppendText("Download cancelled." + "\r\n");
-				this.DownloadProgressBar.Text = "";
-				this.DownloadProgressBar.Value = 0;
+				LogTextBox.AppendText("Download cancelled." + "\r\n");
+				DownloadProgressBar.Text = "";
+				DownloadProgressBar.Value = 0;
 
 				if (File.Exists(pathFileName))
 				{
@@ -285,7 +285,7 @@ namespace Crowbar
 					}
 					catch (Exception ex)
 					{
-						this.LogTextBox.AppendText("WARNING: Problem deleting incomplete downloaded file." + "\r\n");
+						LogTextBox.AppendText("WARNING: Problem deleting incomplete downloaded file." + "\r\n");
 					}
 				}
 			}
@@ -293,41 +293,41 @@ namespace Crowbar
 			{
 				if (File.Exists(pathFileName))
 				{
-					this.LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded file: \"" + pathFileName + "\"" + "\r\n");
-					this.DownloadedItemTextBox.Text = pathFileName;
+					LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded file: \"" + pathFileName + "\"" + "\r\n");
+					DownloadedItemTextBox.Text = pathFileName;
 				}
 				else
 				{
-					this.LogTextBox.AppendText("Download failed." + "\r\n");
+					LogTextBox.AppendText("Download failed." + "\r\n");
 				}
 			}
 
-			this.theWebClient.DownloadProgressChanged -= this.WebClient_DownloadProgressChanged;
-			this.theWebClient.DownloadFileCompleted -= this.WebClient_DownloadFileCompleted;
-			this.theWebClient = null;
+			theWebClient.DownloadProgressChanged -= WebClient_DownloadProgressChanged;
+			theWebClient.DownloadFileCompleted -= WebClient_DownloadFileCompleted;
+			theWebClient = null;
 
 			//Me.DownloadButton.Enabled = True
 			//Me.CancelDownloadButton.Enabled = False
 
 			if (!e.Cancelled && File.Exists(pathFileName))
 			{
-				this.ProcessFolderOrFileAfterDownload(ref pathFileName);
+				ProcessFolderOrFileAfterDownload(ref pathFileName);
 			}
 
-			this.DownloadButton.Enabled = true;
-			this.CancelDownloadButton.Enabled = false;
+			DownloadButton.Enabled = true;
+			CancelDownloadButton.Enabled = false;
 		}
 
 		private void DownloadItem_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 			else if (e.ProgressPercentage == 1)
 			{
 				BackgroundSteamPipe.DownloadItemOutputInfo outputInfo = (BackgroundSteamPipe.DownloadItemOutputInfo)e.UserState;
-				this.theDownloadBytesReceived += outputInfo.BytesReceived;
+				theDownloadBytesReceived += outputInfo.BytesReceived;
 				//Dim progressPercentage As Integer
 				//'If Me.theDownloadBytesReceived < outputInfo.TotalBytesToReceive Then
 				//progressPercentage = CInt(Me.theDownloadBytesReceived * Me.DownloadProgressBar.Maximum / outputInfo.TotalBytesToReceive)
@@ -336,7 +336,7 @@ namespace Crowbar
 				//'End If
 				//Me.DownloadProgressBar.Text = Me.theDownloadBytesReceived.ToString() + " / " + outputInfo.TotalBytesToReceive.ToString() + "   " + progressPercentage.ToString() + " %"
 				//Me.DownloadProgressBar.Value = progressPercentage
-				this.UpdateProgressBar(this.theDownloadBytesReceived, outputInfo.TotalBytesToReceive);
+				UpdateProgressBar(theDownloadBytesReceived, outputInfo.TotalBytesToReceive);
 			}
 		}
 
@@ -348,9 +348,9 @@ namespace Crowbar
 
 			if (e.Cancelled)
 			{
-				this.LogTextBox.AppendText("Download cancelled." + "\r\n");
-				this.DownloadProgressBar.Text = "";
-				this.DownloadProgressBar.Value = 0;
+				LogTextBox.AppendText("Download cancelled." + "\r\n");
+				DownloadProgressBar.Text = "";
+				DownloadProgressBar.Value = 0;
 			}
 			else
 			{
@@ -359,11 +359,11 @@ namespace Crowbar
 				{
 					// Me.theDownloadBytesReceived does not have the full byte count and outputInfo.TotalBytesToReceive = 0.
 					//Me.UpdateProgressBar(Me.theDownloadBytesReceived, outputInfo.TotalBytesToReceive)
-					this.UpdateProgressBar(outputInfo.ContentFile.Length, outputInfo.ContentFile.Length);
+					UpdateProgressBar(outputInfo.ContentFile.Length, outputInfo.ContentFile.Length);
 
-					string outputPath = this.GetOutputPath();
+					string outputPath = GetOutputPath();
 
-					string outputFileName = this.GetOutputFileName(outputInfo.ItemTitle, outputInfo.PublishedItemID, outputInfo.ContentFolderOrFileName, outputInfo.ItemUpdated_Text);
+					string outputFileName = GetOutputFileName(outputInfo.ItemTitle, outputInfo.PublishedItemID, outputInfo.ContentFolderOrFileName, outputInfo.ItemUpdated_Text);
 
 					outputPathFileName = Path.Combine(outputPath, outputFileName);
 					outputPathFileName = FileManager.GetTestedPathFileName(outputPathFileName);
@@ -371,20 +371,20 @@ namespace Crowbar
 					File.WriteAllBytes(outputPathFileName, outputInfo.ContentFile);
 					if (File.Exists(outputPathFileName))
 					{
-						this.LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded file: \"" + outputPathFileName + "\"" + "\r\n");
-						this.DownloadedItemTextBox.Text = outputPathFileName;
+						LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded file: \"" + outputPathFileName + "\"" + "\r\n");
+						DownloadedItemTextBox.Text = outputPathFileName;
 						//Me.ProcessFolderOrFileAfterDownload(outputPathFileName)
 					}
 					else
 					{
-						this.LogTextBox.AppendText("Download failed." + "\r\n");
+						LogTextBox.AppendText("Download failed." + "\r\n");
 					}
 				}
 				else if (outputInfo.Result == "success_SteamUGC")
 				{
-					string outputPath = this.GetOutputPath();
+					string outputPath = GetOutputPath();
 
-					string outputFolder = this.GetOutputFileName(outputInfo.ItemTitle, outputInfo.PublishedItemID, outputInfo.ContentFolderOrFileName, outputInfo.ItemUpdated_Text);
+					string outputFolder = GetOutputFileName(outputInfo.ItemTitle, outputInfo.PublishedItemID, outputInfo.ContentFolderOrFileName, outputInfo.ItemUpdated_Text);
 
 					targetOutputPath = Path.Combine(outputPath, outputFolder);
 					targetOutputPath = FileManager.GetTestedPath(targetOutputPath);
@@ -411,17 +411,17 @@ namespace Crowbar
 						if (Directory.Exists(targetOutputPath))
 						{
 							//Me.ProcessFolderOrFileAfterDownload(targetOutputPath)
-							this.LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded folder: \"" + targetOutputPath + "\"" + "\r\n");
-							this.DownloadedItemTextBox.Text = targetOutputPath;
+							LogTextBox.AppendText("Download complete." + "\r\n" + "Downloaded folder: \"" + targetOutputPath + "\"" + "\r\n");
+							DownloadedItemTextBox.Text = targetOutputPath;
 						}
 						else
 						{
-							this.LogTextBox.AppendText("Download failed." + "\r\n");
+							LogTextBox.AppendText("Download failed." + "\r\n");
 						}
 					}
 					else
 					{
-						this.LogTextBox.AppendText("Download failed." + "\r\n");
+						LogTextBox.AppendText("Download failed." + "\r\n");
 					}
 				}
 			}
@@ -435,7 +435,7 @@ namespace Crowbar
 				{
 					if (File.Exists(outputPathFileName))
 					{
-						this.ProcessFolderOrFileAfterDownload(ref outputPathFileName);
+						ProcessFolderOrFileAfterDownload(ref outputPathFileName);
 					}
 				}
 				else if (outputInfo.Result == "success_SteamUGC")
@@ -448,8 +448,8 @@ namespace Crowbar
 							{
 								//NOTE: Use this temp var because appID as a ByRef var can not be used in a lambda expression used in next line.
 								Steamworks.AppId_t steamAppID = new Steamworks.AppId_t(outputInfo.AppID);
-								this.theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos.First((info) => info.ID == steamAppID);
-								this.ProcessFolderOrFileAfterDownload(ref targetOutputPath);
+								theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos.First((info) => info.ID == steamAppID);
+								ProcessFolderOrFileAfterDownload(ref targetOutputPath);
 							}
 						}
 						catch (Exception ex)
@@ -460,15 +460,15 @@ namespace Crowbar
 				}
 			}
 
-			this.DownloadButton.Enabled = true;
-			this.CancelDownloadButton.Enabled = false;
+			DownloadButton.Enabled = true;
+			CancelDownloadButton.Enabled = false;
 		}
 
 		private void UnsubscribeItem_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 		}
 
@@ -492,7 +492,7 @@ namespace Crowbar
 
 		private void OpenWorkshopPage()
 		{
-			string itemIdOrLink = this.ItemIdTextBox.Text;
+			string itemIdOrLink = ItemIdTextBox.Text;
 			string itemlink = "";
 			if (itemIdOrLink.StartsWith(AppConstants.WorkshopLinkStart))
 			{
@@ -516,7 +516,7 @@ namespace Crowbar
 		{
 			if (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder)
 			{
-				if (string.IsNullOrEmpty(this.OutputPathTextBox.Text))
+				if (string.IsNullOrEmpty(OutputPathTextBox.Text))
 				{
 					try
 					{
@@ -532,9 +532,9 @@ namespace Crowbar
 
 		private void UpdateOutputPathWidgets()
 		{
-			this.DocumentsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.DocumentsFolder);
-			this.OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder);
-			this.BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder);
+			DocumentsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.DocumentsFolder);
+			OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder);
+			BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder);
 			//Me.GotoOutputPathButton.Enabled = (TheApp.Settings.DownloadOutputFolderOption = DownloadOutputPathOptions.WorkFolder)
 		}
 
@@ -576,7 +576,7 @@ namespace Crowbar
 			//Else
 			if (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.DocumentsFolder)
 			{
-				FileManager.OpenWindowsExplorer(this.DocumentsOutputPathTextBox.Text);
+				FileManager.OpenWindowsExplorer(DocumentsOutputPathTextBox.Text);
 			}
 			else if (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder)
 			{
@@ -586,61 +586,61 @@ namespace Crowbar
 
 		private void UseInUnpack()
 		{
-			string extension = Path.GetExtension(this.DownloadedItemTextBox.Text);
+			string extension = Path.GetExtension(DownloadedItemTextBox.Text);
 			if (extension == ".gma" || extension == ".vpk")
 			{
 
 			}
-			MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = this.DownloadedItemTextBox.Text;
+			MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = DownloadedItemTextBox.Text;
 		}
 
 		private void GotoDownloadedItem()
 		{
-			if (!string.IsNullOrEmpty(this.DownloadedItemTextBox.Text))
+			if (!string.IsNullOrEmpty(DownloadedItemTextBox.Text))
 			{
-				FileManager.OpenWindowsExplorer(this.DownloadedItemTextBox.Text);
+				FileManager.OpenWindowsExplorer(DownloadedItemTextBox.Text);
 			}
 		}
 
 		private void DownloadFromLink()
 		{
-			this.LogTextBox.Text = "";
-			this.DownloadProgressBar.Text = "";
-			this.DownloadProgressBar.Value = 0;
-			this.theDownloadBytesReceived = 0;
-			this.DownloadedItemTextBox.Text = "";
-			this.DownloadButton.Enabled = false;
-			this.CancelDownloadButton.Enabled = true;
+			LogTextBox.Text = "";
+			DownloadProgressBar.Text = "";
+			DownloadProgressBar.Value = 0;
+			theDownloadBytesReceived = 0;
+			DownloadedItemTextBox.Text = "";
+			DownloadButton.Enabled = false;
+			CancelDownloadButton.Enabled = true;
 
 			string itemLink = "";
-			string itemID = this.GetItemID();
+			string itemID = GetItemID();
 			uint appID = 0;
 			if (itemID == "0")
 			{
-				this.LogTextBox.AppendText("ERROR: Item ID is invalid." + "\r\n");
+				LogTextBox.AppendText("ERROR: Item ID is invalid." + "\r\n");
 				return;
 			}
 			else
 			{
 				//Me.LogTextBox.AppendText("Getting item content download link." + vbCrLf)
-				this.LogTextBox.AppendText("Getting item content download link...");
+				LogTextBox.AppendText("Getting item content download link...");
 				Application.DoEvents();
-				this.Timer1.Interval = 1000;
-				this.Timer1.Start();
-				itemLink = this.GetDownloadLink(itemID, ref appID);
-				this.Timer1.Stop();
+				Timer1.Interval = 1000;
+				Timer1.Start();
+				itemLink = GetDownloadLink(itemID, ref appID);
+				Timer1.Stop();
 			}
 			if (!string.IsNullOrEmpty(itemLink))
 			{
-				this.LogTextBox.AppendText("Item content download link found. Downloading file via web." + "\r\n");
-				this.DownloadViaWeb(itemLink, this.theItemContentPathFileName);
+				LogTextBox.AppendText("Item content download link found. Downloading file via web." + "\r\n");
+				DownloadViaWeb(itemLink, theItemContentPathFileName);
 			}
 			else
 			{
 				//Me.LogTextBox.AppendText("Item content download link not found. Probably an item that uses newer Steam API or a Friends-only item not downloadable via web." + vbCrLf)
-				this.LogTextBox.AppendText("Item content download link not found. Downloading file via Steam." + "\r\n");
+				LogTextBox.AppendText("Item content download link not found. Downloading file via Steam." + "\r\n");
 
-				string outputPath = this.GetOutputPath();
+				string outputPath = GetOutputPath();
 
 				//Dim outputFolder As String
 				//outputFolder = Me.GetOutputFileName(outputInfo.ItemTitle, outputInfo.PublishedItemID, outputInfo.ContentFolderOrFileName, outputInfo.ItemUpdated_Text)
@@ -651,15 +651,15 @@ namespace Crowbar
 				//------
 				targetPath = outputPath;
 
-				this.DownloadViaSteam(appID, itemID, targetPath);
+				DownloadViaSteam(appID, itemID, targetPath);
 			}
 		}
 
 		private void CancelDownload()
 		{
-			if (this.theWebClient != null)
+			if (theWebClient != null)
 			{
-				this.theWebClient.CancelAsync();
+				theWebClient.CancelAsync();
 			}
 		}
 
@@ -669,7 +669,7 @@ namespace Crowbar
 			string itemID = "0";
 			try
 			{
-				Uri uri = new Uri(this.ItemIdTextBox.Text);
+				Uri uri = new Uri(ItemIdTextBox.Text);
 				string querystring = uri.Query;
 				//Dim separators() = {"="}
 				//id = querystring.Split()
@@ -678,7 +678,7 @@ namespace Crowbar
 			}
 			catch (UriFormatException ex1)
 			{
-				string text = this.ItemIdTextBox.Text;
+				string text = ItemIdTextBox.Text;
 				itemID = "";
 				int pos = text.IndexOf("id=");
 				if (pos >= 0)
@@ -730,7 +730,7 @@ namespace Crowbar
 		private string GetDownloadLink(string itemID, ref uint appID)
 		{
 			string itemLink = "";
-			this.theItemContentPathFileName = "";
+			theItemContentPathFileName = "";
 
 			//Dim downloadHasStarted As Boolean = SteamUGC.DownloadItem(371699674, True)
 			//If downloadHasStarted Then
@@ -789,30 +789,30 @@ namespace Crowbar
 				{
 					itemLink = file_url;
 
-					this.theItemTitle = root.response.publishedfiledetails[0].title;
+					theItemTitle = root.response.publishedfiledetails[0].title;
 					string fileName = root.response.publishedfiledetails[0].filename;
-					this.theItemContentPathFileName = fileName;
-					this.theItemIdText = root.response.publishedfiledetails[0].publishedfileid;
-					this.theItemTimeUpdatedText = root.response.publishedfiledetails[0].time_updated.ToString();
+					theItemContentPathFileName = fileName;
+					theItemIdText = root.response.publishedfiledetails[0].publishedfileid;
+					theItemTimeUpdatedText = root.response.publishedfiledetails[0].time_updated.ToString();
 				}
 
 				appID = Convert.ToUInt32(root.response.publishedfiledetails[0].consumer_app_id);
-				this.theAppIdText = appID.ToString();
-				this.theSteamAppInfo = null;
+				theAppIdText = appID.ToString();
+				theSteamAppInfo = null;
 				try
 				{
 					if (MainCROWBAR.TheApp.SteamAppInfos.Count > 0)
 					{
 						//NOTE: Use this temp var because appID as a ByRef var can not be used in a lambda expression used in next line.
 						Steamworks.AppId_t steamAppID = new Steamworks.AppId_t(appID);
-						this.theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos.First((info) => info.ID == steamAppID);
+						theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos.First((info) => info.ID == steamAppID);
 					}
 				}
 				catch (Exception ex)
 				{
 					int debug = 4242;
 				}
-				if (this.theSteamAppInfo == null)
+				if (theSteamAppInfo == null)
 				{
 					//NOTE: Value was not found, so unable to download.
 					appID = 0;
@@ -833,7 +833,7 @@ namespace Crowbar
 					response.Close();
 				}
 
-				this.LogTextBox.AppendText("\r\n");
+				LogTextBox.AppendText("\r\n");
 			}
 
 			return itemLink;
@@ -843,31 +843,31 @@ namespace Crowbar
 		{
 			Uri uri = new Uri(link);
 
-			string outputPath = this.GetOutputPath();
+			string outputPath = GetOutputPath();
 			try
 			{
 				FileManager.CreatePath(outputPath);
 			}
 			catch (Exception ex)
 			{
-				this.LogTextBox.AppendText("Crowbar tried to create folder path \"" + outputPath + "\", but Windows gave this message: " + ex.Message + "\r\n");
+				LogTextBox.AppendText("Crowbar tried to create folder path \"" + outputPath + "\", but Windows gave this message: " + ex.Message + "\r\n");
 				return;
 			}
 
-			string outputFileName = this.GetOutputFileName(this.theItemTitle, this.theItemIdText, givenFileName, this.theItemTimeUpdatedText);
+			string outputFileName = GetOutputFileName(theItemTitle, theItemIdText, givenFileName, theItemTimeUpdatedText);
 
 			string outputPathFileName = Path.Combine(outputPath, outputFileName);
 			outputPathFileName = FileManager.GetTestedPathFileName(outputPathFileName);
 
-			this.LogTextBox.AppendText("Downloading workshop item as: \"" + outputPathFileName + "\"" + "\r\n");
+			LogTextBox.AppendText("Downloading workshop item as: \"" + outputPathFileName + "\"" + "\r\n");
 
 			//Me.DownloadButton.Enabled = False
 			//Me.CancelDownloadButton.Enabled = True
 
-			this.theWebClient = new WebClient();
-			this.theWebClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
-			this.theWebClient.DownloadFileCompleted += WebClient_DownloadFileCompleted;
-			this.theWebClient.DownloadFileAsync(uri, outputPathFileName, outputPathFileName);
+			theWebClient = new WebClient();
+			theWebClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
+			theWebClient.DownloadFileCompleted += WebClient_DownloadFileCompleted;
+			theWebClient.DownloadFileAsync(uri, outputPathFileName, outputPathFileName);
 		}
 
 		private void DownloadViaSteam(uint appID, string itemID, string targetPath)
@@ -881,7 +881,7 @@ namespace Crowbar
 			inputInfo.AppID = appID;
 			inputInfo.PublishedItemID = itemID;
 			inputInfo.TargetPath = targetPath;
-			this.theBackgroundSteamPipe.DownloadItem(this.DownloadItem_ProgressChanged, this.DownloadItem_RunWorkerCompleted, inputInfo);
+			theBackgroundSteamPipe.DownloadItem(DownloadItem_ProgressChanged, DownloadItem_RunWorkerCompleted, inputInfo);
 		}
 
 		private void UnsubscribeItem(uint appID, string itemID)
@@ -889,7 +889,7 @@ namespace Crowbar
 			BackgroundSteamPipe.DownloadItemInputInfo inputInfo = new BackgroundSteamPipe.DownloadItemInputInfo();
 			inputInfo.AppID = appID;
 			inputInfo.PublishedItemID = itemID;
-			this.theBackgroundSteamPipe.UnsubscribeItem(this.UnsubscribeItem_ProgressChanged, this.UnsubscribeItem_RunWorkerCompleted, inputInfo);
+			theBackgroundSteamPipe.UnsubscribeItem(UnsubscribeItem_ProgressChanged, UnsubscribeItem_RunWorkerCompleted, inputInfo);
 		}
 
 		private string GetOutputPath()
@@ -898,7 +898,7 @@ namespace Crowbar
 
 			if (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.DocumentsFolder)
 			{
-				outputPath = this.DocumentsOutputPathTextBox.Text;
+				outputPath = DocumentsOutputPathTextBox.Text;
 			}
 			else if (MainCROWBAR.TheApp.Settings.DownloadOutputFolderOption == AppEnums.DownloadOutputPathOptions.WorkFolder)
 			{
@@ -912,7 +912,7 @@ namespace Crowbar
 
 		private void UpdateExampleOutputFileNameTextBox()
 		{
-			this.ExampleOutputFileNameTextBox.Text = this.GetOutputFileName("Example Title With Spaces", "00000000", "ExampleFileName.vpk", "0");
+			ExampleOutputFileNameTextBox.Text = GetOutputFileName("Example Title With Spaces", "00000000", "ExampleFileName.vpk", "0");
 		}
 
 		private string GetOutputFileName(string givenTitle, string givenID, string givenFileName, string givenTimeUpdatedText)
@@ -969,9 +969,9 @@ namespace Crowbar
 		{
 			try
 			{
-				int progressPercentage = Convert.ToInt32(bytesReceived * this.DownloadProgressBar.Maximum / (double)totalBytesToReceive);
-				this.DownloadProgressBar.Text = bytesReceived.ToString("N0") + " / " + totalBytesToReceive.ToString("N0") + " bytes   " + progressPercentage.ToString() + " %";
-				this.DownloadProgressBar.Value = progressPercentage;
+				int progressPercentage = Convert.ToInt32(bytesReceived * DownloadProgressBar.Maximum / (double)totalBytesToReceive);
+				DownloadProgressBar.Text = bytesReceived.ToString("N0") + " / " + totalBytesToReceive.ToString("N0") + " bytes   " + progressPercentage.ToString() + " %";
+				DownloadProgressBar.Value = progressPercentage;
 			}
 			catch (Exception ex)
 			{
@@ -981,24 +981,24 @@ namespace Crowbar
 
 		private void ProcessFolderOrFileAfterDownload(ref string pathFileName)
 		{
-			if (this.theSteamAppInfo != null && MainCROWBAR.TheApp.Settings.DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked)
+			if (theSteamAppInfo != null && MainCROWBAR.TheApp.Settings.DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked)
 			{
 				try
 				{
 					//Me.DownloadButton.Enabled = False
 					//Me.CancelDownloadButton.Enabled = True
 
-					this.theProcessAfterDownloadWorker = new BackgroundWorkerEx();
-					this.theProcessAfterDownloadWorker.WorkerSupportsCancellation = true;
-					this.theProcessAfterDownloadWorker.WorkerReportsProgress = true;
-					this.theProcessAfterDownloadWorker.DoWork += ProcessAfterDownloadWorker_DoWork;
-					this.theProcessAfterDownloadWorker.ProgressChanged += ProcessAfterDownloadWorker_ProgressChanged;
-					this.theProcessAfterDownloadWorker.RunWorkerCompleted += ProcessAfterDownloadWorker_RunWorkerCompleted;
-					this.theProcessAfterDownloadWorker.RunWorkerAsync(pathFileName);
+					theProcessAfterDownloadWorker = new BackgroundWorkerEx();
+					theProcessAfterDownloadWorker.WorkerSupportsCancellation = true;
+					theProcessAfterDownloadWorker.WorkerReportsProgress = true;
+					theProcessAfterDownloadWorker.DoWork += ProcessAfterDownloadWorker_DoWork;
+					theProcessAfterDownloadWorker.ProgressChanged += ProcessAfterDownloadWorker_ProgressChanged;
+					theProcessAfterDownloadWorker.RunWorkerCompleted += ProcessAfterDownloadWorker_RunWorkerCompleted;
+					theProcessAfterDownloadWorker.RunWorkerAsync(pathFileName);
 				}
 				catch (Exception ex)
 				{
-					this.LogTextBox.AppendText("ERROR: " + ex.Message + "\r\n");
+					LogTextBox.AppendText("ERROR: " + ex.Message + "\r\n");
 				}
 			}
 		}
@@ -1007,7 +1007,7 @@ namespace Crowbar
 		private void ProcessAfterDownloadWorker_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			string givenPathFileName = (e.Argument == null ? null : Convert.ToString(e.Argument));
-			string convertedPathFileName = this.theSteamAppInfo.ProcessFileAfterDownload(givenPathFileName, this.theProcessAfterDownloadWorker);
+			string convertedPathFileName = theSteamAppInfo.ProcessFileAfterDownload(givenPathFileName, theProcessAfterDownloadWorker);
 			if (convertedPathFileName == givenPathFileName)
 			{
 				e.Result = "";
@@ -1022,7 +1022,7 @@ namespace Crowbar
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 				//ElseIf e.ProgressPercentage = 1 Then
 				//	Me.LogTextBox.AppendText(vbTab + CStr(e.UserState))
 			}
@@ -1038,15 +1038,15 @@ namespace Crowbar
 				string pathFileName = (e.Result == null ? null : Convert.ToString(e.Result));
 				if (!string.IsNullOrEmpty(pathFileName))
 				{
-					this.LogTextBox.AppendText("Converted to file: \"" + pathFileName + "\"" + "\r\n");
+					LogTextBox.AppendText("Converted to file: \"" + pathFileName + "\"" + "\r\n");
 					//Me.DownloadedItemTextBox.Text = pathFileName
 				}
 			}
 
-			this.theProcessAfterDownloadWorker.DoWork -= ProcessAfterDownloadWorker_DoWork;
-			this.theProcessAfterDownloadWorker.ProgressChanged -= ProcessAfterDownloadWorker_ProgressChanged;
-			this.theProcessAfterDownloadWorker.RunWorkerCompleted -= ProcessAfterDownloadWorker_RunWorkerCompleted;
-			this.theProcessAfterDownloadWorker = null;
+			theProcessAfterDownloadWorker.DoWork -= ProcessAfterDownloadWorker_DoWork;
+			theProcessAfterDownloadWorker.ProgressChanged -= ProcessAfterDownloadWorker_ProgressChanged;
+			theProcessAfterDownloadWorker.RunWorkerCompleted -= ProcessAfterDownloadWorker_RunWorkerCompleted;
+			theProcessAfterDownloadWorker = null;
 
 			//Me.DownloadButton.Enabled = True
 			//Me.CancelDownloadButton.Enabled = False

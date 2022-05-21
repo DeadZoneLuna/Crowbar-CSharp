@@ -14,12 +14,12 @@ namespace Crowbar
 		public SourceMdlFileData()
 		{
 			//NOTE: Set an extremely large number so that the calculations later will work well.
-			this.theSectionFrameMinFrameCount = 2000000;
+			theSectionFrameMinFrameCount = 2000000;
 
-			this.theMdlFileOnlyHasAnimations = false;
-			this.theFirstAnimationDesc = null;
-			this.theFirstAnimationDescFrameLines = new SortedList<int, AnimationFrameLine>();
-			this.theWeightLists = new List<SourceMdlWeightList>();
+			theMdlFileOnlyHasAnimations = false;
+			theFirstAnimationDesc = null;
+			theFirstAnimationDescFrameLines = new SortedList<int, AnimationFrameLine>();
+			theWeightLists = new List<SourceMdlWeightList>();
 		}
 
 		//FROM: SourceEngine2006_source\public\studio.h

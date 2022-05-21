@@ -13,13 +13,13 @@ namespace Crowbar
 	{
 		public SourceMdlFileData14()
 		{
-			this.theChecksumIsValid = false;
+			theChecksumIsValid = false;
 
-			this.eyePosition = new SourceVector();
-			this.hullMinPosition = new SourceVector();
-			this.hullMaxPosition = new SourceVector();
-			this.viewBoundingBoxMinPosition = new SourceVector();
-			this.viewBoundingBoxMaxPosition = new SourceVector();
+			eyePosition = new SourceVector();
+			hullMinPosition = new SourceVector();
+			hullMaxPosition = new SourceVector();
+			viewBoundingBoxMinPosition = new SourceVector();
+			viewBoundingBoxMaxPosition = new SourceVector();
 		}
 
 		public char[] name = new char[64];

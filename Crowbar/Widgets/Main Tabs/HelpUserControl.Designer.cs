@@ -39,180 +39,180 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.TutorialLinkLabel = new System.Windows.Forms.LinkLabel();
-			this.ContentsLinkLabel = new System.Windows.Forms.LinkLabel();
-			this.IndexLinkLabel = new System.Windows.Forms.LinkLabel();
-			this.TipsLinkLabel = new System.Windows.Forms.LinkLabel();
-			this.GroupBox1 = new System.Windows.Forms.GroupBox();
-			this.Label4 = new System.Windows.Forms.Label();
-			this.Label3 = new System.Windows.Forms.Label();
-			this.Label2 = new System.Windows.Forms.Label();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.Label5 = new System.Windows.Forms.Label();
-			this.Label6 = new System.Windows.Forms.Label();
-			this.CrowbarGuideButton = new System.Windows.Forms.Button();
-			this.GroupBox1.SuspendLayout();
-			this.SuspendLayout();
+			TutorialLinkLabel = new System.Windows.Forms.LinkLabel();
+			ContentsLinkLabel = new System.Windows.Forms.LinkLabel();
+			IndexLinkLabel = new System.Windows.Forms.LinkLabel();
+			TipsLinkLabel = new System.Windows.Forms.LinkLabel();
+			GroupBox1 = new System.Windows.Forms.GroupBox();
+			Label4 = new System.Windows.Forms.Label();
+			Label3 = new System.Windows.Forms.Label();
+			Label2 = new System.Windows.Forms.Label();
+			Label1 = new System.Windows.Forms.Label();
+			Label5 = new System.Windows.Forms.Label();
+			Label6 = new System.Windows.Forms.Label();
+			CrowbarGuideButton = new System.Windows.Forms.Button();
+			GroupBox1.SuspendLayout();
+			SuspendLayout();
 			//
 			//TutorialLinkLabel
 			//
-			this.TutorialLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
-			this.TutorialLinkLabel.AutoSize = true;
-			this.TutorialLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.TutorialLinkLabel.LinkColor = System.Drawing.Color.Green;
-			this.TutorialLinkLabel.Location = new System.Drawing.Point(6, 16);
-			this.TutorialLinkLabel.Name = "TutorialLinkLabel";
-			this.TutorialLinkLabel.Size = new System.Drawing.Size(84, 25);
-			this.TutorialLinkLabel.TabIndex = 1;
-			this.TutorialLinkLabel.TabStop = true;
-			this.TutorialLinkLabel.Text = "Tutorial";
-			this.TutorialLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
+			TutorialLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
+			TutorialLinkLabel.AutoSize = true;
+			TutorialLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			TutorialLinkLabel.LinkColor = System.Drawing.Color.Green;
+			TutorialLinkLabel.Location = new System.Drawing.Point(6, 16);
+			TutorialLinkLabel.Name = "TutorialLinkLabel";
+			TutorialLinkLabel.Size = new System.Drawing.Size(84, 25);
+			TutorialLinkLabel.TabIndex = 1;
+			TutorialLinkLabel.TabStop = true;
+			TutorialLinkLabel.Text = "Tutorial";
+			TutorialLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
 			//
 			//ContentsLinkLabel
 			//
-			this.ContentsLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
-			this.ContentsLinkLabel.AutoSize = true;
-			this.ContentsLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.ContentsLinkLabel.LinkColor = System.Drawing.Color.Green;
-			this.ContentsLinkLabel.Location = new System.Drawing.Point(6, 41);
-			this.ContentsLinkLabel.Name = "ContentsLinkLabel";
-			this.ContentsLinkLabel.Size = new System.Drawing.Size(98, 25);
-			this.ContentsLinkLabel.TabIndex = 2;
-			this.ContentsLinkLabel.TabStop = true;
-			this.ContentsLinkLabel.Text = "Contents";
-			this.ContentsLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
+			ContentsLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
+			ContentsLinkLabel.AutoSize = true;
+			ContentsLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			ContentsLinkLabel.LinkColor = System.Drawing.Color.Green;
+			ContentsLinkLabel.Location = new System.Drawing.Point(6, 41);
+			ContentsLinkLabel.Name = "ContentsLinkLabel";
+			ContentsLinkLabel.Size = new System.Drawing.Size(98, 25);
+			ContentsLinkLabel.TabIndex = 2;
+			ContentsLinkLabel.TabStop = true;
+			ContentsLinkLabel.Text = "Contents";
+			ContentsLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
 			//
 			//IndexLinkLabel
 			//
-			this.IndexLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
-			this.IndexLinkLabel.AutoSize = true;
-			this.IndexLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.IndexLinkLabel.LinkColor = System.Drawing.Color.Green;
-			this.IndexLinkLabel.Location = new System.Drawing.Point(6, 66);
-			this.IndexLinkLabel.Name = "IndexLinkLabel";
-			this.IndexLinkLabel.Size = new System.Drawing.Size(64, 25);
-			this.IndexLinkLabel.TabIndex = 3;
-			this.IndexLinkLabel.TabStop = true;
-			this.IndexLinkLabel.Text = "Index";
-			this.IndexLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
+			IndexLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
+			IndexLinkLabel.AutoSize = true;
+			IndexLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			IndexLinkLabel.LinkColor = System.Drawing.Color.Green;
+			IndexLinkLabel.Location = new System.Drawing.Point(6, 66);
+			IndexLinkLabel.Name = "IndexLinkLabel";
+			IndexLinkLabel.Size = new System.Drawing.Size(64, 25);
+			IndexLinkLabel.TabIndex = 3;
+			IndexLinkLabel.TabStop = true;
+			IndexLinkLabel.Text = "Index";
+			IndexLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
 			//
 			//TipsLinkLabel
 			//
-			this.TipsLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
-			this.TipsLinkLabel.AutoSize = true;
-			this.TipsLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.TipsLinkLabel.LinkColor = System.Drawing.Color.Green;
-			this.TipsLinkLabel.Location = new System.Drawing.Point(6, 91);
-			this.TipsLinkLabel.Name = "TipsLinkLabel";
-			this.TipsLinkLabel.Size = new System.Drawing.Size(53, 25);
-			this.TipsLinkLabel.TabIndex = 4;
-			this.TipsLinkLabel.TabStop = true;
-			this.TipsLinkLabel.Text = "Tips";
-			this.TipsLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
+			TipsLinkLabel.ActiveLinkColor = System.Drawing.Color.Lime;
+			TipsLinkLabel.AutoSize = true;
+			TipsLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			TipsLinkLabel.LinkColor = System.Drawing.Color.Green;
+			TipsLinkLabel.Location = new System.Drawing.Point(6, 91);
+			TipsLinkLabel.Name = "TipsLinkLabel";
+			TipsLinkLabel.Size = new System.Drawing.Size(53, 25);
+			TipsLinkLabel.TabIndex = 4;
+			TipsLinkLabel.TabStop = true;
+			TipsLinkLabel.Text = "Tips";
+			TipsLinkLabel.VisitedLinkColor = System.Drawing.Color.Green;
 			//
 			//GroupBox1
 			//
-			this.GroupBox1.Controls.Add(this.Label4);
-			this.GroupBox1.Controls.Add(this.Label3);
-			this.GroupBox1.Controls.Add(this.Label2);
-			this.GroupBox1.Controls.Add(this.Label1);
-			this.GroupBox1.Controls.Add(this.TutorialLinkLabel);
-			this.GroupBox1.Controls.Add(this.TipsLinkLabel);
-			this.GroupBox1.Controls.Add(this.ContentsLinkLabel);
-			this.GroupBox1.Controls.Add(this.IndexLinkLabel);
-			this.GroupBox1.Location = new System.Drawing.Point(49, 388);
-			this.GroupBox1.Name = "GroupBox1";
-			this.GroupBox1.Size = new System.Drawing.Size(640, 132);
-			this.GroupBox1.TabIndex = 5;
-			this.GroupBox1.TabStop = false;
-			this.GroupBox1.Visible = false;
+			GroupBox1.Controls.Add(Label4);
+			GroupBox1.Controls.Add(Label3);
+			GroupBox1.Controls.Add(Label2);
+			GroupBox1.Controls.Add(Label1);
+			GroupBox1.Controls.Add(TutorialLinkLabel);
+			GroupBox1.Controls.Add(TipsLinkLabel);
+			GroupBox1.Controls.Add(ContentsLinkLabel);
+			GroupBox1.Controls.Add(IndexLinkLabel);
+			GroupBox1.Location = new System.Drawing.Point(49, 388);
+			GroupBox1.Name = "GroupBox1";
+			GroupBox1.Size = new System.Drawing.Size(640, 132);
+			GroupBox1.TabIndex = 5;
+			GroupBox1.TabStop = false;
+			GroupBox1.Visible = false;
 			//
 			//Label4
 			//
-			this.Label4.AutoSize = true;
-			this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label4.Location = new System.Drawing.Point(110, 92);
-			this.Label4.Name = "Label4";
-			this.Label4.Size = new System.Drawing.Size(407, 24);
-			this.Label4.TabIndex = 8;
-			this.Label4.Text = "Ways to use Crowbar that might not be obvious.";
+			Label4.AutoSize = true;
+			Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label4.Location = new System.Drawing.Point(110, 92);
+			Label4.Name = "Label4";
+			Label4.Size = new System.Drawing.Size(407, 24);
+			Label4.TabIndex = 8;
+			Label4.Text = "Ways to use Crowbar that might not be obvious.";
 			//
 			//Label3
 			//
-			this.Label3.AutoSize = true;
-			this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label3.Location = new System.Drawing.Point(110, 67);
-			this.Label3.Name = "Label3";
-			this.Label3.Size = new System.Drawing.Size(462, 24);
-			this.Label3.TabIndex = 7;
-			this.Label3.Text = "Links to where important words and phrases are used.";
+			Label3.AutoSize = true;
+			Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label3.Location = new System.Drawing.Point(110, 67);
+			Label3.Name = "Label3";
+			Label3.Size = new System.Drawing.Size(462, 24);
+			Label3.TabIndex = 7;
+			Label3.Text = "Links to where important words and phrases are used.";
 			//
 			//Label2
 			//
-			this.Label2.AutoSize = true;
-			this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label2.Location = new System.Drawing.Point(110, 42);
-			this.Label2.Name = "Label2";
-			this.Label2.Size = new System.Drawing.Size(317, 24);
-			this.Label2.TabIndex = 6;
-			this.Label2.Text = "Documentation arranged in sections.";
+			Label2.AutoSize = true;
+			Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label2.Location = new System.Drawing.Point(110, 42);
+			Label2.Name = "Label2";
+			Label2.Size = new System.Drawing.Size(317, 24);
+			Label2.TabIndex = 6;
+			Label2.Text = "Documentation arranged in sections.";
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label1.Location = new System.Drawing.Point(110, 17);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(464, 24);
-			this.Label1.TabIndex = 5;
-			this.Label1.Text = "Step-by-step guide on how to use most of the features.";
+			Label1.AutoSize = true;
+			Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label1.Location = new System.Drawing.Point(110, 17);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(464, 24);
+			Label1.TabIndex = 5;
+			Label1.Text = "Step-by-step guide on how to use most of the features.";
 			//
 			//Label5
 			//
-			this.Label5.AutoSize = true;
-			this.Label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label5.Location = new System.Drawing.Point(49, 337);
-			this.Label5.Name = "Label5";
-			this.Label5.Size = new System.Drawing.Size(577, 16);
-			this.Label5.TabIndex = 7;
-			this.Label5.Text = "Crowbar allows you to quickly access many tools for modding models for Source-eng" + "ine games.";
-			this.Label5.Visible = false;
+			Label5.AutoSize = true;
+			Label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label5.Location = new System.Drawing.Point(49, 337);
+			Label5.Name = "Label5";
+			Label5.Size = new System.Drawing.Size(577, 16);
+			Label5.TabIndex = 7;
+			Label5.Text = "Crowbar allows you to quickly access many tools for modding models for Source-eng" + "ine games.";
+			Label5.Visible = false;
 			//
 			//Label6
 			//
-			this.Label6.AutoSize = true;
-			this.Label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.Label6.Location = new System.Drawing.Point(49, 361);
-			this.Label6.Name = "Label6";
-			this.Label6.Size = new System.Drawing.Size(419, 16);
-			this.Label6.TabIndex = 8;
-			this.Label6.Text = "(The links below will open as web pages in your default web browser.)";
-			this.Label6.Visible = false;
+			Label6.AutoSize = true;
+			Label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			Label6.Location = new System.Drawing.Point(49, 361);
+			Label6.Name = "Label6";
+			Label6.Size = new System.Drawing.Size(419, 16);
+			Label6.TabIndex = 8;
+			Label6.Text = "(The links below will open as web pages in your default web browser.)";
+			Label6.Visible = false;
 			//
 			//CrowbarGuideButton
 			//
-			this.CrowbarGuideButton.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CrowbarGuideButton.Image = global::Crowbar.Properties.Resources.CrowbarGuideBanner;
-			this.CrowbarGuideButton.Location = new System.Drawing.Point(3, 3);
-			this.CrowbarGuideButton.Name = "CrowbarGuideButton";
-			this.CrowbarGuideButton.Size = new System.Drawing.Size(530, 147);
-			this.CrowbarGuideButton.TabIndex = 9;
-			this.CrowbarGuideButton.UseVisualStyleBackColor = true;
+			CrowbarGuideButton.Cursor = System.Windows.Forms.Cursors.Hand;
+			CrowbarGuideButton.Image = global::Crowbar.Properties.Resources.CrowbarGuideBanner;
+			CrowbarGuideButton.Location = new System.Drawing.Point(3, 3);
+			CrowbarGuideButton.Name = "CrowbarGuideButton";
+			CrowbarGuideButton.Size = new System.Drawing.Size(530, 147);
+			CrowbarGuideButton.TabIndex = 9;
+			CrowbarGuideButton.UseVisualStyleBackColor = true;
 			//
 			//HelpUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.CrowbarGuideButton);
-			this.Controls.Add(this.Label6);
-			this.Controls.Add(this.Label5);
-			this.Controls.Add(this.GroupBox1);
-			this.Name = "HelpUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.GroupBox1.ResumeLayout(false);
-			this.GroupBox1.PerformLayout();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(CrowbarGuideButton);
+			Controls.Add(Label6);
+			Controls.Add(Label5);
+			Controls.Add(GroupBox1);
+			Name = "HelpUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			GroupBox1.ResumeLayout(false);
+			GroupBox1.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			CrowbarGuideButton.Click += new System.EventHandler(CrowbarGuideButton_Click);

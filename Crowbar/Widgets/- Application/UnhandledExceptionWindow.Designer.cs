@@ -32,83 +32,83 @@ namespace Crowbar
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnhandledExceptionWindow));
-			this.ExitButton = new System.Windows.Forms.Button();
-			this.CopyErrorReportButton = new System.Windows.Forms.Button();
-			this.LinkLabel1 = new System.Windows.Forms.LinkLabel();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.ErrorReportTextBox = new TextBoxEx();
-			this.SuspendLayout();
+			ExitButton = new System.Windows.Forms.Button();
+			CopyErrorReportButton = new System.Windows.Forms.Button();
+			LinkLabel1 = new System.Windows.Forms.LinkLabel();
+			Label1 = new System.Windows.Forms.Label();
+			ErrorReportTextBox = new TextBoxEx();
+			SuspendLayout();
 			//
 			//ExitButton
 			//
-			this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.ExitButton.Location = new System.Drawing.Point(614, 379);
-			this.ExitButton.Name = "ExitButton";
-			this.ExitButton.Size = new System.Drawing.Size(90, 23);
-			this.ExitButton.TabIndex = 4;
-			this.ExitButton.Text = "Exit Crowbar";
+			ExitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+			ExitButton.Location = new System.Drawing.Point(614, 379);
+			ExitButton.Name = "ExitButton";
+			ExitButton.Size = new System.Drawing.Size(90, 23);
+			ExitButton.TabIndex = 4;
+			ExitButton.Text = "Exit Crowbar";
 			//
 			//CopyErrorReportButton
 			//
-			this.CopyErrorReportButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.CopyErrorReportButton.Location = new System.Drawing.Point(507, 379);
-			this.CopyErrorReportButton.Name = "CopyErrorReportButton";
-			this.CopyErrorReportButton.Size = new System.Drawing.Size(101, 23);
-			this.CopyErrorReportButton.TabIndex = 3;
-			this.CopyErrorReportButton.Text = "Copy Error Report";
+			CopyErrorReportButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			CopyErrorReportButton.Location = new System.Drawing.Point(507, 379);
+			CopyErrorReportButton.Name = "CopyErrorReportButton";
+			CopyErrorReportButton.Size = new System.Drawing.Size(101, 23);
+			CopyErrorReportButton.TabIndex = 3;
+			CopyErrorReportButton.Text = "Copy Error Report";
 			//
 			//LinkLabel1
 			//
-			this.LinkLabel1.LinkArea = new System.Windows.Forms.LinkArea(204, 26);
-			this.LinkLabel1.Location = new System.Drawing.Point(12, 12);
-			this.LinkLabel1.Name = "LinkLabel1";
-			this.LinkLabel1.Size = new System.Drawing.Size(692, 138);
-			this.LinkLabel1.TabIndex = 0;
-			this.LinkLabel1.TabStop = true;
-			this.LinkLabel1.Text = resources.GetString("LinkLabel1.Text");
-			this.LinkLabel1.UseCompatibleTextRendering = true;
+			LinkLabel1.LinkArea = new System.Windows.Forms.LinkArea(204, 26);
+			LinkLabel1.Location = new System.Drawing.Point(12, 12);
+			LinkLabel1.Name = "LinkLabel1";
+			LinkLabel1.Size = new System.Drawing.Size(692, 138);
+			LinkLabel1.TabIndex = 0;
+			LinkLabel1.TabStop = true;
+			LinkLabel1.Text = resources.GetString("LinkLabel1.Text");
+			LinkLabel1.UseCompatibleTextRendering = true;
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Location = new System.Drawing.Point(12, 153);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(71, 13);
-			this.Label1.TabIndex = 1;
-			this.Label1.Text = "Error Report:";
+			Label1.AutoSize = true;
+			Label1.Location = new System.Drawing.Point(12, 153);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(71, 13);
+			Label1.TabIndex = 1;
+			Label1.Text = "Error Report:";
 			//
 			//ErrorReportTextBox
 			//
-			this.ErrorReportTextBox.Location = new System.Drawing.Point(15, 169);
-			this.ErrorReportTextBox.Multiline = true;
-			this.ErrorReportTextBox.Name = "ErrorReportTextBox";
-			this.ErrorReportTextBox.ReadOnly = true;
-			this.ErrorReportTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.ErrorReportTextBox.Size = new System.Drawing.Size(689, 204);
-			this.ErrorReportTextBox.TabIndex = 2;
+			ErrorReportTextBox.Location = new System.Drawing.Point(15, 169);
+			ErrorReportTextBox.Multiline = true;
+			ErrorReportTextBox.Name = "ErrorReportTextBox";
+			ErrorReportTextBox.ReadOnly = true;
+			ErrorReportTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			ErrorReportTextBox.Size = new System.Drawing.Size(689, 204);
+			ErrorReportTextBox.TabIndex = 2;
 			//
 			//UnhandledExceptionWindow
 			//
-			this.AcceptButton = this.ExitButton;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.CopyErrorReportButton;
-			this.ClientSize = new System.Drawing.Size(716, 418);
-			this.ControlBox = false;
-			this.Controls.Add(this.ErrorReportTextBox);
-			this.Controls.Add(this.Label1);
-			this.Controls.Add(this.LinkLabel1);
-			this.Controls.Add(this.CopyErrorReportButton);
-			this.Controls.Add(this.ExitButton);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
-			this.Name = "UnhandledExceptionWindow";
-			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Crowbar Internal Error";
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AcceptButton = ExitButton;
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			CancelButton = CopyErrorReportButton;
+			ClientSize = new System.Drawing.Size(716, 418);
+			ControlBox = false;
+			Controls.Add(ErrorReportTextBox);
+			Controls.Add(Label1);
+			Controls.Add(LinkLabel1);
+			Controls.Add(CopyErrorReportButton);
+			Controls.Add(ExitButton);
+			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			MaximizeBox = false;
+			MinimizeBox = false;
+			Name = "UnhandledExceptionWindow";
+			ShowInTaskbar = false;
+			StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			Text = "Crowbar Internal Error";
+			ResumeLayout(false);
+			PerformLayout();
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(LinkLabel1_LinkClicked);

@@ -20,14 +20,14 @@ namespace Crowbar
 
 		public App()
 		{
-			this.IsDisposed = false;
+			IsDisposed = false;
 
 			//NOTE: To use a particular culture's NumberFormat that doesn't change with user settings, 
 			//      must use this constructor with False as second param.
-			this.theInternalCultureInfo = new CultureInfo("en-US", false);
-			this.theInternalNumberFormat = this.theInternalCultureInfo.NumberFormat;
+			theInternalCultureInfo = new CultureInfo("en-US", false);
+			theInternalNumberFormat = theInternalCultureInfo.NumberFormat;
 
-			this.theSmdFilesWritten = new List<string>();
+			theSmdFilesWritten = new List<string>();
 		}
 
 #region IDisposable Support
@@ -41,15 +41,15 @@ namespace Crowbar
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this.IsDisposed)
+			if (!IsDisposed)
 			{
 				if (disposing)
 				{
-					this.Free();
+					Free();
 				}
 				//NOTE: free shared unmanaged resources
 			}
-			this.IsDisposed = true;
+			IsDisposed = true;
 		}
 
 		//Protected Overrides Sub Finalize()
@@ -66,25 +66,25 @@ namespace Crowbar
 
 		public void Init()
 		{
-			this.theAppPath = Application.StartupPath;
+			theAppPath = Application.StartupPath;
 			//NOTE: Needed for using DLLs placed in folder separate from main EXE file.
-			Environment.SetEnvironmentVariable("path", this.GetCustomDataPath(), EnvironmentVariableTarget.Process);
-			this.WriteRequiredFiles();
-			this.LoadAppSettings();
+			Environment.SetEnvironmentVariable("path", GetCustomDataPath(), EnvironmentVariableTarget.Process);
+			WriteRequiredFiles();
+			LoadAppSettings();
 
-			if (this.Settings.SteamLibraryPaths.Count == 0)
+			if (Settings.SteamLibraryPaths.Count == 0)
 			{
 				SteamLibraryPath libraryPath = new SteamLibraryPath();
-				this.Settings.SteamLibraryPaths.Add(libraryPath);
+				Settings.SteamLibraryPaths.Add(libraryPath);
 			}
 
-			this.theUnpacker = new Unpacker();
-			this.theDecompiler = new Decompiler();
-			this.theCompiler = new Compiler();
-			this.thePacker = new Packer();
+			theUnpacker = new Unpacker();
+			theDecompiler = new Decompiler();
+			theCompiler = new Compiler();
+			thePacker = new Packer();
 			//Me.theModelViewer = New Viewer()
 
-			string documentsPath = Path.Combine(this.theAppPath, "Documents");
+			string documentsPath = Path.Combine(theAppPath, "Documents");
 			AppConstants.HelpTutorialLink = Path.Combine(documentsPath, AppConstants.HelpTutorialLink);
 			AppConstants.HelpContentsLink = Path.Combine(documentsPath, AppConstants.HelpContentsLink);
 			AppConstants.HelpIndexLink = Path.Combine(documentsPath, AppConstants.HelpIndexLink);
@@ -93,9 +93,9 @@ namespace Crowbar
 
 		private void Free()
 		{
-			if (this.theSettings != null)
+			if (theSettings != null)
 			{
-				this.SaveAppSettings();
+				SaveAppSettings();
 			}
 			//If Me.theCompiler IsNot Nothing Then
 			//End If
@@ -109,7 +109,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theSettings;
+				return theSettings;
 			}
 		}
 
@@ -117,7 +117,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCommandLineOption_Settings_IsEnabled;
+				return theCommandLineOption_Settings_IsEnabled;
 			}
 		}
 
@@ -125,7 +125,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return Path.Combine(this.GetCustomDataPath(), this.ErrorFileName);
+				return Path.Combine(GetCustomDataPath(), ErrorFileName);
 			}
 		}
 
@@ -133,7 +133,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpacker;
+				return theUnpacker;
 			}
 		}
 
@@ -141,7 +141,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompiler;
+				return theDecompiler;
 			}
 		}
 
@@ -149,7 +149,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompiler;
+				return theCompiler;
 			}
 		}
 
@@ -157,7 +157,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePacker;
+				return thePacker;
 			}
 		}
 
@@ -180,7 +180,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theInternalCultureInfo;
+				return theInternalCultureInfo;
 			}
 		}
 
@@ -188,7 +188,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theInternalNumberFormat;
+				return theInternalNumberFormat;
 			}
 		}
 
@@ -196,11 +196,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theSmdFilesWritten;
+				return theSmdFilesWritten;
 			}
 			set
 			{
-				this.theSmdFilesWritten = value;
+				theSmdFilesWritten = value;
 			}
 		}
 
@@ -215,21 +215,21 @@ namespace Crowbar
 
 		public void WriteRequiredFiles()
 		{
-			string steamAPIDLLPathFileName = Path.Combine(this.GetCustomDataPath(), App.theSteamAPIDLLFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.steam_api, steamAPIDLLPathFileName);
+			string steamAPIDLLPathFileName = Path.Combine(GetCustomDataPath(), App.theSteamAPIDLLFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.steam_api, steamAPIDLLPathFileName);
 
 			//NOTE: Although Crowbar itself does not need the DLL file extracted, CrowbarSteamPipe needs it extracted.
-			string steamworksDotNetPathFileName = Path.Combine(this.GetCustomDataPath(), App.theSteamworksDotNetDLLFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.Steamworks_NET, steamworksDotNetPathFileName);
+			string steamworksDotNetPathFileName = Path.Combine(GetCustomDataPath(), App.theSteamworksDotNetDLLFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.Steamworks_NET, steamworksDotNetPathFileName);
 
-			string crowbarSteamPipePathFileName = Path.Combine(this.GetCustomDataPath(), App.CrowbarSteamPipeFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.CrowbarSteamPipe, crowbarSteamPipePathFileName);
+			string crowbarSteamPipePathFileName = Path.Combine(GetCustomDataPath(), App.CrowbarSteamPipeFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.CrowbarSteamPipe, crowbarSteamPipePathFileName);
 
-			this.LzmaExePathFileName = Path.Combine(this.GetCustomDataPath(), App.theLzmaExeFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.lzma, this.LzmaExePathFileName);
+			LzmaExePathFileName = Path.Combine(GetCustomDataPath(), App.theLzmaExeFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.lzma, LzmaExePathFileName);
 
 			//NOTE: Only write settings file if it does not exist.
-			string appSettingsPathFileName = Path.Combine(this.GetCustomDataPath(), App.theAppSettingsFileName);
+			string appSettingsPathFileName = Path.Combine(GetCustomDataPath(), App.theAppSettingsFileName);
 			try
 			{
 				if (!File.Exists(appSettingsPathFileName))
@@ -250,21 +250,21 @@ namespace Crowbar
 
 		public void WriteUpdaterFiles()
 		{
-			this.SevenZrExePathFileName = Path.Combine(this.GetCustomDataPath(), App.theSevenZrEXEFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.SevenZr, this.SevenZrExePathFileName);
+			SevenZrExePathFileName = Path.Combine(GetCustomDataPath(), App.theSevenZrEXEFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.SevenZr, SevenZrExePathFileName);
 
-			this.CrowbarLauncherExePathFileName = Path.Combine(this.GetCustomDataPath(), App.theCrowbarLauncherEXEFileName);
-			this.WriteResourceToFileIfDifferent(Properties.Resources.CrowbarLauncher, this.CrowbarLauncherExePathFileName);
+			CrowbarLauncherExePathFileName = Path.Combine(GetCustomDataPath(), App.theCrowbarLauncherEXEFileName);
+			WriteResourceToFileIfDifferent(Properties.Resources.CrowbarLauncher, CrowbarLauncherExePathFileName);
 		}
 
 		public void DeleteUpdaterFiles()
 		{
-			this.SevenZrExePathFileName = Path.Combine(this.GetCustomDataPath(), App.theSevenZrEXEFileName);
+			SevenZrExePathFileName = Path.Combine(GetCustomDataPath(), App.theSevenZrEXEFileName);
 			try
 			{
-				if (File.Exists(this.SevenZrExePathFileName))
+				if (File.Exists(SevenZrExePathFileName))
 				{
-					File.Delete(this.SevenZrExePathFileName);
+					File.Delete(SevenZrExePathFileName);
 				}
 			}
 			catch (Exception ex)
@@ -272,12 +272,12 @@ namespace Crowbar
 				int debug = 4242;
 			}
 
-			this.CrowbarLauncherExePathFileName = Path.Combine(this.GetCustomDataPath(), App.theCrowbarLauncherEXEFileName);
+			CrowbarLauncherExePathFileName = Path.Combine(GetCustomDataPath(), App.theCrowbarLauncherEXEFileName);
 			try
 			{
-				if (File.Exists(this.CrowbarLauncherExePathFileName))
+				if (File.Exists(CrowbarLauncherExePathFileName))
 				{
-					File.Delete(this.CrowbarLauncherExePathFileName);
+					File.Delete(CrowbarLauncherExePathFileName);
 				}
 			}
 			catch (Exception ex)
@@ -288,12 +288,12 @@ namespace Crowbar
 
 		public void WriteSteamAppIdFile(uint appID)
 		{
-			this.WriteSteamAppIdFile(appID.ToString());
+			WriteSteamAppIdFile(appID.ToString());
 		}
 
 		public void WriteSteamAppIdFile(string appID_text)
 		{
-			string steamAppIDPathFileName = Path.Combine(this.GetCustomDataPath(), App.theSteamAppIDFileName);
+			string steamAppIDPathFileName = Path.Combine(GetCustomDataPath(), App.theSteamAppIDFileName);
 			using (StreamWriter sw = File.CreateText(steamAppIDPathFileName))
 			{
 				sw.WriteLine(appID_text);
@@ -313,21 +313,21 @@ namespace Crowbar
 		public void SaveAppSettings()
 		{
 			string appSettingsPath = null;
-			string appSettingsPathFileName = this.GetAppSettingsPathFileName();
+			string appSettingsPathFileName = GetAppSettingsPathFileName();
 
 			appSettingsPath = FileManager.GetPath(appSettingsPathFileName);
 
 			if (FileManager.PathExistsAfterTryToCreate(appSettingsPath))
 			{
-				FileManager.WriteXml(this.theSettings, appSettingsPathFileName);
+				FileManager.WriteXml(theSettings, appSettingsPathFileName);
 			}
 		}
 
 		public void InitAppInfo()
 		{
-			if (this.SteamAppInfos == null)
+			if (SteamAppInfos == null)
 			{
-				this.SteamAppInfos = SteamAppInfoBase.GetSteamAppInfos();
+				SteamAppInfos = SteamAppInfoBase.GetSteamAppInfos();
 			}
 		}
 
@@ -373,7 +373,7 @@ namespace Crowbar
 
 		public string GetAppSettingsPathFileName()
 		{
-			return Path.Combine(this.GetCustomDataPath(), App.theAppSettingsFileName);
+			return Path.Combine(GetCustomDataPath(), App.theAppSettingsFileName);
 		}
 
 #endregion
@@ -382,7 +382,7 @@ namespace Crowbar
 
 		private void LoadAppSettings()
 		{
-			string appSettingsPathFileName = this.GetAppSettingsPathFileName();
+			string appSettingsPathFileName = GetAppSettingsPathFileName();
 
 			bool commandLineOption_Settings_IsEnabled = false;
 			ReadOnlyCollection<string> commandLineValues = new ReadOnlyCollection<string>(System.Environment.GetCommandLineArgs());
@@ -406,31 +406,31 @@ namespace Crowbar
 				try
 				{
 					VersionModule.ConvertSettingsFile(appSettingsPathFileName);
-					this.theSettings = (AppSettings)FileManager.ReadXml(typeof(AppSettings), appSettingsPathFileName);
+					theSettings = (AppSettings)FileManager.ReadXml(typeof(AppSettings), appSettingsPathFileName);
 				}
 				catch
 				{
-					this.CreateAppSettings();
+					CreateAppSettings();
 				}
 			}
 			else
 			{
 				// File not found, so init default values.
-				this.CreateAppSettings();
+				CreateAppSettings();
 			}
 		}
 
 		private void CreateAppSettings()
 		{
-			this.theSettings = new AppSettings();
+			theSettings = new AppSettings();
 
 			GameSetup gameSetup = new GameSetup();
-			this.theSettings.GameSetups.Add(gameSetup);
+			theSettings.GameSetups.Add(gameSetup);
 
 			SteamLibraryPath aPath = new SteamLibraryPath();
-			this.theSettings.SteamLibraryPaths.Add(aPath);
+			theSettings.SteamLibraryPaths.Add(aPath);
 
-			this.SaveAppSettings();
+			SaveAppSettings();
 		}
 
 		//Private Function GetAppDataPath() As String
@@ -493,7 +493,7 @@ namespace Crowbar
 		{
 			string line = "Created by ";
 
-			line += this.GetProductNameAndVersion();
+			line += GetProductNameAndVersion();
 
 			return line;
 		}
@@ -515,7 +515,7 @@ namespace Crowbar
 
 			result = pathFileName;
 
-			foreach (SteamLibraryPath aSteamLibraryPath in this.Settings.SteamLibraryPaths)
+			foreach (SteamLibraryPath aSteamLibraryPath in Settings.SteamLibraryPaths)
 			{
 				aMacro = aSteamLibraryPath.Macro;
 				if (pathFileName.StartsWith(aMacro))

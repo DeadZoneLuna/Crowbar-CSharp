@@ -101,8 +101,8 @@ namespace Crowbar
 
 		public SourceQuaternion48bitsViaBytes()
 		{
-			this.theQuaternion = new SourceQuaternion();
-			this.theQuaternionIsComputed = false;
+			theQuaternion = new SourceQuaternion();
+			theQuaternionIsComputed = false;
 		}
 
 		public byte[] theBytes = new byte[6];
@@ -111,8 +111,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.x;
+				ComputeQuaternion();
+				return theQuaternion.x;
 			}
 		}
 
@@ -120,8 +120,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.y;
+				ComputeQuaternion();
+				return theQuaternion.y;
 			}
 		}
 
@@ -129,8 +129,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.z;
+				ComputeQuaternion();
+				return theQuaternion.z;
 			}
 		}
 
@@ -138,8 +138,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.w;
+				ComputeQuaternion();
+				return theQuaternion.w;
 			}
 		}
 
@@ -147,14 +147,14 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion;
+				ComputeQuaternion();
+				return theQuaternion;
 			}
 		}
 
 		private void ComputeQuaternion()
 		{
-			if (!this.theQuaternionIsComputed)
+			if (!theQuaternionIsComputed)
 			{
 				//1a-15-1b-15-1c-15 where 1a << 1 + 1b is index of missing component and 1c is sign of missing component 
 
@@ -165,22 +165,22 @@ namespace Crowbar
 				UInt32 uIntegerC = 0;
 				double missingComponentSign = 0;
 				UInt32 missingComponentIndex = 0;
-				tempInteger = (uint)(this.theBytes[1] & 0x7F);
-				tempInteger2 = (uint)this.theBytes[0];
+				tempInteger = (uint)(theBytes[1] & 0x7F);
+				tempInteger2 = (uint)theBytes[0];
 				uIntegerA = (tempInteger << 8) | (tempInteger2);
 
-				tempInteger = (uint)(this.theBytes[3] & 0x7F);
-				tempInteger2 = (uint)this.theBytes[2];
+				tempInteger = (uint)(theBytes[3] & 0x7F);
+				tempInteger2 = (uint)theBytes[2];
 				uIntegerB = (tempInteger << 8) | (tempInteger2);
 
-				tempInteger = (uint)(this.theBytes[5] & 0x7F);
-				tempInteger2 = (uint)this.theBytes[4];
+				tempInteger = (uint)(theBytes[5] & 0x7F);
+				tempInteger2 = (uint)theBytes[4];
 				uIntegerC = (tempInteger << 8) | (tempInteger2);
 
-				tempInteger = (uint)(this.theBytes[1] & 0x80);
-				tempInteger2 = (uint)(this.theBytes[3] & 0x80);
+				tempInteger = (uint)(theBytes[1] & 0x80);
+				tempInteger2 = (uint)(theBytes[3] & 0x80);
 				missingComponentIndex = (tempInteger >> 6) | (tempInteger2 >> 7);
-				if ((this.theBytes[5] & 0x80) > 0)
+				if ((theBytes[5] & 0x80) > 0)
 				{
 					missingComponentSign = -1;
 				}
@@ -199,31 +199,31 @@ namespace Crowbar
 
 				if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_X)
 				{
-					this.theQuaternion.x = this.GetMissingComponent(a, b, c, missingComponentSign);
-					this.theQuaternion.y = a;
-					this.theQuaternion.z = b;
-					this.theQuaternion.w = c;
+					theQuaternion.x = GetMissingComponent(a, b, c, missingComponentSign);
+					theQuaternion.y = a;
+					theQuaternion.z = b;
+					theQuaternion.w = c;
 				}
 				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_Y)
 				{
-					this.theQuaternion.x = c;
-					this.theQuaternion.y = this.GetMissingComponent(a, b, c, missingComponentSign);
-					this.theQuaternion.z = a;
-					this.theQuaternion.w = b;
+					theQuaternion.x = c;
+					theQuaternion.y = GetMissingComponent(a, b, c, missingComponentSign);
+					theQuaternion.z = a;
+					theQuaternion.w = b;
 				}
 				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_Z)
 				{
-					this.theQuaternion.x = b;
-					this.theQuaternion.y = c;
-					this.theQuaternion.z = this.GetMissingComponent(a, b, c, missingComponentSign);
-					this.theQuaternion.w = a;
+					theQuaternion.x = b;
+					theQuaternion.y = c;
+					theQuaternion.z = GetMissingComponent(a, b, c, missingComponentSign);
+					theQuaternion.w = a;
 				}
 				else if (missingComponentIndex == SourceQuaternion48bitsViaBytes.MISSING_COMPONENT_W)
 				{
-					this.theQuaternion.x = a;
-					this.theQuaternion.y = b;
-					this.theQuaternion.z = c;
-					this.theQuaternion.w = this.GetMissingComponent(a, b, c, missingComponentSign);
+					theQuaternion.x = a;
+					theQuaternion.y = b;
+					theQuaternion.z = c;
+					theQuaternion.w = GetMissingComponent(a, b, c, missingComponentSign);
 				}
 			}
 		}

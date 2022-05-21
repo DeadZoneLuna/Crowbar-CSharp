@@ -14,8 +14,8 @@ namespace Crowbar
 
 		public IntermediateExpression(string iExpression, int iPrecedence)
 		{
-			this.theExpression = iExpression;
-			this.thePrecedence = iPrecedence;
+			theExpression = iExpression;
+			thePrecedence = iPrecedence;
 		}
 
 		public string theExpression;

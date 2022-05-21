@@ -20,7 +20,7 @@ namespace Crowbar
 
 			//TEST: See if this prevents the overlapping or larger text on Chinese Windows.
 			// This should allow Forms that inherit from this class and their widgets to use the system font instead of Visual Studio's default of Microsoft Sans Serif.
-			this.Font = new Font(SystemFonts.MessageBoxFont.Name, 8.25f);
+			Font = new Font(SystemFonts.MessageBoxFont.Name, 8.25f);
 
 			// This call is required by the designer.
 			InitializeComponent();
@@ -38,7 +38,7 @@ namespace Crowbar
 					{
 						components.Dispose();
 					}
-					this.Free();
+					Free();
 				}
 			}
 			finally
@@ -53,12 +53,12 @@ namespace Crowbar
 
 		protected virtual void Init()
 		{
-			this.theWidgets = new List<Control>();
-			this.GetAllWidgets(this.Controls);
+			theWidgets = new List<Control>();
+			GetAllWidgets(Controls);
 
-			this.theCheckBoxesAreChangingViaMe = false;
-			this.theComboBoxesAreChangingViaMe = false;
-			this.theTextBoxesAreChangingViaMe = false;
+			theCheckBoxesAreChangingViaMe = false;
+			theComboBoxesAreChangingViaMe = false;
+			theTextBoxesAreChangingViaMe = false;
 		}
 
 		private void GetAllWidgets(ControlCollection iWidgets)
@@ -69,14 +69,14 @@ namespace Crowbar
 				{
 					if (widget is CheckBoxEx)
 					{
-						this.theWidgets.Add(widget);
+						theWidgets.Add(widget);
 					}
 					else if (widget is ComboBox)
 					{
 						string aComboBoxTag = (widget.Tag == null ? null : Convert.ToString(widget.Tag));
 						if (aComboBoxTag == "TagsEnabled")
 						{
-							this.theWidgets.Add(widget);
+							theWidgets.Add(widget);
 						}
 					}
 					else if (widget is TextBox)
@@ -84,13 +84,13 @@ namespace Crowbar
 						string aTextBoxTag = (widget.Tag == null ? null : Convert.ToString(widget.Tag));
 						if (aTextBoxTag == "TagsEnabled")
 						{
-							this.theWidgets.Add(widget);
+							theWidgets.Add(widget);
 						}
 					}
 				}
 				else if (widget is GroupBox || widget is Panel)
 				{
-					this.GetAllWidgets(widget.Controls);
+					GetAllWidgets(widget.Controls);
 				}
 			}
 		}
@@ -100,16 +100,16 @@ namespace Crowbar
 			CheckBoxEx aCheckBox = null;
 			ComboBox aComboBox = null;
 			TextBox aTextBox = null;
-			if (this.theWidgets != null)
+			if (theWidgets != null)
 			{
-				foreach (Control widget in this.theWidgets)
+				foreach (Control widget in theWidgets)
 				{
 					if (widget.Tag is string)
 					{
 						if (widget is CheckBoxEx)
 						{
 							aCheckBox = (CheckBoxEx)widget;
-							aCheckBox.CheckedChanged -= this.CheckBox_CheckedChanged;
+							aCheckBox.CheckedChanged -= CheckBox_CheckedChanged;
 						}
 						else if (widget is ComboBox)
 						{
@@ -117,7 +117,7 @@ namespace Crowbar
 							if (aComboBoxTag == "TagsEnabled")
 							{
 								aComboBox = (ComboBox)widget;
-								aComboBox.SelectedIndexChanged -= this.ComboBox_SelectedIndexChanged;
+								aComboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
 							}
 						}
 						else if (widget is TextBox)
@@ -126,7 +126,7 @@ namespace Crowbar
 							if (aTextBoxTag == "TagsEnabled")
 							{
 								aTextBox = (TextBox)widget;
-								aTextBox.TextChanged -= this.TextBox_TextChanged;
+								aTextBox.TextChanged -= TextBox_TextChanged;
 							}
 						}
 					}
@@ -147,7 +147,7 @@ namespace Crowbar
 				TextBox aTextBox = null;
 				IList anEnumList = null;
 				BindingListEx<string> itemTagsList = new BindingListEx<string>();
-				foreach (Control widget in this.theWidgets)
+				foreach (Control widget in theWidgets)
 				{
 					if (widget.Tag is string)
 					{
@@ -187,15 +187,15 @@ namespace Crowbar
 			}
 			set
 			{
-				this.theCheckBoxesAreChangingViaMe = true;
-				this.theComboBoxesAreChangingViaMe = true;
-				this.theTextBoxesAreChangingViaMe = true;
+				theCheckBoxesAreChangingViaMe = true;
+				theComboBoxesAreChangingViaMe = true;
+				theTextBoxesAreChangingViaMe = true;
 
 				CheckBoxEx aCheckBox = null;
 				ComboBox aComboBox = null;
 				TextBox aTextBox = null;
 
-				foreach (Control widget in this.theWidgets)
+				foreach (Control widget in theWidgets)
 				{
 					if (widget.Tag is string)
 					{
@@ -203,8 +203,8 @@ namespace Crowbar
 						{
 							aCheckBox = (CheckBoxEx)widget;
 							aCheckBox.Checked = false;
-							aCheckBox.CheckedChanged -= this.CheckBox_CheckedChanged;
-							aCheckBox.CheckedChanged += this.CheckBox_CheckedChanged;
+							aCheckBox.CheckedChanged -= CheckBox_CheckedChanged;
+							aCheckBox.CheckedChanged += CheckBox_CheckedChanged;
 						}
 						else if (widget is ComboBox)
 						{
@@ -212,8 +212,8 @@ namespace Crowbar
 							if (aComboBoxTag == "TagsEnabled")
 							{
 								aComboBox = (ComboBox)widget;
-								aComboBox.SelectedIndexChanged -= this.ComboBox_SelectedIndexChanged;
-								aComboBox.SelectedIndexChanged += this.ComboBox_SelectedIndexChanged;
+								aComboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
+								aComboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
 							}
 						}
 						else if (widget is TextBox)
@@ -223,8 +223,8 @@ namespace Crowbar
 							{
 								aTextBox = (TextBox)widget;
 								aTextBox.Text = "";
-								aTextBox.TextChanged -= this.TextBox_TextChanged;
-								aTextBox.TextChanged += this.TextBox_TextChanged;
+								aTextBox.TextChanged -= TextBox_TextChanged;
+								aTextBox.TextChanged += TextBox_TextChanged;
 							}
 						}
 					}
@@ -237,7 +237,7 @@ namespace Crowbar
 				{
 					tagHasBeenAssigned = false;
 
-					foreach (Control widget in this.theWidgets)
+					foreach (Control widget in theWidgets)
 					{
 						if (widget.Tag is string)
 						{
@@ -275,7 +275,7 @@ namespace Crowbar
 					//Loop through TextBoxes last because they will be filled with tags that do not belong to any other widget.
 					if (!tagHasBeenAssigned)
 					{
-						foreach (Control widget in this.theWidgets)
+						foreach (Control widget in theWidgets)
 						{
 							if (widget.Tag is string)
 							{
@@ -297,9 +297,9 @@ namespace Crowbar
 					}
 				}
 
-				this.theCheckBoxesAreChangingViaMe = false;
-				this.theComboBoxesAreChangingViaMe = false;
-				this.theTextBoxesAreChangingViaMe = false;
+				theCheckBoxesAreChangingViaMe = false;
+				theComboBoxesAreChangingViaMe = false;
+				theTextBoxesAreChangingViaMe = false;
 			}
 		}
 
@@ -309,7 +309,7 @@ namespace Crowbar
 
 		private void TagsBaseUserControl_Load(object sender, EventArgs e)
 		{
-			this.Init();
+			Init();
 		}
 
 #endregion
@@ -318,12 +318,12 @@ namespace Crowbar
 
 		private void CheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			this.OnCheckBox_CheckedChanged(sender, e);
+			OnCheckBox_CheckedChanged(sender, e);
 		}
 
 		private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (!this.theComboBoxesAreChangingViaMe)
+			if (!theComboBoxesAreChangingViaMe)
 			{
 				if (TagsPropertyChanged != null)
 					TagsPropertyChanged(this, new EventArgs());
@@ -332,7 +332,7 @@ namespace Crowbar
 
 		private void TextBox_TextChanged(object sender, EventArgs e)
 		{
-			if (!this.theTextBoxesAreChangingViaMe)
+			if (!theTextBoxesAreChangingViaMe)
 			{
 				if (TagsPropertyChanged != null)
 					TagsPropertyChanged(this, new EventArgs());
@@ -351,7 +351,7 @@ namespace Crowbar
 
 		protected virtual void OnCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!this.theCheckBoxesAreChangingViaMe)
+			if (!theCheckBoxesAreChangingViaMe)
 			{
 				if (TagsPropertyChanged != null)
 					TagsPropertyChanged(this, new EventArgs());

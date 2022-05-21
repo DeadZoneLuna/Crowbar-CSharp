@@ -37,17 +37,17 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.SuspendLayout();
+			SuspendLayout();
 			//
 			//BaseForm
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(292, 272);
-			this.DoubleBuffered = true;
-			this.Name = "BaseForm";
-			this.Text = "BaseForm";
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(292, 272);
+			DoubleBuffered = true;
+			Name = "BaseForm";
+			Text = "BaseForm";
+			ResumeLayout(false);
 
 		}
 	}

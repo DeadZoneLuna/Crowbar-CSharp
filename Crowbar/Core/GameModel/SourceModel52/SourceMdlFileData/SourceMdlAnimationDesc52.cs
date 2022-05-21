@@ -13,7 +13,7 @@ namespace Crowbar
 	{
 		public SourceMdlAnimationDesc52()
 		{
-			this.theLinkedSequences = new List<SourceMdlSequenceDesc>();
+			theLinkedSequences = new List<SourceMdlSequenceDesc>();
 		}
 
 		//FROM: AlienSwarm_source\src\public\studio.h

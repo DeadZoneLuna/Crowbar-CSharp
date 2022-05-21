@@ -41,7 +41,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return !string.IsNullOrEmpty(this.theVtxPathFileName) && File.Exists(this.theVtxPathFileName);
+				return !string.IsNullOrEmpty(theVtxPathFileName) && File.Exists(theVtxPathFileName);
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (!this.theMdlFileData.theMdlFileOnlyHasAnimations && this.theMdlFileData.theBones != null && this.theMdlFileData.theBones.Count > 0 && this.theVtxFileData != null)
+				if (!theMdlFileData.theMdlFileOnlyHasAnimations && theMdlFileData.theBones != null && theMdlFileData.theBones.Count > 0 && theVtxFileData != null)
 				{
 					return true;
 				}
@@ -98,7 +98,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.thePhyFileDataGeneric != null && this.thePhyFileDataGeneric.theSourcePhyCollisionDatas != null && !this.theMdlFileData.theMdlFileOnlyHasAnimations && this.theMdlFileData.theBones != null && this.theMdlFileData.theBones.Count > 0)
+				if (thePhyFileDataGeneric != null && thePhyFileDataGeneric.theSourcePhyCollisionDatas != null && !theMdlFileData.theMdlFileOnlyHasAnimations && theMdlFileData.theBones != null && theMdlFileData.theBones.Count > 0)
 				{
 					return true;
 				}
@@ -129,7 +129,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theMdlFileData.theAnimationDescs != null && this.theMdlFileData.theAnimationDescs.Count > 0)
+				if (theMdlFileData.theAnimationDescs != null && theMdlFileData.theAnimationDescs.Count > 0)
 				{
 					return true;
 				}
@@ -164,24 +164,24 @@ namespace Crowbar
 		{
 			AppEnums.FilesFoundFlags status = AppEnums.FilesFoundFlags.AllFilesFound;
 
-			if (!this.theMdlFileDataGeneric.theMdlFileOnlyHasAnimations)
+			if (!theMdlFileDataGeneric.theMdlFileOnlyHasAnimations)
 			{
-				this.thePhyPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".phy");
+				thePhyPathFileName = Path.ChangeExtension(theMdlPathFileName, ".phy");
 
-				this.theVtxPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".dx11.vtx");
-				if (!File.Exists(this.theVtxPathFileName))
+				theVtxPathFileName = Path.ChangeExtension(theMdlPathFileName, ".dx11.vtx");
+				if (!File.Exists(theVtxPathFileName))
 				{
-					this.theVtxPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".dx90.vtx");
-					if (!File.Exists(this.theVtxPathFileName))
+					theVtxPathFileName = Path.ChangeExtension(theMdlPathFileName, ".dx90.vtx");
+					if (!File.Exists(theVtxPathFileName))
 					{
-						this.theVtxPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".dx80.vtx");
-						if (!File.Exists(this.theVtxPathFileName))
+						theVtxPathFileName = Path.ChangeExtension(theMdlPathFileName, ".dx80.vtx");
+						if (!File.Exists(theVtxPathFileName))
 						{
-							this.theVtxPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".sw.vtx");
-							if (!File.Exists(this.theVtxPathFileName))
+							theVtxPathFileName = Path.ChangeExtension(theMdlPathFileName, ".sw.vtx");
+							if (!File.Exists(theVtxPathFileName))
 							{
-								this.theVtxPathFileName = Path.ChangeExtension(this.theMdlPathFileName, ".vtx");
-								if (!File.Exists(this.theVtxPathFileName))
+								theVtxPathFileName = Path.ChangeExtension(theMdlPathFileName, ".vtx");
+								if (!File.Exists(theVtxPathFileName))
 								{
 									status = AppEnums.FilesFoundFlags.ErrorRequiredVtxFileNotFound;
 								}
@@ -202,17 +202,17 @@ namespace Crowbar
 			//	status = Me.CheckForRequiredFiles()
 			//End If
 
-			if (!string.IsNullOrEmpty(this.thePhyPathFileName))
+			if (!string.IsNullOrEmpty(thePhyPathFileName))
 			{
 				if (status == AppEnums.StatusMessage.Success)
 				{
 					try
 					{
-						this.ReadFile(this.thePhyPathFileName, this.ReadPhyFile_Internal);
-						if (this.thePhyFileDataGeneric.checksum != this.theMdlFileData.checksum)
+						ReadFile(thePhyPathFileName, ReadPhyFile_Internal);
+						if (thePhyFileDataGeneric.checksum != theMdlFileData.checksum)
 						{
 							//status = StatusMessage.WarningPhyChecksumDoesNotMatchMdl
-							this.NotifySourceModelProgress(AppEnums.ProgressOptions.WarningPhyFileChecksumDoesNotMatchMdlFileChecksum, "");
+							NotifySourceModelProgress(AppEnums.ProgressOptions.WarningPhyFileChecksumDoesNotMatchMdlFileChecksum, "");
 						}
 					}
 					catch (Exception ex)
@@ -229,7 +229,7 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			status = this.WriteMeshSmdFiles(modelOutputPath, 0, 0);
+			status = WriteMeshSmdFiles(modelOutputPath, 0, 0);
 
 			return status;
 		}
@@ -238,7 +238,7 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			status = this.WriteMeshSmdFiles(modelOutputPath, 1, this.theVtxFileData.lodCount - 1);
+			status = WriteMeshSmdFiles(modelOutputPath, 1, theVtxFileData.lodCount - 1);
 
 			return status;
 		}
@@ -249,8 +249,8 @@ namespace Crowbar
 
 			try
 			{
-				this.theOutputFileTextWriter = File.CreateText(smdPathFileName);
-				SourceSmdFile32 smdFile = new SourceSmdFile32(this.theOutputFileTextWriter, this.theMdlFileData);
+				theOutputFileTextWriter = File.CreateText(smdPathFileName);
+				SourceSmdFile32 smdFile = new SourceSmdFile32(theOutputFileTextWriter, theMdlFileData);
 
 				smdFile.WriteHeaderComment();
 
@@ -265,10 +265,10 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.theOutputFileTextWriter != null)
+				if (theOutputFileTextWriter != null)
 				{
-					this.theOutputFileTextWriter.Flush();
-					this.theOutputFileTextWriter.Close();
+					theOutputFileTextWriter.Flush();
+					theOutputFileTextWriter.Close();
 				}
 			}
 
@@ -287,37 +287,37 @@ namespace Crowbar
 
 			try
 			{
-				for (int anAnimDescIndex = 0; anAnimDescIndex < this.theMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
+				for (int anAnimDescIndex = 0; anAnimDescIndex < theMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
 				{
-					anAnimationDesc = this.theMdlFileData.theAnimationDescs[anAnimDescIndex];
+					anAnimationDesc = theMdlFileData.theAnimationDescs[anAnimDescIndex];
 
-					anAnimationDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(anAnimationDesc.theSmdRelativePathFileName, this.Name, anAnimationDesc.theName);
+					anAnimationDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(anAnimationDesc.theSmdRelativePathFileName, Name, anAnimationDesc.theName);
 					smdPathFileName = Path.Combine(modelOutputPath, anAnimationDesc.theSmdRelativePathFileName);
 					smdPath = FileManager.GetPath(smdPathFileName);
 					if (FileManager.PathExistsAfterTryToCreate(smdPath))
 					{
-						this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, smdPathFileName);
+						NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, smdPathFileName);
 						//NOTE: Check here in case writing is canceled in the above event.
-						if (this.theWritingIsCanceled)
+						if (theWritingIsCanceled)
 						{
 							status = AppEnums.StatusMessage.Canceled;
 							return status;
 						}
-						else if (this.theWritingSingleFileIsCanceled)
+						else if (theWritingSingleFileIsCanceled)
 						{
-							this.theWritingSingleFileIsCanceled = false;
+							theWritingSingleFileIsCanceled = false;
 							continue;
 						}
 
-						writeStatus = this.WriteBoneAnimationSmdFile(smdPathFileName, null, anAnimationDesc);
+						writeStatus = WriteBoneAnimationSmdFile(smdPathFileName, null, anAnimationDesc);
 
 						if (writeStatus == "Success")
 						{
-							this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, smdPathFileName);
+							NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, smdPathFileName);
 						}
 						else
 						{
-							this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFailed, writeStatus);
+							NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFailed, writeStatus);
 						}
 					}
 				}
@@ -336,28 +336,28 @@ namespace Crowbar
 
 			string debugPathFileName = null;
 
-			if (this.theMdlFileData != null)
+			if (theMdlFileData != null)
 			{
-				debugPathFileName = Path.Combine(debugPath, this.theName + " " + Properties.Resources.Decompile_DebugMdlFileNameSuffix);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
-				this.WriteAccessedBytesDebugFile(debugPathFileName, this.theMdlFileData.theFileSeekLog);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
+				debugPathFileName = Path.Combine(debugPath, theName + " " + Properties.Resources.Decompile_DebugMdlFileNameSuffix);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
+				WriteAccessedBytesDebugFile(debugPathFileName, theMdlFileData.theFileSeekLog);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
 			}
 
-			if (this.theVtxFileData != null)
+			if (theVtxFileData != null)
 			{
-				debugPathFileName = Path.Combine(debugPath, this.theName + " " + Properties.Resources.Decompile_DebugVtxFileNameSuffix);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
-				this.WriteAccessedBytesDebugFile(debugPathFileName, this.theVtxFileData.theFileSeekLog);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
+				debugPathFileName = Path.Combine(debugPath, theName + " " + Properties.Resources.Decompile_DebugVtxFileNameSuffix);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
+				WriteAccessedBytesDebugFile(debugPathFileName, theVtxFileData.theFileSeekLog);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
 			}
 
-			if (this.thePhyFileDataGeneric != null)
+			if (thePhyFileDataGeneric != null)
 			{
-				debugPathFileName = Path.Combine(debugPath, this.theName + " " + Properties.Resources.Decompile_DebugPhyFileNameSuffix);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
-				this.WriteAccessedBytesDebugFile(debugPathFileName, this.thePhyFileDataGeneric.theFileSeekLog);
-				this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
+				debugPathFileName = Path.Combine(debugPath, theName + " " + Properties.Resources.Decompile_DebugPhyFileNameSuffix);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, debugPathFileName);
+				WriteAccessedBytesDebugFile(debugPathFileName, thePhyFileDataGeneric.theFileSeekLog);
+				NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, debugPathFileName);
 			}
 
 			return status;
@@ -369,13 +369,13 @@ namespace Crowbar
 
 		protected override void ReadMdlFileHeader_Internal()
 		{
-			if (this.theMdlFileData == null)
+			if (theMdlFileData == null)
 			{
-				this.theMdlFileData = new SourceMdlFileData32();
-				this.theMdlFileDataGeneric = this.theMdlFileData;
+				theMdlFileData = new SourceMdlFileData32();
+				theMdlFileDataGeneric = theMdlFileData;
 			}
 
-			SourceMdlFile32 mdlFile = new SourceMdlFile32(this.theInputFileReader, this.theMdlFileData);
+			SourceMdlFile32 mdlFile = new SourceMdlFile32(theInputFileReader, theMdlFileData);
 
 			mdlFile.ReadMdlHeader00("MDL File Header 00");
 			mdlFile.ReadMdlHeader01("MDL File Header 01");
@@ -383,13 +383,13 @@ namespace Crowbar
 
 		protected override void ReadMdlFileForViewer_Internal()
 		{
-			if (this.theMdlFileData == null)
+			if (theMdlFileData == null)
 			{
-				this.theMdlFileData = new SourceMdlFileData32();
-				this.theMdlFileDataGeneric = this.theMdlFileData;
+				theMdlFileData = new SourceMdlFileData32();
+				theMdlFileDataGeneric = theMdlFileData;
 			}
 
-			SourceMdlFile32 mdlFile = new SourceMdlFile32(this.theInputFileReader, this.theMdlFileData);
+			SourceMdlFile32 mdlFile = new SourceMdlFile32(theInputFileReader, theMdlFileData);
 
 			mdlFile.ReadMdlHeader00("MDL File Header 00");
 			mdlFile.ReadMdlHeader01("MDL File Header 01");
@@ -400,13 +400,13 @@ namespace Crowbar
 
 		protected override void ReadMdlFile_Internal()
 		{
-			if (this.theMdlFileData == null)
+			if (theMdlFileData == null)
 			{
-				this.theMdlFileData = new SourceMdlFileData32();
-				this.theMdlFileDataGeneric = this.theMdlFileData;
+				theMdlFileData = new SourceMdlFileData32();
+				theMdlFileDataGeneric = theMdlFileData;
 			}
 
-			SourceMdlFile32 mdlFile = new SourceMdlFile32(this.theInputFileReader, this.theMdlFileData);
+			SourceMdlFile32 mdlFile = new SourceMdlFile32(theInputFileReader, theMdlFileData);
 
 			mdlFile.ReadMdlHeader00("MDL File Header 00");
 			mdlFile.ReadMdlHeader01("MDL File Header 01");
@@ -455,15 +455,15 @@ namespace Crowbar
 
 		protected override void ReadPhyFile_Internal()
 		{
-			if (this.thePhyFileDataGeneric == null)
+			if (thePhyFileDataGeneric == null)
 			{
-				this.thePhyFileDataGeneric = new SourcePhyFileData();
+				thePhyFileDataGeneric = new SourcePhyFileData();
 			}
 
-			SourcePhyFile phyFile = new SourcePhyFile(this.theInputFileReader, this.thePhyFileDataGeneric);
+			SourcePhyFile phyFile = new SourcePhyFile(theInputFileReader, thePhyFileDataGeneric);
 
 			phyFile.ReadSourcePhyHeader();
-			if (this.thePhyFileDataGeneric.solidCount > 0)
+			if (thePhyFileDataGeneric.solidCount > 0)
 			{
 				phyFile.ReadSourceCollisionData();
 				phyFile.CalculateVertexNormals();
@@ -478,12 +478,12 @@ namespace Crowbar
 
 		protected override void ReadVtxFile_Internal()
 		{
-			if (this.theVtxFileData == null)
+			if (theVtxFileData == null)
 			{
-				this.theVtxFileData = new SourceVtxFileData06();
+				theVtxFileData = new SourceVtxFileData06();
 			}
 
-			SourceVtxFile06 vtxFile = new SourceVtxFile06(this.theInputFileReader, this.theVtxFileData);
+			SourceVtxFile06 vtxFile = new SourceVtxFile06(theInputFileReader, theVtxFileData);
 
 			vtxFile.ReadSourceVtxHeader();
 			//If Me.theVtxFileData.lodCount > 0 Then
@@ -494,7 +494,7 @@ namespace Crowbar
 
 		protected override void WriteQcFile()
 		{
-			SourceQcFile32 qcFile = new SourceQcFile32(this.theOutputFileTextWriter, this.theQcPathFileName, this.theMdlFileData, this.thePhyFileDataGeneric, this.theVtxFileData, this.theName);
+			SourceQcFile32 qcFile = new SourceQcFile32(theOutputFileTextWriter, theQcPathFileName, theMdlFileData, thePhyFileDataGeneric, theVtxFileData, theName);
 
 			try
 			{
@@ -504,7 +504,7 @@ namespace Crowbar
 
 				qcFile.WriteStaticPropCommand();
 
-				if (this.theMdlFileData.theModelCommandIsUsed)
+				if (theMdlFileData.theModelCommandIsUsed)
 				{
 					qcFile.WriteModelCommand();
 					qcFile.WriteBodyGroupCommand(1);
@@ -570,11 +570,11 @@ namespace Crowbar
 			SourceMdlModel37 aBodyModel = null;
 			int bodyPartVertexIndexStart = 0;
 
-			if (this.theVtxFileData.theVtxBodyParts != null && this.theMdlFileData.theBodyParts != null)
+			if (theVtxFileData.theVtxBodyParts != null && theMdlFileData.theBodyParts != null)
 			{
-				for (int bodyPartIndex = 0; bodyPartIndex < this.theVtxFileData.theVtxBodyParts.Count; bodyPartIndex++)
+				for (int bodyPartIndex = 0; bodyPartIndex < theVtxFileData.theVtxBodyParts.Count; bodyPartIndex++)
 				{
-					aBodyPart = this.theVtxFileData.theVtxBodyParts[bodyPartIndex];
+					aBodyPart = theVtxFileData.theVtxBodyParts[bodyPartIndex];
 
 					if (aBodyPart.theVtxModels != null)
 					{
@@ -584,7 +584,7 @@ namespace Crowbar
 
 							if (aVtxModel.theVtxModelLods != null)
 							{
-								aBodyModel = this.theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex];
+								aBodyModel = theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex];
 								if (aBodyModel.name[0] == '\0' && aVtxModel.theVtxModelLods[0].theVtxMeshes == null)
 								{
 									continue;
@@ -600,30 +600,30 @@ namespace Crowbar
 
 									try
 									{
-										string bodyModelName = this.theMdlFileData.theSequenceGroups[0].theFileName;
+										string bodyModelName = theMdlFileData.theSequenceGroups[0].theFileName;
 										if (string.IsNullOrEmpty(bodyModelName) || FileManager.FilePathHasInvalidChars(bodyModelName))
 										{
-											bodyModelName = new string(this.theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].name);
+											bodyModelName = new string(theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].name);
 										}
-										aBodyModel.theSmdFileNames[lodIndex] = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileNames[lodIndex], bodyPartIndex, modelIndex, lodIndex, this.theName, bodyModelName);
+										aBodyModel.theSmdFileNames[lodIndex] = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileNames[lodIndex], bodyPartIndex, modelIndex, lodIndex, theName, bodyModelName);
 										smdPathFileName = Path.Combine(modelOutputPath, aBodyModel.theSmdFileNames[lodIndex]);
 
-										this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, smdPathFileName);
+										NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileStarted, smdPathFileName);
 										//NOTE: Check here in case writing is canceled in the above event.
-										if (this.theWritingIsCanceled)
+										if (theWritingIsCanceled)
 										{
 											status = AppEnums.StatusMessage.Canceled;
 											return status;
 										}
-										else if (this.theWritingSingleFileIsCanceled)
+										else if (theWritingSingleFileIsCanceled)
 										{
-											this.theWritingSingleFileIsCanceled = false;
+											theWritingSingleFileIsCanceled = false;
 											continue;
 										}
 
-										this.WriteMeshSmdFile(smdPathFileName, lodIndex, aVtxModel, aBodyModel, bodyPartVertexIndexStart);
+										WriteMeshSmdFile(smdPathFileName, lodIndex, aVtxModel, aBodyModel, bodyPartVertexIndexStart);
 
-										this.NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, smdPathFileName);
+										NotifySourceModelProgress(AppEnums.ProgressOptions.WritingFileFinished, smdPathFileName);
 									}
 									catch (Exception ex)
 									{
@@ -643,7 +643,7 @@ namespace Crowbar
 
 		protected override void WritePhysicsMeshSmdFile()
 		{
-			SourceSmdFile32 physicsMeshSmdFile = new SourceSmdFile32(this.theOutputFileTextWriter, this.theMdlFileData, this.thePhyFileDataGeneric);
+			SourceSmdFile32 physicsMeshSmdFile = new SourceSmdFile32(theOutputFileTextWriter, theMdlFileData, thePhyFileDataGeneric);
 
 			try
 			{
@@ -665,7 +665,7 @@ namespace Crowbar
 
 		protected override void WriteBoneAnimationSmdFile(SourceMdlSequenceDescBase aSequenceDesc, SourceMdlAnimationDescBase anAnimationDesc)
 		{
-			SourceSmdFile32 smdFile = new SourceSmdFile32(this.theOutputFileTextWriter, this.theMdlFileData);
+			SourceSmdFile32 smdFile = new SourceSmdFile32(theOutputFileTextWriter, theMdlFileData);
 
 			try
 			{

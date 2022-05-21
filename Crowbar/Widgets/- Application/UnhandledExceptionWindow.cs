@@ -24,14 +24,14 @@ namespace Crowbar
 
 		private void CloseButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.Close();
+			DialogResult = System.Windows.Forms.DialogResult.OK;
+			Close();
 		}
 
 		private void CopyErrorReportButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.None;
-			DataObject data = new DataObject(this.ErrorReportTextBox.Text);
+			DialogResult = System.Windows.Forms.DialogResult.None;
+			DataObject data = new DataObject(ErrorReportTextBox.Text);
 			//NOTE: Set the second parameter to True so that the Clipboard will keep the text on it when the application exits.
 			Clipboard.SetDataObject(data, true);
 		}

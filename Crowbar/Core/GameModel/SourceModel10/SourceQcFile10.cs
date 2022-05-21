@@ -70,12 +70,12 @@ namespace Crowbar
 
 		public SourceQcFile10(StreamWriter outputFileStream, string outputPathFileName, SourceMdlFileData10 mdlFileData, string modelName)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
-			this.theModelName = modelName;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
+			theModelName = modelName;
 
-			this.theOutputPath = FileManager.GetPath(outputPathFileName);
-			this.theOutputFileNameWithoutExtension = Path.GetFileNameWithoutExtension(outputPathFileName);
+			theOutputPath = FileManager.GetPath(outputPathFileName);
+			theOutputFileNameWithoutExtension = Path.GetFileNameWithoutExtension(outputPathFileName);
 		}
 
 #endregion
@@ -84,26 +84,26 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteAttachmentCommand()
 		{
 			string line = "";
 
-			if (this.theMdlFileData.theAttachments != null)
+			if (theMdlFileData.theAttachments != null)
 			{
 				line = "";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
-				for (int i = 0; i < this.theMdlFileData.theAttachments.Count; i++)
+				for (int i = 0; i < theMdlFileData.theAttachments.Count; i++)
 				{
-					SourceMdlAttachment10 anAttachment = this.theMdlFileData.theAttachments[i];
+					SourceMdlAttachment10 anAttachment = theMdlFileData.theAttachments[i];
 
 					line = "$attachment ";
 					line += i.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " \"";
-					line += this.theMdlFileData.theBones[anAttachment.boneIndex].theName;
+					line += theMdlFileData.theBones[anAttachment.boneIndex].theName;
 					line += "\"";
 					line += " ";
 
@@ -113,7 +113,7 @@ namespace Crowbar
 					line += " ";
 					line += anAttachment.attachmentPoint.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -128,22 +128,22 @@ namespace Crowbar
 			double maxY = 0;
 			double maxZ = 0;
 
-			this.theOutputFileStreamWriter.WriteLine();
+			theOutputFileStreamWriter.WriteLine();
 
 			if (MainCROWBAR.TheApp.Settings.DecompileDebugInfoFilesIsChecked)
 			{
 				line = "// Bounding box or hull. Used for collision with a world object.";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			//FROM: VDC wiki: 
 			//$bbox (min x) (min y) (min z) (max x) (max y) (max z)
-			minX = Math.Round(this.theMdlFileData.hullMinPosition.x, 3);
-			minY = Math.Round(this.theMdlFileData.hullMinPosition.y, 3);
-			minZ = Math.Round(this.theMdlFileData.hullMinPosition.z, 3);
-			maxX = Math.Round(this.theMdlFileData.hullMaxPosition.x, 3);
-			maxY = Math.Round(this.theMdlFileData.hullMaxPosition.y, 3);
-			maxZ = Math.Round(this.theMdlFileData.hullMaxPosition.z, 3);
+			minX = Math.Round(theMdlFileData.hullMinPosition.x, 3);
+			minY = Math.Round(theMdlFileData.hullMinPosition.y, 3);
+			minZ = Math.Round(theMdlFileData.hullMinPosition.z, 3);
+			maxX = Math.Round(theMdlFileData.hullMaxPosition.x, 3);
+			maxY = Math.Round(theMdlFileData.hullMaxPosition.y, 3);
+			maxZ = Math.Round(theMdlFileData.hullMaxPosition.z, 3);
 
 			line = "";
 			line += "$bbox ";
@@ -159,7 +159,7 @@ namespace Crowbar
 			line += " ";
 			line += maxZ.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteBodyGroupCommand()
@@ -168,22 +168,22 @@ namespace Crowbar
 			SourceMdlBodyPart10 aBodyPart = null;
 			SourceMdlModel10 aBodyModel = null;
 
-			if (this.theMdlFileData.theBodyParts != null && this.theMdlFileData.theBodyParts.Count > 0)
+			if (theMdlFileData.theBodyParts != null && theMdlFileData.theBodyParts.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				for (int bodyPartIndex = 0; bodyPartIndex < this.theMdlFileData.theBodyParts.Count; bodyPartIndex++)
+				for (int bodyPartIndex = 0; bodyPartIndex < theMdlFileData.theBodyParts.Count; bodyPartIndex++)
 				{
-					aBodyPart = this.theMdlFileData.theBodyParts[bodyPartIndex];
+					aBodyPart = theMdlFileData.theBodyParts[bodyPartIndex];
 
 					line = "$bodygroup ";
 					line += "\"";
 					line += aBodyPart.theName;
 					line += "\"";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					line = "{";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					if (aBodyPart.theModels != null && aBodyPart.theModels.Count > 0)
 					{
@@ -198,18 +198,18 @@ namespace Crowbar
 							}
 							else
 							{
-								aBodyModel.theSmdFileName = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileName, bodyPartIndex, modelIndex, 0, this.theModelName, this.theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theName);
+								aBodyModel.theSmdFileName = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileName, bodyPartIndex, modelIndex, 0, theModelName, theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theName);
 								line += "studio ";
 								line += "\"";
 								line += Path.GetFileNameWithoutExtension(aBodyModel.theSmdFileName);
 								line += "\"";
 							}
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 						}
 					}
 
 					line = "}";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -224,22 +224,22 @@ namespace Crowbar
 			double maxY = 0;
 			double maxZ = 0;
 
-			this.theOutputFileStreamWriter.WriteLine();
+			theOutputFileStreamWriter.WriteLine();
 
 			if (MainCROWBAR.TheApp.Settings.DecompileDebugInfoFilesIsChecked)
 			{
 				line = "// Clipping box or view bounding box.";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			//FROM: VDC wiki: 
 			//$cbox <float|minx> <float|miny> <float|minz> <float|maxx> <float|maxy> <float|maxz> 
-			minX = Math.Round(this.theMdlFileData.viewBoundingBoxMinPosition.x, 3);
-			minY = Math.Round(this.theMdlFileData.viewBoundingBoxMinPosition.y, 3);
-			minZ = Math.Round(this.theMdlFileData.viewBoundingBoxMinPosition.z, 3);
-			maxX = Math.Round(this.theMdlFileData.viewBoundingBoxMaxPosition.x, 3);
-			maxY = Math.Round(this.theMdlFileData.viewBoundingBoxMaxPosition.y, 3);
-			maxZ = Math.Round(this.theMdlFileData.viewBoundingBoxMaxPosition.z, 3);
+			minX = Math.Round(theMdlFileData.viewBoundingBoxMinPosition.x, 3);
+			minY = Math.Round(theMdlFileData.viewBoundingBoxMinPosition.y, 3);
+			minZ = Math.Round(theMdlFileData.viewBoundingBoxMinPosition.z, 3);
+			maxX = Math.Round(theMdlFileData.viewBoundingBoxMaxPosition.x, 3);
+			maxY = Math.Round(theMdlFileData.viewBoundingBoxMaxPosition.y, 3);
+			maxZ = Math.Round(theMdlFileData.viewBoundingBoxMaxPosition.z, 3);
 
 			line = "$cbox ";
 			line += minX.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
@@ -254,7 +254,7 @@ namespace Crowbar
 			line += " ";
 			line += maxZ.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteCDCommand()
@@ -262,7 +262,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "$cd \".\"";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteCDTextureCommand()
@@ -270,7 +270,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "$cdtexture \".\"";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteClipToTexturesCommand()
@@ -278,7 +278,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "$cliptotextures";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteControllerCommand()
@@ -290,16 +290,16 @@ namespace Crowbar
 			//$controller 0 "tracker" LYR -1 1
 			try
 			{
-				if (this.theMdlFileData.theBoneControllers != null)
+				if (theMdlFileData.theBoneControllers != null)
 				{
-					if (this.theMdlFileData.theBoneControllers.Count > 0)
+					if (theMdlFileData.theBoneControllers.Count > 0)
 					{
-						this.theOutputFileStreamWriter.WriteLine();
+						theOutputFileStreamWriter.WriteLine();
 					}
 
-					for (int i = 0; i < this.theMdlFileData.theBoneControllers.Count; i++)
+					for (int i = 0; i < theMdlFileData.theBoneControllers.Count; i++)
 					{
-						boneController = this.theMdlFileData.theBoneControllers[i];
+						boneController = theMdlFileData.theBoneControllers[i];
 
 						line = "$controller ";
 						if (boneController.index == 4)
@@ -311,14 +311,14 @@ namespace Crowbar
 							line += boneController.index.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 						}
 						line += " \"";
-						line += this.theMdlFileData.theBones[boneController.boneIndex].theName;
+						line += theMdlFileData.theBones[boneController.boneIndex].theName;
 						line += "\" ";
 						line += SourceModule10.GetControlText(boneController.type);
 						line += " ";
 						line += boneController.startAngleDegrees.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 						line += " ";
 						line += boneController.endAngleDegrees.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-						this.theOutputFileStreamWriter.WriteLine(line);
+						theOutputFileStreamWriter.WriteLine(line);
 					}
 				}
 			}
@@ -332,12 +332,12 @@ namespace Crowbar
 		{
 			string line = "";
 
-			if (this.theMdlFileData.textureCount == 0)
+			if (theMdlFileData.textureCount == 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
 				line = "$externaltextures";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 		}
 
@@ -348,9 +348,9 @@ namespace Crowbar
 			double offsetY = 0;
 			double offsetZ = 0;
 
-			offsetX = Math.Round(this.theMdlFileData.eyePosition.y, 3);
-			offsetY = -Math.Round(this.theMdlFileData.eyePosition.x, 3);
-			offsetZ = Math.Round(this.theMdlFileData.eyePosition.z, 3);
+			offsetX = Math.Round(theMdlFileData.eyePosition.y, 3);
+			offsetY = -Math.Round(theMdlFileData.eyePosition.x, 3);
+			offsetZ = Math.Round(theMdlFileData.eyePosition.z, 3);
 
 			if (offsetX == 0 && offsetY == 0 && offsetZ == 0)
 			{
@@ -358,7 +358,7 @@ namespace Crowbar
 			}
 
 			line = "";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			line = "$eyeposition ";
 			line += offsetX.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
@@ -366,18 +366,18 @@ namespace Crowbar
 			line += offsetY.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 			line += " ";
 			line += offsetZ.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteFlagsCommand()
 		{
 			string line = "";
 
-			this.theOutputFileStreamWriter.WriteLine();
+			theOutputFileStreamWriter.WriteLine();
 
 			line = "$flags ";
-			line += this.theMdlFileData.flags.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-			this.theOutputFileStreamWriter.WriteLine(line);
+			line += theMdlFileData.flags.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteHBoxCommands()
@@ -385,19 +385,19 @@ namespace Crowbar
 			string line = "";
 			SourceMdlHitbox10 aHitbox = null;
 
-			if (this.theMdlFileData.theHitboxes.Count > 0)
+			if (theMdlFileData.theHitboxes.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				for (int j = 0; j < this.theMdlFileData.theHitboxes.Count; j++)
+				for (int j = 0; j < theMdlFileData.theHitboxes.Count; j++)
 				{
-					aHitbox = this.theMdlFileData.theHitboxes[j];
+					aHitbox = theMdlFileData.theHitboxes[j];
 
 					line = "$hbox ";
 					line += aHitbox.groupIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += "\"";
-					line += this.theMdlFileData.theBones[aHitbox.boneIndex].theName;
+					line += theMdlFileData.theBones[aHitbox.boneIndex].theName;
 					line += "\"";
 					line += " ";
 					line += aHitbox.boundingBoxMin.x.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
@@ -412,7 +412,7 @@ namespace Crowbar
 					line += " ";
 					line += aHitbox.boundingBoxMax.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -425,15 +425,15 @@ namespace Crowbar
 			//NOTE: Ignore internal model name ($modelname) and instead use file name of MDL file.
 			//      This seems to be how it is handled by Half-Life and all the tools for it.
 			//modelPathFileName = Me.theMdlFileData.theModelName
-			modelPathFileName = this.theMdlFileData.theFileName + ".mdl";
+			modelPathFileName = theMdlFileData.theFileName + ".mdl";
 
-			this.theOutputFileStreamWriter.WriteLine();
+			theOutputFileStreamWriter.WriteLine();
 
 			//If Path.GetExtension(modelPathFileName) <> ".mdl" Then
-			if (modelPathFileName != this.theMdlFileData.theModelName)
+			if (modelPathFileName != theMdlFileData.theModelName)
 			{
-				line = "// Stored modelname (without quotes): \"" + this.theMdlFileData.theModelName + "\"";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line = "// Stored modelname (without quotes): \"" + theMdlFileData.theModelName + "\"";
+				theOutputFileStreamWriter.WriteLine(line);
 
 				//modelPathFileName = Me.theMdlFileData.theFileName + ".mdl"
 			}
@@ -442,7 +442,7 @@ namespace Crowbar
 			line += "\"";
 			line += modelPathFileName;
 			line += "\"";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		//NOTE: Although this code is correct, the $sequencegroup command seems completely pointless; it just labels each group, but is not used for anything.
@@ -474,11 +474,11 @@ namespace Crowbar
 			long groupSize = 0;
 			double remainder = 0;
 
-			if (this.theMdlFileData.theSequenceGroups.Count > 1)
+			if (theMdlFileData.theSequenceGroups.Count > 1)
 			{
-				for (int sequenceGroupIndex = 0; sequenceGroupIndex < this.theMdlFileData.theSequenceGroups.Count; sequenceGroupIndex++)
+				for (int sequenceGroupIndex = 0; sequenceGroupIndex < theMdlFileData.theSequenceGroups.Count; sequenceGroupIndex++)
 				{
-					fileSize = this.theMdlFileData.theSequenceGroupFileHeaders[sequenceGroupIndex].theActualFileSize;
+					fileSize = theMdlFileData.theSequenceGroupFileHeaders[sequenceGroupIndex].theActualFileSize;
 					if (largestFileSize < fileSize)
 					{
 						largestFileSize = fileSize;
@@ -494,12 +494,12 @@ namespace Crowbar
 						groupSize += 1;
 					}
 
-					this.theOutputFileStreamWriter.WriteLine();
+					theOutputFileStreamWriter.WriteLine();
 
 					line = "$sequencegroupsize ";
 					line += groupSize.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -509,7 +509,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "$scale 1.0";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSequenceCommands()
@@ -517,13 +517,13 @@ namespace Crowbar
 			string line = "";
 			SourceMdlSequenceDesc10 aSequence = null;
 
-			if (this.theMdlFileData.theSequences != null && this.theMdlFileData.theSequences.Count > 0)
+			if (theMdlFileData.theSequences != null && theMdlFileData.theSequences.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				for (int sequenceGroupIndex = 0; sequenceGroupIndex < this.theMdlFileData.theSequences.Count; sequenceGroupIndex++)
+				for (int sequenceGroupIndex = 0; sequenceGroupIndex < theMdlFileData.theSequences.Count; sequenceGroupIndex++)
 				{
-					aSequence = this.theMdlFileData.theSequences[sequenceGroupIndex];
+					aSequence = theMdlFileData.theSequences[sequenceGroupIndex];
 
 					line = "$sequence ";
 					line += "\"";
@@ -531,11 +531,11 @@ namespace Crowbar
 					line += "\"";
 					//NOTE: Opening brace must be on same line as the command.
 					line += " {";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					try
 					{
-						this.WriteSequenceOptions(aSequence);
+						WriteSequenceOptions(aSequence);
 					}
 					catch (Exception ex)
 					{
@@ -543,46 +543,46 @@ namespace Crowbar
 					}
 
 					line = "}";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
 
 		public void WriteTexRenderMode()
 		{
-			if (this.theMdlFileData.theTextures != null && this.theMdlFileData.theTextures.Count > 0)
+			if (theMdlFileData.theTextures != null && theMdlFileData.theTextures.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				foreach (SourceMdlTexture10 texture in this.theMdlFileData.theTextures)
+				foreach (SourceMdlTexture10 texture in theMdlFileData.theTextures)
 				{
 					if (((texture.flags & SourceMdlTexture10.STUDIO_NF_FLATSHADE) > 0) && (!(texture.theFileName.ToLower().Contains("chrome"))))
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "flatshade", true);
+						WriteTexRenderModeLine(texture.theFileName, "flatshade", true);
 					}
 					if (((texture.flags & SourceMdlTexture10.STUDIO_NF_CHROME) > 0) && (!(texture.theFileName.ToLower().Contains("chrome"))))
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "chrome", false);
+						WriteTexRenderModeLine(texture.theFileName, "chrome", false);
 					}
 					if ((texture.flags & SourceMdlTexture10.STUDIO_NF_FULLBRIGHT) > 0)
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "fullbright", false);
+						WriteTexRenderModeLine(texture.theFileName, "fullbright", false);
 					}
 					if ((texture.flags & SourceMdlTexture10.STUDIO_NF_NOMIPS) > 0)
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "nomips", false);
+						WriteTexRenderModeLine(texture.theFileName, "nomips", false);
 					}
 					if ((texture.flags & SourceMdlTexture10.STUDIO_NF_ALPHA) > 0)
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "alpha", false);
+						WriteTexRenderModeLine(texture.theFileName, "alpha", false);
 					}
 					if ((texture.flags & SourceMdlTexture10.STUDIO_NF_ADDITIVE) > 0)
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "additive", false);
+						WriteTexRenderModeLine(texture.theFileName, "additive", false);
 					}
 					if ((texture.flags & SourceMdlTexture10.STUDIO_NF_MASKED) > 0)
 					{
-						this.WriteTexRenderModeLine(texture.theFileName, "masked", false);
+						WriteTexRenderModeLine(texture.theFileName, "masked", false);
 					}
 				}
 			}
@@ -592,7 +592,7 @@ namespace Crowbar
 		{
 			string line = "";
 
-			if (this.theMdlFileData.theSkinFamilies != null && this.theMdlFileData.theSkinFamilies.Count > 0 && this.theMdlFileData.theTextures != null && this.theMdlFileData.theTextures.Count > 0 && this.theMdlFileData.skinReferenceCount > 0)
+			if (theMdlFileData.theSkinFamilies != null && theMdlFileData.theSkinFamilies.Count > 0 && theMdlFileData.theTextures != null && theMdlFileData.theTextures.Count > 0 && theMdlFileData.skinReferenceCount > 0)
 			{
 				//Me.theOutputFileStreamWriter.WriteLine()
 
@@ -620,11 +620,11 @@ namespace Crowbar
 				List<List<short>> processedSkinFamilies = null;
 				if (MainCROWBAR.TheApp.Settings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked)
 				{
-					processedSkinFamilies = this.GetSkinFamiliesOfChangedMaterials(this.theMdlFileData.theSkinFamilies);
+					processedSkinFamilies = GetSkinFamiliesOfChangedMaterials(theMdlFileData.theSkinFamilies);
 				}
 				else
 				{
-					processedSkinFamilies = this.theMdlFileData.theSkinFamilies;
+					processedSkinFamilies = theMdlFileData.theSkinFamilies;
 				}
 
 				List<List<string>> skinFamiliesOfTextureFileNames = new List<List<string>>(processedSkinFamilies.Count);
@@ -636,7 +636,7 @@ namespace Crowbar
 					List<string> textureFileNames = new List<string>(skinReferenceCount);
 					for (int j = 0; j < skinReferenceCount; j++)
 					{
-						SourceMdlTexture10 aTexture = this.theMdlFileData.theTextures[aSkinFamily[j]];
+						SourceMdlTexture10 aTexture = theMdlFileData.theTextures[aSkinFamily[j]];
 
 						textureFileNames.Add(aTexture.theFileName);
 					}
@@ -646,21 +646,21 @@ namespace Crowbar
 
 				if ((!MainCROWBAR.TheApp.Settings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked) || (skinFamiliesOfTextureFileNames.Count > 1))
 				{
-					this.theOutputFileStreamWriter.WriteLine();
+					theOutputFileStreamWriter.WriteLine();
 
 					line = "$texturegroup \"skinfamilies\"";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 					line = "{";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
-					List<string> skinFamilyLines = this.GetTextureGroupSkinFamilyLines(skinFamiliesOfTextureFileNames);
+					List<string> skinFamilyLines = GetTextureGroupSkinFamilyLines(skinFamiliesOfTextureFileNames);
 					for (int skinFamilyLineIndex = 0; skinFamilyLineIndex < skinFamilyLines.Count; skinFamilyLineIndex++)
 					{
-						this.theOutputFileStreamWriter.WriteLine(skinFamilyLines[skinFamilyLineIndex]);
+						theOutputFileStreamWriter.WriteLine(skinFamilyLines[skinFamilyLineIndex]);
 					}
 
 					line = "}";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -754,18 +754,18 @@ namespace Crowbar
 			{
 				if (aSequenceDesc.blendCount == 1)
 				{
-					aSequenceDesc.theSmdRelativePathFileNames[blendIndex] = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileNames[blendIndex], this.theModelName, aSequenceDesc.theName, -1);
+					aSequenceDesc.theSmdRelativePathFileNames[blendIndex] = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileNames[blendIndex], theModelName, aSequenceDesc.theName, -1);
 				}
 				else
 				{
-					aSequenceDesc.theSmdRelativePathFileNames[blendIndex] = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileNames[blendIndex], this.theModelName, aSequenceDesc.theName, blendIndex);
+					aSequenceDesc.theSmdRelativePathFileNames[blendIndex] = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileNames[blendIndex], theModelName, aSequenceDesc.theName, blendIndex);
 				}
 
 				line = "\t";
 				line += "\"";
 				line += FileManager.GetPathFileNameWithoutExtension(aSequenceDesc.theSmdRelativePathFileNames[blendIndex]);
 				line += "\"";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			if (aSequenceDesc.activityId > 0)
@@ -783,7 +783,7 @@ namespace Crowbar
 				line += activityName;
 				line += " ";
 				line += aSequenceDesc.activityWeight.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			for (int i = 0; i <= 1; i++)
@@ -797,7 +797,7 @@ namespace Crowbar
 					line += aSequenceDesc.blendStart[i].ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += aSequenceDesc.blendEnd[i].ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
@@ -827,27 +827,27 @@ namespace Crowbar
 						line += "\"";
 					}
 					line += " }";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
 			line = "\t";
 			line += "fps ";
 			line += aSequenceDesc.fps.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if ((aSequenceDesc.flags & SourceMdlSequenceDesc10.STUDIO_LOOPING) > 0)
 			{
 				line = "\t";
 				line += "loop";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			if (aSequenceDesc.motiontype > 0)
 			{
 				line = "\t";
 				line += SourceModule10.GetMultipleControlText(aSequenceDesc.motiontype);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			if (aSequenceDesc.thePivots != null && aSequenceDesc.thePivots.Count > 0)
@@ -861,11 +861,11 @@ namespace Crowbar
 					line += aSequenceDesc.thePivots[0].pivotStart.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += aSequenceDesc.thePivots[0].pivotEnd.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
-			this.WriteSequenceNodeInfo(aSequenceDesc);
+			WriteSequenceNodeInfo(aSequenceDesc);
 
 			//If (aSequenceDesc.flags And SourceMdlAnimationDesc.STUDIO_AUTOPLAY) > 0 Then
 			//	line = vbTab
@@ -893,7 +893,7 @@ namespace Crowbar
 					line += "node";
 					line += " ";
 					line += (aSeqDesc.entryNodeIndex).ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 				else if ((aSeqDesc.nodeFlags & 1) == 0)
 				{
@@ -904,7 +904,7 @@ namespace Crowbar
 					line += (aSeqDesc.entryNodeIndex).ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += (aSeqDesc.exitNodeIndex).ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 				else
 				{
@@ -915,7 +915,7 @@ namespace Crowbar
 					line += (aSeqDesc.entryNodeIndex).ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += (aSeqDesc.exitNodeIndex).ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -934,7 +934,7 @@ namespace Crowbar
 			line += "\"";
 			line += " ";
 			line += renderMode;
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion

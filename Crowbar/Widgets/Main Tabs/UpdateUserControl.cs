@@ -25,7 +25,7 @@ namespace Crowbar
 			InitializeComponent();
 
 			// Add any initialization after the InitializeComponent() call.
-			this.theUpdater = new Updater();
+			theUpdater = new Updater();
 		}
 
 #endregion
@@ -34,28 +34,28 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.DownloadFolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UpdateDownloadPath", false, DataSourceUpdateMode.OnValidation);
+			DownloadFolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UpdateDownloadPath", false, DataSourceUpdateMode.OnValidation);
 
-			this.UpdateToNewPathCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UpdateUpdateToNewPathIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.UpdateFolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UpdateUpdateDownloadPath", false, DataSourceUpdateMode.OnValidation);
-			this.UpdateCopySettingsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UpdateCopySettingsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UpdateToNewPathCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UpdateUpdateToNewPathIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UpdateFolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UpdateUpdateDownloadPath", false, DataSourceUpdateMode.OnValidation);
+			UpdateCopySettingsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UpdateCopySettingsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.DownloadFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
-			this.UpdateFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			DownloadFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			UpdateFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 
-			this.CurrentVersionLabel.Text = "Current Version: " + Version.Parse(Application.ProductVersion).ToString(2);
+			CurrentVersionLabel.Text = "Current Version: " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		private void Free()
 		{
-			this.DownloadFolderTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
-			this.UpdateFolderTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			DownloadFolderTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			UpdateFolderTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 
-			this.DownloadFolderTextBox.DataBindings.Clear();
+			DownloadFolderTextBox.DataBindings.Clear();
 
-			this.UpdateToNewPathCheckBox.DataBindings.Clear();
-			this.UpdateFolderTextBox.DataBindings.Clear();
-			this.UpdateCopySettingsCheckBox.DataBindings.Clear();
+			UpdateToNewPathCheckBox.DataBindings.Clear();
+			UpdateFolderTextBox.DataBindings.Clear();
+			UpdateCopySettingsCheckBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -64,10 +64,10 @@ namespace Crowbar
 
 		public void CheckForUpdate()
 		{
-			this.CheckForUpdateTextBox.Text = "Checking for update...";
-			this.UpdateCommandWidgets(true);
-			this.CancelCheckButton.Enabled = true;
-			this.theUpdater.CheckForUpdate(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted);
+			CheckForUpdateTextBox.Text = "Checking for update...";
+			UpdateCommandWidgets(true);
+			CancelCheckButton.Enabled = true;
+			theUpdater.CheckForUpdate(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted);
 		}
 
 #endregion
@@ -89,14 +89,14 @@ namespace Crowbar
 		private void UpdateUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.DownloadFolderTextBox, this.BrowseForDownloadFolderButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.DownloadProgressBarEx, this.CancelDownloadButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.UpdateFolderTextBox, this.BrowseForUpdateFolderButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.UpdateProgressBarEx, this.CancelUpdateButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(DownloadFolderTextBox, BrowseForDownloadFolderButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(DownloadProgressBarEx, CancelDownloadButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(UpdateFolderTextBox, BrowseForUpdateFolderButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(UpdateProgressBarEx, CancelUpdateButton);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -106,7 +106,7 @@ namespace Crowbar
 
 		private void CheckForUpdateButton_Click(object sender, EventArgs e)
 		{
-			this.CheckForUpdate();
+			CheckForUpdate();
 		}
 
 		private void DownloadFolderTextBox_DragDrop(object sender, DragEventArgs e)
@@ -129,27 +129,27 @@ namespace Crowbar
 
 		private void BrowseForDownloadFolderButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForDownloadPath();
+			BrowseForDownloadPath();
 		}
 
 		private void CancelCheckButton_Click(object sender, EventArgs e)
 		{
-			this.CancelCheckForUpdate();
+			CancelCheckForUpdate();
 		}
 
 		private void DownloadButton_Click(object sender, EventArgs e)
 		{
-			this.Download();
+			Download();
 		}
 
 		private void CancelDownloadButton_Click(object sender, EventArgs e)
 		{
-			this.CancelDownload();
+			CancelDownload();
 		}
 
 		private void GotoDownloadFileButton_Click(object sender, EventArgs e)
 		{
-			this.GotoDownloadFile();
+			GotoDownloadFile();
 		}
 
 		private void UpdateFolderTextBox_DragDrop(object sender, DragEventArgs e)
@@ -172,17 +172,17 @@ namespace Crowbar
 
 		private void BrowseForUpdateFolderButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForUpdateDownloadPath();
+			BrowseForUpdateDownloadPath();
 		}
 
 		private void UpdateButton_Click(object sender, EventArgs e)
 		{
-			this.UpdateApp();
+			UpdateApp();
 		}
 
 		private void CancelUpdateButton_Click(object sender, EventArgs e)
 		{
-			this.CancelUpdate();
+			CancelUpdate();
 		}
 
 #endregion
@@ -194,7 +194,7 @@ namespace Crowbar
 			if (e.ProgressPercentage == 0)
 			{
 				// Changelog
-				this.ChangelogTextBox.Text = (e.UserState == null ? null : Convert.ToString(e.UserState));
+				ChangelogTextBox.Text = (e.UserState == null ? null : Convert.ToString(e.UserState));
 			}
 		}
 
@@ -202,33 +202,33 @@ namespace Crowbar
 		{
 			if (e.Cancelled)
 			{
-				this.CheckForUpdateTextBox.Text = "Check canceled.";
+				CheckForUpdateTextBox.Text = "Check canceled.";
 			}
 			else
 			{
 				Updater.StatusOutputInfo outputInfo = (Updater.StatusOutputInfo)e.Result;
-				this.CheckForUpdateTextBox.Text = Convert.ToString(outputInfo.StatusMessage);
+				CheckForUpdateTextBox.Text = Convert.ToString(outputInfo.StatusMessage);
 				NotifyUpdateAvailable(outputInfo.UpdateIsAvailable);
 
 				if (outputInfo.UpdateIsEnabled && !outputInfo.UpdateIsAvailable)
 				{
-					this.theCurrentProgressBar.Text = "No available update.";
-					this.theCurrentProgressBar.Value = 0;
+					theCurrentProgressBar.Text = "No available update.";
+					theCurrentProgressBar.Value = 0;
 				}
 				else if (outputInfo.DownloadIsEnabled && !(outputInfo.UpdateIsEnabled && !outputInfo.UpdateIsAvailable))
 				{
-					this.theCurrentProgressBar.Text = "Starting download...";
-					this.theCurrentProgressBar.Value = 0;
+					theCurrentProgressBar.Text = "Starting download...";
+					theCurrentProgressBar.Value = 0;
 				}
 			}
 
-			this.UpdateCommandWidgets(false);
-			this.CancelCheckButton.Enabled = false;
+			UpdateCommandWidgets(false);
+			CancelCheckButton.Enabled = false;
 		}
 
 		private void Download_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
-			this.UpdateProgressBar(this.theCurrentProgressBar, e.BytesReceived, e.TotalBytesToReceive);
+			UpdateProgressBar(theCurrentProgressBar, e.BytesReceived, e.TotalBytesToReceive);
 		}
 
 		private void Download_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -236,8 +236,8 @@ namespace Crowbar
 			string pathFileName = (e.UserState == null ? null : Convert.ToString(e.UserState));
 			if (e.Cancelled)
 			{
-				this.theCurrentProgressBar.Text = "Download failed.";
-				this.theCurrentProgressBar.Value = 0;
+				theCurrentProgressBar.Text = "Download failed.";
+				theCurrentProgressBar.Value = 0;
 
 				if (File.Exists(pathFileName))
 				{
@@ -247,7 +247,7 @@ namespace Crowbar
 					}
 					catch (Exception ex)
 					{
-						this.theCurrentProgressBar.Text += "WARNING: Problem deleting incomplete downloaded file: \"" + Path.GetFileName(pathFileName) + "\"";
+						theCurrentProgressBar.Text += "WARNING: Problem deleting incomplete downloaded file: \"" + Path.GetFileName(pathFileName) + "\"";
 					}
 				}
 			}
@@ -255,23 +255,23 @@ namespace Crowbar
 			{
 				if (File.Exists(pathFileName))
 				{
-					this.theCurrentProgressBar.Text = "Downloaded file: \"" + Path.GetFileName(pathFileName) + "\"   " + this.theCurrentProgressBar.Text;
-					this.GotoDownloadFileButton.Enabled = true;
-					this.theDownloadedPathFileName = pathFileName;
+					theCurrentProgressBar.Text = "Downloaded file: \"" + Path.GetFileName(pathFileName) + "\"   " + theCurrentProgressBar.Text;
+					GotoDownloadFileButton.Enabled = true;
+					theDownloadedPathFileName = pathFileName;
 				}
 				else
 				{
-					this.theCurrentProgressBar.Text = "Download failed.";
+					theCurrentProgressBar.Text = "Download failed.";
 				}
 			}
 
 			WebClient client = (WebClient)sender;
-			client.DownloadProgressChanged -= this.Download_DownloadProgressChanged;
-			client.DownloadFileCompleted -= this.Download_DownloadFileCompleted;
+			client.DownloadProgressChanged -= Download_DownloadProgressChanged;
+			client.DownloadFileCompleted -= Download_DownloadFileCompleted;
 			client = null;
 
-			this.UpdateCommandWidgets(false);
-			this.CancelDownloadButton.Enabled = false;
+			UpdateCommandWidgets(false);
+			CancelDownloadButton.Enabled = false;
 		}
 
 		private void Update_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -300,7 +300,7 @@ namespace Crowbar
 
 		private void CancelCheckForUpdate()
 		{
-			this.theUpdater.CancelCheckForUpdate();
+			theUpdater.CancelCheckForUpdate();
 		}
 
 		private void BrowseForDownloadPath()
@@ -334,30 +334,30 @@ namespace Crowbar
 		{
 			if (FileManager.PathExistsAfterTryToCreate(MainCROWBAR.TheApp.Settings.UpdateDownloadPath))
 			{
-				this.DownloadProgressBarEx.Text = "Checking for update...";
-				this.DownloadProgressBarEx.Value = 0;
-				this.theCurrentProgressBar = this.DownloadProgressBarEx;
+				DownloadProgressBarEx.Text = "Checking for update...";
+				DownloadProgressBarEx.Value = 0;
+				theCurrentProgressBar = DownloadProgressBarEx;
 
-				this.UpdateCommandWidgets(true);
-				this.CancelDownloadButton.Enabled = true;
-				this.GotoDownloadFileButton.Enabled = false;
-				this.theUpdater.Download(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, Download_DownloadProgressChanged, Download_DownloadFileCompleted, MainCROWBAR.TheApp.Settings.UpdateDownloadPath);
+				UpdateCommandWidgets(true);
+				CancelDownloadButton.Enabled = true;
+				GotoDownloadFileButton.Enabled = false;
+				theUpdater.Download(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, Download_DownloadProgressChanged, Download_DownloadFileCompleted, MainCROWBAR.TheApp.Settings.UpdateDownloadPath);
 			}
 			else
 			{
-				this.DownloadProgressBarEx.Text = "Download failed to start because folder does not exist";
-				this.DownloadProgressBarEx.Value = 0;
+				DownloadProgressBarEx.Text = "Download failed to start because folder does not exist";
+				DownloadProgressBarEx.Value = 0;
 			}
 		}
 
 		private void CancelDownload()
 		{
-			this.theUpdater.CancelDownload();
+			theUpdater.CancelDownload();
 		}
 
 		public void GotoDownloadFile()
 		{
-			FileManager.OpenWindowsExplorer(this.theDownloadedPathFileName);
+			FileManager.OpenWindowsExplorer(theDownloadedPathFileName);
 		}
 
 		private void BrowseForUpdateDownloadPath()
@@ -390,12 +390,12 @@ namespace Crowbar
 		// Named UpdateApp to avoid confusion with existing UserControl.Update().
 		private void UpdateApp()
 		{
-			this.UpdateProgressBarEx.Text = "Checking for update...";
-			this.UpdateProgressBarEx.Value = 0;
-			this.theCurrentProgressBar = this.UpdateProgressBarEx;
+			UpdateProgressBarEx.Text = "Checking for update...";
+			UpdateProgressBarEx.Value = 0;
+			theCurrentProgressBar = UpdateProgressBarEx;
 
-			this.UpdateCommandWidgets(true);
-			this.CancelUpdateButton.Enabled = true;
+			UpdateCommandWidgets(true);
+			CancelUpdateButton.Enabled = true;
 			string localPath = null;
 			if (MainCROWBAR.TheApp.Settings.UpdateUpdateToNewPathIsChecked)
 			{
@@ -405,25 +405,25 @@ namespace Crowbar
 			{
 				localPath = MainCROWBAR.TheApp.GetCustomDataPath();
 			}
-			this.theUpdater.Update(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, Download_DownloadProgressChanged, Download_DownloadFileCompleted, localPath, Update_ProgressChanged, Update_RunWorkerCompleted);
+			theUpdater.Update(CheckForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, Download_DownloadProgressChanged, Download_DownloadFileCompleted, localPath, Update_ProgressChanged, Update_RunWorkerCompleted);
 		}
 
 		private void CancelUpdate()
 		{
-			this.theUpdater.CancelUpdate();
+			theUpdater.CancelUpdate();
 		}
 
 		private void UpdateCommandWidgets(bool taskIsRunning)
 		{
-			this.CheckForUpdateButton.Enabled = !taskIsRunning;
+			CheckForUpdateButton.Enabled = !taskIsRunning;
 			//Me.CancelCheckButton.Enabled = taskIsRunning
 
-			this.BrowseForDownloadFolderButton.Enabled = !taskIsRunning;
-			this.DownloadButton.Enabled = !taskIsRunning;
+			BrowseForDownloadFolderButton.Enabled = !taskIsRunning;
+			DownloadButton.Enabled = !taskIsRunning;
 			//Me.CancelDownloadButton.Enabled = taskIsRunning
 
-			this.BrowseForUpdateFolderButton.Enabled = !taskIsRunning;
-			this.UpdateButton.Enabled = !taskIsRunning;
+			BrowseForUpdateFolderButton.Enabled = !taskIsRunning;
+			UpdateButton.Enabled = !taskIsRunning;
 			//Me.CancelUpdateButton.Enabled = taskIsRunning
 		}
 
@@ -449,14 +449,14 @@ namespace Crowbar
 			public UpdateAvailableEventArgs(bool updateIsAvailable) : base()
 			{
 
-				this.theUpdateIsAvailable = updateIsAvailable;
+				theUpdateIsAvailable = updateIsAvailable;
 			}
 
 			public bool UpdateIsAvailable
 			{
 				get
 				{
-					return this.theUpdateIsAvailable;
+					return theUpdateIsAvailable;
 				}
 			}
 

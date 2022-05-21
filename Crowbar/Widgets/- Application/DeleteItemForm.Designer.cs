@@ -37,60 +37,60 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.TextBox1 = new Crowbar.TextBoxEx();
-			this.DeleteButton = new System.Windows.Forms.Button();
-			this.CancelDeleteButton = new System.Windows.Forms.Button();
-			this.SuspendLayout();
+			TextBox1 = new Crowbar.TextBoxEx();
+			DeleteButton = new System.Windows.Forms.Button();
+			CancelDeleteButton = new System.Windows.Forms.Button();
+			SuspendLayout();
 			//
 			//TextBox1
 			//
-			this.TextBox1.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.TextBox1.CueBannerText = "";
-			this.TextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.TextBox1.Location = new System.Drawing.Point(12, 12);
-			this.TextBox1.Multiline = true;
-			this.TextBox1.Name = "TextBox1";
-			this.TextBox1.ReadOnly = true;
-			this.TextBox1.Size = new System.Drawing.Size(420, 50);
-			this.TextBox1.TabIndex = 0;
-			this.TextBox1.TabStop = false;
-			this.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			TextBox1.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			TextBox1.CueBannerText = "";
+			TextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			TextBox1.Location = new System.Drawing.Point(12, 12);
+			TextBox1.Multiline = true;
+			TextBox1.Name = "TextBox1";
+			TextBox1.ReadOnly = true;
+			TextBox1.Size = new System.Drawing.Size(420, 50);
+			TextBox1.TabIndex = 0;
+			TextBox1.TabStop = false;
+			TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			//
 			//DeleteButton
 			//
-			this.DeleteButton.Location = new System.Drawing.Point(144, 68);
-			this.DeleteButton.Name = "DeleteButton";
-			this.DeleteButton.Size = new System.Drawing.Size(75, 23);
-			this.DeleteButton.TabIndex = 1;
-			this.DeleteButton.Text = "Delete";
-			this.DeleteButton.UseVisualStyleBackColor = true;
+			DeleteButton.Location = new System.Drawing.Point(144, 68);
+			DeleteButton.Name = "DeleteButton";
+			DeleteButton.Size = new System.Drawing.Size(75, 23);
+			DeleteButton.TabIndex = 1;
+			DeleteButton.Text = "Delete";
+			DeleteButton.UseVisualStyleBackColor = true;
 			//
 			//CancelDeleteButton
 			//
-			this.CancelDeleteButton.Location = new System.Drawing.Point(225, 68);
-			this.CancelDeleteButton.Name = "CancelDeleteButton";
-			this.CancelDeleteButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelDeleteButton.TabIndex = 2;
-			this.CancelDeleteButton.Text = "Cancel";
-			this.CancelDeleteButton.UseVisualStyleBackColor = true;
+			CancelDeleteButton.Location = new System.Drawing.Point(225, 68);
+			CancelDeleteButton.Name = "CancelDeleteButton";
+			CancelDeleteButton.Size = new System.Drawing.Size(75, 23);
+			CancelDeleteButton.TabIndex = 2;
+			CancelDeleteButton.Text = "Cancel";
+			CancelDeleteButton.UseVisualStyleBackColor = true;
 			//
 			//DeleteItemForm
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(444, 113);
-			this.ControlBox = false;
-			this.Controls.Add(this.CancelDeleteButton);
-			this.Controls.Add(this.DeleteButton);
-			this.Controls.Add(this.TextBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Name = "DeleteItemForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Delete Item";
-			this.TopMost = true;
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(444, 113);
+			ControlBox = false;
+			Controls.Add(CancelDeleteButton);
+			Controls.Add(DeleteButton);
+			Controls.Add(TextBox1);
+			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			Name = "DeleteItemForm";
+			StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			Text = "Delete Item";
+			TopMost = true;
+			ResumeLayout(false);
+			PerformLayout();
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			DeleteButton.Click += new System.EventHandler(DeleteButton_Click);

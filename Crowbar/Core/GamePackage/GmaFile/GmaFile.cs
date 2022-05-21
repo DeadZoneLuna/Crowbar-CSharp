@@ -19,9 +19,9 @@ namespace Crowbar
 
 		public GmaFile(BinaryReader archiveDirectoryFileReader, BinaryReader archiveFileReader, GmaFileData gmaFileData)
 		{
-			this.theArchiveDirectoryInputFileReader = archiveDirectoryFileReader;
-			this.theInputFileReader = archiveFileReader;
-			this.theGmaFileData = gmaFileData;
+			theArchiveDirectoryInputFileReader = archiveDirectoryFileReader;
+			theInputFileReader = archiveFileReader;
+			theGmaFileData = gmaFileData;
 		}
 
 #endregion
@@ -32,7 +32,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGmaFileData;
+				return theGmaFileData;
 			}
 		}
 
@@ -48,12 +48,12 @@ namespace Crowbar
 			//Dim fileOffsetStart2 As Long
 			//Dim fileOffsetEnd2 As Long
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-			this.theGmaFileData.id = new string(this.theInputFileReader.ReadChars(4));
-			this.theGmaFileData.version = this.theInputFileReader.ReadByte();
-			this.theGmaFileData.steamID = this.theInputFileReader.ReadBytes(8);
-			this.theGmaFileData.timestamp = this.theInputFileReader.ReadBytes(8);
+			theGmaFileData.id = new string(theInputFileReader.ReadChars(4));
+			theGmaFileData.version = theInputFileReader.ReadByte();
+			theGmaFileData.steamID = theInputFileReader.ReadBytes(8);
+			theGmaFileData.timestamp = theInputFileReader.ReadBytes(8);
 
 			//				if ( m_fmtversion > 1 )
 			//				{
@@ -64,20 +64,20 @@ namespace Crowbar
 			//						strContent = m_buffer.ReadString();
 			//					}
 			//				}
-			if (this.theGmaFileData.version > 1)
+			if (theGmaFileData.version > 1)
 			{
-				this.theGmaFileData.requiredContent = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+				theGmaFileData.requiredContent = FileManager.ReadNullTerminatedString(theInputFileReader);
 			}
 
-			this.theGmaFileData.addonName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
-			this.theGmaFileData.addonDescription = FileManager.ReadNullTerminatedString(this.theInputFileReader);
-			this.theGmaFileData.addonAuthor = FileManager.ReadNullTerminatedString(this.theInputFileReader);
-			this.theGmaFileData.addonVersion = this.theInputFileReader.ReadUInt32();
+			theGmaFileData.addonName = FileManager.ReadNullTerminatedString(theInputFileReader);
+			theGmaFileData.addonDescription = FileManager.ReadNullTerminatedString(theInputFileReader);
+			theGmaFileData.addonAuthor = FileManager.ReadNullTerminatedString(theInputFileReader);
+			theGmaFileData.addonVersion = theInputFileReader.ReadUInt32();
 
 			//Me.theGmaFileData.theDirectoryOffset = Me.theInputFileReader.BaseStream.Position
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.theGmaFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "GMA File Header");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			theGmaFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "GMA File Header");
 		}
 
 		//WRITE: 
@@ -114,7 +114,7 @@ namespace Crowbar
 		//				}
 		public override void ReadEntries(BackgroundWorker bw)
 		{
-			if (!this.theGmaFileData.IsSourcePackage)
+			if (!theGmaFileData.IsSourcePackage)
 			{
 				return;
 			}
@@ -134,12 +134,12 @@ namespace Crowbar
 				entry.fileNumberStored = 0;
 				entry.thePathFileName = "<addon.json>";
 				entry.theRealPathFileName = "addon.json";
-				entry.size = this.GetAddonJsonText().Length;
+				entry.size = GetAddonJsonText().Length;
 				entry.crc = 0;
 				entry.offset = 0;
 				entry.fileNumberUsed = 0;
 
-				this.theGmaFileData.theEntries.Add(entry);
+				theGmaFileData.theEntries.Add(entry);
 
 				entryDataOutputText.Append(entry.thePathFileName);
 				entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -148,28 +148,28 @@ namespace Crowbar
 				entryDataOutputText.Append(" ofs=0x" + entry.offset.ToString("X8"));
 				entryDataOutputText.Append(" sz=" + entry.size.ToString("G0"));
 
-				this.theGmaFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+				theGmaFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 				NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 
 				entryDataOutputText.Clear();
 
-				fileNumberStored = this.theInputFileReader.ReadUInt32();
+				fileNumberStored = theInputFileReader.ReadUInt32();
 				while (fileNumberStored != 0)
 				{
 					entry = new GmaDirectoryEntry();
 
 					entry.fileNumberStored = fileNumberStored;
-					entry.thePathFileName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
-					entry.size = this.theInputFileReader.ReadInt64();
-					entry.crc = this.theInputFileReader.ReadUInt32();
+					entry.thePathFileName = FileManager.ReadNullTerminatedString(theInputFileReader);
+					entry.size = theInputFileReader.ReadInt64();
+					entry.crc = theInputFileReader.ReadUInt32();
 					entry.offset = offset;
 					entry.fileNumberUsed = fileNumber;
 
-					this.theGmaFileData.theEntries.Add(entry);
+					theGmaFileData.theEntries.Add(entry);
 
 					offset += entry.size;
 					fileNumber = (uint)(fileNumber + 1);
-					fileNumberStored = this.theInputFileReader.ReadUInt32();
+					fileNumberStored = theInputFileReader.ReadUInt32();
 
 					entryDataOutputText.Append(entry.thePathFileName);
 					entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -178,13 +178,13 @@ namespace Crowbar
 					entryDataOutputText.Append(" ofs=0x" + entry.offset.ToString("X8"));
 					entryDataOutputText.Append(" sz=" + entry.size.ToString("G0"));
 
-					this.theGmaFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+					theGmaFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 					NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 
 					entryDataOutputText.Clear();
 				}
 
-				this.theGmaFileData.theFileDataOffset = this.theInputFileReader.BaseStream.Position;
+				theGmaFileData.theFileDataOffset = theInputFileReader.BaseStream.Position;
 			}
 			catch (Exception ex)
 			{
@@ -204,17 +204,17 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
+						theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
 
 						if (entry.thePathFileName == "<addon.json>")
 						{
-							this.WriteAddonJsonData();
+							WriteAddonJsonData();
 						}
 						else
 						{
-							this.theInputFileReader.BaseStream.Seek(this.theGmaFileData.theFileDataOffset + entry.offset, SeekOrigin.Begin);
-							byte[] bytes = this.theInputFileReader.ReadBytes((int)entry.size);
-							this.theOutputFileWriter.Write(bytes);
+							theInputFileReader.BaseStream.Seek(theGmaFileData.theFileDataOffset + entry.offset, SeekOrigin.Begin);
+							byte[] bytes = theInputFileReader.ReadBytes((int)entry.size);
+							theOutputFileWriter.Write(bytes);
 						}
 					}
 					catch (Exception ex)
@@ -223,9 +223,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theOutputFileWriter != null)
+						if (theOutputFileWriter != null)
 						{
-							this.theOutputFileWriter.Close();
+							theOutputFileWriter.Close();
 						}
 					}
 				}
@@ -249,8 +249,8 @@ namespace Crowbar
 
 		private string GetAddonJsonText()
 		{
-			string addonJsonText = this.theGmaFileData.addonDescription.Replace("\"description\":", "\"title\":");
-			addonJsonText = addonJsonText.Replace("\"Description\",", "\"" + this.theGmaFileData.addonName + "\",");
+			string addonJsonText = theGmaFileData.addonDescription.Replace("\"description\":", "\"title\":");
+			addonJsonText = addonJsonText.Replace("\"Description\",", "\"" + theGmaFileData.addonName + "\",");
 			addonJsonText = addonJsonText.Trim();
 			addonJsonText = addonJsonText.Replace("\n", "\r\n");
 			//addonJsonText = addonJsonText.Trim(Chr(&HA))
@@ -260,8 +260,8 @@ namespace Crowbar
 		private void WriteAddonJsonData()
 		{
 			// Need to convert string to byte array to avoid length prefix value when using BinaryWriter.
-			byte[] text = System.Text.Encoding.ASCII.GetBytes(this.GetAddonJsonText());
-			this.theOutputFileWriter.Write(text);
+			byte[] text = System.Text.Encoding.ASCII.GetBytes(GetAddonJsonText());
+			theOutputFileWriter.Write(text);
 		}
 
 #endregion

@@ -46,14 +46,14 @@ namespace Crowbar
 		//Public vector02 As New SourceVector()
 		//Public vector03 As New SourceVector()
 		//------
-		//      float cX = bytesToFloat(this.file, cOffset + 24);
-		//      float cY = bytesToFloat(this.file, cOffset + 40);
-		//      float cZ = bytesToFloat(this.file, cOffset + 56);
-		//      float cXX = bytesToFloat(this.file, cOffset + 12);
-		//      float cYX = bytesToFloat(this.file, cOffset + 28);
-		//      float cZX = bytesToFloat(this.file, cOffset + 44);
-		//      float cZY = bytesToFloat(this.file, cOffset + 48);
-		//      float cZZ = bytesToFloat(this.file, cOffset + 52);
+		//      float cX = bytesToFloat(file, cOffset + 24);
+		//      float cY = bytesToFloat(file, cOffset + 40);
+		//      float cZ = bytesToFloat(file, cOffset + 56);
+		//      float cXX = bytesToFloat(file, cOffset + 12);
+		//      float cYX = bytesToFloat(file, cOffset + 28);
+		//      float cZX = bytesToFloat(file, cOffset + 44);
+		//      float cZY = bytesToFloat(file, cOffset + 48);
+		//      float cZZ = bytesToFloat(file, cOffset + 52);
 		public double cXX; //12
 		public double unused01; //16
 		public double unused02; //20

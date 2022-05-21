@@ -14,7 +14,7 @@ namespace Crowbar
 		public SourceMdlFileData31() : base()
 		{
 
-			this.theModelCommandIsUsed = false;
+			theModelCommandIsUsed = false;
 			//Me.theProceduralBonesCommandIsUsed = False
 		}
 

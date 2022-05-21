@@ -53,7 +53,7 @@ namespace Crowbar
 		public virtual void ReadFileForViewer(string inputPathFileName, SourceMdlFileData aMdlFileData)
 		{
 			FileStream inputFileStream = null;
-			this.theInputFileReader = null;
+			theInputFileReader = null;
 			try
 			{
 				inputFileStream = new FileStream(inputPathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -61,30 +61,30 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
+						theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
 
-						this.theMdlFileData = aMdlFileData;
-						this.theMdlFileData.theActualFileSize = inputFileStream.Length;
-						this.theMdlFileData.theSectionFrameCount = 0;
-						this.theMdlFileData.theModelCommandIsUsed = false;
-						this.theMdlFileData.theProceduralBonesCommandIsUsed = false;
-						this.theMdlFileData.theFileSeekLog = new FileSeekLog();
+						theMdlFileData = aMdlFileData;
+						theMdlFileData.theActualFileSize = inputFileStream.Length;
+						theMdlFileData.theSectionFrameCount = 0;
+						theMdlFileData.theModelCommandIsUsed = false;
+						theMdlFileData.theProceduralBonesCommandIsUsed = false;
+						theMdlFileData.theFileSeekLog = new FileSeekLog();
 
-						this.ReadMdlHeader00();
-						this.ReadMdlHeader01();
+						ReadMdlHeader00();
+						ReadMdlHeader01();
 						//Me.ReadMdlHeader02()
 
-						this.ReadTexturePaths();
-						this.ReadTextures();
+						ReadTexturePaths();
+						ReadTextures();
 					}
 					catch
 					{
 					}
 					finally
 					{
-						if (this.theInputFileReader != null)
+						if (theInputFileReader != null)
 						{
-							this.theInputFileReader.Close();
+							theInputFileReader.Close();
 						}
 					}
 				}
@@ -112,10 +112,10 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
+						theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
 
-						this.theMdlFileData = new SourceMdlFileData();
-						this.ReadMdlHeader00();
+						theMdlFileData = new SourceMdlFileData();
+						ReadMdlHeader00();
 					}
 					catch (Exception ex)
 					{
@@ -123,9 +123,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theInputFileReader != null)
+						if (theInputFileReader != null)
 						{
-							this.theInputFileReader.Close();
+							theInputFileReader.Close();
 						}
 					}
 				}
@@ -153,7 +153,7 @@ namespace Crowbar
 						//NOTE: Important to set System.Text.Encoding.ASCII so that ReadChars() only reads in one byte per Char.
 						inputFileWriter = new BinaryWriter(inputFileStream, System.Text.Encoding.ASCII);
 
-						if (this.theMdlFileData.version > 10)
+						if (theMdlFileData.version > 10)
 						{
 							inputFileWriter.BaseStream.Seek(0xC, SeekOrigin.Begin);
 						}
@@ -161,7 +161,7 @@ namespace Crowbar
 						{
 							inputFileWriter.BaseStream.Seek(0x8, SeekOrigin.Begin);
 						}
-						if (this.theMdlFileData.version != 2531)
+						if (theMdlFileData.version != 2531)
 						{
 							//TODO: Should only write up to 64 characters.
 							inputFileWriter.Write(headerName.ToCharArray());
@@ -338,7 +338,7 @@ namespace Crowbar
 		//	Me.theMdlFileData.textureCount = Me.theInputFileReader.ReadInt32()
 		//	Me.theMdlFileData.textureOffset = Me.theInputFileReader.ReadInt32()
 
-		//	'TODO: Check this.
+		//	'TODO: Check 
 		//	If Me.theMdlFileData.version > 10 Then
 		//		' Offsets: 0xD4 (212), 0xD8
 		//		Me.theMdlFileData.texturePathCount = Me.theInputFileReader.ReadInt32()

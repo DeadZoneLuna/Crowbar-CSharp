@@ -17,16 +17,16 @@ namespace Crowbar
 
 		public SourceMdlFile2531(BinaryReader mdlFileReader, SourceMdlFileData2531 mdlFileData)
 		{
-			this.theInputFileReader = mdlFileReader;
-			this.theMdlFileData = mdlFileData;
+			theInputFileReader = mdlFileReader;
+			theMdlFileData = mdlFileData;
 
-			this.theMdlFileData.theFileSeekLog.FileSize = this.theInputFileReader.BaseStream.Length;
+			theMdlFileData.theFileSeekLog.FileSize = theInputFileReader.BaseStream.Length;
 		}
 
 		public SourceMdlFile2531(BinaryWriter mdlFileWriter, SourceMdlFileData2531 mdlFileData)
 		{
-			this.theOutputFileWriter = mdlFileWriter;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileWriter = mdlFileWriter;
+			theMdlFileData = mdlFileData;
 		}
 
 #endregion
@@ -41,110 +41,110 @@ namespace Crowbar
 			//Dim fileOffsetStart2 As Long
 			//Dim fileOffsetEnd2 As Long
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-			this.theMdlFileData.id = this.theInputFileReader.ReadChars(this.theMdlFileData.id.Length);
-			this.theMdlFileData.theID = new string(this.theMdlFileData.id);
-			this.theMdlFileData.version = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.checksum = this.theInputFileReader.ReadInt32();
+			theMdlFileData.id = theInputFileReader.ReadChars(theMdlFileData.id.Length);
+			theMdlFileData.theID = new string(theMdlFileData.id);
+			theMdlFileData.version = theInputFileReader.ReadInt32();
+			theMdlFileData.checksum = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.name = this.theInputFileReader.ReadChars(this.theMdlFileData.name.Length);
-			this.theMdlFileData.theModelName = (new string(this.theMdlFileData.name)).Trim('\0');
+			theMdlFileData.name = theInputFileReader.ReadChars(theMdlFileData.name.Length);
+			theMdlFileData.theModelName = (new string(theMdlFileData.name)).Trim('\0');
 
-			this.theMdlFileData.fileSize = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.theActualFileSize = this.theInputFileReader.BaseStream.Length;
+			theMdlFileData.fileSize = theInputFileReader.ReadInt32();
+			theMdlFileData.theActualFileSize = theInputFileReader.BaseStream.Length;
 
-			this.theMdlFileData.eyePosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.eyePosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.eyePosition.z = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.illuminationPosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.illuminationPosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.illuminationPosition.z = this.theInputFileReader.ReadSingle();
+			theMdlFileData.eyePosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.eyePosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.eyePosition.z = theInputFileReader.ReadSingle();
+			theMdlFileData.illuminationPosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.illuminationPosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.illuminationPosition.z = theInputFileReader.ReadSingle();
 
-			this.theMdlFileData.unknown01 = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.unknown02 = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.unknown03 = this.theInputFileReader.ReadSingle();
+			theMdlFileData.unknown01 = theInputFileReader.ReadSingle();
+			theMdlFileData.unknown02 = theInputFileReader.ReadSingle();
+			theMdlFileData.unknown03 = theInputFileReader.ReadSingle();
 
-			this.theMdlFileData.hullMinPosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.hullMinPosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.hullMinPosition.z = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.hullMaxPosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.hullMaxPosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.hullMaxPosition.z = this.theInputFileReader.ReadSingle();
+			theMdlFileData.hullMinPosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.hullMinPosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.hullMinPosition.z = theInputFileReader.ReadSingle();
+			theMdlFileData.hullMaxPosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.hullMaxPosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.hullMaxPosition.z = theInputFileReader.ReadSingle();
 
-			this.theMdlFileData.viewBoundingBoxMinPosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.viewBoundingBoxMinPosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.viewBoundingBoxMinPosition.z = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.viewBoundingBoxMaxPosition.x = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.viewBoundingBoxMaxPosition.y = this.theInputFileReader.ReadSingle();
-			this.theMdlFileData.viewBoundingBoxMaxPosition.z = this.theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMinPosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMinPosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMinPosition.z = theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMaxPosition.x = theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMaxPosition.y = theInputFileReader.ReadSingle();
+			theMdlFileData.viewBoundingBoxMaxPosition.z = theInputFileReader.ReadSingle();
 
-			this.theMdlFileData.flags = this.theInputFileReader.ReadInt32();
+			theMdlFileData.flags = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.unknown04 = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.unknown05 = this.theInputFileReader.ReadInt32();
+			theMdlFileData.unknown04 = theInputFileReader.ReadInt32();
+			theMdlFileData.unknown05 = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.boneCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.boneOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.boneControllerCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.boneControllerOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.boneCount = theInputFileReader.ReadInt32();
+			theMdlFileData.boneOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.boneControllerCount = theInputFileReader.ReadInt32();
+			theMdlFileData.boneControllerOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.hitBoxSetCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.hitBoxSetOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.hitBoxSetCount = theInputFileReader.ReadInt32();
+			theMdlFileData.hitBoxSetOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.localAnimationCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localAnimationOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localSequenceCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localSequenceOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.sequencesIndexedFlag = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.sequenceGroupCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.sequenceGroupOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.localAnimationCount = theInputFileReader.ReadInt32();
+			theMdlFileData.localAnimationOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.localSequenceCount = theInputFileReader.ReadInt32();
+			theMdlFileData.localSequenceOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.sequencesIndexedFlag = theInputFileReader.ReadInt32();
+			theMdlFileData.sequenceGroupCount = theInputFileReader.ReadInt32();
+			theMdlFileData.sequenceGroupOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.textureCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.textureOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.texturePathCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.texturePathOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.skinReferenceCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.skinFamilyCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.skinOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.textureCount = theInputFileReader.ReadInt32();
+			theMdlFileData.textureOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.texturePathCount = theInputFileReader.ReadInt32();
+			theMdlFileData.texturePathOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.skinReferenceCount = theInputFileReader.ReadInt32();
+			theMdlFileData.skinFamilyCount = theInputFileReader.ReadInt32();
+			theMdlFileData.skinOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.bodyPartCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.bodyPartOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.bodyPartCount = theInputFileReader.ReadInt32();
+			theMdlFileData.bodyPartOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.localAttachmentCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localAttachmentOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.localAttachmentCount = theInputFileReader.ReadInt32();
+			theMdlFileData.localAttachmentOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.transitionCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.transitionOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.transitionCount = theInputFileReader.ReadInt32();
+			theMdlFileData.transitionOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.flexDescCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.flexDescOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.flexControllerCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.flexControllerOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.flexRuleCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.flexRuleOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.flexDescCount = theInputFileReader.ReadInt32();
+			theMdlFileData.flexDescOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.flexControllerCount = theInputFileReader.ReadInt32();
+			theMdlFileData.flexControllerOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.flexRuleCount = theInputFileReader.ReadInt32();
+			theMdlFileData.flexRuleOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.ikChainCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.ikChainOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.mouthCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.mouthOffset = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localPoseParamaterCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.localPoseParameterOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.ikChainCount = theInputFileReader.ReadInt32();
+			theMdlFileData.ikChainOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.mouthCount = theInputFileReader.ReadInt32();
+			theMdlFileData.mouthOffset = theInputFileReader.ReadInt32();
+			theMdlFileData.localPoseParamaterCount = theInputFileReader.ReadInt32();
+			theMdlFileData.localPoseParameterOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.surfacePropOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.surfacePropOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.unknownCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.unknownOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.unknownCount = theInputFileReader.ReadInt32();
+			theMdlFileData.unknownOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.includeModelCount = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.includeModelOffset = this.theInputFileReader.ReadInt32();
+			theMdlFileData.includeModelCount = theInputFileReader.ReadInt32();
+			theMdlFileData.includeModelOffset = theInputFileReader.ReadInt32();
 
-			this.theMdlFileData.unknown06 = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.unknown07 = this.theInputFileReader.ReadInt32();
-			this.theMdlFileData.unknown08 = this.theInputFileReader.ReadInt32();
+			theMdlFileData.unknown06 = theInputFileReader.ReadInt32();
+			theMdlFileData.unknown07 = theInputFileReader.ReadInt32();
+			theMdlFileData.unknown08 = theInputFileReader.ReadInt32();
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "MDL File Header");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "MDL File Header");
 
 			//If Me.theMdlFileData.bodyPartCount = 0 AndAlso Me.theMdlFileData.localSequenceCount > 0 Then
 			//	Me.theMdlFileData.theMdlFileOnlyHasAnimations = True
@@ -153,7 +153,7 @@ namespace Crowbar
 
 		public void ReadBones()
 		{
-			if (this.theMdlFileData.boneCount > 0)
+			if (theMdlFileData.boneCount > 0)
 			{
 				long boneInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -164,21 +164,21 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.boneOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.boneOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theBones = new List<SourceMdlBone2531>(this.theMdlFileData.boneCount);
-					for (int boneIndex = 0; boneIndex < this.theMdlFileData.boneCount; boneIndex++)
+					theMdlFileData.theBones = new List<SourceMdlBone2531>(theMdlFileData.boneCount);
+					for (int boneIndex = 0; boneIndex < theMdlFileData.boneCount; boneIndex++)
 					{
-						boneInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						boneInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlBone2531 aBone = new SourceMdlBone2531();
 
-						aBone.nameOffset = this.theInputFileReader.ReadInt32();
-						aBone.parentBoneIndex = this.theInputFileReader.ReadInt32();
+						aBone.nameOffset = theInputFileReader.ReadInt32();
+						aBone.parentBoneIndex = theInputFileReader.ReadInt32();
 						for (int boneControllerIndexIndex = 0; boneControllerIndexIndex < aBone.boneControllerIndex.Length; boneControllerIndexIndex++)
 						{
-							aBone.boneControllerIndex[boneControllerIndexIndex] = this.theInputFileReader.ReadInt32();
+							aBone.boneControllerIndex[boneControllerIndexIndex] = theInputFileReader.ReadInt32();
 						}
 
 						//For x As Integer = 0 To aBone.value.Length - 1
@@ -187,79 +187,79 @@ namespace Crowbar
 						//For x As Integer = 0 To aBone.scale.Length - 1
 						//	aBone.scale(x) = Me.theInputFileReader.ReadSingle()
 						//Next
-						aBone.position.x = this.theInputFileReader.ReadSingle();
-						aBone.position.y = this.theInputFileReader.ReadSingle();
-						aBone.position.z = this.theInputFileReader.ReadSingle();
-						aBone.rotation.x = this.theInputFileReader.ReadSingle();
-						aBone.rotation.y = this.theInputFileReader.ReadSingle();
-						aBone.rotation.z = this.theInputFileReader.ReadSingle();
-						aBone.rotation.w = this.theInputFileReader.ReadSingle();
-						aBone.positionScale.x = this.theInputFileReader.ReadSingle();
-						aBone.positionScale.y = this.theInputFileReader.ReadSingle();
-						aBone.positionScale.z = this.theInputFileReader.ReadSingle();
-						aBone.rotationScale.x = this.theInputFileReader.ReadSingle();
-						aBone.rotationScale.y = this.theInputFileReader.ReadSingle();
-						aBone.rotationScale.z = this.theInputFileReader.ReadSingle();
+						aBone.position.x = theInputFileReader.ReadSingle();
+						aBone.position.y = theInputFileReader.ReadSingle();
+						aBone.position.z = theInputFileReader.ReadSingle();
+						aBone.rotation.x = theInputFileReader.ReadSingle();
+						aBone.rotation.y = theInputFileReader.ReadSingle();
+						aBone.rotation.z = theInputFileReader.ReadSingle();
+						aBone.rotation.w = theInputFileReader.ReadSingle();
+						aBone.positionScale.x = theInputFileReader.ReadSingle();
+						aBone.positionScale.y = theInputFileReader.ReadSingle();
+						aBone.positionScale.z = theInputFileReader.ReadSingle();
+						aBone.rotationScale.x = theInputFileReader.ReadSingle();
+						aBone.rotationScale.y = theInputFileReader.ReadSingle();
+						aBone.rotationScale.z = theInputFileReader.ReadSingle();
 						//aBone.unknown01 = Me.theInputFileReader.ReadSingle()
-						aBone.rotationScale.w = this.theInputFileReader.ReadSingle();
+						aBone.rotationScale.w = theInputFileReader.ReadSingle();
 
-						aBone.poseToBoneColumn0.x = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn1.x = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn2.x = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn3.x = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn0.y = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn1.y = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn2.y = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn3.y = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn0.z = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn1.z = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn2.z = this.theInputFileReader.ReadSingle();
-						aBone.poseToBoneColumn3.z = this.theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn0.x = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn1.x = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn2.x = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn3.x = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn0.y = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn1.y = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn2.y = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn3.y = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn0.z = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn1.z = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn2.z = theInputFileReader.ReadSingle();
+						aBone.poseToBoneColumn3.z = theInputFileReader.ReadSingle();
 
-						aBone.flags = this.theInputFileReader.ReadInt32();
+						aBone.flags = theInputFileReader.ReadInt32();
 
-						aBone.proceduralRuleType = this.theInputFileReader.ReadInt32();
-						aBone.proceduralRuleOffset = this.theInputFileReader.ReadInt32();
-						aBone.physicsBoneIndex = this.theInputFileReader.ReadInt32();
-						aBone.surfacePropNameOffset = this.theInputFileReader.ReadInt32();
-						aBone.contents = this.theInputFileReader.ReadInt32();
+						aBone.proceduralRuleType = theInputFileReader.ReadInt32();
+						aBone.proceduralRuleOffset = theInputFileReader.ReadInt32();
+						aBone.physicsBoneIndex = theInputFileReader.ReadInt32();
+						aBone.surfacePropNameOffset = theInputFileReader.ReadInt32();
+						aBone.contents = theInputFileReader.ReadInt32();
 
-						this.theMdlFileData.theBones.Add(aBone);
+						theMdlFileData.theBones.Add(aBone);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aBone.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aBone.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aBone.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBone.theName = " + aBone.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBone.theName = " + aBone.theName);
 							}
 						}
 						else if (aBone.theName == null)
 						{
 							aBone.theName = "";
 						}
-						this.theMdlFileData.theBoneNameToBoneIndexMap.Add(aBone.theName, boneIndex);
+						theMdlFileData.theBoneNameToBoneIndexMap.Add(aBone.theName, boneIndex);
 
 						if (aBone.proceduralRuleOffset != 0)
 						{
 							if (aBone.proceduralRuleType == SourceMdlBone2531.STUDIO_PROC_AXISINTERP)
 							{
-								this.ReadAxisInterpBone(boneInputFileStreamPosition, aBone);
+								ReadAxisInterpBone(boneInputFileStreamPosition, aBone);
 							}
 							else if (aBone.proceduralRuleType == SourceMdlBone2531.STUDIO_PROC_QUATINTERP)
 							{
-								this.theMdlFileData.theProceduralBonesCommandIsUsed = true;
-								this.ReadQuatInterpBone(boneInputFileStreamPosition, aBone);
+								theMdlFileData.theProceduralBonesCommandIsUsed = true;
+								ReadQuatInterpBone(boneInputFileStreamPosition, aBone);
 							}
 							else if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_JIGGLE)
 							{
@@ -273,15 +273,15 @@ namespace Crowbar
 						}
 						if (aBone.surfacePropNameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.surfacePropNameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.surfacePropNameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aBone.theSurfacePropName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aBone.theSurfacePropName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBone.theSurfacePropName = " + aBone.theSurfacePropName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBone.theSurfacePropName = " + aBone.theSurfacePropName);
 							}
 						}
 						else
@@ -289,7 +289,7 @@ namespace Crowbar
 							aBone.theSurfacePropName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -306,7 +306,7 @@ namespace Crowbar
 
 		public void ReadBoneControllers()
 		{
-			if (this.theMdlFileData.boneControllerCount > 0)
+			if (theMdlFileData.boneControllerCount > 0)
 			{
 				//Dim boneControllerInputFileStreamPosition As Long
 				//Dim inputFileStreamPosition As Long
@@ -317,31 +317,31 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.boneControllerOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.boneControllerOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theBoneControllers = new List<SourceMdlBoneController2531>(this.theMdlFileData.boneControllerCount);
-					for (int i = 0; i < this.theMdlFileData.boneControllerCount; i++)
+					theMdlFileData.theBoneControllers = new List<SourceMdlBoneController2531>(theMdlFileData.boneControllerCount);
+					for (int i = 0; i < theMdlFileData.boneControllerCount; i++)
 					{
 						//boneControllerInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlBoneController2531 aBoneController = new SourceMdlBoneController2531();
 
-						aBoneController.boneIndex = this.theInputFileReader.ReadInt32();
-						aBoneController.type = this.theInputFileReader.ReadInt32();
-						aBoneController.startAngleDegrees = this.theInputFileReader.ReadSingle();
-						aBoneController.endAngleDegrees = this.theInputFileReader.ReadSingle();
-						aBoneController.restIndex = this.theInputFileReader.ReadInt32();
-						aBoneController.inputField = this.theInputFileReader.ReadInt32();
+						aBoneController.boneIndex = theInputFileReader.ReadInt32();
+						aBoneController.type = theInputFileReader.ReadInt32();
+						aBoneController.startAngleDegrees = theInputFileReader.ReadSingle();
+						aBoneController.endAngleDegrees = theInputFileReader.ReadSingle();
+						aBoneController.restIndex = theInputFileReader.ReadInt32();
+						aBoneController.inputField = theInputFileReader.ReadInt32();
 						for (int x = 0; x < aBoneController.unused.Length; x++)
 						{
-							aBoneController.unused[x] = this.theInputFileReader.ReadInt32();
+							aBoneController.unused[x] = theInputFileReader.ReadInt32();
 						}
 
-						this.theMdlFileData.theBoneControllers.Add(aBoneController);
+						theMdlFileData.theBoneControllers.Add(aBoneController);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBoneController");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBoneController");
 
 						//inputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 
@@ -362,7 +362,7 @@ namespace Crowbar
 
 		public void ReadAttachments()
 		{
-			if (this.theMdlFileData.localAttachmentCount > 0)
+			if (theMdlFileData.localAttachmentCount > 0)
 			{
 				long attachmentInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -373,19 +373,19 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.localAttachmentOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.localAttachmentOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theAttachments = new List<SourceMdlAttachment2531>(this.theMdlFileData.localAttachmentCount);
-					for (int attachmentIndex = 0; attachmentIndex < this.theMdlFileData.localAttachmentCount; attachmentIndex++)
+					theMdlFileData.theAttachments = new List<SourceMdlAttachment2531>(theMdlFileData.localAttachmentCount);
+					for (int attachmentIndex = 0; attachmentIndex < theMdlFileData.localAttachmentCount; attachmentIndex++)
 					{
-						attachmentInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						attachmentInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlAttachment2531 anAttachment = new SourceMdlAttachment2531();
 
-						anAttachment.nameOffset = this.theInputFileReader.ReadInt32();
-						anAttachment.type = this.theInputFileReader.ReadInt32();
-						anAttachment.boneIndex = this.theInputFileReader.ReadInt32();
+						anAttachment.nameOffset = theInputFileReader.ReadInt32();
+						anAttachment.type = theInputFileReader.ReadInt32();
+						anAttachment.boneIndex = theInputFileReader.ReadInt32();
 
 						//anAttachment.attachmentPointColumn0.x = Me.theInputFileReader.ReadSingle()
 						//anAttachment.attachmentPointColumn0.y = Me.theInputFileReader.ReadSingle()
@@ -412,40 +412,40 @@ namespace Crowbar
 						//anAttachment.vector03.x = Me.theInputFileReader.ReadSingle()
 						//anAttachment.vector03.y = Me.theInputFileReader.ReadSingle()
 						//anAttachment.vector03.z = Me.theInputFileReader.ReadSingle()
-						anAttachment.cXX = this.theInputFileReader.ReadSingle();
-						anAttachment.unused01 = this.theInputFileReader.ReadSingle();
-						anAttachment.unused02 = this.theInputFileReader.ReadSingle();
-						anAttachment.posX = this.theInputFileReader.ReadSingle();
+						anAttachment.cXX = theInputFileReader.ReadSingle();
+						anAttachment.unused01 = theInputFileReader.ReadSingle();
+						anAttachment.unused02 = theInputFileReader.ReadSingle();
+						anAttachment.posX = theInputFileReader.ReadSingle();
 
-						anAttachment.cYX = this.theInputFileReader.ReadSingle();
-						anAttachment.unused03 = this.theInputFileReader.ReadSingle();
-						anAttachment.unused04 = this.theInputFileReader.ReadSingle();
-						anAttachment.posY = this.theInputFileReader.ReadSingle();
+						anAttachment.cYX = theInputFileReader.ReadSingle();
+						anAttachment.unused03 = theInputFileReader.ReadSingle();
+						anAttachment.unused04 = theInputFileReader.ReadSingle();
+						anAttachment.posY = theInputFileReader.ReadSingle();
 
-						anAttachment.cZX = this.theInputFileReader.ReadSingle();
-						anAttachment.cZY = this.theInputFileReader.ReadSingle();
-						anAttachment.cZZ = this.theInputFileReader.ReadSingle();
-						anAttachment.posZ = this.theInputFileReader.ReadSingle();
+						anAttachment.cZX = theInputFileReader.ReadSingle();
+						anAttachment.cZY = theInputFileReader.ReadSingle();
+						anAttachment.cZZ = theInputFileReader.ReadSingle();
+						anAttachment.posZ = theInputFileReader.ReadSingle();
 
 
-						this.theMdlFileData.theAttachments.Add(anAttachment);
+						theMdlFileData.theAttachments.Add(anAttachment);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAttachment");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAttachment");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (anAttachment.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(attachmentInputFileStreamPosition + anAttachment.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(attachmentInputFileStreamPosition + anAttachment.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							anAttachment.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							anAttachment.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anAttachment.theName = " + anAttachment.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anAttachment.theName = " + anAttachment.theName);
 							}
 						}
 						else if (anAttachment.theName == null)
@@ -453,7 +453,7 @@ namespace Crowbar
 							anAttachment.theName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -470,7 +470,7 @@ namespace Crowbar
 
 		public void ReadHitboxSets()
 		{
-			if (this.theMdlFileData.hitBoxSetCount > 0)
+			if (theMdlFileData.hitBoxSetCount > 0)
 			{
 				long hitboxSetInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -481,38 +481,38 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.hitBoxSetOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.hitBoxSetOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theHitboxSets = new List<SourceMdlHitboxSet2531>(this.theMdlFileData.hitBoxSetCount);
-					for (int i = 0; i < this.theMdlFileData.hitBoxSetCount; i++)
+					theMdlFileData.theHitboxSets = new List<SourceMdlHitboxSet2531>(theMdlFileData.hitBoxSetCount);
+					for (int i = 0; i < theMdlFileData.hitBoxSetCount; i++)
 					{
-						hitboxSetInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						hitboxSetInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlHitboxSet2531 aHitboxSet = new SourceMdlHitboxSet2531();
 
-						aHitboxSet.nameOffset = this.theInputFileReader.ReadInt32();
-						aHitboxSet.hitboxCount = this.theInputFileReader.ReadInt32();
-						aHitboxSet.hitboxOffset = this.theInputFileReader.ReadInt32();
+						aHitboxSet.nameOffset = theInputFileReader.ReadInt32();
+						aHitboxSet.hitboxCount = theInputFileReader.ReadInt32();
+						aHitboxSet.hitboxOffset = theInputFileReader.ReadInt32();
 
-						this.theMdlFileData.theHitboxSets.Add(aHitboxSet);
+						theMdlFileData.theHitboxSets.Add(aHitboxSet);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aHitboxSet");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aHitboxSet");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aHitboxSet.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(hitboxSetInputFileStreamPosition + aHitboxSet.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(hitboxSetInputFileStreamPosition + aHitboxSet.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aHitboxSet.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aHitboxSet.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aHitboxSet.theName = " + aHitboxSet.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aHitboxSet.theName = " + aHitboxSet.theName);
 							}
 						}
 						else
@@ -520,9 +520,9 @@ namespace Crowbar
 							aHitboxSet.theName = "";
 						}
 
-						this.ReadHitboxes(hitboxSetInputFileStreamPosition + aHitboxSet.hitboxOffset, aHitboxSet);
+						ReadHitboxes(hitboxSetInputFileStreamPosition + aHitboxSet.hitboxOffset, aHitboxSet);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -539,7 +539,7 @@ namespace Crowbar
 
 		public void ReadSequences()
 		{
-			if (this.theMdlFileData.localSequenceCount > 0)
+			if (theMdlFileData.localSequenceCount > 0)
 			{
 				long seqInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -550,32 +550,32 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.localSequenceOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.localSequenceOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theSequences = new List<SourceMdlSequenceDesc2531>(this.theMdlFileData.localSequenceCount);
-					for (int i = 0; i < this.theMdlFileData.localSequenceCount; i++)
+					theMdlFileData.theSequences = new List<SourceMdlSequenceDesc2531>(theMdlFileData.localSequenceCount);
+					for (int i = 0; i < theMdlFileData.localSequenceCount; i++)
 					{
-						seqInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						seqInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlSequenceDesc2531 aSequence = new SourceMdlSequenceDesc2531();
 
-						aSequence.nameOffset = this.theInputFileReader.ReadInt32();
-						aSequence.activityNameOffset = this.theInputFileReader.ReadInt32();
-						aSequence.flags = this.theInputFileReader.ReadInt32();
-						aSequence.activityId = this.theInputFileReader.ReadInt32();
-						aSequence.activityWeight = this.theInputFileReader.ReadInt32();
-						aSequence.eventCount = this.theInputFileReader.ReadInt32();
-						aSequence.eventOffset = this.theInputFileReader.ReadInt32();
+						aSequence.nameOffset = theInputFileReader.ReadInt32();
+						aSequence.activityNameOffset = theInputFileReader.ReadInt32();
+						aSequence.flags = theInputFileReader.ReadInt32();
+						aSequence.activityId = theInputFileReader.ReadInt32();
+						aSequence.activityWeight = theInputFileReader.ReadInt32();
+						aSequence.eventCount = theInputFileReader.ReadInt32();
+						aSequence.eventOffset = theInputFileReader.ReadInt32();
 
-						aSequence.bbMin.x = this.theInputFileReader.ReadSingle();
-						aSequence.bbMin.y = this.theInputFileReader.ReadSingle();
-						aSequence.bbMin.z = this.theInputFileReader.ReadSingle();
-						aSequence.bbMax.x = this.theInputFileReader.ReadSingle();
-						aSequence.bbMax.y = this.theInputFileReader.ReadSingle();
-						aSequence.bbMax.z = this.theInputFileReader.ReadSingle();
+						aSequence.bbMin.x = theInputFileReader.ReadSingle();
+						aSequence.bbMin.y = theInputFileReader.ReadSingle();
+						aSequence.bbMin.z = theInputFileReader.ReadSingle();
+						aSequence.bbMax.x = theInputFileReader.ReadSingle();
+						aSequence.bbMax.y = theInputFileReader.ReadSingle();
+						aSequence.bbMax.z = theInputFileReader.ReadSingle();
 
-						aSequence.blendCount = this.theInputFileReader.ReadInt32();
+						aSequence.blendCount = theInputFileReader.ReadInt32();
 
 						//For x As Integer = 0 To aSequence.anim.Length - 1
 						//	aSequence.anim(x) = Me.theInputFileReader.ReadInt16()
@@ -584,47 +584,47 @@ namespace Crowbar
 						{
 							for (int columnIndex = 0; columnIndex < SourceModule2531.MAXSTUDIOBLENDS; columnIndex++)
 							{
-								aSequence.anim[rowIndex][columnIndex] = this.theInputFileReader.ReadInt16();
+								aSequence.anim[rowIndex][columnIndex] = theInputFileReader.ReadInt16();
 							}
 						}
 
-						aSequence.movementIndex = this.theInputFileReader.ReadInt32();
-						aSequence.groupSize[0] = this.theInputFileReader.ReadInt32();
-						aSequence.groupSize[1] = this.theInputFileReader.ReadInt32();
+						aSequence.movementIndex = theInputFileReader.ReadInt32();
+						aSequence.groupSize[0] = theInputFileReader.ReadInt32();
+						aSequence.groupSize[1] = theInputFileReader.ReadInt32();
 
-						aSequence.paramIndex[0] = this.theInputFileReader.ReadInt32();
-						aSequence.paramIndex[1] = this.theInputFileReader.ReadInt32();
-						aSequence.paramStart[0] = this.theInputFileReader.ReadSingle();
-						aSequence.paramStart[1] = this.theInputFileReader.ReadSingle();
-						aSequence.paramEnd[0] = this.theInputFileReader.ReadSingle();
-						aSequence.paramEnd[1] = this.theInputFileReader.ReadSingle();
-						aSequence.paramParent = this.theInputFileReader.ReadInt32();
+						aSequence.paramIndex[0] = theInputFileReader.ReadInt32();
+						aSequence.paramIndex[1] = theInputFileReader.ReadInt32();
+						aSequence.paramStart[0] = theInputFileReader.ReadSingle();
+						aSequence.paramStart[1] = theInputFileReader.ReadSingle();
+						aSequence.paramEnd[0] = theInputFileReader.ReadSingle();
+						aSequence.paramEnd[1] = theInputFileReader.ReadSingle();
+						aSequence.paramParent = theInputFileReader.ReadInt32();
 
-						aSequence.sequenceGroup = this.theInputFileReader.ReadInt32();
+						aSequence.sequenceGroup = theInputFileReader.ReadInt32();
 
 						//aSequence.test = Me.theInputFileReader.ReadInt32()
-						aSequence.test = this.theInputFileReader.ReadSingle();
+						aSequence.test = theInputFileReader.ReadSingle();
 
-						aSequence.fadeInTime = this.theInputFileReader.ReadSingle();
-						aSequence.fadeOutTime = this.theInputFileReader.ReadSingle();
+						aSequence.fadeInTime = theInputFileReader.ReadSingle();
+						aSequence.fadeOutTime = theInputFileReader.ReadSingle();
 
-						aSequence.localEntryNodeIndex = this.theInputFileReader.ReadInt32();
-						aSequence.localExitNodeIndex = this.theInputFileReader.ReadInt32();
-						aSequence.nodeFlags = this.theInputFileReader.ReadInt32();
+						aSequence.localEntryNodeIndex = theInputFileReader.ReadInt32();
+						aSequence.localExitNodeIndex = theInputFileReader.ReadInt32();
+						aSequence.nodeFlags = theInputFileReader.ReadInt32();
 
-						aSequence.entryPhase = this.theInputFileReader.ReadSingle();
-						aSequence.exitPhase = this.theInputFileReader.ReadSingle();
-						aSequence.lastFrame = this.theInputFileReader.ReadSingle();
+						aSequence.entryPhase = theInputFileReader.ReadSingle();
+						aSequence.exitPhase = theInputFileReader.ReadSingle();
+						aSequence.lastFrame = theInputFileReader.ReadSingle();
 
-						aSequence.nextSeq = this.theInputFileReader.ReadInt32();
-						aSequence.pose = this.theInputFileReader.ReadInt32();
+						aSequence.nextSeq = theInputFileReader.ReadInt32();
+						aSequence.pose = theInputFileReader.ReadInt32();
 
-						aSequence.ikRuleCount = this.theInputFileReader.ReadInt32();
-						aSequence.autoLayerCount = this.theInputFileReader.ReadInt32();
-						aSequence.autoLayerOffset = this.theInputFileReader.ReadInt32();
+						aSequence.ikRuleCount = theInputFileReader.ReadInt32();
+						aSequence.autoLayerCount = theInputFileReader.ReadInt32();
+						aSequence.autoLayerOffset = theInputFileReader.ReadInt32();
 						//aSequence.weightOffset = Me.theInputFileReader.ReadInt32()
 						//aSequence.poseKeyOffset = Me.theInputFileReader.ReadInt32()
-						aSequence.unknown01 = this.theInputFileReader.ReadInt32();
+						aSequence.unknown01 = theInputFileReader.ReadInt32();
 
 						//aSequence.bbMin2.x = Me.theInputFileReader.ReadSingle()
 						//aSequence.bbMin2.y = Me.theInputFileReader.ReadSingle()
@@ -637,45 +637,45 @@ namespace Crowbar
 						//Next
 						for (int x = 0; x < aSequence.test02.Length; x++)
 						{
-							aSequence.test02[x] = this.theInputFileReader.ReadSingle();
+							aSequence.test02[x] = theInputFileReader.ReadSingle();
 						}
 
-						aSequence.test03 = this.theInputFileReader.ReadInt32();
+						aSequence.test03 = theInputFileReader.ReadInt32();
 
-						aSequence.ikLockCount = this.theInputFileReader.ReadInt32();
-						aSequence.ikLockOffset = this.theInputFileReader.ReadInt32();
+						aSequence.ikLockCount = theInputFileReader.ReadInt32();
+						aSequence.ikLockOffset = theInputFileReader.ReadInt32();
 						//aSequence.keyValueOffset = Me.theInputFileReader.ReadInt32()
-						aSequence.keyValueSize = this.theInputFileReader.ReadInt32();
-						aSequence.keyValueOffset = this.theInputFileReader.ReadInt32();
+						aSequence.keyValueSize = theInputFileReader.ReadInt32();
+						aSequence.keyValueOffset = theInputFileReader.ReadInt32();
 
 						//aSequence.unknown01 = Me.theInputFileReader.ReadInt32()
-						aSequence.unknown02 = this.theInputFileReader.ReadSingle();
-						aSequence.unknown03 = this.theInputFileReader.ReadSingle();
+						aSequence.unknown02 = theInputFileReader.ReadSingle();
+						aSequence.unknown03 = theInputFileReader.ReadSingle();
 						for (int x = 0; x < aSequence.unknown04.Length; x++)
 						{
-							aSequence.unknown04[x] = this.theInputFileReader.ReadInt32();
+							aSequence.unknown04[x] = theInputFileReader.ReadInt32();
 						}
 						for (int x = 0; x < aSequence.unknown05.Length; x++)
 						{
-							aSequence.unknown05[x] = this.theInputFileReader.ReadSingle();
+							aSequence.unknown05[x] = theInputFileReader.ReadSingle();
 						}
 
-						this.theMdlFileData.theSequences.Add(aSequence);
+						theMdlFileData.theSequences.Add(aSequence);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
 						//Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence")
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aSequence.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(seqInputFileStreamPosition + aSequence.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(seqInputFileStreamPosition + aSequence.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aSequence.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aSequence.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aSequence.theName = " + aSequence.theName);
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aSequence.theName = " + aSequence.theName);
 						}
 						else
 						{
@@ -683,19 +683,19 @@ namespace Crowbar
 						}
 
 						//NOTE: Moved this line here so can show the name in the log.
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence [" + aSequence.theName + "]");
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence [" + aSequence.theName + "]");
 
 						if (aSequence.activityNameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(seqInputFileStreamPosition + aSequence.activityNameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(seqInputFileStreamPosition + aSequence.activityNameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aSequence.theActivityName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aSequence.theActivityName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aSequence.theActivityName = " + aSequence.theActivityName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aSequence.theActivityName = " + aSequence.theActivityName);
 							}
 						}
 						else
@@ -728,7 +728,7 @@ namespace Crowbar
 						//	Me.ReadActivityModifiers(seqInputFileStreamPosition, aSeqDesc)
 						//End If
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -743,7 +743,7 @@ namespace Crowbar
 
 		public void ReadLocalAnimationDescs()
 		{
-			if (this.theMdlFileData.localAnimationCount > 0)
+			if (theMdlFileData.localAnimationCount > 0)
 			{
 				long animationDescInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -754,53 +754,53 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.localAnimationOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.localAnimationOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theAnimationDescs = new List<SourceMdlAnimationDesc2531>(this.theMdlFileData.localAnimationCount);
-					for (int i = 0; i < this.theMdlFileData.localAnimationCount; i++)
+					theMdlFileData.theAnimationDescs = new List<SourceMdlAnimationDesc2531>(theMdlFileData.localAnimationCount);
+					for (int i = 0; i < theMdlFileData.localAnimationCount; i++)
 					{
-						animationDescInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						animationDescInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlAnimationDesc2531 anAnimationDesc = new SourceMdlAnimationDesc2531();
 
-						anAnimationDesc.nameOffset = this.theInputFileReader.ReadInt32();
-						anAnimationDesc.fps = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.flags = this.theInputFileReader.ReadInt32();
-						anAnimationDesc.frameCount = this.theInputFileReader.ReadInt32();
-						anAnimationDesc.movementCount = this.theInputFileReader.ReadInt32();
-						anAnimationDesc.movementOffset = this.theInputFileReader.ReadInt32();
+						anAnimationDesc.nameOffset = theInputFileReader.ReadInt32();
+						anAnimationDesc.fps = theInputFileReader.ReadSingle();
+						anAnimationDesc.flags = theInputFileReader.ReadInt32();
+						anAnimationDesc.frameCount = theInputFileReader.ReadInt32();
+						anAnimationDesc.movementCount = theInputFileReader.ReadInt32();
+						anAnimationDesc.movementOffset = theInputFileReader.ReadInt32();
 
-						anAnimationDesc.bbMin.x = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.bbMin.y = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.bbMin.z = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.bbMax.x = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.bbMax.y = this.theInputFileReader.ReadSingle();
-						anAnimationDesc.bbMax.z = this.theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMin.x = theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMin.y = theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMin.z = theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMax.x = theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMax.y = theInputFileReader.ReadSingle();
+						anAnimationDesc.bbMax.z = theInputFileReader.ReadSingle();
 
-						anAnimationDesc.animOffset = this.theInputFileReader.ReadInt32();
+						anAnimationDesc.animOffset = theInputFileReader.ReadInt32();
 
-						anAnimationDesc.ikRuleCount = this.theInputFileReader.ReadInt32();
-						anAnimationDesc.ikRuleOffset = this.theInputFileReader.ReadInt32();
+						anAnimationDesc.ikRuleCount = theInputFileReader.ReadInt32();
+						anAnimationDesc.ikRuleOffset = theInputFileReader.ReadInt32();
 
 						for (int x = 0; x < anAnimationDesc.unused.Length; x++)
 						{
-							anAnimationDesc.unused[x] = this.theInputFileReader.ReadInt32();
+							anAnimationDesc.unused[x] = theInputFileReader.ReadInt32();
 						}
 
-						this.theMdlFileData.theAnimationDescs.Add(anAnimationDesc);
+						theMdlFileData.theAnimationDescs.Add(anAnimationDesc);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAnimationDesc");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAnimationDesc");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (anAnimationDesc.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(animationDescInputFileStreamPosition + anAnimationDesc.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(animationDescInputFileStreamPosition + anAnimationDesc.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							anAnimationDesc.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							anAnimationDesc.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 							if (anAnimationDesc.theName[0] == '@')
 							{
 								anAnimationDesc.theName = anAnimationDesc.theName.Remove(0, 1);
@@ -812,10 +812,10 @@ namespace Crowbar
 							//	anAnimationDesc.theName = Path.Combine(FileManager.GetPath(anAnimationDesc.theName), "a_" + Path.GetFileName(anAnimationDesc.theName))
 							//End If
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anAnimationDesc.theName = " + anAnimationDesc.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anAnimationDesc.theName = " + anAnimationDesc.theName);
 							}
 						}
 						else
@@ -823,9 +823,9 @@ namespace Crowbar
 							anAnimationDesc.theName = "";
 						}
 
-						this.ReadAnimations(animationDescInputFileStreamPosition, anAnimationDesc);
+						ReadAnimations(animationDescInputFileStreamPosition, anAnimationDesc);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -842,7 +842,7 @@ namespace Crowbar
 
 		public void ReadTextures()
 		{
-			if (this.theMdlFileData.textureCount > 0)
+			if (theMdlFileData.textureCount > 0)
 			{
 				long textureInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -854,35 +854,35 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.textureOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.textureOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theTextures = new List<SourceMdlTexture2531>(this.theMdlFileData.textureCount);
-					for (int i = 0; i < this.theMdlFileData.textureCount; i++)
+					theMdlFileData.theTextures = new List<SourceMdlTexture2531>(theMdlFileData.textureCount);
+					for (int i = 0; i < theMdlFileData.textureCount; i++)
 					{
-						textureInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						textureInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlTexture2531 aTexture = new SourceMdlTexture2531();
 
-						aTexture.fileNameOffset = this.theInputFileReader.ReadInt32();
-						aTexture.flags = this.theInputFileReader.ReadInt32();
-						aTexture.width = this.theInputFileReader.ReadSingle();
-						aTexture.height = this.theInputFileReader.ReadSingle();
-						aTexture.unknown = this.theInputFileReader.ReadSingle();
+						aTexture.fileNameOffset = theInputFileReader.ReadInt32();
+						aTexture.flags = theInputFileReader.ReadInt32();
+						aTexture.width = theInputFileReader.ReadSingle();
+						aTexture.height = theInputFileReader.ReadSingle();
+						aTexture.unknown = theInputFileReader.ReadSingle();
 
-						this.theMdlFileData.theTextures.Add(aTexture);
+						theMdlFileData.theTextures.Add(aTexture);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aTexture");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aTexture");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aTexture.fileNameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(textureInputFileStreamPosition + aTexture.fileNameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(textureInputFileStreamPosition + aTexture.fileNameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aTexture.theFileName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aTexture.theFileName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
 							// Convert all forward slashes to backward slashes.
 							aTexture.theFileName = FileManager.GetNormalizedPathFileName(aTexture.theFileName);
@@ -910,10 +910,10 @@ namespace Crowbar
 							//	aTexture.theName = textureFileName
 							//End If
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aTexture.theFileName = " + aTexture.theFileName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aTexture.theFileName = " + aTexture.theFileName);
 							}
 						}
 						else
@@ -921,7 +921,7 @@ namespace Crowbar
 							aTexture.theFileName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -938,7 +938,7 @@ namespace Crowbar
 
 		public void ReadTexturePaths()
 		{
-			if (this.theMdlFileData.texturePathCount > 0)
+			if (theMdlFileData.texturePathCount > 0)
 			{
 				long texturePathInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -949,49 +949,49 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.texturePathOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.texturePathOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theTexturePaths = new List<string>(this.theMdlFileData.texturePathCount);
+					theMdlFileData.theTexturePaths = new List<string>(theMdlFileData.texturePathCount);
 					int texturePathOffset = 0;
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 					string aTexturePath = null;
-					for (int i = 0; i < this.theMdlFileData.texturePathCount; i++)
+					for (int i = 0; i < theMdlFileData.texturePathCount; i++)
 					{
-						texturePathInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						texturePathInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 	//					Dim aTexturePath As String
 
-						texturePathOffset = this.theInputFileReader.ReadInt32();
+						texturePathOffset = theInputFileReader.ReadInt32();
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aTexturePath (offset to text)");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aTexturePath (offset to text)");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (texturePathOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(texturePathOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(texturePathOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aTexturePath = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aTexturePath = FileManager.ReadNullTerminatedString(theInputFileReader);
 
 							//TEST: Convert all forward slashes to backward slashes.
 							aTexturePath = FileManager.GetNormalizedPathFileName(aTexturePath);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aTexturePath (text) = " + aTexturePath);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aTexturePath (text) = " + aTexturePath);
 							}
 						}
 						else
 						{
 							aTexturePath = "";
 						}
-						this.theMdlFileData.theTexturePaths.Add(aTexturePath);
+						theMdlFileData.theTexturePaths.Add(aTexturePath);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1008,7 +1008,7 @@ namespace Crowbar
 
 		public void ReadSkins()
 		{
-			if (this.theMdlFileData.skinFamilyCount > 0 && this.theMdlFileData.skinReferenceCount > 0)
+			if (theMdlFileData.skinFamilyCount > 0 && theMdlFileData.skinReferenceCount > 0)
 			{
 				long skinFamilyInputFileStreamPosition = 0;
 				//Dim inputFileStreamPosition As Long
@@ -1019,26 +1019,26 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.skinOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.skinOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theSkinFamilies = new List<List<short>>(this.theMdlFileData.skinFamilyCount);
-					for (int i = 0; i < this.theMdlFileData.skinFamilyCount; i++)
+					theMdlFileData.theSkinFamilies = new List<List<short>>(theMdlFileData.skinFamilyCount);
+					for (int i = 0; i < theMdlFileData.skinFamilyCount; i++)
 					{
-						skinFamilyInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						skinFamilyInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						List<short> aSkinFamily = new List<short>();
 
-						for (int j = 0; j < this.theMdlFileData.skinReferenceCount; j++)
+						for (int j = 0; j < theMdlFileData.skinReferenceCount; j++)
 						{
-							short aSkinRef = this.theInputFileReader.ReadInt16();
+							short aSkinRef = theInputFileReader.ReadInt16();
 							aSkinFamily.Add(aSkinRef);
 						}
 
-						this.theMdlFileData.theSkinFamilies.Add(aSkinFamily);
+						theMdlFileData.theSkinFamilies.Add(aSkinFamily);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSkin");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSkin");
 
 						//inputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 
@@ -1086,7 +1086,7 @@ namespace Crowbar
 
 		public void ReadIncludeModels()
 		{
-			if (this.theMdlFileData.includeModelCount > 0)
+			if (theMdlFileData.includeModelCount > 0)
 			{
 				long includeModelInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1097,37 +1097,37 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.includeModelOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.includeModelOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theIncludeModels = new List<SourceMdlIncludeModel2531>(this.theMdlFileData.includeModelCount);
-					for (int i = 0; i < this.theMdlFileData.includeModelCount; i++)
+					theMdlFileData.theIncludeModels = new List<SourceMdlIncludeModel2531>(theMdlFileData.includeModelCount);
+					for (int i = 0; i < theMdlFileData.includeModelCount; i++)
 					{
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
-						includeModelInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
+						includeModelInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 						SourceMdlIncludeModel2531 anIncludeModel = new SourceMdlIncludeModel2531();
 
-						anIncludeModel.fileNameOffset = this.theInputFileReader.ReadInt32();
+						anIncludeModel.fileNameOffset = theInputFileReader.ReadInt32();
 						for (int x = 0; x < anIncludeModel.unknown.Length; x++)
 						{
-							anIncludeModel.unknown[x] = this.theInputFileReader.ReadInt32();
+							anIncludeModel.unknown[x] = theInputFileReader.ReadInt32();
 						}
 
-						this.theMdlFileData.theIncludeModels.Add(anIncludeModel);
+						theMdlFileData.theIncludeModels.Add(anIncludeModel);
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (anIncludeModel.fileNameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(includeModelInputFileStreamPosition + anIncludeModel.fileNameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(includeModelInputFileStreamPosition + anIncludeModel.fileNameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							anIncludeModel.theFileName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							anIncludeModel.theFileName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anIncludeModel.theFileName = " + anIncludeModel.theFileName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anIncludeModel.theFileName = " + anIncludeModel.theFileName);
 							}
 						}
 						else
@@ -1135,10 +1135,10 @@ namespace Crowbar
 							anIncludeModel.theFileName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anIncludeModel [" + anIncludeModel.theFileName + "]");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anIncludeModel [" + anIncludeModel.theFileName + "]");
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1153,7 +1153,7 @@ namespace Crowbar
 
 		public void ReadBodyParts()
 		{
-			if (this.theMdlFileData.bodyPartCount > 0)
+			if (theMdlFileData.bodyPartCount > 0)
 			{
 				long bodyPartInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1164,39 +1164,39 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.bodyPartOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.bodyPartOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.theBodyParts = new List<SourceMdlBodyPart2531>(this.theMdlFileData.bodyPartCount);
-					for (int i = 0; i < this.theMdlFileData.bodyPartCount; i++)
+					theMdlFileData.theBodyParts = new List<SourceMdlBodyPart2531>(theMdlFileData.bodyPartCount);
+					for (int i = 0; i < theMdlFileData.bodyPartCount; i++)
 					{
-						bodyPartInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						bodyPartInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlBodyPart2531 aBodyPart = new SourceMdlBodyPart2531();
 
-						aBodyPart.nameOffset = this.theInputFileReader.ReadInt32();
-						aBodyPart.modelCount = this.theInputFileReader.ReadInt32();
-						aBodyPart.@base = this.theInputFileReader.ReadInt32();
-						aBodyPart.modelOffset = this.theInputFileReader.ReadInt32();
+						aBodyPart.nameOffset = theInputFileReader.ReadInt32();
+						aBodyPart.modelCount = theInputFileReader.ReadInt32();
+						aBodyPart.@base = theInputFileReader.ReadInt32();
+						aBodyPart.modelOffset = theInputFileReader.ReadInt32();
 
-						this.theMdlFileData.theBodyParts.Add(aBodyPart);
+						theMdlFileData.theBodyParts.Add(aBodyPart);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBodyPart");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBodyPart");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aBodyPart.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aBodyPart.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aBodyPart.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBodyPart.theName = " + aBodyPart.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aBodyPart.theName = " + aBodyPart.theName);
 							}
 						}
 						else
@@ -1204,14 +1204,14 @@ namespace Crowbar
 							aBodyPart.theName = "";
 						}
 
-						this.ReadModels(bodyPartInputFileStreamPosition, aBodyPart);
+						ReadModels(bodyPartInputFileStreamPosition, aBodyPart);
 
 						//'NOTE: Aligned here because studiomdl aligns after reserving space for bodyparts and models.
 						//If i = Me.theMdlFileData.bodyPartCount - 1 Then
 						//	Me.LogToEndAndAlignToNextStart(Me.theInputFileReader.BaseStream.Position - 1, 4, "theMdlFileData.theBodyParts + aBodyPart.theModels alignment")
 						//End If
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1226,7 +1226,7 @@ namespace Crowbar
 
 		public void ReadFlexDescs()
 		{
-			if (this.theMdlFileData.flexDescCount > 0)
+			if (theMdlFileData.flexDescCount > 0)
 			{
 				long flexDescInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1235,31 +1235,31 @@ namespace Crowbar
 				long fileOffsetStart2 = 0;
 				long fileOffsetEnd2 = 0;
 
-				this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.flexDescOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(theMdlFileData.flexDescOffset, SeekOrigin.Begin);
 				//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-				this.theMdlFileData.theFlexDescs = new List<SourceMdlFlexDesc>(this.theMdlFileData.flexDescCount);
-				for (int i = 0; i < this.theMdlFileData.flexDescCount; i++)
+				theMdlFileData.theFlexDescs = new List<SourceMdlFlexDesc>(theMdlFileData.flexDescCount);
+				for (int i = 0; i < theMdlFileData.flexDescCount; i++)
 				{
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
-					flexDescInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
+					flexDescInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					SourceMdlFlexDesc aFlexDesc = new SourceMdlFlexDesc();
-					aFlexDesc.nameOffset = this.theInputFileReader.ReadInt32();
-					this.theMdlFileData.theFlexDescs.Add(aFlexDesc);
+					aFlexDesc.nameOffset = theInputFileReader.ReadInt32();
+					theMdlFileData.theFlexDescs.Add(aFlexDesc);
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (aFlexDesc.nameOffset != 0)
 					{
-						this.theInputFileReader.BaseStream.Seek(flexDescInputFileStreamPosition + aFlexDesc.nameOffset, SeekOrigin.Begin);
-						fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+						theInputFileReader.BaseStream.Seek(flexDescInputFileStreamPosition + aFlexDesc.nameOffset, SeekOrigin.Begin);
+						fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-						aFlexDesc.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+						aFlexDesc.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-						fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-						if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+						fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+						if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 						{
-							this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexDesc.theName = " + aFlexDesc.theName);
+							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexDesc.theName = " + aFlexDesc.theName);
 						}
 					}
 					else
@@ -1267,10 +1267,10 @@ namespace Crowbar
 						aFlexDesc.theName = "";
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexDesc [" + aFlexDesc.theName + "]");
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexDesc [" + aFlexDesc.theName + "]");
 				}
 
 				//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1280,7 +1280,7 @@ namespace Crowbar
 
 		public void ReadFlexControllers()
 		{
-			if (this.theMdlFileData.flexControllerCount > 0)
+			if (theMdlFileData.flexControllerCount > 0)
 			{
 				long flexControllerInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1289,35 +1289,35 @@ namespace Crowbar
 				long fileOffsetStart2 = 0;
 				long fileOffsetEnd2 = 0;
 
-				this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.flexControllerOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(theMdlFileData.flexControllerOffset, SeekOrigin.Begin);
 				//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-				this.theMdlFileData.theFlexControllers = new List<SourceMdlFlexController>(this.theMdlFileData.flexControllerCount);
-				for (int i = 0; i < this.theMdlFileData.flexControllerCount; i++)
+				theMdlFileData.theFlexControllers = new List<SourceMdlFlexController>(theMdlFileData.flexControllerCount);
+				for (int i = 0; i < theMdlFileData.flexControllerCount; i++)
 				{
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
-					flexControllerInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
+					flexControllerInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					SourceMdlFlexController aFlexController = new SourceMdlFlexController();
-					aFlexController.typeOffset = this.theInputFileReader.ReadInt32();
-					aFlexController.nameOffset = this.theInputFileReader.ReadInt32();
-					aFlexController.localToGlobal = this.theInputFileReader.ReadInt32();
-					aFlexController.min = this.theInputFileReader.ReadSingle();
-					aFlexController.max = this.theInputFileReader.ReadSingle();
-					this.theMdlFileData.theFlexControllers.Add(aFlexController);
+					aFlexController.typeOffset = theInputFileReader.ReadInt32();
+					aFlexController.nameOffset = theInputFileReader.ReadInt32();
+					aFlexController.localToGlobal = theInputFileReader.ReadInt32();
+					aFlexController.min = theInputFileReader.ReadSingle();
+					aFlexController.max = theInputFileReader.ReadSingle();
+					theMdlFileData.theFlexControllers.Add(aFlexController);
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (aFlexController.typeOffset != 0)
 					{
-						this.theInputFileReader.BaseStream.Seek(flexControllerInputFileStreamPosition + aFlexController.typeOffset, SeekOrigin.Begin);
-						fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+						theInputFileReader.BaseStream.Seek(flexControllerInputFileStreamPosition + aFlexController.typeOffset, SeekOrigin.Begin);
+						fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-						aFlexController.theType = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+						aFlexController.theType = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-						fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-						if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+						fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+						if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 						{
-							this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexController.theType = " + aFlexController.theType);
+							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexController.theType = " + aFlexController.theType);
 						}
 					}
 					else
@@ -1326,15 +1326,15 @@ namespace Crowbar
 					}
 					if (aFlexController.nameOffset != 0)
 					{
-						this.theInputFileReader.BaseStream.Seek(flexControllerInputFileStreamPosition + aFlexController.nameOffset, SeekOrigin.Begin);
-						fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+						theInputFileReader.BaseStream.Seek(flexControllerInputFileStreamPosition + aFlexController.nameOffset, SeekOrigin.Begin);
+						fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-						aFlexController.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+						aFlexController.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-						fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-						if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+						fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+						if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 						{
-							this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexController.theName = " + aFlexController.theName);
+							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aFlexController.theName = " + aFlexController.theName);
 						}
 					}
 					else
@@ -1342,15 +1342,15 @@ namespace Crowbar
 						aFlexController.theName = "";
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexController [" + aFlexController.theName + "]");
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexController [" + aFlexController.theName + "]");
 				}
 
-				if (this.theMdlFileData.theFlexControllers.Count > 0)
+				if (theMdlFileData.theFlexControllers.Count > 0)
 				{
-					this.theMdlFileData.theModelCommandIsUsed = true;
+					theMdlFileData.theModelCommandIsUsed = true;
 				}
 
 				//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1360,7 +1360,7 @@ namespace Crowbar
 
 		public void ReadFlexRules()
 		{
-			if (this.theMdlFileData.flexRuleCount > 0)
+			if (theMdlFileData.flexRuleCount > 0)
 			{
 				long flexRuleInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1369,44 +1369,44 @@ namespace Crowbar
 				//Dim fileOffsetStart2 As Long
 				//Dim fileOffsetEnd2 As Long
 
-				this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.flexRuleOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(theMdlFileData.flexRuleOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-				this.theMdlFileData.theFlexRules = new List<SourceMdlFlexRule>(this.theMdlFileData.flexRuleCount);
-				for (int i = 0; i < this.theMdlFileData.flexRuleCount; i++)
+				theMdlFileData.theFlexRules = new List<SourceMdlFlexRule>(theMdlFileData.flexRuleCount);
+				for (int i = 0; i < theMdlFileData.flexRuleCount; i++)
 				{
-					flexRuleInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					flexRuleInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					SourceMdlFlexRule aFlexRule = new SourceMdlFlexRule();
-					aFlexRule.flexIndex = this.theInputFileReader.ReadInt32();
-					aFlexRule.opCount = this.theInputFileReader.ReadInt32();
-					aFlexRule.opOffset = this.theInputFileReader.ReadInt32();
-					this.theMdlFileData.theFlexRules.Add(aFlexRule);
+					aFlexRule.flexIndex = theInputFileReader.ReadInt32();
+					aFlexRule.opCount = theInputFileReader.ReadInt32();
+					aFlexRule.opOffset = theInputFileReader.ReadInt32();
+					theMdlFileData.theFlexRules.Add(aFlexRule);
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
-					this.theMdlFileData.theFlexDescs[aFlexRule.flexIndex].theDescIsUsedByFlexRule = true;
+					theMdlFileData.theFlexDescs[aFlexRule.flexIndex].theDescIsUsedByFlexRule = true;
 
 					if (aFlexRule.opCount > 0 && aFlexRule.opOffset != 0)
 					{
-						this.ReadFlexOps(flexRuleInputFileStreamPosition, aFlexRule);
+						ReadFlexOps(flexRuleInputFileStreamPosition, aFlexRule);
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
-				if (this.theMdlFileData.theFlexRules.Count > 0)
+				if (theMdlFileData.theFlexRules.Count > 0)
 				{
-					this.theMdlFileData.theModelCommandIsUsed = true;
+					theMdlFileData.theModelCommandIsUsed = true;
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theMdlFileData.theFlexRules " + this.theMdlFileData.theFlexDescs.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theMdlFileData.theFlexRules " + theMdlFileData.theFlexDescs.Count.ToString());
 			}
 		}
 
 		public void ReadPoseParamDescs()
 		{
-			if (this.theMdlFileData.localPoseParamaterCount > 0)
+			if (theMdlFileData.localPoseParamaterCount > 0)
 			{
 				long poseInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -1417,40 +1417,40 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.localPoseParameterOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.localPoseParameterOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					this.theMdlFileData.thePoseParamDescs = new List<SourceMdlPoseParamDesc2531>(this.theMdlFileData.localPoseParamaterCount);
-					for (int i = 0; i < this.theMdlFileData.localPoseParamaterCount; i++)
+					theMdlFileData.thePoseParamDescs = new List<SourceMdlPoseParamDesc2531>(theMdlFileData.localPoseParamaterCount);
+					for (int i = 0; i < theMdlFileData.localPoseParamaterCount; i++)
 					{
-						poseInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						poseInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlPoseParamDesc2531 aPoseParamDesc = new SourceMdlPoseParamDesc2531();
 
-						aPoseParamDesc.nameOffset = this.theInputFileReader.ReadInt32();
-						aPoseParamDesc.flags = this.theInputFileReader.ReadInt32();
-						aPoseParamDesc.startingValue = this.theInputFileReader.ReadSingle();
-						aPoseParamDesc.endingValue = this.theInputFileReader.ReadSingle();
-						aPoseParamDesc.loopingRange = this.theInputFileReader.ReadSingle();
+						aPoseParamDesc.nameOffset = theInputFileReader.ReadInt32();
+						aPoseParamDesc.flags = theInputFileReader.ReadInt32();
+						aPoseParamDesc.startingValue = theInputFileReader.ReadSingle();
+						aPoseParamDesc.endingValue = theInputFileReader.ReadSingle();
+						aPoseParamDesc.loopingRange = theInputFileReader.ReadSingle();
 
-						this.theMdlFileData.thePoseParamDescs.Add(aPoseParamDesc);
+						theMdlFileData.thePoseParamDescs.Add(aPoseParamDesc);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aPoseParamDesc");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aPoseParamDesc");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aPoseParamDesc.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(poseInputFileStreamPosition + aPoseParamDesc.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(poseInputFileStreamPosition + aPoseParamDesc.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							aPoseParamDesc.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							aPoseParamDesc.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aPoseParamDesc.theName = " + aPoseParamDesc.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aPoseParamDesc.theName = " + aPoseParamDesc.theName);
 							}
 						}
 						else
@@ -1458,7 +1458,7 @@ namespace Crowbar
 							aPoseParamDesc.theName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1473,7 +1473,7 @@ namespace Crowbar
 
 		public void ReadSequenceGroups()
 		{
-			if (this.theMdlFileData.sequenceGroupCount > 0)
+			if (theMdlFileData.sequenceGroupCount > 0)
 			{
 				//Dim boneInputFileStreamPosition As Long
 				//Dim inputFileStreamPosition As Long
@@ -1484,14 +1484,14 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.sequenceGroupOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theMdlFileData.sequenceGroupOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 					//Me.theMdlFileData.theSequenceGroupFileHeaders = New List(Of SourceMdlSequenceGroupFileHeader2531)(Me.theMdlFileData.sequenceGroupCount)
-					this.theMdlFileData.theSequenceGroups = new List<SourceMdlSequenceGroup2531>(this.theMdlFileData.sequenceGroupCount);
-					for (int sequenceGroupIndex = 0; sequenceGroupIndex < this.theMdlFileData.sequenceGroupCount; sequenceGroupIndex++)
+					theMdlFileData.theSequenceGroups = new List<SourceMdlSequenceGroup2531>(theMdlFileData.sequenceGroupCount);
+					for (int sequenceGroupIndex = 0; sequenceGroupIndex < theMdlFileData.sequenceGroupCount; sequenceGroupIndex++)
 					{
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						//boneInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 						SourceMdlSequenceGroup2531 aSequenceGroup = new SourceMdlSequenceGroup2531();
 
@@ -1504,17 +1504,17 @@ namespace Crowbar
 						for (int x = 0; x < aSequenceGroup.unknown.Length; x++)
 						{
 							//aSequenceGroup.unknown(x) = Me.theInputFileReader.ReadSingle()
-							aSequenceGroup.unknown[x] = this.theInputFileReader.ReadInt32();
+							aSequenceGroup.unknown[x] = theInputFileReader.ReadInt32();
 						}
 
-						this.theMdlFileData.theSequenceGroups.Add(aSequenceGroup);
+						theMdlFileData.theSequenceGroups.Add(aSequenceGroup);
 
 						//inputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 
 						//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceGroup ");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceGroup ");
 						//Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceGroup " + aSequenceGroup.theName + " [filename = " + aSequenceGroup.theFileName + "]")
 					}
 
@@ -1532,20 +1532,20 @@ namespace Crowbar
 
 		public void ReadSurfaceProp()
 		{
-			if (this.theMdlFileData.surfacePropOffset > 0)
+			if (theMdlFileData.surfacePropOffset > 0)
 			{
 				long fileOffsetStart = 0;
 				long fileOffsetEnd = 0;
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theMdlFileData.surfacePropOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(theMdlFileData.surfacePropOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-					this.theMdlFileData.theSurfacePropName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+					theMdlFileData.theSurfacePropName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theSurfacePropName = " + this.theMdlFileData.theSurfacePropName);
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theSurfacePropName = " + theMdlFileData.theSurfacePropName);
 				}
 				catch (Exception ex)
 				{
@@ -1554,13 +1554,13 @@ namespace Crowbar
 			}
 			else
 			{
-				this.theMdlFileData.theSurfacePropName = "";
+				theMdlFileData.theSurfacePropName = "";
 			}
 		}
 
 		public void ReadUnreadBytes()
 		{
-			this.theMdlFileData.theFileSeekLog.LogUnreadBytes(this.theInputFileReader);
+			theMdlFileData.theFileSeekLog.LogUnreadBytes(theInputFileReader);
 		}
 
 		public void CreateFlexFrameList()
@@ -1572,13 +1572,13 @@ namespace Crowbar
 			SourceMdlFlex2531 aFlex = null;
 			FlexFrame2531 searchedFlexFrame = null;
 
-			this.theMdlFileData.theFlexFrames = new List<FlexFrame2531>();
+			theMdlFileData.theFlexFrames = new List<FlexFrame2531>();
 
 			//NOTE: Create the defaultflex.
 			aFlexFrame = new FlexFrame2531();
-			this.theMdlFileData.theFlexFrames.Add(aFlexFrame);
+			theMdlFileData.theFlexFrames.Add(aFlexFrame);
 
-			if (this.theMdlFileData.theFlexDescs != null && this.theMdlFileData.theFlexDescs.Count > 0)
+			if (theMdlFileData.theFlexDescs != null && theMdlFileData.theFlexDescs.Count > 0)
 			{
 				//Dim flexDescToMeshIndexes As List(Of List(Of Integer))
 				List<List<FlexFrame2531>> flexDescToFlexFrames = null;
@@ -1590,16 +1590,16 @@ namespace Crowbar
 				//	flexDescToMeshIndexes.Add(meshIndexList)
 				//Next
 
-				flexDescToFlexFrames = new List<List<FlexFrame2531>>(this.theMdlFileData.theFlexDescs.Count);
-				for (int x = 0; x < this.theMdlFileData.theFlexDescs.Count; x++)
+				flexDescToFlexFrames = new List<List<FlexFrame2531>>(theMdlFileData.theFlexDescs.Count);
+				for (int x = 0; x < theMdlFileData.theFlexDescs.Count; x++)
 				{
 					List<FlexFrame2531> flexFrameList = new List<FlexFrame2531>();
 					flexDescToFlexFrames.Add(flexFrameList);
 				}
 
-				for (int bodyPartIndex = 0; bodyPartIndex < this.theMdlFileData.theBodyParts.Count; bodyPartIndex++)
+				for (int bodyPartIndex = 0; bodyPartIndex < theMdlFileData.theBodyParts.Count; bodyPartIndex++)
 				{
-					aBodyPart = this.theMdlFileData.theBodyParts[bodyPartIndex];
+					aBodyPart = theMdlFileData.theBodyParts[bodyPartIndex];
 
 					if (aBodyPart.theModels != null && aBodyPart.theModels.Count > 0)
 					{
@@ -1613,7 +1613,7 @@ namespace Crowbar
 								{
 									aMesh = aModel.theMeshes[meshIndex];
 
-									meshVertexIndexStart = this.theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theMeshes[meshIndex].vertexIndexStart;
+									meshVertexIndexStart = theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theMeshes[meshIndex].vertexIndexStart;
 
 									if (aMesh.theFlexes != null && aMesh.theFlexes.Count > 0)
 									{
@@ -1640,14 +1640,14 @@ namespace Crowbar
 											if (aFlexFrame == null)
 											{
 												aFlexFrame = new FlexFrame2531();
-												this.theMdlFileData.theFlexFrames.Add(aFlexFrame);
+												theMdlFileData.theFlexFrames.Add(aFlexFrame);
 												aFlexFrame.bodyAndMeshVertexIndexStarts = new List<int>();
 												aFlexFrame.flexes = new List<SourceMdlFlex2531>();
 
 												//Dim aFlexDescPartnerIndex As Integer
 												//aFlexDescPartnerIndex = aMesh.theFlexes(flexIndex).flexDescPartnerIndex
 
-												aFlexFrame.flexName = this.theMdlFileData.theFlexDescs[aFlex.flexDescIndex].theName;
+												aFlexFrame.flexName = theMdlFileData.theFlexDescs[aFlex.flexDescIndex].theName;
 												//If aFlexDescPartnerIndex > 0 Then
 												//	'line += "flexpair """
 												//	'aFlexFrame.flexName = aFlexFrame.flexName.Remove(aFlexFrame.flexName.Length - 1, 1)
@@ -1662,7 +1662,7 @@ namespace Crowbar
 												aFlexFrame.flexDescription = aFlexFrame.flexName;
 												aFlexFrame.flexHasPartner = false;
 												//End If
-												this.theMdlFileData.theFlexDescs[aFlex.flexDescIndex].theDescIsUsedByFlex = true;
+												theMdlFileData.theFlexDescs[aFlex.flexDescIndex].theDescIsUsedByFlex = true;
 
 												flexDescToFlexFrames[aFlex.flexDescIndex].Add(aFlexFrame);
 											}
@@ -1686,11 +1686,11 @@ namespace Crowbar
 
 		public void WriteInternalMdlFileName(string internalMdlFileName)
 		{
-			this.theOutputFileWriter.BaseStream.Seek(0xC, SeekOrigin.Begin);
+			theOutputFileWriter.BaseStream.Seek(0xC, SeekOrigin.Begin);
 			//TODO: Should only write up to 128 characters.
-			this.theOutputFileWriter.Write(internalMdlFileName.ToCharArray());
+			theOutputFileWriter.Write(internalMdlFileName.ToCharArray());
 			//NOTE: Write the ending null byte.
-			this.theOutputFileWriter.Write(Convert.ToByte(0));
+			theOutputFileWriter.Write(Convert.ToByte(0));
 		}
 
 #endregion
@@ -1706,30 +1706,30 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.proceduralRuleOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.proceduralRuleOffset, SeekOrigin.Begin);
 
-				axisInterpBoneInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				axisInterpBoneInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aBone.theAxisInterpBone = new SourceMdlAxisInterpBone2531();
-				aBone.theAxisInterpBone.controlBoneIndex = this.theInputFileReader.ReadInt32();
-				aBone.theAxisInterpBone.axis = this.theInputFileReader.ReadInt32();
+				aBone.theAxisInterpBone.controlBoneIndex = theInputFileReader.ReadInt32();
+				aBone.theAxisInterpBone.axis = theInputFileReader.ReadInt32();
 				for (int x = 0; x < aBone.theAxisInterpBone.pos.Length; x++)
 				{
-					aBone.theAxisInterpBone.pos[x].x = this.theInputFileReader.ReadSingle();
-					aBone.theAxisInterpBone.pos[x].y = this.theInputFileReader.ReadSingle();
-					aBone.theAxisInterpBone.pos[x].z = this.theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.pos[x].x = theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.pos[x].y = theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.pos[x].z = theInputFileReader.ReadSingle();
 				}
 				for (int x = 0; x < aBone.theAxisInterpBone.quat.Length; x++)
 				{
-					aBone.theAxisInterpBone.quat[x].x = this.theInputFileReader.ReadSingle();
-					aBone.theAxisInterpBone.quat[x].y = this.theInputFileReader.ReadSingle();
-					aBone.theAxisInterpBone.quat[x].z = this.theInputFileReader.ReadSingle();
-					aBone.theAxisInterpBone.quat[x].z = this.theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.quat[x].x = theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.quat[x].y = theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.quat[x].z = theInputFileReader.ReadSingle();
+					aBone.theAxisInterpBone.quat[x].z = theInputFileReader.ReadSingle();
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.theAxisInterpBone");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.theAxisInterpBone");
 
 				//inputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 
@@ -1750,27 +1750,27 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.proceduralRuleOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(boneInputFileStreamPosition + aBone.proceduralRuleOffset, SeekOrigin.Begin);
 
-				quatInterpBoneInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				quatInterpBoneInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aBone.theQuatInterpBone = new SourceMdlQuatInterpBone2531();
-				aBone.theQuatInterpBone.controlBoneIndex = this.theInputFileReader.ReadInt32();
-				aBone.theQuatInterpBone.triggerCount = this.theInputFileReader.ReadInt32();
-				aBone.theQuatInterpBone.triggerOffset = this.theInputFileReader.ReadInt32();
+				aBone.theQuatInterpBone.controlBoneIndex = theInputFileReader.ReadInt32();
+				aBone.theQuatInterpBone.triggerCount = theInputFileReader.ReadInt32();
+				aBone.theQuatInterpBone.triggerOffset = theInputFileReader.ReadInt32();
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.theQuatInterpBone");
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.theQuatInterpBone");
 
-				inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+				inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 				if (aBone.theQuatInterpBone.triggerCount > 0 && aBone.theQuatInterpBone.triggerOffset != 0)
 				{
-					this.ReadTriggers(quatInterpBoneInputFileStreamPosition, aBone.theQuatInterpBone);
+					ReadTriggers(quatInterpBoneInputFileStreamPosition, aBone.theQuatInterpBone);
 				}
 
-				this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 			}
 			catch (Exception ex)
 			{
@@ -1785,35 +1785,35 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(quatInterpBoneInputFileStreamPosition + aQuatInterpBone.triggerOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(quatInterpBoneInputFileStreamPosition + aQuatInterpBone.triggerOffset, SeekOrigin.Begin);
 				//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 				aQuatInterpBone.theTriggers = new List<SourceMdlQuatInterpInfo2531>(aQuatInterpBone.triggerCount);
 				for (int j = 0; j < aQuatInterpBone.triggerCount; j++)
 				{
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 					SourceMdlQuatInterpInfo2531 aTrigger = new SourceMdlQuatInterpInfo2531();
 
-					aTrigger.inverseToleranceAngle = this.theInputFileReader.ReadSingle();
+					aTrigger.inverseToleranceAngle = theInputFileReader.ReadSingle();
 
-					aTrigger.trigger.x = this.theInputFileReader.ReadSingle();
-					aTrigger.trigger.y = this.theInputFileReader.ReadSingle();
-					aTrigger.trigger.z = this.theInputFileReader.ReadSingle();
-					aTrigger.trigger.w = this.theInputFileReader.ReadSingle();
+					aTrigger.trigger.x = theInputFileReader.ReadSingle();
+					aTrigger.trigger.y = theInputFileReader.ReadSingle();
+					aTrigger.trigger.z = theInputFileReader.ReadSingle();
+					aTrigger.trigger.w = theInputFileReader.ReadSingle();
 
-					aTrigger.pos.x = this.theInputFileReader.ReadSingle();
-					aTrigger.pos.y = this.theInputFileReader.ReadSingle();
-					aTrigger.pos.z = this.theInputFileReader.ReadSingle();
+					aTrigger.pos.x = theInputFileReader.ReadSingle();
+					aTrigger.pos.y = theInputFileReader.ReadSingle();
+					aTrigger.pos.z = theInputFileReader.ReadSingle();
 
-					aTrigger.quat.x = this.theInputFileReader.ReadSingle();
-					aTrigger.quat.y = this.theInputFileReader.ReadSingle();
-					aTrigger.quat.z = this.theInputFileReader.ReadSingle();
-					aTrigger.quat.w = this.theInputFileReader.ReadSingle();
+					aTrigger.quat.x = theInputFileReader.ReadSingle();
+					aTrigger.quat.y = theInputFileReader.ReadSingle();
+					aTrigger.quat.z = theInputFileReader.ReadSingle();
+					aTrigger.quat.w = theInputFileReader.ReadSingle();
 
 					aQuatInterpBone.theTriggers.Add(aTrigger);
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.aQuatInterpBone.aTrigger");
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBone.aQuatInterpBone.aTrigger");
 				}
 
 				//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1838,29 +1838,29 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(hitboxOffsetInputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(hitboxOffsetInputFileStreamPosition, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 					aHitboxSet.theHitboxes = new List<SourceMdlHitbox2531>(aHitboxSet.hitboxCount);
 					for (int j = 0; j < aHitboxSet.hitboxCount; j++)
 					{
 						//hitboxInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlHitbox2531 aHitbox = new SourceMdlHitbox2531();
 
-						aHitbox.boneIndex = this.theInputFileReader.ReadInt32();
-						aHitbox.groupIndex = this.theInputFileReader.ReadInt32();
-						aHitbox.boundingBoxMin.x = this.theInputFileReader.ReadSingle();
-						aHitbox.boundingBoxMin.y = this.theInputFileReader.ReadSingle();
-						aHitbox.boundingBoxMin.z = this.theInputFileReader.ReadSingle();
-						aHitbox.boundingBoxMax.x = this.theInputFileReader.ReadSingle();
-						aHitbox.boundingBoxMax.y = this.theInputFileReader.ReadSingle();
-						aHitbox.boundingBoxMax.z = this.theInputFileReader.ReadSingle();
+						aHitbox.boneIndex = theInputFileReader.ReadInt32();
+						aHitbox.groupIndex = theInputFileReader.ReadInt32();
+						aHitbox.boundingBoxMin.x = theInputFileReader.ReadSingle();
+						aHitbox.boundingBoxMin.y = theInputFileReader.ReadSingle();
+						aHitbox.boundingBoxMin.z = theInputFileReader.ReadSingle();
+						aHitbox.boundingBoxMax.x = theInputFileReader.ReadSingle();
+						aHitbox.boundingBoxMax.y = theInputFileReader.ReadSingle();
+						aHitbox.boundingBoxMax.z = theInputFileReader.ReadSingle();
 
 						aHitboxSet.theHitboxes.Add(aHitbox);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aHitbox");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aHitbox");
 
 						//inputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 
@@ -1892,32 +1892,32 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.modelOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.modelOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 					aBodyPart.theModels = new List<SourceMdlModel2531>(aBodyPart.modelCount);
 					for (int j = 0; j < aBodyPart.modelCount; j++)
 					{
-						modelInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						modelInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlModel2531 aModel = new SourceMdlModel2531();
 
-						aModel.name = this.theInputFileReader.ReadChars(aModel.name.Length);
+						aModel.name = theInputFileReader.ReadChars(aModel.name.Length);
 						aModel.theName = (new string(aModel.name)).Trim('\0');
-						aModel.type = this.theInputFileReader.ReadInt32();
-						aModel.boundingRadius = this.theInputFileReader.ReadSingle();
+						aModel.type = theInputFileReader.ReadInt32();
+						aModel.boundingRadius = theInputFileReader.ReadSingle();
 
-						aModel.meshCount = this.theInputFileReader.ReadInt32();
-						aModel.meshOffset = this.theInputFileReader.ReadInt32();
-						aModel.vertexCount = this.theInputFileReader.ReadInt32();
-						aModel.vertexOffset = this.theInputFileReader.ReadInt32();
-						aModel.tangentOffset = this.theInputFileReader.ReadInt32();
+						aModel.meshCount = theInputFileReader.ReadInt32();
+						aModel.meshOffset = theInputFileReader.ReadInt32();
+						aModel.vertexCount = theInputFileReader.ReadInt32();
+						aModel.vertexOffset = theInputFileReader.ReadInt32();
+						aModel.tangentOffset = theInputFileReader.ReadInt32();
 
-						aModel.vertexListType = this.theInputFileReader.ReadInt32();
+						aModel.vertexListType = theInputFileReader.ReadInt32();
 
 						for (int x = 0; x < aModel.unknown01.Length; x++)
 						{
-							aModel.unknown01[x] = this.theInputFileReader.ReadSingle();
+							aModel.unknown01[x] = theInputFileReader.ReadSingle();
 						}
 
 						//aModel.unknownCount = Me.theInputFileReader.ReadInt32()
@@ -1925,52 +1925,52 @@ namespace Crowbar
 
 						for (int x = 0; x < aModel.unknown02.Length; x++)
 						{
-							aModel.unknown02[x] = this.theInputFileReader.ReadSingle();
+							aModel.unknown02[x] = theInputFileReader.ReadSingle();
 						}
 						//For x As Integer = 0 To aModel.unknown03.Length - 1
 						//	aModel.unknown03(x) = Me.theInputFileReader.ReadInt32()
 						//Next
 
-						aModel.attachmentCount = this.theInputFileReader.ReadInt32();
-						aModel.attachmentOffset = this.theInputFileReader.ReadInt32();
-						aModel.eyeballCount = this.theInputFileReader.ReadInt32();
-						aModel.eyeballOffset = this.theInputFileReader.ReadInt32();
+						aModel.attachmentCount = theInputFileReader.ReadInt32();
+						aModel.attachmentOffset = theInputFileReader.ReadInt32();
+						aModel.eyeballCount = theInputFileReader.ReadInt32();
+						aModel.eyeballOffset = theInputFileReader.ReadInt32();
 						for (int x = 0; x < aModel.unknown03.Length; x++)
 						{
-							aModel.unknown03[x] = this.theInputFileReader.ReadInt32();
+							aModel.unknown03[x] = theInputFileReader.ReadInt32();
 						}
 
-						aModel.unknown01Count = this.theInputFileReader.ReadInt32();
-						aModel.unknown01Offset = this.theInputFileReader.ReadInt32();
-						aModel.unknown02Count = this.theInputFileReader.ReadInt32();
-						aModel.unknown02Offset = this.theInputFileReader.ReadInt32();
+						aModel.unknown01Count = theInputFileReader.ReadInt32();
+						aModel.unknown01Offset = theInputFileReader.ReadInt32();
+						aModel.unknown02Count = theInputFileReader.ReadInt32();
+						aModel.unknown02Offset = theInputFileReader.ReadInt32();
 
 						aBodyPart.theModels.Add(aModel);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel [" + aModel.theName + "]");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel [" + aModel.theName + "]");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						//NOTE: Call ReadEyeballs() before ReadMeshes() so that ReadMeshes can fill-in the eyeball.theTextureIndex values.
-						this.ReadEyeballs(modelInputFileStreamPosition, aModel);
-						this.ReadMeshes(modelInputFileStreamPosition, aModel);
+						ReadEyeballs(modelInputFileStreamPosition, aModel);
+						ReadMeshes(modelInputFileStreamPosition, aModel);
 						//If (Me.theMdlFileData.flags And SourceMdlFileData2531.STUDIOHDR_FLAGS_STATIC_PROP) > 0 Then
 						if (aModel.vertexListType == 0)
 						{
-							this.ReadVertexesType0(modelInputFileStreamPosition, aModel);
+							ReadVertexesType0(modelInputFileStreamPosition, aModel);
 						}
 						else if (aModel.vertexListType == 1)
 						{
-							this.ReadVertexesType1(modelInputFileStreamPosition, aModel);
+							ReadVertexesType1(modelInputFileStreamPosition, aModel);
 						}
 						else
 						{
-							this.ReadVertexesType2(modelInputFileStreamPosition, aModel);
+							ReadVertexesType2(modelInputFileStreamPosition, aModel);
 						}
-						this.ReadTangents(modelInputFileStreamPosition, aModel);
+						ReadTangents(modelInputFileStreamPosition, aModel);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -1998,79 +1998,79 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.eyeballOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.eyeballOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 					aModel.theEyeballs = new List<SourceMdlEyeball2531>(aModel.eyeballCount);
 					for (int k = 0; k < aModel.eyeballCount; k++)
 					{
-						eyeballInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						eyeballInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlEyeball2531 anEyeball = new SourceMdlEyeball2531();
 
-						anEyeball.nameOffset = this.theInputFileReader.ReadInt32();
+						anEyeball.nameOffset = theInputFileReader.ReadInt32();
 
-						anEyeball.boneIndex = this.theInputFileReader.ReadInt32();
-						anEyeball.org.x = this.theInputFileReader.ReadSingle();
-						anEyeball.org.y = this.theInputFileReader.ReadSingle();
-						anEyeball.org.z = this.theInputFileReader.ReadSingle();
-						anEyeball.zOffset = this.theInputFileReader.ReadSingle();
-						anEyeball.radius = this.theInputFileReader.ReadSingle();
-						anEyeball.up.x = this.theInputFileReader.ReadSingle();
-						anEyeball.up.y = this.theInputFileReader.ReadSingle();
-						anEyeball.up.z = this.theInputFileReader.ReadSingle();
-						anEyeball.forward.x = this.theInputFileReader.ReadSingle();
-						anEyeball.forward.y = this.theInputFileReader.ReadSingle();
-						anEyeball.forward.z = this.theInputFileReader.ReadSingle();
+						anEyeball.boneIndex = theInputFileReader.ReadInt32();
+						anEyeball.org.x = theInputFileReader.ReadSingle();
+						anEyeball.org.y = theInputFileReader.ReadSingle();
+						anEyeball.org.z = theInputFileReader.ReadSingle();
+						anEyeball.zOffset = theInputFileReader.ReadSingle();
+						anEyeball.radius = theInputFileReader.ReadSingle();
+						anEyeball.up.x = theInputFileReader.ReadSingle();
+						anEyeball.up.y = theInputFileReader.ReadSingle();
+						anEyeball.up.z = theInputFileReader.ReadSingle();
+						anEyeball.forward.x = theInputFileReader.ReadSingle();
+						anEyeball.forward.y = theInputFileReader.ReadSingle();
+						anEyeball.forward.z = theInputFileReader.ReadSingle();
 
-						anEyeball.texture = this.theInputFileReader.ReadInt32();
-						anEyeball.iris_material = this.theInputFileReader.ReadInt32();
-						anEyeball.iris_scale = this.theInputFileReader.ReadSingle();
-						anEyeball.glint_material = this.theInputFileReader.ReadInt32();
+						anEyeball.texture = theInputFileReader.ReadInt32();
+						anEyeball.iris_material = theInputFileReader.ReadInt32();
+						anEyeball.iris_scale = theInputFileReader.ReadSingle();
+						anEyeball.glint_material = theInputFileReader.ReadInt32();
 
-						anEyeball.upperFlexDesc[0] = this.theInputFileReader.ReadInt32();
-						anEyeball.upperFlexDesc[1] = this.theInputFileReader.ReadInt32();
-						anEyeball.upperFlexDesc[2] = this.theInputFileReader.ReadInt32();
-						anEyeball.lowerFlexDesc[0] = this.theInputFileReader.ReadInt32();
-						anEyeball.lowerFlexDesc[1] = this.theInputFileReader.ReadInt32();
-						anEyeball.lowerFlexDesc[2] = this.theInputFileReader.ReadInt32();
-						anEyeball.upperTarget[0] = this.theInputFileReader.ReadSingle();
-						anEyeball.upperTarget[1] = this.theInputFileReader.ReadSingle();
-						anEyeball.upperTarget[2] = this.theInputFileReader.ReadSingle();
-						anEyeball.lowerTarget[0] = this.theInputFileReader.ReadSingle();
-						anEyeball.lowerTarget[1] = this.theInputFileReader.ReadSingle();
-						anEyeball.lowerTarget[2] = this.theInputFileReader.ReadSingle();
+						anEyeball.upperFlexDesc[0] = theInputFileReader.ReadInt32();
+						anEyeball.upperFlexDesc[1] = theInputFileReader.ReadInt32();
+						anEyeball.upperFlexDesc[2] = theInputFileReader.ReadInt32();
+						anEyeball.lowerFlexDesc[0] = theInputFileReader.ReadInt32();
+						anEyeball.lowerFlexDesc[1] = theInputFileReader.ReadInt32();
+						anEyeball.lowerFlexDesc[2] = theInputFileReader.ReadInt32();
+						anEyeball.upperTarget[0] = theInputFileReader.ReadSingle();
+						anEyeball.upperTarget[1] = theInputFileReader.ReadSingle();
+						anEyeball.upperTarget[2] = theInputFileReader.ReadSingle();
+						anEyeball.lowerTarget[0] = theInputFileReader.ReadSingle();
+						anEyeball.lowerTarget[1] = theInputFileReader.ReadSingle();
+						anEyeball.lowerTarget[2] = theInputFileReader.ReadSingle();
 
-						anEyeball.upperLidFlexDesc = this.theInputFileReader.ReadInt32();
-						anEyeball.lowerLidFlexDesc = this.theInputFileReader.ReadInt32();
+						anEyeball.upperLidFlexDesc = theInputFileReader.ReadInt32();
+						anEyeball.lowerLidFlexDesc = theInputFileReader.ReadInt32();
 
-						anEyeball.minPitch = this.theInputFileReader.ReadSingle();
-						anEyeball.maxPitch = this.theInputFileReader.ReadSingle();
-						anEyeball.minYaw = this.theInputFileReader.ReadSingle();
-						anEyeball.maxYaw = this.theInputFileReader.ReadSingle();
+						anEyeball.minPitch = theInputFileReader.ReadSingle();
+						anEyeball.maxPitch = theInputFileReader.ReadSingle();
+						anEyeball.minYaw = theInputFileReader.ReadSingle();
+						anEyeball.maxYaw = theInputFileReader.ReadSingle();
 
 						aModel.theEyeballs.Add(anEyeball);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anEyeball");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anEyeball");
 
 						//'NOTE: Set the default value to -1 to distinguish it from value assigned to it by ReadMeshes().
 						//anEyeball.theTextureIndex = -1
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						//NOTE: The mdl file doesn't appear to store the eyeball name; studiomdl only uses it internally with eyelids.
 						if (anEyeball.nameOffset != 0)
 						{
-							this.theInputFileReader.BaseStream.Seek(eyeballInputFileStreamPosition + anEyeball.nameOffset, SeekOrigin.Begin);
-							fileOffsetStart2 = this.theInputFileReader.BaseStream.Position;
+							theInputFileReader.BaseStream.Seek(eyeballInputFileStreamPosition + anEyeball.nameOffset, SeekOrigin.Begin);
+							fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
-							anEyeball.theName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+							anEyeball.theName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-							fileOffsetEnd2 = this.theInputFileReader.BaseStream.Position - 1;
-							if (!this.theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
+							fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+							if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
 							{
-								this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anEyeball.theName = " + anEyeball.theName);
+								theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "anEyeball.theName = " + anEyeball.theName);
 							}
 						}
 						else
@@ -2078,7 +2078,7 @@ namespace Crowbar
 							anEyeball.theName = "";
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
 					//If aModel.theEyeballs.Count > 0 Then
@@ -2110,52 +2110,52 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.meshOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.meshOffset, SeekOrigin.Begin);
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 					aModel.theMeshes = new List<SourceMdlMesh2531>(aModel.meshCount);
 					for (int meshIndex = 0; meshIndex < aModel.meshCount; meshIndex++)
 					{
-						meshInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						meshInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceMdlMesh2531 aMesh = new SourceMdlMesh2531();
 
-						aMesh.materialIndex = this.theInputFileReader.ReadInt32();
-						aMesh.modelOffset = this.theInputFileReader.ReadInt32();
-						aMesh.vertexCount = this.theInputFileReader.ReadInt32();
-						aMesh.vertexIndexStart = this.theInputFileReader.ReadInt32();
-						aMesh.flexCount = this.theInputFileReader.ReadInt32();
-						aMesh.flexOffset = this.theInputFileReader.ReadInt32();
+						aMesh.materialIndex = theInputFileReader.ReadInt32();
+						aMesh.modelOffset = theInputFileReader.ReadInt32();
+						aMesh.vertexCount = theInputFileReader.ReadInt32();
+						aMesh.vertexIndexStart = theInputFileReader.ReadInt32();
+						aMesh.flexCount = theInputFileReader.ReadInt32();
+						aMesh.flexOffset = theInputFileReader.ReadInt32();
 
 						SourceMdlMeshVertexData meshVertexData = new SourceMdlMeshVertexData();
-						meshVertexData.modelVertexDataP = this.theInputFileReader.ReadInt32();
+						meshVertexData.modelVertexDataP = theInputFileReader.ReadInt32();
 						for (int x = 0; x < SourceConstants.MAX_NUM_LODS; x++)
 						{
-							meshVertexData.lodVertexCount[x] = this.theInputFileReader.ReadInt32();
+							meshVertexData.lodVertexCount[x] = theInputFileReader.ReadInt32();
 						}
 						aMesh.vertexData = meshVertexData;
 
 						aModel.theMeshes.Add(aMesh);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh");
 
 						//' Fill-in eyeball texture index info.
 						//If aMesh.materialType = 1 Then
 						//	aModel.theEyeballs(aMesh.materialParam).theTextureIndex = aMesh.materialIndex
 						//End If
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aMesh.flexCount > 0 && aMesh.flexOffset != 0)
 						{
-							this.ReadFlexes(meshInputFileStreamPosition, aMesh);
+							ReadFlexes(meshInputFileStreamPosition, aMesh);
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
 					//Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theMeshes")
 
 					//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 32, "aModel.theMeshes alignment")
@@ -2179,25 +2179,25 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(meshInputFileStreamPosition + aMesh.flexOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(meshInputFileStreamPosition + aMesh.flexOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				for (int k = 0; k < aMesh.flexCount; k++)
 				{
-					flexInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					flexInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					SourceMdlFlex2531 aFlex = new SourceMdlFlex2531();
 
-					aFlex.flexDescIndex = this.theInputFileReader.ReadInt32();
+					aFlex.flexDescIndex = theInputFileReader.ReadInt32();
 
-					aFlex.target0 = this.theInputFileReader.ReadSingle();
-					aFlex.target1 = this.theInputFileReader.ReadSingle();
-					aFlex.target2 = this.theInputFileReader.ReadSingle();
-					aFlex.target3 = this.theInputFileReader.ReadSingle();
+					aFlex.target0 = theInputFileReader.ReadSingle();
+					aFlex.target1 = theInputFileReader.ReadSingle();
+					aFlex.target2 = theInputFileReader.ReadSingle();
+					aFlex.target3 = theInputFileReader.ReadSingle();
 
-					aFlex.vertCount = this.theInputFileReader.ReadInt32();
-					aFlex.vertOffset = this.theInputFileReader.ReadInt32();
+					aFlex.vertCount = theInputFileReader.ReadInt32();
+					aFlex.vertOffset = theInputFileReader.ReadInt32();
 
-					aFlex.unknown = this.theInputFileReader.ReadInt32();
+					aFlex.unknown = theInputFileReader.ReadInt32();
 					//------
 					//aFlex.flexDescPartnerIndex = Me.theInputFileReader.ReadInt32()
 					//aFlex.vertAnimType = Me.theInputFileReader.ReadByte()
@@ -2210,18 +2210,18 @@ namespace Crowbar
 
 					aMesh.theFlexes.Add(aFlex);
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (aFlex.vertCount > 0 && aFlex.vertOffset != 0)
 					{
-						this.ReadVertAnims(flexInputFileStreamPosition, aFlex);
+						ReadVertAnims(flexInputFileStreamPosition, aFlex);
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh.theFlexes " + aMesh.theFlexes.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh.theFlexes " + aMesh.theFlexes.Count.ToString());
 
 				//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "aMesh.theFlexes alignment")
 			}
@@ -2247,17 +2247,17 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(flexInputFileStreamPosition + aFlex.vertOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(flexInputFileStreamPosition + aFlex.vertOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				SourceMdlVertAnim2531 aVertAnim = null;
 				aFlex.theVertAnims = new List<SourceMdlVertAnim2531>(aFlex.vertCount);
 				for (int k = 0; k < aFlex.vertCount; k++)
 				{
-					eyeballInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					eyeballInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					aVertAnim = new SourceMdlVertAnim2531();
 
-					aVertAnim.index = this.theInputFileReader.ReadUInt16();
+					aVertAnim.index = theInputFileReader.ReadUInt16();
 
 					//aVertAnim.deltaX = Me.theInputFileReader.ReadByte()
 					//aVertAnim.deltaY = Me.theInputFileReader.ReadByte()
@@ -2281,9 +2281,9 @@ namespace Crowbar
 					//aVertAnim.deltaZ = Me.theInputFileReader.ReadSByte()
 					//aVertAnim.nDeltaZ = Me.theInputFileReader.ReadSByte()
 					//------
-					aVertAnim.deltaX = this.theInputFileReader.ReadInt16();
-					aVertAnim.deltaY = this.theInputFileReader.ReadInt16();
-					aVertAnim.deltaZ = this.theInputFileReader.ReadInt16();
+					aVertAnim.deltaX = theInputFileReader.ReadInt16();
+					aVertAnim.deltaY = theInputFileReader.ReadInt16();
+					aVertAnim.deltaZ = theInputFileReader.ReadInt16();
 					//------
 					//For x As Integer = 0 To 2
 					//	aVertAnim.deltaByte(x) = Me.theInputFileReader.ReadByte()
@@ -2298,17 +2298,17 @@ namespace Crowbar
 
 					aFlex.theVertAnims.Add(aVertAnim);
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
 				//aFlex.theVertAnims.Sort(AddressOf Me.SortVertAnims)
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlex.theVertAnims " + aFlex.theVertAnims.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlex.theVertAnims " + aFlex.theVertAnims.Count.ToString());
 
-				this.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(this.theInputFileReader, fileOffsetEnd, 4, "aFlex.theVertAnims alignment");
+				theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(theInputFileReader, fileOffsetEnd, 4, "aFlex.theVertAnims alignment");
 			}
 			catch (Exception ex)
 			{
@@ -2327,25 +2327,25 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(flexRuleInputFileStreamPosition + aFlexRule.opOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(flexRuleInputFileStreamPosition + aFlexRule.opOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aFlexRule.theFlexOps = new List<SourceMdlFlexOp>(aFlexRule.opCount);
 				for (int i = 0; i < aFlexRule.opCount; i++)
 				{
 					//flexRuleInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 					SourceMdlFlexOp aFlexOp = new SourceMdlFlexOp();
-					aFlexOp.op = this.theInputFileReader.ReadInt32();
+					aFlexOp.op = theInputFileReader.ReadInt32();
 					if (aFlexOp.op == SourceMdlFlexOp.STUDIO_CONST)
 					{
-						aFlexOp.value = this.theInputFileReader.ReadSingle();
+						aFlexOp.value = theInputFileReader.ReadSingle();
 					}
 					else
 					{
-						aFlexOp.index = this.theInputFileReader.ReadInt32();
+						aFlexOp.index = theInputFileReader.ReadInt32();
 						if (aFlexOp.op == SourceMdlFlexOp.STUDIO_FETCH2)
 						{
-							this.theMdlFileData.theFlexDescs[aFlexOp.index].theDescIsUsedByFlexRule = true;
+							theMdlFileData.theFlexDescs[aFlexOp.index].theDescIsUsedByFlexRule = true;
 						}
 					}
 					aFlexRule.theFlexOps.Add(aFlexOp);
@@ -2355,8 +2355,8 @@ namespace Crowbar
 					//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexRule.theFlexOps " + aFlexRule.theFlexOps.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aFlexRule.theFlexOps " + aFlexRule.theFlexOps.Count.ToString());
 			}
 			catch (Exception ex)
 			{
@@ -2377,8 +2377,8 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 					aModel.theVertexesType0 = new List<SourceMdlType0Vertex2531>(aModel.vertexCount);
 					for (int j = 0; j < aModel.vertexCount; j++)
@@ -2389,23 +2389,23 @@ namespace Crowbar
 
 						for (int x = 0; x < aVertex.weight.Length; x++)
 						{
-							aVertex.weight[x] = this.theInputFileReader.ReadByte();
+							aVertex.weight[x] = theInputFileReader.ReadByte();
 						}
-						aVertex.unknown1 = this.theInputFileReader.ReadByte();
+						aVertex.unknown1 = theInputFileReader.ReadByte();
 						for (int x = 0; x < aVertex.boneIndex.Length; x++)
 						{
-							aVertex.boneIndex[x] = this.theInputFileReader.ReadInt16();
+							aVertex.boneIndex[x] = theInputFileReader.ReadInt16();
 						}
-						aVertex.unknown2 = this.theInputFileReader.ReadInt16();
+						aVertex.unknown2 = theInputFileReader.ReadInt16();
 
-						aVertex.position.x = this.theInputFileReader.ReadSingle();
-						aVertex.position.y = this.theInputFileReader.ReadSingle();
-						aVertex.position.z = this.theInputFileReader.ReadSingle();
-						aVertex.normal.x = this.theInputFileReader.ReadSingle();
-						aVertex.normal.y = this.theInputFileReader.ReadSingle();
-						aVertex.normal.z = this.theInputFileReader.ReadSingle();
-						aVertex.texCoordU = this.theInputFileReader.ReadSingle();
-						aVertex.texCoordV = this.theInputFileReader.ReadSingle();
+						aVertex.position.x = theInputFileReader.ReadSingle();
+						aVertex.position.y = theInputFileReader.ReadSingle();
+						aVertex.position.z = theInputFileReader.ReadSingle();
+						aVertex.normal.x = theInputFileReader.ReadSingle();
+						aVertex.normal.y = theInputFileReader.ReadSingle();
+						aVertex.normal.z = theInputFileReader.ReadSingle();
+						aVertex.texCoordU = theInputFileReader.ReadSingle();
+						aVertex.texCoordV = theInputFileReader.ReadSingle();
 
 						aModel.theVertexesType0.Add(aVertex);
 
@@ -2417,8 +2417,8 @@ namespace Crowbar
 						//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType0 " + aModel.theVertexesType0.Count.ToString());
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType0 " + aModel.theVertexesType0.Count.ToString());
 
 					//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "aHitboxSet.theHitboxes alignment")
 				}
@@ -2442,13 +2442,13 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 					aModel.theVertexesType1 = new List<SourceMdlType1Vertex2531>(aModel.vertexCount);
 					for (int j = 0; j < aModel.vertexCount; j++)
 					{
-						hitboxInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						hitboxInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 						//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 						SourceMdlType1Vertex2531 aVertex = new SourceMdlType1Vertex2531();
 
@@ -2461,19 +2461,19 @@ namespace Crowbar
 						//For x As Integer = 0 To aVertex.unknown.Length - 1
 						//	aVertex.unknown(x) = Me.theInputFileReader.ReadByte()
 						//Next
-						aVertex.positionX = this.theInputFileReader.ReadUInt16();
-						aVertex.positionY = this.theInputFileReader.ReadUInt16();
-						aVertex.positionZ = this.theInputFileReader.ReadUInt16();
+						aVertex.positionX = theInputFileReader.ReadUInt16();
+						aVertex.positionY = theInputFileReader.ReadUInt16();
+						aVertex.positionZ = theInputFileReader.ReadUInt16();
 						//aVertex.normalX = Me.theInputFileReader.ReadUInt16()
 						//aVertex.normalY = Me.theInputFileReader.ReadUInt16()
 						//aVertex.normalZ = Me.theInputFileReader.ReadUInt16()
-						aVertex.normalX = this.theInputFileReader.ReadByte();
-						aVertex.normalY = this.theInputFileReader.ReadByte();
-						aVertex.normalZ = this.theInputFileReader.ReadByte();
+						aVertex.normalX = theInputFileReader.ReadByte();
+						aVertex.normalY = theInputFileReader.ReadByte();
+						aVertex.normalZ = theInputFileReader.ReadByte();
 						//Me.theInputFileReader.ReadByte()
-						aVertex.texCoordU = this.theInputFileReader.ReadByte();
-						this.theInputFileReader.ReadByte();
-						aVertex.texCoordV = this.theInputFileReader.ReadByte();
+						aVertex.texCoordU = theInputFileReader.ReadByte();
+						theInputFileReader.ReadByte();
+						aVertex.texCoordV = theInputFileReader.ReadByte();
 						//Me.theInputFileReader.ReadByte()
 						//aVertex.scaleX = Me.theInputFileReader.ReadByte()
 						//aVertex.scaleY = Me.theInputFileReader.ReadByte()
@@ -2484,20 +2484,20 @@ namespace Crowbar
 						//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
 						//Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aVertex")
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						//DEBUG:
-						this.theInputFileReader.BaseStream.Seek(hitboxInputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(hitboxInputFileStreamPosition, SeekOrigin.Begin);
 						for (int x = 0; x < aVertex.unknown.Length; x++)
 						{
-							aVertex.unknown[x] = this.theInputFileReader.ReadByte();
+							aVertex.unknown[x] = theInputFileReader.ReadByte();
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType1 " + aModel.theVertexesType1.Count.ToString());
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType1 " + aModel.theVertexesType1.Count.ToString());
 
 					//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "aHitboxSet.theHitboxes alignment")
 				}
@@ -2521,8 +2521,8 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.vertexOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 					aModel.theVertexesType2 = new List<SourceMdlType2Vertex2531>(aModel.vertexCount);
 					for (int j = 0; j < aModel.vertexCount; j++)
@@ -2540,18 +2540,18 @@ namespace Crowbar
 						//For x As Integer = 0 To aVertex.unknown.Length - 1
 						//	aVertex.unknown(x) = Me.theInputFileReader.ReadByte()
 						//Next
-						aVertex.positionX = this.theInputFileReader.ReadByte();
-						aVertex.positionY = this.theInputFileReader.ReadByte();
-						aVertex.positionZ = this.theInputFileReader.ReadByte();
+						aVertex.positionX = theInputFileReader.ReadByte();
+						aVertex.positionY = theInputFileReader.ReadByte();
+						aVertex.positionZ = theInputFileReader.ReadByte();
 						//aVertex.positionX = Me.theInputFileReader.ReadSByte()
 						//aVertex.positionY = Me.theInputFileReader.ReadSByte()
 						//aVertex.positionZ = Me.theInputFileReader.ReadSByte()
 
-						aVertex.normalX = this.theInputFileReader.ReadByte();
-						aVertex.normalY = this.theInputFileReader.ReadByte();
-						aVertex.texCoordU = this.theInputFileReader.ReadByte();
-						aVertex.normalZ = this.theInputFileReader.ReadByte();
-						aVertex.texCoordV = this.theInputFileReader.ReadByte();
+						aVertex.normalX = theInputFileReader.ReadByte();
+						aVertex.normalY = theInputFileReader.ReadByte();
+						aVertex.texCoordU = theInputFileReader.ReadByte();
+						aVertex.normalZ = theInputFileReader.ReadByte();
+						aVertex.texCoordV = theInputFileReader.ReadByte();
 
 						aModel.theVertexesType2.Add(aVertex);
 
@@ -2563,8 +2563,8 @@ namespace Crowbar
 						//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType2 " + aModel.theVertexesType2.Count.ToString());
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theVertexesType2 " + aModel.theVertexesType2.Count.ToString());
 
 					//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "aHitboxSet.theHitboxes alignment")
 				}
@@ -2588,8 +2588,8 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.tangentOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.tangentOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 					aModel.theTangents = new List<SourceMdlTangent2531>(aModel.vertexCount);
 					for (int j = 0; j < aModel.vertexCount; j++)
@@ -2598,10 +2598,10 @@ namespace Crowbar
 						//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 						SourceMdlTangent2531 aTangent = new SourceMdlTangent2531();
 
-						aTangent.x = this.theInputFileReader.ReadSingle();
-						aTangent.y = this.theInputFileReader.ReadSingle();
-						aTangent.z = this.theInputFileReader.ReadSingle();
-						aTangent.w = this.theInputFileReader.ReadSingle();
+						aTangent.x = theInputFileReader.ReadSingle();
+						aTangent.y = theInputFileReader.ReadSingle();
+						aTangent.z = theInputFileReader.ReadSingle();
+						aTangent.w = theInputFileReader.ReadSingle();
 
 						aModel.theTangents.Add(aTangent);
 
@@ -2613,8 +2613,8 @@ namespace Crowbar
 						//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theTangents " + aModel.theTangents.Count.ToString());
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel.theTangents " + aModel.theTangents.Count.ToString());
 
 					//Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "aHitboxSet.theHitboxes alignment")
 				}
@@ -2627,7 +2627,7 @@ namespace Crowbar
 
 		private void ReadAnimations(long animationDescInputFileStreamPosition, SourceMdlAnimationDesc2531 anAnimationDesc)
 		{
-			if (this.theMdlFileData.boneCount > 0 && anAnimationDesc.animOffset != 0)
+			if (theMdlFileData.boneCount > 0 && anAnimationDesc.animOffset != 0)
 			{
 				long animationInputFileStreamPosition = 0;
 				long inputFileStreamPosition = 0;
@@ -2638,13 +2638,13 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(animationDescInputFileStreamPosition + anAnimationDesc.animOffset, SeekOrigin.Begin);
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					theInputFileReader.BaseStream.Seek(animationDescInputFileStreamPosition + anAnimationDesc.animOffset, SeekOrigin.Begin);
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-					anAnimationDesc.theAnimations = new List<SourceMdlAnimation2531>(this.theMdlFileData.boneCount);
-					for (int boneIndex = 0; boneIndex < this.theMdlFileData.boneCount; boneIndex++)
+					anAnimationDesc.theAnimations = new List<SourceMdlAnimation2531>(theMdlFileData.boneCount);
+					for (int boneIndex = 0; boneIndex < theMdlFileData.boneCount; boneIndex++)
 					{
-						animationInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						animationInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 						//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 						SourceMdlAnimation2531 anAnimation = new SourceMdlAnimation2531();
 
@@ -2693,57 +2693,57 @@ namespace Crowbar
 						//	anAnimation.theRotation.w = Me.theInputFileReader.ReadSingle()
 						//End If
 						//------
-						anAnimation.unknown = this.theInputFileReader.ReadSingle();
-						anAnimation.theOffsets[0] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[1] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[2] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[3] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[4] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[5] = this.theInputFileReader.ReadInt32();
-						anAnimation.theOffsets[6] = this.theInputFileReader.ReadInt32();
+						anAnimation.unknown = theInputFileReader.ReadSingle();
+						anAnimation.theOffsets[0] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[1] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[2] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[3] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[4] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[5] = theInputFileReader.ReadInt32();
+						anAnimation.theOffsets[6] = theInputFileReader.ReadInt32();
 
 						anAnimationDesc.theAnimations.Add(anAnimation);
 
 						//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
 						//Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAnimation")
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (anAnimation.theOffsets[0] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[0], anAnimationDesc.frameCount, anAnimation.thePositionAnimationXValues, "anAnimation.thePositionAnimationXValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[0], anAnimationDesc.frameCount, anAnimation.thePositionAnimationXValues, "anAnimation.thePositionAnimationXValues");
 						}
 						if (anAnimation.theOffsets[1] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[1], anAnimationDesc.frameCount, anAnimation.thePositionAnimationYValues, "anAnimation.thePositionAnimationYValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[1], anAnimationDesc.frameCount, anAnimation.thePositionAnimationYValues, "anAnimation.thePositionAnimationYValues");
 						}
 						if (anAnimation.theOffsets[2] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[2], anAnimationDesc.frameCount, anAnimation.thePositionAnimationZValues, "anAnimation.thePositionAnimationZValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[2], anAnimationDesc.frameCount, anAnimation.thePositionAnimationZValues, "anAnimation.thePositionAnimationZValues");
 						}
 
 						if (anAnimation.theOffsets[3] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[3], anAnimationDesc.frameCount, anAnimation.theRotationAnimationXValues, "anAnimation.theRotationAnimationXValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[3], anAnimationDesc.frameCount, anAnimation.theRotationAnimationXValues, "anAnimation.theRotationAnimationXValues");
 						}
 						if (anAnimation.theOffsets[4] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[4], anAnimationDesc.frameCount, anAnimation.theRotationAnimationYValues, "anAnimation.theRotationAnimationYValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[4], anAnimationDesc.frameCount, anAnimation.theRotationAnimationYValues, "anAnimation.theRotationAnimationYValues");
 						}
 						if (anAnimation.theOffsets[5] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[5], anAnimationDesc.frameCount, anAnimation.theRotationAnimationZValues, "anAnimation.theRotationAnimationZValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[5], anAnimationDesc.frameCount, anAnimation.theRotationAnimationZValues, "anAnimation.theRotationAnimationZValues");
 						}
 						if (anAnimation.theOffsets[6] > 0)
 						{
-							this.ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[6], anAnimationDesc.frameCount, anAnimation.theRotationAnimationWValues, "anAnimation.theRotationAnimationWValues");
+							ReadAnimationValues(animationInputFileStreamPosition + anAnimation.theOffsets[6], anAnimationDesc.frameCount, anAnimation.theRotationAnimationWValues, "anAnimation.theRotationAnimationWValues");
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAnimationDesc.theAnimations " + anAnimationDesc.theAnimations.Count.ToString());
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "anAnimationDesc.theAnimations " + anAnimationDesc.theAnimations.Count.ToString());
 
 					//Me.LogToEndAndAlignToNextStart(fileOffsetEnd, 4, "anAnimationDesc.theMeshes alignment")
 				}
@@ -2765,13 +2765,13 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(animationValuesInputFileStreamPosition, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(animationValuesInputFileStreamPosition, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				frameCountRemainingToBeChecked = frameCount;
 				while (frameCountRemainingToBeChecked > 0)
 				{
-					anAnimationValue.value = this.theInputFileReader.ReadInt16();
+					anAnimationValue.value = theInputFileReader.ReadInt16();
 					currentTotal = anAnimationValue.total;
 					if (currentTotal == 0)
 					{
@@ -2784,13 +2784,13 @@ namespace Crowbar
 					validCount = anAnimationValue.valid;
 					for (int i = 1; i <= validCount; i++)
 					{
-						anAnimationValue.value = this.theInputFileReader.ReadInt16();
+						anAnimationValue.value = theInputFileReader.ReadInt16();
 						animationValues.Add(anAnimationValue);
 					}
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, debugDescription);
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, debugDescription);
 			}
 			catch (Exception ex)
 			{

@@ -39,9 +39,9 @@ namespace Crowbar
 
 		public SourceVector48bits()
 		{
-			this.theXInput = new SourceFloat16bits();
-			this.theYInput = new SourceFloat16bits();
-			this.theZInput = new SourceFloat16bits();
+			theXInput = new SourceFloat16bits();
+			theYInput = new SourceFloat16bits();
+			theZInput = new SourceFloat16bits();
 		}
 
 		//Public theBytes(5) As Byte
@@ -53,7 +53,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theXInput.TheFloatValue;
+				return theXInput.TheFloatValue;
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theYInput.TheFloatValue;
+				return theYInput.TheFloatValue;
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theZInput.TheFloatValue;
+				return theZInput.TheFloatValue;
 			}
 		}
 	}

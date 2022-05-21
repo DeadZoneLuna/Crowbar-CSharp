@@ -14,8 +14,8 @@ namespace Crowbar
 		public SourceMdlFileData2531() : base()
 		{
 
-			this.theModelCommandIsUsed = false;
-			this.theProceduralBonesCommandIsUsed = false;
+			theModelCommandIsUsed = false;
+			theProceduralBonesCommandIsUsed = false;
 		}
 
 		//FROM: Bloodlines SDK source 2015-06-16\sdk-src (16.06.2015)\src\public\studio.h

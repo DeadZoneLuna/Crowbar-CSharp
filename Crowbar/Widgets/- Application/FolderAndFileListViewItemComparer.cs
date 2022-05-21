@@ -18,8 +18,8 @@ namespace Crowbar
 
 		public FolderAndFileListViewItemComparer(int column, SortOrder order)
 		{
-			this.col = column;
-			this.order = order;
+			col = column;
+			order = order;
 		}
 
 		public int Compare(object x, object y)
@@ -43,9 +43,9 @@ namespace Crowbar
 			}
 			else
 			{
-				if (this.col == 1 && xItem.SubItems[4].Text != "<Folder>")
+				if (col == 1 && xItem.SubItems[4].Text != "<Folder>")
 				{
-					if (Int32.Parse(xItem.SubItems[this.col].Text, NumberStyles.Integer | NumberStyles.AllowThousands, MainCROWBAR.TheApp.InternalCultureInfo) < Int32.Parse(yItem.SubItems[this.col].Text, NumberStyles.Integer | NumberStyles.AllowThousands, MainCROWBAR.TheApp.InternalCultureInfo))
+					if (Int32.Parse(xItem.SubItems[col].Text, NumberStyles.Integer | NumberStyles.AllowThousands, MainCROWBAR.TheApp.InternalCultureInfo) < Int32.Parse(yItem.SubItems[col].Text, NumberStyles.Integer | NumberStyles.AllowThousands, MainCROWBAR.TheApp.InternalCultureInfo))
 					{
 						returnVal = -1;
 					}
@@ -56,9 +56,9 @@ namespace Crowbar
 				}
 				else
 				{
-					returnVal = string.Compare(xItem.SubItems[this.col].Text, yItem.SubItems[this.col].Text);
+					returnVal = string.Compare(xItem.SubItems[col].Text, yItem.SubItems[col].Text);
 				}
-				if (this.order == SortOrder.Descending)
+				if (order == SortOrder.Descending)
 				{
 					returnVal *= -1;
 				}

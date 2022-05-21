@@ -18,24 +18,24 @@ namespace Crowbar
 		public BackgroundSteamPipe() : base()
 		{
 
-			this.theActiveSteamPipes = new List<SteamPipe>();
-			this.theActiveBackgroundWorkers = new List<BackgroundWorkerEx>();
+			theActiveSteamPipes = new List<SteamPipe>();
+			theActiveBackgroundWorkers = new List<BackgroundWorkerEx>();
 		}
 
 		public void Kill()
 		{
 			//NOTE: Prevent handlers from doing stuff because some of them might access widgets that are disposed.
-			for (int i = this.theActiveBackgroundWorkers.Count - 1; i >= 0; i--)
+			for (int i = theActiveBackgroundWorkers.Count - 1; i >= 0; i--)
 			{
-				BackgroundWorkerEx aBackgroundWorker = this.theActiveBackgroundWorkers[i];
+				BackgroundWorkerEx aBackgroundWorker = theActiveBackgroundWorkers[i];
 				aBackgroundWorker.Kill();
-				this.theActiveBackgroundWorkers.Remove(aBackgroundWorker);
+				theActiveBackgroundWorkers.Remove(aBackgroundWorker);
 			}
-			for (int i = this.theActiveSteamPipes.Count - 1; i >= 0; i--)
+			for (int i = theActiveSteamPipes.Count - 1; i >= 0; i--)
 			{
-				SteamPipe aSteamPipe = this.theActiveSteamPipes[i];
+				SteamPipe aSteamPipe = theActiveSteamPipes[i];
 				aSteamPipe.Kill();
-				this.theActiveSteamPipes.Remove(aSteamPipe);
+				theActiveSteamPipes.Remove(aSteamPipe);
 			}
 		}
 
@@ -64,14 +64,14 @@ namespace Crowbar
 
 		public void DownloadItem(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, DownloadItemInputInfo inputInfo)
 		{
-			this.theDownloadItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theDownloadItemBackgroundWorker, this.DownloadItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
+			theDownloadItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theDownloadItemBackgroundWorker, DownloadItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void DownloadItem_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			DownloadItemInputInfo inputInfo = (DownloadItemInputInfo)e.Argument;
 			BackgroundSteamPipe.DownloadItemOutputInfo outputInfo = new BackgroundSteamPipe.DownloadItemOutputInfo();
 
@@ -81,14 +81,14 @@ namespace Crowbar
 				MainCROWBAR.TheApp.WriteSteamAppIdFile(211);
 
 				SteamPipe steamPipeToGetAppID = new SteamPipe();
-				this.theActiveSteamPipes.Add(steamPipeToGetAppID);
+				theActiveSteamPipes.Add(steamPipeToGetAppID);
 				string resultOfGetAppID = steamPipeToGetAppID.Open("GetItemAppID", bw, "Getting item app ID");
 				if (resultOfGetAppID != "success")
 				{
 					outputInfo.Result = "error";
 					e.Result = outputInfo;
-					this.theActiveSteamPipes.Remove(steamPipeToGetAppID);
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveSteamPipes.Remove(steamPipeToGetAppID);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 
@@ -96,8 +96,8 @@ namespace Crowbar
 				{
 					steamPipeToGetAppID.Kill();
 					e.Cancel = true;
-					this.theActiveSteamPipes.Remove(steamPipeToGetAppID);
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveSteamPipes.Remove(steamPipeToGetAppID);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 
@@ -108,13 +108,13 @@ namespace Crowbar
 				{
 					steamPipeToGetAppID.Kill();
 					e.Cancel = true;
-					this.theActiveSteamPipes.Remove(steamPipeToGetAppID);
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveSteamPipes.Remove(steamPipeToGetAppID);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 
 				steamPipeToGetAppID.Shut();
-				this.theActiveSteamPipes.Remove(steamPipeToGetAppID);
+				theActiveSteamPipes.Remove(steamPipeToGetAppID);
 
 				if (!string.IsNullOrEmpty(appID_text))
 				{
@@ -126,7 +126,7 @@ namespace Crowbar
 					bw.ReportProgress(0, "ERROR: " + publishedItem.Title + "\r\n");
 					outputInfo.Result = "error";
 					e.Result = outputInfo;
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 			}
@@ -137,14 +137,14 @@ namespace Crowbar
 			outputInfo.AppID = inputInfo.AppID;
 
 			SteamPipe steamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(steamPipe);
+			theActiveSteamPipes.Add(steamPipe);
 			string result = steamPipe.Open("DownloadItem", bw, "Downloading item");
 			if (result != "success")
 			{
 				outputInfo.Result = "error";
 				e.Result = outputInfo;
-				this.theActiveSteamPipes.Remove(steamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(steamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
@@ -168,36 +168,36 @@ namespace Crowbar
 			outputInfo.Result = result;
 
 			steamPipe.Shut();
-			this.theActiveSteamPipes.Remove(steamPipe);
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveSteamPipes.Remove(steamPipe);
+			theActiveBackgroundWorkers.Remove(bw);
 
 			e.Result = outputInfo;
 		}
 
 		public void UnsubscribeItem(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, DownloadItemInputInfo inputInfo)
 		{
-			this.theUnsubscribeItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theUnsubscribeItemBackgroundWorker, this.UnsubscribeItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
+			theUnsubscribeItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theUnsubscribeItemBackgroundWorker, UnsubscribeItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void UnsubscribeItem_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			DownloadItemInputInfo inputInfo = (DownloadItemInputInfo)e.Argument;
 			BackgroundSteamPipe.DownloadItemOutputInfo outputInfo = new BackgroundSteamPipe.DownloadItemOutputInfo();
 
 			MainCROWBAR.TheApp.WriteSteamAppIdFile(inputInfo.AppID);
 
 			SteamPipe steamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(steamPipe);
+			theActiveSteamPipes.Add(steamPipe);
 			string result = steamPipe.Open("UnsubscribeItem", bw, "Unsubscribing from item");
 			if (result != "success")
 			{
 				outputInfo.Result = "error";
 				e.Result = outputInfo;
-				this.theActiveSteamPipes.Remove(steamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(steamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
@@ -209,8 +209,8 @@ namespace Crowbar
 			outputInfo.Result = result;
 
 			steamPipe.Shut();
-			this.theActiveSteamPipes.Remove(steamPipe);
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveSteamPipes.Remove(steamPipe);
+			theActiveBackgroundWorkers.Remove(bw);
 
 			e.Result = outputInfo;
 		}
@@ -224,24 +224,24 @@ namespace Crowbar
 
 		public void GetPublishedItems(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, string appID_text)
 		{
-			this.theGetPublishedItemsBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theGetPublishedItemsBackgroundWorker, this.GetPublishedItems_DoWork, given_ProgressChanged, given_RunWorkerCompleted, appID_text);
+			theGetPublishedItemsBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theGetPublishedItemsBackgroundWorker, GetPublishedItems_DoWork, given_ProgressChanged, given_RunWorkerCompleted, appID_text);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void GetPublishedItems_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			string appID_text = (e.Argument == null ? null : Convert.ToString(e.Argument));
 
 			SteamPipe steamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(steamPipe);
+			theActiveSteamPipes.Add(steamPipe);
 			string result = steamPipe.Open("GetPublishedItems", bw, "Getting list of published items");
 			if (result != "success")
 			{
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(steamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(steamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
@@ -260,8 +260,8 @@ namespace Crowbar
 				{
 					steamPipe.Kill();
 					e.Cancel = true;
-					this.theActiveSteamPipes.Remove(steamPipe);
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveSteamPipes.Remove(steamPipe);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 
@@ -279,15 +279,15 @@ namespace Crowbar
 				{
 					steamPipe.Kill();
 					e.Cancel = true;
-					this.theActiveSteamPipes.Remove(steamPipe);
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveSteamPipes.Remove(steamPipe);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 			}
 
 			steamPipe.Shut();
-			this.theActiveSteamPipes.Remove(steamPipe);
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveSteamPipes.Remove(steamPipe);
+			theActiveBackgroundWorkers.Remove(bw);
 		}
 
 		private BackgroundWorkerEx theGetPublishedItemsBackgroundWorker;
@@ -304,9 +304,9 @@ namespace Crowbar
 
 			public GetPublishedFileDetailsInputInfo(string iItemID_text, string iAppID_text, string action)
 			{
-				this.ItemID_text = iItemID_text;
-				this.AppID_text = iAppID_text;
-				this.Action = action;
+				ItemID_text = iItemID_text;
+				AppID_text = iAppID_text;
+				Action = action;
 			}
 		}
 
@@ -317,64 +317,64 @@ namespace Crowbar
 
 			public GetPublishedFileDetailsOutputInfo(WorkshopItem publishedItem, string action)
 			{
-				this.PublishedItem = publishedItem;
-				this.Action = action;
+				PublishedItem = publishedItem;
+				Action = action;
 			}
 		}
 
 		public void GetPublishedItemDetails(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, GetPublishedFileDetailsInputInfo input)
 		{
-			this.theGetPublishedItemDetailsBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theGetPublishedItemDetailsBackgroundWorker, this.GetPublishedItemDetails_DoWork, given_ProgressChanged, given_RunWorkerCompleted, input);
+			theGetPublishedItemDetailsBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theGetPublishedItemDetailsBackgroundWorker, GetPublishedItemDetails_DoWork, given_ProgressChanged, given_RunWorkerCompleted, input);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void GetPublishedItemDetails_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			GetPublishedFileDetailsInputInfo input = (GetPublishedFileDetailsInputInfo)e.Argument;
 
-			if (this.theGetItemDetailsSteamPipe != null)
+			if (theGetItemDetailsSteamPipe != null)
 			{
-				this.theGetItemDetailsSteamPipe.Kill();
+				theGetItemDetailsSteamPipe.Kill();
 			}
-			this.theGetItemDetailsSteamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(this.theGetItemDetailsSteamPipe);
+			theGetItemDetailsSteamPipe = new SteamPipe();
+			theActiveSteamPipes.Add(theGetItemDetailsSteamPipe);
 
-			string result = this.theGetItemDetailsSteamPipe.Open("GetItemDetails", bw, "Getting item details");
+			string result = theGetItemDetailsSteamPipe.Open("GetItemDetails", bw, "Getting item details");
 			if (result != "success")
 			{
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(this.theGetItemDetailsSteamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(theGetItemDetailsSteamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
 			if (bw.CancellationPending)
 			{
-				this.theGetItemDetailsSteamPipe.Kill();
+				theGetItemDetailsSteamPipe.Kill();
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(this.theGetItemDetailsSteamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(theGetItemDetailsSteamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
 			string appID_text = "";
-			WorkshopItem publishedItem = this.theGetItemDetailsSteamPipe.SteamRemoteStorage_GetPublishedFileDetails(input.ItemID_text, input.AppID_text, ref appID_text);
+			WorkshopItem publishedItem = theGetItemDetailsSteamPipe.SteamRemoteStorage_GetPublishedFileDetails(input.ItemID_text, input.AppID_text, ref appID_text);
 
 			if (bw.CancellationPending)
 			{
-				this.theGetItemDetailsSteamPipe.Kill();
+				theGetItemDetailsSteamPipe.Kill();
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(this.theGetItemDetailsSteamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(theGetItemDetailsSteamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
 			if (publishedItem.ID != "0")
 			{
 				string tempVar = publishedItem.PreviewImagePathFileName;
-				result = this.theGetItemDetailsSteamPipe.Crowbar_DownloadPreviewFile(ref tempVar);
+				result = theGetItemDetailsSteamPipe.Crowbar_DownloadPreviewFile(ref tempVar);
 					publishedItem.PreviewImagePathFileName = tempVar;
 			}
 			else
@@ -384,18 +384,18 @@ namespace Crowbar
 				bw.ReportProgress(1, null);
 			}
 
-			this.theGetItemDetailsSteamPipe.Shut();
-			this.theActiveSteamPipes.Remove(this.theGetItemDetailsSteamPipe);
-			this.theGetItemDetailsSteamPipe = null;
+			theGetItemDetailsSteamPipe.Shut();
+			theActiveSteamPipes.Remove(theGetItemDetailsSteamPipe);
+			theGetItemDetailsSteamPipe = null;
 
 			if (bw.CancellationPending)
 			{
 				e.Cancel = true;
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveBackgroundWorkers.Remove(bw);
 			GetPublishedFileDetailsOutputInfo output = new GetPublishedFileDetailsOutputInfo(publishedItem, input.Action);
 			e.Result = output;
 		}
@@ -409,24 +409,24 @@ namespace Crowbar
 
 		public void DeletePublishedItemFromWorkshop(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, string itemID_text)
 		{
-			this.theDeletePublishedItemFromWorkshopBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theDeletePublishedItemFromWorkshopBackgroundWorker, this.DeletePublishedItemFromWorkshop_DoWork, given_ProgressChanged, given_RunWorkerCompleted, itemID_text);
+			theDeletePublishedItemFromWorkshopBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theDeletePublishedItemFromWorkshopBackgroundWorker, DeletePublishedItemFromWorkshop_DoWork, given_ProgressChanged, given_RunWorkerCompleted, itemID_text);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void DeletePublishedItemFromWorkshop_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			string itemID_text = (e.Argument == null ? null : Convert.ToString(e.Argument));
 
 			SteamPipe steamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(steamPipe);
+			theActiveSteamPipes.Add(steamPipe);
 			string result = steamPipe.Open("DeleteItem", bw, "Deleting item");
 			if (result != "success")
 			{
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(steamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(steamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
@@ -441,8 +441,8 @@ namespace Crowbar
 			}
 
 			steamPipe.Shut();
-			this.theActiveSteamPipes.Remove(steamPipe);
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveSteamPipes.Remove(steamPipe);
+			theActiveBackgroundWorkers.Remove(bw);
 
 			e.Result = result;
 		}
@@ -479,14 +479,14 @@ namespace Crowbar
 
 		public void PublishItem(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted, PublishItemInputInfo inputInfo)
 		{
-			this.thePublishItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.thePublishItemBackgroundWorker, this.PublishItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
+			thePublishItemBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(thePublishItemBackgroundWorker, PublishItem_DoWork, given_ProgressChanged, given_RunWorkerCompleted, inputInfo);
 		}
 
 		//NOTE: This is run in a background thread.
 		private void PublishItem_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
-			this.theActiveBackgroundWorkers.Add(bw);
+			theActiveBackgroundWorkers.Add(bw);
 			PublishItemInputInfo inputInfo = (PublishItemInputInfo)e.Argument;
 
 			//TODO: Process content folder or file before accessing Steam.
@@ -496,7 +496,7 @@ namespace Crowbar
 				bool processedFileCheckIsSuccessful = true;
 				try
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Processing content for upload." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Processing content for upload." + "\r\n");
 					processedContentPathFolderOrFileName = inputInfo.AppInfo.ProcessFileBeforeUpload(inputInfo.Item, bw);
 
 					if (inputInfo.AppInfo.CanUseContentFolderOrFile)
@@ -523,15 +523,15 @@ namespace Crowbar
 				}
 				catch (Exception ex)
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + ex.Message + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + ex.Message + "\r\n");
 					processedFileCheckIsSuccessful = false;
 				}
 
 				if (!processedFileCheckIsSuccessful)
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Processing content failed. Review log messages above for reason." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Processing content failed. Review log messages above for reason." + "\r\n");
 					e.Cancel = true;
-					this.theActiveBackgroundWorkers.Remove(bw);
+					theActiveBackgroundWorkers.Remove(bw);
 					return;
 				}
 			}
@@ -546,24 +546,24 @@ namespace Crowbar
 			}
 
 			SteamPipe steamPipe = new SteamPipe();
-			this.theActiveSteamPipes.Add(steamPipe);
+			theActiveSteamPipes.Add(steamPipe);
 			string result = steamPipe.Open("PublishItem", bw, "Publishing item");
 			if (result != "success")
 			{
 				e.Cancel = true;
-				this.theActiveSteamPipes.Remove(steamPipe);
-				this.theActiveBackgroundWorkers.Remove(bw);
+				theActiveSteamPipes.Remove(steamPipe);
+				theActiveBackgroundWorkers.Remove(bw);
 				return;
 			}
 
 			BackgroundSteamPipe.PublishItemOutputInfo outputInfo = null;
 			if (inputInfo.AppInfo.UsesSteamUGC)
 			{
-				outputInfo = this.PublishViaSteamUGC(steamPipe, inputInfo, processedContentPathFolderOrFileName);
+				outputInfo = PublishViaSteamUGC(steamPipe, inputInfo, processedContentPathFolderOrFileName);
 			}
 			else
 			{
-				outputInfo = this.PublishViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
+				outputInfo = PublishViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
 			}
 
 			if (outputInfo.PublishedItemID != "0")
@@ -577,8 +577,8 @@ namespace Crowbar
 			}
 
 			steamPipe.Shut();
-			this.theActiveSteamPipes.Remove(steamPipe);
-			this.theActiveBackgroundWorkers.Remove(bw);
+			theActiveSteamPipes.Remove(steamPipe);
+			theActiveBackgroundWorkers.Remove(bw);
 
 			e.Result = outputInfo;
 		}
@@ -606,14 +606,14 @@ namespace Crowbar
 				}
 				else if (resultOfCreateItem == "success_agreement")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
 					itemID_text = returnedPublishedItemID;
 					outputInfo.PublishedItemID = returnedPublishedItemID;
 					outputInfo.SteamAgreementStatus = "NotAccepted";
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to create workshop item. Steam error message: " + resultOfCreateItem + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to create workshop item. Steam error message: " + resultOfCreateItem + "\r\n");
 					outputInfo.Result = "Failed";
 					//Return outputInfo
 				}
@@ -630,7 +630,7 @@ namespace Crowbar
 			{
 				string result = "";
 
-				result = this.StartItemUpdate(steamPipe, appID_text, itemID_text);
+				result = StartItemUpdate(steamPipe, appID_text, itemID_text);
 				if (result != "success")
 				{
 					outputInfo.Result = "Failed";
@@ -638,7 +638,7 @@ namespace Crowbar
 				}
 				else
 				{
-					result = this.UpdateNonContentFileOptions(steamPipe, inputInfo);
+					result = UpdateNonContentFileOptions(steamPipe, inputInfo);
 					if (result != "success")
 					{
 						outputInfo.Result = "Failed";
@@ -655,11 +655,11 @@ namespace Crowbar
 									string setItemContentWasSuccessful = steamPipe.SteamUGC_SetItemContent(processedContentPathFolderOrFileName);
 									if (setItemContentWasSuccessful == "success")
 									{
-										this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item content completed." + "\r\n");
+										thePublishItemBackgroundWorker.ReportProgress(0, "Set item content completed." + "\r\n");
 									}
 									else
 									{
-										this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item content failed." + "\r\n");
+										thePublishItemBackgroundWorker.ReportProgress(0, "Set item content failed." + "\r\n");
 										outputInfo.Result = "Failed";
 										//Return outputInfo
 									}
@@ -671,17 +671,17 @@ namespace Crowbar
 						{
 							if (inputInfo.Item.IsDraft)
 							{
-								this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing new item." + "\r\n");
+								thePublishItemBackgroundWorker.ReportProgress(0, "Publishing new item." + "\r\n");
 							}
 							else
 							{
-								this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the update." + "\r\n");
+								thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the update." + "\r\n");
 							}
 
-							result = this.SubmitItemUpdate(steamPipe, changeNote);
+							result = SubmitItemUpdate(steamPipe, changeNote);
 							if (result == "success")
 							{
-								this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing succeeded." + "\r\n");
+								thePublishItemBackgroundWorker.ReportProgress(0, "Publishing succeeded." + "\r\n");
 								outputInfo.Result = "Succeeded";
 								if (outputInfo.PublishedItemID == "0")
 								{
@@ -692,12 +692,12 @@ namespace Crowbar
 							{
 								if (outputInfo.PublishedItemID == "0")
 								{
-									this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
+									thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
 									outputInfo.PublishedItemID = inputInfo.Item.ID;
 								}
 								else if (outputInfo.SteamAgreementStatus == "Accepted")
 								{
-									this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
+									thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
 								}
 								outputInfo.SteamAgreementStatus = "NotAccepted";
 								outputInfo.Result = "Succeeded";
@@ -711,7 +711,7 @@ namespace Crowbar
 
 						if (inputInfo.Item.ContentPathFolderOrFileNameIsChanged && !string.IsNullOrEmpty(inputInfo.Item.ContentPathFolderOrFileName))
 						{
-							inputInfo.AppInfo.CleanUpAfterUpload(this.thePublishItemBackgroundWorker);
+							inputInfo.AppInfo.CleanUpAfterUpload(thePublishItemBackgroundWorker);
 						}
 					}
 				}
@@ -727,11 +727,11 @@ namespace Crowbar
 
 			if (inputInfo.Item.IsDraft)
 			{
-				outputInfo = this.CreateViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
+				outputInfo = CreateViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
 			}
 			else
 			{
-				outputInfo = this.UpdateViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
+				outputInfo = UpdateViaRemoteStorage(steamPipe, inputInfo, processedContentPathFolderOrFileName);
 			}
 
 			return outputInfo;
@@ -749,7 +749,7 @@ namespace Crowbar
 			string resultForPreview_SteamRemoteStorage_FileWrite = steamPipe.SteamRemoteStorage_FileWrite(inputInfo.Item.PreviewImagePathFileName, previewFileName);
 			if (resultForPreview_SteamRemoteStorage_FileWrite != "success")
 			{
-				this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + resultForPreview_SteamRemoteStorage_FileWrite + "\r\n");
+				thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + resultForPreview_SteamRemoteStorage_FileWrite + "\r\n");
 				outputInfo.Result = "Failed";
 				//Return outputInfo
 			}
@@ -762,7 +762,7 @@ namespace Crowbar
 					string resultForContent_SteamRemoteStorage_FileWrite = steamPipe.SteamRemoteStorage_FileWrite(processedContentPathFolderOrFileName, fileName);
 					if (resultForContent_SteamRemoteStorage_FileWrite != "success")
 					{
-						this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + resultForContent_SteamRemoteStorage_FileWrite + "\r\n");
+						thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + resultForContent_SteamRemoteStorage_FileWrite + "\r\n");
 						outputInfo.Result = "Failed";
 						//Return outputInfo
 					}
@@ -770,32 +770,32 @@ namespace Crowbar
 					{
 						string appID_text = inputInfo.AppInfo.ID.ToString();
 
-						this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing new item." + "\r\n");
+						thePublishItemBackgroundWorker.ReportProgress(0, "Publishing new item." + "\r\n");
 						string returnedPublishedItemID = "";
 						string resultOfCreateItem = steamPipe.SteamRemoteStorage_PublishWorkshopFile(fileName, previewFileName, appID_text, inputInfo.Item.Title, inputInfo.Item.Description, inputInfo.Item.VisibilityText, inputInfo.Item.Tags, ref returnedPublishedItemID);
 
 						if (resultOfCreateItem == "success")
 						{
-							this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing succeeded." + "\r\n");
+							thePublishItemBackgroundWorker.ReportProgress(0, "Publishing succeeded." + "\r\n");
 							outputInfo.PublishedItemID = returnedPublishedItemID;
 							outputInfo.Result = "Succeeded";
 						}
 						else if (resultOfCreateItem == "success_agreement")
 						{
-							this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
+							thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForCreate + "\r\n");
 							outputInfo.Result = "Succeeded";
 							outputInfo.PublishedItemID = returnedPublishedItemID;
 							outputInfo.SteamAgreementStatus = "NotAccepted";
 						}
 						else
 						{
-							this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to publish workshop item. Steam error message: " + resultOfCreateItem + "\r\n");
+							thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to publish workshop item. Steam error message: " + resultOfCreateItem + "\r\n");
 							outputInfo.Result = "Failed";
 						}
 					}
 				}
 
-				inputInfo.AppInfo.CleanUpAfterUpload(this.thePublishItemBackgroundWorker);
+				inputInfo.AppInfo.CleanUpAfterUpload(thePublishItemBackgroundWorker);
 			}
 
 			return outputInfo;
@@ -812,8 +812,8 @@ namespace Crowbar
 
 			string result = "";
 
-			this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing non-content parts of update." + "\r\n");
-			result = this.StartItemUpdate(steamPipe, inputInfo.AppInfo.ID.ToString(), inputInfo.Item.ID);
+			thePublishItemBackgroundWorker.ReportProgress(0, "Publishing non-content parts of update." + "\r\n");
+			result = StartItemUpdate(steamPipe, inputInfo.AppInfo.ID.ToString(), inputInfo.Item.ID);
 			if (result != "success")
 			{
 				outputInfo.Result = "Failed";
@@ -821,7 +821,7 @@ namespace Crowbar
 			}
 			else
 			{
-				result = this.UpdateNonContentFileOptions(steamPipe, inputInfo);
+				result = UpdateNonContentFileOptions(steamPipe, inputInfo);
 				if (result != "success")
 				{
 					outputInfo.Result = "Failed";
@@ -830,16 +830,16 @@ namespace Crowbar
 				else
 				{
 					//NOTE: The changeNote will not be changed via this SteamUGC function call because updated item is in SteamRemoteStorage.
-					result = this.SubmitItemUpdate(steamPipe, changeNote);
+					result = SubmitItemUpdate(steamPipe, changeNote);
 					if (result == "success")
 					{
-						this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing non-content parts of update succeeded." + "\r\n");
+						thePublishItemBackgroundWorker.ReportProgress(0, "Publishing non-content parts of update succeeded." + "\r\n");
 						outputInfo.PublishedItemID = inputInfo.Item.ID;
 						outputInfo.Result = "Succeeded";
 					}
 					else if (result == "success_agreement")
 					{
-						this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
+						thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
 						outputInfo.PublishedItemID = inputInfo.Item.ID;
 						outputInfo.SteamAgreementStatus = "NotAccepted";
 						outputInfo.Result = "Succeeded";
@@ -853,7 +853,7 @@ namespace Crowbar
 					if (outputInfo.Result != "Failed" && inputInfo.Item.ContentPathFolderOrFileNameIsChanged && !string.IsNullOrEmpty(inputInfo.Item.ContentPathFolderOrFileName))
 					{
 						//Delete old content file.
-						//NOTE: This deletion does not seem to be needed, so do not bother user with any messages related to this.
+						//NOTE: This deletion does not seem to be needed, so do not bother user with any messages related to 
 						//If result_Crowbar_DeleteContentFile <> "success" Then
 						//	Me.LogTextBox.AppendText("WARNING: " + result_Crowbar_DeleteContentFile + vbCrLf)
 						//End If
@@ -867,7 +867,7 @@ namespace Crowbar
 							if (result_SteamRemoteStorage_FileWrite != "success")
 							{
 								//TODO: This error seems to occur when content file is bigger than available space for app's Steam Cloud.
-								this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Not enough space on this game's Steam Cloud for content file." + result_SteamRemoteStorage_FileWrite + "\r\n");
+								thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Not enough space on this game's Steam Cloud for content file." + result_SteamRemoteStorage_FileWrite + "\r\n");
 								outputInfo.Result = "Failed";
 								//Return outputInfo
 							}
@@ -876,7 +876,7 @@ namespace Crowbar
 								string result_SteamRemoteStorage_CreatePublishedFileUpdateRequest = steamPipe.SteamRemoteStorage_CreatePublishedFileUpdateRequest(inputInfo.Item.ID);
 								if (result_SteamRemoteStorage_CreatePublishedFileUpdateRequest != "success")
 								{
-									this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + result_SteamRemoteStorage_CreatePublishedFileUpdateRequest + "\r\n");
+									thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: " + result_SteamRemoteStorage_CreatePublishedFileUpdateRequest + "\r\n");
 									outputInfo.Result = "Failed";
 									//Return outputInfo
 								}
@@ -885,7 +885,7 @@ namespace Crowbar
 									string result_SteamRemoteStorage_UpdatePublishedFileFile = steamPipe.SteamRemoteStorage_UpdatePublishedFileFile(fileName);
 									if (result_SteamRemoteStorage_UpdatePublishedFileFile != "success")
 									{
-										this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Update of content file failed." + "\r\n");
+										thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Update of content file failed." + "\r\n");
 										outputInfo.Result = "Failed";
 										//Return outputInfo
 									}
@@ -896,7 +896,7 @@ namespace Crowbar
 										string result_SteamRemoteStorage_UpdatePublishedFileSetChangeDescription = steamPipe.SteamRemoteStorage_UpdatePublishedFileSetChangeDescription(changeNote);
 										if (result_SteamRemoteStorage_UpdatePublishedFileSetChangeDescription != "success")
 										{
-											this.thePublishItemBackgroundWorker.ReportProgress(0, "WARNING: Update of change note failed." + "\r\n");
+											thePublishItemBackgroundWorker.ReportProgress(0, "WARNING: Update of change note failed." + "\r\n");
 										}
 										else
 										{
@@ -904,18 +904,18 @@ namespace Crowbar
 										}
 
 										// Copy content file from RemoteStorage (Steam Cloud) to SteamUGC storage. The copy might actually occur in an earlier function call.
-										this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the content part of update." + "\r\n");
+										thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the content part of update." + "\r\n");
 										string result_SteamRemoteStorage_CommitPublishedFileUpdate = steamPipe.SteamRemoteStorage_CommitPublishedFileUpdate();
 										if (result_SteamRemoteStorage_CommitPublishedFileUpdate == "success")
 										{
 											//Me.thePublishItemBackgroundWorker.ReportProgress(0, updateCompletedLogText + " completed." + vbCrLf)
-											this.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the content part of update succeeded." + "\r\n");
+											thePublishItemBackgroundWorker.ReportProgress(0, "Publishing the content part of update succeeded." + "\r\n");
 											outputInfo.PublishedItemID = inputInfo.Item.ID;
 											outputInfo.Result = "Succeeded";
 										}
 										else if (result_SteamRemoteStorage_CommitPublishedFileUpdate == "success_agreement")
 										{
-											this.thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
+											thePublishItemBackgroundWorker.ReportProgress(0, SteamPipe.AgreementMessageForUpdate + "\r\n");
 											outputInfo.PublishedItemID = inputInfo.Item.ID;
 											outputInfo.Result = "FailedContentAndChangeNote";
 											outputInfo.SteamAgreementStatus = "NotAccepted";
@@ -925,14 +925,14 @@ namespace Crowbar
 										else
 										{
 											string result_SteamRemoteStorage_FileDelete = steamPipe.SteamRemoteStorage_FileDelete(fileName);
-											this.thePublishItemBackgroundWorker.ReportProgress(0, result_SteamRemoteStorage_CommitPublishedFileUpdate + "\r\n");
+											thePublishItemBackgroundWorker.ReportProgress(0, result_SteamRemoteStorage_CommitPublishedFileUpdate + "\r\n");
 											outputInfo.Result = "FailedContentAndChangeNote";
 											//Return outputInfo
 										}
 									}
 								}
 
-								// Delete content file from RemoteStorage (Steam Cloud). No need to bother user with any messages related to this.
+								// Delete content file from RemoteStorage (Steam Cloud). No need to bother user with any messages related to 
 								string result_Crowbar_DeleteContentFile = steamPipe.Crowbar_DeleteContentFile(inputInfo.Item.ID);
 							}
 						}
@@ -940,7 +940,7 @@ namespace Crowbar
 				}
 			}
 
-			inputInfo.AppInfo.CleanUpAfterUpload(this.thePublishItemBackgroundWorker);
+			inputInfo.AppInfo.CleanUpAfterUpload(thePublishItemBackgroundWorker);
 
 			return outputInfo;
 		}
@@ -956,11 +956,11 @@ namespace Crowbar
 				string setItemTitleWasSuccessful = steamPipe.SteamUGC_SetItemTitle(inputInfo.Item.Title);
 				if (setItemTitleWasSuccessful == "success")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item title completed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item title completed." + "\r\n");
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item title failed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item title failed." + "\r\n");
 					return "error";
 				}
 			}
@@ -970,11 +970,11 @@ namespace Crowbar
 				string setItemDescriptionWasSuccessful = steamPipe.SteamUGC_SetItemDescription(inputInfo.Item.Description);
 				if (setItemDescriptionWasSuccessful == "success")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item description completed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item description completed." + "\r\n");
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item description failed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item description failed." + "\r\n");
 					return "error";
 				}
 			}
@@ -984,11 +984,11 @@ namespace Crowbar
 				string setItemPreviewWasSuccessful = steamPipe.SteamUGC_SetItemPreview(inputInfo.Item.PreviewImagePathFileName);
 				if (setItemPreviewWasSuccessful == "success")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item preview completed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item preview completed." + "\r\n");
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item preview failed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item preview failed." + "\r\n");
 					return "error";
 				}
 			}
@@ -999,11 +999,11 @@ namespace Crowbar
 				string setItemVisibilityWasSuccessful = steamPipe.SteamUGC_SetItemVisibility(visibility_text);
 				if (setItemVisibilityWasSuccessful == "success")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item visibility completed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item visibility completed." + "\r\n");
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item visibility failed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item visibility failed." + "\r\n");
 					return "error";
 				}
 			}
@@ -1013,11 +1013,11 @@ namespace Crowbar
 				string setItemTagsWasSuccessful = steamPipe.SteamUGC_SetItemTags(inputInfo.Item.Tags);
 				if (setItemTagsWasSuccessful == "success")
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item tags completed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item tags completed." + "\r\n");
 				}
 				else
 				{
-					this.thePublishItemBackgroundWorker.ReportProgress(0, "Set item tags failed." + "\r\n");
+					thePublishItemBackgroundWorker.ReportProgress(0, "Set item tags failed." + "\r\n");
 					return "error";
 				}
 			}
@@ -1031,7 +1031,7 @@ namespace Crowbar
 			string result = steamPipe.SteamUGC_StartItemUpdate(appID_Text, itemID_text);
 			if (result != "success")
 			{
-				this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to start the update of item." + "\r\n");
+				thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to start the update of item." + "\r\n");
 			}
 			return result;
 		}
@@ -1042,7 +1042,7 @@ namespace Crowbar
 			string result = steamPipe.SteamUGC_SubmitItemUpdate(changeNote);
 			if (!result.StartsWith("success"))
 			{
-				this.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to submit the update of item. Steam error: " + result + "\r\n");
+				thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to submit the update of item. Steam error: " + result + "\r\n");
 			}
 			return result;
 		}

@@ -41,339 +41,339 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.UpdateUserControlFillPanel = new System.Windows.Forms.Panel();
-			this.CheckForUpdateGroupBox = new System.Windows.Forms.GroupBox();
-			this.Panel1 = new System.Windows.Forms.Panel();
-			this.ChangelogTextBox = new Crowbar.RichTextBoxEx();
-			this.CurrentVersionLabel = new System.Windows.Forms.Label();
-			this.CheckForUpdateTopPanel = new System.Windows.Forms.Panel();
-			this.CheckForUpdateButton = new System.Windows.Forms.Button();
-			this.CheckForUpdateTextBox = new Crowbar.TextBoxEx();
-			this.CheckForUpdateProgressBar = new Crowbar.ProgressBarEx();
-			this.CancelCheckButton = new System.Windows.Forms.Button();
-			this.DownloadGroupBox = new System.Windows.Forms.GroupBox();
-			this.DownloadFolderTextBox = new Crowbar.TextBoxEx();
-			this.DownloadProgressBarEx = new Crowbar.ProgressBarEx();
-			this.BrowseForDownloadFolderButton = new System.Windows.Forms.Button();
-			this.DownloadFolderLabel = new System.Windows.Forms.Label();
-			this.GotoDownloadFileButton = new System.Windows.Forms.Button();
-			this.CancelDownloadButton = new System.Windows.Forms.Button();
-			this.DownloadButton = new System.Windows.Forms.Button();
-			this.UpdateGroupBox = new System.Windows.Forms.GroupBox();
-			this.CancelUpdateButton = new System.Windows.Forms.Button();
-			this.BrowseForUpdateFolderButton = new System.Windows.Forms.Button();
-			this.UpdateFolderTextBox = new Crowbar.TextBoxEx();
-			this.UpdateProgressBarEx = new Crowbar.ProgressBarEx();
-			this.UpdateButton = new System.Windows.Forms.Button();
-			this.UpdateToNewPathCheckBox = new System.Windows.Forms.CheckBox();
-			this.UpdateCopySettingsCheckBox = new System.Windows.Forms.CheckBox();
-			this.UpdateUserControlFillPanel.SuspendLayout();
-			this.CheckForUpdateGroupBox.SuspendLayout();
-			this.Panel1.SuspendLayout();
-			this.CheckForUpdateTopPanel.SuspendLayout();
-			this.DownloadGroupBox.SuspendLayout();
-			this.UpdateGroupBox.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			UpdateUserControlFillPanel = new System.Windows.Forms.Panel();
+			CheckForUpdateGroupBox = new System.Windows.Forms.GroupBox();
+			Panel1 = new System.Windows.Forms.Panel();
+			ChangelogTextBox = new Crowbar.RichTextBoxEx();
+			CurrentVersionLabel = new System.Windows.Forms.Label();
+			CheckForUpdateTopPanel = new System.Windows.Forms.Panel();
+			CheckForUpdateButton = new System.Windows.Forms.Button();
+			CheckForUpdateTextBox = new Crowbar.TextBoxEx();
+			CheckForUpdateProgressBar = new Crowbar.ProgressBarEx();
+			CancelCheckButton = new System.Windows.Forms.Button();
+			DownloadGroupBox = new System.Windows.Forms.GroupBox();
+			DownloadFolderTextBox = new Crowbar.TextBoxEx();
+			DownloadProgressBarEx = new Crowbar.ProgressBarEx();
+			BrowseForDownloadFolderButton = new System.Windows.Forms.Button();
+			DownloadFolderLabel = new System.Windows.Forms.Label();
+			GotoDownloadFileButton = new System.Windows.Forms.Button();
+			CancelDownloadButton = new System.Windows.Forms.Button();
+			DownloadButton = new System.Windows.Forms.Button();
+			UpdateGroupBox = new System.Windows.Forms.GroupBox();
+			CancelUpdateButton = new System.Windows.Forms.Button();
+			BrowseForUpdateFolderButton = new System.Windows.Forms.Button();
+			UpdateFolderTextBox = new Crowbar.TextBoxEx();
+			UpdateProgressBarEx = new Crowbar.ProgressBarEx();
+			UpdateButton = new System.Windows.Forms.Button();
+			UpdateToNewPathCheckBox = new System.Windows.Forms.CheckBox();
+			UpdateCopySettingsCheckBox = new System.Windows.Forms.CheckBox();
+			UpdateUserControlFillPanel.SuspendLayout();
+			CheckForUpdateGroupBox.SuspendLayout();
+			Panel1.SuspendLayout();
+			CheckForUpdateTopPanel.SuspendLayout();
+			DownloadGroupBox.SuspendLayout();
+			UpdateGroupBox.SuspendLayout();
+			SuspendLayout();
 			//
 			//UpdateUserControlFillPanel
 			//
-			this.UpdateUserControlFillPanel.Controls.Add(this.CheckForUpdateGroupBox);
-			this.UpdateUserControlFillPanel.Controls.Add(this.DownloadGroupBox);
-			this.UpdateUserControlFillPanel.Controls.Add(this.UpdateGroupBox);
-			this.UpdateUserControlFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.UpdateUserControlFillPanel.Location = new System.Drawing.Point(0, 0);
-			this.UpdateUserControlFillPanel.Name = "UpdateUserControlFillPanel";
-			this.UpdateUserControlFillPanel.Size = new System.Drawing.Size(776, 536);
-			this.UpdateUserControlFillPanel.TabIndex = 17;
+			UpdateUserControlFillPanel.Controls.Add(CheckForUpdateGroupBox);
+			UpdateUserControlFillPanel.Controls.Add(DownloadGroupBox);
+			UpdateUserControlFillPanel.Controls.Add(UpdateGroupBox);
+			UpdateUserControlFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			UpdateUserControlFillPanel.Location = new System.Drawing.Point(0, 0);
+			UpdateUserControlFillPanel.Name = "UpdateUserControlFillPanel";
+			UpdateUserControlFillPanel.Size = new System.Drawing.Size(776, 536);
+			UpdateUserControlFillPanel.TabIndex = 17;
 			//
 			//CheckForUpdateGroupBox
 			//
-			this.CheckForUpdateGroupBox.Controls.Add(this.Panel1);
-			this.CheckForUpdateGroupBox.Controls.Add(this.CurrentVersionLabel);
-			this.CheckForUpdateGroupBox.Controls.Add(this.CheckForUpdateTopPanel);
-			this.CheckForUpdateGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.CheckForUpdateGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.CheckForUpdateGroupBox.Name = "CheckForUpdateGroupBox";
-			this.CheckForUpdateGroupBox.Size = new System.Drawing.Size(776, 365);
-			this.CheckForUpdateGroupBox.TabIndex = 14;
-			this.CheckForUpdateGroupBox.TabStop = false;
-			this.CheckForUpdateGroupBox.Text = "Check for Update - Check for latest version and get changelog";
+			CheckForUpdateGroupBox.Controls.Add(Panel1);
+			CheckForUpdateGroupBox.Controls.Add(CurrentVersionLabel);
+			CheckForUpdateGroupBox.Controls.Add(CheckForUpdateTopPanel);
+			CheckForUpdateGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			CheckForUpdateGroupBox.Location = new System.Drawing.Point(0, 0);
+			CheckForUpdateGroupBox.Name = "CheckForUpdateGroupBox";
+			CheckForUpdateGroupBox.Size = new System.Drawing.Size(776, 365);
+			CheckForUpdateGroupBox.TabIndex = 14;
+			CheckForUpdateGroupBox.TabStop = false;
+			CheckForUpdateGroupBox.Text = "Check for Update - Check for latest version and get changelog";
 			//
 			//Panel1
 			//
-			this.Panel1.Controls.Add(this.ChangelogTextBox);
-			this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel1.Location = new System.Drawing.Point(3, 44);
-			this.Panel1.Name = "Panel1";
-			this.Panel1.Padding = new System.Windows.Forms.Padding(3);
-			this.Panel1.Size = new System.Drawing.Size(770, 318);
-			this.Panel1.TabIndex = 16;
+			Panel1.Controls.Add(ChangelogTextBox);
+			Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel1.Location = new System.Drawing.Point(3, 44);
+			Panel1.Name = "Panel1";
+			Panel1.Padding = new System.Windows.Forms.Padding(3);
+			Panel1.Size = new System.Drawing.Size(770, 318);
+			Panel1.TabIndex = 16;
 			//
 			//ChangelogTextBox
 			//
-			this.ChangelogTextBox.BackColor = System.Drawing.SystemColors.Control;
-			this.ChangelogTextBox.CueBannerText = "";
-			this.ChangelogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ChangelogTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.ChangelogTextBox.Location = new System.Drawing.Point(3, 3);
-			this.ChangelogTextBox.Name = "ChangelogTextBox";
-			this.ChangelogTextBox.Size = new System.Drawing.Size(764, 312);
-			this.ChangelogTextBox.TabIndex = 6;
-			this.ChangelogTextBox.Text = "";
+			ChangelogTextBox.BackColor = System.Drawing.SystemColors.Control;
+			ChangelogTextBox.CueBannerText = "";
+			ChangelogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			ChangelogTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			ChangelogTextBox.Location = new System.Drawing.Point(3, 3);
+			ChangelogTextBox.Name = "ChangelogTextBox";
+			ChangelogTextBox.Size = new System.Drawing.Size(764, 312);
+			ChangelogTextBox.TabIndex = 6;
+			ChangelogTextBox.Text = "";
 			//
 			//CurrentVersionLabel
 			//
-			this.CurrentVersionLabel.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.CurrentVersionLabel.AutoSize = true;
-			this.CurrentVersionLabel.Location = new System.Drawing.Point(659, 0);
-			this.CurrentVersionLabel.Name = "CurrentVersionLabel";
-			this.CurrentVersionLabel.Size = new System.Drawing.Size(114, 13);
-			this.CurrentVersionLabel.TabIndex = 14;
-			this.CurrentVersionLabel.Text = "Current Version: 0.00";
+			CurrentVersionLabel.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			CurrentVersionLabel.AutoSize = true;
+			CurrentVersionLabel.Location = new System.Drawing.Point(659, 0);
+			CurrentVersionLabel.Name = "CurrentVersionLabel";
+			CurrentVersionLabel.Size = new System.Drawing.Size(114, 13);
+			CurrentVersionLabel.TabIndex = 14;
+			CurrentVersionLabel.Text = "Current Version: 0.00";
 			//
 			//CheckForUpdateTopPanel
 			//
-			this.CheckForUpdateTopPanel.Controls.Add(this.CheckForUpdateButton);
-			this.CheckForUpdateTopPanel.Controls.Add(this.CheckForUpdateTextBox);
-			this.CheckForUpdateTopPanel.Controls.Add(this.CheckForUpdateProgressBar);
-			this.CheckForUpdateTopPanel.Controls.Add(this.CancelCheckButton);
-			this.CheckForUpdateTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.CheckForUpdateTopPanel.Location = new System.Drawing.Point(3, 18);
-			this.CheckForUpdateTopPanel.Name = "CheckForUpdateTopPanel";
-			this.CheckForUpdateTopPanel.Size = new System.Drawing.Size(770, 26);
-			this.CheckForUpdateTopPanel.TabIndex = 15;
+			CheckForUpdateTopPanel.Controls.Add(CheckForUpdateButton);
+			CheckForUpdateTopPanel.Controls.Add(CheckForUpdateTextBox);
+			CheckForUpdateTopPanel.Controls.Add(CheckForUpdateProgressBar);
+			CheckForUpdateTopPanel.Controls.Add(CancelCheckButton);
+			CheckForUpdateTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			CheckForUpdateTopPanel.Location = new System.Drawing.Point(3, 18);
+			CheckForUpdateTopPanel.Name = "CheckForUpdateTopPanel";
+			CheckForUpdateTopPanel.Size = new System.Drawing.Size(770, 26);
+			CheckForUpdateTopPanel.TabIndex = 15;
 			//
 			//CheckForUpdateButton
 			//
-			this.CheckForUpdateButton.Location = new System.Drawing.Point(3, 0);
-			this.CheckForUpdateButton.Name = "CheckForUpdateButton";
-			this.CheckForUpdateButton.Size = new System.Drawing.Size(69, 23);
-			this.CheckForUpdateButton.TabIndex = 1;
-			this.CheckForUpdateButton.Text = "Check";
-			this.CheckForUpdateButton.UseVisualStyleBackColor = true;
+			CheckForUpdateButton.Location = new System.Drawing.Point(3, 0);
+			CheckForUpdateButton.Name = "CheckForUpdateButton";
+			CheckForUpdateButton.Size = new System.Drawing.Size(69, 23);
+			CheckForUpdateButton.TabIndex = 1;
+			CheckForUpdateButton.Text = "Check";
+			CheckForUpdateButton.UseVisualStyleBackColor = true;
 			//
 			//CheckForUpdateTextBox
 			//
-			this.CheckForUpdateTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.CheckForUpdateTextBox.CueBannerText = "";
-			this.CheckForUpdateTextBox.Location = new System.Drawing.Point(78, 0);
-			this.CheckForUpdateTextBox.Name = "CheckForUpdateTextBox";
-			this.CheckForUpdateTextBox.ReadOnly = true;
-			this.CheckForUpdateTextBox.Size = new System.Drawing.Size(614, 22);
-			this.CheckForUpdateTextBox.TabIndex = 9;
-			this.CheckForUpdateTextBox.Text = "[not checked yet]";
+			CheckForUpdateTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			CheckForUpdateTextBox.CueBannerText = "";
+			CheckForUpdateTextBox.Location = new System.Drawing.Point(78, 0);
+			CheckForUpdateTextBox.Name = "CheckForUpdateTextBox";
+			CheckForUpdateTextBox.ReadOnly = true;
+			CheckForUpdateTextBox.Size = new System.Drawing.Size(614, 22);
+			CheckForUpdateTextBox.TabIndex = 9;
+			CheckForUpdateTextBox.Text = "[not checked yet]";
 			//
 			//CheckForUpdateProgressBar
 			//
-			this.CheckForUpdateProgressBar.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.CheckForUpdateProgressBar.Location = new System.Drawing.Point(78, 0);
-			this.CheckForUpdateProgressBar.Name = "CheckForUpdateProgressBar";
-			this.CheckForUpdateProgressBar.Size = new System.Drawing.Size(614, 22);
-			this.CheckForUpdateProgressBar.TabIndex = 10;
-			this.CheckForUpdateProgressBar.Visible = false;
+			CheckForUpdateProgressBar.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			CheckForUpdateProgressBar.Location = new System.Drawing.Point(78, 0);
+			CheckForUpdateProgressBar.Name = "CheckForUpdateProgressBar";
+			CheckForUpdateProgressBar.Size = new System.Drawing.Size(614, 22);
+			CheckForUpdateProgressBar.TabIndex = 10;
+			CheckForUpdateProgressBar.Visible = false;
 			//
 			//CancelCheckButton
 			//
-			this.CancelCheckButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.CancelCheckButton.Enabled = false;
-			this.CancelCheckButton.Location = new System.Drawing.Point(698, 0);
-			this.CancelCheckButton.Name = "CancelCheckButton";
-			this.CancelCheckButton.Size = new System.Drawing.Size(69, 23);
-			this.CancelCheckButton.TabIndex = 11;
-			this.CancelCheckButton.Text = "Cancel";
-			this.CancelCheckButton.UseVisualStyleBackColor = true;
+			CancelCheckButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			CancelCheckButton.Enabled = false;
+			CancelCheckButton.Location = new System.Drawing.Point(698, 0);
+			CancelCheckButton.Name = "CancelCheckButton";
+			CancelCheckButton.Size = new System.Drawing.Size(69, 23);
+			CancelCheckButton.TabIndex = 11;
+			CancelCheckButton.Text = "Cancel";
+			CancelCheckButton.UseVisualStyleBackColor = true;
 			//
 			//DownloadGroupBox
 			//
-			this.DownloadGroupBox.Controls.Add(this.DownloadFolderTextBox);
-			this.DownloadGroupBox.Controls.Add(this.DownloadProgressBarEx);
-			this.DownloadGroupBox.Controls.Add(this.BrowseForDownloadFolderButton);
-			this.DownloadGroupBox.Controls.Add(this.DownloadFolderLabel);
-			this.DownloadGroupBox.Controls.Add(this.GotoDownloadFileButton);
-			this.DownloadGroupBox.Controls.Add(this.CancelDownloadButton);
-			this.DownloadGroupBox.Controls.Add(this.DownloadButton);
-			this.DownloadGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.DownloadGroupBox.Location = new System.Drawing.Point(0, 365);
-			this.DownloadGroupBox.Name = "DownloadGroupBox";
-			this.DownloadGroupBox.Size = new System.Drawing.Size(776, 76);
-			this.DownloadGroupBox.TabIndex = 8;
-			this.DownloadGroupBox.TabStop = false;
-			this.DownloadGroupBox.Text = "Download - Download the new version (compressed file) for manually updating";
+			DownloadGroupBox.Controls.Add(DownloadFolderTextBox);
+			DownloadGroupBox.Controls.Add(DownloadProgressBarEx);
+			DownloadGroupBox.Controls.Add(BrowseForDownloadFolderButton);
+			DownloadGroupBox.Controls.Add(DownloadFolderLabel);
+			DownloadGroupBox.Controls.Add(GotoDownloadFileButton);
+			DownloadGroupBox.Controls.Add(CancelDownloadButton);
+			DownloadGroupBox.Controls.Add(DownloadButton);
+			DownloadGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+			DownloadGroupBox.Location = new System.Drawing.Point(0, 365);
+			DownloadGroupBox.Name = "DownloadGroupBox";
+			DownloadGroupBox.Size = new System.Drawing.Size(776, 76);
+			DownloadGroupBox.TabIndex = 8;
+			DownloadGroupBox.TabStop = false;
+			DownloadGroupBox.Text = "Download - Download the new version (compressed file) for manually updating";
 			//
 			//DownloadFolderTextBox
 			//
-			this.DownloadFolderTextBox.AllowDrop = true;
-			this.DownloadFolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DownloadFolderTextBox.CueBannerText = "";
-			this.DownloadFolderTextBox.Location = new System.Drawing.Point(107, 15);
-			this.DownloadFolderTextBox.Name = "DownloadFolderTextBox";
-			this.DownloadFolderTextBox.Size = new System.Drawing.Size(582, 22);
-			this.DownloadFolderTextBox.TabIndex = 7;
+			DownloadFolderTextBox.AllowDrop = true;
+			DownloadFolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DownloadFolderTextBox.CueBannerText = "";
+			DownloadFolderTextBox.Location = new System.Drawing.Point(107, 15);
+			DownloadFolderTextBox.Name = "DownloadFolderTextBox";
+			DownloadFolderTextBox.Size = new System.Drawing.Size(582, 22);
+			DownloadFolderTextBox.TabIndex = 7;
 			//
 			//DownloadProgressBarEx
 			//
-			this.DownloadProgressBarEx.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DownloadProgressBarEx.Location = new System.Drawing.Point(87, 44);
-			this.DownloadProgressBarEx.Name = "DownloadProgressBarEx";
-			this.DownloadProgressBarEx.Size = new System.Drawing.Size(521, 23);
-			this.DownloadProgressBarEx.TabIndex = 6;
+			DownloadProgressBarEx.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DownloadProgressBarEx.Location = new System.Drawing.Point(87, 44);
+			DownloadProgressBarEx.Name = "DownloadProgressBarEx";
+			DownloadProgressBarEx.Size = new System.Drawing.Size(521, 23);
+			DownloadProgressBarEx.TabIndex = 6;
 			//
 			//BrowseForDownloadFolderButton
 			//
-			this.BrowseForDownloadFolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForDownloadFolderButton.Location = new System.Drawing.Point(695, 15);
-			this.BrowseForDownloadFolderButton.Name = "BrowseForDownloadFolderButton";
-			this.BrowseForDownloadFolderButton.Size = new System.Drawing.Size(75, 23);
-			this.BrowseForDownloadFolderButton.TabIndex = 8;
-			this.BrowseForDownloadFolderButton.Text = "Browse...";
-			this.BrowseForDownloadFolderButton.UseVisualStyleBackColor = true;
+			BrowseForDownloadFolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForDownloadFolderButton.Location = new System.Drawing.Point(695, 15);
+			BrowseForDownloadFolderButton.Name = "BrowseForDownloadFolderButton";
+			BrowseForDownloadFolderButton.Size = new System.Drawing.Size(75, 23);
+			BrowseForDownloadFolderButton.TabIndex = 8;
+			BrowseForDownloadFolderButton.Text = "Browse...";
+			BrowseForDownloadFolderButton.UseVisualStyleBackColor = true;
 			//
 			//DownloadFolderLabel
 			//
-			this.DownloadFolderLabel.AutoSize = true;
-			this.DownloadFolderLabel.Location = new System.Drawing.Point(3, 20);
-			this.DownloadFolderLabel.Name = "DownloadFolderLabel";
-			this.DownloadFolderLabel.Size = new System.Drawing.Size(98, 13);
-			this.DownloadFolderLabel.TabIndex = 9;
-			this.DownloadFolderLabel.Text = "Download folder:";
+			DownloadFolderLabel.AutoSize = true;
+			DownloadFolderLabel.Location = new System.Drawing.Point(3, 20);
+			DownloadFolderLabel.Name = "DownloadFolderLabel";
+			DownloadFolderLabel.Size = new System.Drawing.Size(98, 13);
+			DownloadFolderLabel.TabIndex = 9;
+			DownloadFolderLabel.Text = "Download folder:";
 			//
 			//GotoDownloadFileButton
 			//
-			this.GotoDownloadFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoDownloadFileButton.Enabled = false;
-			this.GotoDownloadFileButton.Location = new System.Drawing.Point(695, 44);
-			this.GotoDownloadFileButton.Name = "GotoDownloadFileButton";
-			this.GotoDownloadFileButton.Size = new System.Drawing.Size(75, 23);
-			this.GotoDownloadFileButton.TabIndex = 13;
-			this.GotoDownloadFileButton.Text = "Goto";
-			this.GotoDownloadFileButton.UseVisualStyleBackColor = true;
+			GotoDownloadFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoDownloadFileButton.Enabled = false;
+			GotoDownloadFileButton.Location = new System.Drawing.Point(695, 44);
+			GotoDownloadFileButton.Name = "GotoDownloadFileButton";
+			GotoDownloadFileButton.Size = new System.Drawing.Size(75, 23);
+			GotoDownloadFileButton.TabIndex = 13;
+			GotoDownloadFileButton.Text = "Goto";
+			GotoDownloadFileButton.UseVisualStyleBackColor = true;
 			//
 			//CancelDownloadButton
 			//
-			this.CancelDownloadButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.CancelDownloadButton.Enabled = false;
-			this.CancelDownloadButton.Location = new System.Drawing.Point(614, 44);
-			this.CancelDownloadButton.Name = "CancelDownloadButton";
-			this.CancelDownloadButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelDownloadButton.TabIndex = 12;
-			this.CancelDownloadButton.Text = "Cancel";
-			this.CancelDownloadButton.UseVisualStyleBackColor = true;
+			CancelDownloadButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			CancelDownloadButton.Enabled = false;
+			CancelDownloadButton.Location = new System.Drawing.Point(614, 44);
+			CancelDownloadButton.Name = "CancelDownloadButton";
+			CancelDownloadButton.Size = new System.Drawing.Size(75, 23);
+			CancelDownloadButton.TabIndex = 12;
+			CancelDownloadButton.Text = "Cancel";
+			CancelDownloadButton.UseVisualStyleBackColor = true;
 			//
 			//DownloadButton
 			//
-			this.DownloadButton.Location = new System.Drawing.Point(6, 44);
-			this.DownloadButton.Name = "DownloadButton";
-			this.DownloadButton.Size = new System.Drawing.Size(75, 23);
-			this.DownloadButton.TabIndex = 2;
-			this.DownloadButton.Text = "Download";
-			this.DownloadButton.UseVisualStyleBackColor = true;
+			DownloadButton.Location = new System.Drawing.Point(6, 44);
+			DownloadButton.Name = "DownloadButton";
+			DownloadButton.Size = new System.Drawing.Size(75, 23);
+			DownloadButton.TabIndex = 2;
+			DownloadButton.Text = "Download";
+			DownloadButton.UseVisualStyleBackColor = true;
 			//
 			//UpdateGroupBox
 			//
-			this.UpdateGroupBox.Controls.Add(this.CancelUpdateButton);
-			this.UpdateGroupBox.Controls.Add(this.BrowseForUpdateFolderButton);
-			this.UpdateGroupBox.Controls.Add(this.UpdateFolderTextBox);
-			this.UpdateGroupBox.Controls.Add(this.UpdateProgressBarEx);
-			this.UpdateGroupBox.Controls.Add(this.UpdateButton);
-			this.UpdateGroupBox.Controls.Add(this.UpdateToNewPathCheckBox);
-			this.UpdateGroupBox.Controls.Add(this.UpdateCopySettingsCheckBox);
-			this.UpdateGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.UpdateGroupBox.Location = new System.Drawing.Point(0, 441);
-			this.UpdateGroupBox.Name = "UpdateGroupBox";
-			this.UpdateGroupBox.Size = new System.Drawing.Size(776, 95);
-			this.UpdateGroupBox.TabIndex = 7;
-			this.UpdateGroupBox.TabStop = false;
-			this.UpdateGroupBox.Text = "Update - Update current version to latest version - Crowbar will close and reopen" + "";
+			UpdateGroupBox.Controls.Add(CancelUpdateButton);
+			UpdateGroupBox.Controls.Add(BrowseForUpdateFolderButton);
+			UpdateGroupBox.Controls.Add(UpdateFolderTextBox);
+			UpdateGroupBox.Controls.Add(UpdateProgressBarEx);
+			UpdateGroupBox.Controls.Add(UpdateButton);
+			UpdateGroupBox.Controls.Add(UpdateToNewPathCheckBox);
+			UpdateGroupBox.Controls.Add(UpdateCopySettingsCheckBox);
+			UpdateGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+			UpdateGroupBox.Location = new System.Drawing.Point(0, 441);
+			UpdateGroupBox.Name = "UpdateGroupBox";
+			UpdateGroupBox.Size = new System.Drawing.Size(776, 95);
+			UpdateGroupBox.TabIndex = 7;
+			UpdateGroupBox.TabStop = false;
+			UpdateGroupBox.Text = "Update - Update current version to latest version - Crowbar will close and reopen" + "";
 			//
 			//CancelUpdateButton
 			//
-			this.CancelUpdateButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.CancelUpdateButton.Enabled = false;
-			this.CancelUpdateButton.Location = new System.Drawing.Point(695, 66);
-			this.CancelUpdateButton.Name = "CancelUpdateButton";
-			this.CancelUpdateButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelUpdateButton.TabIndex = 13;
-			this.CancelUpdateButton.Text = "Cancel";
-			this.CancelUpdateButton.UseVisualStyleBackColor = true;
+			CancelUpdateButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			CancelUpdateButton.Enabled = false;
+			CancelUpdateButton.Location = new System.Drawing.Point(695, 66);
+			CancelUpdateButton.Name = "CancelUpdateButton";
+			CancelUpdateButton.Size = new System.Drawing.Size(75, 23);
+			CancelUpdateButton.TabIndex = 13;
+			CancelUpdateButton.Text = "Cancel";
+			CancelUpdateButton.UseVisualStyleBackColor = true;
 			//
 			//BrowseForUpdateFolderButton
 			//
-			this.BrowseForUpdateFolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForUpdateFolderButton.Location = new System.Drawing.Point(695, 16);
-			this.BrowseForUpdateFolderButton.Name = "BrowseForUpdateFolderButton";
-			this.BrowseForUpdateFolderButton.Size = new System.Drawing.Size(75, 23);
-			this.BrowseForUpdateFolderButton.TabIndex = 10;
-			this.BrowseForUpdateFolderButton.Text = "Browse...";
-			this.BrowseForUpdateFolderButton.UseVisualStyleBackColor = true;
+			BrowseForUpdateFolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForUpdateFolderButton.Location = new System.Drawing.Point(695, 16);
+			BrowseForUpdateFolderButton.Name = "BrowseForUpdateFolderButton";
+			BrowseForUpdateFolderButton.Size = new System.Drawing.Size(75, 23);
+			BrowseForUpdateFolderButton.TabIndex = 10;
+			BrowseForUpdateFolderButton.Text = "Browse...";
+			BrowseForUpdateFolderButton.UseVisualStyleBackColor = true;
 			//
 			//UpdateFolderTextBox
 			//
-			this.UpdateFolderTextBox.AllowDrop = true;
-			this.UpdateFolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.UpdateFolderTextBox.CueBannerText = "";
-			this.UpdateFolderTextBox.Location = new System.Drawing.Point(266, 16);
-			this.UpdateFolderTextBox.Name = "UpdateFolderTextBox";
-			this.UpdateFolderTextBox.Size = new System.Drawing.Size(423, 22);
-			this.UpdateFolderTextBox.TabIndex = 9;
+			UpdateFolderTextBox.AllowDrop = true;
+			UpdateFolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			UpdateFolderTextBox.CueBannerText = "";
+			UpdateFolderTextBox.Location = new System.Drawing.Point(266, 16);
+			UpdateFolderTextBox.Name = "UpdateFolderTextBox";
+			UpdateFolderTextBox.Size = new System.Drawing.Size(423, 22);
+			UpdateFolderTextBox.TabIndex = 9;
 			//
 			//UpdateProgressBarEx
 			//
-			this.UpdateProgressBarEx.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.UpdateProgressBarEx.Location = new System.Drawing.Point(87, 66);
-			this.UpdateProgressBarEx.Name = "UpdateProgressBarEx";
-			this.UpdateProgressBarEx.Size = new System.Drawing.Size(602, 23);
-			this.UpdateProgressBarEx.TabIndex = 5;
+			UpdateProgressBarEx.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			UpdateProgressBarEx.Location = new System.Drawing.Point(87, 66);
+			UpdateProgressBarEx.Name = "UpdateProgressBarEx";
+			UpdateProgressBarEx.Size = new System.Drawing.Size(602, 23);
+			UpdateProgressBarEx.TabIndex = 5;
 			//
 			//UpdateButton
 			//
-			this.UpdateButton.Location = new System.Drawing.Point(6, 66);
-			this.UpdateButton.Name = "UpdateButton";
-			this.UpdateButton.Size = new System.Drawing.Size(75, 23);
-			this.UpdateButton.TabIndex = 0;
-			this.UpdateButton.Text = "Update";
-			this.UpdateButton.UseVisualStyleBackColor = true;
+			UpdateButton.Location = new System.Drawing.Point(6, 66);
+			UpdateButton.Name = "UpdateButton";
+			UpdateButton.Size = new System.Drawing.Size(75, 23);
+			UpdateButton.TabIndex = 0;
+			UpdateButton.Text = "Update";
+			UpdateButton.UseVisualStyleBackColor = true;
 			//
 			//UpdateToNewPathCheckBox
 			//
-			this.UpdateToNewPathCheckBox.AutoSize = true;
-			this.UpdateToNewPathCheckBox.Location = new System.Drawing.Point(6, 20);
-			this.UpdateToNewPathCheckBox.Name = "UpdateToNewPathCheckBox";
-			this.UpdateToNewPathCheckBox.Size = new System.Drawing.Size(254, 17);
-			this.UpdateToNewPathCheckBox.TabIndex = 4;
-			this.UpdateToNewPathCheckBox.Text = "Update to new folder (keep current version):";
-			this.UpdateToNewPathCheckBox.UseVisualStyleBackColor = true;
+			UpdateToNewPathCheckBox.AutoSize = true;
+			UpdateToNewPathCheckBox.Location = new System.Drawing.Point(6, 20);
+			UpdateToNewPathCheckBox.Name = "UpdateToNewPathCheckBox";
+			UpdateToNewPathCheckBox.Size = new System.Drawing.Size(254, 17);
+			UpdateToNewPathCheckBox.TabIndex = 4;
+			UpdateToNewPathCheckBox.Text = "Update to new folder (keep current version):";
+			UpdateToNewPathCheckBox.UseVisualStyleBackColor = true;
 			//
 			//UpdateCopySettingsCheckBox
 			//
-			this.UpdateCopySettingsCheckBox.AutoSize = true;
-			this.UpdateCopySettingsCheckBox.Checked = true;
-			this.UpdateCopySettingsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.UpdateCopySettingsCheckBox.Location = new System.Drawing.Point(6, 43);
-			this.UpdateCopySettingsCheckBox.Name = "UpdateCopySettingsCheckBox";
-			this.UpdateCopySettingsCheckBox.Size = new System.Drawing.Size(282, 17);
-			this.UpdateCopySettingsCheckBox.TabIndex = 3;
-			this.UpdateCopySettingsCheckBox.Text = "Copy settings from current version to new version";
-			this.UpdateCopySettingsCheckBox.UseVisualStyleBackColor = true;
+			UpdateCopySettingsCheckBox.AutoSize = true;
+			UpdateCopySettingsCheckBox.Checked = true;
+			UpdateCopySettingsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+			UpdateCopySettingsCheckBox.Location = new System.Drawing.Point(6, 43);
+			UpdateCopySettingsCheckBox.Name = "UpdateCopySettingsCheckBox";
+			UpdateCopySettingsCheckBox.Size = new System.Drawing.Size(282, 17);
+			UpdateCopySettingsCheckBox.TabIndex = 3;
+			UpdateCopySettingsCheckBox.Text = "Copy settings from current version to new version";
+			UpdateCopySettingsCheckBox.UseVisualStyleBackColor = true;
 			//
 			//UpdateUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.UpdateUserControlFillPanel);
-			this.Name = "UpdateUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.UpdateUserControlFillPanel.ResumeLayout(false);
-			this.CheckForUpdateGroupBox.ResumeLayout(false);
-			this.CheckForUpdateGroupBox.PerformLayout();
-			this.Panel1.ResumeLayout(false);
-			this.CheckForUpdateTopPanel.ResumeLayout(false);
-			this.CheckForUpdateTopPanel.PerformLayout();
-			this.DownloadGroupBox.ResumeLayout(false);
-			this.DownloadGroupBox.PerformLayout();
-			this.UpdateGroupBox.ResumeLayout(false);
-			this.UpdateGroupBox.PerformLayout();
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(UpdateUserControlFillPanel);
+			Name = "UpdateUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			UpdateUserControlFillPanel.ResumeLayout(false);
+			CheckForUpdateGroupBox.ResumeLayout(false);
+			CheckForUpdateGroupBox.PerformLayout();
+			Panel1.ResumeLayout(false);
+			CheckForUpdateTopPanel.ResumeLayout(false);
+			CheckForUpdateTopPanel.PerformLayout();
+			DownloadGroupBox.ResumeLayout(false);
+			DownloadGroupBox.PerformLayout();
+			UpdateGroupBox.ResumeLayout(false);
+			UpdateGroupBox.PerformLayout();
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(UpdateUserControl_Load);

@@ -239,7 +239,7 @@ namespace Crowbar
 
 				int sign = 0;
 				int floatSign = 0;
-				sign = this.GetSign(this.the16BitValue);
+				sign = GetSign(the16BitValue);
 				if (sign == 1)
 				{
 					floatSign = -1;
@@ -253,7 +253,7 @@ namespace Crowbar
 				//		{
 				//			return maxfloat16bits * ( ( inFloat.bits.sign == 1 ) ? -1.0f : 1.0f );
 				//		}
-				if (this.IsInfinity(this.the16BitValue))
+				if (IsInfinity(the16BitValue))
 				{
 					return maxfloat16bits * floatSign;
 				}
@@ -262,7 +262,7 @@ namespace Crowbar
 				//		{
 				//			return 0.0;
 				//		}
-				if (this.IsNaN(this.the16BitValue))
+				if (IsNaN(the16BitValue))
 				{
 					return 0;
 				}
@@ -286,8 +286,8 @@ namespace Crowbar
 				int biased_exponent = 0;
 				//Dim anInteger32 As Integer
 				//Dim anInteger32Bytes() As Byte
-				mantissa = this.GetMantissa(this.the16BitValue);
-				biased_exponent = this.GetBiasedExponent(this.the16BitValue);
+				mantissa = GetMantissa(the16BitValue);
+				biased_exponent = GetBiasedExponent(the16BitValue);
 				if (biased_exponent == 0 && mantissa != 0)
 				{
 					float floatMantissa = mantissa / 1024.0F;
@@ -300,7 +300,7 @@ namespace Crowbar
 					//'Array.Reverse(anInteger32Bytes)
 					//result = BitConverter.ToSingle(anInteger32Bytes, 0)
 					//------
-					result = this.GetSingle(this.the16BitValue);
+					result = GetSingle(the16BitValue);
 
 					// For debugging the conversion.
 					//result = CType(anInteger32, Single)
@@ -404,9 +404,9 @@ namespace Crowbar
 			int resultSign = 0;
 			bitsResult.i = 0;
 
-			mantissa = this.GetMantissa(this.the16BitValue);
-			biased_exponent = this.GetBiasedExponent(this.the16BitValue);
-			sign = this.GetSign(this.the16BitValue);
+			mantissa = GetMantissa(the16BitValue);
+			biased_exponent = GetBiasedExponent(the16BitValue);
+			sign = GetSign(the16BitValue);
 
 			//			output.bits.mantissa = inFloat.bits.mantissa << (23-10);
 			//			output.bits.biased_exponent = (inFloat.bits.biased_exponent - float16bias + float32bias) * (inFloat.bits.biased_exponent != 0);
@@ -493,8 +493,8 @@ namespace Crowbar
 			int mantissa = 0;
 			int biased_exponent = 0;
 
-			mantissa = this.GetMantissa(value);
-			biased_exponent = this.GetBiasedExponent(value);
+			mantissa = GetMantissa(value);
+			biased_exponent = GetBiasedExponent(value);
 			return ((biased_exponent == 31) && (mantissa == 0));
 		}
 
@@ -507,8 +507,8 @@ namespace Crowbar
 			int mantissa = 0;
 			int biased_exponent = 0;
 
-			mantissa = this.GetMantissa(value);
-			biased_exponent = this.GetBiasedExponent(value);
+			mantissa = GetMantissa(value);
+			biased_exponent = GetBiasedExponent(value);
 			return ((biased_exponent == 31) && (mantissa != 0));
 		}
 

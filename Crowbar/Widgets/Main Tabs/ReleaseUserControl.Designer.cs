@@ -37,39 +37,39 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.Panel1 = new System.Windows.Forms.Panel();
-			this.TextBoxEx4 = new Crowbar.TextBoxEx();
-			this.Panel1.SuspendLayout();
-			this.SuspendLayout();
+			Panel1 = new System.Windows.Forms.Panel();
+			TextBoxEx4 = new Crowbar.TextBoxEx();
+			Panel1.SuspendLayout();
+			SuspendLayout();
 			//
 			//Panel1
 			//
-			this.Panel1.Controls.Add(this.TextBoxEx4);
-			this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel1.Location = new System.Drawing.Point(0, 0);
-			this.Panel1.Name = "Panel1";
-			this.Panel1.Size = new System.Drawing.Size(776, 536);
-			this.Panel1.TabIndex = 0;
+			Panel1.Controls.Add(TextBoxEx4);
+			Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel1.Location = new System.Drawing.Point(0, 0);
+			Panel1.Name = "Panel1";
+			Panel1.Size = new System.Drawing.Size(776, 536);
+			Panel1.TabIndex = 0;
 			//
 			//TextBoxEx4
 			//
-			this.TextBoxEx4.Location = new System.Drawing.Point(3, 3);
-			this.TextBoxEx4.Name = "TextBoxEx4";
-			this.TextBoxEx4.ReadOnly = true;
-			this.TextBoxEx4.Size = new System.Drawing.Size(778, 22);
-			this.TextBoxEx4.TabIndex = 2;
-			this.TextBoxEx4.Text = "Not implemented yet.";
+			TextBoxEx4.Location = new System.Drawing.Point(3, 3);
+			TextBoxEx4.Name = "TextBoxEx4";
+			TextBoxEx4.ReadOnly = true;
+			TextBoxEx4.Size = new System.Drawing.Size(778, 22);
+			TextBoxEx4.TabIndex = 2;
+			TextBoxEx4.Text = "Not implemented yet.";
 			//
 			//ReleaseUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.Panel1);
-			this.Name = "ReleaseUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.Panel1.ResumeLayout(false);
-			this.Panel1.PerformLayout();
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(Panel1);
+			Name = "ReleaseUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			Panel1.ResumeLayout(false);
+			Panel1.PerformLayout();
+			ResumeLayout(false);
 
 		}
 		internal System.Windows.Forms.Panel Panel1;

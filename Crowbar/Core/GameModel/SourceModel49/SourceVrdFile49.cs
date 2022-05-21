@@ -17,8 +17,8 @@ namespace Crowbar
 
 		public SourceVrdFile49(StreamWriter outputFileStream, SourceMdlFileData49 mdlFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
 		}
 
 #endregion
@@ -27,12 +27,12 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteCommands()
 		{
-			if (this.theMdlFileData.theBones != null)
+			if (theMdlFileData.theBones != null)
 			{
 				string line = "";
 				SourceMdlBone aBone = null;
@@ -49,9 +49,9 @@ namespace Crowbar
 
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				string anAimName = null;
-				for (int i = 0; i < this.theMdlFileData.theBones.Count; i++)
+				for (int i = 0; i < theMdlFileData.theBones.Count; i++)
 				{
-					aBone = this.theMdlFileData.theBones[i];
+					aBone = theMdlFileData.theBones[i];
 
 					if (aBone.proceduralRuleOffset != 0)
 					{
@@ -67,9 +67,9 @@ namespace Crowbar
 							//<trigger> 90 0 0 -90 0 0 -45 0 0 0
 
 							//int i = sscanf( g_szLine, "%s %s %s %s %s", cmd, pBone->bonename, pBone->parentname, pBone->controlparentname, pBone->controlname );
-							aParentBone = this.theMdlFileData.theBones[aBone.parentBoneIndex];
-							aControlBone = this.theMdlFileData.theBones[aBone.theQuatInterpBone.controlBoneIndex];
-							aParentControlBone = this.theMdlFileData.theBones[aControlBone.parentBoneIndex];
+							aParentBone = theMdlFileData.theBones[aBone.parentBoneIndex];
+							aControlBone = theMdlFileData.theBones[aBone.theQuatInterpBone.controlBoneIndex];
+							aParentControlBone = theMdlFileData.theBones[aControlBone.parentBoneIndex];
 
 							//NOTE: A bone name in a VRD file must have its characters up to and including the first dot removed.
 							//aBoneName = aBone.theName.Replace("ValveBiped.", "")
@@ -81,7 +81,7 @@ namespace Crowbar
 							aParentControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentControlBone.theName);
 							aControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aControlBone.theName);
 
-							this.theOutputFileStreamWriter.WriteLine();
+							theOutputFileStreamWriter.WriteLine();
 
 							line = "<helper>";
 							line += " ";
@@ -92,7 +92,7 @@ namespace Crowbar
 							line += aParentControlBoneName;
 							line += " ";
 							line += aControlBoneName;
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 
 							//'NOTE: Use "1" for the 3 size values because it looks like they are not used in compile.
 							//line = "<display>"
@@ -116,7 +116,7 @@ namespace Crowbar
 							line += "0";
 							line += " ";
 							line += "0";
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 
 							for (int triggerIndex = 0; triggerIndex < aBone.theQuatInterpBone.theTriggers.Count; triggerIndex++)
 							{
@@ -171,25 +171,25 @@ namespace Crowbar
 								line += aTrigger.pos.y.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 								line += " ";
 								line += aTrigger.pos.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-								this.theOutputFileStreamWriter.WriteLine(line);
+								theOutputFileStreamWriter.WriteLine(line);
 							}
 						}
 						else if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AIMATBONE || aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AIMATATTACH)
 						{
 							aBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aBone.theName);
 
-							aParentBone = this.theMdlFileData.theBones[aBone.theAimAtBone.parentBoneIndex];
+							aParentBone = theMdlFileData.theBones[aBone.theAimAtBone.parentBoneIndex];
 							aParentBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentBone.theName);
 
 	//						Dim anAimName As String
 							if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AIMATBONE)
 							{
-								SourceMdlBone anAimBone = this.theMdlFileData.theBones[aBone.theAimAtBone.aimBoneOrAttachmentIndex];
+								SourceMdlBone anAimBone = theMdlFileData.theBones[aBone.theAimAtBone.aimBoneOrAttachmentIndex];
 								anAimName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(anAimBone.theName);
 							}
 							else
 							{
-								SourceMdlAttachment anAimAttachment = this.theMdlFileData.theAttachments[aBone.theAimAtBone.aimBoneOrAttachmentIndex];
+								SourceMdlAttachment anAimAttachment = theMdlFileData.theAttachments[aBone.theAimAtBone.aimBoneOrAttachmentIndex];
 								anAimName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(anAimAttachment.theName);
 							}
 
@@ -200,7 +200,7 @@ namespace Crowbar
 							line += aParentBoneName;
 							line += " ";
 							line += anAimName;
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 
 							line = "<aimvector>";
 							line += " ";
@@ -209,7 +209,7 @@ namespace Crowbar
 							line += aBone.theAimAtBone.aim.y.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 							line += " ";
 							line += aBone.theAimAtBone.aim.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 
 							line = "<upvector>";
 							line += " ";
@@ -218,7 +218,7 @@ namespace Crowbar
 							line += aBone.theAimAtBone.up.y.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 							line += " ";
 							line += aBone.theAimAtBone.up.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 
 							line = "<basepos>";
 							line += " ";
@@ -227,7 +227,7 @@ namespace Crowbar
 							line += aBone.theAimAtBone.basePos.y.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 							line += " ";
 							line += aBone.theAimAtBone.basePos.z.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 						}
 					}
 				}

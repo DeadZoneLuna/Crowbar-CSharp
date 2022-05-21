@@ -37,27 +37,27 @@ namespace Crowbar
 		//      reasontext - A short phrase such as "Publishing item" or "Getting item details" to be used in opening and closing connection messages.
 		public string Open(string pipeNameSuffix, BackgroundWorker bw, string reasonText)
 		{
-			this.theBackgroundWorker = bw;
-			this.theReasonText = reasonText;
+			theBackgroundWorker = bw;
+			theReasonText = reasonText;
 
-			if (this.theBackgroundWorker != null)
+			if (theBackgroundWorker != null)
 			{
-				string logMessage = this.theReasonText + " - opening connection to Steam Workshop." + "\r\n";
-				this.theBackgroundWorker.ReportProgress(0, logMessage);
+				string logMessage = theReasonText + " - opening connection to Steam Workshop." + "\r\n";
+				theBackgroundWorker.ReportProgress(0, logMessage);
 			}
 
-			this.theCrowbarSteamPipeProcess = new Process();
+			theCrowbarSteamPipeProcess = new Process();
 			try
 			{
-				this.theCrowbarSteamPipeProcess.StartInfo.UseShellExecute = false;
-				this.theCrowbarSteamPipeProcess.StartInfo.FileName = App.CrowbarSteamPipeFileName;
-				this.theCrowbarSteamPipeProcess.StartInfo.Arguments = pipeNameSuffix;
+				theCrowbarSteamPipeProcess.StartInfo.UseShellExecute = false;
+				theCrowbarSteamPipeProcess.StartInfo.FileName = App.CrowbarSteamPipeFileName;
+				theCrowbarSteamPipeProcess.StartInfo.Arguments = pipeNameSuffix;
 #if DEBUG
-				this.theCrowbarSteamPipeProcess.StartInfo.CreateNoWindow = false;
+				theCrowbarSteamPipeProcess.StartInfo.CreateNoWindow = false;
 #else
-				this.theCrowbarSteamPipeProcess.StartInfo.CreateNoWindow = true;
+				theCrowbarSteamPipeProcess.StartInfo.CreateNoWindow = true;
 #endif
-				this.theCrowbarSteamPipeProcess.Start();
+				theCrowbarSteamPipeProcess.Start();
 			}
 			catch (Exception ex)
 			{
@@ -67,26 +67,26 @@ namespace Crowbar
 			{
 			}
 
-			this.theCrowbarSteamPipeServer = new NamedPipeServerStream("CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, 1);
+			theCrowbarSteamPipeServer = new NamedPipeServerStream("CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, 1);
 			Console.WriteLine("Waiting for client to connect to pipe ...");
-			this.theCrowbarSteamPipeServer.WaitForConnection();
+			theCrowbarSteamPipeServer.WaitForConnection();
 			Console.WriteLine("... Client connected to pipe.");
 
-			this.theStreamWriter = new StreamWriter(this.theCrowbarSteamPipeServer);
-			this.theStreamWriter.AutoFlush = true;
-			this.theStreamReader = new StreamReader(this.theCrowbarSteamPipeServer);
+			theStreamWriter = new StreamWriter(theCrowbarSteamPipeServer);
+			theStreamWriter.AutoFlush = true;
+			theStreamReader = new StreamReader(theCrowbarSteamPipeServer);
 			try
 			{
 				//If Me.theBackgroundWorker IsNot Nothing Then
 				//	Dim logMessage As String = "Connecting to Steam Workshop." + vbCrLf
 				//	Me.theBackgroundWorker.ReportProgress(0, logMessage)
 				//End If
-				this.theStreamWriter.WriteLine("Init");
+				theStreamWriter.WriteLine("Init");
 				Console.WriteLine("Command: Init");
 
-				string result = this.theStreamReader.ReadLine();
+				string result = theStreamReader.ReadLine();
 				Console.WriteLine("Result: " + result);
-				if (this.theBackgroundWorker != null)
+				if (theBackgroundWorker != null)
 				{
 					if (result != "success")
 					{
@@ -101,12 +101,12 @@ namespace Crowbar
 						//	logMessage = "Connection to Steam Workshop failed because you do not own the app or game to which this item belongs." + vbCrLf
 						//End If
 						logMessage = "Connection to Steam Workshop failed. This most likely means you need to login to Steam or you do not own the app or game to which this item belongs." + "\r\n";
-						this.theBackgroundWorker.ReportProgress(0, logMessage);
-						if (this.theCrowbarSteamPipeServer != null)
+						theBackgroundWorker.ReportProgress(0, logMessage);
+						if (theCrowbarSteamPipeServer != null)
 						{
 							Console.WriteLine("Closing pipe due to error.");
-							this.theCrowbarSteamPipeServer.Close();
-							this.theCrowbarSteamPipeServer = null;
+							theCrowbarSteamPipeServer.Close();
+							theCrowbarSteamPipeServer = null;
 						}
 						return "error";
 						//Else
@@ -118,11 +118,11 @@ namespace Crowbar
 			catch (IOException ex)
 			{
 				Console.WriteLine("EXCEPTION: " + ex.Message);
-				if (this.theCrowbarSteamPipeServer != null)
+				if (theCrowbarSteamPipeServer != null)
 				{
 					Console.WriteLine("Closing pipe due to error.");
-					this.theCrowbarSteamPipeServer.Close();
-					this.theCrowbarSteamPipeServer = null;
+					theCrowbarSteamPipeServer.Close();
+					theCrowbarSteamPipeServer = null;
 				}
 			}
 			finally
@@ -136,61 +136,61 @@ namespace Crowbar
 		{
 			try
 			{
-				this.theStreamWriter.WriteLine("Free");
+				theStreamWriter.WriteLine("Free");
 				Console.WriteLine("Command: Free");
-				if (this.theBackgroundWorker != null)
+				if (theBackgroundWorker != null)
 				{
-					string logMessage = this.theReasonText + " finished - closing connection to Steam Workshop." + "\r\n";
-					this.theBackgroundWorker.ReportProgress(0, logMessage);
+					string logMessage = theReasonText + " finished - closing connection to Steam Workshop." + "\r\n";
+					theBackgroundWorker.ReportProgress(0, logMessage);
 				}
 			}
 			catch (IOException ex)
 			{
 				Console.WriteLine("EXCEPTION: " + ex.Message);
-				if (this.theCrowbarSteamPipeServer != null)
+				if (theCrowbarSteamPipeServer != null)
 				{
 					Console.WriteLine("Closing pipe due to error.");
-					this.theCrowbarSteamPipeServer.Close();
-					this.theCrowbarSteamPipeServer = null;
+					theCrowbarSteamPipeServer.Close();
+					theCrowbarSteamPipeServer = null;
 				}
 			}
 			finally
 			{
 #if DEBUG
 				//NOTE: This 'If DEBUG Then' block allows the CrowbarSteamPipe console window to stay open, if it is set to do that. 
-				if (this.theCrowbarSteamPipeServer != null)
+				if (theCrowbarSteamPipeServer != null)
 				{
 					Console.WriteLine("Closing pipe.");
-					this.theCrowbarSteamPipeServer.Close();
-					this.theCrowbarSteamPipeServer = null;
+					theCrowbarSteamPipeServer.Close();
+					theCrowbarSteamPipeServer = null;
 				}
-				if (this.theCrowbarSteamPipeProcess != null)
+				if (theCrowbarSteamPipeProcess != null)
 				{
-					this.theCrowbarSteamPipeProcess.Close();
-					this.theCrowbarSteamPipeProcess = null;
+					theCrowbarSteamPipeProcess.Close();
+					theCrowbarSteamPipeProcess = null;
 				}
 #else
-				this.Kill();
+				Kill();
 #endif
 			}
 		}
 
 		public void Kill()
 		{
-			if (this.theCrowbarSteamPipeServer != null)
+			if (theCrowbarSteamPipeServer != null)
 			{
 				Console.WriteLine("Closing pipe.");
-				this.theCrowbarSteamPipeServer.Close();
-				this.theCrowbarSteamPipeServer = null;
+				theCrowbarSteamPipeServer.Close();
+				theCrowbarSteamPipeServer = null;
 			}
-			if (this.theCrowbarSteamPipeProcess != null)
+			if (theCrowbarSteamPipeProcess != null)
 			{
 				try
 				{
-					if (!this.theCrowbarSteamPipeProcess.HasExited && !this.theCrowbarSteamPipeProcess.CloseMainWindow())
+					if (!theCrowbarSteamPipeProcess.HasExited && !theCrowbarSteamPipeProcess.CloseMainWindow())
 					{
 						Console.WriteLine("Killing pipe process.");
-						this.theCrowbarSteamPipeProcess.Kill();
+						theCrowbarSteamPipeProcess.Kill();
 					}
 				}
 				catch (Exception ex)
@@ -199,10 +199,10 @@ namespace Crowbar
 				}
 				finally
 				{
-					if (this.theCrowbarSteamPipeProcess != null)
+					if (theCrowbarSteamPipeProcess != null)
 					{
-						this.theCrowbarSteamPipeProcess.Close();
-						this.theCrowbarSteamPipeProcess = null;
+						theCrowbarSteamPipeProcess.Close();
+						theCrowbarSteamPipeProcess = null;
 					}
 				}
 			}
@@ -212,25 +212,25 @@ namespace Crowbar
 
 		public string Crowbar_DeleteContentFile(string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("Crowbar_DeleteContentFile");
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("Crowbar_DeleteContentFile");
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string Crowbar_DownloadContentFolderOrFile(string itemID_text, string targetPath, ref byte[] contentFileBytes, ref string itemUpdated_Text, ref string itemTitle, ref string contentFolderOrFileName, ref string appID_Text)
 		{
-			this.theStreamWriter.WriteLine("Crowbar_DownloadContentFolderOrFile");
-			this.theStreamWriter.WriteLine(itemID_text);
-			this.theStreamWriter.WriteLine(targetPath);
+			theStreamWriter.WriteLine("Crowbar_DownloadContentFolderOrFile");
+			theStreamWriter.WriteLine(itemID_text);
+			theStreamWriter.WriteLine(targetPath);
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result == "success")
 			{
-				itemUpdated_Text = this.theStreamReader.ReadLine();
-				itemTitle = this.ReadMultipleLinesOfText(this.theStreamReader);
-				contentFolderOrFileName = this.theStreamReader.ReadLine();
-				int byteCount = int.Parse(this.theStreamReader.ReadLine());
+				itemUpdated_Text = theStreamReader.ReadLine();
+				itemTitle = ReadMultipleLinesOfText(theStreamReader);
+				contentFolderOrFileName = theStreamReader.ReadLine();
+				int byteCount = int.Parse(theStreamReader.ReadLine());
 				if (byteCount > 0)
 				{
 					int batchByteCount = 1024;
@@ -247,7 +247,7 @@ namespace Crowbar
 						{
 							//bw.ReportProgress(0, "Read" + vbCrLf)
 							//length = Me.theStreamReader.BaseStream.Read(batchData, byteOffset, batchByteCount)
-							length = this.theStreamReader.BaseStream.Read(batchData, 0, batchByteCount);
+							length = theStreamReader.BaseStream.Read(batchData, 0, batchByteCount);
 							//bw.ReportProgress(0, "CopyTo: " + contentFileBytes.Length.ToString() + " offset = " + byteOffset.ToString() + vbCrLf)
 							Array.Copy(batchData, 0, contentFileBytes, byteOffset, length);
 
@@ -260,7 +260,7 @@ namespace Crowbar
 								outputInfo.BytesReceived = batchByteCount;
 							}
 							outputInfo.TotalBytesToReceive = byteCount;
-							this.theBackgroundWorker.ReportProgress(1, outputInfo);
+							theBackgroundWorker.ReportProgress(1, outputInfo);
 
 							byteOffset += length;
 							bytesRemaining -= batchByteCount;
@@ -268,22 +268,22 @@ namespace Crowbar
 					}
 					catch (Exception ex)
 					{
-						this.theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get content folder or file. Exception raised: " + ex.Message + "\r\n");
+						theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get content folder or file. Exception raised: " + ex.Message + "\r\n");
 					}
 				}
 			}
 			else if (result == "success_SteamUGC")
 			{
-				itemUpdated_Text = this.theStreamReader.ReadLine();
-				itemTitle = this.ReadMultipleLinesOfText(this.theStreamReader);
-				contentFolderOrFileName = this.theStreamReader.ReadLine();
-				appID_Text = this.theStreamReader.ReadLine();
+				itemUpdated_Text = theStreamReader.ReadLine();
+				itemTitle = ReadMultipleLinesOfText(theStreamReader);
+				contentFolderOrFileName = theStreamReader.ReadLine();
+				appID_Text = theStreamReader.ReadLine();
 
 				int debug = 4242;
 			}
 			else
 			{
-				this.theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get content folder or file. Steam message: " + result + "\r\n");
+				theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get content folder or file. Steam message: " + result + "\r\n");
 			}
 
 			return result;
@@ -291,37 +291,37 @@ namespace Crowbar
 
 		public string Crowbar_DownloadPreviewFile(ref string previewImagePathFileName)
 		{
-			this.theStreamWriter.WriteLine("Crowbar_DownloadPreviewFile");
+			theStreamWriter.WriteLine("Crowbar_DownloadPreviewFile");
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result == "success")
 			{
-				previewImagePathFileName = this.theStreamReader.ReadLine();
-				int byteCount = int.Parse(this.theStreamReader.ReadLine());
+				previewImagePathFileName = theStreamReader.ReadLine();
+				int byteCount = int.Parse(theStreamReader.ReadLine());
 				if (byteCount > 0)
 				{
 					byte[] data = new byte[byteCount + 1];
 					try
 					{
-						this.theStreamReader.BaseStream.Read(data, 0, data.Length);
+						theStreamReader.BaseStream.Read(data, 0, data.Length);
 
-						if (this.theBackgroundWorker.CancellationPending)
+						if (theBackgroundWorker.CancellationPending)
 						{
 							return "cancelled";
 						}
 
 						MemoryStream pictureBytes = new MemoryStream(data);
-						this.theBackgroundWorker.ReportProgress(1, Image.FromStream(pictureBytes));
+						theBackgroundWorker.ReportProgress(1, Image.FromStream(pictureBytes));
 					}
 					catch (Exception ex)
 					{
-						this.theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get preview image." + "\r\n");
+						theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get preview image." + "\r\n");
 					}
 				}
 			}
 			else
 			{
-				this.theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get preview image. Steam message: " + result + "\r\n");
+				theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get preview image. Steam message: " + result + "\r\n");
 			}
 
 			return result;
@@ -333,12 +333,12 @@ namespace Crowbar
 
 		public string GetAppInstallPath(string appID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamApps_GetAppInstallDir");
-			this.theStreamWriter.WriteLine(appID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamApps_GetAppInstallDir");
+			theStreamWriter.WriteLine(appID_text);
+			string result = theStreamReader.ReadLine();
 			if (result == "success")
 			{
-				string appInstallPath = this.theStreamReader.ReadLine();
+				string appInstallPath = theStreamReader.ReadLine();
 				return appInstallPath;
 			}
 			else
@@ -353,41 +353,41 @@ namespace Crowbar
 
 		public string SteamRemoteStorage_CommitPublishedFileUpdate()
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_CommitPublishedFileUpdate");
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_CommitPublishedFileUpdate");
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamRemoteStorage_CreatePublishedFileUpdateRequest(string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_CreatePublishedFileUpdateRequest");
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_CreatePublishedFileUpdateRequest");
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamRemoteStorage_DeletePublishedFile(string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_DeletePublishedFile");
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_DeletePublishedFile");
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamRemoteStorage_FileDelete(string targetFileName)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_FileDelete");
-			this.theStreamWriter.WriteLine(targetFileName);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_FileDelete");
+			theStreamWriter.WriteLine(targetFileName);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamRemoteStorage_FileWrite(string localPathFileName, string remotePathFileName)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_FileWrite");
-			this.theStreamWriter.WriteLine(localPathFileName);
-			this.theStreamWriter.WriteLine(remotePathFileName);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_FileWrite");
+			theStreamWriter.WriteLine(localPathFileName);
+			theStreamWriter.WriteLine(remotePathFileName);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -395,44 +395,44 @@ namespace Crowbar
 		{
 			WorkshopItem publishedItem = new WorkshopItem();
 
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_GetPublishedFileDetails");
-			this.theStreamWriter.WriteLine(itemID_text);
+			theStreamWriter.WriteLine("SteamRemoteStorage_GetPublishedFileDetails");
+			theStreamWriter.WriteLine(itemID_text);
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result == "success")
 			{
 				string itemAppID = "";
 				string unixTimeStampText = null;
 				string ownerSteamIDText = null;
 
-				publishedItem.ID = this.theStreamReader.ReadLine();
+				publishedItem.ID = theStreamReader.ReadLine();
 				Console.WriteLine("Item ID: " + publishedItem.ID);
 
-				publishedItem.CreatorAppID = this.theStreamReader.ReadLine();
+				publishedItem.CreatorAppID = theStreamReader.ReadLine();
 
-				itemAppID = this.theStreamReader.ReadLine();
+				itemAppID = theStreamReader.ReadLine();
 				oAppID_text = itemAppID;
 
-				ownerSteamIDText = this.theStreamReader.ReadLine();
+				ownerSteamIDText = theStreamReader.ReadLine();
 				publishedItem.OwnerID = ulong.Parse(ownerSteamIDText);
-				publishedItem.OwnerName = this.theStreamReader.ReadLine();
+				publishedItem.OwnerName = theStreamReader.ReadLine();
 
-				unixTimeStampText = this.theStreamReader.ReadLine();
+				unixTimeStampText = theStreamReader.ReadLine();
 				publishedItem.Posted = long.Parse(unixTimeStampText);
-				unixTimeStampText = this.theStreamReader.ReadLine();
+				unixTimeStampText = theStreamReader.ReadLine();
 				publishedItem.Updated = long.Parse(unixTimeStampText);
 
-				publishedItem.Title = this.ReadMultipleLinesOfText(this.theStreamReader);
-				publishedItem.Description = this.ReadMultipleLinesOfText(this.theStreamReader);
+				publishedItem.Title = ReadMultipleLinesOfText(theStreamReader);
+				publishedItem.Description = ReadMultipleLinesOfText(theStreamReader);
 
-				publishedItem.ContentSize = int.Parse(this.theStreamReader.ReadLine());
-				publishedItem.ContentPathFolderOrFileName = this.theStreamReader.ReadLine();
-				publishedItem.PreviewImageSize = int.Parse(this.theStreamReader.ReadLine());
+				publishedItem.ContentSize = int.Parse(theStreamReader.ReadLine());
+				publishedItem.ContentPathFolderOrFileName = theStreamReader.ReadLine();
+				publishedItem.PreviewImageSize = int.Parse(theStreamReader.ReadLine());
 				//NOTE: This is URL and is probably not preview file name. There does not seem to be a way to get preview file name.
-				publishedItem.PreviewImagePathFileName = this.theStreamReader.ReadLine();
-				publishedItem.VisibilityText = this.theStreamReader.ReadLine();
+				publishedItem.PreviewImagePathFileName = theStreamReader.ReadLine();
+				publishedItem.VisibilityText = theStreamReader.ReadLine();
 
-				publishedItem.TagsAsTextLine = this.theStreamReader.ReadLine();
+				publishedItem.TagsAsTextLine = theStreamReader.ReadLine();
 
 				if (itemAppID != appID_text)
 				{
@@ -456,55 +456,55 @@ namespace Crowbar
 			string availableBytesText = null;
 			string totalBytesText = null;
 
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_GetQuota");
+			theStreamWriter.WriteLine("SteamRemoteStorage_GetQuota");
 
-			string resultIsSuccess = this.theStreamReader.ReadLine();
+			string resultIsSuccess = theStreamReader.ReadLine();
 			if (resultIsSuccess == "success")
 			{
-				availableBytesText = this.theStreamReader.ReadLine();
+				availableBytesText = theStreamReader.ReadLine();
 				availableBytes = ulong.Parse(availableBytesText);
-				totalBytesText = this.theStreamReader.ReadLine();
+				totalBytesText = theStreamReader.ReadLine();
 				totalBytes = ulong.Parse(totalBytesText);
 			}
 		}
 
 		public string SteamRemoteStorage_PublishWorkshopFile(string contentFileName, string previewFileName, string appID_text, string title, string description, string visibility_text, BindingListEx<string> tags, ref string returnedPublishedItemID)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_PublishWorkshopFile");
-			this.theStreamWriter.WriteLine(contentFileName);
-			this.theStreamWriter.WriteLine(previewFileName);
-			this.theStreamWriter.WriteLine(appID_text);
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, title);
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, description);
-			this.theStreamWriter.WriteLine(visibility_text);
+			theStreamWriter.WriteLine("SteamRemoteStorage_PublishWorkshopFile");
+			theStreamWriter.WriteLine(contentFileName);
+			theStreamWriter.WriteLine(previewFileName);
+			theStreamWriter.WriteLine(appID_text);
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, title);
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, description);
+			theStreamWriter.WriteLine(visibility_text);
 
-			this.theStreamWriter.WriteLine(tags.Count.ToString());
+			theStreamWriter.WriteLine(tags.Count.ToString());
 			foreach (string tag in tags)
 			{
-				this.theStreamWriter.WriteLine(tag);
+				theStreamWriter.WriteLine(tag);
 			}
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result.StartsWith("success"))
 			{
-				returnedPublishedItemID = this.theStreamReader.ReadLine();
+				returnedPublishedItemID = theStreamReader.ReadLine();
 			}
 			return result;
 		}
 
 		public string SteamRemoteStorage_UpdatePublishedFileFile(string contentFileName)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_UpdatePublishedFileFile");
-			this.theStreamWriter.WriteLine(contentFileName);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_UpdatePublishedFileFile");
+			theStreamWriter.WriteLine(contentFileName);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamRemoteStorage_UpdatePublishedFileSetChangeDescription(string changeNote)
 		{
-			this.theStreamWriter.WriteLine("SteamRemoteStorage_UpdatePublishedFileSetChangeDescription");
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, changeNote);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamRemoteStorage_UpdatePublishedFileSetChangeDescription");
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, changeNote);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -516,31 +516,31 @@ namespace Crowbar
 
 		public string SteamUGC_CreateQueryUGCDetailsRequest(string itemID_Text)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_CreateQueryUGCDetailsRequest");
-			this.theStreamWriter.WriteLine(itemID_Text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_CreateQueryUGCDetailsRequest");
+			theStreamWriter.WriteLine(itemID_Text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_CreateQueryUserUGCRequest(string appID_text, uint pageNumber)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_CreateQueryUserUGCRequest");
-			this.theStreamWriter.WriteLine(appID_text);
-			this.theStreamWriter.WriteLine(pageNumber);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_CreateQueryUserUGCRequest");
+			theStreamWriter.WriteLine(appID_text);
+			theStreamWriter.WriteLine(pageNumber);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SendQueryUGCRequest()
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SendQueryUGCRequest");
+			theStreamWriter.WriteLine("SteamUGC_SendQueryUGCRequest");
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result == "success")
 			{
 				string resultsCountText = null;
 				uint resultsCount = 0;
-				resultsCountText = this.theStreamReader.ReadLine();
+				resultsCountText = theStreamReader.ReadLine();
 				resultsCount = uint.Parse(resultsCountText);
 				if (resultsCount == 0)
 				{
@@ -550,7 +550,7 @@ namespace Crowbar
 				{
 					string totalCountText = null;
 					uint totalCount = 0;
-					totalCountText = this.theStreamReader.ReadLine();
+					totalCountText = theStreamReader.ReadLine();
 					totalCount = uint.Parse(totalCountText);
 
 					WorkshopItem item = null;
@@ -558,40 +558,40 @@ namespace Crowbar
 					string ownerSteamIDText = null;
 					//Dim steamID As Steamworks.CSteamID = Steamworks.SteamUser.GetSteamID()
 
-					this.theBackgroundWorker.ReportProgress(1, totalCount);
+					theBackgroundWorker.ReportProgress(1, totalCount);
 //INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(resultsCount - 1) for every iteration:
 					uint tempVar = (uint)(resultsCount - 1);
 					for (uint i = 0; i <= tempVar; i++)
 					{
 						item = new WorkshopItem();
 
-						item.ID = this.theStreamReader.ReadLine();
+						item.ID = theStreamReader.ReadLine();
 
 						//If item.ID <> "0" Then
-						ownerSteamIDText = this.theStreamReader.ReadLine();
+						ownerSteamIDText = theStreamReader.ReadLine();
 						item.OwnerID = ulong.Parse(ownerSteamIDText);
-						item.OwnerName = this.theStreamReader.ReadLine();
-						unixTimeStampText = this.theStreamReader.ReadLine();
+						item.OwnerName = theStreamReader.ReadLine();
+						unixTimeStampText = theStreamReader.ReadLine();
 						item.Posted = long.Parse(unixTimeStampText);
-						unixTimeStampText = this.theStreamReader.ReadLine();
+						unixTimeStampText = theStreamReader.ReadLine();
 						item.Updated = long.Parse(unixTimeStampText);
 
 						//item.Title = Me.streamReaderForQuerying.ReadLine()
 						//======
-						item.Title = this.ReadMultipleLinesOfText(this.theStreamReader);
+						item.Title = ReadMultipleLinesOfText(theStreamReader);
 
 						//item.Description = Me.streamReaderForQuerying.ReadLine()
 
-						item.ContentPathFolderOrFileName = this.theStreamReader.ReadLine();
-						item.PreviewImagePathFileName = this.theStreamReader.ReadLine();
-						item.VisibilityText = this.theStreamReader.ReadLine();
-						item.TagsAsTextLine = this.theStreamReader.ReadLine();
+						item.ContentPathFolderOrFileName = theStreamReader.ReadLine();
+						item.PreviewImagePathFileName = theStreamReader.ReadLine();
+						item.VisibilityText = theStreamReader.ReadLine();
+						item.TagsAsTextLine = theStreamReader.ReadLine();
 
 						//publishedItems.Add(item)
-						this.theBackgroundWorker.ReportProgress(2, item);
+						theBackgroundWorker.ReportProgress(2, item);
 						//End If
 
-						if (this.theBackgroundWorker.CancellationPending)
+						if (theBackgroundWorker.CancellationPending)
 						{
 							break;
 						}
@@ -618,23 +618,23 @@ namespace Crowbar
 
 		public string SteamUGC_CreateItem(string appID_text, ref string returnedPublishedItemID)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_CreateItem");
-			this.theStreamWriter.WriteLine(appID_text);
+			theStreamWriter.WriteLine("SteamUGC_CreateItem");
+			theStreamWriter.WriteLine(appID_text);
 
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			if (result.StartsWith("success"))
 			{
-				returnedPublishedItemID = this.theStreamReader.ReadLine();
+				returnedPublishedItemID = theStreamReader.ReadLine();
 			}
 			return result;
 		}
 
 		public string SteamUGC_StartItemUpdate(string appID_text, string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_StartItemUpdate");
-			this.theStreamWriter.WriteLine(appID_text);
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_StartItemUpdate");
+			theStreamWriter.WriteLine(appID_text);
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -642,53 +642,53 @@ namespace Crowbar
 
 		public string SteamUGC_SetItemTitle(string title)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemTitle");
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, title);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_SetItemTitle");
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, title);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SetItemDescription(string description)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemDescription");
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, description);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_SetItemDescription");
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, description);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SetItemContent(string contentPathFolderOrFileName)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemContent");
-			this.theStreamWriter.WriteLine(contentPathFolderOrFileName);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_SetItemContent");
+			theStreamWriter.WriteLine(contentPathFolderOrFileName);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SetItemPreview(string previewPathFileName)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemPreview");
-			this.theStreamWriter.WriteLine(previewPathFileName);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_SetItemPreview");
+			theStreamWriter.WriteLine(previewPathFileName);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SetItemVisibility(string visibility_text)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemVisibility");
-			this.theStreamWriter.WriteLine(visibility_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_SetItemVisibility");
+			theStreamWriter.WriteLine(visibility_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
 		public string SteamUGC_SetItemTags(BindingListEx<string> tags)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SetItemTags");
-			this.theStreamWriter.WriteLine(tags.Count.ToString());
+			theStreamWriter.WriteLine("SteamUGC_SetItemTags");
+			theStreamWriter.WriteLine(tags.Count.ToString());
 			foreach (string tag in tags)
 			{
-				this.theStreamWriter.WriteLine(tag);
+				theStreamWriter.WriteLine(tag);
 			}
-			string result = this.theStreamReader.ReadLine();
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -696,8 +696,8 @@ namespace Crowbar
 
 		public string SteamUGC_SubmitItemUpdate(string changeNote)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_SubmitItemUpdate");
-			this.WriteTextThatMightHaveMultipleLines(this.theStreamWriter, changeNote);
+			theStreamWriter.WriteLine("SteamUGC_SubmitItemUpdate");
+			WriteTextThatMightHaveMultipleLines(theStreamWriter, changeNote);
 
 			string result = "";
 			BackgroundSteamPipe.PublishItemProgressInfo outputInfo = new BackgroundSteamPipe.PublishItemProgressInfo();
@@ -705,21 +705,21 @@ namespace Crowbar
 
 			while (true)
 			{
-				result = this.theStreamReader.ReadLine();
+				result = theStreamReader.ReadLine();
 				//NOTE: The Sleep() is needed to prevent Crowbar Publish locking up when publishing to a workshop via SteamUGC.
 				//      Unfortunately, I do not understand how this prevents lock up considering that each ReadLine() waits for available input.
 				System.Threading.Thread.Sleep(1);
 				if (result == "OnSubmitItemUpdate")
 				{
-					result = this.theStreamReader.ReadLine();
+					result = theStreamReader.ReadLine();
 					break;
 				}
 				else
 				{
 					//Threading.Thread.Sleep(1)
 					outputInfo.Status = result;
-					outputInfo.UploadedByteCount = ulong.Parse(this.theStreamReader.ReadLine());
-					outputInfo.TotalUploadedByteCount = ulong.Parse(this.theStreamReader.ReadLine());
+					outputInfo.UploadedByteCount = ulong.Parse(theStreamReader.ReadLine());
+					outputInfo.TotalUploadedByteCount = ulong.Parse(theStreamReader.ReadLine());
 					//Threading.Thread.Sleep(1)
 					if (outputInfo.Status == "invalid")
 					{
@@ -732,7 +732,7 @@ namespace Crowbar
 						{
 							//Threading.Thread.Sleep(1)
 							//If outputInfo.TotalUploadedByteCount > 0 Then
-							this.theBackgroundWorker.ReportProgress(2, outputInfo);
+							theBackgroundWorker.ReportProgress(2, outputInfo);
 
 							//Threading.Thread.Sleep(1)
 							previousOutputInfo.Status = outputInfo.Status;
@@ -753,9 +753,9 @@ namespace Crowbar
 
 		public string SteamUGC_DeleteItem(string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_DeleteItem");
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_DeleteItem");
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -765,9 +765,9 @@ namespace Crowbar
 
 		public string SteamUGC_UnsubscribeItem(string itemID_text)
 		{
-			this.theStreamWriter.WriteLine("SteamUGC_UnsubscribeItem");
-			this.theStreamWriter.WriteLine(itemID_text);
-			string result = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUGC_UnsubscribeItem");
+			theStreamWriter.WriteLine(itemID_text);
+			string result = theStreamReader.ReadLine();
 			return result;
 		}
 
@@ -779,8 +779,8 @@ namespace Crowbar
 
 		public ulong GetUserSteamID()
 		{
-			this.theStreamWriter.WriteLine("SteamUser_GetSteamID");
-			string idText = this.theStreamReader.ReadLine();
+			theStreamWriter.WriteLine("SteamUser_GetSteamID");
+			string idText = theStreamReader.ReadLine();
 			return ulong.Parse(idText);
 		}
 
@@ -788,7 +788,7 @@ namespace Crowbar
 
 #region Private Functions
 
-		//NOTE: WriteLine only writes string until first LF or CR, so need to adjust how to send this.
+		//NOTE: WriteLine only writes string until first LF or CR, so need to adjust how to send 
 		//NOTE: From TextReader.ReadLine: A line is defined as a sequence of characters followed by 
 		//      a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, Environment.NewLine, or the end-of-stream marker.
 		//      https://docs.microsoft.com/en-us/dotnet/api/system.io.textreader.readline?view=netframework-4.0

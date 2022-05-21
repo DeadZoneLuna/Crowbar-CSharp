@@ -37,7 +37,7 @@ namespace Crowbar
 			{
 				if (disposing)
 				{
-					this.Free();
+					Free();
 					if (components != null)
 					{
 						components.Dispose();
@@ -56,21 +56,21 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "PatchMdlPathFileName", false, DataSourceUpdateMode.OnValidation);
+			MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "PatchMdlPathFileName", false, DataSourceUpdateMode.OnValidation);
 
-			this.UpdateDataBindings();
-			this.UpdateWidgets(false);
+			UpdateDataBindings();
+			UpdateWidgets(false);
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
-			this.MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 		}
 
 		private void Free()
 		{
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
-			this.MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 
-			this.MdlPathFileNameTextBox.DataBindings.Clear();
+			MdlPathFileNameTextBox.DataBindings.Clear();
 		}
 
 #endregion

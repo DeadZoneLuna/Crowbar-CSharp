@@ -21,12 +21,12 @@ namespace Crowbar
 		public Packer() : base()
 		{
 
-			this.thePackedLogFiles = new BindingListEx<string>();
-			this.thePackedFiles = new BindingListEx<string>();
+			thePackedLogFiles = new BindingListEx<string>();
+			thePackedFiles = new BindingListEx<string>();
 
-			this.WorkerReportsProgress = true;
-			this.WorkerSupportsCancellation = true;
-			this.DoWork += this.Packer_DoWork;
+			WorkerReportsProgress = true;
+			WorkerSupportsCancellation = true;
+			DoWork += Packer_DoWork;
 		}
 
 #endregion
@@ -39,18 +39,18 @@ namespace Crowbar
 
 		public void Run()
 		{
-			this.RunWorkerAsync();
+			RunWorkerAsync();
 		}
 
 		public void SkipCurrentFolder()
 		{
 			//NOTE: This might have thread race condition, but it probably doesn't matter.
-			this.theSkipCurrentModelIsActive = true;
+			theSkipCurrentModelIsActive = true;
 		}
 
 		public string GetOutputPathFileName(string relativePathFileName)
 		{
-			string pathFileName = Path.Combine(this.theOutputPath, relativePathFileName);
+			string pathFileName = Path.Combine(theOutputPath, relativePathFileName);
 
 			pathFileName = Path.GetFullPath(pathFileName);
 
@@ -67,22 +67,22 @@ namespace Crowbar
 
 		private void Packer_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
-			this.ReportProgress(0, "");
+			ReportProgress(0, "");
 
-			this.theOutputPath = this.GetOutputPath();
+			theOutputPath = GetOutputPath();
 
 			AppEnums.StatusMessage status = 0;
-			if (this.PackerInputsAreValid())
+			if (PackerInputsAreValid())
 			{
-				status = this.Pack();
+				status = Pack();
 			}
 			else
 			{
 				status = AppEnums.StatusMessage.Error;
 			}
-			e.Result = this.GetPackerOutputs(status);
+			e.Result = GetPackerOutputs(status);
 
-			if (this.CancellationPending)
+			if (CancellationPending)
 			{
 				e.Cancel = true;
 			}
@@ -130,7 +130,7 @@ namespace Crowbar
 		{
 			bool inputsAreValid = true;
 
-			string gamePackerPathFileName = this.GetGamePackerPathFileName();
+			string gamePackerPathFileName = GetGamePackerPathFileName();
 			GameSetup gameSetup = null;
 			string gamePathFileName = null;
 			gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.PackGameSetupSelectedIndex];
@@ -139,31 +139,31 @@ namespace Crowbar
 			if (!File.Exists(gamePackerPathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The model packer, \"" + gamePackerPathFileName + "\", does not exist.");
-				this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				WriteErrorMessage(1, "The model packer, \"" + gamePackerPathFileName + "\", does not exist.");
+				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 			}
 			if (!File.Exists(gamePathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The game's \"" + gamePathFileName + "\" file does not exist.");
-				this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				WriteErrorMessage(1, "The game's \"" + gamePathFileName + "\" file does not exist.");
+				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 			}
 			if (string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.PackInputPath))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "Input Folder has not been selected.");
+				WriteErrorMessage(1, "Input Folder has not been selected.");
 			}
 			else if (!Directory.Exists(MainCROWBAR.TheApp.Settings.PackInputPath))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The Input Folder, \"" + MainCROWBAR.TheApp.Settings.PackInputPath + "\", does not exist.");
+				WriteErrorMessage(1, "The Input Folder, \"" + MainCROWBAR.TheApp.Settings.PackInputPath + "\", does not exist.");
 			}
 			if (MainCROWBAR.TheApp.Settings.PackOutputFolderOption == AppEnums.PackOutputPathOptions.WorkFolder)
 			{
-				if (!FileManager.PathExistsAfterTryToCreate(this.theOutputPath))
+				if (!FileManager.PathExistsAfterTryToCreate(theOutputPath))
 				{
 					inputsAreValid = false;
-					this.WriteErrorMessage(1, "The Output Folder, \"" + this.theOutputPath + "\" could not be created.");
+					WriteErrorMessage(1, "The Output Folder, \"" + theOutputPath + "\" could not be created.");
 				}
 			}
 
@@ -178,13 +178,13 @@ namespace Crowbar
 
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.PackGameSetupSelectedIndex];
 
-			if (this.thePackedFiles.Count > 0)
+			if (thePackedFiles.Count > 0)
 			{
-				packResultInfo.thePackedRelativePathFileNames = this.thePackedFiles;
+				packResultInfo.thePackedRelativePathFileNames = thePackedFiles;
 			}
 			else if (MainCROWBAR.TheApp.Settings.PackLogFileIsChecked)
 			{
-				packResultInfo.thePackedRelativePathFileNames = this.thePackedLogFiles;
+				packResultInfo.thePackedRelativePathFileNames = thePackedLogFiles;
 			}
 
 			return packResultInfo;
@@ -194,10 +194,10 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			this.theSkipCurrentModelIsActive = false;
+			theSkipCurrentModelIsActive = false;
 
-			this.thePackedLogFiles.Clear();
-			this.thePackedFiles.Clear();
+			thePackedLogFiles.Clear();
+			thePackedFiles.Clear();
 
 			string inputPath = MainCROWBAR.TheApp.Settings.PackInputPath;
 
@@ -208,17 +208,17 @@ namespace Crowbar
 				if (MainCROWBAR.TheApp.Settings.PackMode == AppEnums.PackInputOptions.ParentFolder)
 				{
 					progressDescriptionText += "\"" + inputPath + "\" (parent folder)";
-					this.UpdateProgressStart(progressDescriptionText + " ...");
+					UpdateProgressStart(progressDescriptionText + " ...");
 
-					status = this.CreateLogTextFile(inputPath, null);
+					status = CreateLogTextFile(inputPath, null);
 
-					this.PackFoldersInParentFolder(inputPath);
+					PackFoldersInParentFolder(inputPath);
 				}
 				else
 				{
 					progressDescriptionText += "\"" + inputPath + "\"";
-					this.UpdateProgressStart(progressDescriptionText + " ...");
-					status = this.PackOneFolder(inputPath);
+					UpdateProgressStart(progressDescriptionText + " ...");
+					status = PackOneFolder(inputPath);
 				}
 			}
 			catch (Exception ex)
@@ -227,15 +227,15 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.theLogFileStream != null)
+				if (theLogFileStream != null)
 				{
-					this.theLogFileStream.Flush();
-					this.theLogFileStream.Close();
-					this.theLogFileStream = null;
+					theLogFileStream.Flush();
+					theLogFileStream.Close();
+					theLogFileStream = null;
 				}
 			}
 
-			this.UpdateProgressStop("... " + progressDescriptionText + " finished.");
+			UpdateProgressStop("... " + progressDescriptionText + " finished.");
 
 			return status;
 		}
@@ -244,18 +244,18 @@ namespace Crowbar
 		{
 			foreach (string aChildPath in Directory.GetDirectories(parentPath))
 			{
-				this.PackOneFolder(aChildPath);
+				PackOneFolder(aChildPath);
 
 				//TODO: Double-check if this is wanted. If so, then add equivalent to Unpacker.UnpackModelsInFolder().
-				this.ReportProgress(5, "");
+				ReportProgress(5, "");
 
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
 					return;
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.theSkipCurrentModelIsActive = false;
+					theSkipCurrentModelIsActive = false;
 					continue;
 				}
 			}
@@ -269,27 +269,27 @@ namespace Crowbar
 			{
 				if (MainCROWBAR.TheApp.Settings.PackMode == AppEnums.PackInputOptions.Folder)
 				{
-					status = this.CreateLogTextFile(null, inputPath);
+					status = CreateLogTextFile(null, inputPath);
 				}
 
-				this.UpdateProgress();
-				this.UpdateProgress(1, "Packing \"" + inputPath + "\" ...");
+				UpdateProgress();
+				UpdateProgress(1, "Packing \"" + inputPath + "\" ...");
 
-				string result = this.CheckFiles(inputPath);
+				string result = CheckFiles(inputPath);
 				if (result == "success")
 				{
-					this.UpdateProgress(2, "Output from packer \"" + this.GetGamePackerPathFileName() + "\": ");
-					this.RunPackerApp(inputPath);
+					UpdateProgress(2, "Output from packer \"" + GetGamePackerPathFileName() + "\": ");
+					RunPackerApp(inputPath);
 
-					if (!this.theProcessHasOutputData)
+					if (!theProcessHasOutputData)
 					{
-						this.UpdateProgress(2, "ERROR: The packer did not return any status messages.");
-						this.UpdateProgress(2, "CAUSE: The packer is not the correct one for the selected game.");
-						this.UpdateProgress(2, "SOLUTION: Verify integrity of game files via Steam so that the correct packer is installed.");
+						UpdateProgress(2, "ERROR: The packer did not return any status messages.");
+						UpdateProgress(2, "CAUSE: The packer is not the correct one for the selected game.");
+						UpdateProgress(2, "SOLUTION: Verify integrity of game files via Steam so that the correct packer is installed.");
 					}
 					else
 					{
-						this.ProcessPackage(inputPath);
+						ProcessPackage(inputPath);
 					}
 
 					//' Clean up any created folders.
@@ -302,7 +302,7 @@ namespace Crowbar
 					//End If
 				}
 
-				this.UpdateProgress(1, "... Packing \"" + inputPath + "\" finished. Check above for any errors.");
+				UpdateProgress(1, "... Packing \"" + inputPath + "\" finished. Check above for any errors.");
 			}
 			catch (Exception ex)
 			{
@@ -318,7 +318,7 @@ namespace Crowbar
 			string result = "success";
 
 			//TODO: Determine what to check before Packer runs for a folder.
-			string gamePackerPathFileName = this.GetGamePackerPathFileName();
+			string gamePackerPathFileName = GetGamePackerPathFileName();
 			string gamePackerFileName = Path.GetFileName(gamePackerPathFileName);
 			if (gamePackerFileName == "gmad.exe")
 			{
@@ -343,7 +343,7 @@ namespace Crowbar
 			string inputFolder = Path.GetFileName(inputPath);
 			Directory.SetCurrentDirectory(parentPath);
 
-			string gamePackerPathFileName = this.GetGamePackerPathFileName();
+			string gamePackerPathFileName = GetGamePackerPathFileName();
 			string gamePackerFileName = Path.GetFileName(gamePackerPathFileName);
 
 			string arguments = "";
@@ -368,20 +368,20 @@ namespace Crowbar
 			myProcess.StartInfo = myProcessStartInfo;
 			//'NOTE: Need this line to make Me.myProcess_Exited be called.
 			//myProcess.EnableRaisingEvents = True
-			myProcess.OutputDataReceived += this.myProcess_OutputDataReceived;
-			myProcess.ErrorDataReceived += this.myProcess_ErrorDataReceived;
+			myProcess.OutputDataReceived += myProcess_OutputDataReceived;
+			myProcess.ErrorDataReceived += myProcess_ErrorDataReceived;
 
 			myProcess.Start();
 			myProcess.StandardInput.AutoFlush = true;
 			myProcess.BeginOutputReadLine();
 			myProcess.BeginErrorReadLine();
-			this.theProcessHasOutputData = false;
-			this.theGmadResultFileName = "";
+			theProcessHasOutputData = false;
+			theGmadResultFileName = "";
 			myProcess.WaitForExit();
 
 			myProcess.Close();
-			myProcess.OutputDataReceived -= this.myProcess_OutputDataReceived;
-			myProcess.ErrorDataReceived -= this.myProcess_ErrorDataReceived;
+			myProcess.OutputDataReceived -= myProcess_OutputDataReceived;
+			myProcess.ErrorDataReceived -= myProcess_ErrorDataReceived;
 
 			Directory.SetCurrentDirectory(currentFolder);
 		}
@@ -397,7 +397,7 @@ namespace Crowbar
 				// Gmad removes the first dot and text past that from the created file name, 
 				//    so use the file name shown in the log from Gmad.
 				sourcePathFileName = Path.GetDirectoryName(sourcePathFileName);
-				sourcePathFileName = Path.Combine(sourcePathFileName, this.theGmadResultFileName);
+				sourcePathFileName = Path.Combine(sourcePathFileName, theGmadResultFileName);
 			}
 			else
 			{
@@ -405,7 +405,7 @@ namespace Crowbar
 			}
 			if (File.Exists(sourcePathFileName))
 			{
-				string targetPath = this.theOutputPath;
+				string targetPath = theOutputPath;
 				string targetFileName = Path.GetFileName(sourcePathFileName);
 				string targetPathFileName = Path.Combine(targetPath, targetFileName);
 
@@ -425,18 +425,18 @@ namespace Crowbar
 					try
 					{
 						File.Move(sourcePathFileName, targetPathFileName);
-						this.UpdateProgress(2, "CROWBAR: Moved package file \"" + sourcePathFileName + "\" to \"" + targetPath + "\"");
+						UpdateProgress(2, "CROWBAR: Moved package file \"" + sourcePathFileName + "\" to \"" + targetPath + "\"");
 					}
 					catch (Exception ex)
 					{
-						this.UpdateProgress();
-						this.UpdateProgress(2, "WARNING: Crowbar tried to move the file, \"" + sourcePathFileName + "\", to the output folder, but Windows complained with this message: " + ex.Message.Trim());
-						this.UpdateProgress(2, "SOLUTION: Pack again (and hope Windows does not complain again) or move the file yourself.");
-						this.UpdateProgress();
+						UpdateProgress();
+						UpdateProgress(2, "WARNING: Crowbar tried to move the file, \"" + sourcePathFileName + "\", to the output folder, but Windows complained with this message: " + ex.Message.Trim());
+						UpdateProgress(2, "SOLUTION: Pack again (and hope Windows does not complain again) or move the file yourself.");
+						UpdateProgress();
 					}
 				}
 
-				this.thePackedFiles.Add(targetFileName);
+				thePackedFiles.Add(targetFileName);
 			}
 		}
 
@@ -499,11 +499,11 @@ namespace Crowbar
 						char[] delimiters = {'\"'};
 						string[] tokens = {""};
 						tokens = line.Split(delimiters);
-						this.theGmadResultFileName = tokens[1];
+						theGmadResultFileName = tokens[1];
 					}
 
-					this.theProcessHasOutputData = true;
-					this.UpdateProgress(3, line);
+					theProcessHasOutputData = true;
+					UpdateProgress(3, line);
 				}
 			}
 			catch (Exception ex)
@@ -512,13 +512,13 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
-					this.StopPack(true, myProcess);
+					StopPack(true, myProcess);
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.StopPack(true, myProcess);
+					StopPack(true, myProcess);
 				}
 			}
 		}
@@ -533,7 +533,7 @@ namespace Crowbar
 				line = e.Data;
 				if (line != null)
 				{
-					this.UpdateProgress(3, line);
+					UpdateProgress(3, line);
 				}
 			}
 			catch (Exception ex)
@@ -542,13 +542,13 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
-					this.StopPack(true, myProcess);
+					StopPack(true, myProcess);
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.StopPack(true, myProcess);
+					StopPack(true, myProcess);
 				}
 			}
 		}
@@ -571,7 +571,7 @@ namespace Crowbar
 
 			if (processIsCanceled)
 			{
-				this.theLastLine = "...Packing canceled.";
+				theLastLine = "...Packing canceled.";
 			}
 		}
 
@@ -603,27 +603,27 @@ namespace Crowbar
 					FileManager.CreatePath(logPath);
 					logPathFileName = Path.Combine(logPath, logFileName);
 
-					this.theLogFileStream = File.CreateText(logPathFileName);
-					this.theLogFileStream.AutoFlush = true;
+					theLogFileStream = File.CreateText(logPathFileName);
+					theLogFileStream.AutoFlush = true;
 
 					if (File.Exists(logPathFileName))
 					{
-						this.thePackedLogFiles.Add(FileManager.GetRelativePathFileName(this.theOutputPath, logPathFileName));
+						thePackedLogFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, logPathFileName));
 					}
 
-					this.theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
-					this.theLogFileStream.Flush();
+					theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
+					theLogFileStream.Flush();
 				}
 				catch (Exception ex)
 				{
-					this.UpdateProgress();
-					this.UpdateProgress(2, "ERROR: Crowbar tried to write the pack log file but the system gave this message: " + ex.Message);
+					UpdateProgress();
+					UpdateProgress(2, "ERROR: Crowbar tried to write the pack log file but the system gave this message: " + ex.Message);
 					status = AppEnums.StatusMessage.Error;
 				}
 			}
 			else
 			{
-				this.theLogFileStream = null;
+				theLogFileStream = null;
 			}
 
 			return status;
@@ -631,22 +631,22 @@ namespace Crowbar
 
 		private void UpdateProgressStart(string line)
 		{
-			this.UpdateProgressInternal(0, line);
+			UpdateProgressInternal(0, line);
 		}
 
 		private void UpdateProgressStop(string line)
 		{
-			this.UpdateProgressInternal(100, "\r" + line);
+			UpdateProgressInternal(100, "\r" + line);
 		}
 
 		private void UpdateProgress()
 		{
-			this.UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, "");
 		}
 
 		private void WriteErrorMessage(int indentLevel, string line)
 		{
-			this.UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
+			UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
 		}
 
 		private void UpdateProgress(int indentLevel, string line)
@@ -658,18 +658,18 @@ namespace Crowbar
 				indentedLine += "  ";
 			}
 			indentedLine += line;
-			this.UpdateProgressInternal(1, indentedLine);
+			UpdateProgressInternal(1, indentedLine);
 		}
 
 		private void UpdateProgressInternal(int progressValue, string line)
 		{
-			if (progressValue == 1 && this.theLogFileStream != null)
+			if (progressValue == 1 && theLogFileStream != null)
 			{
-				this.theLogFileStream.WriteLine(line);
-				this.theLogFileStream.Flush();
+				theLogFileStream.WriteLine(line);
+				theLogFileStream.Flush();
 			}
 
-			this.ReportProgress(progressValue, line);
+			ReportProgress(progressValue, line);
 		}
 
 #endregion

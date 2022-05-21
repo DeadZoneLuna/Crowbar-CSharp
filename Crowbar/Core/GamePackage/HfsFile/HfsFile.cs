@@ -19,9 +19,9 @@ namespace Crowbar
 
 		public HfsFile(BinaryReader packageDirectoryFileReader, BinaryReader packageFileReader, HfsFileData hfsFileData)
 		{
-			this.thePackageDirectoryInputFileReader = packageDirectoryFileReader;
-			this.theInputFileReader = packageFileReader;
-			this.theHfsFileData = hfsFileData;
+			thePackageDirectoryInputFileReader = packageDirectoryFileReader;
+			theInputFileReader = packageFileReader;
+			theHfsFileData = hfsFileData;
 		}
 
 #endregion
@@ -32,7 +32,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theHfsFileData;
+				return theHfsFileData;
 			}
 		}
 
@@ -48,25 +48,25 @@ namespace Crowbar
 			//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
 			//&H02014648 = "HF" 01 02
-			this.theHfsFileData.id = this.theInputFileReader.ReadUInt32();
+			theHfsFileData.id = theInputFileReader.ReadUInt32();
 
 			//    char {4}     - Signature (HF) (0x06054648)
 			byte aByte = 0;
 			UInt32 aDoubleWord = 0;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of this.theInputFileReader.BaseStream.Length for every iteration:
-			long tempVar = this.theInputFileReader.BaseStream.Length;
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of theInputFileReader.BaseStream.Length for every iteration:
+			long tempVar = theInputFileReader.BaseStream.Length;
 			for (long offset = 1; offset <= tempVar; offset++)
 			{
-				this.theInputFileReader.BaseStream.Seek(-offset, SeekOrigin.End);
-				aByte = this.theInputFileReader.ReadByte();
+				theInputFileReader.BaseStream.Seek(-offset, SeekOrigin.End);
+				aByte = theInputFileReader.ReadByte();
 				if (aByte == 6)
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theInputFileReader.BaseStream.Position - 4, SeekOrigin.Begin);
-					aDoubleWord = this.theInputFileReader.ReadUInt32();
+					theInputFileReader.BaseStream.Seek(theInputFileReader.BaseStream.Position - 4, SeekOrigin.Begin);
+					aDoubleWord = theInputFileReader.ReadUInt32();
 					//&H06054648 = "HF" 05 06
 					if (aDoubleWord == 0x6054648)
 					{
-						this.theHfsFileData.theMainDirectoryHeaderOffset = this.theInputFileReader.BaseStream.Position;
+						theHfsFileData.theMainDirectoryHeaderOffset = theInputFileReader.BaseStream.Position;
 						break;
 					}
 				}
@@ -78,7 +78,7 @@ namespace Crowbar
 
 		public override void ReadEntries(BackgroundWorker bw)
 		{
-			if (!this.theHfsFileData.IsSourcePackage)
+			if (!theHfsFileData.IsSourcePackage)
 			{
 				return;
 			}
@@ -92,7 +92,7 @@ namespace Crowbar
 				//    uint16 {2}   - Disk where CD starts
 				//    uint16 {2}   - Number of CD records
 				//NOTE: Skip the first 6 bytes.
-				this.theInputFileReader.BaseStream.Seek(this.theHfsFileData.theMainDirectoryHeaderOffset + 6, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(theHfsFileData.theMainDirectoryHeaderOffset + 6, SeekOrigin.Begin);
 
 				//    uint16 {2}   - Count of CD records
 				//    uint32 {4}   - Size of central directory
@@ -103,84 +103,84 @@ namespace Crowbar
 				UInt16 mainDirectoryEntryCount = 0;
 				UInt32 mainDirectorySize = 0;
 				UInt32 mainDirectoryOffset = 0;
-				mainDirectoryEntryCount = this.theInputFileReader.ReadUInt16();
-				mainDirectorySize = this.theInputFileReader.ReadUInt32();
-				mainDirectoryOffset = this.theInputFileReader.ReadUInt32();
+				mainDirectoryEntryCount = theInputFileReader.ReadUInt16();
+				mainDirectorySize = theInputFileReader.ReadUInt32();
+				mainDirectoryOffset = theInputFileReader.ReadUInt32();
 
 				long blockPosition = 0;
 				long nextMainDirectoryEntryOffset = 0;
 
-				this.theInputFileReader.BaseStream.Seek(mainDirectoryOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(mainDirectoryOffset, SeekOrigin.Begin);
 				for (int mainDirectoryEntryIndex = 0; mainDirectoryEntryIndex < mainDirectoryEntryCount; mainDirectoryEntryIndex++)
 				{
 					HfsMainDirectoryEntry mainDirectoryEntry = new HfsMainDirectoryEntry();
 
-					mainDirectoryEntry.signature = this.theInputFileReader.ReadUInt32();
-					mainDirectoryEntry.unused01 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused02 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused03 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused04 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.fileLastModificationTime = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.fileLastModificationDate = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.crc = this.theInputFileReader.ReadUInt32();
-					mainDirectoryEntry.compressedFileSize = this.theInputFileReader.ReadUInt32();
-					mainDirectoryEntry.decompressedFileSize = this.theInputFileReader.ReadUInt32();
-					mainDirectoryEntry.fileNameSize = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.extraFieldSize = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.commentSize = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused05 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused06 = this.theInputFileReader.ReadUInt16();
-					mainDirectoryEntry.unused07 = this.theInputFileReader.ReadUInt32();
-					mainDirectoryEntry.fileDataHeaderOffset = this.theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.signature = theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.unused01 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused02 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused03 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused04 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.fileLastModificationTime = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.fileLastModificationDate = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.crc = theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.compressedFileSize = theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.decompressedFileSize = theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.fileNameSize = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.extraFieldSize = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.commentSize = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused05 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused06 = theInputFileReader.ReadUInt16();
+					mainDirectoryEntry.unused07 = theInputFileReader.ReadUInt32();
+					mainDirectoryEntry.fileDataHeaderOffset = theInputFileReader.ReadUInt32();
 
 					if (mainDirectoryEntry.fileNameSize > 0)
 					{
-						blockPosition = this.theInputFileReader.BaseStream.Position;
+						blockPosition = theInputFileReader.BaseStream.Position;
 						byte[] fileNameEncoded = new byte[mainDirectoryEntry.fileNameSize];
-						fileNameEncoded = this.theInputFileReader.ReadBytes(mainDirectoryEntry.fileNameSize);
-						this.DecodeBlockWithKey(blockPosition, this.fileNameKey, ref fileNameEncoded);
+						fileNameEncoded = theInputFileReader.ReadBytes(mainDirectoryEntry.fileNameSize);
+						DecodeBlockWithKey(blockPosition, fileNameKey, ref fileNameEncoded);
 						mainDirectoryEntry.fileName = System.Text.Encoding.ASCII.GetString(fileNameEncoded);
 					}
 					if (mainDirectoryEntry.extraFieldSize > 0)
 					{
 						byte[] extraField = new byte[mainDirectoryEntry.extraFieldSize];
-						extraField = this.theInputFileReader.ReadBytes(mainDirectoryEntry.extraFieldSize);
+						extraField = theInputFileReader.ReadBytes(mainDirectoryEntry.extraFieldSize);
 					}
 					if (mainDirectoryEntry.commentSize > 0)
 					{
 						byte[] comment = new byte[mainDirectoryEntry.commentSize];
-						comment = this.theInputFileReader.ReadBytes(mainDirectoryEntry.commentSize);
+						comment = theInputFileReader.ReadBytes(mainDirectoryEntry.commentSize);
 					}
 
-					nextMainDirectoryEntryOffset = this.theInputFileReader.BaseStream.Position;
+					nextMainDirectoryEntryOffset = theInputFileReader.BaseStream.Position;
 
 					//TODO: Read file header and data.
-					this.theInputFileReader.BaseStream.Seek(mainDirectoryEntry.fileDataHeaderOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(mainDirectoryEntry.fileDataHeaderOffset, SeekOrigin.Begin);
 
 					HfsDirectoryEntry entry = new HfsDirectoryEntry();
 
-					entry.signature = this.theInputFileReader.ReadUInt32();
+					entry.signature = theInputFileReader.ReadUInt32();
 					if (entry.signature != 0x2014648)
 					{
 						int somethingIsWrong = 4242;
 					}
-					entry.unused01 = this.theInputFileReader.ReadUInt16();
-					entry.unused02 = this.theInputFileReader.ReadUInt16();
-					entry.unused03 = this.theInputFileReader.ReadUInt16();
-					entry.fileLastModificationTime = this.theInputFileReader.ReadUInt16();
-					entry.fileLastModificationDate = this.theInputFileReader.ReadUInt16();
-					entry.crc = this.theInputFileReader.ReadUInt32();
-					entry.compressedFileSize = this.theInputFileReader.ReadUInt32();
-					entry.decompressedFileSize = this.theInputFileReader.ReadUInt32();
-					entry.fileNameSize = this.theInputFileReader.ReadUInt16();
-					entry.extraFieldSize = this.theInputFileReader.ReadUInt16();
+					entry.unused01 = theInputFileReader.ReadUInt16();
+					entry.unused02 = theInputFileReader.ReadUInt16();
+					entry.unused03 = theInputFileReader.ReadUInt16();
+					entry.fileLastModificationTime = theInputFileReader.ReadUInt16();
+					entry.fileLastModificationDate = theInputFileReader.ReadUInt16();
+					entry.crc = theInputFileReader.ReadUInt32();
+					entry.compressedFileSize = theInputFileReader.ReadUInt32();
+					entry.decompressedFileSize = theInputFileReader.ReadUInt32();
+					entry.fileNameSize = theInputFileReader.ReadUInt16();
+					entry.extraFieldSize = theInputFileReader.ReadUInt16();
 
 					if (entry.fileNameSize > 0)
 					{
-						blockPosition = this.theInputFileReader.BaseStream.Position;
+						blockPosition = theInputFileReader.BaseStream.Position;
 						byte[] fileNameEncoded = new byte[entry.fileNameSize];
-						fileNameEncoded = this.theInputFileReader.ReadBytes(entry.fileNameSize);
-						this.DecodeBlockWithKey(blockPosition, this.fileNameKey, ref fileNameEncoded);
+						fileNameEncoded = theInputFileReader.ReadBytes(entry.fileNameSize);
+						DecodeBlockWithKey(blockPosition, fileNameKey, ref fileNameEncoded);
 						entry.fileName = System.Text.Encoding.ASCII.GetString(fileNameEncoded);
 						//TODO: Figure out how the path is stored and insert it here.
 						if (Path.GetExtension(entry.fileName) == ".comp")
@@ -195,15 +195,15 @@ namespace Crowbar
 					if (entry.extraFieldSize > 0)
 					{
 						byte[] extraField = new byte[entry.extraFieldSize];
-						extraField = this.theInputFileReader.ReadBytes(entry.extraFieldSize);
+						extraField = theInputFileReader.ReadBytes(entry.extraFieldSize);
 					}
 					if (entry.compressedFileSize > 0 && entry.decompressedFileSize > 0)
 					{
-						entry.offset = this.theInputFileReader.BaseStream.Position;
+						entry.offset = theInputFileReader.BaseStream.Position;
 					}
 					//entry.fileDataBlockPosition = Me.theInputFileReader.BaseStream.Position
 
-					this.theHfsFileData.theEntries.Add(entry);
+					theHfsFileData.theEntries.Add(entry);
 
 					entryDataOutputText.Append(entry.thePathFileName);
 					entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -212,14 +212,14 @@ namespace Crowbar
 					entryDataOutputText.Append(" ofs=0x" + entry.offset.ToString("X8"));
 					entryDataOutputText.Append(" sz=" + entry.decompressedFileSize.ToString("G0"));
 
-					this.theHfsFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+					theHfsFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 					NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 
 					entryDataOutputText.Clear();
 
-					this.theInputFileReader.BaseStream.Seek(nextMainDirectoryEntryOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(nextMainDirectoryEntryOffset, SeekOrigin.Begin);
 				}
-				if (mainDirectoryOffset + mainDirectorySize != this.theInputFileReader.BaseStream.Position)
+				if (mainDirectoryOffset + mainDirectorySize != theInputFileReader.BaseStream.Position)
 				{
 					int somethingIsWrong = 4242;
 				}
@@ -242,10 +242,10 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
+						theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
 
-						this.theInputFileReader.BaseStream.Seek(entry.offset, SeekOrigin.Begin);
-						byte[] bytes = this.theInputFileReader.ReadBytes((int)entry.compressedFileSize);
+						theInputFileReader.BaseStream.Seek(entry.offset, SeekOrigin.Begin);
+						byte[] bytes = theInputFileReader.ReadBytes((int)entry.compressedFileSize);
 
 						if (Path.GetExtension(entry.fileName) == ".comp")
 						{
@@ -259,7 +259,7 @@ namespace Crowbar
 							//	Me.DecodeBlockWithKey(entry.offset, fileNameKey, bytes)
 						}
 
-						this.theOutputFileWriter.Write(bytes);
+						theOutputFileWriter.Write(bytes);
 					}
 					catch (Exception ex)
 					{
@@ -267,9 +267,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theOutputFileWriter != null)
+						if (theOutputFileWriter != null)
 						{
-							this.theOutputFileWriter.Close();
+							theOutputFileWriter.Close();
 						}
 					}
 				}

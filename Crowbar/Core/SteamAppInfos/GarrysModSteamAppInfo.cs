@@ -19,12 +19,12 @@ namespace Crowbar
 		public GarrysModSteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(4000);
-			this.Name = "Garry's Mod";
-			this.UsesSteamUGC = true;
-			this.CanUseContentFolderOrFile = true;
-			this.ContentFileExtensionsAndDescriptions.Add("gma", "Garry's Mod GMA Files");
-			this.TagsControlType = typeof(GarrysModTagsUserControl);
+			ID = new AppId_t(4000);
+			Name = "Garry's Mod";
+			UsesSteamUGC = true;
+			CanUseContentFolderOrFile = true;
+			ContentFileExtensionsAndDescriptions.Add("gma", "Garry's Mod GMA Files");
+			TagsControlType = typeof(GarrysModTagsUserControl);
 		}
 
 		public override string ProcessFileAfterDownload(string givenPathFileName, BackgroundWorkerEx bw)
@@ -122,36 +122,36 @@ namespace Crowbar
 		public override string ProcessFileBeforeUpload(WorkshopItem item, BackgroundWorkerEx bw)
 		{
 			string processedPathFileName = item.ContentPathFolderOrFileName;
-			this.theBackgroundWorker = bw;
+			theBackgroundWorker = bw;
 
 			// Create a folder in the Windows Temp path, to prevent potential file collisions and to provide user a more obvious folder name.
 			Guid guid = new Guid();
 			guid = Guid.NewGuid();
 			string tempCrowbarFolder = "Crowbar_" + guid.ToString();
 			string tempPath = Path.GetTempPath();
-			this.theTempCrowbarPath = Path.Combine(tempPath, tempCrowbarFolder);
+			theTempCrowbarPath = Path.Combine(tempPath, tempCrowbarFolder);
 			try
 			{
-				FileManager.CreatePath(this.theTempCrowbarPath);
+				FileManager.CreatePath(theTempCrowbarPath);
 			}
 			catch (Exception ex)
 			{
-				throw new System.Exception("Crowbar tried to create folder path \"" + this.theTempCrowbarPath + "\", but Windows gave this message: " + ex.Message);
+				throw new System.Exception("Crowbar tried to create folder path \"" + theTempCrowbarPath + "\", but Windows gave this message: " + ex.Message);
 			}
 
 			string gmaPathFileName = null;
 			if (Directory.Exists(item.ContentPathFolderOrFileName))
 			{
-				this.theBackgroundWorker.ReportProgress(0, "Creating GMA file." + "\r\n");
+				theBackgroundWorker.ReportProgress(0, "Creating GMA file." + "\r\n");
 
 				//NOTE: File name is all lowercase in case Garry's Mod needs that on Linux.
 				if (item.IsDraft)
 				{
-					gmaPathFileName = Path.Combine(this.theTempCrowbarPath, "new_item_via_crowbar.gma");
+					gmaPathFileName = Path.Combine(theTempCrowbarPath, "new_item_via_crowbar.gma");
 				}
 				else
 				{
-					gmaPathFileName = Path.Combine(this.theTempCrowbarPath, item.ID + "_via_crowbar.gma");
+					gmaPathFileName = Path.Combine(theTempCrowbarPath, item.ID + "_via_crowbar.gma");
 				}
 
 				//TODO: Create GMA file without calling gmad.exe.
@@ -160,7 +160,7 @@ namespace Crowbar
 				string result = steamPipe.Open("GetAppInstallPath", null, "");
 				if (result == "success")
 				{
-					appInstallPath = steamPipe.GetAppInstallPath(this.ID.ToString());
+					appInstallPath = steamPipe.GetAppInstallPath(ID.ToString());
 				}
 				steamPipe.Shut();
 				if (!string.IsNullOrEmpty(appInstallPath))
@@ -169,7 +169,7 @@ namespace Crowbar
 					string garrysModPathGmadExe = Path.Combine(garrysModBinPath, "gmad.exe");
 					if (File.Exists(garrysModPathGmadExe))
 					{
-						string addonJsonPathFileName = this.CreateAddonJsonFile(item.ContentPathFolderOrFileName, item.Title, item.Tags);
+						string addonJsonPathFileName = CreateAddonJsonFile(item.ContentPathFolderOrFileName, item.Title, item.Tags);
 						if (File.Exists(addonJsonPathFileName))
 						{
 							Process gmadExeProcess = new Process();
@@ -191,8 +191,8 @@ namespace Crowbar
 #else
 									gmadExeProcess.StartInfo.CreateNoWindow = true;
 #endif
-								gmadExeProcess.OutputDataReceived += this.myProcess_OutputDataReceived;
-								gmadExeProcess.ErrorDataReceived += this.myProcess_ErrorDataReceived;
+								gmadExeProcess.OutputDataReceived += myProcess_OutputDataReceived;
+								gmadExeProcess.ErrorDataReceived += myProcess_ErrorDataReceived;
 
 								gmadExeProcess.Start();
 								gmadExeProcess.StandardInput.AutoFlush = true;
@@ -208,8 +208,8 @@ namespace Crowbar
 							finally
 							{
 								gmadExeProcess.Close();
-								gmadExeProcess.OutputDataReceived -= this.myProcess_OutputDataReceived;
-								gmadExeProcess.ErrorDataReceived -= this.myProcess_ErrorDataReceived;
+								gmadExeProcess.OutputDataReceived -= myProcess_OutputDataReceived;
+								gmadExeProcess.ErrorDataReceived -= myProcess_ErrorDataReceived;
 
 								//If Not File.Exists(gmaPathFileName) Then
 								//	Throw New System.Exception("Crowbar tried to create the file """ + gmaPathFileName + """ with Garry's Mod gmad.exe, but the file was not created.")
@@ -312,18 +312,18 @@ namespace Crowbar
 
 		public override void CleanUpAfterUpload(BackgroundWorkerEx bw)
 		{
-			if (Directory.Exists(this.theTempCrowbarPath))
+			if (Directory.Exists(theTempCrowbarPath))
 			{
 				try
 				{
-					Directory.Delete(this.theTempCrowbarPath, true);
+					Directory.Delete(theTempCrowbarPath, true);
 				}
 				catch (Exception ex)
 				{
-					bw.ReportProgress(0, "Crowbar tried to delete its temp folder \"" + this.theTempCrowbarPath + "\" but Windows gave this message: " + ex.Message);
+					bw.ReportProgress(0, "Crowbar tried to delete its temp folder \"" + theTempCrowbarPath + "\" but Windows gave this message: " + ex.Message);
 				}
 			}
-			this.theTempCrowbarPath = "";
+			theTempCrowbarPath = "";
 		}
 
 		//Example 01:
@@ -513,7 +513,7 @@ namespace Crowbar
 				if (line != null)
 				{
 					//Me.theProcessHasOutputData = True
-					this.theBackgroundWorker.ReportProgress(1, line + "\r\n");
+					theBackgroundWorker.ReportProgress(1, line + "\r\n");
 				}
 			}
 			catch (Exception ex)
@@ -540,7 +540,7 @@ namespace Crowbar
 				line = e.Data;
 				if (line != null)
 				{
-					this.theBackgroundWorker.ReportProgress(1, line + "\r\n");
+					theBackgroundWorker.ReportProgress(1, line + "\r\n");
 				}
 			}
 			catch (Exception ex)

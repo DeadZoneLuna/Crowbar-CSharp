@@ -20,16 +20,16 @@ namespace Crowbar
 		{
 			//MyBase.New()
 
-			this.theMacro = "<library1>";
-			this.thePath = "C:\\Program Files (x86)\\Steam";
-			this.theUseCount = 0;
+			theMacro = "<library1>";
+			thePath = "C:\\Program Files (x86)\\Steam";
+			theUseCount = 0;
 		}
 
 		protected SteamLibraryPath(SteamLibraryPath originalObject)
 		{
-			this.theMacro = originalObject.Macro;
-			this.thePath = originalObject.LibraryPath;
-			this.theUseCount = originalObject.UseCount;
+			theMacro = originalObject.Macro;
+			thePath = originalObject.LibraryPath;
+			theUseCount = originalObject.UseCount;
 		}
 
 		public object Clone()
@@ -45,13 +45,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theMacro;
+				return theMacro;
 			}
 			set
 			{
-				if (this.theMacro != value)
+				if (theMacro != value)
 				{
-					this.theMacro = value;
+					theMacro = value;
 					NotifyPropertyChanged("Macro");
 				}
 			}
@@ -61,11 +61,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePath;
+				return thePath;
 			}
 			set
 			{
-				this.thePath = value;
+				thePath = value;
 				NotifyPropertyChanged("LibraryPath");
 			}
 		}
@@ -74,11 +74,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUseCount;
+				return theUseCount;
 			}
 			set
 			{
-				this.theUseCount = value;
+				theUseCount = value;
 				NotifyPropertyChanged("UseCount");
 			}
 		}

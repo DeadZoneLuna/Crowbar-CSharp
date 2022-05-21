@@ -17,8 +17,8 @@ namespace Crowbar
 
 		public SourceVtaFile37(StreamWriter outputFileStream, SourceMdlFileData37 mdlFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
 		}
 
 #endregion
@@ -27,7 +27,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteHeaderSection()
@@ -36,7 +36,7 @@ namespace Crowbar
 
 			//version 1
 			line = "version 1";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteNodesSection()
@@ -46,23 +46,23 @@ namespace Crowbar
 
 			//nodes
 			line = "nodes";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				name = this.theMdlFileData.theBones[boneIndex].theName;
+				name = theMdlFileData.theBones[boneIndex].theName;
 
 				line = "  ";
 				line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " \"";
 				line += name;
 				line += "\" ";
-				line += this.theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSectionForVertexAnimation()
@@ -71,7 +71,7 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -81,7 +81,7 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			int timeIndex = 0;
 			int flexTimeIndex = 0;
@@ -89,9 +89,9 @@ namespace Crowbar
 
 			timeIndex = 1;
 			//NOTE: The first frame was written in code above.
-			for (flexTimeIndex = 1; flexTimeIndex < this.theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
+			for (flexTimeIndex = 1; flexTimeIndex < theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
 			{
-				aFlexFrame = this.theMdlFileData.theFlexFrames[flexTimeIndex];
+				aFlexFrame = theMdlFileData.theFlexFrames[flexTimeIndex];
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -104,13 +104,13 @@ namespace Crowbar
 				line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " # ";
 				line += aFlexFrame.flexDescription;
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				timeIndex += 1;
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteVertexAnimationSection()
@@ -120,7 +120,7 @@ namespace Crowbar
 
 			//vertexanimation
 			line = "vertexanimation";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -130,13 +130,13 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			try
 			{
-				for (int vertexIndex = 0; vertexIndex < this.theMdlFileData.theVertexes.Count; vertexIndex++)
+				for (int vertexIndex = 0; vertexIndex < theMdlFileData.theVertexes.Count; vertexIndex++)
 				{
-					aVertex = this.theMdlFileData.theVertexes[vertexIndex];
+					aVertex = theMdlFileData.theVertexes[vertexIndex];
 
 					line = "    ";
 					line += vertexIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
@@ -152,7 +152,7 @@ namespace Crowbar
 					line += aVertex.normal.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += aVertex.normal.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 			catch (Exception ex)
@@ -166,9 +166,9 @@ namespace Crowbar
 
 			timeIndex = 1;
 			//NOTE: The first frame was written in code above.
-			for (flexTimeIndex = 1; flexTimeIndex < this.theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
+			for (flexTimeIndex = 1; flexTimeIndex < theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
 			{
-				aFlexFrame = this.theMdlFileData.theFlexFrames[flexTimeIndex];
+				aFlexFrame = theMdlFileData.theFlexFrames[flexTimeIndex];
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -181,18 +181,18 @@ namespace Crowbar
 				line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " # ";
 				line += aFlexFrame.flexDescription;
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				for (int x = 0; x < aFlexFrame.flexes.Count; x++)
 				{
-					this.WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
+					WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
 				}
 
 				timeIndex += 1;
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion
@@ -220,7 +220,7 @@ namespace Crowbar
 				SourceMdlVertAnim37 aVertAnim = aFlex.theVertAnims[i];
 
 				vertexIndex = aVertAnim.index + bodyAndMeshVertexIndexStart;
-				aVertex = this.theMdlFileData.theVertexes[vertexIndex];
+				aVertex = theMdlFileData.theVertexes[vertexIndex];
 
 				positionX = aVertex.position.x + aVertAnim.delta.x;
 				positionY = aVertex.position.y + aVertAnim.delta.y;
@@ -257,7 +257,7 @@ namespace Crowbar
 				//line += " "
 				//line += aVertAnim.flNDelta(2).the16BitValue.ToString()
 
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 		}
 

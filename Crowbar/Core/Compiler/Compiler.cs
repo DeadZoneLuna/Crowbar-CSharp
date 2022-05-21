@@ -19,12 +19,12 @@ namespace Crowbar
 		public Compiler() : base()
 		{
 
-			this.theCompiledLogFiles = new BindingListEx<string>();
-			this.theCompiledMdlFiles = new BindingListEx<string>();
+			theCompiledLogFiles = new BindingListEx<string>();
+			theCompiledMdlFiles = new BindingListEx<string>();
 
-			this.WorkerReportsProgress = true;
-			this.WorkerSupportsCancellation = true;
-			this.DoWork += this.Compiler_DoWork;
+			WorkerReportsProgress = true;
+			WorkerSupportsCancellation = true;
+			DoWork += Compiler_DoWork;
 		}
 
 #endregion
@@ -37,18 +37,18 @@ namespace Crowbar
 
 		public void Run()
 		{
-			this.RunWorkerAsync();
+			RunWorkerAsync();
 		}
 
 		public void SkipCurrentModel()
 		{
 			//NOTE: This might have thread race condition, but it probably doesn't matter.
-			this.theSkipCurrentModelIsActive = true;
+			theSkipCurrentModelIsActive = true;
 		}
 
 		public string GetOutputPathFileName(string relativePathFileName)
 		{
-			string pathFileName = Path.Combine(this.theOutputPath, relativePathFileName);
+			string pathFileName = Path.Combine(theOutputPath, relativePathFileName);
 
 			pathFileName = Path.GetFullPath(pathFileName);
 
@@ -65,22 +65,22 @@ namespace Crowbar
 
 		private void Compiler_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
-			this.ReportProgress(0, "");
+			ReportProgress(0, "");
 
-			this.theOutputPath = this.GetOutputPath();
+			theOutputPath = GetOutputPath();
 
 			AppEnums.StatusMessage status = 0;
-			if (this.CompilerInputsAreValid())
+			if (CompilerInputsAreValid())
 			{
-				status = this.Compile();
+				status = Compile();
 			}
 			else
 			{
 				status = AppEnums.StatusMessage.Error;
 			}
-			e.Result = this.GetCompilerOutputs(status);
+			e.Result = GetCompilerOutputs(status);
 
-			if (this.CancellationPending)
+			if (CancellationPending)
 			{
 				e.Cancel = true;
 			}
@@ -108,7 +108,7 @@ namespace Crowbar
 
 		private string GetGameModelsPath()
 		{
-			string gameModelsPath = Path.Combine(this.GetGamePath(), "models");
+			string gameModelsPath = Path.Combine(GetGamePath(), "models");
 
 
 			return gameModelsPath;
@@ -166,7 +166,7 @@ namespace Crowbar
 			}
 			else
 			{
-				outputPath = this.GetGameModelsPath();
+				outputPath = GetGameModelsPath();
 			}
 
 			//This will change a relative path to an absolute path.
@@ -195,7 +195,7 @@ namespace Crowbar
 			//	Return
 			//End If
 
-			string gameCompilerPathFileName = this.GetGameCompilerPathFileName();
+			string gameCompilerPathFileName = GetGameCompilerPathFileName();
 			GameSetup gameSetup = null;
 			string gamePathFileName = null;
 			gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
@@ -204,46 +204,46 @@ namespace Crowbar
 			if (!File.Exists(gameCompilerPathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The model compiler, \"" + gameCompilerPathFileName + "\", does not exist.");
-				this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				WriteErrorMessage(1, "The model compiler, \"" + gameCompilerPathFileName + "\", does not exist.");
+				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 			}
 			//TODO: [CompilerInputsAreValid] If GoldSource, then only check for liblist.gam if output is for game's "models" folder.
 			//TODO: [CompilerInputsAreValid] Change error message to include "liblist.gam" or "gameinfo.txt" as appropriate.
 			if (!File.Exists(gamePathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The game's \"" + gamePathFileName + "\" file does not exist.");
-				this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				WriteErrorMessage(1, "The game's \"" + gamePathFileName + "\" file does not exist.");
+				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 			}
 			if (string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.CompileQcPathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "QC file or folder has not been selected.");
+				WriteErrorMessage(1, "QC file or folder has not been selected.");
 			}
 			else if (MainCROWBAR.TheApp.Settings.CompileMode == AppEnums.InputOptions.File && !File.Exists(MainCROWBAR.TheApp.Settings.CompileQcPathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The QC file, \"" + MainCROWBAR.TheApp.Settings.CompileQcPathFileName + "\", does not exist.");
+				WriteErrorMessage(1, "The QC file, \"" + MainCROWBAR.TheApp.Settings.CompileQcPathFileName + "\", does not exist.");
 			}
 			if (gameSetup.GameEngine == AppEnums.GameEngine.Source && MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked)
 			{
 				if (MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesCreateFileIsChecked)
 				{
-					string defineBonesPathFileName = this.GetDefineBonesPathFileName();
+					string defineBonesPathFileName = GetDefineBonesPathFileName();
 					if (File.Exists(defineBonesPathFileName) && !MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesOverwriteQciFileIsChecked)
 					{
 						inputsAreValid = false;
-						this.WriteErrorMessage(1, "The DefineBones file, \"" + defineBonesPathFileName + "\", already exists.");
+						WriteErrorMessage(1, "The DefineBones file, \"" + defineBonesPathFileName + "\", already exists.");
 					}
 				}
 			}
 			//If TheApp.Settings.CompileOutputFolderIsChecked Then
 			if (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption != AppEnums.CompileOutputPathOptions.GameModelsFolder)
 			{
-				if (!FileManager.PathExistsAfterTryToCreate(this.theOutputPath))
+				if (!FileManager.PathExistsAfterTryToCreate(theOutputPath))
 				{
 					inputsAreValid = false;
-					this.WriteErrorMessage(1, "The Output Folder, \"" + this.theOutputPath + "\" could not be created.");
+					WriteErrorMessage(1, "The Output Folder, \"" + theOutputPath + "\" could not be created.");
 				}
 			}
 
@@ -258,17 +258,17 @@ namespace Crowbar
 
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
 
-			if (this.theCompiledMdlFiles.Count > 0)
+			if (theCompiledMdlFiles.Count > 0)
 			{
-				compileResultInfo.theCompiledRelativePathFileNames = this.theCompiledMdlFiles;
+				compileResultInfo.theCompiledRelativePathFileNames = theCompiledMdlFiles;
 			}
 			else if (gameSetup.GameEngine == AppEnums.GameEngine.GoldSource && MainCROWBAR.TheApp.Settings.CompileGoldSourceLogFileIsChecked)
 			{
-				compileResultInfo.theCompiledRelativePathFileNames = this.theCompiledLogFiles;
+				compileResultInfo.theCompiledRelativePathFileNames = theCompiledLogFiles;
 			}
 			else if (gameSetup.GameEngine == AppEnums.GameEngine.Source && MainCROWBAR.TheApp.Settings.CompileSourceLogFileIsChecked)
 			{
-				compileResultInfo.theCompiledRelativePathFileNames = this.theCompiledLogFiles;
+				compileResultInfo.theCompiledRelativePathFileNames = theCompiledLogFiles;
 			}
 
 			return compileResultInfo;
@@ -278,19 +278,19 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			this.theSkipCurrentModelIsActive = false;
+			theSkipCurrentModelIsActive = false;
 
-			this.theCompiledLogFiles.Clear();
-			this.theCompiledMdlFiles.Clear();
+			theCompiledLogFiles.Clear();
+			theCompiledMdlFiles.Clear();
 
 			string qcPathFileName = MainCROWBAR.TheApp.Settings.CompileQcPathFileName;
 			if (File.Exists(qcPathFileName))
 			{
-				this.theInputQcPath = FileManager.GetPath(qcPathFileName);
+				theInputQcPath = FileManager.GetPath(qcPathFileName);
 			}
 			else if (Directory.Exists(qcPathFileName))
 			{
-				this.theInputQcPath = qcPathFileName;
+				theInputQcPath = qcPathFileName;
 			}
 
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
@@ -315,33 +315,33 @@ namespace Crowbar
 			{
 				if (MainCROWBAR.TheApp.Settings.CompileMode == AppEnums.InputOptions.FolderRecursion)
 				{
-					progressDescriptionText += "\"" + this.theInputQcPath + "\" (folder + subfolders)";
-					this.UpdateProgressStart(progressDescriptionText + " ...");
+					progressDescriptionText += "\"" + theInputQcPath + "\" (folder + subfolders)";
+					UpdateProgressStart(progressDescriptionText + " ...");
 
-					status = this.CreateLogTextFile("");
+					status = CreateLogTextFile("");
 					//If status = StatusMessage.Error Then
 					//	Return status
 					//End If
 
-					this.CompileModelsInFolderRecursively(this.theInputQcPath);
+					CompileModelsInFolderRecursively(theInputQcPath);
 				}
 				else if (MainCROWBAR.TheApp.Settings.CompileMode == AppEnums.InputOptions.Folder)
 				{
-					progressDescriptionText += "\"" + this.theInputQcPath + "\" (folder)";
-					this.UpdateProgressStart(progressDescriptionText + " ...");
+					progressDescriptionText += "\"" + theInputQcPath + "\" (folder)";
+					UpdateProgressStart(progressDescriptionText + " ...");
 
-					status = this.CreateLogTextFile("");
+					status = CreateLogTextFile("");
 					//If status = StatusMessage.Error Then
 					//	Return status
 					//End If
 
-					this.CompileModelsInFolder(this.theInputQcPath);
+					CompileModelsInFolder(theInputQcPath);
 				}
 				else
 				{
 					progressDescriptionText += "\"" + qcPathFileName + "\"";
-					this.UpdateProgressStart(progressDescriptionText + " ...");
-					status = this.CompileOneModel(qcPathFileName);
+					UpdateProgressStart(progressDescriptionText + " ...");
+					status = CompileOneModel(qcPathFileName);
 				}
 			}
 			catch (Exception ex)
@@ -350,27 +350,27 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.theLogFileStream != null)
+				if (theLogFileStream != null)
 				{
-					this.theLogFileStream.Flush();
-					this.theLogFileStream.Close();
-					this.theLogFileStream = null;
+					theLogFileStream.Flush();
+					theLogFileStream.Close();
+					theLogFileStream = null;
 				}
 			}
 
-			this.UpdateProgressStop("... " + progressDescriptionText + " finished.");
+			UpdateProgressStop("... " + progressDescriptionText + " finished.");
 
 			return status;
 		}
 
 		private void CompileModelsInFolderRecursively(string modelsPathName)
 		{
-			this.CompileModelsInFolder(modelsPathName);
+			CompileModelsInFolder(modelsPathName);
 
 			foreach (string aPathName in Directory.GetDirectories(modelsPathName))
 			{
-				this.CompileModelsInFolderRecursively(aPathName);
-				if (this.CancellationPending)
+				CompileModelsInFolderRecursively(aPathName);
+				if (CancellationPending)
 				{
 					return;
 				}
@@ -381,18 +381,18 @@ namespace Crowbar
 		{
 			foreach (string aPathFileName in Directory.GetFiles(modelsPathName, "*.qc"))
 			{
-				this.CompileOneModel(aPathFileName);
+				CompileOneModel(aPathFileName);
 
 				//TODO: Double-check if this is wanted. If so, then add equivalent to Decompiler.DecompileModelsInFolder().
-				this.ReportProgress(5, "");
+				ReportProgress(5, "");
 
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
 					return;
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.theSkipCurrentModelIsActive = false;
+					theSkipCurrentModelIsActive = false;
 					continue;
 				}
 			}
@@ -416,7 +416,7 @@ namespace Crowbar
 				string qcRelativePathFileName = null;
 				qcPath = FileManager.GetPath(qcPathFileName);
 				qcFileName = Path.GetFileName(qcPathFileName);
-				qcRelativePath = FileManager.GetRelativePathFileName(this.theInputQcPath, FileManager.GetPath(qcPathFileName));
+				qcRelativePath = FileManager.GetRelativePathFileName(theInputQcPath, FileManager.GetPath(qcPathFileName));
 				qcRelativePathFileName = Path.Combine(qcRelativePath, qcFileName);
 
 				//Dim gameSetup As GameSetup
@@ -425,7 +425,7 @@ namespace Crowbar
 				//gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
 				//gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 				//gameModelsPath = Path.Combine(gamePath, "models")
-				string gameModelsPath = this.GetGameModelsPath();
+				string gameModelsPath = GetGameModelsPath();
 
 				GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
 
@@ -498,7 +498,7 @@ namespace Crowbar
 				//Me.CreateLogTextFile(qcPathFileName)
 				if (MainCROWBAR.TheApp.Settings.CompileMode == AppEnums.InputOptions.File)
 				{
-					status = this.CreateLogTextFile(qcPathFileName);
+					status = CreateLogTextFile(qcPathFileName);
 					//If status = StatusMessage.Error Then
 					//	Return status
 					//End If
@@ -510,33 +510,33 @@ namespace Crowbar
 					defineBonesText = "Define Bones of ";
 				}
 
-				this.UpdateProgress();
-				this.UpdateProgress(1, "Compiling " + defineBonesText + "\"" + qcRelativePathFileName + "\" ...");
+				UpdateProgress();
+				UpdateProgress(1, "Compiling " + defineBonesText + "\"" + qcRelativePathFileName + "\" ...");
 
-				string result = this.CheckFiles();
+				string result = CheckFiles();
 				if (result == "success")
 				{
 					if (gameSetup.GameEngine == AppEnums.GameEngine.Source && MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked && MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesCreateFileIsChecked)
 					{
-						this.OpenDefineBonesFile();
+						OpenDefineBonesFile();
 					}
 
-					this.UpdateProgress(2, "Output from compiler \"" + this.GetGameCompilerPathFileName() + "\": ");
-					this.RunStudioMdlApp(qcPath, qcFileName);
+					UpdateProgress(2, "Output from compiler \"" + GetGameCompilerPathFileName() + "\": ");
+					RunStudioMdlApp(qcPath, qcFileName);
 
-					if (!this.theProcessHasOutputData)
+					if (!theProcessHasOutputData)
 					{
-						this.UpdateProgress(2, "ERROR: The compiler did not return any status messages.");
-						this.UpdateProgress(2, "CAUSE: The compiler is not the correct one for the selected game.");
-						this.UpdateProgress(2, "SOLUTION: Verify integrity of game files via Steam so that the correct compiler is installed.");
+						UpdateProgress(2, "ERROR: The compiler did not return any status messages.");
+						UpdateProgress(2, "CAUSE: The compiler is not the correct one for the selected game.");
+						UpdateProgress(2, "SOLUTION: Verify integrity of game files via Steam so that the correct compiler is installed.");
 					}
 					else if (gameSetup.GameEngine == AppEnums.GameEngine.Source && MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked)
 					{
-						if (this.theDefineBonesFileStream != null)
+						if (theDefineBonesFileStream != null)
 						{
-							string qciPathFileName = ((FileStream)this.theDefineBonesFileStream.BaseStream).Name;
+							string qciPathFileName = ((FileStream)theDefineBonesFileStream.BaseStream).Name;
 
-							this.CloseDefineBonesFile();
+							CloseDefineBonesFile();
 
 							//NOTE: Must do this after closing define bones file.
 							if (File.Exists(qciPathFileName))
@@ -544,7 +544,7 @@ namespace Crowbar
 								FileInfo qciFileInfo = new FileInfo(qciPathFileName);
 								if (qciFileInfo.Length == 0)
 								{
-									this.UpdateProgress(2, "CROWBAR WARNING: No define bones were written to QCI file.");
+									UpdateProgress(2, "CROWBAR WARNING: No define bones were written to QCI file.");
 
 									try
 									{
@@ -552,23 +552,23 @@ namespace Crowbar
 									}
 									catch (Exception ex)
 									{
-										this.UpdateProgress(2, "CROWBAR WARNING: Failed to delete empty QCI file: \"" + qciPathFileName + "\"");
+										UpdateProgress(2, "CROWBAR WARNING: Failed to delete empty QCI file: \"" + qciPathFileName + "\"");
 									}
 								}
 								else
 								{
-									this.UpdateProgress(2, "CROWBAR: Wrote define bones into QCI file: \"" + qciPathFileName + "\"");
+									UpdateProgress(2, "CROWBAR: Wrote define bones into QCI file: \"" + qciPathFileName + "\"");
 
 									if (MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesModifyQcFileIsChecked)
 									{
-										string line = this.InsertAnIncludeDefineBonesFileCommandIntoQcFile(qciPathFileName);
-										this.UpdateProgress(2, "CROWBAR: Wrote in the QC file this line: " + line);
+										string line = InsertAnIncludeDefineBonesFileCommandIntoQcFile(qciPathFileName);
+										UpdateProgress(2, "CROWBAR: Wrote in the QC file this line: " + line);
 									}
 								}
 							}
 							else
 							{
-								this.UpdateProgress(2, "CROWBAR WARNING: Failed to write QCI file: \"" + qciPathFileName + "\"");
+								UpdateProgress(2, "CROWBAR WARNING: Failed to write QCI file: \"" + qciPathFileName + "\"");
 							}
 						}
 					}
@@ -576,7 +576,7 @@ namespace Crowbar
 					{
 						if (File.Exists(compiledMdlPathFileName))
 						{
-							this.ProcessCompiledModel(compiledMdlPathFileName, qcModelName);
+							ProcessCompiledModel(compiledMdlPathFileName, qcModelName);
 						}
 					}
 
@@ -594,12 +594,12 @@ namespace Crowbar
 						string fullPathDeleted = FileManager.DeleteEmptySubpath(qcModelTopNonextantPath);
 						if (!string.IsNullOrEmpty(fullPathDeleted))
 						{
-							this.UpdateProgress(2, "CROWBAR: Deleted empty temporary compile folder \"" + fullPathDeleted + "\".");
+							UpdateProgress(2, "CROWBAR: Deleted empty temporary compile folder \"" + fullPathDeleted + "\".");
 						}
 					}
 				}
 
-				this.UpdateProgress(1, "... Compiling " + defineBonesText + "\"" + qcRelativePathFileName + "\" finished. Check above for any errors.");
+				UpdateProgress(1, "... Compiling " + defineBonesText + "\"" + qcRelativePathFileName + "\" finished. Check above for any errors.");
 			}
 			catch (Exception ex)
 			{
@@ -629,7 +629,7 @@ namespace Crowbar
 			string currentFolder = Directory.GetCurrentDirectory();
 			Directory.SetCurrentDirectory(qcPath);
 
-			string gameCompilerPathFileName = this.GetGameCompilerPathFileName();
+			string gameCompilerPathFileName = GetGameCompilerPathFileName();
 
 			string arguments = "";
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
@@ -638,7 +638,7 @@ namespace Crowbar
 				arguments += "-game";
 				arguments += " ";
 				arguments += "\"";
-				arguments += this.GetGamePath();
+				arguments += GetGamePath();
 				arguments += "\"";
 				arguments += " ";
 			}
@@ -658,14 +658,14 @@ namespace Crowbar
 			myProcess.StartInfo = myProcessStartInfo;
 			//'NOTE: Need this line to make Me.myProcess_Exited be called.
 			//myProcess.EnableRaisingEvents = True
-			myProcess.OutputDataReceived += this.myProcess_OutputDataReceived;
-			myProcess.ErrorDataReceived += this.myProcess_ErrorDataReceived;
+			myProcess.OutputDataReceived += myProcess_OutputDataReceived;
+			myProcess.ErrorDataReceived += myProcess_ErrorDataReceived;
 			myProcess.Start();
 			//Directory.SetCurrentDirectory(currentFolder)
 			myProcess.StandardInput.AutoFlush = true;
 			myProcess.BeginOutputReadLine();
 			myProcess.BeginErrorReadLine();
-			this.theProcessHasOutputData = false;
+			theProcessHasOutputData = false;
 
 			//myProcess.StandardOutput.ReadToEnd()
 			//'NOTE: Do this to handle "hit a key to continue" at the end of Dota 2's compiler.
@@ -675,8 +675,8 @@ namespace Crowbar
 			myProcess.WaitForExit();
 
 			myProcess.Close();
-			myProcess.OutputDataReceived -= this.myProcess_OutputDataReceived;
-			myProcess.ErrorDataReceived -= this.myProcess_ErrorDataReceived;
+			myProcess.OutputDataReceived -= myProcess_OutputDataReceived;
+			myProcess.ErrorDataReceived -= myProcess_ErrorDataReceived;
 
 			Directory.SetCurrentDirectory(currentFolder);
 		}
@@ -719,13 +719,13 @@ namespace Crowbar
 
 			if (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder)
 			{
-				outputPathModelsFolder = this.theOutputPath;
+				outputPathModelsFolder = theOutputPath;
 			}
 			else
 			{
-				outputPathModelsFolder = Path.Combine(this.theOutputPath, "models");
+				outputPathModelsFolder = Path.Combine(theOutputPath, "models");
 			}
-			modelsSubpath = this.GetModelsSubpath(FileManager.GetPath(qcModelName), gameSetup.GameEngine);
+			modelsSubpath = GetModelsSubpath(FileManager.GetPath(qcModelName), gameSetup.GameEngine);
 			targetPath = Path.Combine(outputPathModelsFolder, modelsSubpath);
 			FileManager.CreatePath(targetPath);
 
@@ -767,14 +767,14 @@ namespace Crowbar
 					try
 					{
 						File.Move(sourcePathFileName, targetPathFileName);
-						this.UpdateProgress(2, "CROWBAR: Moved compiled model file \"" + sourcePathFileName + "\" to \"" + targetPath + "\"");
+						UpdateProgress(2, "CROWBAR: Moved compiled model file \"" + sourcePathFileName + "\" to \"" + targetPath + "\"");
 					}
 					catch (Exception ex)
 					{
-						this.UpdateProgress();
-						this.UpdateProgress(2, "WARNING: Crowbar tried to move the file, \"" + sourcePathFileName + "\", to the output folder, but Windows complained with this message: " + ex.Message.Trim());
-						this.UpdateProgress(2, "SOLUTION: Compile the model again (and hope Windows does not complain again) or move the file yourself.");
-						this.UpdateProgress();
+						UpdateProgress();
+						UpdateProgress(2, "WARNING: Crowbar tried to move the file, \"" + sourcePathFileName + "\", to the output folder, but Windows complained with this message: " + ex.Message.Trim());
+						UpdateProgress(2, "SOLUTION: Compile the model again (and hope Windows does not complain again) or move the file yourself.");
+						UpdateProgress();
 					}
 					//End If
 				}
@@ -782,7 +782,7 @@ namespace Crowbar
 				//NOTE: Make list of main MDL files compiled.
 				if (string.Compare(Path.GetFileName(targetPathFileName), Path.GetFileName(compiledMdlPathFileName), true) == 0)
 				{
-					this.theCompiledMdlFiles.Add(FileManager.GetRelativePathFileName(this.theOutputPath, targetPathFileName));
+					theCompiledMdlFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, targetPathFileName));
 				}
 			}
 		}
@@ -849,21 +849,21 @@ namespace Crowbar
 				line = e.Data;
 				if (line != null)
 				{
-					this.theProcessHasOutputData = true;
-					this.UpdateProgress(3, line);
+					theProcessHasOutputData = true;
+					UpdateProgress(3, line);
 
-					if (this.theDefineBonesFileStream != null)
+					if (theDefineBonesFileStream != null)
 					{
 						line = line.Trim();
 						if (line.StartsWith("$definebone"))
 						{
-							this.theDefineBonesFileStream.WriteLine(line);
+							theDefineBonesFileStream.WriteLine(line);
 						}
 					}
 
 					if (line.StartsWith("Hit a key"))
 					{
-						this.StopCompile(false, myProcess);
+						StopCompile(false, myProcess);
 					}
 					//TEST: 
 					//Else
@@ -883,13 +883,13 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
-					this.StopCompile(true, myProcess);
+					StopCompile(true, myProcess);
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.StopCompile(true, myProcess);
+					StopCompile(true, myProcess);
 				}
 			}
 		}
@@ -904,7 +904,7 @@ namespace Crowbar
 				line = e.Data;
 				if (line != null)
 				{
-					this.UpdateProgress(3, line);
+					UpdateProgress(3, line);
 				}
 			}
 			catch (Exception ex)
@@ -913,13 +913,13 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
-					this.StopCompile(true, myProcess);
+					StopCompile(true, myProcess);
 				}
-				else if (this.theSkipCurrentModelIsActive)
+				else if (theSkipCurrentModelIsActive)
 				{
-					this.StopCompile(true, myProcess);
+					StopCompile(true, myProcess);
 				}
 			}
 		}
@@ -942,7 +942,7 @@ namespace Crowbar
 
 			if (processIsCanceled)
 			{
-				this.theLastLine = "...Compiling canceled.";
+				theLastLine = "...Compiling canceled.";
 			}
 		}
 
@@ -968,33 +968,33 @@ namespace Crowbar
 					}
 					else
 					{
-						logPath = this.theInputQcPath;
+						logPath = theInputQcPath;
 						logFileName = "compile-log.txt";
 					}
 					FileManager.CreatePath(logPath);
 					logPathFileName = Path.Combine(logPath, logFileName);
 
-					this.theLogFileStream = File.CreateText(logPathFileName);
-					this.theLogFileStream.AutoFlush = true;
+					theLogFileStream = File.CreateText(logPathFileName);
+					theLogFileStream.AutoFlush = true;
 
 					if (File.Exists(logPathFileName))
 					{
-						this.theCompiledLogFiles.Add(FileManager.GetRelativePathFileName(this.theOutputPath, logPathFileName));
+						theCompiledLogFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, logPathFileName));
 					}
 
-					this.theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
-					this.theLogFileStream.Flush();
+					theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
+					theLogFileStream.Flush();
 				}
 				catch (Exception ex)
 				{
-					this.UpdateProgress();
-					this.UpdateProgress(2, "ERROR: Crowbar tried to write the compile log file but the system gave this message: " + ex.Message);
+					UpdateProgress();
+					UpdateProgress(2, "ERROR: Crowbar tried to write the compile log file but the system gave this message: " + ex.Message);
 					status = AppEnums.StatusMessage.Error;
 				}
 			}
 			else
 			{
-				this.theLogFileStream = null;
+				theLogFileStream = null;
 			}
 
 			return status;
@@ -1002,22 +1002,22 @@ namespace Crowbar
 
 		private void UpdateProgressStart(string line)
 		{
-			this.UpdateProgressInternal(0, line);
+			UpdateProgressInternal(0, line);
 		}
 
 		private void UpdateProgressStop(string line)
 		{
-			this.UpdateProgressInternal(100, "\r" + line);
+			UpdateProgressInternal(100, "\r" + line);
 		}
 
 		private void UpdateProgress()
 		{
-			this.UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, "");
 		}
 
 		private void WriteErrorMessage(int indentLevel, string line)
 		{
-			this.UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
+			UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
 		}
 
 		private void UpdateProgress(int indentLevel, string line)
@@ -1029,7 +1029,7 @@ namespace Crowbar
 				indentedLine += "  ";
 			}
 			indentedLine += line;
-			this.UpdateProgressInternal(1, indentedLine);
+			UpdateProgressInternal(1, indentedLine);
 		}
 
 		private string GetDefineBonesPathFileName()
@@ -1053,19 +1053,19 @@ namespace Crowbar
 		{
 			try
 			{
-				this.theDefineBonesFileStream = File.CreateText(this.GetDefineBonesPathFileName());
+				theDefineBonesFileStream = File.CreateText(GetDefineBonesPathFileName());
 			}
 			catch (Exception ex)
 			{
-				this.theDefineBonesFileStream = null;
+				theDefineBonesFileStream = null;
 			}
 		}
 
 		private void CloseDefineBonesFile()
 		{
-			this.theDefineBonesFileStream.Flush();
-			this.theDefineBonesFileStream.Close();
-			this.theDefineBonesFileStream = null;
+			theDefineBonesFileStream.Flush();
+			theDefineBonesFileStream.Close();
+			theDefineBonesFileStream = null;
 		}
 
 		private string InsertAnIncludeDefineBonesFileCommandIntoQcFile(string qciPathFileName)
@@ -1076,13 +1076,13 @@ namespace Crowbar
 
 		private void UpdateProgressInternal(int progressValue, string line)
 		{
-			if (progressValue == 1 && this.theLogFileStream != null)
+			if (progressValue == 1 && theLogFileStream != null)
 			{
-				this.theLogFileStream.WriteLine(line);
-				this.theLogFileStream.Flush();
+				theLogFileStream.WriteLine(line);
+				theLogFileStream.Flush();
 			}
 
-			this.ReportProgress(progressValue, line);
+			ReportProgress(progressValue, line);
 		}
 
 #endregion

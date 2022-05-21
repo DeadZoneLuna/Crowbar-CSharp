@@ -14,8 +14,8 @@ namespace Crowbar
 		public SourceMdlFileData37() : base()
 		{
 
-			this.theModelCommandIsUsed = false;
-			this.theProceduralBonesCommandIsUsed = false;
+			theModelCommandIsUsed = false;
+			theProceduralBonesCommandIsUsed = false;
 		}
 
 		//FROM: The Axel Project - source [MDL v37]\TAPSRC\src\Public\studio.h

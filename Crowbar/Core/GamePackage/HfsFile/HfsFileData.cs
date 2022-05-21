@@ -20,7 +20,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return (this.id == HfsFileData.HFS_ID);
+				return (id == HfsFileData.HFS_ID);
 			}
 		}
 

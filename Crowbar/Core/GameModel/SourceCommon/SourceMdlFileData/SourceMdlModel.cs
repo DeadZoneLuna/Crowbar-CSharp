@@ -16,10 +16,10 @@ namespace Crowbar
 		{
 			//MyBase.New()
 
-			this.theSmdFileNames = new List<string>(SourceConstants.MAX_NUM_LODS);
+			theSmdFileNames = new List<string>(SourceConstants.MAX_NUM_LODS);
 			for (int i = 0; i < SourceConstants.MAX_NUM_LODS; i++)
 			{
-				this.theSmdFileNames.Add("");
+				theSmdFileNames.Add("");
 			}
 		}
 

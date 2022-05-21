@@ -29,22 +29,22 @@ namespace Crowbar
 
 			// Set the ToolStrip and its child controls to use same default FontSize as the other controls. 
 			//    Inexplicably, the default FontSize for them is 9 instead of 8.25 like all other controls.
-			this.ToolStrip1.Font = this.Font;
-			foreach (Control widget in this.ToolStrip1.Controls)
+			ToolStrip1.Font = Font;
+			foreach (Control widget in ToolStrip1.Controls)
 			{
-				widget.Font = this.Font;
+				widget.Font = Font;
 			}
 
-			this.UseInDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.UseInDownloadToolStripMenuItem.Name = "ItemsDataGridViewUseInDownloadToolStripMenuItem";
-			this.UseInDownloadToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.UseInDownloadToolStripMenuItem.Text = "Use in Download";
+			UseInDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			UseInDownloadToolStripMenuItem.Name = "ItemsDataGridViewUseInDownloadToolStripMenuItem";
+			UseInDownloadToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			UseInDownloadToolStripMenuItem.Text = "Use in Download";
 
-			this.ItemContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.ItemContextMenuStrip.Items.Add(this.UseInDownloadToolStripMenuItem);
-			this.ItemContextMenuStrip.Name = "ItemsDataGridViewContextMenuStrip";
-			this.ItemContextMenuStrip.Size = new System.Drawing.Size(177, 114);
-			this.ContextMenuStrip = this.ItemContextMenuStrip;
+			ItemContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
+			ItemContextMenuStrip.Items.Add(UseInDownloadToolStripMenuItem);
+			ItemContextMenuStrip.Name = "ItemsDataGridViewContextMenuStrip";
+			ItemContextMenuStrip.Size = new System.Drawing.Size(177, 114);
+			ContextMenuStrip = ItemContextMenuStrip;
 
 			//Me.ItemsDataGridViewUseInDownloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 			//Me.ItemsDataGridViewUseInDownloadToolStripMenuItem.Name = "ItemsDataGridViewUseInDownloadToolStripMenuItem"
@@ -88,7 +88,7 @@ namespace Crowbar
 			{
 				if (disposing)
 				{
-					this.Free();
+					Free();
 					if (components != null)
 					{
 						components.Dispose();
@@ -113,48 +113,48 @@ namespace Crowbar
 			{
 				MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex = 0;
 			}
-			this.AppIdComboBox.DisplayMember = "Name";
-			this.AppIdComboBox.ValueMember = "ID";
-			this.AppIdComboBox.DataSource = MainCROWBAR.TheApp.SteamAppInfos;
-			this.AppIdComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "PublishGameSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
+			AppIdComboBox.DisplayMember = "Name";
+			AppIdComboBox.ValueMember = "ID";
+			AppIdComboBox.DataSource = MainCROWBAR.TheApp.SteamAppInfos;
+			AppIdComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "PublishGameSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.theBackgroundSteamPipe = new BackgroundSteamPipe();
+			theBackgroundSteamPipe = new BackgroundSteamPipe();
 
-			this.GetUserSteamID();
+			GetUserSteamID();
 
-			this.theSelectedItemIsChangingViaMe = true;
-			this.theItemBindingSource = new BindingSource();
-			this.InitItemListWidgets();
-			this.theItemBindingSource.DataSource = this.theDisplayedItems;
-			this.InitItemDetailWidgets();
-			this.theSelectedItemIsChangingViaMe = false;
+			theSelectedItemIsChangingViaMe = true;
+			theItemBindingSource = new BindingSource();
+			InitItemListWidgets();
+			theItemBindingSource.DataSource = theDisplayedItems;
+			InitItemDetailWidgets();
+			theSelectedItemIsChangingViaMe = false;
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
 
-			this.theSelectedGameIsStillUpdatingInterface = false;
-			this.UpdateSteamAppWidgets();
+			theSelectedGameIsStillUpdatingInterface = false;
+			UpdateSteamAppWidgets();
 		}
 
 		//NOTE: This is called after all child widgets (created via designer) are disposed but before this UserControl is disposed.
 		private void Free()
 		{
-			if (this.theBackgroundSteamPipe != null)
+			if (theBackgroundSteamPipe != null)
 			{
-				this.theBackgroundSteamPipe.Kill();
+				theBackgroundSteamPipe.Kill();
 			}
 
-			if (this.theTagsWidget != null)
+			if (theTagsWidget != null)
 			{
-				this.theTagsWidget.TagsPropertyChanged -= this.TagsWidget_TagsPropertyChanged;
+				theTagsWidget.TagsPropertyChanged -= TagsWidget_TagsPropertyChanged;
 			}
 
-			if (this.theSelectedItem != null)
+			if (theSelectedItem != null)
 			{
-				if (this.theSelectedItem.IsTemplate && this.theSelectedItem.IsChanged)
+				if (theSelectedItem.IsTemplate && theSelectedItem.IsChanged)
 				{
-					this.SaveChangedTemplateToDraft();
+					SaveChangedTemplateToDraft();
 				}
-				this.theSelectedItem.PropertyChanged -= this.WorkshopItem_PropertyChanged;
+				theSelectedItem.PropertyChanged -= WorkshopItem_PropertyChanged;
 			}
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
@@ -166,21 +166,21 @@ namespace Crowbar
 			string result = steamPipe.Open("GetUserSteamID", null, "");
 			if (result != "success")
 			{
-				this.theUserSteamID = 0;
+				theUserSteamID = 0;
 				return;
 			}
-			this.theUserSteamID = steamPipe.GetUserSteamID();
+			theUserSteamID = steamPipe.GetUserSteamID();
 			steamPipe.Shut();
 		}
 
 		//NOTE: Gets the quota for the logged-in Steam user for the selected SteamApp. 
 		private void GetUserSteamAppCloudQuota()
 		{
-			if (this.theSteamAppInfo.UsesSteamUGC)
+			if (theSteamAppInfo.UsesSteamUGC)
 			{
-				this.QuotaProgressBar.Text = "";
-				this.QuotaProgressBar.Value = 0;
-				this.ToolTip1.SetToolTip(this.QuotaProgressBar, "");
+				QuotaProgressBar.Text = "";
+				QuotaProgressBar.Value = 0;
+				ToolTip1.SetToolTip(QuotaProgressBar, "");
 			}
 			else
 			{
@@ -188,7 +188,7 @@ namespace Crowbar
 				string result = steamPipe.Open("GetQuota", null, "");
 				if (result != "success")
 				{
-					this.theUserSteamID = 0;
+					theUserSteamID = 0;
 					return;
 				}
 				ulong availableBytes = 0;
@@ -198,31 +198,31 @@ namespace Crowbar
 
 				if (totalBytes == 0)
 				{
-					this.QuotaProgressBar.Text = "unknown";
-					this.QuotaProgressBar.Value = 0;
-					this.ToolTip1.SetToolTip(this.QuotaProgressBar, "Quota (unknown)");
+					QuotaProgressBar.Text = "unknown";
+					QuotaProgressBar.Value = 0;
+					ToolTip1.SetToolTip(QuotaProgressBar, "Quota (unknown)");
 				}
 				else
 				{
 					ulong usedBytes = totalBytes - availableBytes;
-					int progressPercentage = Convert.ToInt32(usedBytes * (ulong)this.QuotaProgressBar.Maximum / totalBytes);
+					int progressPercentage = Convert.ToInt32(usedBytes * (ulong)QuotaProgressBar.Maximum / totalBytes);
 					string availableBytesText = MathModule.ByteUnitsConversion(availableBytes);
 					string usedBytesText = MathModule.ByteUnitsConversion(usedBytes);
 					string totalBytesText = MathModule.ByteUnitsConversion(totalBytes);
-					this.QuotaProgressBar.Text = availableBytesText + " available ";
-					this.QuotaProgressBar.Value = progressPercentage;
-					this.ToolTip1.SetToolTip(this.QuotaProgressBar, "Quota: " + usedBytesText + " used of " + totalBytesText + " total (" + progressPercentage.ToString() + "% used)");
+					QuotaProgressBar.Text = availableBytesText + " available ";
+					QuotaProgressBar.Value = progressPercentage;
+					ToolTip1.SetToolTip(QuotaProgressBar, "Quota: " + usedBytesText + " used of " + totalBytesText + " total (" + progressPercentage.ToString() + "% used)");
 				}
 			}
 		}
 
 		private void InitItemListWidgets()
 		{
-			this.theDisplayedItems = new WorkshopItemBindingList();
-			this.theEntireListOfItems = new WorkshopItemBindingList();
+			theDisplayedItems = new WorkshopItemBindingList();
+			theEntireListOfItems = new WorkshopItemBindingList();
 
-			this.ItemsDataGridView.AutoGenerateColumns = false;
-			this.ItemsDataGridView.DataSource = this.theItemBindingSource;
+			ItemsDataGridView.AutoGenerateColumns = false;
+			ItemsDataGridView.DataSource = theItemBindingSource;
 
 			DataGridViewTextBoxColumn textColumn = new DataGridViewTextBoxColumn();
 
@@ -237,7 +237,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 20;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -248,7 +248,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 100;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -259,7 +259,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 200;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -270,7 +270,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 110;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -281,7 +281,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 110;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -292,7 +292,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 75;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -303,7 +303,7 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
 			textColumn.Width = 120;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.DataPropertyName = "";
@@ -314,22 +314,22 @@ namespace Crowbar
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-			this.ItemsDataGridView.Columns.Add(textColumn);
+			ItemsDataGridView.Columns.Add(textColumn);
 
-			this.SearchItemsToolStripComboBox.ComboBox.DisplayMember = "Value";
-			this.SearchItemsToolStripComboBox.ComboBox.ValueMember = "Key";
-			this.SearchItemsToolStripComboBox.ComboBox.DataSource = EnumHelper.ToList(typeof(AppEnums.PublishSearchFieldOptions));
-			this.SearchItemsToolStripComboBox.ComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "PublishSearchField", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.SearchItemsToolStripTextBox.TextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "PublishSearchText", false, DataSourceUpdateMode.OnValidation);
+			SearchItemsToolStripComboBox.ComboBox.DisplayMember = "Value";
+			SearchItemsToolStripComboBox.ComboBox.ValueMember = "Key";
+			SearchItemsToolStripComboBox.ComboBox.DataSource = EnumHelper.ToList(typeof(AppEnums.PublishSearchFieldOptions));
+			SearchItemsToolStripComboBox.ComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "PublishSearchField", false, DataSourceUpdateMode.OnPropertyChanged);
+			SearchItemsToolStripTextBox.TextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "PublishSearchText", false, DataSourceUpdateMode.OnValidation);
 		}
 
 		private void InitItemDetailWidgets()
 		{
-			this.ItemTitleTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentTitleMax;
-			this.ItemDescriptionTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentDescriptionMax;
-			this.ItemChangeNoteTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentChangeDescriptionMax;
+			ItemTitleTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentTitleMax;
+			ItemDescriptionTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentDescriptionMax;
+			ItemChangeNoteTextBox.MaxLength = (int)Steamworks.Constants.k_cchPublishedDocumentChangeDescriptionMax;
 
-			this.ItemIDTextBox.DataBindings.Add("Text", this.theItemBindingSource, "ID", false, DataSourceUpdateMode.OnValidation);
+			ItemIDTextBox.DataBindings.Add("Text", theItemBindingSource, "ID", false, DataSourceUpdateMode.OnValidation);
 			//TODO: Change ID textbox to combobox dropdownlist that lists most-recently accessed IDs, including those selected via list.
 			//Dim anEnumList As IList
 			//anEnumList = EnumHelper.ToList(GetType(SteamUGCPublishedFileVisibility))
@@ -338,20 +338,20 @@ namespace Crowbar
 			//Me.ItemIDComboBox.DataSource = anEnumList
 			//Me.ItemIDComboBox.DataBindings.Add("SelectedValue", Me.theItemBindingSource, "ID", False, DataSourceUpdateMode.OnPropertyChanged)
 
-			this.ItemOwnerTextBox.DataBindings.Add("Text", this.theItemBindingSource, "OwnerName", false, DataSourceUpdateMode.OnValidation);
-			this.ItemPostedTextBox.DataBindings.Add("Text", this.theItemBindingSource, "Posted", false, DataSourceUpdateMode.OnValidation);
-			this.ItemUpdatedTextBox.DataBindings.Add("Text", this.theItemBindingSource, "Updated", false, DataSourceUpdateMode.OnValidation);
-			this.ItemTitleTextBox.DataBindings.Add("Text", this.theItemBindingSource, "Title", false, DataSourceUpdateMode.OnPropertyChanged);
+			ItemOwnerTextBox.DataBindings.Add("Text", theItemBindingSource, "OwnerName", false, DataSourceUpdateMode.OnValidation);
+			ItemPostedTextBox.DataBindings.Add("Text", theItemBindingSource, "Posted", false, DataSourceUpdateMode.OnValidation);
+			ItemUpdatedTextBox.DataBindings.Add("Text", theItemBindingSource, "Updated", false, DataSourceUpdateMode.OnValidation);
+			ItemTitleTextBox.DataBindings.Add("Text", theItemBindingSource, "Title", false, DataSourceUpdateMode.OnPropertyChanged);
 			//NOTE: For RichTextBox, set the Formatting argument to True when DataSourceUpdateMode.OnPropertyChanged is used, to prevent characters being entered in reverse order.
-			this.ItemDescriptionTextBox.DataBindings.Add("Text", this.theItemBindingSource, "Description", true, DataSourceUpdateMode.OnPropertyChanged);
-			this.ItemChangeNoteTextBox.DataBindings.Add("Text", this.theItemBindingSource, "ChangeNote", true, DataSourceUpdateMode.OnPropertyChanged);
-			this.ItemContentPathFileNameTextBox.DataBindings.Add("Text", this.theItemBindingSource, "ContentPathFolderOrFileName", false, DataSourceUpdateMode.OnValidation);
-			this.ItemPreviewImagePathFileNameTextBox.DataBindings.Add("Text", this.theItemBindingSource, "PreviewImagePathFileName", false, DataSourceUpdateMode.OnValidation);
+			ItemDescriptionTextBox.DataBindings.Add("Text", theItemBindingSource, "Description", true, DataSourceUpdateMode.OnPropertyChanged);
+			ItemChangeNoteTextBox.DataBindings.Add("Text", theItemBindingSource, "ChangeNote", true, DataSourceUpdateMode.OnPropertyChanged);
+			ItemContentPathFileNameTextBox.DataBindings.Add("Text", theItemBindingSource, "ContentPathFolderOrFileName", false, DataSourceUpdateMode.OnValidation);
+			ItemPreviewImagePathFileNameTextBox.DataBindings.Add("Text", theItemBindingSource, "PreviewImagePathFileName", false, DataSourceUpdateMode.OnValidation);
 
-			this.ItemVisibilityComboBox.DisplayMember = "Value";
-			this.ItemVisibilityComboBox.ValueMember = "Key";
-			this.ItemVisibilityComboBox.DataSource = EnumHelper.ToList(typeof(WorkshopItem.SteamUGCPublishedItemVisibility));
-			this.ItemVisibilityComboBox.DataBindings.Add("SelectedValue", this.theItemBindingSource, "Visibility", false, DataSourceUpdateMode.OnPropertyChanged);
+			ItemVisibilityComboBox.DisplayMember = "Value";
+			ItemVisibilityComboBox.ValueMember = "Key";
+			ItemVisibilityComboBox.DataSource = EnumHelper.ToList(typeof(WorkshopItem.SteamUGCPublishedItemVisibility));
+			ItemVisibilityComboBox.DataBindings.Add("SelectedValue", theItemBindingSource, "Visibility", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 #endregion
@@ -369,11 +369,11 @@ namespace Crowbar
 		private void PublishUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.AppIdComboBox, this.RefreshGameItemsButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(AppIdComboBox, RefreshGameItemsButton);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -383,12 +383,12 @@ namespace Crowbar
 
 		private void RefreshGameItemsButton_Click(object sender, EventArgs e)
 		{
-			this.UpdateSteamAppWidgets();
+			UpdateSteamAppWidgets();
 		}
 
 		private void OpenSteamSubscriberAgreementButton_Click(object sender, EventArgs e)
 		{
-			this.OpenSteamSubscriberAgreement();
+			OpenSteamSubscriberAgreement();
 		}
 
 		private void ItemsDataGridView_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
@@ -439,25 +439,25 @@ namespace Crowbar
 
 		private void ItemsDataGridView_SelectionChanged(object sender, EventArgs e)
 		{
-			if (!this.theSelectedItemIsChangingViaMe && this.ItemsDataGridView.SelectedRows.Count > 0)
+			if (!theSelectedItemIsChangingViaMe && ItemsDataGridView.SelectedRows.Count > 0)
 			{
 				//If Me.ItemsDataGridView.SelectedRows.Count > 0 Then
 				//NOTE: Allow the highlight to show in the grid before updating item details.
 				Application.DoEvents();
-				if (this.theSelectedItem != null && this.theSelectedItem.IsTemplate && this.theSelectedItem.IsChanged)
+				if (theSelectedItem != null && theSelectedItem.IsTemplate && theSelectedItem.IsChanged)
 				{
-					this.SaveChangedTemplateToDraft();
+					SaveChangedTemplateToDraft();
 				}
-				this.UpdateItemDetails();
+				UpdateItemDetails();
 			}
 		}
 
 		//NOTE: Without this handler, when Items grid is sorted, the selection stays at list index instead of with the item.
 		private void ItemsDataGridView_Sorted(object sender, EventArgs e)
 		{
-			this.theSelectedItemIsChangingViaMe = true;
-			this.theItemBindingSource.Position = this.theItemBindingSource.IndexOf(this.theSelectedItem);
-			this.theSelectedItemIsChangingViaMe = false;
+			theSelectedItemIsChangingViaMe = true;
+			theItemBindingSource.Position = theItemBindingSource.IndexOf(theSelectedItem);
+			theSelectedItemIsChangingViaMe = false;
 		}
 
 		//Private Sub UseInDownloadToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemsDataGridViewUseInDownloadToolStripMenuItem.Click, ItemIdLabelUseInDownloadToolStripMenuItem.Click, ItemIdTextBoxUseInDownloadToolStripMenuItem.Click
@@ -465,7 +465,7 @@ namespace Crowbar
 		//End Sub
 		private void UseInDownloadToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.UseItemIdInDownload();
+			UseItemIdInDownload();
 		}
 
 		//Private Sub SearchItemsToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SearchItemsToolStripComboBox.SelectedIndexChanged
@@ -485,7 +485,7 @@ namespace Crowbar
 					//End If
 					//'NOTE: Prevent annoying beep when textbox is single line.
 					//e.Handled = True
-					this.SearchItems();
+					SearchItems();
 				}
 				catch (Exception ex)
 				{
@@ -496,88 +496,88 @@ namespace Crowbar
 
 		private void SearchItemsToolStripButton_Click(object sender, EventArgs e)
 		{
-			this.SearchItems();
+			SearchItems();
 		}
 
 		private void AddItemButton_Click(object sender, EventArgs e)
 		{
-			this.AddDraftItem(null);
-			this.SelectItemInGrid(this.ItemsDataGridView.Rows.Count - 1);
+			AddDraftItem(null);
+			SelectItemInGrid(ItemsDataGridView.Rows.Count - 1);
 		}
 
 		private void OwnerLabel_DoubleClick(object sender, EventArgs e)
 		{
-			this.SwapBetweenOwnerNameAndID();
+			SwapBetweenOwnerNameAndID();
 		}
 
 		private void ToggleWordWrapForDescriptionCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			this.ToggleWordWrapImageOnCheckbox((CheckBox)sender);
-			this.ItemDescriptionTextBox.WordWrap = this.ToggleWordWrapForDescriptionCheckBox.Checked;
+			ToggleWordWrapImageOnCheckbox((CheckBox)sender);
+			ItemDescriptionTextBox.WordWrap = ToggleWordWrapForDescriptionCheckBox.Checked;
 		}
 
 		private void ToggleWordWrapForChangeNoteCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			this.ToggleWordWrapImageOnCheckbox((CheckBox)sender);
-			this.ItemChangeNoteTextBox.WordWrap = this.ToggleWordWrapForChangeNoteCheckBox.Checked;
+			ToggleWordWrapImageOnCheckbox((CheckBox)sender);
+			ItemChangeNoteTextBox.WordWrap = ToggleWordWrapForChangeNoteCheckBox.Checked;
 		}
 
 		private void BrowseContentPathFileNameButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForContentPathFolderOrFileName();
+			BrowseForContentPathFolderOrFileName();
 		}
 
 		private void BrowsePreviewImageButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForPreviewImage();
+			BrowseForPreviewImage();
 		}
 
 		private void SaveAsTemplateOrDraftItemButton_Click(object sender, EventArgs e)
 		{
 			if (SaveAsTemplateOrDraftItemButton.Text == "Save as Template")
 			{
-				this.SaveItemAsTemplate();
+				SaveItemAsTemplate();
 			}
 			else
 			{
-				this.AddDraftItem(this.theSelectedItem);
-				if (this.theSelectedItem.IsTemplate && this.theSelectedItem.IsChanged)
+				AddDraftItem(theSelectedItem);
+				if (theSelectedItem.IsTemplate && theSelectedItem.IsChanged)
 				{
-					this.RevertChangedTemplate();
+					RevertChangedTemplate();
 				}
-				this.SelectItemInGrid(this.ItemsDataGridView.Rows.Count - 1);
+				SelectItemInGrid(ItemsDataGridView.Rows.Count - 1);
 			}
 		}
 
 		private void RefreshOrRevertButton_Click(object sender, EventArgs e)
 		{
-			this.RefreshOrRevertItem();
+			RefreshOrRevertItem();
 		}
 
 		private void OpenWorkshopPageButton_Click(object sender, EventArgs e)
 		{
-			this.OpenWorkshopPage();
+			OpenWorkshopPage();
 		}
 
 		private void SaveTemplateButton_Click(object sender, EventArgs e)
 		{
-			this.SaveTemplate();
+			SaveTemplate();
 		}
 
 		private void DeleteItemButton_Click(object sender, EventArgs e)
 		{
-			this.DeleteItem();
+			DeleteItem();
 		}
 
 		//NOTE: There is no automatic data-binding with TagsWidget, so manually bind from widget to object here.
 		private void TagsWidget_TagsPropertyChanged(object sender, EventArgs e)
 		{
-			this.theSelectedItem.Tags = this.theTagsWidget.ItemTags;
+			theSelectedItem.Tags = theTagsWidget.ItemTags;
 		}
 
 		private void PublishItemButton_Click(object sender, EventArgs e)
 		{
-			this.PublishItem();
+			PublishItem();
 		}
 
 #endregion
@@ -591,72 +591,72 @@ namespace Crowbar
 				MainCROWBAR.TheApp.Settings.PublishSearchField = AppEnums.PublishSearchFieldOptions.ID;
 				MainCROWBAR.TheApp.Settings.PublishSearchText = "";
 
-				this.UpdateSteamAppWidgets();
+				UpdateSteamAppWidgets();
 			}
 		}
 
 		private void WorkshopItem_PropertyChanged(System.Object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (this.theSelectedItemDetailsIsChangingViaMe)
+			if (theSelectedItemDetailsIsChangingViaMe)
 			{
 				return;
 			}
 
 			if (e.PropertyName == "ID")
 			{
-				this.theWorkshopPageLink = AppConstants.WorkshopLinkStart + this.theSelectedItem.ID;
+				theWorkshopPageLink = AppConstants.WorkshopLinkStart + theSelectedItem.ID;
 			}
 			else if (e.PropertyName == "Title")
 			{
-				this.UpdateItemTitleLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemTitleLabel();
+				UpdateItemChangedStatus();
 			}
 			else if (e.PropertyName == "Description")
 			{
-				this.UpdateItemDescriptionLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemDescriptionLabel();
+				UpdateItemChangedStatus();
 			}
 			else if (e.PropertyName == "ChangeNote")
 			{
-				this.UpdateItemChangeNoteLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemChangeNoteLabel();
+				UpdateItemChangedStatus();
 			}
 			else if (e.PropertyName == "ContentSize")
 			{
-				this.UpdateItemContentLabel();
+				UpdateItemContentLabel();
 			}
 			else if (e.PropertyName == "ContentPathFolderOrFileName")
 			{
-				this.UpdateItemContentLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemContentLabel();
+				UpdateItemChangedStatus();
 			}
 			else if (e.PropertyName == "PreviewImageSize")
 			{
-				this.UpdateItemPreviewImageLabel();
-				this.UpdateItemPreviewImageBox();
+				UpdateItemPreviewImageLabel();
+				UpdateItemPreviewImageBox();
 			}
 			else if (e.PropertyName == "PreviewImagePathFileName")
 			{
-				this.UpdateItemPreviewImageLabel();
-				this.UpdateItemPreviewImageBox();
-				this.UpdateItemChangedStatus();
+				UpdateItemPreviewImageLabel();
+				UpdateItemPreviewImageBox();
+				UpdateItemChangedStatus();
 				//NOTE: Using this property raises an exception, possibly because the DataGridView gets confused by the property being a list, so use "TagsAsTextLine" property.
 				//ElseIf e.PropertyName = "Tags" Then
 			}
 			else if (e.PropertyName == "TagsAsTextLine")
 			{
-				this.UpdateItemTagsLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemTagsLabel();
+				UpdateItemChangedStatus();
 			}
 			else if (e.PropertyName == "Visibility")
 			{
-				this.UpdateItemVisibilityLabel();
-				this.UpdateItemChangedStatus();
+				UpdateItemVisibilityLabel();
+				UpdateItemChangedStatus();
 			}
 
-			if (this.theSelectedItem.IsDraft)
+			if (theSelectedItem.IsDraft)
 			{
-				this.theSelectedItem.Updated = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
+				theSelectedItem.Updated = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
 			}
 		}
 
@@ -664,18 +664,18 @@ namespace Crowbar
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.theExpectedPublishedItemCount = Convert.ToUInt32(e.UserState);
+				theExpectedPublishedItemCount = Convert.ToUInt32(e.UserState);
 			}
 			else if (e.ProgressPercentage == 2)
 			{
 				WorkshopItem publishedItem = (WorkshopItem)e.UserState;
 
 				bool itemHasBeenFound = false;
-				foreach (WorkshopItem item in this.theDisplayedItems)
+				foreach (WorkshopItem item in theDisplayedItems)
 				{
 					if (item.ID == publishedItem.ID)
 					{
@@ -685,11 +685,11 @@ namespace Crowbar
 				}
 				if (!itemHasBeenFound)
 				{
-					this.theDisplayedItems.Add(publishedItem);
+					theDisplayedItems.Add(publishedItem);
 				}
 
 				itemHasBeenFound = false;
-				foreach (WorkshopItem item in this.theEntireListOfItems)
+				foreach (WorkshopItem item in theEntireListOfItems)
 				{
 					if (item.ID == publishedItem.ID)
 					{
@@ -699,7 +699,7 @@ namespace Crowbar
 				}
 				if (!itemHasBeenFound)
 				{
-					this.theEntireListOfItems.Add(publishedItem);
+					theEntireListOfItems.Add(publishedItem);
 				}
 				//ElseIf e.ProgressPercentage = 3 Then
 				//	Dim availableBytes As ULong = CULng(e.UserState)
@@ -709,7 +709,7 @@ namespace Crowbar
 				//	Me.SteamCloudSizeLabel.Text += totalBytes.ToString("N") + " total)"
 			}
 
-			this.UpdateItemListWidgets(true);
+			UpdateItemListWidgets(true);
 		}
 
 		private void GetPublishedItems_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -720,26 +720,26 @@ namespace Crowbar
 			}
 			else
 			{
-				this.UpdateItemListWidgets(false);
+				UpdateItemListWidgets(false);
 			}
-			this.theSelectedGameIsStillUpdatingInterface = false;
+			theSelectedGameIsStillUpdatingInterface = false;
 		}
 
 		private void GetPublishedItemDetails_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				if (this.ItemPreviewImagePictureBox.Image != null)
+				if (ItemPreviewImagePictureBox.Image != null)
 				{
-					this.ItemPreviewImagePictureBox.Image.Dispose();
+					ItemPreviewImagePictureBox.Image.Dispose();
 				}
-				this.ItemPreviewImagePictureBox.Image = (Image)e.UserState;
+				ItemPreviewImagePictureBox.Image = (Image)e.UserState;
 				//Application.DoEvents()
-				this.ItemPreviewImagePictureBox.Refresh();
+				ItemPreviewImagePictureBox.Refresh();
 			}
 		}
 
@@ -755,43 +755,43 @@ namespace Crowbar
 				WorkshopItem publishedItem = output.PublishedItem;
 				if (output.Action == "Updated")
 				{
-					if (publishedItem.ID != "0" && publishedItem.ID == this.theSelectedItem.ID)
+					if (publishedItem.ID != "0" && publishedItem.ID == theSelectedItem.ID)
 					{
-						this.theSelectedItem.Updated = publishedItem.Updated;
+						theSelectedItem.Updated = publishedItem.Updated;
 					}
 				}
 				else
 				{
 					if (publishedItem.ID != "0")
 					{
-						if (publishedItem.ID == this.theSelectedItem.ID)
+						if (publishedItem.ID == theSelectedItem.ID)
 						{
-							string previewImagePathFileName = this.theSelectedItem.PreviewImagePathFileName;
+							string previewImagePathFileName = theSelectedItem.PreviewImagePathFileName;
 
-							this.theSelectedItem.CreatorAppID = publishedItem.CreatorAppID;
-							this.theSelectedItem.ID = publishedItem.ID;
-							this.theSelectedItem.OwnerID = publishedItem.OwnerID;
-							this.theSelectedItem.OwnerName = publishedItem.OwnerName;
-							this.theSelectedItem.Posted = publishedItem.Posted;
-							this.theSelectedItem.Updated = publishedItem.Updated;
-							this.theSelectedItem.Title = publishedItem.Title;
-							this.theSelectedItem.Description = publishedItem.Description;
-							this.theSelectedItem.ContentSize = publishedItem.ContentSize;
-							if (this.theSteamAppInfo.UsesSteamUGC && string.IsNullOrEmpty(publishedItem.ContentPathFolderOrFileName))
+							theSelectedItem.CreatorAppID = publishedItem.CreatorAppID;
+							theSelectedItem.ID = publishedItem.ID;
+							theSelectedItem.OwnerID = publishedItem.OwnerID;
+							theSelectedItem.OwnerName = publishedItem.OwnerName;
+							theSelectedItem.Posted = publishedItem.Posted;
+							theSelectedItem.Updated = publishedItem.Updated;
+							theSelectedItem.Title = publishedItem.Title;
+							theSelectedItem.Description = publishedItem.Description;
+							theSelectedItem.ContentSize = publishedItem.ContentSize;
+							if (theSteamAppInfo.UsesSteamUGC && string.IsNullOrEmpty(publishedItem.ContentPathFolderOrFileName))
 							{
-								this.theSelectedItem.ContentPathFolderOrFileName = "Folder_" + publishedItem.ID;
+								theSelectedItem.ContentPathFolderOrFileName = "Folder_" + publishedItem.ID;
 							}
 							else
 							{
-								this.theSelectedItem.ContentPathFolderOrFileName = publishedItem.ContentPathFolderOrFileName;
+								theSelectedItem.ContentPathFolderOrFileName = publishedItem.ContentPathFolderOrFileName;
 							}
-							this.theSelectedItem.PreviewImageSize = publishedItem.PreviewImageSize;
-							this.theSelectedItem.PreviewImagePathFileName = publishedItem.PreviewImagePathFileName;
-							this.theSelectedItem.Visibility = publishedItem.Visibility;
-							this.theSelectedItem.TagsAsTextLine = publishedItem.TagsAsTextLine;
+							theSelectedItem.PreviewImageSize = publishedItem.PreviewImageSize;
+							theSelectedItem.PreviewImagePathFileName = publishedItem.PreviewImagePathFileName;
+							theSelectedItem.Visibility = publishedItem.Visibility;
+							theSelectedItem.TagsAsTextLine = publishedItem.TagsAsTextLine;
 
-							this.theSelectedItem.IsChanged = false;
-							this.DeleteTempPreviewImageFile(previewImagePathFileName, this.theSelectedItem.ID);
+							theSelectedItem.IsChanged = false;
+							DeleteTempPreviewImageFile(previewImagePathFileName, theSelectedItem.ID);
 							//Me.UpdateItemDetailWidgets()
 						}
 						else
@@ -799,11 +799,11 @@ namespace Crowbar
 							//NOTE: This is an item from SearchItemIDs().
 							if (output.Action == "FindAll")
 							{
-								this.theDisplayedItems.Add(publishedItem);
-								this.theEntireListOfItems.Add(publishedItem);
-								this.theSelectedItemIsChangingViaMe = true;
-								this.SelectItemInGrid(this.ItemsDataGridView.Rows.Count - 1);
-								this.theSelectedItemIsChangingViaMe = false;
+								theDisplayedItems.Add(publishedItem);
+								theEntireListOfItems.Add(publishedItem);
+								theSelectedItemIsChangingViaMe = true;
+								SelectItemInGrid(ItemsDataGridView.Rows.Count - 1);
+								theSelectedItemIsChangingViaMe = false;
 							}
 						}
 					}
@@ -813,17 +813,17 @@ namespace Crowbar
 			}
 
 			//Me.theSelectedItemIsChangingViaMe = False
-			this.theSelectedItemDetailsIsChangingViaMe = false;
+			theSelectedItemDetailsIsChangingViaMe = false;
 
-			this.AppIdComboBox.Enabled = true;
-			this.ItemsDataGridView.Enabled = true;
-			this.ItemTitleTextBox.Enabled = true;
-			this.ItemDescriptionTextBox.Enabled = true;
-			this.ItemChangeNoteTextBox.Enabled = true;
-			this.ItemContentPathFileNameTextBox.Enabled = true;
-			this.ItemPreviewImagePathFileNameTextBox.Enabled = true;
-			this.ItemTagsGroupBox.Enabled = true;
-			this.UpdateItemDetailWidgets();
+			AppIdComboBox.Enabled = true;
+			ItemsDataGridView.Enabled = true;
+			ItemTitleTextBox.Enabled = true;
+			ItemDescriptionTextBox.Enabled = true;
+			ItemChangeNoteTextBox.Enabled = true;
+			ItemContentPathFileNameTextBox.Enabled = true;
+			ItemPreviewImagePathFileNameTextBox.Enabled = true;
+			ItemTagsGroupBox.Enabled = true;
+			UpdateItemDetailWidgets();
 		}
 
 		private void DeletePublishedItemFromWorkshop_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -842,43 +842,43 @@ namespace Crowbar
 				string result = (e.Result == null ? null : Convert.ToString(e.Result));
 				if (result == "success")
 				{
-					this.LogTextBox.AppendText("Delete of published item succeeded." + "\r\n");
-					if (this.theExpectedPublishedItemCount > 0)
+					LogTextBox.AppendText("Delete of published item succeeded." + "\r\n");
+					if (theExpectedPublishedItemCount > 0)
 					{
-						this.theExpectedPublishedItemCount -= 1U;
+						theExpectedPublishedItemCount -= 1U;
 					}
 					else
 					{
 						//TODO: When testing, somehow got to here.
 						int debug = 4242;
 					}
-					this.UpdateAfterDeleteItem();
+					UpdateAfterDeleteItem();
 				}
 				else
 				{
-					this.LogTextBox.AppendText("ERROR: " + result + "\r\n");
-					this.UpdateItemDetailButtons();
+					LogTextBox.AppendText("ERROR: " + result + "\r\n");
+					UpdateItemDetailButtons();
 				}
 			}
-			this.AppIdComboBox.Enabled = true;
-			this.ItemsDataGridView.Enabled = true;
-			this.ItemTitleTextBox.Enabled = true;
-			this.ItemDescriptionTextBox.Enabled = true;
-			this.ItemChangeNoteTextBox.Enabled = true;
-			this.ItemContentPathFileNameTextBox.Enabled = true;
-			this.ItemPreviewImagePathFileNameTextBox.Enabled = true;
-			this.ItemTagsGroupBox.Enabled = true;
+			AppIdComboBox.Enabled = true;
+			ItemsDataGridView.Enabled = true;
+			ItemTitleTextBox.Enabled = true;
+			ItemDescriptionTextBox.Enabled = true;
+			ItemChangeNoteTextBox.Enabled = true;
+			ItemContentPathFileNameTextBox.Enabled = true;
+			ItemPreviewImagePathFileNameTextBox.Enabled = true;
+			ItemTagsGroupBox.Enabled = true;
 		}
 
 		private void PublishItem_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			if (e.ProgressPercentage == 0)
 			{
-				this.LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText((e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.LogTextBox.AppendText("\t" + (e.UserState == null ? null : Convert.ToString(e.UserState)));
+				LogTextBox.AppendText("\t" + (e.UserState == null ? null : Convert.ToString(e.UserState)));
 			}
 			else if (e.ProgressPercentage == 2)
 			{
@@ -887,11 +887,11 @@ namespace Crowbar
 				if (outputInfo.TotalUploadedByteCount > 0)
 				{
 					int progressPercentage = Convert.ToInt32(outputInfo.UploadedByteCount * 100 / outputInfo.TotalUploadedByteCount);
-					this.LogTextBox.AppendText("\t" + "\t" + outputInfo.Status + ": " + outputInfo.UploadedByteCount.ToString("N0") + " / " + outputInfo.TotalUploadedByteCount.ToString("N0") + "   " + progressPercentage.ToString() + " %" + "\r\n");
+					LogTextBox.AppendText("\t" + "\t" + outputInfo.Status + ": " + outputInfo.UploadedByteCount.ToString("N0") + " / " + outputInfo.TotalUploadedByteCount.ToString("N0") + "   " + progressPercentage.ToString() + " %" + "\r\n");
 				}
 				else
 				{
-					this.LogTextBox.AppendText("\t" + outputInfo.Status + "." + "\r\n");
+					LogTextBox.AppendText("\t" + outputInfo.Status + "." + "\r\n");
 				}
 			}
 		}
@@ -912,51 +912,51 @@ namespace Crowbar
 
 				if (result == "Succeeded")
 				{
-					if (this.theSelectedItem.IsDraft)
+					if (theSelectedItem.IsDraft)
 					{
-						this.ChangeDraftItemIntoPublishedItem(this.theSelectedItem);
-						this.theSelectedItem.ID = publishedItemID;
+						ChangeDraftItemIntoPublishedItem(theSelectedItem);
+						theSelectedItem.ID = publishedItemID;
 					}
 					else
 					{
-						this.ChangeChangedItemIntoPublishedItem(this.theSelectedItem);
+						ChangeChangedItemIntoPublishedItem(theSelectedItem);
 					}
 
-					this.theSelectedItem.OwnerID = outputInfo.PublishedItemOwnerID;
-					this.theSelectedItem.OwnerName = outputInfo.PublishedItemOwnerName;
-					this.theSelectedItem.Posted = outputInfo.PublishedItemPosted;
-					this.theSelectedItem.Updated = outputInfo.PublishedItemUpdated;
-					this.theSelectedItem.ChangeNote = "";
+					theSelectedItem.OwnerID = outputInfo.PublishedItemOwnerID;
+					theSelectedItem.OwnerName = outputInfo.PublishedItemOwnerName;
+					theSelectedItem.Posted = outputInfo.PublishedItemPosted;
+					theSelectedItem.Updated = outputInfo.PublishedItemUpdated;
+					theSelectedItem.ChangeNote = "";
 
 					if (outputInfo.SteamAgreementStatus == "NotAccepted")
 					{
 						agreementWindowShouldBeShown = true;
 					}
 
-					this.DeleteInUseTempPreviewImageFile(this.theSelectedItem.PreviewImagePathFileName, this.theSelectedItem.ID);
-					this.theSelectedItem.PreviewImagePathFileName = Path.GetFileName(this.theSelectedItem.PreviewImagePathFileName);
-					this.theSelectedItem.PreviewImagePathFileNameIsChanged = false;
+					DeleteInUseTempPreviewImageFile(theSelectedItem.PreviewImagePathFileName, theSelectedItem.ID);
+					theSelectedItem.PreviewImagePathFileName = Path.GetFileName(theSelectedItem.PreviewImagePathFileName);
+					theSelectedItem.PreviewImagePathFileNameIsChanged = false;
 				}
 				else if (result == "FailedContentAndChangeNote")
 				{
 					//NOTE: Content file and change note were not updated. Keep their changed status.
-					if (this.theSelectedItem.IsDraft)
+					if (theSelectedItem.IsDraft)
 					{
-						bool contentPathFolderOrFileNameIsChanged = this.theSelectedItem.ContentPathFolderOrFileNameIsChanged;
-						bool changeNoteIsChanged = this.theSelectedItem.ChangeNoteIsChanged;
+						bool contentPathFolderOrFileNameIsChanged = theSelectedItem.ContentPathFolderOrFileNameIsChanged;
+						bool changeNoteIsChanged = theSelectedItem.ChangeNoteIsChanged;
 
-						this.ChangeDraftItemIntoPublishedItem(this.theSelectedItem);
+						ChangeDraftItemIntoPublishedItem(theSelectedItem);
 
-						this.theSelectedItem.ContentPathFolderOrFileNameIsChanged = contentPathFolderOrFileNameIsChanged;
-						this.theSelectedItem.ChangeNoteIsChanged = changeNoteIsChanged;
-						this.theSelectedItem.IsChanged = contentPathFolderOrFileNameIsChanged || changeNoteIsChanged;
+						theSelectedItem.ContentPathFolderOrFileNameIsChanged = contentPathFolderOrFileNameIsChanged;
+						theSelectedItem.ChangeNoteIsChanged = changeNoteIsChanged;
+						theSelectedItem.IsChanged = contentPathFolderOrFileNameIsChanged || changeNoteIsChanged;
 					}
 
-					this.theSelectedItem.TitleIsChanged = false;
-					this.theSelectedItem.DescriptionIsChanged = false;
-					this.theSelectedItem.PreviewImagePathFileNameIsChanged = false;
-					this.theSelectedItem.VisibilityIsChanged = false;
-					this.theSelectedItem.TagsIsChanged = false;
+					theSelectedItem.TitleIsChanged = false;
+					theSelectedItem.DescriptionIsChanged = false;
+					theSelectedItem.PreviewImagePathFileNameIsChanged = false;
+					theSelectedItem.VisibilityIsChanged = false;
+					theSelectedItem.TagsIsChanged = false;
 				}
 			}
 
@@ -969,15 +969,15 @@ namespace Crowbar
 			//Me.ItemPreviewImagePathFileNameTextBox.Enabled = True
 			//Me.ItemTagsGroupBox.Enabled = True
 			//Me.UpdateItemDetailWidgets()
-			this.UpdateWidgetsAfterPublish();
+			UpdateWidgetsAfterPublish();
 
-			this.GetUserSteamAppCloudQuota();
+			GetUserSteamAppCloudQuota();
 
-			this.theSelectedItemDetailsIsChangingViaMe = false;
+			theSelectedItemDetailsIsChangingViaMe = false;
 
 			if (agreementWindowShouldBeShown)
 			{
-				this.OpenAgreementRequiresAcceptanceWindow();
+				OpenAgreementRequiresAcceptanceWindow();
 			}
 		}
 
@@ -988,60 +988,60 @@ namespace Crowbar
 		private void UpdateSteamAppWidgets()
 		{
 			//NOTE: If this has not been created, then app is in not far enough in Init() and not ready for update.
-			if (this.theEntireListOfItems == null || this.theSelectedGameIsStillUpdatingInterface)
+			if (theEntireListOfItems == null || theSelectedGameIsStillUpdatingInterface)
 			{
 				return;
 			}
-			this.theSelectedGameIsStillUpdatingInterface = true;
+			theSelectedGameIsStillUpdatingInterface = true;
 
-			if (!string.IsNullOrEmpty(this.LogTextBox.Text))
+			if (!string.IsNullOrEmpty(LogTextBox.Text))
 			{
-				this.LogTextBox.AppendText("------" + "\r\n");
+				LogTextBox.AppendText("------" + "\r\n");
 			}
 
-			this.theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos[MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex];
-			this.theSteamAppId = this.theSteamAppInfo.ID;
-			MainCROWBAR.TheApp.WriteSteamAppIdFile(this.theSteamAppId.m_AppId);
+			theSteamAppInfo = MainCROWBAR.TheApp.SteamAppInfos[MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex];
+			theSteamAppId = theSteamAppInfo.ID;
+			MainCROWBAR.TheApp.WriteSteamAppIdFile(theSteamAppId.m_AppId);
 
-			this.theSteamAppUserInfo = null;
+			theSteamAppUserInfo = null;
 			try
 			{
 				if (MainCROWBAR.TheApp.Settings.PublishSteamAppUserInfos.Count > 0)
 				{
 					//NOTE: Using FirstOrDefault() instead of First() to avoid an exception when no item is found.
-					this.theSteamAppUserInfo = MainCROWBAR.TheApp.Settings.PublishSteamAppUserInfos.FirstOrDefault((info) => info.AppID == (int)this.theSteamAppId.m_AppId);
+					theSteamAppUserInfo = MainCROWBAR.TheApp.Settings.PublishSteamAppUserInfos.FirstOrDefault((info) => info.AppID == (int)theSteamAppId.m_AppId);
 				}
 			}
 			catch (Exception ex)
 			{
 				int debug = 4242;
 			}
-			if (this.theSteamAppUserInfo == null)
+			if (theSteamAppUserInfo == null)
 			{
 				//NOTE: Value was not found, so set to new info.
-				this.theSteamAppUserInfo = new SteamAppUserInfo(this.theSteamAppId.m_AppId);
-				MainCROWBAR.TheApp.Settings.PublishSteamAppUserInfos.Add(this.theSteamAppUserInfo);
+				theSteamAppUserInfo = new SteamAppUserInfo(theSteamAppId.m_AppId);
+				MainCROWBAR.TheApp.Settings.PublishSteamAppUserInfos.Add(theSteamAppUserInfo);
 			}
 
 			//NOTE: Swap the Tags widget before selecting an item so when item is selected tags will set correctly.
-			this.SwapSteamAppTagsWidget();
+			SwapSteamAppTagsWidget();
 
 			int selectedRowIndex = 0;
-			this.theDisplayedItems.Clear();
-			this.theEntireListOfItems.Clear();
+			theDisplayedItems.Clear();
+			theEntireListOfItems.Clear();
 			//Me.theTemplateItemTotalCount = 0
 			//Me.theChangedItemTotalCount = 0
-			if (this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Count == 0)
+			if (theSteamAppUserInfo.DraftTemplateAndChangedItems.Count == 0)
 			{
-				this.AddDraftItem(null);
+				AddDraftItem(null);
 			}
 			else
 			{
 				WorkshopItem draftItem = null;
 				long mostRecentlyUpdatedDraftItemDateTime = 0;
-				for (int draftItemIndex = 0; draftItemIndex < this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Count; draftItemIndex++)
+				for (int draftItemIndex = 0; draftItemIndex < theSteamAppUserInfo.DraftTemplateAndChangedItems.Count; draftItemIndex++)
 				{
-					draftItem = this.theSteamAppUserInfo.DraftTemplateAndChangedItems[draftItemIndex];
+					draftItem = theSteamAppUserInfo.DraftTemplateAndChangedItems[draftItemIndex];
 					if (draftItem.IsTemplate)
 					{
 						//Me.theTemplateItemTotalCount += 1UI
@@ -1056,130 +1056,130 @@ namespace Crowbar
 						mostRecentlyUpdatedDraftItemDateTime = draftItem.Updated;
 						selectedRowIndex = draftItemIndex;
 					}
-					this.theDisplayedItems.Add(draftItem);
-					this.theEntireListOfItems.Add(draftItem);
+					theDisplayedItems.Add(draftItem);
+					theEntireListOfItems.Add(draftItem);
 				}
 			}
-			this.SelectItemInGrid(selectedRowIndex);
+			SelectItemInGrid(selectedRowIndex);
 
-			this.GetUserSteamAppCloudQuota();
+			GetUserSteamAppCloudQuota();
 
-			this.theBackgroundSteamPipe.GetPublishedItems(this.GetPublishedItems_ProgressChanged, this.GetPublishedItems_RunWorkerCompleted, this.theSteamAppId.ToString());
+			theBackgroundSteamPipe.GetPublishedItems(GetPublishedItems_ProgressChanged, GetPublishedItems_RunWorkerCompleted, theSteamAppId.ToString());
 		}
 
 		private void SwapSteamAppTagsWidget()
 		{
 			if (theTagsWidget != null)
 			{
-				this.theTagsWidget.TagsPropertyChanged -= this.TagsWidget_TagsPropertyChanged;
+				theTagsWidget.TagsPropertyChanged -= TagsWidget_TagsPropertyChanged;
 			}
 
 			//Me.theTagsWidget = CType(Me.AppIdComboBox.SelectedItem, SteamAppInfo).TagsWidget
 			//Dim info As SteamAppInfo = CType(Me.AppIdComboBox.SelectedItem, SteamAppInfo)
 			SteamAppInfoBase info = MainCROWBAR.TheApp.SteamAppInfos[MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex];
 			Type t = info.TagsControlType;
-			this.theTagsWidget = (Base_TagsUserControl)(t.GetConstructor(new System.Type[0]).Invoke(new object[0]));
-			if (this.ItemTagsGroupBox.Controls.Count > 0)
+			theTagsWidget = (Base_TagsUserControl)(t.GetConstructor(new System.Type[0]).Invoke(new object[0]));
+			if (ItemTagsGroupBox.Controls.Count > 0)
 			{
-				this.ItemTagsGroupBox.Controls.RemoveAt(0);
+				ItemTagsGroupBox.Controls.RemoveAt(0);
 			}
-			this.ItemTagsGroupBox.Controls.Add(this.theTagsWidget);
-			this.theTagsWidget.AutoScroll = true;
-			this.theTagsWidget.Dock = System.Windows.Forms.DockStyle.Fill;
+			ItemTagsGroupBox.Controls.Add(theTagsWidget);
+			theTagsWidget.AutoScroll = true;
+			theTagsWidget.Dock = System.Windows.Forms.DockStyle.Fill;
 			//Me.theTagsWidget.ItemTags = CType(Resources.GetObject("ContagionTagsUserControl1.ItemTags"), System.Collections.Generic.List(Of String))
-			this.theTagsWidget.Location = new System.Drawing.Point(3, 17);
-			this.theTagsWidget.Name = "TagsUserControl";
-			this.theTagsWidget.Size = new System.Drawing.Size(193, 307);
-			this.theTagsWidget.TabIndex = 0;
+			theTagsWidget.Location = new System.Drawing.Point(3, 17);
+			theTagsWidget.Name = "TagsUserControl";
+			theTagsWidget.Size = new System.Drawing.Size(193, 307);
+			theTagsWidget.TabIndex = 0;
 
-			this.theTagsWidget.TagsPropertyChanged += this.TagsWidget_TagsPropertyChanged;
+			theTagsWidget.TagsPropertyChanged += TagsWidget_TagsPropertyChanged;
 		}
 
 		private void SelectItemInGrid()
 		{
 			int selectedRowIndex = 0;
-			if (this.ItemsDataGridView.SelectedRows.Count > 0)
+			if (ItemsDataGridView.SelectedRows.Count > 0)
 			{
-				selectedRowIndex = this.ItemsDataGridView.SelectedRows[0].Index;
+				selectedRowIndex = ItemsDataGridView.SelectedRows[0].Index;
 			}
 			else
 			{
-				selectedRowIndex = this.ItemsDataGridView.Rows.Count - 1;
+				selectedRowIndex = ItemsDataGridView.Rows.Count - 1;
 			}
-			this.SelectItemInGrid(selectedRowIndex);
+			SelectItemInGrid(selectedRowIndex);
 		}
 
 		private void SelectItemInGrid(int selectedRowIndex)
 		{
-			if (selectedRowIndex >= this.ItemsDataGridView.Rows.Count)
+			if (selectedRowIndex >= ItemsDataGridView.Rows.Count)
 			{
-				selectedRowIndex = this.ItemsDataGridView.Rows.Count - 1;
+				selectedRowIndex = ItemsDataGridView.Rows.Count - 1;
 			}
 			//NOTE: This line does not update the widgets connected to the list fields.
-			this.ItemsDataGridView.Rows[selectedRowIndex].Selected = true;
+			ItemsDataGridView.Rows[selectedRowIndex].Selected = true;
 			//NOTE: This line is required so that the item detail widgets update when the gird selection is changed programmatically.
-			this.ItemsDataGridView.CurrentCell = this.ItemsDataGridView.Rows[selectedRowIndex].Cells[0];
-			this.ItemsDataGridView.FirstDisplayedScrollingRowIndex = selectedRowIndex;
+			ItemsDataGridView.CurrentCell = ItemsDataGridView.Rows[selectedRowIndex].Cells[0];
+			ItemsDataGridView.FirstDisplayedScrollingRowIndex = selectedRowIndex;
 		}
 
 		private void UseItemIdInDownload()
 		{
-			MainCROWBAR.TheApp.Settings.DownloadItemIdOrLink = this.theSelectedItem.ID;
+			MainCROWBAR.TheApp.Settings.DownloadItemIdOrLink = theSelectedItem.ID;
 		}
 
 		private void SearchItems()
 		{
-			if (string.IsNullOrEmpty(this.SearchItemsToolStripTextBox.Text))
+			if (string.IsNullOrEmpty(SearchItemsToolStripTextBox.Text))
 			{
-				this.ClearSearch();
+				ClearSearch();
 			}
 			else
 			{
 				if (MainCROWBAR.TheApp.Settings.PublishSearchField == AppEnums.PublishSearchFieldOptions.ID)
 				{
-					this.SearchItemIDs();
+					SearchItemIDs();
 				}
 				else if (MainCROWBAR.TheApp.Settings.PublishSearchField == AppEnums.PublishSearchFieldOptions.Owner)
 				{
-					this.SearchItemOwnerNames();
+					SearchItemOwnerNames();
 				}
 				else if (MainCROWBAR.TheApp.Settings.PublishSearchField == AppEnums.PublishSearchFieldOptions.Title)
 				{
-					this.SearchItemTitles();
+					SearchItemTitles();
 				}
 				else if (MainCROWBAR.TheApp.Settings.PublishSearchField == AppEnums.PublishSearchFieldOptions.Description)
 				{
-					this.SearchItemDescriptions();
+					SearchItemDescriptions();
 				}
 				else if (MainCROWBAR.TheApp.Settings.PublishSearchField == AppEnums.PublishSearchFieldOptions.AllFields)
 				{
-					this.SearchItemAllFields();
+					SearchItemAllFields();
 				}
 			}
-			this.UpdateItemListWidgets(false);
+			UpdateItemListWidgets(false);
 		}
 
 		private void ClearSearch()
 		{
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
-				this.theDisplayedItems.Add(item);
+				theDisplayedItems.Add(item);
 			}
 		}
 
 		private void SearchItemIDs()
 		{
-			string itemTextToFind = this.SearchItemsToolStripTextBox.Text.ToLower();
+			string itemTextToFind = SearchItemsToolStripTextBox.Text.ToLower();
 			bool itemHasBeenFound = false;
 
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
 				if (item.ID.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 			}
 
@@ -1202,79 +1202,79 @@ namespace Crowbar
 
 		private void SearchItemOwnerNames()
 		{
-			string itemTextToFind = this.SearchItemsToolStripTextBox.Text.ToLower();
+			string itemTextToFind = SearchItemsToolStripTextBox.Text.ToLower();
 			bool itemHasBeenFound = false;
 
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
 				if (item.OwnerName.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 			}
 		}
 
 		private void SearchItemTitles()
 		{
-			string itemTextToFind = this.SearchItemsToolStripTextBox.Text.ToLower();
+			string itemTextToFind = SearchItemsToolStripTextBox.Text.ToLower();
 			bool itemHasBeenFound = false;
 
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
 				if (item.Title.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 			}
 		}
 
 		private void SearchItemDescriptions()
 		{
-			string itemTextToFind = this.SearchItemsToolStripTextBox.Text.ToLower();
+			string itemTextToFind = SearchItemsToolStripTextBox.Text.ToLower();
 			bool itemHasBeenFound = false;
 
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
 				if (item.Description.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 			}
 		}
 
 		private void SearchItemAllFields()
 		{
-			string itemTextToFind = this.SearchItemsToolStripTextBox.Text.ToLower();
+			string itemTextToFind = SearchItemsToolStripTextBox.Text.ToLower();
 			bool itemHasBeenFound = false;
 
-			this.theDisplayedItems.Clear();
-			foreach (WorkshopItem item in this.theEntireListOfItems)
+			theDisplayedItems.Clear();
+			foreach (WorkshopItem item in theEntireListOfItems)
 			{
 				if (item.ID.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 				else if (item.OwnerName.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 				else if (item.Title.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 				else if (item.Description.ToLower().Contains(itemTextToFind))
 				{
 					itemHasBeenFound = true;
-					this.theDisplayedItems.Add(item);
+					theDisplayedItems.Add(item);
 				}
 			}
 		}
@@ -1291,34 +1291,34 @@ namespace Crowbar
 				draftItem = (WorkshopItem)itemToCopy.Clone();
 				draftItem.SetAllChangedForNonEmptyFields();
 			}
-			this.theDisplayedItems.Add(draftItem);
-			this.theEntireListOfItems.Add(draftItem);
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(draftItem);
-			this.UpdateItemListWidgets(false);
+			theDisplayedItems.Add(draftItem);
+			theEntireListOfItems.Add(draftItem);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(draftItem);
+			UpdateItemListWidgets(false);
 		}
 
 		private void ChangeDraftItemIntoPublishedItem(WorkshopItem item)
 		{
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(item);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(item);
 			item.IsChanged = false;
-			this.UpdateItemListWidgets(false);
+			UpdateItemListWidgets(false);
 		}
 
 		private void ChangePublishedItemIntoChangedItem(WorkshopItem item)
 		{
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(item);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(item);
 			//Me.theChangedItemTotalCount += 1UI
-			this.UpdateItemListWidgets(false);
-			this.SaveCopyOfPreviewImageFile(item);
+			UpdateItemListWidgets(false);
+			SaveCopyOfPreviewImageFile(item);
 		}
 
 		private void ChangeChangedItemIntoPublishedItem(WorkshopItem item)
 		{
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(item);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(item);
 			//Me.theChangedItemTotalCount -= 1UI
 			item.ChangeNote = "";
 			item.IsChanged = false;
-			this.UpdateItemListWidgets(false);
+			UpdateItemListWidgets(false);
 		}
 
 		private void OpenSteamSubscriberAgreement()
@@ -1331,11 +1331,11 @@ namespace Crowbar
 			if (!isProgress)
 			{
 				// If the DataGridView is not currently sorted, then sortedColumn is Nothing.
-				DataGridViewColumn sortedColumn = this.ItemsDataGridView.SortedColumn;
+				DataGridViewColumn sortedColumn = ItemsDataGridView.SortedColumn;
 				if (sortedColumn != null)
 				{
 					ListSortDirection direction = 0;
-					if (this.ItemsDataGridView.SortOrder == SortOrder.Ascending)
+					if (ItemsDataGridView.SortOrder == SortOrder.Ascending)
 					{
 						direction = ListSortDirection.Ascending;
 					}
@@ -1343,7 +1343,7 @@ namespace Crowbar
 					{
 						direction = ListSortDirection.Descending;
 					}
-					this.ItemsDataGridView.Sort(sortedColumn, direction);
+					ItemsDataGridView.Sort(sortedColumn, direction);
 				}
 			}
 
@@ -1351,200 +1351,200 @@ namespace Crowbar
 			//Dim publishedItemsDisplayedCount As UInteger = CUInt(Me.theDisplayedItems.Count - Me.theSteamAppUserInfo.DraftTemplateAndChangedItems.Count)
 			//Dim draftItemsTotalCount As UInteger = CUInt(Me.theSteamAppUserInfo.DraftTemplateAndChangedItems.Count - Me.theTemplateItemTotalCount - Me.theChangedItemTotalCount)
 			//Dim publishedItemsTotalCount As UInteger = CUInt(Me.theEntireListOfItems.Count - Me.theSteamAppUserInfo.DraftTemplateAndChangedItems.Count)
-			uint draftItemsDisplayedCount = this.theDisplayedItems.DraftItemCount;
-			uint publishedItemsDisplayedCount = this.theDisplayedItems.PublishedItemCount;
-			uint draftItemsTotalCount = this.theEntireListOfItems.DraftItemCount;
-			uint publishedItemsTotalCount = this.theEntireListOfItems.PublishedItemCount;
+			uint draftItemsDisplayedCount = theDisplayedItems.DraftItemCount;
+			uint publishedItemsDisplayedCount = theDisplayedItems.PublishedItemCount;
+			uint draftItemsTotalCount = theEntireListOfItems.DraftItemCount;
+			uint publishedItemsTotalCount = theEntireListOfItems.PublishedItemCount;
 
-			this.ItemCountsToolStripLabel.Text = "";
-			if (this.theDisplayedItems.Count != this.theEntireListOfItems.Count)
+			ItemCountsToolStripLabel.Text = "";
+			if (theDisplayedItems.Count != theEntireListOfItems.Count)
 			{
-				this.ItemCountsToolStripLabel.Text += draftItemsDisplayedCount.ToString() + "/";
+				ItemCountsToolStripLabel.Text += draftItemsDisplayedCount.ToString() + "/";
 			}
-			this.ItemCountsToolStripLabel.Text += draftItemsTotalCount.ToString() + " draft + ";
-			if (this.theDisplayedItems.Count != this.theEntireListOfItems.Count)
+			ItemCountsToolStripLabel.Text += draftItemsTotalCount.ToString() + " draft + ";
+			if (theDisplayedItems.Count != theEntireListOfItems.Count)
 			{
 				//Me.ItemCountsToolStripLabel.Text += Me.theTemplateItemDisplayedCount.ToString() + "/"
-				this.ItemCountsToolStripLabel.Text += this.theDisplayedItems.TemplateItemCount.ToString() + "/";
+				ItemCountsToolStripLabel.Text += theDisplayedItems.TemplateItemCount.ToString() + "/";
 			}
 			//Me.ItemCountsToolStripLabel.Text += Me.theTemplateItemTotalCount.ToString() + " template + "
-			this.ItemCountsToolStripLabel.Text += this.theEntireListOfItems.TemplateItemCount.ToString() + " template + ";
-			if (this.theDisplayedItems.Count != this.theEntireListOfItems.Count)
+			ItemCountsToolStripLabel.Text += theEntireListOfItems.TemplateItemCount.ToString() + " template + ";
+			if (theDisplayedItems.Count != theEntireListOfItems.Count)
 			{
 				//Me.ItemCountsToolStripLabel.Text += Me.theChangedItemDisplayedCount.ToString() + "/"
-				this.ItemCountsToolStripLabel.Text += this.theDisplayedItems.ChangedItemCount.ToString() + "/";
+				ItemCountsToolStripLabel.Text += theDisplayedItems.ChangedItemCount.ToString() + "/";
 			}
 			//Me.ItemCountsToolStripLabel.Text += Me.theChangedItemTotalCount.ToString() + " changed + "
-			this.ItemCountsToolStripLabel.Text += this.theEntireListOfItems.ChangedItemCount.ToString() + " changed + ";
-			if (this.theDisplayedItems.Count != this.theEntireListOfItems.Count)
+			ItemCountsToolStripLabel.Text += theEntireListOfItems.ChangedItemCount.ToString() + " changed + ";
+			if (theDisplayedItems.Count != theEntireListOfItems.Count)
 			{
-				this.ItemCountsToolStripLabel.Text += publishedItemsDisplayedCount.ToString() + "/";
+				ItemCountsToolStripLabel.Text += publishedItemsDisplayedCount.ToString() + "/";
 			}
-			this.ItemCountsToolStripLabel.Text += publishedItemsTotalCount.ToString() + " published";
+			ItemCountsToolStripLabel.Text += publishedItemsTotalCount.ToString() + " published";
 			if (isProgress)
 			{
-				uint remainingPublishedItemsCount = this.theExpectedPublishedItemCount - publishedItemsTotalCount;
-				this.ItemCountsToolStripLabel.Text += " (" + remainingPublishedItemsCount.ToString() + " more to get)";
+				uint remainingPublishedItemsCount = theExpectedPublishedItemCount - publishedItemsTotalCount;
+				ItemCountsToolStripLabel.Text += " (" + remainingPublishedItemsCount.ToString() + " more to get)";
 			}
 			else
 			{
 				//If (publishedItemsTotalCount + Me.theChangedItemTotalCount) <> Me.theExpectedPublishedItemCount Then
-				if ((publishedItemsTotalCount + this.theEntireListOfItems.ChangedItemCount) != this.theExpectedPublishedItemCount)
+				if ((publishedItemsTotalCount + theEntireListOfItems.ChangedItemCount) != theExpectedPublishedItemCount)
 				{
-					this.ItemCountsToolStripLabel.Text += " (" + this.theExpectedPublishedItemCount.ToString() + " expected)";
+					ItemCountsToolStripLabel.Text += " (" + theExpectedPublishedItemCount.ToString() + " expected)";
 				}
 			}
-			this.ItemCountsToolStripLabel.Text += " = ";
-			if (this.theDisplayedItems.Count != this.theEntireListOfItems.Count)
+			ItemCountsToolStripLabel.Text += " = ";
+			if (theDisplayedItems.Count != theEntireListOfItems.Count)
 			{
-				this.ItemCountsToolStripLabel.Text += this.theDisplayedItems.Count.ToString() + "/";
+				ItemCountsToolStripLabel.Text += theDisplayedItems.Count.ToString() + "/";
 			}
-			this.ItemCountsToolStripLabel.Text += this.theEntireListOfItems.Count.ToString() + " total";
+			ItemCountsToolStripLabel.Text += theEntireListOfItems.Count.ToString() + " total";
 		}
 
 		private void UpdateItemDetails()
 		{
-			if (this.theSelectedItem != null)
+			if (theSelectedItem != null)
 			{
-				this.theSelectedItem.PropertyChanged -= this.WorkshopItem_PropertyChanged;
+				theSelectedItem.PropertyChanged -= WorkshopItem_PropertyChanged;
 			}
-			this.theSelectedItem = this.theDisplayedItems[this.ItemsDataGridView.SelectedRows[0].Index];
-			this.theSelectedItem.PropertyChanged += this.WorkshopItem_PropertyChanged;
+			theSelectedItem = theDisplayedItems[ItemsDataGridView.SelectedRows[0].Index];
+			theSelectedItem.PropertyChanged += WorkshopItem_PropertyChanged;
 
-			if (this.theSelectedItem.IsDraft)
+			if (theSelectedItem.IsDraft)
 			{
-				this.UpdateItemDetailWidgets();
+				UpdateItemDetailWidgets();
 			}
-			else if (this.theSelectedItem.IsTemplate)
+			else if (theSelectedItem.IsTemplate)
 			{
-				this.theUnchangedSelectedTemplateItem = (WorkshopItem)this.theSelectedItem.Clone();
-				this.theUnchangedSelectedTemplateItem.IsTemplate = true;
-				this.UpdateItemDetailWidgets();
+				theUnchangedSelectedTemplateItem = (WorkshopItem)theSelectedItem.Clone();
+				theUnchangedSelectedTemplateItem.IsTemplate = true;
+				UpdateItemDetailWidgets();
 			}
-			else if (this.theSelectedItem.IsChanged)
+			else if (theSelectedItem.IsChanged)
 			{
-				this.UpdateItemDetailWidgets();
+				UpdateItemDetailWidgets();
 			}
 			else
 			{
 				//NOTE: UpdateItemDetailWidgets() will be called from the 'bw_completed' handler.
-				this.GetPublishedItemDetailsViaSteamRemoteStorage(this.theSelectedItem.ID, "All");
+				GetPublishedItemDetailsViaSteamRemoteStorage(theSelectedItem.ID, "All");
 				return;
 			}
 		}
 
 		private void UpdateItemDetailWidgets()
 		{
-			if (this.theUserSteamID == 0)
+			if (theUserSteamID == 0)
 			{
-				this.GetUserSteamID();
+				GetUserSteamID();
 			}
 
 			//INSTANT C# TODO TASK: The following line could not be converted:
-			//Dim editableTextBoxesAreReadOnly As Boolean = (this.theSelectedItem.IsPublished) AndAlso (this.theSelectedItem.OwnerID < > this.theUserSteamID)
+			//Dim editableTextBoxesAreReadOnly As Boolean = (theSelectedItem.IsPublished) AndAlso (theSelectedItem.OwnerID < > theUserSteamID)
 			bool editableTextBoxesAreReadOnly = theSelectedItem.IsPublished && theSelectedItem.OwnerID != theUserSteamID;
-			bool editableNonTextWidgetsAreEnabled = (this.theSelectedItem.IsDraft) || (this.theSelectedItem.IsTemplate) || (this.theSelectedItem.OwnerID == this.theUserSteamID);
+			bool editableNonTextWidgetsAreEnabled = (theSelectedItem.IsDraft) || (theSelectedItem.IsTemplate) || (theSelectedItem.OwnerID == theUserSteamID);
 
-			this.ItemGroupBox.Enabled = true;
-			this.UpdateItemGroupBoxLabel();
+			ItemGroupBox.Enabled = true;
+			UpdateItemGroupBoxLabel();
 
-			this.UpdateItemTitleLabel();
-			this.ItemTitleTextBox.ReadOnly = editableTextBoxesAreReadOnly;
+			UpdateItemTitleLabel();
+			ItemTitleTextBox.ReadOnly = editableTextBoxesAreReadOnly;
 
-			this.UpdateItemDescriptionLabel();
-			this.ItemDescriptionTextBox.ReadOnly = editableTextBoxesAreReadOnly;
+			UpdateItemDescriptionLabel();
+			ItemDescriptionTextBox.ReadOnly = editableTextBoxesAreReadOnly;
 
-			this.UpdateItemChangeNoteLabel();
-			this.ItemChangeNoteTextBox.ReadOnly = editableTextBoxesAreReadOnly;
+			UpdateItemChangeNoteLabel();
+			ItemChangeNoteTextBox.ReadOnly = editableTextBoxesAreReadOnly;
 
-			this.UpdateItemContentLabel();
-			this.ItemContentPathFileNameTextBox.ReadOnly = editableTextBoxesAreReadOnly;
+			UpdateItemContentLabel();
+			ItemContentPathFileNameTextBox.ReadOnly = editableTextBoxesAreReadOnly;
 
-			this.UpdateItemPreviewImageLabel();
-			this.ItemPreviewImagePathFileNameTextBox.ReadOnly = editableTextBoxesAreReadOnly;
-			if (!this.theSelectedItem.IsPublished || this.theSelectedItem.IsChanged)
+			UpdateItemPreviewImageLabel();
+			ItemPreviewImagePathFileNameTextBox.ReadOnly = editableTextBoxesAreReadOnly;
+			if (!theSelectedItem.IsPublished || theSelectedItem.IsChanged)
 			{
-				this.UpdateItemPreviewImageBox();
+				UpdateItemPreviewImageBox();
 			}
 
-			this.UpdateItemVisibilityLabel();
-			this.ItemVisibilityComboBox.Enabled = editableNonTextWidgetsAreEnabled;
+			UpdateItemVisibilityLabel();
+			ItemVisibilityComboBox.Enabled = editableNonTextWidgetsAreEnabled;
 
-			this.ItemTagsGroupBox.Enabled = true;
+			ItemTagsGroupBox.Enabled = true;
 			//NOTE: There is no automatic data-binding with TagsWidget, so manually bind from object to widget here.
-			this.theTagsWidget.ItemTags = this.theSelectedItem.Tags;
-			this.UpdateItemTagsLabel();
-			this.theTagsWidget.Enabled = editableNonTextWidgetsAreEnabled;
+			theTagsWidget.ItemTags = theSelectedItem.Tags;
+			UpdateItemTagsLabel();
+			theTagsWidget.Enabled = editableNonTextWidgetsAreEnabled;
 
-			this.theWorkshopPageLink = AppConstants.WorkshopLinkStart + this.theSelectedItem.ID;
+			theWorkshopPageLink = AppConstants.WorkshopLinkStart + theSelectedItem.ID;
 
-			this.UpdateItemDetailButtons();
+			UpdateItemDetailButtons();
 		}
 
 		private void UpdateItemChangedStatus()
 		{
-			if (!this.theSelectedItem.IsChanged)
+			if (!theSelectedItem.IsChanged)
 			{
-				if (this.theSelectedItem.IsTemplate)
+				if (theSelectedItem.IsTemplate)
 				{
-					this.theSelectedItem.IsChanged = true;
-					this.UpdateItemGroupBoxLabel();
+					theSelectedItem.IsChanged = true;
+					UpdateItemGroupBoxLabel();
 				}
-				else if (this.theSelectedItem.IsPublished)
+				else if (theSelectedItem.IsPublished)
 				{
-					this.theSelectedItem.IsChanged = true;
-					this.ChangePublishedItemIntoChangedItem(this.theSelectedItem);
-					this.UpdateItemGroupBoxLabel();
+					theSelectedItem.IsChanged = true;
+					ChangePublishedItemIntoChangedItem(theSelectedItem);
+					UpdateItemGroupBoxLabel();
 				}
 			}
-			this.theSelectedItem.Updated = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
-			this.UpdateItemDetailButtons();
+			theSelectedItem.Updated = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
+			UpdateItemDetailButtons();
 		}
 
 		private void UpdateItemGroupBoxLabel()
 		{
 			string changedMarker = "";
-			if (this.theSelectedItem.IsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.IsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemGroupBox.Text = "Item" + changedMarker;
+			ItemGroupBox.Text = "Item" + changedMarker;
 		}
 
 		private void UpdateItemTitleLabel()
 		{
-			int titleSize = this.theSelectedItem.Title.Length;
+			int titleSize = theSelectedItem.Title.Length;
 			int titleSizeMax = (int)Steamworks.Constants.k_cchPublishedDocumentTitleMax;
 			string changedMarker = "";
-			if (this.theSelectedItem.TitleIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.TitleIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemTitleLabel.Text = "Title" + changedMarker + " (" + titleSize.ToString() + " / " + titleSizeMax.ToString() + " characters max):";
+			ItemTitleLabel.Text = "Title" + changedMarker + " (" + titleSize.ToString() + " / " + titleSizeMax.ToString() + " characters max):";
 		}
 
 		private void UpdateItemDescriptionLabel()
 		{
-			int descriptionSize = this.theSelectedItem.Description.Length;
+			int descriptionSize = theSelectedItem.Description.Length;
 			int descriptionSizeMax = (int)Steamworks.Constants.k_cchPublishedDocumentDescriptionMax;
 			string changedMarker = "";
-			if (this.theSelectedItem.DescriptionIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.DescriptionIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemDescriptionLabel.Text = "Description" + changedMarker + " (" + descriptionSize.ToString() + " / " + descriptionSizeMax.ToString() + " characters max):";
+			ItemDescriptionLabel.Text = "Description" + changedMarker + " (" + descriptionSize.ToString() + " / " + descriptionSizeMax.ToString() + " characters max):";
 		}
 
 		private void UpdateItemChangeNoteLabel()
 		{
-			int changeNoteSize = this.theSelectedItem.ChangeNote.Length;
+			int changeNoteSize = theSelectedItem.ChangeNote.Length;
 			int changeNoteSizeMax = (int)Steamworks.Constants.k_cchPublishedDocumentChangeDescriptionMax;
 			string changedMarker = "";
-			if (this.theSelectedItem.ChangeNoteIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.ChangeNoteIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemChangeNoteLabel.Text = "Change Note" + changedMarker + " (" + changeNoteSize.ToString() + " / " + changeNoteSizeMax.ToString() + " characters max):";
+			ItemChangeNoteLabel.Text = "Change Note" + changedMarker + " (" + changeNoteSize.ToString() + " / " + changeNoteSizeMax.ToString() + " characters max):";
 		}
 
 		private void UpdateItemContentLabel()
@@ -1552,119 +1552,119 @@ namespace Crowbar
 			string contentFileSizeText = "0";
 			if (MainCROWBAR.TheApp.SteamAppInfos[MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex].CanUseContentFolderOrFile)
 			{
-				this.ItemContentFolderOrFileLabel.Text = "Content Folder or File";
-				if (Directory.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+				ItemContentFolderOrFileLabel.Text = "Content Folder or File";
+				if (Directory.Exists(theSelectedItem.ContentPathFolderOrFileName))
 				{
-					ulong folderSize = FileManager.GetFolderSize(this.theSelectedItem.ContentPathFolderOrFileName);
+					ulong folderSize = FileManager.GetFolderSize(theSelectedItem.ContentPathFolderOrFileName);
 					contentFileSizeText = MathModule.ByteUnitsConversion(folderSize);
 				}
-				else if (File.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+				else if (File.Exists(theSelectedItem.ContentPathFolderOrFileName))
 				{
-					FileInfo aFile = new FileInfo(this.theSelectedItem.ContentPathFolderOrFileName);
+					FileInfo aFile = new FileInfo(theSelectedItem.ContentPathFolderOrFileName);
 					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)aFile.Length);
 				}
-				else if (this.theSelectedItem.ContentSize > 0 && this.theSelectedItem.IsPublished)
+				else if (theSelectedItem.ContentSize > 0 && theSelectedItem.IsPublished)
 				{
-					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)this.theSelectedItem.ContentSize);
+					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)theSelectedItem.ContentSize);
 				}
 			}
 			else if (MainCROWBAR.TheApp.SteamAppInfos[MainCROWBAR.TheApp.Settings.PublishGameSelectedIndex].UsesSteamUGC)
 			{
-				this.ItemContentFolderOrFileLabel.Text = "Content Folder";
-				if (Directory.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+				ItemContentFolderOrFileLabel.Text = "Content Folder";
+				if (Directory.Exists(theSelectedItem.ContentPathFolderOrFileName))
 				{
-					ulong folderSize = FileManager.GetFolderSize(this.theSelectedItem.ContentPathFolderOrFileName);
+					ulong folderSize = FileManager.GetFolderSize(theSelectedItem.ContentPathFolderOrFileName);
 					contentFileSizeText = MathModule.ByteUnitsConversion(folderSize);
 				}
-				else if (this.theSelectedItem.ContentSize > 0 && this.theSelectedItem.IsPublished)
+				else if (theSelectedItem.ContentSize > 0 && theSelectedItem.IsPublished)
 				{
-					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)this.theSelectedItem.ContentSize);
+					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)theSelectedItem.ContentSize);
 				}
 			}
 			else
 			{
-				this.ItemContentFolderOrFileLabel.Text = "Content File";
-				if (File.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+				ItemContentFolderOrFileLabel.Text = "Content File";
+				if (File.Exists(theSelectedItem.ContentPathFolderOrFileName))
 				{
-					FileInfo aFile = new FileInfo(this.theSelectedItem.ContentPathFolderOrFileName);
+					FileInfo aFile = new FileInfo(theSelectedItem.ContentPathFolderOrFileName);
 					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)aFile.Length);
 				}
-				else if (this.theSelectedItem.ContentSize > 0 && this.theSelectedItem.IsPublished)
+				else if (theSelectedItem.ContentSize > 0 && theSelectedItem.IsPublished)
 				{
-					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)this.theSelectedItem.ContentSize);
+					contentFileSizeText = MathModule.ByteUnitsConversion((ulong)theSelectedItem.ContentSize);
 				}
 			}
 			//Dim contentFileSizeMaxText As String = "<unknown>"
 			//'Dim contentFileSizeMax As Integer = CInt(Steamworks.Constants.k_unMaxCloudFileChunkSize / 1048576)
 			//'contentFileSizeMaxText = contentFileSizeMax.ToString()
 			string changedMarker = "";
-			if (this.theSelectedItem.ContentPathFolderOrFileNameIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.ContentPathFolderOrFileNameIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
 			//NOTE: Not sure what max size is, so do not show it.
 			//Me.ItemContentFolderOrFileLabel.Text += changedMarker + " (" + contentFileSizeText + " / " + contentFileSizeMaxText + " MB max):"
-			this.ItemContentFolderOrFileLabel.Text += changedMarker;
+			ItemContentFolderOrFileLabel.Text += changedMarker;
 			if (contentFileSizeText != "0")
 			{
-				this.ItemContentFolderOrFileLabel.Text += " (" + contentFileSizeText + ")";
+				ItemContentFolderOrFileLabel.Text += " (" + contentFileSizeText + ")";
 			}
-			this.ItemContentFolderOrFileLabel.Text += ":";
+			ItemContentFolderOrFileLabel.Text += ":";
 		}
 
 		private void UpdateItemPreviewImageLabel()
 		{
 			string previewImageSizeText = "0";
-			if (File.Exists(this.theSelectedItem.PreviewImagePathFileName))
+			if (File.Exists(theSelectedItem.PreviewImagePathFileName))
 			{
-				FileInfo aFile = new FileInfo(this.theSelectedItem.PreviewImagePathFileName);
+				FileInfo aFile = new FileInfo(theSelectedItem.PreviewImagePathFileName);
 				previewImageSizeText = MathModule.ByteUnitsConversion((ulong)aFile.Length);
 			}
-			else if (this.theSelectedItem.PreviewImageSize > 0 && this.theSelectedItem.IsPublished)
+			else if (theSelectedItem.PreviewImageSize > 0 && theSelectedItem.IsPublished)
 			{
-				previewImageSizeText = MathModule.ByteUnitsConversion((ulong)this.theSelectedItem.PreviewImageSize);
+				previewImageSizeText = MathModule.ByteUnitsConversion((ulong)theSelectedItem.PreviewImageSize);
 			}
 			//Dim previewImageSizeMaxText As String = "<unknown>"
 			string changedMarker = "";
-			if (this.theSelectedItem.PreviewImagePathFileNameIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.PreviewImagePathFileNameIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
 			//NOTE: Not sure what max size is, so do not show it.
 			//Me.ItemPreviewImageLabel.Text = "Preview Image" + changedMarker + " (" + previewImageSizeText + " / " + previewImageSizeMaxText + " MB max):"
-			this.ItemPreviewImageLabel.Text = "Preview Image" + changedMarker;
+			ItemPreviewImageLabel.Text = "Preview Image" + changedMarker;
 			if (previewImageSizeText != "0")
 			{
-				this.ItemPreviewImageLabel.Text += " (" + previewImageSizeText + ")";
+				ItemPreviewImageLabel.Text += " (" + previewImageSizeText + ")";
 			}
-			this.ItemPreviewImageLabel.Text += ":";
+			ItemPreviewImageLabel.Text += ":";
 		}
 
 		private void UpdateItemPreviewImageBox()
 		{
-			if (File.Exists(this.theSelectedItem.PreviewImagePathFileName))
+			if (File.Exists(theSelectedItem.PreviewImagePathFileName))
 			{
 				try
 				{
-					if (this.ItemPreviewImagePictureBox.Image != null)
+					if (ItemPreviewImagePictureBox.Image != null)
 					{
-						this.ItemPreviewImagePictureBox.Image.Dispose();
+						ItemPreviewImagePictureBox.Image.Dispose();
 					}
-					this.ItemPreviewImagePictureBox.Image = Image.FromFile(this.theSelectedItem.PreviewImagePathFileName);
+					ItemPreviewImagePictureBox.Image = Image.FromFile(theSelectedItem.PreviewImagePathFileName);
 				}
 				catch (Exception ex)
 				{
 					// Problem setting Image, so reset the textbox text.
-					this.theSelectedItem.PreviewImagePathFileName = this.theSavedPreviewImagePathFileName;
+					theSelectedItem.PreviewImagePathFileName = theSavedPreviewImagePathFileName;
 				}
 			}
 			else
 			{
-				if (this.ItemPreviewImagePictureBox.Image != null)
+				if (ItemPreviewImagePictureBox.Image != null)
 				{
-					this.ItemPreviewImagePictureBox.Image.Dispose();
+					ItemPreviewImagePictureBox.Image.Dispose();
 				}
-				this.ItemPreviewImagePictureBox.Image = null;
+				ItemPreviewImagePictureBox.Image = null;
 			}
 		}
 
@@ -1673,45 +1673,45 @@ namespace Crowbar
 		//      Need to delete the file when published or reverted.
 		private void SaveCopyOfPreviewImageFile(WorkshopItem item)
 		{
-			if (this.ItemPreviewImagePictureBox.Image == null)
+			if (ItemPreviewImagePictureBox.Image == null)
 			{
 				return;
 			}
 
-			System.Drawing.Imaging.ImageFormat anImageFormat = this.ItemPreviewImagePictureBox.Image.RawFormat;
+			System.Drawing.Imaging.ImageFormat anImageFormat = ItemPreviewImagePictureBox.Image.RawFormat;
 			string previewImagePathFileName = "";
 			if (anImageFormat.Equals(System.Drawing.Imaging.ImageFormat.Gif))
 			{
-				previewImagePathFileName = this.GetPreviewImagePathFileName("temp.gif", item.ID, 0);
+				previewImagePathFileName = GetPreviewImagePathFileName("temp.gif", item.ID, 0);
 			}
 			else
 			{
-				previewImagePathFileName = this.GetPreviewImagePathFileName("temp.png", item.ID, 0);
+				previewImagePathFileName = GetPreviewImagePathFileName("temp.png", item.ID, 0);
 				anImageFormat = System.Drawing.Imaging.ImageFormat.Png;
 			}
 			if (!string.IsNullOrEmpty(previewImagePathFileName))
 			{
 				try
 				{
-					this.ItemPreviewImagePictureBox.Image.Save(previewImagePathFileName, anImageFormat);
+					ItemPreviewImagePictureBox.Image.Save(previewImagePathFileName, anImageFormat);
 				}
 				catch (Exception ex)
 				{
 					if (!File.Exists(previewImagePathFileName))
 					{
-						this.LogTextBox.AppendText("ERROR: Crowbar tried to save preview image to temp file \"" + previewImagePathFileName + "\" but Windows gave this message: " + ex.Message);
+						LogTextBox.AppendText("ERROR: Crowbar tried to save preview image to temp file \"" + previewImagePathFileName + "\" but Windows gave this message: " + ex.Message);
 					}
 				}
 				if (File.Exists(previewImagePathFileName))
 				{
-					bool selectedItemDetailsIsChangingViaMe = this.theSelectedItemDetailsIsChangingViaMe;
-					bool selectedItemPreviewImagePathFileNameIsChanged = this.theSelectedItem.PreviewImagePathFileNameIsChanged;
-					this.theSelectedItemDetailsIsChangingViaMe = true;
+					bool selectedItemDetailsIsChangingViaMe = theSelectedItemDetailsIsChangingViaMe;
+					bool selectedItemPreviewImagePathFileNameIsChanged = theSelectedItem.PreviewImagePathFileNameIsChanged;
+					theSelectedItemDetailsIsChangingViaMe = true;
 
-					this.theSelectedItem.PreviewImagePathFileName = previewImagePathFileName;
+					theSelectedItem.PreviewImagePathFileName = previewImagePathFileName;
 
-					this.theSelectedItemDetailsIsChangingViaMe = selectedItemDetailsIsChangingViaMe;
-					this.theSelectedItem.PreviewImagePathFileNameIsChanged = selectedItemPreviewImagePathFileNameIsChanged;
+					theSelectedItemDetailsIsChangingViaMe = selectedItemDetailsIsChangingViaMe;
+					theSelectedItem.PreviewImagePathFileNameIsChanged = selectedItemPreviewImagePathFileNameIsChanged;
 				}
 			}
 		}
@@ -1726,11 +1726,11 @@ namespace Crowbar
 				if (File.Exists(itemPreviewImagePathFileName))
 				{
 					img = Image.FromFile(itemPreviewImagePathFileName);
-					if (this.ItemPreviewImagePictureBox.Image != null)
+					if (ItemPreviewImagePictureBox.Image != null)
 					{
-						this.ItemPreviewImagePictureBox.Image.Dispose();
+						ItemPreviewImagePictureBox.Image.Dispose();
 					}
-					this.ItemPreviewImagePictureBox.Image = new Bitmap(img);
+					ItemPreviewImagePictureBox.Image = new Bitmap(img);
 					img.Dispose();
 				}
 			}
@@ -1743,12 +1743,12 @@ namespace Crowbar
 				}
 			}
 
-			this.DeleteTempPreviewImageFile(itemPreviewImagePathFileName, itemID);
+			DeleteTempPreviewImageFile(itemPreviewImagePathFileName, itemID);
 		}
 
 		private void DeleteTempPreviewImageFile(string itemPreviewImagePathFileName, string itemID)
 		{
-			string previewImagePathFileName = this.GetPreviewImagePathFileName(itemPreviewImagePathFileName, itemID, 0);
+			string previewImagePathFileName = GetPreviewImagePathFileName(itemPreviewImagePathFileName, itemID, 0);
 			if (!string.IsNullOrEmpty(previewImagePathFileName) && File.Exists(previewImagePathFileName))
 			{
 				try
@@ -1757,7 +1757,7 @@ namespace Crowbar
 				}
 				catch (Exception ex)
 				{
-					this.LogTextBox.AppendText("ERROR: Crowbar tried to delete an old temp file \"" + previewImagePathFileName + "\" but Windows gave this message: " + ex.Message);
+					LogTextBox.AppendText("ERROR: Crowbar tried to delete an old temp file \"" + previewImagePathFileName + "\" but Windows gave this message: " + ex.Message);
 				}
 			}
 		}
@@ -1790,80 +1790,80 @@ namespace Crowbar
 		private void UpdateItemVisibilityLabel()
 		{
 			string changedMarker = "";
-			if (this.theSelectedItem.VisibilityIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.VisibilityIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemVisibilityLabel.Text = "Visibility" + changedMarker + ":";
+			ItemVisibilityLabel.Text = "Visibility" + changedMarker + ":";
 		}
 
 		private void UpdateItemTagsLabel()
 		{
 			string changedMarker = "";
-			if (this.theSelectedItem.TagsIsChanged && !this.theSelectedItem.IsDraft)
+			if (theSelectedItem.TagsIsChanged && !theSelectedItem.IsDraft)
 			{
 				changedMarker = AppConstants.ChangedMarker;
 			}
-			this.ItemTagsGroupBox.Text = "Tags" + changedMarker;
+			ItemTagsGroupBox.Text = "Tags" + changedMarker;
 		}
 
 		private void UpdateItemDetailButtons()
 		{
-			if (this.theUserSteamID == 0)
+			if (theUserSteamID == 0)
 			{
-				this.GetUserSteamID();
+				GetUserSteamID();
 			}
 
-			bool editableNonTextWidgetsAreEnabled = (this.theSelectedItem.IsDraft) || (this.theSelectedItem.IsTemplate) || (this.theSelectedItem.OwnerID == this.theUserSteamID);
+			bool editableNonTextWidgetsAreEnabled = (theSelectedItem.IsDraft) || (theSelectedItem.IsTemplate) || (theSelectedItem.OwnerID == theUserSteamID);
 
-			this.BrowseItemContentPathFileNameButton.Enabled = editableNonTextWidgetsAreEnabled;
-			this.BrowseItemPreviewImagePathFileNameButton.Enabled = editableNonTextWidgetsAreEnabled;
+			BrowseItemContentPathFileNameButton.Enabled = editableNonTextWidgetsAreEnabled;
+			BrowseItemPreviewImagePathFileNameButton.Enabled = editableNonTextWidgetsAreEnabled;
 
-			this.SaveAsTemplateOrDraftItemButton.Enabled = true;
-			if (this.theSelectedItem.IsTemplate)
+			SaveAsTemplateOrDraftItemButton.Enabled = true;
+			if (theSelectedItem.IsTemplate)
 			{
-				this.SaveAsTemplateOrDraftItemButton.Text = "Save as Draft";
+				SaveAsTemplateOrDraftItemButton.Text = "Save as Draft";
 			}
 			else
 			{
-				this.SaveAsTemplateOrDraftItemButton.Text = "Save as Template";
+				SaveAsTemplateOrDraftItemButton.Text = "Save as Template";
 			}
 
 			//Me.RefreshOrRevertItemButton.Visible = True
 			//Me.RefreshOrRevertItemButton.Enabled = (Me.theSelectedItem.ID <> "" AndAlso Not Me.theSelectedItem.IsDraft)
-			this.RefreshOrRevertItemButton.Enabled = (this.theSelectedItem.IsPublished) || (this.theSelectedItem.IsTemplate && this.theSelectedItem.IsChanged);
-			if ((this.theSelectedItem.IsTemplate) || (this.theSelectedItem.IsPublished && this.theSelectedItem.IsChanged))
+			RefreshOrRevertItemButton.Enabled = (theSelectedItem.IsPublished) || (theSelectedItem.IsTemplate && theSelectedItem.IsChanged);
+			if ((theSelectedItem.IsTemplate) || (theSelectedItem.IsPublished && theSelectedItem.IsChanged))
 			{
-				this.RefreshOrRevertItemButton.Text = "Revert";
+				RefreshOrRevertItemButton.Text = "Revert";
 			}
 			else
 			{
-				this.RefreshOrRevertItemButton.Text = "Refresh";
+				RefreshOrRevertItemButton.Text = "Refresh";
 			}
 
-			this.OpenWorkshopPageButton.Visible = (!this.theSelectedItem.IsTemplate);
-			this.OpenWorkshopPageButton.Enabled = (!this.theSelectedItem.IsDraft);
+			OpenWorkshopPageButton.Visible = (!theSelectedItem.IsTemplate);
+			OpenWorkshopPageButton.Enabled = (!theSelectedItem.IsDraft);
 
-			this.SaveTemplateButton.Visible = (this.theSelectedItem.IsTemplate);
-			this.SaveTemplateButton.Enabled = (this.theSelectedItem.IsChanged);
+			SaveTemplateButton.Visible = (theSelectedItem.IsTemplate);
+			SaveTemplateButton.Enabled = (theSelectedItem.IsChanged);
 
-			this.DeleteItemButton.Enabled = editableNonTextWidgetsAreEnabled;
+			DeleteItemButton.Enabled = editableNonTextWidgetsAreEnabled;
 
 			//NOTE: SteamRemoteStorage_PublishWorkshopFile requires Item to have a Title, a Description, a Content File, and a Preview Image.
-			this.PublishItemButton.Enabled = (((this.theSelectedItem.IsDraft) && (!string.IsNullOrEmpty(this.theSelectedItem.Title) && !string.IsNullOrEmpty(this.theSelectedItem.Description) && !string.IsNullOrEmpty(this.theSelectedItem.ContentPathFolderOrFileName) && !string.IsNullOrEmpty(this.theSelectedItem.PreviewImagePathFileName))) || (this.theSelectedItem.IsChanged && (this.theUserSteamID == this.theSelectedItem.OwnerID)) || (this.theSelectedItem.IsTemplate));
+			PublishItemButton.Enabled = (((theSelectedItem.IsDraft) && (!string.IsNullOrEmpty(theSelectedItem.Title) && !string.IsNullOrEmpty(theSelectedItem.Description) && !string.IsNullOrEmpty(theSelectedItem.ContentPathFolderOrFileName) && !string.IsNullOrEmpty(theSelectedItem.PreviewImagePathFileName))) || (theSelectedItem.IsChanged && (theUserSteamID == theSelectedItem.OwnerID)) || (theSelectedItem.IsTemplate));
 		}
 
 		private void SwapBetweenOwnerNameAndID()
 		{
-			if (this.ItemOwnerTextBox.DataBindings["Text"].BindingMemberInfo.BindingMember == "OwnerName")
+			if (ItemOwnerTextBox.DataBindings["Text"].BindingMemberInfo.BindingMember == "OwnerName")
 			{
-				this.ItemOwnerTextBox.DataBindings.Remove(this.ItemOwnerTextBox.DataBindings["Text"]);
-				this.ItemOwnerTextBox.DataBindings.Add("Text", this.theItemBindingSource, "OwnerID", false, DataSourceUpdateMode.OnValidation);
+				ItemOwnerTextBox.DataBindings.Remove(ItemOwnerTextBox.DataBindings["Text"]);
+				ItemOwnerTextBox.DataBindings.Add("Text", theItemBindingSource, "OwnerID", false, DataSourceUpdateMode.OnValidation);
 			}
 			else
 			{
-				this.ItemOwnerTextBox.DataBindings.Remove(this.ItemOwnerTextBox.DataBindings["Text"]);
-				this.ItemOwnerTextBox.DataBindings.Add("Text", this.theItemBindingSource, "OwnerName", false, DataSourceUpdateMode.OnValidation);
+				ItemOwnerTextBox.DataBindings.Remove(ItemOwnerTextBox.DataBindings["Text"]);
+				ItemOwnerTextBox.DataBindings.Add("Text", theItemBindingSource, "OwnerName", false, DataSourceUpdateMode.OnValidation);
 			}
 		}
 
@@ -1883,9 +1883,9 @@ namespace Crowbar
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
 
-			if (this.theSteamAppInfo.CanUseContentFolderOrFile || this.theSteamAppInfo.UsesSteamUGC)
+			if (theSteamAppInfo.CanUseContentFolderOrFile || theSteamAppInfo.UsesSteamUGC)
 			{
-				if (this.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Count > 0)
+				if (theSteamAppInfo.ContentFileExtensionsAndDescriptions.Count > 0)
 				{
 					openFileWdw.Title = "Open the folder or the package file you want to upload";
 				}
@@ -1899,13 +1899,13 @@ namespace Crowbar
 			{
 				openFileWdw.Title = "Open the file you want to upload";
 			}
-			if (File.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+			if (File.Exists(theSelectedItem.ContentPathFolderOrFileName))
 			{
-				openFileWdw.InitialDirectory = FileManager.GetPath(this.theSelectedItem.ContentPathFolderOrFileName);
+				openFileWdw.InitialDirectory = FileManager.GetPath(theSelectedItem.ContentPathFolderOrFileName);
 			}
 			else
 			{
-				openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedItem.ContentPathFolderOrFileName);
+				openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedItem.ContentPathFolderOrFileName);
 				if (string.IsNullOrEmpty(openFileWdw.InitialDirectory))
 				{
 					openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -1914,13 +1914,13 @@ namespace Crowbar
 
 			//NOTE: Must use temp string because openFileWdw.Filter validates itself on assignment.
 			string fileFilter = "";
-			for (int i = 0; i < this.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Count; i++)
+			for (int i = 0; i < theSteamAppInfo.ContentFileExtensionsAndDescriptions.Count; i++)
 			{
-				fileFilter += this.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Values[i];
+				fileFilter += theSteamAppInfo.ContentFileExtensionsAndDescriptions.Values[i];
 				fileFilter += " (*.";
-				fileFilter += this.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Keys[i];
+				fileFilter += theSteamAppInfo.ContentFileExtensionsAndDescriptions.Keys[i];
 				fileFilter += ")|*.";
-				fileFilter += this.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Keys[i];
+				fileFilter += theSteamAppInfo.ContentFileExtensionsAndDescriptions.Keys[i];
 				fileFilter += "|";
 			}
 			fileFilter += "All Files (*.*)|*.*";
@@ -1936,22 +1936,22 @@ namespace Crowbar
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				if (this.theSteamAppInfo.CanUseContentFolderOrFile || this.theSteamAppInfo.UsesSteamUGC)
+				if (theSteamAppInfo.CanUseContentFolderOrFile || theSteamAppInfo.UsesSteamUGC)
 				{
 					if (Path.GetFileNameWithoutExtension(openFileWdw.FileName) == "[Folder Selection]")
 					{
-						this.theSelectedItem.ContentPathFolderOrFileName = FileManager.GetPath(openFileWdw.FileName);
+						theSelectedItem.ContentPathFolderOrFileName = FileManager.GetPath(openFileWdw.FileName);
 					}
 					else
 					{
-						this.theSelectedItem.ContentPathFolderOrFileName = openFileWdw.FileName;
+						theSelectedItem.ContentPathFolderOrFileName = openFileWdw.FileName;
 					}
 				}
 				else
 				{
-					this.theSelectedItem.ContentPathFolderOrFileName = openFileWdw.FileName;
+					theSelectedItem.ContentPathFolderOrFileName = openFileWdw.FileName;
 				}
-				this.UpdateItemContentLabel();
+				UpdateItemContentLabel();
 			}
 		}
 
@@ -1960,13 +1960,13 @@ namespace Crowbar
 			OpenFileDialog openFileWdw = new OpenFileDialog();
 
 			openFileWdw.Title = "Open the image file you want to use for preview image";
-			if (File.Exists(this.theSelectedItem.PreviewImagePathFileName))
+			if (File.Exists(theSelectedItem.PreviewImagePathFileName))
 			{
-				openFileWdw.InitialDirectory = FileManager.GetPath(this.theSelectedItem.PreviewImagePathFileName);
+				openFileWdw.InitialDirectory = FileManager.GetPath(theSelectedItem.PreviewImagePathFileName);
 			}
 			else
 			{
-				openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedItem.PreviewImagePathFileName);
+				openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedItem.PreviewImagePathFileName);
 				if (string.IsNullOrEmpty(openFileWdw.InitialDirectory))
 				{
 					openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -1984,9 +1984,9 @@ namespace Crowbar
 				Application.DoEvents();
 
 				// Save the pathFileName in case the PictureBox.Image does not like the file.
-				this.theSavedPreviewImagePathFileName = this.theSelectedItem.PreviewImagePathFileName;
+				theSavedPreviewImagePathFileName = theSelectedItem.PreviewImagePathFileName;
 				//NOTE: Changing the file name field also changes the preview picturebox.
-				this.theSelectedItem.PreviewImagePathFileName = openFileWdw.FileName;
+				theSelectedItem.PreviewImagePathFileName = openFileWdw.FileName;
 			}
 		}
 
@@ -1996,82 +1996,82 @@ namespace Crowbar
 		private void SaveItemAsTemplate()
 		{
 			WorkshopItem anItem = null;
-			if (this.theSelectedItem.IsDraft)
+			if (theSelectedItem.IsDraft)
 			{
-				anItem = this.theSelectedItem;
+				anItem = theSelectedItem;
 			}
 			else
 			{
-				anItem = (WorkshopItem)this.theSelectedItem.Clone();
+				anItem = (WorkshopItem)theSelectedItem.Clone();
 			}
 
-			this.theSelectedItemDetailsIsChangingViaMe = true;
+			theSelectedItemDetailsIsChangingViaMe = true;
 			anItem.IsTemplate = true;
 			//anItem.ContentPathFolderOrFileName = ""
 			//anItem.PreviewImagePathFileName = ""
 			anItem.IsChanged = false;
 			//NOTE: Without this line, the ID field in the widgets does not change until a different item is selected.
-			this.theItemBindingSource.ResetCurrentItem();
-			this.theSelectedItemDetailsIsChangingViaMe = false;
+			theItemBindingSource.ResetCurrentItem();
+			theSelectedItemDetailsIsChangingViaMe = false;
 			//Me.theTemplateItemTotalCount += 1UI
 
-			if (anItem != this.theSelectedItem)
+			if (anItem != theSelectedItem)
 			{
-				this.theDisplayedItems.Add(anItem);
-				this.theEntireListOfItems.Add(anItem);
-				this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(anItem);
-				this.SaveCopyOfPreviewImageFile(anItem);
-				this.SelectItemInGrid(this.ItemsDataGridView.Rows.Count - 1);
+				theDisplayedItems.Add(anItem);
+				theEntireListOfItems.Add(anItem);
+				theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(anItem);
+				SaveCopyOfPreviewImageFile(anItem);
+				SelectItemInGrid(ItemsDataGridView.Rows.Count - 1);
 			}
 
-			this.UpdateItemListWidgets(false);
-			this.UpdateItemDetails();
+			UpdateItemListWidgets(false);
+			UpdateItemDetails();
 		}
 
 		private void RefreshOrRevertItem()
 		{
-			if (this.theSelectedItem.IsChanged)
+			if (theSelectedItem.IsChanged)
 			{
-				if (this.theSelectedItem.IsTemplate)
+				if (theSelectedItem.IsTemplate)
 				{
 					//Me.theSelectedItemDetailsIsChangingViaMe = True
 					//'NOTE: Change the item in the list (and not the Me.theSelectedItem) so that list and selected item stay synced.
 					//Dim selectedItemIndex As Integer = Me.theItemBindingSource.IndexOf(Me.theSelectedItem)
 					//Me.theDisplayedItems(selectedItemIndex) = Me.theUnchangedSelectedTemplateItem
 					//Me.theSelectedItemDetailsIsChangingViaMe = False
-					this.RevertChangedTemplate();
+					RevertChangedTemplate();
 				}
-				else if (this.theSelectedItem.IsPublished)
+				else if (theSelectedItem.IsPublished)
 				{
-					this.ChangeChangedItemIntoPublishedItem(this.theSelectedItem);
+					ChangeChangedItemIntoPublishedItem(theSelectedItem);
 				}
 			}
-			this.UpdateItemDetails();
+			UpdateItemDetails();
 		}
 
 		private void OpenWorkshopPage()
 		{
-			System.Diagnostics.Process.Start(this.theWorkshopPageLink);
+			System.Diagnostics.Process.Start(theWorkshopPageLink);
 		}
 
 		private void SaveTemplate()
 		{
-			this.theSelectedItemDetailsIsChangingViaMe = true;
-			this.theSelectedItem.IsChanged = false;
-			this.theSelectedItemDetailsIsChangingViaMe = false;
+			theSelectedItemDetailsIsChangingViaMe = true;
+			theSelectedItem.IsChanged = false;
+			theSelectedItemDetailsIsChangingViaMe = false;
 			//Me.UpdateItemListWidgets(False)
-			this.UpdateItemDetails();
+			UpdateItemDetails();
 		}
 
 		private void DeleteItem()
 		{
 			DeleteItemForm deleteItemWindow = new DeleteItemForm();
-			if (this.theSelectedItem.IsPublished)
+			if (theSelectedItem.IsPublished)
 			{
 				deleteItemWindow.TextBox1.Text = "Deleting will remove the item from the Workshop permanently." + "\r\n" + "Backup anything you want to save before deleting.";
 				if (deleteItemWindow.ShowDialog() == DialogResult.OK)
 				{
-					this.DeletePublishedItemFromWorkshop();
+					DeletePublishedItemFromWorkshop();
 				}
 			}
 			else
@@ -2079,7 +2079,7 @@ namespace Crowbar
 				deleteItemWindow.TextBox1.Text = "Deleting will remove the item from your saved items permanently." + "\r\n" + "Backup anything you want to save before deleting.";
 				if (deleteItemWindow.ShowDialog() == DialogResult.OK)
 				{
-					this.UpdateAfterDeleteItem();
+					UpdateAfterDeleteItem();
 				}
 			}
 		}
@@ -2087,7 +2087,7 @@ namespace Crowbar
 		private void UpdateAfterDeleteItem()
 		{
 			//NOTE: Need to make a temp variable because Me.theSelectedItem will change between function calls.
-			WorkshopItem deletedItem = this.theSelectedItem;
+			WorkshopItem deletedItem = theSelectedItem;
 			//If deletedItem.IsTemplate Then
 			//	Me.theTemplateItemTotalCount -= 1UI
 			//ElseIf Not deletedItem.IsDraft AndAlso deletedItem.IsChanged Then
@@ -2095,59 +2095,59 @@ namespace Crowbar
 			//Else
 			//End If
 			//NOTE: No exception is raised if item is not in any of these lists.
-			this.theDisplayedItems.Remove(deletedItem);
-			this.theEntireListOfItems.Remove(deletedItem);
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(deletedItem);
-			this.UpdateItemListWidgets(false);
-			this.SelectItemInGrid();
+			theDisplayedItems.Remove(deletedItem);
+			theEntireListOfItems.Remove(deletedItem);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(deletedItem);
+			UpdateItemListWidgets(false);
+			SelectItemInGrid();
 
-			this.GetUserSteamAppCloudQuota();
+			GetUserSteamAppCloudQuota();
 		}
 
 		private void DeletePublishedItemFromWorkshop()
 		{
-			this.AppIdComboBox.Enabled = false;
-			this.ItemsDataGridView.Enabled = false;
-			this.ItemGroupBox.Enabled = false;
+			AppIdComboBox.Enabled = false;
+			ItemsDataGridView.Enabled = false;
+			ItemGroupBox.Enabled = false;
 			//Me.DeleteItemButton.Enabled = False
-			this.PublishItemButton.Enabled = false;
-			if (!string.IsNullOrEmpty(this.LogTextBox.Text))
+			PublishItemButton.Enabled = false;
+			if (!string.IsNullOrEmpty(LogTextBox.Text))
 			{
-				this.LogTextBox.AppendText("------" + "\r\n");
+				LogTextBox.AppendText("------" + "\r\n");
 			}
 
-			this.theBackgroundSteamPipe.DeletePublishedItemFromWorkshop(this.DeletePublishedItemFromWorkshop_ProgressChanged, this.DeletePublishedItemFromWorkshop_RunWorkerCompleted, this.theSelectedItem.ID);
+			theBackgroundSteamPipe.DeletePublishedItemFromWorkshop(DeletePublishedItemFromWorkshop_ProgressChanged, DeletePublishedItemFromWorkshop_RunWorkerCompleted, theSelectedItem.ID);
 		}
 
 		private void GetPublishedItemDetailsViaSteamRemoteStorage(string itemID, string action)
 		{
-			this.AppIdComboBox.Enabled = false;
-			this.ItemsDataGridView.Enabled = false;
-			this.ItemGroupBox.Enabled = false;
-			this.PublishItemButton.Enabled = false;
-			if (!string.IsNullOrEmpty(this.LogTextBox.Text))
+			AppIdComboBox.Enabled = false;
+			ItemsDataGridView.Enabled = false;
+			ItemGroupBox.Enabled = false;
+			PublishItemButton.Enabled = false;
+			if (!string.IsNullOrEmpty(LogTextBox.Text))
 			{
-				this.LogTextBox.AppendText("------" + "\r\n");
+				LogTextBox.AppendText("------" + "\r\n");
 			}
 
-			this.theSelectedItemDetailsIsChangingViaMe = true;
+			theSelectedItemDetailsIsChangingViaMe = true;
 
-			BackgroundSteamPipe.GetPublishedFileDetailsInputInfo input = new BackgroundSteamPipe.GetPublishedFileDetailsInputInfo(itemID, this.theSteamAppId.ToString(), action);
-			this.theBackgroundSteamPipe.GetPublishedItemDetails(this.GetPublishedItemDetails_ProgressChanged, this.GetPublishedItemDetails_RunWorkerCompleted, input);
+			BackgroundSteamPipe.GetPublishedFileDetailsInputInfo input = new BackgroundSteamPipe.GetPublishedFileDetailsInputInfo(itemID, theSteamAppId.ToString(), action);
+			theBackgroundSteamPipe.GetPublishedItemDetails(GetPublishedItemDetails_ProgressChanged, GetPublishedItemDetails_RunWorkerCompleted, input);
 		}
 
 		private void PublishItem()
 		{
-			if (this.theSelectedItem.IsTemplate)
+			if (theSelectedItem.IsTemplate)
 			{
-				this.SaveChangedTemplateToDraft();
-				this.SelectItemInGrid(this.ItemsDataGridView.Rows.Count - 1);
+				SaveChangedTemplateToDraft();
+				SelectItemInGrid(ItemsDataGridView.Rows.Count - 1);
 			}
 
 			//NOTE: Need to do this after the template-to-draft change above.
-			this.AppIdComboBox.Enabled = false;
-			this.ItemsDataGridView.Enabled = false;
-			this.ItemGroupBox.Enabled = false;
+			AppIdComboBox.Enabled = false;
+			ItemsDataGridView.Enabled = false;
+			ItemGroupBox.Enabled = false;
 			//Me.ItemTitleTextBox.Enabled = False
 			//Me.ItemDescriptionTextBox.Enabled = False
 			//Me.ItemChangeNoteTextBox.Enabled = False
@@ -2158,74 +2158,74 @@ namespace Crowbar
 			//Me.OpenWorkshopPageButton.Enabled = True
 			//Me.DeleteItemButton.Enabled = False
 			//Me.ItemTagsGroupBox.Enabled = False
-			this.PublishItemButton.Enabled = false;
-			if (!string.IsNullOrEmpty(this.LogTextBox.Text))
+			PublishItemButton.Enabled = false;
+			if (!string.IsNullOrEmpty(LogTextBox.Text))
 			{
-				this.LogTextBox.AppendText("------" + "\r\n");
+				LogTextBox.AppendText("------" + "\r\n");
 			}
 
 			bool prePublishChecksAreSuccessful = true;
-			if (this.theSelectedItem.ContentPathFolderOrFileNameIsChanged)
+			if (theSelectedItem.ContentPathFolderOrFileNameIsChanged)
 			{
-				if (this.theSteamAppInfo.CanUseContentFolderOrFile)
+				if (theSteamAppInfo.CanUseContentFolderOrFile)
 				{
-					if (!Directory.Exists(this.theSelectedItem.ContentPathFolderOrFileName) && !File.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+					if (!Directory.Exists(theSelectedItem.ContentPathFolderOrFileName) && !File.Exists(theSelectedItem.ContentPathFolderOrFileName))
 					{
-						this.LogTextBox.AppendText("ERROR: Item content folder or file does not exist." + "\r\n");
+						LogTextBox.AppendText("ERROR: Item content folder or file does not exist." + "\r\n");
 						prePublishChecksAreSuccessful = false;
 					}
 				}
-				else if (this.theSteamAppInfo.UsesSteamUGC)
+				else if (theSteamAppInfo.UsesSteamUGC)
 				{
-					if (!Directory.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+					if (!Directory.Exists(theSelectedItem.ContentPathFolderOrFileName))
 					{
-						this.LogTextBox.AppendText("ERROR: Item content folder does not exist." + "\r\n");
+						LogTextBox.AppendText("ERROR: Item content folder does not exist." + "\r\n");
 						prePublishChecksAreSuccessful = false;
 					}
 				}
 				else
 				{
-					if (!File.Exists(this.theSelectedItem.ContentPathFolderOrFileName))
+					if (!File.Exists(theSelectedItem.ContentPathFolderOrFileName))
 					{
-						this.LogTextBox.AppendText("ERROR: Item content file does not exist." + "\r\n");
+						LogTextBox.AppendText("ERROR: Item content file does not exist." + "\r\n");
 						prePublishChecksAreSuccessful = false;
 					}
 				}
 			}
-			if (this.theSelectedItem.PreviewImagePathFileNameIsChanged)
+			if (theSelectedItem.PreviewImagePathFileNameIsChanged)
 			{
-				if (!File.Exists(this.theSelectedItem.PreviewImagePathFileName))
+				if (!File.Exists(theSelectedItem.PreviewImagePathFileName))
 				{
-					this.LogTextBox.AppendText("ERROR: Item preview image file does not exist." + "\r\n");
+					LogTextBox.AppendText("ERROR: Item preview image file does not exist." + "\r\n");
 					prePublishChecksAreSuccessful = false;
 				}
 			}
 			if (!prePublishChecksAreSuccessful)
 			{
 				//Me.UpdateItemDetailWidgets()
-				this.UpdateWidgetsAfterPublish();
+				UpdateWidgetsAfterPublish();
 				return;
 			}
 
-			this.theSelectedItemDetailsIsChangingViaMe = true;
+			theSelectedItemDetailsIsChangingViaMe = true;
 
 			BackgroundSteamPipe.PublishItemInputInfo inputInfo = new BackgroundSteamPipe.PublishItemInputInfo();
-			inputInfo.AppInfo = this.theSteamAppInfo;
-			inputInfo.Item = this.theSelectedItem;
-			this.theBackgroundSteamPipe.PublishItem(this.PublishItem_ProgressChanged, this.PublishItem_RunWorkerCompleted, inputInfo);
+			inputInfo.AppInfo = theSteamAppInfo;
+			inputInfo.Item = theSelectedItem;
+			theBackgroundSteamPipe.PublishItem(PublishItem_ProgressChanged, PublishItem_RunWorkerCompleted, inputInfo);
 		}
 
 		private void UpdateWidgetsAfterPublish()
 		{
-			this.AppIdComboBox.Enabled = true;
-			this.ItemsDataGridView.Enabled = true;
-			this.ItemTitleTextBox.Enabled = true;
-			this.ItemDescriptionTextBox.Enabled = true;
-			this.ItemChangeNoteTextBox.Enabled = true;
-			this.ItemContentPathFileNameTextBox.Enabled = true;
-			this.ItemPreviewImagePathFileNameTextBox.Enabled = true;
-			this.ItemTagsGroupBox.Enabled = true;
-			this.UpdateItemDetailWidgets();
+			AppIdComboBox.Enabled = true;
+			ItemsDataGridView.Enabled = true;
+			ItemTitleTextBox.Enabled = true;
+			ItemDescriptionTextBox.Enabled = true;
+			ItemChangeNoteTextBox.Enabled = true;
+			ItemContentPathFileNameTextBox.Enabled = true;
+			ItemPreviewImagePathFileNameTextBox.Enabled = true;
+			ItemTagsGroupBox.Enabled = true;
+			UpdateItemDetailWidgets();
 		}
 
 		private void OpenAgreementRequiresAcceptanceWindow()
@@ -2233,35 +2233,35 @@ namespace Crowbar
 			AgreementRequiresAcceptanceForm agreementRequiresAcceptanceWindow = new AgreementRequiresAcceptanceForm();
 			if (agreementRequiresAcceptanceWindow.ShowDialog() == DialogResult.OK)
 			{
-				this.OpenSteamSubscriberAgreement();
+				OpenSteamSubscriberAgreement();
 			}
 			else if (agreementRequiresAcceptanceWindow.ShowDialog() == DialogResult.Ignore)
 			{
-				this.OpenWorkshopPage();
+				OpenWorkshopPage();
 			}
 		}
 
 		private void SaveChangedTemplateToDraft()
 		{
-			this.AddDraftItem(this.theSelectedItem);
-			if (this.theSelectedItem.IsChanged)
+			AddDraftItem(theSelectedItem);
+			if (theSelectedItem.IsChanged)
 			{
-				this.RevertChangedTemplate();
+				RevertChangedTemplate();
 			}
 		}
 
 		private void RevertChangedTemplate()
 		{
-			this.theSelectedItemDetailsIsChangingViaMe = true;
+			theSelectedItemDetailsIsChangingViaMe = true;
 			//NOTE: Change the item in the list (and not the Me.theSlectedItem) so that list and selected item stay synced.
-			int selectedItemIndex = this.theItemBindingSource.IndexOf(this.theSelectedItem);
-			this.theDisplayedItems[selectedItemIndex] = this.theUnchangedSelectedTemplateItem;
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(this.theSelectedItem);
-			this.theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(this.theUnchangedSelectedTemplateItem);
-			this.theSelectedItem.PropertyChanged -= this.WorkshopItem_PropertyChanged;
-			this.theSelectedItem = this.theUnchangedSelectedTemplateItem;
-			this.theSelectedItem.PropertyChanged += this.WorkshopItem_PropertyChanged;
-			this.theSelectedItemDetailsIsChangingViaMe = false;
+			int selectedItemIndex = theItemBindingSource.IndexOf(theSelectedItem);
+			theDisplayedItems[selectedItemIndex] = theUnchangedSelectedTemplateItem;
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Remove(theSelectedItem);
+			theSteamAppUserInfo.DraftTemplateAndChangedItems.Add(theUnchangedSelectedTemplateItem);
+			theSelectedItem.PropertyChanged -= WorkshopItem_PropertyChanged;
+			theSelectedItem = theUnchangedSelectedTemplateItem;
+			theSelectedItem.PropertyChanged += WorkshopItem_PropertyChanged;
+			theSelectedItemDetailsIsChangingViaMe = false;
 		}
 
 #endregion
@@ -2335,12 +2335,12 @@ namespace Crowbar
 		private void ItemPreviewImagePictureBox_Resize(object sender, EventArgs e)
 		{
 			// Make sure size stays a square even when theme font changes it.
-			int width = this.ItemPreviewImagePictureBox.Width;
-			int height = this.ItemPreviewImagePictureBox.Height;
+			int width = ItemPreviewImagePictureBox.Width;
+			int height = ItemPreviewImagePictureBox.Height;
 			if (width != height)
 			{
 				int length = Math.Min(width, height);
-				this.ItemPreviewImagePictureBox.Size = new System.Drawing.Size(length, length);
+				ItemPreviewImagePictureBox.Size = new System.Drawing.Size(length, length);
 			}
 		}
 

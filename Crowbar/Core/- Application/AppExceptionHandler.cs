@@ -92,7 +92,7 @@ namespace Crowbar
 				errorReportText += "\r\n";
 				errorReportText += "\r\n";
 
-				this.WriteToErrorFile(errorReportText);
+				WriteToErrorFile(errorReportText);
 
 				anUnhandledExceptionWindow.ErrorReportTextBox.Text = errorReportText;
 				anUnhandledExceptionWindow.ShowDialog();

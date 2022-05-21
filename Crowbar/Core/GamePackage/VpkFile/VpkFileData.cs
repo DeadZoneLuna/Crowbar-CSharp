@@ -14,7 +14,7 @@ namespace Crowbar
 		public VpkFileData() : base()
 		{
 
-			this.theEntryCount = 0;
+			theEntryCount = 0;
 			//Me.theEntries = New List(Of VpkDirectoryEntry)()
 			//Me.theEntryDataOutputTexts = New List(Of String)()
 		}
@@ -23,7 +23,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return ((this.id == VpkFileData.VPK_ID) || (this.id == VpkFileData.FPX_ID) || this.theEntryCount > 0);
+				return ((id == VpkFileData.VPK_ID) || (id == VpkFileData.FPX_ID) || theEntryCount > 0);
 			}
 		}
 
@@ -31,7 +31,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.id == VpkFileData.FPX_ID)
+				if (id == VpkFileData.FPX_ID)
 				{
 					return VpkFileData.TheFpxFileExtension;
 				}
@@ -46,7 +46,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.id == VpkFileData.FPX_ID)
+				if (id == VpkFileData.FPX_ID)
 				{
 					return VpkFileData.TheFpxDirectoryFileNameSuffix;
 				}
@@ -61,7 +61,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.id == VpkFileData.FPX_ID)
+				if (id == VpkFileData.FPX_ID)
 				{
 					return VpkFileData.TheFpxDirectoryFileNameSuffix + VpkFileData.TheFpxFileExtension;
 				}
@@ -76,7 +76,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return ((this.id == VpkFileData.VPK_ID) || (this.id == VpkFileData.FPX_ID));
+				return ((id == VpkFileData.VPK_ID) || (id == VpkFileData.FPX_ID));
 			}
 		}
 

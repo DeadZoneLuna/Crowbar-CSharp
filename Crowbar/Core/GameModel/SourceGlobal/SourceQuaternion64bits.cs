@@ -92,9 +92,9 @@ namespace Crowbar
 				IntegerAndSingleUnion bitsResult = new IntegerAndSingleUnion();
 				double result = 0;
 
-				byte0 = ((int)this.theBytes[0] & 0xFF);
-				byte1 = ((int)this.theBytes[1] & 0xFF) << 8;
-				byte2 = ((int)this.theBytes[2] & 0x1F) << 16;
+				byte0 = ((int)theBytes[0] & 0xFF);
+				byte1 = ((int)theBytes[1] & 0xFF) << 8;
+				byte2 = ((int)theBytes[2] & 0x1F) << 16;
 				//------
 				//byte0 = (CInt(Me.theBytes(7)) And &HFF)
 				//byte1 = (CInt(Me.theBytes(6)) And &HFF) << 8
@@ -119,10 +119,10 @@ namespace Crowbar
 				IntegerAndSingleUnion bitsResult = new IntegerAndSingleUnion();
 				double result = 0;
 
-				byte2 = ((int)this.theBytes[2] & 0xE0) >> 5;
-				byte3 = ((int)this.theBytes[3] & 0xFF) << 3;
-				byte4 = ((int)this.theBytes[4] & 0xFF) << 11;
-				byte5 = ((int)this.theBytes[5] & 0x3) << 19;
+				byte2 = ((int)theBytes[2] & 0xE0) >> 5;
+				byte3 = ((int)theBytes[3] & 0xFF) << 3;
+				byte4 = ((int)theBytes[4] & 0xFF) << 11;
+				byte5 = ((int)theBytes[5] & 0x3) << 19;
 				//------
 				//byte2 = (CInt(Me.theBytes(5)) And &HE0) >> 5
 				//byte3 = (CInt(Me.theBytes(4)) And &HFF) << 3
@@ -147,9 +147,9 @@ namespace Crowbar
 				IntegerAndSingleUnion bitsResult = new IntegerAndSingleUnion();
 				double result = 0;
 
-				byte5 = ((int)this.theBytes[5] & 0xFC) >> 2;
-				byte6 = ((int)this.theBytes[6] & 0xFF) << 6;
-				byte7 = ((int)this.theBytes[7] & 0x7F) << 14;
+				byte5 = ((int)theBytes[5] & 0xFC) >> 2;
+				byte6 = ((int)theBytes[6] & 0xFF) << 6;
+				byte7 = ((int)theBytes[7] & 0x7F) << 14;
 				//------
 				//byte5 = (CInt(Me.theBytes(2)) And &HFC) >> 2
 				//byte6 = (CInt(Me.theBytes(1)) And &HFF) << 6
@@ -170,7 +170,7 @@ namespace Crowbar
 				double result;
 
 				//result = Me.wneg
-				result = Math.Sqrt(1 - this.x * this.x - this.y * this.y - this.z * this.z) * this.wneg;
+				result = Math.Sqrt(1 - x * x - y * y - z * z) * wneg;
 				return result;
 			}
 		}
@@ -179,7 +179,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if ((this.theBytes[7] & 0x80) > 0)
+				if ((theBytes[7] & 0x80) > 0)
 				{
 					return -1;
 				}
@@ -205,7 +205,7 @@ namespace Crowbar
 				double angle = 0;
 				double sin_a = 0;
 
-				cos_a = this.w;
+				cos_a = w;
 				angle = Math.Acos(cos_a) * 2;
 				sin_a = Math.Sqrt(1.0 - cos_a * cos_a);
 				if (Math.Abs(sin_a) < 0.000005)
@@ -213,7 +213,7 @@ namespace Crowbar
 					sin_a = 1;
 				}
 
-				return this.x / sin_a;
+				return x / sin_a;
 			}
 		}
 
@@ -225,7 +225,7 @@ namespace Crowbar
 				double angle = 0;
 				double sin_a = 0;
 
-				cos_a = this.w;
+				cos_a = w;
 				angle = Math.Acos(cos_a) * 2;
 				sin_a = Math.Sqrt(1.0 - cos_a * cos_a);
 				if (Math.Abs(sin_a) < 0.000005)
@@ -233,7 +233,7 @@ namespace Crowbar
 					sin_a = 1;
 				}
 
-				return this.y / sin_a;
+				return y / sin_a;
 			}
 		}
 
@@ -245,7 +245,7 @@ namespace Crowbar
 				double angle = 0;
 				double sin_a = 0;
 
-				cos_a = this.w;
+				cos_a = w;
 				angle = Math.Acos(cos_a) * 2;
 				sin_a = Math.Sqrt(1.0 - cos_a * cos_a);
 				if (Math.Abs(sin_a) < 0.000005)
@@ -253,7 +253,7 @@ namespace Crowbar
 					sin_a = 1;
 				}
 
-				return this.z / sin_a;
+				return z / sin_a;
 			}
 		}
 

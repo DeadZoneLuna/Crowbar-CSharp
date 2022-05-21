@@ -15,22 +15,22 @@ namespace Crowbar
 
 		public SourceQuaternion48bitsSmallest3()
 		{
-			this.theQuaternion = new SourceQuaternion();
-			this.theQuaternionIsComputed = false;
+			theQuaternion = new SourceQuaternion();
+			theQuaternionIsComputed = false;
 		}
 
 		public ushort AInput
 		{
 			get
 			{
-				return this.theAInput;
+				return theAInput;
 			}
 			set
 			{
-				if (this.theAInput != value)
+				if (theAInput != value)
 				{
-					this.theAInput = value;
-					this.theQuaternionIsComputed = false;
+					theAInput = value;
+					theQuaternionIsComputed = false;
 				}
 			}
 		}
@@ -39,14 +39,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theBInput;
+				return theBInput;
 			}
 			set
 			{
-				if (this.theBInput != value)
+				if (theBInput != value)
 				{
-					this.theBInput = value;
-					this.theQuaternionIsComputed = false;
+					theBInput = value;
+					theQuaternionIsComputed = false;
 				}
 			}
 		}
@@ -55,14 +55,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCInput;
+				return theCInput;
 			}
 			set
 			{
-				if (this.theCInput != value)
+				if (theCInput != value)
 				{
-					this.theCInput = value;
-					this.theQuaternionIsComputed = false;
+					theCInput = value;
+					theQuaternionIsComputed = false;
 				}
 			}
 		}
@@ -71,8 +71,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.x;
+				ComputeQuaternion();
+				return theQuaternion.x;
 			}
 		}
 
@@ -80,8 +80,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.y;
+				ComputeQuaternion();
+				return theQuaternion.y;
 			}
 		}
 
@@ -89,8 +89,8 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.z;
+				ComputeQuaternion();
+				return theQuaternion.z;
 			}
 		}
 
@@ -98,14 +98,14 @@ namespace Crowbar
 		{
 			get
 			{
-				this.ComputeQuaternion();
-				return this.theQuaternion.w;
+				ComputeQuaternion();
+				return theQuaternion.w;
 			}
 		}
 
 		private void ComputeQuaternion()
 		{
-			if (!this.theQuaternionIsComputed)
+			if (!theQuaternionIsComputed)
 			{
 				int missingComponentType = 0;
 				int integerA = 0;
@@ -118,16 +118,16 @@ namespace Crowbar
 
 
 				// Get component type from first 2 bits.
-				missingComponentType = (this.theAInput & 0xC000) >> 14;
+				missingComponentType = (theAInput & 0xC000) >> 14;
 
 				// Get A from last 13 bits of A and first 2 bits of B.
-				integerA = (this.theAInput & 0x1FFF) | ((this.theBInput & 0xC000) >> 14);
+				integerA = (theAInput & 0x1FFF) | ((theBInput & 0xC000) >> 14);
 
 				// Get B from last 14 bits of B and first 1 bits of C.
-				integerB = (this.theBInput & 0x3FFF) | ((this.theCInput & 0x8000) >> 15);
+				integerB = (theBInput & 0x3FFF) | ((theCInput & 0x8000) >> 15);
 
 				// Get C from last 15 bits of C.
-				integerC = (this.theCInput & 0x7FFF) >> 1;
+				integerC = (theCInput & 0x7FFF) >> 1;
 
 				a = integerA / 1024.0F * (Maximum - Minimum) + Minimum;
 				b = integerB / 1024.0F * (Maximum - Minimum) + Minimum;
@@ -163,34 +163,34 @@ namespace Crowbar
 
 				if (missingComponentType == SourceQuaternion48bitsSmallest3.MISSING_COMPONENT_X)
 				{
-					this.theQuaternion.x = this.GetMissingComponent(a, b, c);
-					this.theQuaternion.y = a;
-					this.theQuaternion.z = b;
-					this.theQuaternion.w = c;
+					theQuaternion.x = GetMissingComponent(a, b, c);
+					theQuaternion.y = a;
+					theQuaternion.z = b;
+					theQuaternion.w = c;
 				}
 				else if (missingComponentType == SourceQuaternion48bitsSmallest3.MISSING_COMPONENT_Y)
 				{
-					this.theQuaternion.x = a;
-					this.theQuaternion.y = this.GetMissingComponent(a, b, c);
-					this.theQuaternion.z = b;
-					this.theQuaternion.w = c;
+					theQuaternion.x = a;
+					theQuaternion.y = GetMissingComponent(a, b, c);
+					theQuaternion.z = b;
+					theQuaternion.w = c;
 				}
 				else if (missingComponentType == SourceQuaternion48bitsSmallest3.MISSING_COMPONENT_Z)
 				{
-					this.theQuaternion.x = a;
-					this.theQuaternion.y = b;
-					this.theQuaternion.z = this.GetMissingComponent(a, b, c);
-					this.theQuaternion.w = c;
+					theQuaternion.x = a;
+					theQuaternion.y = b;
+					theQuaternion.z = GetMissingComponent(a, b, c);
+					theQuaternion.w = c;
 				}
 				else if (missingComponentType == SourceQuaternion48bitsSmallest3.MISSING_COMPONENT_W)
 				{
-					this.theQuaternion.x = a;
-					this.theQuaternion.y = b;
-					this.theQuaternion.z = c;
-					this.theQuaternion.w = this.GetMissingComponent(a, b, c);
+					theQuaternion.x = a;
+					theQuaternion.y = b;
+					theQuaternion.z = c;
+					theQuaternion.w = GetMissingComponent(a, b, c);
 				}
 
-				this.theQuaternionIsComputed = true;
+				theQuaternionIsComputed = true;
 			}
 		}
 

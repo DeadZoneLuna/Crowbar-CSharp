@@ -13,13 +13,13 @@ namespace Crowbar
 	{
 		public SourceMdlFileData10()
 		{
-			this.theChecksumIsValid = false;
+			theChecksumIsValid = false;
 
-			this.eyePosition = new SourceVector();
-			this.hullMinPosition = new SourceVector();
-			this.hullMaxPosition = new SourceVector();
-			this.viewBoundingBoxMinPosition = new SourceVector();
-			this.viewBoundingBoxMaxPosition = new SourceVector();
+			eyePosition = new SourceVector();
+			hullMinPosition = new SourceVector();
+			hullMaxPosition = new SourceVector();
+			viewBoundingBoxMinPosition = new SourceVector();
+			viewBoundingBoxMaxPosition = new SourceVector();
 		}
 
 		//FROM: GoldSourceEngine2002_source\halflife-master\utils\studiomdl\studiomdl.h

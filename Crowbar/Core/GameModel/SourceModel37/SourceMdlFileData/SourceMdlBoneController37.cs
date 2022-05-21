@@ -70,51 +70,51 @@ namespace Crowbar
 		{
 			get
 			{
-				if ((this.type & STUDIO_X) > 0)
+				if ((type & STUDIO_X) > 0)
 				{
 					return "X";
 				}
-				else if ((this.type & STUDIO_Y) > 0)
+				else if ((type & STUDIO_Y) > 0)
 				{
 					return "Y";
 				}
-				else if ((this.type & STUDIO_Z) > 0)
+				else if ((type & STUDIO_Z) > 0)
 				{
 					return "Z";
 				}
-				else if ((this.type & STUDIO_XR) > 0)
+				else if ((type & STUDIO_XR) > 0)
 				{
 					return "XR";
 				}
-				else if ((this.type & STUDIO_YR) > 0)
+				else if ((type & STUDIO_YR) > 0)
 				{
 					return "YR";
 				}
-				else if ((this.type & STUDIO_ZR) > 0)
+				else if ((type & STUDIO_ZR) > 0)
 				{
 					return "ZR";
 				}
-				else if ((this.type & STUDIO_LX) > 0)
+				else if ((type & STUDIO_LX) > 0)
 				{
 					return "LX";
 				}
-				else if ((this.type & STUDIO_LY) > 0)
+				else if ((type & STUDIO_LY) > 0)
 				{
 					return "LY";
 				}
-				else if ((this.type & STUDIO_LZ) > 0)
+				else if ((type & STUDIO_LZ) > 0)
 				{
 					return "LZ";
 				}
-				else if ((this.type & STUDIO_LXR) > 0)
+				else if ((type & STUDIO_LXR) > 0)
 				{
 					return "LXR";
 				}
-				else if ((this.type & STUDIO_LYR) > 0)
+				else if ((type & STUDIO_LYR) > 0)
 				{
 					return "LYR";
 				}
-				else if ((this.type & STUDIO_LZR) > 0)
+				else if ((type & STUDIO_LZR) > 0)
 				{
 					return "LZR";
 					//ElseIf (Me.type And STUDIO_LINEAR) > 0 Then

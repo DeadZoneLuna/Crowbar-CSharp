@@ -13,7 +13,7 @@ namespace Crowbar
 	{
 		public VpkDirectoryEntry()
 		{
-			this.isVtmbVpk = false;
+			isVtmbVpk = false;
 		}
 
 		//FROM: Nem's Tools\hllib245\HLLib\VPKFile.h

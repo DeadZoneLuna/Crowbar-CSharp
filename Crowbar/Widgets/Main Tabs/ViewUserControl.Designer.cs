@@ -35,275 +35,275 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.ViewButton = new System.Windows.Forms.Button();
-			this.MdlPathFileNameTextBox = new Crowbar.TextBoxEx();
-			this.BrowseForMdlFileButton = new System.Windows.Forms.Button();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.Panel2 = new System.Windows.Forms.Panel();
-			this.OverrideMdlVersionLabel = new System.Windows.Forms.Label();
-			this.OverrideMdlVersionComboBox = new System.Windows.Forms.ComboBox();
-			this.GotoMdlFileButton = new System.Windows.Forms.Button();
-			this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.GroupBox1 = new System.Windows.Forms.GroupBox();
-			this.InfoRichTextBox = new Crowbar.RichTextBoxEx();
-			this.GameLabel = new System.Windows.Forms.Label();
-			this.GameSetupComboBox = new System.Windows.Forms.ComboBox();
-			this.SetUpGameButton = new System.Windows.Forms.Button();
-			this.ViewAsReplacementButton = new System.Windows.Forms.Button();
-			this.UseInDecompileButton = new System.Windows.Forms.Button();
-			this.OpenViewerButton = new System.Windows.Forms.Button();
-			this.OpenMappingToolButton = new System.Windows.Forms.Button();
-			this.RunGameButton = new System.Windows.Forms.Button();
-			this.MessageTextBox = new Crowbar.TextBoxEx();
-			this.Panel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)this.SplitContainer1).BeginInit();
-			this.SplitContainer1.Panel1.SuspendLayout();
-			this.SplitContainer1.Panel2.SuspendLayout();
-			this.SplitContainer1.SuspendLayout();
-			this.GroupBox1.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			ViewButton = new System.Windows.Forms.Button();
+			MdlPathFileNameTextBox = new Crowbar.TextBoxEx();
+			BrowseForMdlFileButton = new System.Windows.Forms.Button();
+			Label1 = new System.Windows.Forms.Label();
+			Panel2 = new System.Windows.Forms.Panel();
+			OverrideMdlVersionLabel = new System.Windows.Forms.Label();
+			OverrideMdlVersionComboBox = new System.Windows.Forms.ComboBox();
+			GotoMdlFileButton = new System.Windows.Forms.Button();
+			SplitContainer1 = new System.Windows.Forms.SplitContainer();
+			GroupBox1 = new System.Windows.Forms.GroupBox();
+			InfoRichTextBox = new Crowbar.RichTextBoxEx();
+			GameLabel = new System.Windows.Forms.Label();
+			GameSetupComboBox = new System.Windows.Forms.ComboBox();
+			SetUpGameButton = new System.Windows.Forms.Button();
+			ViewAsReplacementButton = new System.Windows.Forms.Button();
+			UseInDecompileButton = new System.Windows.Forms.Button();
+			OpenViewerButton = new System.Windows.Forms.Button();
+			OpenMappingToolButton = new System.Windows.Forms.Button();
+			RunGameButton = new System.Windows.Forms.Button();
+			MessageTextBox = new Crowbar.TextBoxEx();
+			Panel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)SplitContainer1).BeginInit();
+			SplitContainer1.Panel1.SuspendLayout();
+			SplitContainer1.Panel2.SuspendLayout();
+			SplitContainer1.SuspendLayout();
+			GroupBox1.SuspendLayout();
+			SuspendLayout();
 			//
 			//ViewButton
 			//
-			this.ViewButton.Enabled = false;
-			this.ViewButton.Location = new System.Drawing.Point(0, 32);
-			this.ViewButton.Name = "ViewButton";
-			this.ViewButton.Size = new System.Drawing.Size(40, 23);
-			this.ViewButton.TabIndex = 8;
-			this.ViewButton.Text = "View";
-			this.ViewButton.UseVisualStyleBackColor = true;
+			ViewButton.Enabled = false;
+			ViewButton.Location = new System.Drawing.Point(0, 32);
+			ViewButton.Name = "ViewButton";
+			ViewButton.Size = new System.Drawing.Size(40, 23);
+			ViewButton.TabIndex = 8;
+			ViewButton.Text = "View";
+			ViewButton.UseVisualStyleBackColor = true;
 			//
 			//MdlPathFileNameTextBox
 			//
-			this.MdlPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.MdlPathFileNameTextBox.CueBannerText = "";
-			this.MdlPathFileNameTextBox.Location = new System.Drawing.Point(58, 3);
-			this.MdlPathFileNameTextBox.Name = "MdlPathFileNameTextBox";
-			this.MdlPathFileNameTextBox.Size = new System.Drawing.Size(596, 22);
-			this.MdlPathFileNameTextBox.TabIndex = 1;
+			MdlPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			MdlPathFileNameTextBox.CueBannerText = "";
+			MdlPathFileNameTextBox.Location = new System.Drawing.Point(58, 3);
+			MdlPathFileNameTextBox.Name = "MdlPathFileNameTextBox";
+			MdlPathFileNameTextBox.Size = new System.Drawing.Size(596, 22);
+			MdlPathFileNameTextBox.TabIndex = 1;
 			//
 			//BrowseForMdlFileButton
 			//
-			this.BrowseForMdlFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForMdlFileButton.Location = new System.Drawing.Point(660, 3);
-			this.BrowseForMdlFileButton.Name = "BrowseForMdlFileButton";
-			this.BrowseForMdlFileButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForMdlFileButton.TabIndex = 2;
-			this.BrowseForMdlFileButton.Text = "Browse...";
-			this.BrowseForMdlFileButton.UseVisualStyleBackColor = true;
+			BrowseForMdlFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForMdlFileButton.Location = new System.Drawing.Point(660, 3);
+			BrowseForMdlFileButton.Name = "BrowseForMdlFileButton";
+			BrowseForMdlFileButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForMdlFileButton.TabIndex = 2;
+			BrowseForMdlFileButton.Text = "Browse...";
+			BrowseForMdlFileButton.UseVisualStyleBackColor = true;
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Location = new System.Drawing.Point(3, 8);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(52, 13);
-			this.Label1.TabIndex = 0;
-			this.Label1.Text = "MDL file:";
+			Label1.AutoSize = true;
+			Label1.Location = new System.Drawing.Point(3, 8);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(52, 13);
+			Label1.TabIndex = 0;
+			Label1.Text = "MDL file:";
 			//
 			//Panel2
 			//
-			this.Panel2.Controls.Add(this.OverrideMdlVersionLabel);
-			this.Panel2.Controls.Add(this.Label1);
-			this.Panel2.Controls.Add(this.MdlPathFileNameTextBox);
-			this.Panel2.Controls.Add(this.OverrideMdlVersionComboBox);
-			this.Panel2.Controls.Add(this.BrowseForMdlFileButton);
-			this.Panel2.Controls.Add(this.GotoMdlFileButton);
-			this.Panel2.Controls.Add(this.SplitContainer1);
-			this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel2.Location = new System.Drawing.Point(0, 0);
-			this.Panel2.Margin = new System.Windows.Forms.Padding(2);
-			this.Panel2.Name = "Panel2";
-			this.Panel2.Size = new System.Drawing.Size(776, 536);
-			this.Panel2.TabIndex = 8;
+			Panel2.Controls.Add(OverrideMdlVersionLabel);
+			Panel2.Controls.Add(Label1);
+			Panel2.Controls.Add(MdlPathFileNameTextBox);
+			Panel2.Controls.Add(OverrideMdlVersionComboBox);
+			Panel2.Controls.Add(BrowseForMdlFileButton);
+			Panel2.Controls.Add(GotoMdlFileButton);
+			Panel2.Controls.Add(SplitContainer1);
+			Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel2.Location = new System.Drawing.Point(0, 0);
+			Panel2.Margin = new System.Windows.Forms.Padding(2);
+			Panel2.Name = "Panel2";
+			Panel2.Size = new System.Drawing.Size(776, 536);
+			Panel2.TabIndex = 8;
 			//
 			//OverrideMdlVersionLabel
 			//
-			this.OverrideMdlVersionLabel.AutoSize = true;
-			this.OverrideMdlVersionLabel.Location = new System.Drawing.Point(3, 36);
-			this.OverrideMdlVersionLabel.Name = "OverrideMdlVersionLabel";
-			this.OverrideMdlVersionLabel.Size = new System.Drawing.Size(120, 13);
-			this.OverrideMdlVersionLabel.TabIndex = 48;
-			this.OverrideMdlVersionLabel.Text = "Override MDL version:";
+			OverrideMdlVersionLabel.AutoSize = true;
+			OverrideMdlVersionLabel.Location = new System.Drawing.Point(3, 36);
+			OverrideMdlVersionLabel.Name = "OverrideMdlVersionLabel";
+			OverrideMdlVersionLabel.Size = new System.Drawing.Size(120, 13);
+			OverrideMdlVersionLabel.TabIndex = 48;
+			OverrideMdlVersionLabel.Text = "Override MDL version:";
 			//
 			//OverrideMdlVersionComboBox
 			//
-			this.OverrideMdlVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OverrideMdlVersionComboBox.FormattingEnabled = true;
-			this.OverrideMdlVersionComboBox.Location = new System.Drawing.Point(123, 32);
-			this.OverrideMdlVersionComboBox.Name = "OverrideMdlVersionComboBox";
-			this.OverrideMdlVersionComboBox.Size = new System.Drawing.Size(110, 21);
-			this.OverrideMdlVersionComboBox.TabIndex = 47;
+			OverrideMdlVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			OverrideMdlVersionComboBox.FormattingEnabled = true;
+			OverrideMdlVersionComboBox.Location = new System.Drawing.Point(123, 32);
+			OverrideMdlVersionComboBox.Name = "OverrideMdlVersionComboBox";
+			OverrideMdlVersionComboBox.Size = new System.Drawing.Size(110, 21);
+			OverrideMdlVersionComboBox.TabIndex = 47;
 			//
 			//GotoMdlFileButton
 			//
-			this.GotoMdlFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoMdlFileButton.Location = new System.Drawing.Point(730, 3);
-			this.GotoMdlFileButton.Name = "GotoMdlFileButton";
-			this.GotoMdlFileButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoMdlFileButton.TabIndex = 3;
-			this.GotoMdlFileButton.Text = "Goto";
-			this.GotoMdlFileButton.UseVisualStyleBackColor = true;
+			GotoMdlFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoMdlFileButton.Location = new System.Drawing.Point(730, 3);
+			GotoMdlFileButton.Name = "GotoMdlFileButton";
+			GotoMdlFileButton.Size = new System.Drawing.Size(43, 23);
+			GotoMdlFileButton.TabIndex = 3;
+			GotoMdlFileButton.Text = "Goto";
+			GotoMdlFileButton.UseVisualStyleBackColor = true;
 			//
 			//SplitContainer1
 			//
-			this.SplitContainer1.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.SplitContainer1.Location = new System.Drawing.Point(3, 59);
-			this.SplitContainer1.Name = "SplitContainer1";
-			this.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			SplitContainer1.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			SplitContainer1.Location = new System.Drawing.Point(3, 59);
+			SplitContainer1.Name = "SplitContainer1";
+			SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			//
 			//SplitContainer1.Panel1
 			//
-			this.SplitContainer1.Panel1.Controls.Add(this.GroupBox1);
-			this.SplitContainer1.Panel1MinSize = 45;
+			SplitContainer1.Panel1.Controls.Add(GroupBox1);
+			SplitContainer1.Panel1MinSize = 45;
 			//
 			//SplitContainer1.Panel2
 			//
-			this.SplitContainer1.Panel2.Controls.Add(this.GameLabel);
-			this.SplitContainer1.Panel2.Controls.Add(this.GameSetupComboBox);
-			this.SplitContainer1.Panel2.Controls.Add(this.SetUpGameButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.ViewButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.ViewAsReplacementButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.UseInDecompileButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.OpenViewerButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.OpenMappingToolButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.RunGameButton);
-			this.SplitContainer1.Panel2.Controls.Add(this.MessageTextBox);
-			this.SplitContainer1.Panel2MinSize = 45;
-			this.SplitContainer1.Size = new System.Drawing.Size(770, 474);
-			this.SplitContainer1.SplitterDistance = 363;
-			this.SplitContainer1.TabIndex = 13;
+			SplitContainer1.Panel2.Controls.Add(GameLabel);
+			SplitContainer1.Panel2.Controls.Add(GameSetupComboBox);
+			SplitContainer1.Panel2.Controls.Add(SetUpGameButton);
+			SplitContainer1.Panel2.Controls.Add(ViewButton);
+			SplitContainer1.Panel2.Controls.Add(ViewAsReplacementButton);
+			SplitContainer1.Panel2.Controls.Add(UseInDecompileButton);
+			SplitContainer1.Panel2.Controls.Add(OpenViewerButton);
+			SplitContainer1.Panel2.Controls.Add(OpenMappingToolButton);
+			SplitContainer1.Panel2.Controls.Add(RunGameButton);
+			SplitContainer1.Panel2.Controls.Add(MessageTextBox);
+			SplitContainer1.Panel2MinSize = 45;
+			SplitContainer1.Size = new System.Drawing.Size(770, 474);
+			SplitContainer1.SplitterDistance = 363;
+			SplitContainer1.TabIndex = 13;
 			//
 			//GroupBox1
 			//
-			this.GroupBox1.Controls.Add(this.InfoRichTextBox);
-			this.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.GroupBox1.Location = new System.Drawing.Point(0, 0);
-			this.GroupBox1.Name = "GroupBox1";
-			this.GroupBox1.Size = new System.Drawing.Size(770, 363);
-			this.GroupBox1.TabIndex = 4;
-			this.GroupBox1.TabStop = false;
-			this.GroupBox1.Text = "Info";
+			GroupBox1.Controls.Add(InfoRichTextBox);
+			GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			GroupBox1.Location = new System.Drawing.Point(0, 0);
+			GroupBox1.Name = "GroupBox1";
+			GroupBox1.Size = new System.Drawing.Size(770, 363);
+			GroupBox1.TabIndex = 4;
+			GroupBox1.TabStop = false;
+			GroupBox1.Text = "Info";
 			//
 			//InfoRichTextBox
 			//
-			this.InfoRichTextBox.CueBannerText = "";
-			this.InfoRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.InfoRichTextBox.Location = new System.Drawing.Point(3, 18);
-			this.InfoRichTextBox.Name = "InfoRichTextBox";
-			this.InfoRichTextBox.ReadOnly = true;
-			this.InfoRichTextBox.Size = new System.Drawing.Size(764, 342);
-			this.InfoRichTextBox.TabIndex = 0;
-			this.InfoRichTextBox.Text = "";
-			this.InfoRichTextBox.WordWrap = false;
+			InfoRichTextBox.CueBannerText = "";
+			InfoRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			InfoRichTextBox.Location = new System.Drawing.Point(3, 18);
+			InfoRichTextBox.Name = "InfoRichTextBox";
+			InfoRichTextBox.ReadOnly = true;
+			InfoRichTextBox.Size = new System.Drawing.Size(764, 342);
+			InfoRichTextBox.TabIndex = 0;
+			InfoRichTextBox.Text = "";
+			InfoRichTextBox.WordWrap = false;
 			//
 			//GameLabel
 			//
-			this.GameLabel.AutoSize = true;
-			this.GameLabel.Location = new System.Drawing.Point(0, 8);
-			this.GameLabel.Name = "GameLabel";
-			this.GameLabel.Size = new System.Drawing.Size(175, 13);
-			this.GameLabel.TabIndex = 5;
-			this.GameLabel.Text = "Game that has the model viewer:";
+			GameLabel.AutoSize = true;
+			GameLabel.Location = new System.Drawing.Point(0, 8);
+			GameLabel.Name = "GameLabel";
+			GameLabel.Size = new System.Drawing.Size(175, 13);
+			GameLabel.TabIndex = 5;
+			GameLabel.Text = "Game that has the model viewer:";
 			//
 			//GameSetupComboBox
 			//
-			this.GameSetupComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.GameSetupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.GameSetupComboBox.FormattingEnabled = true;
-			this.GameSetupComboBox.Location = new System.Drawing.Point(181, 4);
-			this.GameSetupComboBox.Name = "GameSetupComboBox";
-			this.GameSetupComboBox.Size = new System.Drawing.Size(493, 21);
-			this.GameSetupComboBox.TabIndex = 6;
+			GameSetupComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			GameSetupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			GameSetupComboBox.FormattingEnabled = true;
+			GameSetupComboBox.Location = new System.Drawing.Point(181, 4);
+			GameSetupComboBox.Name = "GameSetupComboBox";
+			GameSetupComboBox.Size = new System.Drawing.Size(493, 21);
+			GameSetupComboBox.TabIndex = 6;
 			//
 			//SetUpGameButton
 			//
-			this.SetUpGameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.SetUpGameButton.Location = new System.Drawing.Point(680, 3);
-			this.SetUpGameButton.Name = "SetUpGameButton";
-			this.SetUpGameButton.Size = new System.Drawing.Size(90, 23);
-			this.SetUpGameButton.TabIndex = 7;
-			this.SetUpGameButton.Text = "Set Up Games";
-			this.SetUpGameButton.UseVisualStyleBackColor = true;
+			SetUpGameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			SetUpGameButton.Location = new System.Drawing.Point(680, 3);
+			SetUpGameButton.Name = "SetUpGameButton";
+			SetUpGameButton.Size = new System.Drawing.Size(90, 23);
+			SetUpGameButton.TabIndex = 7;
+			SetUpGameButton.Text = "Set Up Games";
+			SetUpGameButton.UseVisualStyleBackColor = true;
 			//
 			//ViewAsReplacementButton
 			//
-			this.ViewAsReplacementButton.Enabled = false;
-			this.ViewAsReplacementButton.Location = new System.Drawing.Point(46, 32);
-			this.ViewAsReplacementButton.Name = "ViewAsReplacementButton";
-			this.ViewAsReplacementButton.Size = new System.Drawing.Size(125, 23);
-			this.ViewAsReplacementButton.TabIndex = 9;
-			this.ViewAsReplacementButton.Text = "View as Replacement";
-			this.ViewAsReplacementButton.UseVisualStyleBackColor = true;
+			ViewAsReplacementButton.Enabled = false;
+			ViewAsReplacementButton.Location = new System.Drawing.Point(46, 32);
+			ViewAsReplacementButton.Name = "ViewAsReplacementButton";
+			ViewAsReplacementButton.Size = new System.Drawing.Size(125, 23);
+			ViewAsReplacementButton.TabIndex = 9;
+			ViewAsReplacementButton.Text = "View as Replacement";
+			ViewAsReplacementButton.UseVisualStyleBackColor = true;
 			//
 			//UseInDecompileButton
 			//
-			this.UseInDecompileButton.Enabled = false;
-			this.UseInDecompileButton.Location = new System.Drawing.Point(177, 32);
-			this.UseInDecompileButton.Name = "UseInDecompileButton";
-			this.UseInDecompileButton.Size = new System.Drawing.Size(120, 23);
-			this.UseInDecompileButton.TabIndex = 10;
-			this.UseInDecompileButton.Text = "Use in Decompile";
-			this.UseInDecompileButton.UseVisualStyleBackColor = true;
+			UseInDecompileButton.Enabled = false;
+			UseInDecompileButton.Location = new System.Drawing.Point(177, 32);
+			UseInDecompileButton.Name = "UseInDecompileButton";
+			UseInDecompileButton.Size = new System.Drawing.Size(120, 23);
+			UseInDecompileButton.TabIndex = 10;
+			UseInDecompileButton.Text = "Use in Decompile";
+			UseInDecompileButton.UseVisualStyleBackColor = true;
 			//
 			//OpenViewerButton
 			//
-			this.OpenViewerButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.OpenViewerButton.Location = new System.Drawing.Point(488, 32);
-			this.OpenViewerButton.Name = "OpenViewerButton";
-			this.OpenViewerButton.Size = new System.Drawing.Size(90, 23);
-			this.OpenViewerButton.TabIndex = 11;
-			this.OpenViewerButton.Text = "Open Viewer";
-			this.OpenViewerButton.UseVisualStyleBackColor = true;
+			OpenViewerButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			OpenViewerButton.Location = new System.Drawing.Point(488, 32);
+			OpenViewerButton.Name = "OpenViewerButton";
+			OpenViewerButton.Size = new System.Drawing.Size(90, 23);
+			OpenViewerButton.TabIndex = 11;
+			OpenViewerButton.Text = "Open Viewer";
+			OpenViewerButton.UseVisualStyleBackColor = true;
 			//
 			//OpenMappingToolButton
 			//
-			this.OpenMappingToolButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.OpenMappingToolButton.Location = new System.Drawing.Point(584, 32);
-			this.OpenMappingToolButton.Name = "OpenMappingToolButton";
-			this.OpenMappingToolButton.Size = new System.Drawing.Size(90, 23);
-			this.OpenMappingToolButton.TabIndex = 14;
-			this.OpenMappingToolButton.Text = "Open Mapper";
-			this.OpenMappingToolButton.UseVisualStyleBackColor = true;
+			OpenMappingToolButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			OpenMappingToolButton.Location = new System.Drawing.Point(584, 32);
+			OpenMappingToolButton.Name = "OpenMappingToolButton";
+			OpenMappingToolButton.Size = new System.Drawing.Size(90, 23);
+			OpenMappingToolButton.TabIndex = 14;
+			OpenMappingToolButton.Text = "Open Mapper";
+			OpenMappingToolButton.UseVisualStyleBackColor = true;
 			//
 			//RunGameButton
 			//
-			this.RunGameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.RunGameButton.Location = new System.Drawing.Point(680, 32);
-			this.RunGameButton.Name = "RunGameButton";
-			this.RunGameButton.Size = new System.Drawing.Size(90, 23);
-			this.RunGameButton.TabIndex = 13;
-			this.RunGameButton.Text = "Run Game";
-			this.RunGameButton.UseVisualStyleBackColor = true;
+			RunGameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			RunGameButton.Location = new System.Drawing.Point(680, 32);
+			RunGameButton.Name = "RunGameButton";
+			RunGameButton.Size = new System.Drawing.Size(90, 23);
+			RunGameButton.TabIndex = 13;
+			RunGameButton.Text = "Run Game";
+			RunGameButton.UseVisualStyleBackColor = true;
 			//
 			//MessageTextBox
 			//
-			this.MessageTextBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.MessageTextBox.CueBannerText = "";
-			this.MessageTextBox.Location = new System.Drawing.Point(0, 61);
-			this.MessageTextBox.Multiline = true;
-			this.MessageTextBox.Name = "MessageTextBox";
-			this.MessageTextBox.ReadOnly = true;
-			this.MessageTextBox.Size = new System.Drawing.Size(770, 45);
-			this.MessageTextBox.TabIndex = 12;
+			MessageTextBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			MessageTextBox.CueBannerText = "";
+			MessageTextBox.Location = new System.Drawing.Point(0, 61);
+			MessageTextBox.Multiline = true;
+			MessageTextBox.Name = "MessageTextBox";
+			MessageTextBox.ReadOnly = true;
+			MessageTextBox.Size = new System.Drawing.Size(770, 45);
+			MessageTextBox.TabIndex = 12;
 			//
 			//ViewUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.Panel2);
-			this.Name = "ViewUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.Panel2.ResumeLayout(false);
-			this.Panel2.PerformLayout();
-			this.SplitContainer1.Panel1.ResumeLayout(false);
-			this.SplitContainer1.Panel2.ResumeLayout(false);
-			this.SplitContainer1.Panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)this.SplitContainer1).EndInit();
-			this.SplitContainer1.ResumeLayout(false);
-			this.GroupBox1.ResumeLayout(false);
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(Panel2);
+			Name = "ViewUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			Panel2.ResumeLayout(false);
+			Panel2.PerformLayout();
+			SplitContainer1.Panel1.ResumeLayout(false);
+			SplitContainer1.Panel2.ResumeLayout(false);
+			SplitContainer1.Panel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)SplitContainer1).EndInit();
+			SplitContainer1.ResumeLayout(false);
+			GroupBox1.ResumeLayout(false);
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(UpdateUserControl_Load);

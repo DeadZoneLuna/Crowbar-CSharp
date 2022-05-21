@@ -65,7 +65,7 @@ namespace Crowbar
 				double result;
 
 				//result = (Me.theXInput - 32768) * (1 / 32768)
-				result = ((int)this.theXInput - 32768) * (1 / 32768.0);
+				result = ((int)theXInput - 32768) * (1 / 32768.0);
 				return result;
 			}
 		}
@@ -77,7 +77,7 @@ namespace Crowbar
 				double result;
 
 				//result = (Me.theYInput - 32768) * (1 / 32768)
-				result = ((int)this.theYInput - 32768) * (1 / 32768.0);
+				result = ((int)theYInput - 32768) * (1 / 32768.0);
 				return result;
 			}
 		}
@@ -89,7 +89,7 @@ namespace Crowbar
 				int zInput = 0;
 				double result = 0;
 
-				zInput = this.theZWInput & 0x7FFF;
+				zInput = theZWInput & 0x7FFF;
 				result = (zInput - 16384) * (1 / 16384.0);
 				return result;
 			}
@@ -99,7 +99,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return Math.Sqrt(1 - this.x * this.x - this.y * this.y - this.z * this.z) * this.wneg;
+				return Math.Sqrt(1 - x * x - y * y - z * z) * wneg;
 			}
 		}
 
@@ -107,7 +107,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if ((this.theZWInput & 0x8000) > 0)
+				if ((theZWInput & 0x8000) > 0)
 				{
 					return -1;
 				}
@@ -123,10 +123,10 @@ namespace Crowbar
 			get
 			{
 				SourceQuaternion aQuaternion = new SourceQuaternion();
-				aQuaternion.x = this.x;
-				aQuaternion.y = this.y;
-				aQuaternion.z = this.z;
-				aQuaternion.w = this.w;
+				aQuaternion.x = x;
+				aQuaternion.y = y;
+				aQuaternion.z = z;
+				aQuaternion.w = w;
 				return aQuaternion;
 			}
 		}

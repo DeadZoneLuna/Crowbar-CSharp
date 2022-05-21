@@ -14,8 +14,8 @@ namespace Crowbar
 
 		public SourcePhyVertex()
 		{
-			this.theNormal = new SourceVector();
-			this.theNormalIsNormalized = false;
+			theNormal = new SourceVector();
+			theNormalIsNormalized = false;
 		}
 
 		public SourceVector vertex = new SourceVector();
@@ -24,12 +24,12 @@ namespace Crowbar
 		{
 			get
 			{
-				if (!this.theNormalIsNormalized)
+				if (!theNormalIsNormalized)
 				{
-					MathModule.VectorNormalize(ref this.theNormal);
-					this.theNormalIsNormalized = true;
+					MathModule.VectorNormalize(ref theNormal);
+					theNormalIsNormalized = true;
 				}
-				return this.theNormal;
+				return theNormal;
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theNormal;
+				return theNormal;
 			}
 		}
 

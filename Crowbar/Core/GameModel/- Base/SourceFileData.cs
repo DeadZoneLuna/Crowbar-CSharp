@@ -18,8 +18,8 @@ namespace Crowbar
 
 		public SourceFileData()
 		{
-			this.theFileSeekLog = new FileSeekLog();
-			this.theUnknownValues = new List<UnknownValue>();
+			theFileSeekLog = new FileSeekLog();
+			theUnknownValues = new List<UnknownValue>();
 		}
 
 #endregion

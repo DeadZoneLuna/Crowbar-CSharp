@@ -14,8 +14,8 @@ namespace Crowbar
 
 		public SourceMdlHitbox10()
 		{
-			this.boundingBoxMin = new SourceVector();
-			this.boundingBoxMax = new SourceVector();
+			boundingBoxMin = new SourceVector();
+			boundingBoxMax = new SourceVector();
 		}
 
 

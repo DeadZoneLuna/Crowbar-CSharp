@@ -19,11 +19,11 @@ namespace Crowbar
 		public GameApp() : base()
 		{
 
-			this.isDisposed = false;
+			isDisposed = false;
 
-			this.WorkerReportsProgress = true;
-			this.WorkerSupportsCancellation = true;
-			this.DoWork += this.GameApp_DoWork;
+			WorkerReportsProgress = true;
+			WorkerSupportsCancellation = true;
+			DoWork += GameApp_DoWork;
 		}
 
 #region IDisposable Support
@@ -36,15 +36,15 @@ namespace Crowbar
 
 		protected void Dispose(bool disposing)
 		{
-			if (!this.isDisposed)
+			if (!isDisposed)
 			{
 				if (disposing)
 				{
-					this.Halt(false);
+					Halt(false);
 				}
 				//NOTE: free shared unmanaged resources
 			}
-			this.isDisposed = true;
+			isDisposed = true;
 			base.Dispose(disposing);
 		}
 
@@ -76,12 +76,12 @@ namespace Crowbar
 		{
 			GameAppInfo info = new GameAppInfo();
 			info.gameSetupSelectedIndex = gameSetupSelectedIndex;
-			this.RunWorkerAsync(info);
+			RunWorkerAsync(info);
 		}
 
 		public void Halt()
 		{
-			this.Halt(false);
+			Halt(false);
 		}
 
 #endregion
@@ -94,13 +94,13 @@ namespace Crowbar
 
 		private void Halt(bool calledFromBackgroundThread)
 		{
-			if (this.theGameAppProcess != null && !this.theGameAppProcess.HasExited)
+			if (theGameAppProcess != null && !theGameAppProcess.HasExited)
 			{
 				try
 				{
-					if (!this.theGameAppProcess.CloseMainWindow())
+					if (!theGameAppProcess.CloseMainWindow())
 					{
-						this.theGameAppProcess.Kill();
+						theGameAppProcess.Kill();
 					}
 				}
 				catch (Exception ex)
@@ -109,8 +109,8 @@ namespace Crowbar
 				}
 				finally
 				{
-					this.theGameAppProcess.Close();
-					this.theGameAppProcess = null;
+					theGameAppProcess.Close();
+					theGameAppProcess = null;
 					//NOTE: This raises an exception when the background thread has already completed its work.
 					//If calledFromBackgroundThread Then
 					//	Me.UpdateProgressStop("Model viewer closed.")
@@ -125,15 +125,15 @@ namespace Crowbar
 
 		private void GameApp_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
-			this.ReportProgress(0, "");
+			ReportProgress(0, "");
 
 			GameAppInfo info = (GameAppInfo)e.Argument;
 
-			this.theGameSetupSelectedIndex = info.gameSetupSelectedIndex;
+			theGameSetupSelectedIndex = info.gameSetupSelectedIndex;
 			if (GameAppInputsAreOkay())
 			{
-				this.UpdateProgress(1, "Game run.");
-				this.RunGameApp();
+				UpdateProgress(1, "Game run.");
+				RunGameApp();
 			}
 		}
 
@@ -145,14 +145,14 @@ namespace Crowbar
 
 			GameSetup gameSetup = null;
 			string gameAppPathFileName = null;
-			gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[this.theGameSetupSelectedIndex];
+			gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[theGameSetupSelectedIndex];
 			gameAppPathFileName = gameSetup.GameAppPathFileName;
 
 			if (!File.Exists(gameAppPathFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage("The game's executable, \"" + gameAppPathFileName + "\", does not exist.");
-				this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				WriteErrorMessage("The game's executable, \"" + gameAppPathFileName + "\", does not exist.");
+				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 			}
 
 			return inputsAreValid;
@@ -168,7 +168,7 @@ namespace Crowbar
 			string gameAppOptions = null;
 			//Dim currentFolder As String
 
-			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[this.theGameSetupSelectedIndex];
+			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[theGameSetupSelectedIndex];
 			gamePath = FileManager.GetPath(gameSetup.GamePathFileName);
 			gameFileName = Path.GetFileName(gameSetup.GamePathFileName);
 			gameAppPathFileName = gameSetup.GameAppPathFileName;
@@ -183,7 +183,7 @@ namespace Crowbar
 			arguments += "\" ";
 			arguments += gameAppOptions;
 
-			this.theGameAppProcess = new Process();
+			theGameAppProcess = new Process();
 			ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(gameAppPathFileName, arguments);
 			myProcessStartInfo.CreateNoWindow = true;
 			myProcessStartInfo.RedirectStandardError = true;
@@ -191,35 +191,35 @@ namespace Crowbar
 			myProcessStartInfo.UseShellExecute = false;
 			// Instead of using asynchronous running, use synchronous and wait for process to exit, so this background thread won't complete until model viewer is closed.
 			//      This allows background thread to announce to main thread when model viewer process exits.
-			this.theGameAppProcess.EnableRaisingEvents = true;
-			this.theGameAppProcess.StartInfo = myProcessStartInfo;
+			theGameAppProcess.EnableRaisingEvents = true;
+			theGameAppProcess.StartInfo = myProcessStartInfo;
 
-			this.theGameAppProcess.Start();
-			this.theGameAppProcess.WaitForExit();
-			this.theGameAppProcess.Close();
-			this.theGameAppProcess = null;
+			theGameAppProcess.Start();
+			theGameAppProcess.WaitForExit();
+			theGameAppProcess.Close();
+			theGameAppProcess = null;
 
 			//Directory.SetCurrentDirectory(currentFolder)
 		}
 
 		private void UpdateProgressStart(string line)
 		{
-			this.UpdateProgressInternal(0, line);
+			UpdateProgressInternal(0, line);
 		}
 
 		private void UpdateProgressStop(string line)
 		{
-			this.UpdateProgressInternal(100, "\r" + line);
+			UpdateProgressInternal(100, "\r" + line);
 		}
 
 		private void UpdateProgress()
 		{
-			this.UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, "");
 		}
 
 		private void WriteErrorMessage(string line)
 		{
-			this.UpdateProgressInternal(1, "ERROR: " + line);
+			UpdateProgressInternal(1, "ERROR: " + line);
 		}
 
 		private void UpdateProgress(int indentLevel, string line)
@@ -231,7 +231,7 @@ namespace Crowbar
 				indentedLine += "  ";
 			}
 			indentedLine += line;
-			this.UpdateProgressInternal(1, indentedLine);
+			UpdateProgressInternal(1, indentedLine);
 		}
 
 		private void UpdateProgressInternal(int progressValue, string line)
@@ -243,7 +243,7 @@ namespace Crowbar
 			//    Me.theLogFileStream.Flush()
 			//End If
 
-			this.ReportProgress(progressValue, line);
+			ReportProgress(progressValue, line);
 		}
 
 #endregion

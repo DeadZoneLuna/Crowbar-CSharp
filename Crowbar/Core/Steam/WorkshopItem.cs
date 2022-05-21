@@ -18,85 +18,85 @@ namespace Crowbar
 
 		public WorkshopItem() : base()
 		{
-			this.Create();
+			Create();
 		}
 
 		private void Create()
 		{
-			this.theItemIsDisposed = false;
+			theItemIsDisposed = false;
 
-			this.theCreatorAppID = "0";
+			theCreatorAppID = "0";
 
-			this.theID = WorkshopItem.DraftItemIDText;
-			this.theOwnerSteamID = 0;
-			this.theOwnerName = "";
-			this.thePosted = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
-			this.theUpdated = this.thePosted;
+			theID = WorkshopItem.DraftItemIDText;
+			theOwnerSteamID = 0;
+			theOwnerName = "";
+			thePosted = MathModule.DateTimeToUnixTimeStamp(DateTime.Now);
+			theUpdated = thePosted;
 
-			this.theTitle = "";
-			this.theTitleIsChanged = false;
-			this.theDescription = "";
-			this.theDescriptionIsChanged = false;
-			this.theChangeNote = "";
-			this.theChangeNoteIsChanged = false;
+			theTitle = "";
+			theTitleIsChanged = false;
+			theDescription = "";
+			theDescriptionIsChanged = false;
+			theChangeNote = "";
+			theChangeNoteIsChanged = false;
 
-			this.theContentSize = 0;
-			this.theContentPathFolderOrFileName = "";
-			this.theContentPathFolderOrFileNameIsChanged = false;
+			theContentSize = 0;
+			theContentPathFolderOrFileName = "";
+			theContentPathFolderOrFileNameIsChanged = false;
 
-			this.thePreviewImageSize = 0;
-			this.thePreviewImagePathFileName = "";
-			this.thePreviewImagePathFileNameIsChanged = false;
+			thePreviewImageSize = 0;
+			thePreviewImagePathFileName = "";
+			thePreviewImagePathFileNameIsChanged = false;
 
-			this.theVisibility = SteamUGCPublishedItemVisibility.Hidden;
-			this.theVisibilityIsChanged = false;
+			theVisibility = SteamUGCPublishedItemVisibility.Hidden;
+			theVisibilityIsChanged = false;
 
-			this.theTags = new BindingListEx<string>();
-			this.theTagsAsTextLine = "";
-			this.theTagsIsChanged = false;
+			theTags = new BindingListEx<string>();
+			theTagsAsTextLine = "";
+			theTagsIsChanged = false;
 
-			this.theItemIsChanged = false;
+			theItemIsChanged = false;
 		}
 
 		protected WorkshopItem(WorkshopItem originalObject)
 		{
-			this.theCreatorAppID = originalObject.theCreatorAppID;
+			theCreatorAppID = originalObject.theCreatorAppID;
 
 			//NOTE: Clone becomes a draft item.
-			this.theID = WorkshopItem.DraftItemIDText;
-			this.theOwnerSteamID = originalObject.OwnerID;
-			this.theOwnerName = originalObject.OwnerName;
-			this.thePosted = originalObject.Posted;
-			this.theUpdated = originalObject.Updated;
+			theID = WorkshopItem.DraftItemIDText;
+			theOwnerSteamID = originalObject.OwnerID;
+			theOwnerName = originalObject.OwnerName;
+			thePosted = originalObject.Posted;
+			theUpdated = originalObject.Updated;
 
-			this.theTitle = originalObject.Title;
-			this.theTitleIsChanged = false;
-			this.theDescription = originalObject.Description;
-			this.theDescriptionIsChanged = false;
-			this.theChangeNote = originalObject.ChangeNote;
-			this.theChangeNoteIsChanged = false;
+			theTitle = originalObject.Title;
+			theTitleIsChanged = false;
+			theDescription = originalObject.Description;
+			theDescriptionIsChanged = false;
+			theChangeNote = originalObject.ChangeNote;
+			theChangeNoteIsChanged = false;
 
-			this.theContentSize = originalObject.ContentSize;
-			this.theContentPathFolderOrFileName = originalObject.ContentPathFolderOrFileName;
-			this.theContentPathFolderOrFileNameIsChanged = false;
+			theContentSize = originalObject.ContentSize;
+			theContentPathFolderOrFileName = originalObject.ContentPathFolderOrFileName;
+			theContentPathFolderOrFileNameIsChanged = false;
 
-			this.thePreviewImageSize = originalObject.PreviewImageSize;
-			this.thePreviewImagePathFileName = originalObject.PreviewImagePathFileName;
-			this.thePreviewImagePathFileNameIsChanged = false;
+			thePreviewImageSize = originalObject.PreviewImageSize;
+			thePreviewImagePathFileName = originalObject.PreviewImagePathFileName;
+			thePreviewImagePathFileNameIsChanged = false;
 
-			this.theVisibility = originalObject.Visibility;
-			this.theVisibilityIsChanged = false;
+			theVisibility = originalObject.Visibility;
+			theVisibilityIsChanged = false;
 
-			this.theTags = new BindingListEx<string>();
+			theTags = new BindingListEx<string>();
 			foreach (string originalTag in originalObject.Tags)
 			{
-				this.theTags.Add(originalTag);
+				theTags.Add(originalTag);
 			}
-			this.theTagsAsTextLine = originalObject.TagsAsTextLine;
-			this.theTagsIsChanged = false;
+			theTagsAsTextLine = originalObject.TagsAsTextLine;
+			theTagsIsChanged = false;
 
 			//NOTE: Clone becomes a draft item; thus theItemIsChanged is always False.
-			this.theItemIsChanged = false;
+			theItemIsChanged = false;
 		}
 
 		public object Clone()
@@ -115,15 +115,15 @@ namespace Crowbar
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this.theItemIsDisposed)
+			if (!theItemIsDisposed)
 			{
 				if (disposing)
 				{
-					this.Free();
+					Free();
 				}
 				//NOTE: free shared unmanaged resources
 			}
-			this.theItemIsDisposed = true;
+			theItemIsDisposed = true;
 		}
 
 		//Protected Overrides Sub Finalize()
@@ -154,13 +154,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCreatorAppID;
+				return theCreatorAppID;
 			}
 			set
 			{
-				if (this.theCreatorAppID != value)
+				if (theCreatorAppID != value)
 				{
-					this.theCreatorAppID = value;
+					theCreatorAppID = value;
 					NotifyPropertyChanged("CreatorAppID");
 				}
 			}
@@ -170,13 +170,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theID;
+				return theID;
 			}
 			set
 			{
-				if (this.theID != value)
+				if (theID != value)
 				{
-					this.theID = value;
+					theID = value;
 					NotifyPropertyChanged("ID");
 				}
 			}
@@ -186,13 +186,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOwnerSteamID;
+				return theOwnerSteamID;
 			}
 			set
 			{
-				if (this.theOwnerSteamID != value)
+				if (theOwnerSteamID != value)
 				{
-					this.theOwnerSteamID = value;
+					theOwnerSteamID = value;
 					NotifyPropertyChanged("OwnerID");
 				}
 			}
@@ -202,13 +202,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOwnerName;
+				return theOwnerName;
 			}
 			set
 			{
-				if (this.theOwnerName != value)
+				if (theOwnerName != value)
 				{
-					this.theOwnerName = value;
+					theOwnerName = value;
 					NotifyPropertyChanged("OwnerName");
 				}
 			}
@@ -219,13 +219,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePosted;
+				return thePosted;
 			}
 			set
 			{
-				if (this.thePosted != value)
+				if (thePosted != value)
 				{
-					this.thePosted = value;
+					thePosted = value;
 					NotifyPropertyChanged("Posted");
 				}
 			}
@@ -236,13 +236,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUpdated;
+				return theUpdated;
 			}
 			set
 			{
-				if (this.theUpdated != value)
+				if (theUpdated != value)
 				{
-					this.theUpdated = value;
+					theUpdated = value;
 					NotifyPropertyChanged("Updated");
 				}
 			}
@@ -252,14 +252,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTitle;
+				return theTitle;
 			}
 			set
 			{
-				if (this.theTitle != value)
+				if (theTitle != value)
 				{
-					this.theTitle = value;
-					this.theTitleIsChanged = true;
+					theTitle = value;
+					theTitleIsChanged = true;
 					NotifyPropertyChanged("Title");
 				}
 			}
@@ -269,13 +269,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTitleIsChanged;
+				return theTitleIsChanged;
 			}
 			set
 			{
-				if (this.theTitleIsChanged != value)
+				if (theTitleIsChanged != value)
 				{
-					this.theTitleIsChanged = value;
+					theTitleIsChanged = value;
 				}
 			}
 		}
@@ -284,14 +284,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDescription;
+				return theDescription;
 			}
 			set
 			{
-				if (this.theDescription != value)
+				if (theDescription != value)
 				{
-					this.theDescription = value;
-					this.theDescriptionIsChanged = true;
+					theDescription = value;
+					theDescriptionIsChanged = true;
 					NotifyPropertyChanged("Description");
 				}
 			}
@@ -301,13 +301,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDescriptionIsChanged;
+				return theDescriptionIsChanged;
 			}
 			set
 			{
-				if (this.theDescriptionIsChanged != value)
+				if (theDescriptionIsChanged != value)
 				{
-					this.theDescriptionIsChanged = value;
+					theDescriptionIsChanged = value;
 				}
 			}
 		}
@@ -316,14 +316,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theChangeNote;
+				return theChangeNote;
 			}
 			set
 			{
-				if (this.theChangeNote != value)
+				if (theChangeNote != value)
 				{
-					this.theChangeNote = value;
-					this.theChangeNoteIsChanged = true;
+					theChangeNote = value;
+					theChangeNoteIsChanged = true;
 					NotifyPropertyChanged("ChangeNote");
 				}
 			}
@@ -333,13 +333,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theChangeNoteIsChanged;
+				return theChangeNoteIsChanged;
 			}
 			set
 			{
-				if (this.theChangeNoteIsChanged != value)
+				if (theChangeNoteIsChanged != value)
 				{
-					this.theChangeNoteIsChanged = value;
+					theChangeNoteIsChanged = value;
 				}
 			}
 		}
@@ -348,13 +348,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theContentSize;
+				return theContentSize;
 			}
 			set
 			{
-				if (this.theContentSize != value)
+				if (theContentSize != value)
 				{
-					this.theContentSize = value;
+					theContentSize = value;
 					NotifyPropertyChanged("ContentSize");
 				}
 			}
@@ -364,14 +364,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theContentPathFolderOrFileName;
+				return theContentPathFolderOrFileName;
 			}
 			set
 			{
-				if (this.theContentPathFolderOrFileName != value)
+				if (theContentPathFolderOrFileName != value)
 				{
-					this.theContentPathFolderOrFileName = value;
-					this.theContentPathFolderOrFileNameIsChanged = true;
+					theContentPathFolderOrFileName = value;
+					theContentPathFolderOrFileNameIsChanged = true;
 					NotifyPropertyChanged("ContentPathFolderOrFileName");
 				}
 			}
@@ -381,13 +381,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theContentPathFolderOrFileNameIsChanged;
+				return theContentPathFolderOrFileNameIsChanged;
 			}
 			set
 			{
-				if (this.theContentPathFolderOrFileNameIsChanged != value)
+				if (theContentPathFolderOrFileNameIsChanged != value)
 				{
-					this.theContentPathFolderOrFileNameIsChanged = value;
+					theContentPathFolderOrFileNameIsChanged = value;
 				}
 			}
 		}
@@ -396,13 +396,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewImageSize;
+				return thePreviewImageSize;
 			}
 			set
 			{
-				if (this.thePreviewImageSize != value)
+				if (thePreviewImageSize != value)
 				{
-					this.thePreviewImageSize = value;
+					thePreviewImageSize = value;
 					NotifyPropertyChanged("PreviewImageSize");
 				}
 			}
@@ -412,14 +412,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewImagePathFileName;
+				return thePreviewImagePathFileName;
 			}
 			set
 			{
-				if (this.thePreviewImagePathFileName != value)
+				if (thePreviewImagePathFileName != value)
 				{
-					this.thePreviewImagePathFileName = value;
-					this.thePreviewImagePathFileNameIsChanged = true;
+					thePreviewImagePathFileName = value;
+					thePreviewImagePathFileNameIsChanged = true;
 					NotifyPropertyChanged("PreviewImagePathFileName");
 				}
 			}
@@ -429,13 +429,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewImagePathFileNameIsChanged;
+				return thePreviewImagePathFileNameIsChanged;
 			}
 			set
 			{
-				if (this.thePreviewImagePathFileNameIsChanged != value)
+				if (thePreviewImagePathFileNameIsChanged != value)
 				{
-					this.thePreviewImagePathFileNameIsChanged = value;
+					thePreviewImagePathFileNameIsChanged = value;
 				}
 			}
 		}
@@ -444,14 +444,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theVisibility;
+				return theVisibility;
 			}
 			set
 			{
-				if (this.theVisibility != value)
+				if (theVisibility != value)
 				{
-					this.theVisibility = value;
-					this.theVisibilityIsChanged = true;
+					theVisibility = value;
+					theVisibilityIsChanged = true;
 					NotifyPropertyChanged("Visibility");
 				}
 			}
@@ -462,14 +462,14 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theVisibility.ToString();
+				return theVisibility.ToString();
 			}
 			set
 			{
-				if (this.theVisibility.ToString() != value)
+				if (theVisibility.ToString() != value)
 				{
-					this.theVisibility = (SteamUGCPublishedItemVisibility)Enum.Parse(typeof(SteamUGCPublishedItemVisibility), value);
-					this.theVisibilityIsChanged = true;
+					theVisibility = (SteamUGCPublishedItemVisibility)Enum.Parse(typeof(SteamUGCPublishedItemVisibility), value);
+					theVisibilityIsChanged = true;
 					NotifyPropertyChanged("Visibility");
 				}
 			}
@@ -479,13 +479,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theVisibilityIsChanged;
+				return theVisibilityIsChanged;
 			}
 			set
 			{
-				if (this.theVisibilityIsChanged != value)
+				if (theVisibilityIsChanged != value)
 				{
-					this.theVisibilityIsChanged = value;
+					theVisibilityIsChanged = value;
 				}
 			}
 		}
@@ -494,7 +494,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTags;
+				return theTags;
 			}
 			set
 			{
@@ -505,11 +505,11 @@ namespace Crowbar
 				}
 				givenTagsAsTextLine.TrimEnd(',');
 
-				if (this.theTagsAsTextLine != givenTagsAsTextLine)
+				if (theTagsAsTextLine != givenTagsAsTextLine)
 				{
-					this.theTags = value;
-					this.theTagsAsTextLine = givenTagsAsTextLine;
-					this.theTagsIsChanged = true;
+					theTags = value;
+					theTagsAsTextLine = givenTagsAsTextLine;
+					theTagsIsChanged = true;
 					//NOTE: This line raises exception, possibly because the DataGridView gets confused by the property being a list, so use "TagsAsTextLine" property.
 					//System.ArgumentOutOfRangeException
 					//  HResult=0x80131502
@@ -544,21 +544,21 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTagsAsTextLine;
+				return theTagsAsTextLine;
 			}
 			set
 			{
-				if (this.theTagsAsTextLine != value)
+				if (theTagsAsTextLine != value)
 				{
-					this.theTags = new BindingListEx<string>();
+					theTags = new BindingListEx<string>();
 					char[] charSeparators = {','};
 					string[] words = value.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
 					foreach (string word in words)
 					{
-						this.theTags.Add(word);
+						theTags.Add(word);
 					}
-					this.theTagsAsTextLine = value;
-					this.theTagsIsChanged = true;
+					theTagsAsTextLine = value;
+					theTagsIsChanged = true;
 					//NOTE: This line raises exception, possibly because the DataGridView gets confused by the property being a list, so use "TagsAsTextLine" property.
 					//NotifyPropertyChanged("Tags")
 					//RaiseEvent TagsPropertyChanged(Me, New PropertyChangedEventArgs("Tags"))
@@ -573,13 +573,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTagsIsChanged;
+				return theTagsIsChanged;
 			}
 			set
 			{
-				if (this.theTagsIsChanged != value)
+				if (theTagsIsChanged != value)
 				{
-					this.theTagsIsChanged = value;
+					theTagsIsChanged = value;
 				}
 			}
 		}
@@ -589,25 +589,25 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theItemIsChanged;
+				return theItemIsChanged;
 			}
 			set
 			{
 				//NOTE: Set these whenever set to False and not just when it changes.
 				if (!value)
 				{
-					this.theTitleIsChanged = false;
-					this.theDescriptionIsChanged = false;
-					this.theChangeNoteIsChanged = false;
-					this.theContentPathFolderOrFileNameIsChanged = false;
-					this.thePreviewImagePathFileNameIsChanged = false;
-					this.theVisibilityIsChanged = false;
-					this.theTagsIsChanged = false;
+					theTitleIsChanged = false;
+					theDescriptionIsChanged = false;
+					theChangeNoteIsChanged = false;
+					theContentPathFolderOrFileNameIsChanged = false;
+					thePreviewImagePathFileNameIsChanged = false;
+					theVisibilityIsChanged = false;
+					theTagsIsChanged = false;
 				}
 
-				if (this.theItemIsChanged != value)
+				if (theItemIsChanged != value)
 				{
-					this.theItemIsChanged = value;
+					theItemIsChanged = value;
 					NotifyPropertyChanged("IsChanged");
 				}
 			}
@@ -618,7 +618,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theID == WorkshopItem.DraftItemIDText;
+				return theID == WorkshopItem.DraftItemIDText;
 			}
 		}
 
@@ -627,11 +627,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theID == WorkshopItem.TemplateItemIDText;
+				return theID == WorkshopItem.TemplateItemIDText;
 			}
 			set
 			{
-				this.theID = WorkshopItem.TemplateItemIDText;
+				theID = WorkshopItem.TemplateItemIDText;
 			}
 		}
 
@@ -640,7 +640,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theID != WorkshopItem.DraftItemIDText && this.theID != WorkshopItem.TemplateItemIDText;
+				return theID != WorkshopItem.DraftItemIDText && theID != WorkshopItem.TemplateItemIDText;
 			}
 		}
 
@@ -650,33 +650,33 @@ namespace Crowbar
 
 		public void SetAllChangedForNonEmptyFields()
 		{
-			if (!string.IsNullOrEmpty(this.theTitle))
+			if (!string.IsNullOrEmpty(theTitle))
 			{
-				this.theTitleIsChanged = true;
+				theTitleIsChanged = true;
 			}
-			if (!string.IsNullOrEmpty(this.theDescription))
+			if (!string.IsNullOrEmpty(theDescription))
 			{
-				this.theDescriptionIsChanged = true;
+				theDescriptionIsChanged = true;
 			}
-			if (!string.IsNullOrEmpty(this.theChangeNote))
+			if (!string.IsNullOrEmpty(theChangeNote))
 			{
-				this.theChangeNoteIsChanged = true;
+				theChangeNoteIsChanged = true;
 			}
-			if (!string.IsNullOrEmpty(this.theContentPathFolderOrFileName))
+			if (!string.IsNullOrEmpty(theContentPathFolderOrFileName))
 			{
-				this.theContentPathFolderOrFileNameIsChanged = true;
+				theContentPathFolderOrFileNameIsChanged = true;
 			}
-			if (!string.IsNullOrEmpty(this.thePreviewImagePathFileName))
+			if (!string.IsNullOrEmpty(thePreviewImagePathFileName))
 			{
-				this.thePreviewImagePathFileNameIsChanged = true;
+				thePreviewImagePathFileNameIsChanged = true;
 			}
 
 			//NOTE: Always set IsChanged for Visibility and Tags.
-			this.theVisibilityIsChanged = true;
-			this.theTagsIsChanged = true;
+			theVisibilityIsChanged = true;
+			theTagsIsChanged = true;
 
 			//NOTE: Always set IsChanged for item.
-			this.theItemIsChanged = true;
+			theItemIsChanged = true;
 		}
 
 #endregion

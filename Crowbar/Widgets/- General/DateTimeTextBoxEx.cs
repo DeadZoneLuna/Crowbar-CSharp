@@ -17,21 +17,21 @@ namespace Crowbar
 		public DateTimeTextBoxEx() : base()
 		{
 
-			this.theTextBinding = null;
+			theTextBinding = null;
 
-			this.DataBindings.CollectionChanged += DataBindings_CollectionChanged;
+			DataBindings.CollectionChanged += DataBindings_CollectionChanged;
 		}
 
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.IsDisposed)
+			if (!IsDisposed)
 			{
 				if (disposing)
 				{
-					this.DataBindings.CollectionChanged -= DataBindings_CollectionChanged;
-					if (this.theTextBinding != null)
+					DataBindings.CollectionChanged -= DataBindings_CollectionChanged;
+					if (theTextBinding != null)
 					{
-						this.RemoveBinding();
+						RemoveBinding();
 					}
 					//Me.Free()
 				}
@@ -45,23 +45,23 @@ namespace Crowbar
 
 		private void UpdateValue()
 		{
-			this.DataBindings["Text"].ReadValue();
+			DataBindings["Text"].ReadValue();
 		}
 
 		private void InsertBinding(Binding aBinding)
 		{
-			aBinding.Format += this.Binding_Format;
+			aBinding.Format += Binding_Format;
 			//'NOTE: Use Binding_Parse() instead of OnValidating() because OnValidating() is called after value has been saved to data source. 
 			//AddHandler aBinding.Parse, AddressOf Me.Binding_Parse
-			this.theTextBinding = aBinding;
-			this.UpdateValue();
+			theTextBinding = aBinding;
+			UpdateValue();
 		}
 
 		private void RemoveBinding()
 		{
-			this.theTextBinding.Format -= this.Binding_Format;
+			theTextBinding.Format -= Binding_Format;
 			//RemoveHandler Me.theTextBinding.Parse, AddressOf Me.Binding_Parse
-			this.theTextBinding = null;
+			theTextBinding = null;
 		}
 
 		private void Binding_Format(object sender, ConvertEventArgs e)
@@ -73,7 +73,7 @@ namespace Crowbar
 
 			long iUnixTimeStamp = Convert.ToInt64(e.Value);
 
-			e.Value = this.GetFormattedValue(iUnixTimeStamp);
+			e.Value = GetFormattedValue(iUnixTimeStamp);
 		}
 
 		//Private Sub Binding_Parse(ByVal sender As Object, ByVal e As ConvertEventArgs)
@@ -129,28 +129,28 @@ namespace Crowbar
 				Binding aBinding = (Binding)e.Element;
 				if (aBinding.PropertyName == "Text")
 				{
-					this.InsertBinding(aBinding);
+					InsertBinding(aBinding);
 				}
 			}
 			else if (e.Action == CollectionChangeAction.Remove)
 			{
 				Binding aBinding = (Binding)e.Element;
-				if (aBinding == this.theTextBinding)
+				if (aBinding == theTextBinding)
 				{
-					this.RemoveBinding();
+					RemoveBinding();
 				}
 			}
 			else if (e.Action == CollectionChangeAction.Refresh)
 			{
-				if (this.theTextBinding != null)
+				if (theTextBinding != null)
 				{
-					this.RemoveBinding();
+					RemoveBinding();
 				}
-				foreach (Binding aBinding in this.DataBindings)
+				foreach (Binding aBinding in DataBindings)
 				{
 					if (aBinding.PropertyName == "Text")
 					{
-						this.InsertBinding(aBinding);
+						InsertBinding(aBinding);
 					}
 				}
 			}

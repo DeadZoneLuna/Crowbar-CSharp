@@ -182,9 +182,9 @@ namespace Crowbar
 		{
 			SourceVector crossVector = new SourceVector();
 
-			crossVector.x = this.y * otherVector.z - this.z * otherVector.y;
-			crossVector.y = this.z * otherVector.x - this.x * otherVector.z;
-			crossVector.z = this.x * otherVector.y - this.y * otherVector.x;
+			crossVector.x = y * otherVector.z - z * otherVector.y;
+			crossVector.y = z * otherVector.x - x * otherVector.z;
+			crossVector.z = x * otherVector.y - y * otherVector.x;
 
 			return crossVector;
 		}
@@ -194,10 +194,10 @@ namespace Crowbar
 			double magnitude = 0;
 			SourceVector normalVector = new SourceVector();
 
-			magnitude = Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-			normalVector.x = this.x / magnitude;
-			normalVector.y = this.y / magnitude;
-			normalVector.z = this.z / magnitude;
+			magnitude = Math.Sqrt(x * x + y * y + z * z);
+			normalVector.x = x / magnitude;
+			normalVector.y = y / magnitude;
+			normalVector.z = z / magnitude;
 
 			return normalVector;
 		}

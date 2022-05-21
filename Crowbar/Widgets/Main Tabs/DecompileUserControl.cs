@@ -29,114 +29,114 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileMdlPathFileName", false, DataSourceUpdateMode.OnValidation);
+			MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileMdlPathFileName", false, DataSourceUpdateMode.OnValidation);
 
-			this.OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileOutputFullPath", false, DataSourceUpdateMode.OnValidation);
-			this.OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
-			this.InitOutputPathComboBox();
-			this.UpdateOutputPathWidgets();
+			OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileOutputFullPath", false, DataSourceUpdateMode.OnValidation);
+			OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "DecompileOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
+			InitOutputPathComboBox();
+			UpdateOutputPathWidgets();
 
-			this.InitDecompilerOptions();
+			InitDecompilerOptions();
 
-			this.theDecompiledRelativePathFileNames = new BindingListEx<string>();
-			this.DecompiledFilesComboBox.DataSource = this.theDecompiledRelativePathFileNames;
+			theDecompiledRelativePathFileNames = new BindingListEx<string>();
+			DecompiledFilesComboBox.DataSource = theDecompiledRelativePathFileNames;
 
-			this.UpdateDecompileMode();
-			this.UpdateWidgets(false);
+			UpdateDecompileMode();
+			UpdateWidgets(false);
 
-			this.MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Decompiler.ProgressChanged += this.DecompilerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Decompiler.RunWorkerCompleted += this.DecompilerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Decompiler.ProgressChanged += DecompilerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Decompiler.RunWorkerCompleted += DecompilerBackgroundWorker_RunWorkerCompleted;
 		}
 
 		private void InitDecompilerOptions()
 		{
-			this.QcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.GroupIntoQciFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileGroupIntoQciFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.SkinFamilyOnSingleLineCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcSkinFamilyOnSingleLineIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.IncludeDefineBoneLinesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcIncludeDefineBoneLinesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.UseMixedCaseForKeywordsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcUseMixedCaseForKeywordsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			QcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			GroupIntoQciFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileGroupIntoQciFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			SkinFamilyOnSingleLineCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcSkinFamilyOnSingleLineIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			IncludeDefineBoneLinesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcIncludeDefineBoneLinesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UseMixedCaseForKeywordsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileQcUseMixedCaseForKeywordsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.ReferenceMeshSmdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileReferenceMeshSmdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.RemovePathFromMaterialFileNamesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileRemovePathFromSmdMaterialFileNamesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.UseNonValveUvConversionCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileUseNonValveUvConversionIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			ReferenceMeshSmdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileReferenceMeshSmdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			RemovePathFromMaterialFileNamesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileRemovePathFromSmdMaterialFileNamesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UseNonValveUvConversionCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileUseNonValveUvConversionIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.BoneAnimationSmdFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileBoneAnimationSmdFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.PlaceInAnimsSubfolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileBoneAnimationPlaceInSubfolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			BoneAnimationSmdFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileBoneAnimationSmdFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			PlaceInAnimsSubfolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileBoneAnimationPlaceInSubfolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.TextureBmpFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileTextureBmpFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.LodMeshSmdFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileLodMeshSmdFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.PhysicsMeshSmdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompilePhysicsMeshSmdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.VertexAnimationVtaFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileVertexAnimationVtaFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.ProceduralBonesVrdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileProceduralBonesVrdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			TextureBmpFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileTextureBmpFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			LodMeshSmdFilesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileLodMeshSmdFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			PhysicsMeshSmdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompilePhysicsMeshSmdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			VertexAnimationVtaFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileVertexAnimationVtaFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			ProceduralBonesVrdFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileProceduralBonesVrdFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.FolderForEachModelCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileFolderForEachModelIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.PrefixMeshFileNamesWithModelNameCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompilePrefixFileNamesWithModelNameIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.FormatForStricterImportersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileStricterFormatIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			FolderForEachModelCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileFolderForEachModelIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			PrefixMeshFileNamesWithModelNameCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompilePrefixFileNamesWithModelNameIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			FormatForStricterImportersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileStricterFormatIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.LogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.DebugInfoCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileDebugInfoFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			LogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			DebugInfoCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileDebugInfoFilesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.DeclareSequenceQciCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileDeclareSequenceQciFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			DeclareSequenceQciCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "DecompileDeclareSequenceQciFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
 			IList anEnumList = EnumHelper.ToList(typeof(AppEnums.SupportedMdlVersion));
-			this.OverrideMdlVersionComboBox.DisplayMember = "Value";
-			this.OverrideMdlVersionComboBox.ValueMember = "Key";
-			this.OverrideMdlVersionComboBox.DataSource = anEnumList;
-			this.OverrideMdlVersionComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileOverrideMdlVersion", false, DataSourceUpdateMode.OnPropertyChanged);
+			OverrideMdlVersionComboBox.DisplayMember = "Value";
+			OverrideMdlVersionComboBox.ValueMember = "Key";
+			OverrideMdlVersionComboBox.DataSource = anEnumList;
+			OverrideMdlVersionComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileOverrideMdlVersion", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void Free()
 		{
-			this.MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Decompiler.ProgressChanged -= this.DecompilerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Decompiler.RunWorkerCompleted -= this.DecompilerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Decompiler.ProgressChanged -= DecompilerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Decompiler.RunWorkerCompleted -= DecompilerBackgroundWorker_RunWorkerCompleted;
 
-			this.DecompileComboBox.DataBindings.Clear();
-			this.MdlPathFileNameTextBox.DataBindings.Clear();
+			DecompileComboBox.DataBindings.Clear();
+			MdlPathFileNameTextBox.DataBindings.Clear();
 
-			this.OutputPathTextBox.DataBindings.Clear();
-			this.OutputSubfolderTextBox.DataBindings.Clear();
+			OutputPathTextBox.DataBindings.Clear();
+			OutputSubfolderTextBox.DataBindings.Clear();
 
-			this.FreeDecompilerOptions();
+			FreeDecompilerOptions();
 
-			this.DecompiledFilesComboBox.DataSource = null;
+			DecompiledFilesComboBox.DataSource = null;
 		}
 
 		private void FreeDecompilerOptions()
 		{
-			this.QcFileCheckBox.DataBindings.Clear();
-			this.GroupIntoQciFilesCheckBox.DataBindings.Clear();
-			this.SkinFamilyOnSingleLineCheckBox.DataBindings.Clear();
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.DataBindings.Clear();
-			this.IncludeDefineBoneLinesCheckBox.DataBindings.Clear();
-			this.ReferenceMeshSmdFileCheckBox.DataBindings.Clear();
-			this.RemovePathFromMaterialFileNamesCheckBox.DataBindings.Clear();
-			this.UseNonValveUvConversionCheckBox.DataBindings.Clear();
-			this.BoneAnimationSmdFilesCheckBox.DataBindings.Clear();
-			this.PlaceInAnimsSubfolderCheckBox.DataBindings.Clear();
+			QcFileCheckBox.DataBindings.Clear();
+			GroupIntoQciFilesCheckBox.DataBindings.Clear();
+			SkinFamilyOnSingleLineCheckBox.DataBindings.Clear();
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.DataBindings.Clear();
+			IncludeDefineBoneLinesCheckBox.DataBindings.Clear();
+			ReferenceMeshSmdFileCheckBox.DataBindings.Clear();
+			RemovePathFromMaterialFileNamesCheckBox.DataBindings.Clear();
+			UseNonValveUvConversionCheckBox.DataBindings.Clear();
+			BoneAnimationSmdFilesCheckBox.DataBindings.Clear();
+			PlaceInAnimsSubfolderCheckBox.DataBindings.Clear();
 
-			this.TextureBmpFilesCheckBox.DataBindings.Clear();
-			this.LodMeshSmdFilesCheckBox.DataBindings.Clear();
-			this.PhysicsMeshSmdFileCheckBox.DataBindings.Clear();
-			this.VertexAnimationVtaFileCheckBox.DataBindings.Clear();
-			this.ProceduralBonesVrdFileCheckBox.DataBindings.Clear();
+			TextureBmpFilesCheckBox.DataBindings.Clear();
+			LodMeshSmdFilesCheckBox.DataBindings.Clear();
+			PhysicsMeshSmdFileCheckBox.DataBindings.Clear();
+			VertexAnimationVtaFileCheckBox.DataBindings.Clear();
+			ProceduralBonesVrdFileCheckBox.DataBindings.Clear();
 
-			this.FolderForEachModelCheckBox.DataBindings.Clear();
-			this.PrefixMeshFileNamesWithModelNameCheckBox.DataBindings.Clear();
-			this.FormatForStricterImportersCheckBox.DataBindings.Clear();
+			FolderForEachModelCheckBox.DataBindings.Clear();
+			PrefixMeshFileNamesWithModelNameCheckBox.DataBindings.Clear();
+			FormatForStricterImportersCheckBox.DataBindings.Clear();
 
-			this.LogFileCheckBox.DataBindings.Clear();
-			this.DebugInfoCheckBox.DataBindings.Clear();
+			LogFileCheckBox.DataBindings.Clear();
+			DebugInfoCheckBox.DataBindings.Clear();
 
-			this.DeclareSequenceQciCheckBox.DataBindings.Clear();
+			DeclareSequenceQciCheckBox.DataBindings.Clear();
 
-			this.OverrideMdlVersionComboBox.DataBindings.Clear();
+			OverrideMdlVersionComboBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -150,13 +150,13 @@ namespace Crowbar
 		private void DecompileUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.MdlPathFileNameTextBox, this.BrowseForMdlPathFolderOrFileNameButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.OutputPathTextBox, this.BrowseForOutputPathButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.OutputSubfolderTextBox, this.BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(MdlPathFileNameTextBox, BrowseForMdlPathFolderOrFileNameButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(OutputPathTextBox, BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(OutputSubfolderTextBox, BrowseForOutputPathButton);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -303,17 +303,17 @@ namespace Crowbar
 
 		private void OutputPathTextBox_Validated(object sender, EventArgs e)
 		{
-			this.UpdateOutputPathTextBox();
+			UpdateOutputPathTextBox();
 		}
 
 		private void BrowseForOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForOutputPath();
+			BrowseForOutputPath();
 		}
 
 		private void GotoOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.GotoFolder();
+			GotoFolder();
 		}
 
 		private void UseDefaultOutputSubfolderButton_Click(object sender, EventArgs e)
@@ -328,7 +328,7 @@ namespace Crowbar
 
 		private void DecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.RunDecompiler();
+			RunDecompiler();
 		}
 
 		private void SkipCurrentModelButton_Click(System.Object sender, System.EventArgs e)
@@ -354,13 +354,13 @@ namespace Crowbar
 
 		private void UseInCompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			MainCROWBAR.TheApp.Settings.CompileQcPathFileName = MainCROWBAR.TheApp.Decompiler.GetOutputPathFileName(this.theDecompiledRelativePathFileNames[this.DecompiledFilesComboBox.SelectedIndex]);
+			MainCROWBAR.TheApp.Settings.CompileQcPathFileName = MainCROWBAR.TheApp.Decompiler.GetOutputPathFileName(theDecompiledRelativePathFileNames[DecompiledFilesComboBox.SelectedIndex]);
 			MainCROWBAR.TheApp.Settings.CompileMode = AppEnums.InputOptions.File;
 		}
 
 		private void GotoDecompiledFileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			string pathFileName = MainCROWBAR.TheApp.Decompiler.GetOutputPathFileName(this.theDecompiledRelativePathFileNames[this.DecompiledFilesComboBox.SelectedIndex]);
+			string pathFileName = MainCROWBAR.TheApp.Decompiler.GetOutputPathFileName(theDecompiledRelativePathFileNames[DecompiledFilesComboBox.SelectedIndex]);
 			FileManager.OpenWindowsExplorer(pathFileName);
 		}
 
@@ -372,15 +372,15 @@ namespace Crowbar
 		{
 			if (e.PropertyName == "DecompileMdlPathFileName")
 			{
-				this.UpdateDecompileMode();
+				UpdateDecompileMode();
 			}
 			else if (e.PropertyName == "DecompileOutputFolderOption")
 			{
-				this.UpdateOutputPathWidgets();
+				UpdateOutputPathWidgets();
 			}
 			else if (e.PropertyName.StartsWith("Decompile") && e.PropertyName.EndsWith("IsChecked"))
 			{
-				this.UpdateWidgets(MainCROWBAR.TheApp.Settings.DecompilerIsRunning);
+				UpdateWidgets(MainCROWBAR.TheApp.Settings.DecompilerIsRunning);
 			}
 		}
 
@@ -390,17 +390,17 @@ namespace Crowbar
 
 			if (e.ProgressPercentage == 0)
 			{
-				this.DecompilerLogTextBox.Text = "";
-				this.DecompilerLogTextBox.AppendText(line + "\r");
-				this.UpdateWidgets(true);
+				DecompilerLogTextBox.Text = "";
+				DecompilerLogTextBox.AppendText(line + "\r");
+				UpdateWidgets(true);
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.DecompilerLogTextBox.AppendText(line + "\r");
+				DecompilerLogTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.DecompilerLogTextBox.AppendText(line + "\r");
+				DecompilerLogTextBox.AppendText(line + "\r");
 			}
 		}
 
@@ -409,10 +409,10 @@ namespace Crowbar
 			if (!e.Cancelled)
 			{
 				DecompilerOutputInfo decompileResultInfo = (DecompilerOutputInfo)e.Result;
-				this.UpdateDecompiledRelativePathFileNames(decompileResultInfo.theDecompiledRelativePathFileNames);
+				UpdateDecompiledRelativePathFileNames(decompileResultInfo.theDecompiledRelativePathFileNames);
 			}
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 		}
 
 #endregion
@@ -439,13 +439,13 @@ namespace Crowbar
 		{
 			IList anEnumList = EnumHelper.ToList(typeof(AppEnums.DecompileOutputPathOptions));
 
-			this.OutputPathComboBox.DataBindings.Clear();
+			OutputPathComboBox.DataBindings.Clear();
 			try
 			{
-				this.OutputPathComboBox.DisplayMember = "Value";
-				this.OutputPathComboBox.ValueMember = "Key";
-				this.OutputPathComboBox.DataSource = anEnumList;
-				this.OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
+				OutputPathComboBox.DisplayMember = "Value";
+				OutputPathComboBox.ValueMember = "Key";
+				OutputPathComboBox.DataSource = anEnumList;
+				OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				// Do not use this line because it will override the value automatically assigned by the data bindings above.
 				//Me.OutputPathComboBox.SelectedIndex = 0
@@ -458,21 +458,21 @@ namespace Crowbar
 
 		private void UpdateOutputPathWidgets()
 		{
-			this.OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
-			this.OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
-			this.BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
-			this.BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
-			this.GotoOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
-			this.GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
-			this.UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
-			this.UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
+			OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
+			OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
+			BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
+			BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
+			GotoOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
+			GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder);
+			UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
+			UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder);
 		}
 
 		private void UpdateOutputPathTextBox()
 		{
 			if (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.WorkFolder)
 			{
-				if (string.IsNullOrEmpty(this.OutputPathTextBox.Text))
+				if (string.IsNullOrEmpty(OutputPathTextBox.Text))
 				{
 					try
 					{
@@ -544,9 +544,9 @@ namespace Crowbar
 		{
 			MainCROWBAR.TheApp.Settings.DecompilerIsRunning = decompilerIsRunning;
 
-			this.DecompileComboBox.Enabled = !decompilerIsRunning;
-			this.MdlPathFileNameTextBox.Enabled = !decompilerIsRunning;
-			this.BrowseForMdlPathFolderOrFileNameButton.Enabled = !decompilerIsRunning;
+			DecompileComboBox.Enabled = !decompilerIsRunning;
+			MdlPathFileNameTextBox.Enabled = !decompilerIsRunning;
+			BrowseForMdlPathFolderOrFileNameButton.Enabled = !decompilerIsRunning;
 
 			//Me.OutputSubfolderNameRadioButton.Enabled = Not decompilerIsRunning
 			//Me.OutputSubfolderNameTextBox.Enabled = Not decompilerIsRunning
@@ -554,36 +554,36 @@ namespace Crowbar
 			//Me.OutputFullPathRadioButton.Enabled = Not decompilerIsRunning
 			//Me.OutputFullPathTextBox.Enabled = Not decompilerIsRunning
 			//Me.BrowseForOutputPathNameButton.Enabled = Not decompilerIsRunning
-			this.OutputPathComboBox.Enabled = !decompilerIsRunning;
-			this.OutputPathTextBox.Enabled = !decompilerIsRunning;
-			this.OutputSubfolderTextBox.Enabled = !decompilerIsRunning;
-			this.BrowseForOutputPathButton.Enabled = !decompilerIsRunning;
-			this.GotoOutputPathButton.Enabled = !decompilerIsRunning;
-			this.UseDefaultOutputSubfolderButton.Enabled = !decompilerIsRunning;
+			OutputPathComboBox.Enabled = !decompilerIsRunning;
+			OutputPathTextBox.Enabled = !decompilerIsRunning;
+			OutputSubfolderTextBox.Enabled = !decompilerIsRunning;
+			BrowseForOutputPathButton.Enabled = !decompilerIsRunning;
+			GotoOutputPathButton.Enabled = !decompilerIsRunning;
+			UseDefaultOutputSubfolderButton.Enabled = !decompilerIsRunning;
 
-			this.ReCreateFilesGroupBox.Enabled = !decompilerIsRunning;
-			this.GroupIntoQciFilesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
-			this.SkinFamilyOnSingleLineCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
-			this.IncludeDefineBoneLinesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
-			this.UseMixedCaseForKeywordsCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
+			ReCreateFilesGroupBox.Enabled = !decompilerIsRunning;
+			GroupIntoQciFilesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
+			SkinFamilyOnSingleLineCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
+			IncludeDefineBoneLinesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
+			UseMixedCaseForKeywordsCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked;
 
-			this.RemovePathFromMaterialFileNamesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked;
-			this.UseNonValveUvConversionCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked;
+			RemovePathFromMaterialFileNamesCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked;
+			UseNonValveUvConversionCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked;
 
-			this.PlaceInAnimsSubfolderCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked;
+			PlaceInAnimsSubfolderCheckBox.Enabled = MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked;
 
-			this.OptionsGroupBox.Enabled = !decompilerIsRunning;
+			OptionsGroupBox.Enabled = !decompilerIsRunning;
 
-			this.DecompileButton.Enabled = !decompilerIsRunning && (MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileLodMeshSmdFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileTextureBmpFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompileLogFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileDebugInfoFilesIsChecked);
-			this.SkipCurrentModelButton.Enabled = decompilerIsRunning;
-			this.CancelDecompileButton.Enabled = decompilerIsRunning;
-			this.UseAllInCompileButton.Enabled = !decompilerIsRunning && this.theDecompiledRelativePathFileNames.Count > 0;
+			DecompileButton.Enabled = !decompilerIsRunning && (MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileLodMeshSmdFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileTextureBmpFilesIsChecked || MainCROWBAR.TheApp.Settings.DecompileLogFileIsChecked || MainCROWBAR.TheApp.Settings.DecompileDebugInfoFilesIsChecked);
+			SkipCurrentModelButton.Enabled = decompilerIsRunning;
+			CancelDecompileButton.Enabled = decompilerIsRunning;
+			UseAllInCompileButton.Enabled = !decompilerIsRunning && theDecompiledRelativePathFileNames.Count > 0;
 
-			this.DecompiledFilesComboBox.Enabled = !decompilerIsRunning && this.theDecompiledRelativePathFileNames.Count > 0;
-			this.UseInEditButton.Enabled = !decompilerIsRunning && this.theDecompiledRelativePathFileNames.Count > 0;
-			this.UseInCompileButton.Enabled = !decompilerIsRunning && this.theDecompiledRelativePathFileNames.Count > 0 && (Path.GetExtension(this.theDecompiledRelativePathFileNames[this.DecompiledFilesComboBox.SelectedIndex]) == ".qc");
-			this.GotoDecompiledFileButton.Enabled = !decompilerIsRunning && this.theDecompiledRelativePathFileNames.Count > 0;
+			DecompiledFilesComboBox.Enabled = !decompilerIsRunning && theDecompiledRelativePathFileNames.Count > 0;
+			UseInEditButton.Enabled = !decompilerIsRunning && theDecompiledRelativePathFileNames.Count > 0;
+			UseInCompileButton.Enabled = !decompilerIsRunning && theDecompiledRelativePathFileNames.Count > 0 && (Path.GetExtension(theDecompiledRelativePathFileNames[DecompiledFilesComboBox.SelectedIndex]) == ".qc");
+			GotoDecompiledFileButton.Enabled = !decompilerIsRunning && theDecompiledRelativePathFileNames.Count > 0;
 		}
 
 		private void UpdateDecompiledRelativePathFileNames(BindingListEx<string> iDecompiledRelativePathFileNames)
@@ -594,12 +594,12 @@ namespace Crowbar
 			//Next
 			if (iDecompiledRelativePathFileNames != null)
 			{
-				this.theDecompiledRelativePathFileNames = iDecompiledRelativePathFileNames;
+				theDecompiledRelativePathFileNames = iDecompiledRelativePathFileNames;
 				//NOTE: Do not sort because the list is already sorted by file and then by folder.
 				//Me.theDecompiledRelativePathFileNames.Sort()
 				//NOTE: Need to set to nothing first to force it to update.
-				this.DecompiledFilesComboBox.DataSource = null;
-				this.DecompiledFilesComboBox.DataSource = this.theDecompiledRelativePathFileNames;
+				DecompiledFilesComboBox.DataSource = null;
+				DecompiledFilesComboBox.DataSource = theDecompiledRelativePathFileNames;
 			}
 		}
 
@@ -610,7 +610,7 @@ namespace Crowbar
 
 			anEnumList = EnumHelper.ToList(typeof(AppEnums.InputOptions));
 			previousSelectedInputOption = MainCROWBAR.TheApp.Settings.DecompileMode;
-			this.DecompileComboBox.DataBindings.Clear();
+			DecompileComboBox.DataBindings.Clear();
 			try
 			{
 				if (File.Exists(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName))
@@ -630,10 +630,10 @@ namespace Crowbar
 					//	Exit Try
 				}
 
-				this.DecompileComboBox.DisplayMember = "Value";
-				this.DecompileComboBox.ValueMember = "Key";
-				this.DecompileComboBox.DataSource = anEnumList;
-				this.DecompileComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileMode", false, DataSourceUpdateMode.OnPropertyChanged);
+				DecompileComboBox.DisplayMember = "Value";
+				DecompileComboBox.ValueMember = "Key";
+				DecompileComboBox.DataSource = anEnumList;
+				DecompileComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "DecompileMode", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				if (EnumHelper.Contains(previousSelectedInputOption, anEnumList))
 				{

@@ -71,12 +71,12 @@ namespace Crowbar
 
 		public SourceQcFile06(StreamWriter outputFileStream, string outputPathFileName, SourceMdlFileData06 mdlFileData, string modelName)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
-			this.theModelName = modelName;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
+			theModelName = modelName;
 
-			this.theOutputPath = FileManager.GetPath(outputPathFileName);
-			this.theOutputFileNameWithoutExtension = Path.GetFileNameWithoutExtension(outputPathFileName);
+			theOutputPath = FileManager.GetPath(outputPathFileName);
+			theOutputFileNameWithoutExtension = Path.GetFileNameWithoutExtension(outputPathFileName);
 		}
 
 #endregion
@@ -85,7 +85,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteBodyGroupCommand()
@@ -94,13 +94,13 @@ namespace Crowbar
 			SourceMdlBodyPart06 aBodyPart = null;
 			SourceMdlModel06 aBodyModel = null;
 
-			if (this.theMdlFileData.theBodyParts != null && this.theMdlFileData.theBodyParts.Count > 0)
+			if (theMdlFileData.theBodyParts != null && theMdlFileData.theBodyParts.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				for (int bodyPartIndex = 0; bodyPartIndex < this.theMdlFileData.theBodyParts.Count; bodyPartIndex++)
+				for (int bodyPartIndex = 0; bodyPartIndex < theMdlFileData.theBodyParts.Count; bodyPartIndex++)
 				{
-					aBodyPart = this.theMdlFileData.theBodyParts[bodyPartIndex];
+					aBodyPart = theMdlFileData.theBodyParts[bodyPartIndex];
 
 					if (MainCROWBAR.TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked)
 					{
@@ -113,10 +113,10 @@ namespace Crowbar
 					line += "\"";
 					line += aBodyPart.theName;
 					line += "\"";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					line = "{";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					if (aBodyPart.theModels != null && aBodyPart.theModels.Count > 0)
 					{
@@ -131,18 +131,18 @@ namespace Crowbar
 							}
 							else
 							{
-								aBodyModel.theSmdFileName = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileName, bodyPartIndex, modelIndex, 0, this.theModelName, this.theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theName);
+								aBodyModel.theSmdFileName = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileName, bodyPartIndex, modelIndex, 0, theModelName, theMdlFileData.theBodyParts[bodyPartIndex].theModels[modelIndex].theName);
 								line += "studio ";
 								line += "\"";
 								line += aBodyModel.theSmdFileName;
 								line += "\"";
 							}
-							this.theOutputFileStreamWriter.WriteLine(line);
+							theOutputFileStreamWriter.WriteLine(line);
 						}
 					}
 
 					line = "}";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -154,16 +154,16 @@ namespace Crowbar
 
 			try
 			{
-				if (this.theMdlFileData.theBoneControllers != null)
+				if (theMdlFileData.theBoneControllers != null)
 				{
-					if (this.theMdlFileData.theBoneControllers.Count > 0)
+					if (theMdlFileData.theBoneControllers.Count > 0)
 					{
-						this.theOutputFileStreamWriter.WriteLine();
+						theOutputFileStreamWriter.WriteLine();
 					}
 
-					for (int boneControllerIndex = 0; boneControllerIndex < this.theMdlFileData.theBoneControllers.Count; boneControllerIndex++)
+					for (int boneControllerIndex = 0; boneControllerIndex < theMdlFileData.theBoneControllers.Count; boneControllerIndex++)
 					{
-						boneController = this.theMdlFileData.theBoneControllers[boneControllerIndex];
+						boneController = theMdlFileData.theBoneControllers[boneControllerIndex];
 
 						if (MainCROWBAR.TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked)
 						{
@@ -175,14 +175,14 @@ namespace Crowbar
 						}
 						line += boneControllerIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 						line += " \"";
-						line += this.theMdlFileData.theBones[boneController.boneIndex].theName;
+						line += theMdlFileData.theBones[boneController.boneIndex].theName;
 						line += "\" ";
 						line += SourceModule06.GetControlText(boneController.type);
 						line += " ";
 						line += boneController.startAngleDegrees.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
 						line += " ";
 						line += boneController.endAngleDegrees.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-						this.theOutputFileStreamWriter.WriteLine(line);
+						theOutputFileStreamWriter.WriteLine(line);
 					}
 				}
 			}
@@ -195,10 +195,10 @@ namespace Crowbar
 		public void WriteModelNameCommand()
 		{
 			string line = "";
-			string modelPathFileName = this.theMdlFileData.theModelName;
+			string modelPathFileName = theMdlFileData.theModelName;
 
 
-			this.theOutputFileStreamWriter.WriteLine();
+			theOutputFileStreamWriter.WriteLine();
 
 			if (MainCROWBAR.TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked)
 			{
@@ -211,7 +211,7 @@ namespace Crowbar
 			line += "\"";
 			line += modelPathFileName;
 			line += "\"";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSequenceCommands()
@@ -219,13 +219,13 @@ namespace Crowbar
 			string line = "";
 			SourceMdlSequenceDesc06 aSequence = null;
 
-			if (this.theMdlFileData.theSequences != null && this.theMdlFileData.theSequences.Count > 0)
+			if (theMdlFileData.theSequences != null && theMdlFileData.theSequences.Count > 0)
 			{
-				this.theOutputFileStreamWriter.WriteLine();
+				theOutputFileStreamWriter.WriteLine();
 
-				for (int sequenceGroupIndex = 0; sequenceGroupIndex < this.theMdlFileData.theSequences.Count; sequenceGroupIndex++)
+				for (int sequenceGroupIndex = 0; sequenceGroupIndex < theMdlFileData.theSequences.Count; sequenceGroupIndex++)
 				{
-					aSequence = this.theMdlFileData.theSequences[sequenceGroupIndex];
+					aSequence = theMdlFileData.theSequences[sequenceGroupIndex];
 
 					if (MainCROWBAR.TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked)
 					{
@@ -240,12 +240,12 @@ namespace Crowbar
 					line += "\"";
 					//NOTE: Opening brace must be on same line as the command.
 					line += " {";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
-					this.WriteSequenceOptions(aSequence);
+					WriteSequenceOptions(aSequence);
 
 					line = "}";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 		}
@@ -339,18 +339,18 @@ namespace Crowbar
 			{
 				if (aSequenceDesc.blendCount == 1)
 				{
-					aSequenceDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileName, this.theModelName, aSequenceDesc.theName, -1);
+					aSequenceDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileName, theModelName, aSequenceDesc.theName, -1);
 				}
 				else
 				{
-					aSequenceDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileName, this.theModelName, aSequenceDesc.theName, blendIndex);
+					aSequenceDesc.theSmdRelativePathFileName = SourceFileNamesModule.CreateAnimationSmdRelativePathFileName(aSequenceDesc.theSmdRelativePathFileName, theModelName, aSequenceDesc.theName, blendIndex);
 				}
 
 				line = "\t";
 				line += "\"";
 				line += aSequenceDesc.theSmdRelativePathFileName;
 				line += "\"";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			//For i As Integer = 0 To 1
@@ -395,27 +395,27 @@ namespace Crowbar
 					//	line += """"
 					//End If
 					line += " }";
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
 			line = "\t";
 			line += "fps ";
 			line += aSequenceDesc.fps.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if ((aSequenceDesc.flags & SourceMdlSequenceDesc06.STUDIO_LOOPING) > 0)
 			{
 				line = "\t";
 				line += "loop";
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			if (aSequenceDesc.motiontype > 0)
 			{
 				line = "\t";
 				line += SourceModule06.GetMultipleControlText(aSequenceDesc.motiontype);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			//Me.WriteSequenceNodeInfo(aSequenceDesc)

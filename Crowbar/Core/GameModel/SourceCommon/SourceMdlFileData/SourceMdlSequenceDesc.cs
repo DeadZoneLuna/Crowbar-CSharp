@@ -13,9 +13,9 @@ namespace Crowbar
 	{
 		public SourceMdlSequenceDesc()
 		{
-			this.theWeightListIndex = -1;
+			theWeightListIndex = -1;
 			//Me.theCorrectiveSubtractAnimationOptionIsUsed = False
-			this.theCorrectiveAnimationName = null;
+			theCorrectiveAnimationName = null;
 		}
 
 		//// sequence descriptions

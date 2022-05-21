@@ -20,23 +20,23 @@ namespace Crowbar
 		public ProgressBarEx() : base()
 		{
 
-			this.theText = "";
-			this.SetStyle(ControlStyles.UserPaint, true);
-			this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-			this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+			theText = "";
+			SetStyle(ControlStyles.UserPaint, true);
+			SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 		}
 
 		public override string Text
 		{
 			get
 			{
-				return this.theText;
+				return theText;
 			}
 			set
 			{
-				if (this.theText != value)
+				if (theText != value)
 				{
-					this.theText = value;
+					theText = value;
 				}
 			}
 		}
@@ -59,7 +59,7 @@ namespace Crowbar
 				}
 				base.Value = value;
 				//NOTE: Do this so bar is re-painted when Value changes.
-				this.Invalidate();
+				Invalidate();
 			}
 		}
 
@@ -68,13 +68,13 @@ namespace Crowbar
 			Graphics g = e.Graphics;
 			int range = Maximum - Minimum;
 			double percent = (double)(Value - Minimum) / (double)range;
-			Rectangle rect = this.ClientRectangle;
+			Rectangle rect = ClientRectangle;
 			Rectangle bounds = e.ClipRectangle;
 			if (rect.Width > 0 && percent > 0)
 			{
 				if (ProgressBarRenderer.IsSupported)
 				{
-					ProgressBarRenderer.DrawHorizontalBar(g, this.DisplayRectangle);
+					ProgressBarRenderer.DrawHorizontalBar(g, DisplayRectangle);
 					rect.Inflate(-2, -2);
 					rect.Width = Convert.ToInt32(rect.Width * percent);
 					if (rect.Width == 0)
@@ -104,7 +104,7 @@ namespace Crowbar
 			{
 				if (ProgressBarRenderer.IsSupported)
 				{
-					ProgressBarRenderer.DrawHorizontalBar(g, this.DisplayRectangle);
+					ProgressBarRenderer.DrawHorizontalBar(g, DisplayRectangle);
 				}
 				else
 				{
@@ -112,13 +112,13 @@ namespace Crowbar
 				}
 			}
 
-			if (!string.IsNullOrEmpty(this.theText))
+			if (!string.IsNullOrEmpty(theText))
 			{
 				double x = 0;
 				double y = 0;
-				x = this.Width * 0.5 - (g.MeasureString(this.theText, this.Font).Width * 0.5);
-				y = this.Height * 0.5 - (g.MeasureString(this.theText, this.Font).Height * 0.5);
-				TextRenderer.DrawText(g, this.theText, this.Font, new Point(Convert.ToInt32(x), Convert.ToInt32(y)), this.ForeColor, this.BackColor);
+				x = Width * 0.5 - (g.MeasureString(theText, Font).Width * 0.5);
+				y = Height * 0.5 - (g.MeasureString(theText, Font).Height * 0.5);
+				TextRenderer.DrawText(g, theText, Font, new Point(Convert.ToInt32(x), Convert.ToInt32(y)), ForeColor, BackColor);
 			}
 
 		}

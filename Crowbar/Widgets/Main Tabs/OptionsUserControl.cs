@@ -22,7 +22,7 @@ namespace Crowbar
 			//NOTE: Try-Catch is needed so that widget will be shown in MainForm without raising exception.
 			try
 			{
-				this.Init();
+				Init();
 			}
 			catch
 			{
@@ -35,126 +35,126 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.SingleInstanceCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "AppIsSingleInstance", false, DataSourceUpdateMode.OnPropertyChanged);
+			SingleInstanceCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "AppIsSingleInstance", false, DataSourceUpdateMode.OnPropertyChanged);
 
 			// Auto-Open
 
-			this.AutoOpenVpkFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenVpkFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenGmaFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenGmaFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenFpxFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenFpxFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenMdlFileForPreviewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForPreviewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenMdlFileForDecompileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForDecompileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenMdlFileForViewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForViewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.AutoOpenQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenVpkFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenVpkFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenGmaFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenGmaFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenFpxFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenFpxFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenMdlFileForPreviewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForPreviewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenMdlFileForDecompileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForDecompileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenMdlFileForViewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenMdlFileForViewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			AutoOpenQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsAutoOpenQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.InitAutoOpenRadioButtons();
+			InitAutoOpenRadioButtons();
 
 			// Drag and Drop
 
-			this.DragAndDropMdlFileForPreviewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForPreviewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.DragAndDropMdlFileForDecompileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForDecompileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.DragAndDropMdlFileForViewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForViewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			DragAndDropMdlFileForPreviewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForPreviewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			DragAndDropMdlFileForDecompileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForDecompileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			DragAndDropMdlFileForViewCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDragAndDropMdlFileForViewIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.InitDragAndDropRadioButtons();
+			InitDragAndDropRadioButtons();
 
 			// Context Menu
 
-			this.IntegrateContextMenuItemsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsContextMenuIntegrateMenuItemsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.IntegrateAsSubmenuCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsContextMenuIntegrateSubMenuIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			IntegrateContextMenuItemsCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsContextMenuIntegrateMenuItemsIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			IntegrateAsSubmenuCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsContextMenuIntegrateSubMenuIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
 			//Me.OptionsContextMenuDecompileVpkFileCheckBox.DataBindings.Add("Checked", TheApp.Settings, "OptionsUnpackVpkFileIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
 			//Me.OptionsContextMenuDecompileFolderCheckBox.DataBindings.Add("Checked", TheApp.Settings, "OptionsUnpackFolderIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
 			//Me.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", TheApp.Settings, "OptionsUnpackFolderAndSubfoldersIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
 
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsOpenWithCrowbarIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OptionsContextMenuViewMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsViewMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuOpenWithCrowbarCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsOpenWithCrowbarIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuViewMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsViewMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.OptionsContextMenuDecompileMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OptionsContextMenuDecompileFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileFolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileFolderAndSubfoldersIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuDecompileMdlFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileMdlFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuDecompileFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileFolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsDecompileFolderAndSubfoldersIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.OptionsContextMenuCompileQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OptionsContextMenuCompileFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileFolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileFolderAndSubfoldersIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuCompileQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuCompileFolderCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileFolderIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "OptionsCompileFolderAndSubfoldersIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.UpdateApplyPanel();
+			UpdateApplyPanel();
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
 		}
 
 		private void InitAutoOpenRadioButtons()
 		{
-			this.AutoOpenVpkFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenVpkFileOption == AppEnums.ActionType.Unpack);
-			this.AutoOpenVpkFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenVpkFileOption == AppEnums.ActionType.Publish);
-			this.AutoOpenGmaFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenGmaFileOption == AppEnums.ActionType.Unpack);
-			this.AutoOpenGmaFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenGmaFileOption == AppEnums.ActionType.Publish);
+			AutoOpenVpkFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenVpkFileOption == AppEnums.ActionType.Unpack);
+			AutoOpenVpkFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenVpkFileOption == AppEnums.ActionType.Publish);
+			AutoOpenGmaFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenGmaFileOption == AppEnums.ActionType.Unpack);
+			AutoOpenGmaFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenGmaFileOption == AppEnums.ActionType.Publish);
 
-			this.AutoOpenMdlFileForPreviewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.Preview);
-			this.AutoOpenMdlFileForDecompilingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.Decompile);
-			this.AutoOpenMdlFileForViewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.View);
+			AutoOpenMdlFileForPreviewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.Preview);
+			AutoOpenMdlFileForDecompilingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.Decompile);
+			AutoOpenMdlFileForViewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption == AppEnums.ActionType.View);
 
-			this.AutoOpenFolderForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Unpack);
-			this.AutoOpenFolderForDecompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Decompile);
-			this.AutoOpenFolderForCompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Compile);
-			this.AutoOpenFolderForPackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Pack);
+			AutoOpenFolderForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Unpack);
+			AutoOpenFolderForDecompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Decompile);
+			AutoOpenFolderForCompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Compile);
+			AutoOpenFolderForPackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption == AppEnums.ActionType.Pack);
 		}
 
 		private void InitDragAndDropRadioButtons()
 		{
-			this.DragAndDropVpkFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropVpkFileOption == AppEnums.ActionType.Unpack);
-			this.DragAndDropVpkFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropVpkFileOption == AppEnums.ActionType.Publish);
-			this.DragAndDropGmaFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropGmaFileOption == AppEnums.ActionType.Unpack);
-			this.DragAndDropGmaFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropGmaFileOption == AppEnums.ActionType.Publish);
+			DragAndDropVpkFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropVpkFileOption == AppEnums.ActionType.Unpack);
+			DragAndDropVpkFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropVpkFileOption == AppEnums.ActionType.Publish);
+			DragAndDropGmaFileForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropGmaFileOption == AppEnums.ActionType.Unpack);
+			DragAndDropGmaFileForPublishRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropGmaFileOption == AppEnums.ActionType.Publish);
 
-			this.DragAndDropMdlFileForPreviewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.Preview);
-			this.DragAndDropMdlFileForDecompilingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.Decompile);
-			this.DragAndDropMdlFileForViewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.View);
+			DragAndDropMdlFileForPreviewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.Preview);
+			DragAndDropMdlFileForDecompilingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.Decompile);
+			DragAndDropMdlFileForViewingRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption == AppEnums.ActionType.View);
 
-			this.DragAndDropFolderForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Unpack);
-			this.DragAndDropFolderForDecompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Decompile);
-			this.DragAndDropFolderForCompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Compile);
-			this.DragAndDropFolderForPackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Pack);
+			DragAndDropFolderForUnpackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Unpack);
+			DragAndDropFolderForDecompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Decompile);
+			DragAndDropFolderForCompileRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Compile);
+			DragAndDropFolderForPackRadioButton.Checked = (MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption == AppEnums.ActionType.Pack);
 		}
 
 		private void Free()
 		{
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
 
-			this.SingleInstanceCheckBox.DataBindings.Clear();
+			SingleInstanceCheckBox.DataBindings.Clear();
 
 			// Auto-Open
 
-			this.AutoOpenVpkFileCheckBox.DataBindings.Clear();
-			this.AutoOpenGmaFileCheckBox.DataBindings.Clear();
-			this.AutoOpenFpxFileCheckBox.DataBindings.Clear();
-			this.AutoOpenMdlFileCheckBox.DataBindings.Clear();
-			this.AutoOpenMdlFileForPreviewCheckBox.DataBindings.Clear();
-			this.AutoOpenMdlFileForDecompileCheckBox.DataBindings.Clear();
-			this.AutoOpenMdlFileForViewCheckBox.DataBindings.Clear();
-			this.AutoOpenQcFileCheckBox.DataBindings.Clear();
+			AutoOpenVpkFileCheckBox.DataBindings.Clear();
+			AutoOpenGmaFileCheckBox.DataBindings.Clear();
+			AutoOpenFpxFileCheckBox.DataBindings.Clear();
+			AutoOpenMdlFileCheckBox.DataBindings.Clear();
+			AutoOpenMdlFileForPreviewCheckBox.DataBindings.Clear();
+			AutoOpenMdlFileForDecompileCheckBox.DataBindings.Clear();
+			AutoOpenMdlFileForViewCheckBox.DataBindings.Clear();
+			AutoOpenQcFileCheckBox.DataBindings.Clear();
 
 			// Drag and Drop
 
-			this.DragAndDropMdlFileForPreviewCheckBox.DataBindings.Clear();
-			this.DragAndDropMdlFileForDecompileCheckBox.DataBindings.Clear();
-			this.DragAndDropMdlFileForViewCheckBox.DataBindings.Clear();
+			DragAndDropMdlFileForPreviewCheckBox.DataBindings.Clear();
+			DragAndDropMdlFileForDecompileCheckBox.DataBindings.Clear();
+			DragAndDropMdlFileForViewCheckBox.DataBindings.Clear();
 
 			// Context Menu
 
-			this.IntegrateContextMenuItemsCheckBox.DataBindings.Clear();
-			this.IntegrateAsSubmenuCheckBox.DataBindings.Clear();
+			IntegrateContextMenuItemsCheckBox.DataBindings.Clear();
+			IntegrateAsSubmenuCheckBox.DataBindings.Clear();
 
-			this.OptionsContextMenuOpenWithCrowbarCheckBox.DataBindings.Clear();
-			this.OptionsContextMenuViewMdlFileCheckBox.DataBindings.Clear();
+			OptionsContextMenuOpenWithCrowbarCheckBox.DataBindings.Clear();
+			OptionsContextMenuViewMdlFileCheckBox.DataBindings.Clear();
 
-			this.OptionsContextMenuDecompileMdlFileCheckBox.DataBindings.Clear();
-			this.OptionsContextMenuDecompileFolderCheckBox.DataBindings.Clear();
-			this.OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.DataBindings.Clear();
+			OptionsContextMenuDecompileMdlFileCheckBox.DataBindings.Clear();
+			OptionsContextMenuDecompileFolderCheckBox.DataBindings.Clear();
+			OptionsContextMenuDecompileFolderAndSubfoldersCheckBox.DataBindings.Clear();
 
-			this.OptionsContextMenuCompileQcFileCheckBox.DataBindings.Clear();
-			this.OptionsContextMenuCompileFolderCheckBox.DataBindings.Clear();
-			this.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.DataBindings.Clear();
+			OptionsContextMenuCompileQcFileCheckBox.DataBindings.Clear();
+			OptionsContextMenuCompileFolderCheckBox.DataBindings.Clear();
+			OptionsContextMenuCompileFolderAndSubfoldersCheckBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -167,7 +167,7 @@ namespace Crowbar
 
 		private void OptionsUserControl_Disposed(object sender, EventArgs e)
 		{
-			this.Free();
+			Free();
 		}
 
 #endregion
@@ -176,7 +176,7 @@ namespace Crowbar
 
 		private void AutoOpenVpkFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.AutoOpenVpkFileForUnpackRadioButton.Checked)
+			if (AutoOpenVpkFileForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenVpkFileOption = AppEnums.ActionType.Unpack;
 			}
@@ -188,7 +188,7 @@ namespace Crowbar
 
 		private void AutoOpenGmaFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.AutoOpenGmaFileForUnpackRadioButton.Checked)
+			if (AutoOpenGmaFileForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenGmaFileOption = AppEnums.ActionType.Unpack;
 			}
@@ -200,11 +200,11 @@ namespace Crowbar
 
 		private void AutoOpenMdlFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.AutoOpenMdlFileForPreviewingRadioButton.Checked)
+			if (AutoOpenMdlFileForPreviewingRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption = AppEnums.ActionType.Preview;
 			}
-			else if (this.AutoOpenMdlFileForDecompilingRadioButton.Checked)
+			else if (AutoOpenMdlFileForDecompilingRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenMdlFileOption = AppEnums.ActionType.Decompile;
 			}
@@ -217,20 +217,20 @@ namespace Crowbar
 		private void AutoOpenUseDefaultsButton_Click(object sender, EventArgs e)
 		{
 			MainCROWBAR.TheApp.Settings.SetDefaultOptionsAutoOpenOptions();
-			this.InitAutoOpenRadioButtons();
+			InitAutoOpenRadioButtons();
 		}
 
 		private void AutoOpenFolderRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.AutoOpenFolderForUnpackRadioButton.Checked)
+			if (AutoOpenFolderForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption = AppEnums.ActionType.Unpack;
 			}
-			else if (this.AutoOpenFolderForDecompileRadioButton.Checked)
+			else if (AutoOpenFolderForDecompileRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption = AppEnums.ActionType.Decompile;
 			}
-			else if (this.AutoOpenFolderForCompileRadioButton.Checked)
+			else if (AutoOpenFolderForCompileRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsAutoOpenFolderOption = AppEnums.ActionType.Compile;
 			}
@@ -242,7 +242,7 @@ namespace Crowbar
 
 		private void DragAndDropVpkFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.DragAndDropVpkFileForUnpackRadioButton.Checked)
+			if (DragAndDropVpkFileForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropVpkFileOption = AppEnums.ActionType.Unpack;
 			}
@@ -254,7 +254,7 @@ namespace Crowbar
 
 		private void DragAndDropGmaFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.DragAndDropGmaFileForUnpackRadioButton.Checked)
+			if (DragAndDropGmaFileForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropGmaFileOption = AppEnums.ActionType.Unpack;
 			}
@@ -266,11 +266,11 @@ namespace Crowbar
 
 		private void DragAndDropMdlFileRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.DragAndDropMdlFileForPreviewingRadioButton.Checked)
+			if (DragAndDropMdlFileForPreviewingRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption = AppEnums.ActionType.Preview;
 			}
-			else if (this.DragAndDropMdlFileForDecompilingRadioButton.Checked)
+			else if (DragAndDropMdlFileForDecompilingRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption = AppEnums.ActionType.Decompile;
 			}
@@ -282,15 +282,15 @@ namespace Crowbar
 
 		private void DragAndDropFolderRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.DragAndDropFolderForUnpackRadioButton.Checked)
+			if (DragAndDropFolderForUnpackRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption = AppEnums.ActionType.Unpack;
 			}
-			else if (this.DragAndDropFolderForDecompileRadioButton.Checked)
+			else if (DragAndDropFolderForDecompileRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption = AppEnums.ActionType.Decompile;
 			}
-			else if (this.DragAndDropFolderForCompileRadioButton.Checked)
+			else if (DragAndDropFolderForCompileRadioButton.Checked)
 			{
 				MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption = AppEnums.ActionType.Compile;
 			}
@@ -303,7 +303,7 @@ namespace Crowbar
 		private void DragAndDropUseDefaultsButton_Click(object sender, EventArgs e)
 		{
 			MainCROWBAR.TheApp.Settings.SetDefaultOptionsDragAndDropOptions();
-			this.InitDragAndDropRadioButtons();
+			InitDragAndDropRadioButtons();
 		}
 
 		private void ContextMenuUseDefaultsButton_Click(object sender, EventArgs e)
@@ -313,7 +313,7 @@ namespace Crowbar
 
 		private void ApplyButton_Click(object sender, EventArgs e)
 		{
-			this.ApplyAllAutoOpenOptions();
+			ApplyAllAutoOpenOptions();
 		}
 
 #endregion
@@ -328,23 +328,23 @@ namespace Crowbar
 			}
 			else if (e.PropertyName == "OptionsAutoOpenVpkFileIsChecked")
 			{
-				this.ApplyAutoOpenVpkFileOptions();
+				ApplyAutoOpenVpkFileOptions();
 			}
 			else if (e.PropertyName == "OptionsAutoOpenGmaFileIsChecked")
 			{
-				this.ApplyAutoOpenGmaFileOptions();
+				ApplyAutoOpenGmaFileOptions();
 			}
 			else if (e.PropertyName == "OptionsAutoOpenFpxFileIsChecked")
 			{
-				this.ApplyAutoOpenFpxFileOptions();
+				ApplyAutoOpenFpxFileOptions();
 			}
 			else if (e.PropertyName == "OptionsAutoOpenMdlFileIsChecked")
 			{
-				this.ApplyAutoOpenMdlFileOptions();
+				ApplyAutoOpenMdlFileOptions();
 			}
 			else if (e.PropertyName == "OptionsAutoOpenQcFileIsChecked")
 			{
-				this.ApplyAutoOpenQcFileOptions();
+				ApplyAutoOpenQcFileOptions();
 			}
 		}
 
@@ -414,13 +414,13 @@ namespace Crowbar
 
 		private void ApplyAllAutoOpenOptions()
 		{
-			this.ApplyAutoOpenVpkFileOptions();
-			this.ApplyAutoOpenGmaFileOptions();
-			this.ApplyAutoOpenFpxFileOptions();
-			this.ApplyAutoOpenMdlFileOptions();
-			this.ApplyAutoOpenQcFileOptions();
+			ApplyAutoOpenVpkFileOptions();
+			ApplyAutoOpenGmaFileOptions();
+			ApplyAutoOpenFpxFileOptions();
+			ApplyAutoOpenMdlFileOptions();
+			ApplyAutoOpenQcFileOptions();
 
-			this.UpdateApplyPanel();
+			UpdateApplyPanel();
 		}
 
 		private void UpdateApplyPanel()
@@ -457,7 +457,7 @@ namespace Crowbar
 			{
 				applyPanelShouldBeVisible = true;
 			}
-			this.ApplyPanel.Visible = applyPanelShouldBeVisible;
+			ApplyPanel.Visible = applyPanelShouldBeVisible;
 		}
 
 #endregion

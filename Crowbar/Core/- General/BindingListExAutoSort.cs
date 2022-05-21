@@ -14,13 +14,13 @@ namespace Crowbar
 	{
 		public BindingListExAutoSort(string nProperty)
 		{
-			this.theSortedPropertyName = nProperty;
-			this.theSortedProperty = FindPropertyDescriptor(nProperty);
+			theSortedPropertyName = nProperty;
+			theSortedProperty = FindPropertyDescriptor(nProperty);
 		}
 
 		protected override void InsertItem(int index, T item)
 		{
-			base.InsertItemSorted(index, item, this.theSortedProperty);
+			base.InsertItemSorted(index, item, theSortedProperty);
 		}
 
 		//Public Overloads Sub ResetItem(ByVal index As Integer)
@@ -39,16 +39,16 @@ namespace Crowbar
 			//End If
 			//======
 			//NOTE: Raise an extra new event, ItemMoved, so that widgets can know when an item moved because of auto-sorting.
-			if (e.ListChangedType == ListChangedType.ItemChanged && e.PropertyDescriptor != null && e.PropertyDescriptor.Name == this.theSortedPropertyName)
+			if (e.ListChangedType == ListChangedType.ItemChanged && e.PropertyDescriptor != null && e.PropertyDescriptor.Name == theSortedPropertyName)
 			{
-				object obj = this.Items[e.NewIndex];
-				this.Items.RemoveAt(e.NewIndex);
+				object obj = Items[e.NewIndex];
+				Items.RemoveAt(e.NewIndex);
 //INSTANT C# WARNING: Casting to a generic type parameter may result in a runtime exception:
 //ORIGINAL LINE: Dim insertionIndex As Integer
-				int insertionIndex = this.FindInsertionIndex(0, (T)obj, this.theSortedProperty);
+				int insertionIndex = FindInsertionIndex(0, (T)obj, theSortedProperty);
 //INSTANT C# WARNING: Casting to a generic type parameter may result in a runtime exception:
 //ORIGINAL LINE: Me.Items.Insert(insertionIndex, CType(obj, T))
-				this.Items.Insert(insertionIndex, (T)obj);
+				Items.Insert(insertionIndex, (T)obj);
 				ListChangedEventArgs aEventArgs = new ListChangedEventArgs(ListChangedType.ItemMoved, insertionIndex, e.NewIndex);
 				base.OnListChanged(aEventArgs);
 				//Else

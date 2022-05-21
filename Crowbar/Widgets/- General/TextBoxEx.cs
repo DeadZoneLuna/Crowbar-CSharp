@@ -15,7 +15,7 @@ namespace Crowbar
 		public TextBoxEx() : base()
 		{
 
-			this.theCueBannerText = "";
+			theCueBannerText = "";
 		}
 
 		[Browsable(true)]
@@ -25,11 +25,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCueBannerText;
+				return theCueBannerText;
 			}
 			set
 			{
-				this.theCueBannerText = value;
+				theCueBannerText = value;
 			}
 		}
 
@@ -37,22 +37,22 @@ namespace Crowbar
 		{
 			if (e.Control && e.KeyCode == Keys.A)
 			{
-				this.SelectAll();
+				SelectAll();
 			}
 			base.OnKeyDown(e);
 		}
 
 		protected override void OnKeyPress(System.Windows.Forms.KeyPressEventArgs e)
 		{
-			if (!this.Multiline && e.KeyChar == (char)Keys.Return)
+			if (!Multiline && e.KeyChar == (char)Keys.Return)
 			{
 				try
 				{
 					// Cause validation, which means Validating and Validated events are raised.
-					this.FindForm().Validate();
-					if (this.Parent is ContainerControl)
+					FindForm().Validate();
+					if (Parent is ContainerControl)
 					{
-						((ContainerControl)this.Parent).Validate();
+						((ContainerControl)Parent).Validate();
 					}
 					//NOTE: Prevent annoying beep when textbox is single line.
 					e.Handled = true;
@@ -77,7 +77,7 @@ namespace Crowbar
 		{
 			base.OnPaint(e);
 
-			if (!string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text) && this.theOriginalFont != null)
+			if (!string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text) && theOriginalFont != null)
 			{
 				//Using sb As New SolidBrush(SystemColors.Control)
 				//	e.Graphics.FillRectangle(sb, Me.ClientRectangle)
@@ -85,16 +85,16 @@ namespace Crowbar
 				//End Using
 
 				//Dim drawFont As System.Drawing.Font = New System.Drawing.Font(Me.theOriginalFont.FontFamily, Me.theOriginalFont.Size, Me.theOriginalFont.Style, Me.theOriginalFont.Unit)
-				System.Drawing.Font drawFont = new System.Drawing.Font(this.theOriginalFont.FontFamily, this.theOriginalFont.Size, FontStyle.Italic, this.theOriginalFont.Unit);
+				System.Drawing.Font drawFont = new System.Drawing.Font(theOriginalFont.FontFamily, theOriginalFont.Size, FontStyle.Italic, theOriginalFont.Unit);
 
 				Color drawForeColor = SystemColors.GrayText;
 				Color drawBackColor = SystemColors.Control;
 				if (drawForeColor == drawBackColor)
 				{
-					drawForeColor = this.ForeColor;
-					drawBackColor = this.BackColor;
+					drawForeColor = ForeColor;
+					drawBackColor = BackColor;
 				}
-				TextRenderer.DrawText(e.Graphics, this.theCueBannerText, drawFont, new Point(1, 0), drawForeColor, drawBackColor);
+				TextRenderer.DrawText(e.Graphics, theCueBannerText, drawFont, new Point(1, 0), drawForeColor, drawBackColor);
 				//======
 				//' Draw higlight.
 				//Dim higlightForeColor As Color = SystemColors.ControlLightLight
@@ -127,21 +127,21 @@ namespace Crowbar
 			//End If
 
 			// This did not solve the bug.
-			if (this.theOriginalFont == null)
+			if (theOriginalFont == null)
 			{
 				return;
 			}
 
-			if (GetStyle(ControlStyles.UserPaint) != (!string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text)))
+			if (GetStyle(ControlStyles.UserPaint) != (!string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text)))
 			{
-				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				if (this.theOriginalFont != null)
+				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				if (theOriginalFont != null)
 				{
-					this.Font = new System.Drawing.Font(this.theOriginalFont.FontFamily, this.theOriginalFont.Size, this.theOriginalFont.Style, this.theOriginalFont.Unit);
+					Font = new System.Drawing.Font(theOriginalFont.FontFamily, theOriginalFont.Size, theOriginalFont.Style, theOriginalFont.Unit);
 				}
-				this.Invalidate();
+				Invalidate();
 			}
 		}
 
@@ -149,16 +149,16 @@ namespace Crowbar
 		{
 			base.OnVisibleChanged(e);
 
-			if (this.theOriginalFont == null)
+			if (theOriginalFont == null)
 			{
 				//NOTE: Font gets changed at some point after changing style, messing up when cue banner is turned off, 
 				//      so save the Font after widget is visible for first time, but before changing style within the widget.
-				this.theOriginalFont = new System.Drawing.Font(this.Font.FontFamily, this.Font.Size, this.Font.Style, this.Font.Unit);
+				theOriginalFont = new System.Drawing.Font(Font.FontFamily, Font.Size, Font.Style, Font.Unit);
 
 				//SetStyle(ControlStyles.UserPaint, Me.theCueBannerText <> "")
-				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
+				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
 				//Me.Invalidate()
 			}
 		}

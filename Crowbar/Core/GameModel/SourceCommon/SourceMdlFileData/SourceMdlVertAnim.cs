@@ -115,22 +115,22 @@ namespace Crowbar
 //ORIGINAL LINE: Public Property deltaUShort(ByVal index As Integer) As UShort
 		public ushort get_deltaUShort(int index)
 		{
-			return this.theDelta[index].the16BitValue;
+			return theDelta[index].the16BitValue;
 		}
 			public void set_deltaUShort(int index, ushort value)
 			{
-				this.theDelta[index].the16BitValue = value;
+				theDelta[index].the16BitValue = value;
 			}
 
 //INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
 //ORIGINAL LINE: Public Property flDelta(ByVal index As Integer) As SourceFloat16bits
 		public SourceFloat16bits get_flDelta(int index)
 		{
-			return this.theDelta[index];
+			return theDelta[index];
 		}
 			public void set_flDelta(int index, SourceFloat16bits value)
 			{
-				this.theDelta[index] = value;
+				theDelta[index] = value;
 			}
 
 		//Public Property nDelta(ByVal index As Integer) As Short
@@ -146,22 +146,22 @@ namespace Crowbar
 //ORIGINAL LINE: Public Property nDeltaUShort(ByVal index As Integer) As UShort
 		public ushort get_nDeltaUShort(int index)
 		{
-			return this.theNDelta[index].the16BitValue;
+			return theNDelta[index].the16BitValue;
 		}
 			public void set_nDeltaUShort(int index, ushort value)
 			{
-				this.theNDelta[index].the16BitValue = value;
+				theNDelta[index].the16BitValue = value;
 			}
 
 //INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
 //ORIGINAL LINE: Public Property flNDelta(ByVal index As Integer) As SourceFloat16bits
 		public SourceFloat16bits get_flNDelta(int index)
 		{
-			return this.theNDelta[index];
+			return theNDelta[index];
 		}
 			public void set_flNDelta(int index, SourceFloat16bits value)
 			{
-				this.theNDelta[index] = value;
+				theNDelta[index] = value;
 			}
 
 
@@ -172,11 +172,11 @@ namespace Crowbar
 		{
 			for (int x = 0; x <= 2; x++)
 			{
-				this.theDelta[x] = new SourceFloat16bits();
+				theDelta[x] = new SourceFloat16bits();
 			}
 			for (int x = 0; x <= 2; x++)
 			{
-				this.theNDelta[x] = new SourceFloat16bits();
+				theNDelta[x] = new SourceFloat16bits();
 			}
 		}
 

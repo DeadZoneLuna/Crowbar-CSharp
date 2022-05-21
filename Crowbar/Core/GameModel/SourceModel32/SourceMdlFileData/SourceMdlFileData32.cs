@@ -14,8 +14,8 @@ namespace Crowbar
 		public SourceMdlFileData32() : base()
 		{
 
-			this.theModelCommandIsUsed = false;
-			this.theProceduralBonesCommandIsUsed = false;
+			theModelCommandIsUsed = false;
+			theProceduralBonesCommandIsUsed = false;
 		}
 
 		//FROM: SourceEngine2003_source HL2 Beta 2003 [MDL v36]\src_main\Public\studio.h

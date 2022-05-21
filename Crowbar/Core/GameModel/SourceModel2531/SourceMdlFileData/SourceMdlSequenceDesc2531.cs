@@ -14,7 +14,7 @@ namespace Crowbar
 		public SourceMdlSequenceDesc2531()
 		{
 			//	short				anim[MAXSTUDIOBLENDS][MAXSTUDIOBLENDS];	// f64: 16x16x2 = 512 bytes each anim a short
-			this.anim = new List<List<short>>(SourceModule2531.MAXSTUDIOBLENDS);
+			anim = new List<List<short>>(SourceModule2531.MAXSTUDIOBLENDS);
 			for (int rowIndex = 0; rowIndex < SourceModule2531.MAXSTUDIOBLENDS; rowIndex++)
 			{
 				List<short> animRow = new List<short>(SourceModule2531.MAXSTUDIOBLENDS);
@@ -22,7 +22,7 @@ namespace Crowbar
 				{
 					animRow.Add(0);
 				}
-				this.anim.Add(animRow);
+				anim.Add(animRow);
 			}
 		}
 

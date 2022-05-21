@@ -25,7 +25,7 @@ namespace Crowbar
 			//NOTE: Try-Catch is needed so that widget will be shown in MainForm without raising exception.
 			try
 			{
-				this.Init();
+				Init();
 			}
 			catch
 			{
@@ -38,15 +38,15 @@ namespace Crowbar
 
 		protected void Init()
 		{
-			this.GameSetupComboBox.DisplayMember = "GameName";
-			this.GameSetupComboBox.ValueMember = "GameName";
-			this.GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
-			this.GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "SetUpGamesGameSetupSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
+			GameSetupComboBox.DisplayMember = "GameName";
+			GameSetupComboBox.ValueMember = "GameName";
+			GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
+			GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "SetUpGamesGameSetupSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
 
 			DataGridViewTextBoxColumn textColumn = null;
 			DataGridViewButtonColumn buttonColumn = null;
-			this.SteamLibraryPathsDataGridView.AutoGenerateColumns = false;
-			this.SteamLibraryPathsDataGridView.DataSource = MainCROWBAR.TheApp.Settings.SteamLibraryPaths;
+			SteamLibraryPathsDataGridView.AutoGenerateColumns = false;
+			SteamLibraryPathsDataGridView.DataSource = MainCROWBAR.TheApp.Settings.SteamLibraryPaths;
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -57,7 +57,7 @@ namespace Crowbar
 			textColumn.Name = "Macro";
 			textColumn.ReadOnly = true;
 			textColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-			this.SteamLibraryPathsDataGridView.Columns.Add(textColumn);
+			SteamLibraryPathsDataGridView.Columns.Add(textColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.DataPropertyName = "LibraryPath";
@@ -67,7 +67,7 @@ namespace Crowbar
 			textColumn.HeaderText = "Library Path";
 			textColumn.Name = "LibraryPath";
 			textColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-			this.SteamLibraryPathsDataGridView.Columns.Add(textColumn);
+			SteamLibraryPathsDataGridView.Columns.Add(textColumn);
 
 			buttonColumn = new DataGridViewButtonColumn();
 			buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -78,7 +78,7 @@ namespace Crowbar
 			buttonColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
 			buttonColumn.Text = "Browse...";
 			buttonColumn.UseColumnTextForButtonValue = true;
-			this.SteamLibraryPathsDataGridView.Columns.Add(buttonColumn);
+			SteamLibraryPathsDataGridView.Columns.Add(buttonColumn);
 
 			textColumn = new DataGridViewTextBoxColumn();
 			textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -88,44 +88,44 @@ namespace Crowbar
 			textColumn.HeaderText = "Use Count";
 			textColumn.Name = "UseCount";
 			textColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-			this.SteamLibraryPathsDataGridView.Columns.Add(textColumn);
+			SteamLibraryPathsDataGridView.Columns.Add(textColumn);
 
-			this.SteamAppPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "SteamAppPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			SteamAppPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "SteamAppPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
 
-			this.UpdateWidgets();
-			this.UpdateUseCounts();
+			UpdateWidgets();
+			UpdateUseCounts();
 
 			if (MainCROWBAR.TheApp.Settings.SteamLibraryPaths.Count == 0)
 			{
 				MainCROWBAR.TheApp.Settings.SteamLibraryPaths.AddNew();
 			}
 
-			MainCROWBAR.TheApp.Settings.PropertyChanged += this.AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Settings.GameSetups.ListChanged += this.GameSetups_ListChanged;
-			this.SteamLibraryPathsDataGridView.SetMacroInSelectedGameSetupToolStripMenuItem.Click += this.SetMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.SetMacroInAllGameSetupsToolStripMenuItem.Click += this.SetMacroInAllGameSetupsToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ClearMacroInSelectedGameSetupToolStripMenuItem.Click += this.ClearMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ClearMacroInAllGameSetupsToolStripMenuItem.Click += this.ClearMacroInAllGameSetupsToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Click += this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Click += this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem_Click;
+			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
+			MainCROWBAR.TheApp.Settings.GameSetups.ListChanged += GameSetups_ListChanged;
+			SteamLibraryPathsDataGridView.SetMacroInSelectedGameSetupToolStripMenuItem.Click += SetMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.SetMacroInAllGameSetupsToolStripMenuItem.Click += SetMacroInAllGameSetupsToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ClearMacroInSelectedGameSetupToolStripMenuItem.Click += ClearMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ClearMacroInAllGameSetupsToolStripMenuItem.Click += ClearMacroInAllGameSetupsToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Click += ChangeToThisMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Click += ChangeToThisMacroInAllGameSetupsToolStripMenuItem_Click;
 		}
 
 		protected void Free()
 		{
-			MainCROWBAR.TheApp.Settings.PropertyChanged -= this.AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Settings.GameSetups.ListChanged -= this.GameSetups_ListChanged;
-			this.GamePathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.SteamLibraryPathsDataGridView.SetMacroInSelectedGameSetupToolStripMenuItem.Click -= this.SetMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.SetMacroInAllGameSetupsToolStripMenuItem.Click -= this.SetMacroInAllGameSetupsToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ClearMacroInSelectedGameSetupToolStripMenuItem.Click -= this.ClearMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ClearMacroInAllGameSetupsToolStripMenuItem.Click -= this.ClearMacroInAllGameSetupsToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Click -= this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem_Click;
-			this.SteamLibraryPathsDataGridView.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Click -= this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem_Click;
+			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
+			MainCROWBAR.TheApp.Settings.GameSetups.ListChanged -= GameSetups_ListChanged;
+			GamePathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			SteamLibraryPathsDataGridView.SetMacroInSelectedGameSetupToolStripMenuItem.Click -= SetMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.SetMacroInAllGameSetupsToolStripMenuItem.Click -= SetMacroInAllGameSetupsToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ClearMacroInSelectedGameSetupToolStripMenuItem.Click -= ClearMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ClearMacroInAllGameSetupsToolStripMenuItem.Click -= ClearMacroInAllGameSetupsToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Click -= ChangeToThisMacroInSelectedGameSetupToolStripMenuItem_Click;
+			SteamLibraryPathsDataGridView.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Click -= ChangeToThisMacroInAllGameSetupsToolStripMenuItem_Click;
 
-			this.GameSetupComboBox.DataSource = null;
-			this.GameSetupComboBox.DataBindings.Clear();
-			this.SteamAppPathFileNameTextBox.DataBindings.Clear();
-			this.SteamLibraryPathsDataGridView.DataSource = null;
+			GameSetupComboBox.DataSource = null;
+			GameSetupComboBox.DataBindings.Clear();
+			SteamAppPathFileNameTextBox.DataBindings.Clear();
+			SteamLibraryPathsDataGridView.DataSource = null;
 		}
 
 #endregion
@@ -142,8 +142,8 @@ namespace Crowbar
 
 		private void GameSetupComboBox_SelectedIndexChanged(System.Object sender, System.EventArgs e)
 		{
-			this.UpdateWidgets();
-			this.UpdateWidgetsBasedOnGameEngine();
+			UpdateWidgets();
+			UpdateWidgetsBasedOnGameEngine();
 		}
 
 		private void AddGameSetupButton_Click(System.Object sender, System.EventArgs e)
@@ -152,223 +152,223 @@ namespace Crowbar
 			gamesetup.GameName = "<New Game>";
 			MainCROWBAR.TheApp.Settings.GameSetups.Add(gamesetup);
 
-			this.GameSetupComboBox.SelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.IndexOf(gamesetup);
+			GameSetupComboBox.SelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.IndexOf(gamesetup);
 
-			this.UpdateWidgets();
-			this.UpdateUseCounts();
+			UpdateWidgets();
+			UpdateUseCounts();
 		}
 
 		private void BrowseForGamePathFileNameButton_Click(System.Object sender, System.EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine LibList.gam File";
 				openFileWdw.Filter = "GoldSource Engine LibList.gam File|liblist.gam|GAM Files (*.gam)|*.txt|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine GameInfo.txt File";
 				openFileWdw.Filter = "Source Engine GameInfo.txt File|gameinfo.txt|Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine GameInfo.gi File";
 				openFileWdw.Filter = "Source 2 Engine GameInfo.gi File|gameinfo.gi|GI Files (*.gi)|*.txt|All Files (*.*)|*.*";
 			}
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.GamePathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.GamePathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.GamePathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.GamePathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.GamePathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.GamePathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.GamePathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.GamePathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void BrowseForGameAppPathFileNameButton_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine Game's Executable File";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine Game's Executable File";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine Game's Executable File";
 			}
 			openFileWdw.Filter = "Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.GameAppPathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.GameAppPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.GameAppPathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.GameAppPathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.GameAppPathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.GameAppPathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.GameAppPathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.GameAppPathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void ClearGameAppOptionsButton_Click(object sender, EventArgs e)
 		{
-			this.GameAppOptionsTextBox.Text = "";
+			GameAppOptionsTextBox.Text = "";
 		}
 
 		private void BrowseForCompilerPathFileNameButton_Click(System.Object sender, System.EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine Model Compiler Tool";
 				openFileWdw.Filter = "GoldSource Engine Model Compiler Tool File|studiomdl.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine Model Compiler Tool";
 				openFileWdw.Filter = "Source Engine Model Compiler Tool File|studiomdl.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine Model Compiler Tool";
 				openFileWdw.Filter = "Source 2 Engine Model Compiler Tool File|studiomdl.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.CompilerPathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.CompilerPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.CompilerPathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.CompilerPathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.CompilerPathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.CompilerPathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.CompilerPathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.CompilerPathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void BrowseForViewerPathFileNameButton_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine Model Viewer Tool";
 				openFileWdw.Filter = "GoldSource Engine Model Viewer Tool File|hlmv.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine Model Viewer Tool";
 				openFileWdw.Filter = "Source Engine Model Viewer Tool File|hlmv.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine Model Viewer Tool";
 				openFileWdw.Filter = "Source 2 Engine Model Viewer Tool File|hlmv.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.ViewerPathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.ViewerPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.ViewerPathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.ViewerPathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.ViewerPathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.ViewerPathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.ViewerPathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.ViewerPathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void BrowseForMappingToolPathFileNameButton_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine Mapping Tool";
 				openFileWdw.Filter = "GoldSource Engine Mapping Tool Files|hammer.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine Mapping Tool";
 				openFileWdw.Filter = "Source Engine Mapping Tool Files|hammer.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine Mapping Tool";
 				openFileWdw.Filter = "Source 2 Engine Mapping Tool Files|hammer.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.MappingToolPathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.MappingToolPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.MappingToolPathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.MappingToolPathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.MappingToolPathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.MappingToolPathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.MappingToolPathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.MappingToolPathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void BrowseForUnpackerPathFileNameButton_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openFileWdw = new OpenFileDialog();
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
 				openFileWdw.Title = "Select GoldSource Engine Packer/Unpacker Tool";
 				openFileWdw.Filter = "GoldSource Engine Packer/Unpacker Tool Files|vpk.exe;gmad.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				openFileWdw.Title = "Select Source Engine Packer/Unpacker Tool";
 				openFileWdw.Filter = "Source Engine Packer/Unpacker Tool Files|vpk.exe;gmad.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
 				openFileWdw.Title = "Select Source 2 Engine Packer/Unpacker Tool";
 				openFileWdw.Filter = "Source 2 Engine Packer/Unpacker Tool Files|vpk.exe;gmad.exe|Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
 			}
 			openFileWdw.AddExtension = true;
 			openFileWdw.ValidateNames = true;
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.theSelectedGameSetup.PackerPathFileName);
-			openFileWdw.FileName = Path.GetFileName(this.theSelectedGameSetup.PackerPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(theSelectedGameSetup.PackerPathFileName);
+			openFileWdw.FileName = Path.GetFileName(theSelectedGameSetup.PackerPathFileName);
 			if (openFileWdw.ShowDialog() == DialogResult.OK)
 			{
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				string tempVar = this.theSelectedGameSetup.PackerPathFileNameUnprocessed;
+				string tempVar = theSelectedGameSetup.PackerPathFileNameUnprocessed;
 				SetPathFileNameField(openFileWdw.FileName, ref tempVar);
-					this.theSelectedGameSetup.PackerPathFileNameUnprocessed = tempVar;
+					theSelectedGameSetup.PackerPathFileNameUnprocessed = tempVar;
 			}
 		}
 
 		private void CloneGameSetupButton_Click(object sender, EventArgs e)
 		{
-			GameSetup cloneGameSetup = (GameSetup)this.theSelectedGameSetup.Clone();
-			cloneGameSetup.GameName = "Clone of " + this.theSelectedGameSetup.GameName;
+			GameSetup cloneGameSetup = (GameSetup)theSelectedGameSetup.Clone();
+			cloneGameSetup.GameName = "Clone of " + theSelectedGameSetup.GameName;
 			MainCROWBAR.TheApp.Settings.GameSetups.Add(cloneGameSetup);
 
-			this.GameSetupComboBox.SelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.IndexOf(cloneGameSetup);
+			GameSetupComboBox.SelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.IndexOf(cloneGameSetup);
 
-			this.UpdateWidgets();
-			this.UpdateUseCounts();
+			UpdateWidgets();
+			UpdateUseCounts();
 		}
 
 		private void DeleteGameSetupButton_Click(System.Object sender, System.EventArgs e)
@@ -379,16 +379,16 @@ namespace Crowbar
 			//If selectedIndex >= 0 AndAlso TheApp.Settings.GameSetups.Count > 1 Then
 			//	TheApp.Settings.GameSetups.RemoveAt(selectedIndex)
 			//End If
-			MainCROWBAR.TheApp.Settings.GameSetups.Remove(this.theSelectedGameSetup);
+			MainCROWBAR.TheApp.Settings.GameSetups.Remove(theSelectedGameSetup);
 
-			this.UpdateWidgets();
-			this.UpdateUseCounts();
+			UpdateWidgets();
+			UpdateUseCounts();
 		}
 
 		private void CreateModelsFolderTreeButton_Click(object sender, EventArgs e)
 		{
 			//TODO: [CreateModelsFolderTreeButton_Click] Call a function in Unpacker to do the unpacking.
-			string gamePath = FileManager.GetPath(this.theSelectedGameSetup.GamePathFileName);
+			string gamePath = FileManager.GetPath(theSelectedGameSetup.GamePathFileName);
 			MainCROWBAR.TheApp.Unpacker.UnpackFolderTreeFromVPK(gamePath);
 		}
 
@@ -452,32 +452,32 @@ namespace Crowbar
 
 		private void SetMacroInSelectedGameSetupToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.SetMacroInSelectedGameSetup();
+			SetMacroInSelectedGameSetup();
 		}
 
 		private void SetMacroInAllGameSetupsToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.SetMacroInAllGameSetups();
+			SetMacroInAllGameSetups();
 		}
 
 		private void ClearMacroInSelectedGameSetupToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.ClearMacroInSelectedGameSetup();
+			ClearMacroInSelectedGameSetup();
 		}
 
 		private void ClearMacroInAllGameSetupsToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.ClearMacroInAllGameSetups();
+			ClearMacroInAllGameSetups();
 		}
 
 		private void ChangeToThisMacroInSelectedGameSetupToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.ChangeToThisMacroInSelectedGameSetup();
+			ChangeToThisMacroInSelectedGameSetup();
 		}
 
 		private void ChangeToThisMacroInAllGameSetupsToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.ChangeToThisMacroInAllGameSetups();
+			ChangeToThisMacroInAllGameSetups();
 		}
 
 		private void AddLibraryPathButton_Click(object sender, EventArgs e)
@@ -519,7 +519,7 @@ namespace Crowbar
 		{
 			if (e.PropertyName == "SteamAppPathFileName")
 			{
-				this.UpdateUseCounts();
+				UpdateUseCounts();
 			}
 		}
 
@@ -534,11 +534,11 @@ namespace Crowbar
 				{
 					if (e.PropertyDescriptor.Name == "GamePathFileName" || e.PropertyDescriptor.Name == "GameAppPathFileName" || e.PropertyDescriptor.Name == "CompilerPathFileName" || e.PropertyDescriptor.Name == "ViewerPathFileName" || e.PropertyDescriptor.Name == "MappingToolPathFileName" || e.PropertyDescriptor.Name == "PackerPathFileName")
 					{
-						this.UpdateUseCounts();
+						UpdateUseCounts();
 					}
 					else if (e.PropertyDescriptor.Name == "GameEngine")
 					{
-						this.UpdateWidgetsBasedOnGameEngine();
+						UpdateWidgetsBasedOnGameEngine();
 					}
 				}
 			}
@@ -546,7 +546,7 @@ namespace Crowbar
 
 		private void ParsePathFileName(object sender, ConvertEventArgs e)
 		{
-			e.Value = this.ParsePathFileName((e.Value == null ? null : Convert.ToString(e.Value)));
+			e.Value = ParsePathFileName((e.Value == null ? null : Convert.ToString(e.Value)));
 		}
 
 		private string ParsePathFileName(string iPathFileName)
@@ -569,73 +569,73 @@ namespace Crowbar
 		{
 			int gameSetupCount = MainCROWBAR.TheApp.Settings.GameSetups.Count;
 
-			this.GameSetupComboBox.Enabled = (gameSetupCount > 0);
+			GameSetupComboBox.Enabled = (gameSetupCount > 0);
 
-			this.GamePathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.BrowseForGamePathFileNameButton.Enabled = (gameSetupCount > 0);
-			this.GameAppPathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.GameAppOptionsTextBox.Enabled = (gameSetupCount > 0);
-			this.ClearGameAppOptionsButton.Enabled = (gameSetupCount > 0);
-			this.BrowseForGameAppPathFileNameButton.Enabled = (gameSetupCount > 0);
-			this.CompilerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.BrowseForCompilerPathFileNameButton.Enabled = (gameSetupCount > 0);
+			GamePathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			BrowseForGamePathFileNameButton.Enabled = (gameSetupCount > 0);
+			GameAppPathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			GameAppOptionsTextBox.Enabled = (gameSetupCount > 0);
+			ClearGameAppOptionsButton.Enabled = (gameSetupCount > 0);
+			BrowseForGameAppPathFileNameButton.Enabled = (gameSetupCount > 0);
+			CompilerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			BrowseForCompilerPathFileNameButton.Enabled = (gameSetupCount > 0);
 
-			this.ViewerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.BrowseForViewerPathFileNameButton.Enabled = (gameSetupCount > 0);
+			ViewerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			BrowseForViewerPathFileNameButton.Enabled = (gameSetupCount > 0);
 
-			this.MappingToolPathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.BrowseForMappingToolPathFileNameButton.Enabled = (gameSetupCount > 0);
+			MappingToolPathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			BrowseForMappingToolPathFileNameButton.Enabled = (gameSetupCount > 0);
 
-			this.PackerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
-			this.BrowseForUnpackerPathFileNameButton.Enabled = (gameSetupCount > 0);
+			PackerPathFileNameTextBox.Enabled = (gameSetupCount > 0);
+			BrowseForUnpackerPathFileNameButton.Enabled = (gameSetupCount > 0);
 
-			this.CloneGameSetupButton.Enabled = (gameSetupCount > 0);
-			this.DeleteGameSetupButton.Enabled = (gameSetupCount > 1);
+			CloneGameSetupButton.Enabled = (gameSetupCount > 0);
+			DeleteGameSetupButton.Enabled = (gameSetupCount > 1);
 
 			//NOTE: Reset the bindings, because a new game setup has been chosen.
 
-			this.theSelectedGameSetup = MainCROWBAR.TheApp.Settings.GameSetups[this.GameSetupComboBox.SelectedIndex];
+			theSelectedGameSetup = MainCROWBAR.TheApp.Settings.GameSetups[GameSetupComboBox.SelectedIndex];
 
-			this.GameNameTextBox.DataBindings.Clear();
-			this.GameNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "GameName", false, DataSourceUpdateMode.OnValidation);
+			GameNameTextBox.DataBindings.Clear();
+			GameNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "GameName", false, DataSourceUpdateMode.OnValidation);
 
-			this.UpdateGameEngineComboBox();
+			UpdateGameEngineComboBox();
 
-			this.GamePathFileNameTextBox.DataBindings.Clear();
-			this.GamePathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "GamePathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.GamePathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.GamePathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
+			GamePathFileNameTextBox.DataBindings.Clear();
+			GamePathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "GamePathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			GamePathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			GamePathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
 			//TEST: Was testing these lines for converting bad text found in Settings file. Problem is that Me.theSelectedGameSetup.GamePathFileNameUnprocessed
 			//      always raises events when changed and ends up back here to do it again, thus leading to stack overflow.
 			//Me.GamePathFileNameTextBox.Text = Me.ParsePathFileName(Me.theSelectedGameSetup.GamePathFileNameUnprocessed)
 			//Me.GamePathFileNameTextBox.DataBindings("Text").WriteValue()
 
-			this.GameAppPathFileNameTextBox.DataBindings.Clear();
-			this.GameAppPathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "GameAppPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.GameAppPathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.GameAppPathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
-			this.GameAppOptionsTextBox.DataBindings.Clear();
-			this.GameAppOptionsTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "GameAppOptions", false, DataSourceUpdateMode.OnValidation);
+			GameAppPathFileNameTextBox.DataBindings.Clear();
+			GameAppPathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "GameAppPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			GameAppPathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			GameAppPathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
+			GameAppOptionsTextBox.DataBindings.Clear();
+			GameAppOptionsTextBox.DataBindings.Add("Text", theSelectedGameSetup, "GameAppOptions", false, DataSourceUpdateMode.OnValidation);
 
-			this.CompilerPathFileNameTextBox.DataBindings.Clear();
-			this.CompilerPathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "CompilerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.CompilerPathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.CompilerPathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
+			CompilerPathFileNameTextBox.DataBindings.Clear();
+			CompilerPathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "CompilerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			CompilerPathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			CompilerPathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
 
-			this.ViewerPathFileNameTextBox.DataBindings.Clear();
-			this.ViewerPathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "ViewerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.ViewerPathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.ViewerPathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
+			ViewerPathFileNameTextBox.DataBindings.Clear();
+			ViewerPathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "ViewerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			ViewerPathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			ViewerPathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
 
-			this.MappingToolPathFileNameTextBox.DataBindings.Clear();
-			this.MappingToolPathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "MappingToolPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.MappingToolPathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.MappingToolPathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
+			MappingToolPathFileNameTextBox.DataBindings.Clear();
+			MappingToolPathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "MappingToolPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			MappingToolPathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			MappingToolPathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
 
-			this.PackerPathFileNameTextBox.DataBindings.Clear();
-			this.PackerPathFileNameTextBox.DataBindings.Add("Text", this.theSelectedGameSetup, "PackerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
-			this.PackerPathFileNameTextBox.DataBindings["Text"].Parse -= this.ParsePathFileName;
-			this.PackerPathFileNameTextBox.DataBindings["Text"].Parse += this.ParsePathFileName;
+			PackerPathFileNameTextBox.DataBindings.Clear();
+			PackerPathFileNameTextBox.DataBindings.Add("Text", theSelectedGameSetup, "PackerPathFileNameUnprocessed", false, DataSourceUpdateMode.OnValidation);
+			PackerPathFileNameTextBox.DataBindings["Text"].Parse -= ParsePathFileName;
+			PackerPathFileNameTextBox.DataBindings["Text"].Parse += ParsePathFileName;
 		}
 
 		private void UpdateGameEngineComboBox()
@@ -645,13 +645,13 @@ namespace Crowbar
 			//NOTE: For now, remove the Source 2 value.
 			EnumHelper.RemoveFromList(AppEnums.GameEngine.Source2, ref anEnumList);
 
-			this.EngineComboBox.DataBindings.Clear();
+			EngineComboBox.DataBindings.Clear();
 			try
 			{
-				this.EngineComboBox.DisplayMember = "Value";
-				this.EngineComboBox.ValueMember = "Key";
-				this.EngineComboBox.DataSource = anEnumList;
-				this.EngineComboBox.DataBindings.Add("SelectedValue", this.theSelectedGameSetup, "GameEngine", false, DataSourceUpdateMode.OnPropertyChanged);
+				EngineComboBox.DisplayMember = "Value";
+				EngineComboBox.ValueMember = "Key";
+				EngineComboBox.DataSource = anEnumList;
+				EngineComboBox.DataBindings.Add("SelectedValue", theSelectedGameSetup, "GameEngine", false, DataSourceUpdateMode.OnPropertyChanged);
 			}
 			catch (Exception ex)
 			{
@@ -661,23 +661,23 @@ namespace Crowbar
 
 		private void UpdateWidgetsBasedOnGameEngine()
 		{
-			if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
+			if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
-				this.GamePathLabel.Text = "LibList.gam:";
+				GamePathLabel.Text = "LibList.gam:";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
-				this.GamePathLabel.Text = "GameInfo.txt:";
+				GamePathLabel.Text = "GameInfo.txt:";
 			}
-			else if (this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
+			else if (theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source2)
 			{
-				this.GamePathLabel.Text = "GameInfo.gi:";
+				GamePathLabel.Text = "GameInfo.gi:";
 			}
 
-			this.PackerLabel.Visible = this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
-			this.PackerPathFileNameTextBox.Visible = this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
-			this.BrowseForUnpackerPathFileNameButton.Visible = this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
-			this.CreateModelsFolderTreeButton.Visible = this.theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
+			PackerLabel.Visible = theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
+			PackerPathFileNameTextBox.Visible = theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
+			BrowseForUnpackerPathFileNameButton.Visible = theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
+			CreateModelsFolderTreeButton.Visible = theSelectedGameSetup.GameEngine == AppEnums.GameEngine.Source;
 		}
 
 		private void SetPathFileNameField(string inputText, ref string outputText)
@@ -739,52 +739,52 @@ namespace Crowbar
 
 		private void SetMacroInSelectedGameSetup()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
-			this.SetMacroInOneGameSetup(aSteamLibraryPath.LibraryPath, aSteamLibraryPath.Macro, this.theSelectedGameSetup);
+			SetMacroInOneGameSetup(aSteamLibraryPath.LibraryPath, aSteamLibraryPath.Macro, theSelectedGameSetup);
 		}
 
 		private void SetMacroInAllGameSetups()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
 			foreach (GameSetup aGameSetup in MainCROWBAR.TheApp.Settings.GameSetups)
 			{
-				this.SetMacroInOneGameSetup(aSteamLibraryPath.LibraryPath, aSteamLibraryPath.Macro, aGameSetup);
+				SetMacroInOneGameSetup(aSteamLibraryPath.LibraryPath, aSteamLibraryPath.Macro, aGameSetup);
 			}
 		}
 
 		private void ClearMacroInSelectedGameSetup()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
-			this.SetMacroInOneGameSetup(aSteamLibraryPath.Macro, aSteamLibraryPath.LibraryPath, this.theSelectedGameSetup);
+			SetMacroInOneGameSetup(aSteamLibraryPath.Macro, aSteamLibraryPath.LibraryPath, theSelectedGameSetup);
 		}
 
 		private void ClearMacroInAllGameSetups()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
 			foreach (GameSetup aGameSetup in MainCROWBAR.TheApp.Settings.GameSetups)
 			{
-				this.SetMacroInOneGameSetup(aSteamLibraryPath.Macro, aSteamLibraryPath.LibraryPath, aGameSetup);
+				SetMacroInOneGameSetup(aSteamLibraryPath.Macro, aSteamLibraryPath.LibraryPath, aGameSetup);
 			}
 		}
 
 		private void ChangeToThisMacroInSelectedGameSetup()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
-			this.SetMacroInOneGameSetup("<>", aSteamLibraryPath.Macro, this.theSelectedGameSetup);
+			SetMacroInOneGameSetup("<>", aSteamLibraryPath.Macro, theSelectedGameSetup);
 		}
 
 		private void ChangeToThisMacroInAllGameSetups()
 		{
-			SteamLibraryPath aSteamLibraryPath = this.GetSelectedSteamLibraryPath();
+			SteamLibraryPath aSteamLibraryPath = GetSelectedSteamLibraryPath();
 
 			foreach (GameSetup aGameSetup in MainCROWBAR.TheApp.Settings.GameSetups)
 			{
-				this.SetMacroInOneGameSetup("<>", aSteamLibraryPath.Macro, aGameSetup);
+				SetMacroInOneGameSetup("<>", aSteamLibraryPath.Macro, aGameSetup);
 			}
 		}
 
@@ -793,9 +793,9 @@ namespace Crowbar
 			SteamLibraryPath aSteamLibraryPath = null;
 			int selectedRowIndex = 0;
 
-			if (this.SteamLibraryPathsDataGridView.SelectedCells.Count > 0)
+			if (SteamLibraryPathsDataGridView.SelectedCells.Count > 0)
 			{
-				selectedRowIndex = this.SteamLibraryPathsDataGridView.SelectedCells[0].RowIndex;
+				selectedRowIndex = SteamLibraryPathsDataGridView.SelectedCells[0].RowIndex;
 			}
 			else
 			{

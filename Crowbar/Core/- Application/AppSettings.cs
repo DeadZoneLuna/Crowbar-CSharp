@@ -22,101 +22,101 @@ namespace Crowbar
 		{
 			//MyBase.New()
 
-			this.theAppIsSingleInstance = false;
-			this.theWindowLocation = new Point(0, 0);
-			this.theWindowSize = new Size(800, 600);
-			this.theWindowState = FormWindowState.Normal;
+			theAppIsSingleInstance = false;
+			theWindowLocation = new Point(0, 0);
+			theWindowSize = new Size(800, 600);
+			theWindowState = FormWindowState.Normal;
 			//NOTE: 0 means the Set Up Games tab.
-			this.theMainWindowSelectedTabIndex = 0;
+			theMainWindowSelectedTabIndex = 0;
 
-			this.thePreviewDataViewerIsRunning = false;
+			thePreviewDataViewerIsRunning = false;
 			//Me.thePreviewerIsRunning = False
-			this.theDecompilerIsRunning = false;
-			this.theCompilerIsRunning = false;
-			this.theViewDataViewerIsRunning = false;
+			theDecompilerIsRunning = false;
+			theCompilerIsRunning = false;
+			theViewDataViewerIsRunning = false;
 			//Me.theViewerIsRunning = False
-			this.thePackerIsRunning = false;
+			thePackerIsRunning = false;
 
-			this.theGameSetups = new BindingListExAutoSort<GameSetup>("GameName");
-			this.theSteamAppPathFileName = "C:\\Program Files (x86)\\Steam\\Steam.exe";
-			this.theSteamLibraryPaths = new BindingListEx<SteamLibraryPath>();
-			this.theSetUpGamesGameSetupSelectedIndex = 0;
+			theGameSetups = new BindingListExAutoSort<GameSetup>("GameName");
+			theSteamAppPathFileName = "C:\\Program Files (x86)\\Steam\\Steam.exe";
+			theSteamLibraryPaths = new BindingListEx<SteamLibraryPath>();
+			theSetUpGamesGameSetupSelectedIndex = 0;
 
-			this.theDownloadItemIdOrLink = "";
-			this.theDownloadOutputFolderOption = AppEnums.DownloadOutputPathOptions.DocumentsFolder;
-			this.theDownloadOutputWorkPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.SetDefaultDownloadOptions();
+			theDownloadItemIdOrLink = "";
+			theDownloadOutputFolderOption = AppEnums.DownloadOutputPathOptions.DocumentsFolder;
+			theDownloadOutputWorkPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			SetDefaultDownloadOptions();
 
-			this.theUnpackContainerType = AppEnums.ContainerType.VPK;
-			this.theUnpackPackagePathFolderOrFileName = "";
+			theUnpackContainerType = AppEnums.ContainerType.VPK;
+			theUnpackPackagePathFolderOrFileName = "";
 			//Me.theUnpackOutputFolderOption = OutputFolderOptions.SubfolderName
-			this.theUnpackOutputFolderOption = AppEnums.UnpackOutputPathOptions.SameFolder;
-			this.SetDefaultUnpackOutputSubfolderName();
-			this.theUnpackOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.theUnpackGameSetupSelectedIndex = 0;
-			this.theUnpackSearchField = AppEnums.UnpackSearchFieldOptions.Files;
-			this.theUnpackSearchText = "";
-			this.SetDefaultUnpackOptions();
-			this.theUnpackMode = AppEnums.InputOptions.File;
+			theUnpackOutputFolderOption = AppEnums.UnpackOutputPathOptions.SameFolder;
+			SetDefaultUnpackOutputSubfolderName();
+			theUnpackOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			theUnpackGameSetupSelectedIndex = 0;
+			theUnpackSearchField = AppEnums.UnpackSearchFieldOptions.Files;
+			theUnpackSearchText = "";
+			SetDefaultUnpackOptions();
+			theUnpackMode = AppEnums.InputOptions.File;
 
-			this.thePreviewMdlPathFileName = "";
-			this.thePreviewOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
-			this.thePreviewGameSetupSelectedIndex = 0;
+			thePreviewMdlPathFileName = "";
+			thePreviewOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
+			thePreviewGameSetupSelectedIndex = 0;
 
-			this.theDecompileMdlPathFileName = "";
+			theDecompileMdlPathFileName = "";
 			//Me.theDecompileOutputFolderOption = OutputFolderOptions.SubfolderName
-			this.theDecompileOutputFolderOption = AppEnums.DecompileOutputPathOptions.WorkFolder;
-			this.SetDefaultDecompileOutputSubfolderName();
-			this.theDecompileOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.SetDefaultDecompileReCreateFilesOptions();
-			this.theDecompileMode = AppEnums.InputOptions.File;
-			this.theDecompileFolderForEachModelIsChecked = false;
-			this.theDecompileStricterFormatIsChecked = false;
-			this.theDecompileLogFileIsChecked = false;
-			this.theDecompileDebugInfoFilesIsChecked = false;
-			this.theDecompileOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
+			theDecompileOutputFolderOption = AppEnums.DecompileOutputPathOptions.WorkFolder;
+			SetDefaultDecompileOutputSubfolderName();
+			theDecompileOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			SetDefaultDecompileReCreateFilesOptions();
+			theDecompileMode = AppEnums.InputOptions.File;
+			theDecompileFolderForEachModelIsChecked = false;
+			theDecompileStricterFormatIsChecked = false;
+			theDecompileLogFileIsChecked = false;
+			theDecompileDebugInfoFilesIsChecked = false;
+			theDecompileOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
 
-			this.theCompileQcPathFileName = "";
-			this.theCompileOutputFolderIsChecked = true;
+			theCompileQcPathFileName = "";
+			theCompileOutputFolderIsChecked = true;
 			//Me.theCompileOutputFolderOption = OutputFolderOptions.SubfolderName
-			this.theCompileOutputFolderOption = AppEnums.CompileOutputPathOptions.GameModelsFolder;
-			this.SetDefaultCompileOutputSubfolderName();
-			this.theCompileOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.theCompileGameSetupSelectedIndex = 0;
-			this.SetDefaultCompileOptions();
-			this.theCompileMode = AppEnums.InputOptions.File;
+			theCompileOutputFolderOption = AppEnums.CompileOutputPathOptions.GameModelsFolder;
+			SetDefaultCompileOutputSubfolderName();
+			theCompileOutputFullPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			theCompileGameSetupSelectedIndex = 0;
+			SetDefaultCompileOptions();
+			theCompileMode = AppEnums.InputOptions.File;
 
-			this.thePatchMdlPathFileName = "";
-			this.thePatchMode = AppEnums.InputOptions.File;
+			thePatchMdlPathFileName = "";
+			thePatchMode = AppEnums.InputOptions.File;
 
-			this.theViewMdlPathFileName = "";
-			this.theViewOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
-			this.theViewGameSetupSelectedIndex = 0;
+			theViewMdlPathFileName = "";
+			theViewOverrideMdlVersion = AppEnums.SupportedMdlVersion.DoNotOverride;
+			theViewGameSetupSelectedIndex = 0;
 
-			this.thePackInputPathFileName = "";
+			thePackInputPathFileName = "";
 			//Me.theCompileOutputFolderIsChecked = True
 			//'Me.theCompileOutputFolderOption = OutputFolderOptions.SubfolderName
-			this.thePackOutputFolderOption = AppEnums.PackOutputPathOptions.ParentFolder;
+			thePackOutputFolderOption = AppEnums.PackOutputPathOptions.ParentFolder;
 			//Me.SetDefaultCompileOutputSubfolderName()
-			this.thePackOutputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.thePackGameSetupSelectedIndex = 0;
-			this.SetDefaultPackOptions();
+			thePackOutputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			thePackGameSetupSelectedIndex = 0;
+			SetDefaultPackOptions();
 			//Me.theCompileMode = InputOptions.File
 
-			this.thePublishGameSelectedIndex = 0;
-			this.thePublishSteamAppUserInfos = new BindingListExAutoSort<SteamAppUserInfo>("AppID");
-			this.thePublishSearchField = AppEnums.PublishSearchFieldOptions.ID;
-			this.thePublishSearchText = "";
+			thePublishGameSelectedIndex = 0;
+			thePublishSteamAppUserInfos = new BindingListExAutoSort<SteamAppUserInfo>("AppID");
+			thePublishSearchField = AppEnums.PublishSearchFieldOptions.ID;
+			thePublishSearchText = "";
 			//Me.thePublishDragDroppedContentPath = ""
 
-			this.SetDefaultOptionsAutoOpenOptions();
-			this.SetDefaultOptionsDragAndDropOptions();
-			this.SetDefaultOptionsContextMenuOptions();
+			SetDefaultOptionsAutoOpenOptions();
+			SetDefaultOptionsDragAndDropOptions();
+			SetDefaultOptionsContextMenuOptions();
 
-			this.theUpdateDownloadPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.theUpdateUpdateToNewPathIsChecked = false;
-			this.theUpdateUpdateDownloadPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			this.theUpdateCopySettingsIsChecked = true;
+			theUpdateDownloadPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			theUpdateUpdateToNewPathIsChecked = false;
+			theUpdateUpdateDownloadPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			theUpdateCopySettingsIsChecked = true;
 
 			//Me.Init()
 		}
@@ -188,7 +188,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theMainWindowSelectedTabIndex;
+				return theMainWindowSelectedTabIndex;
 			}
 			set
 			{
@@ -200,11 +200,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGameSetups;
+				return theGameSetups;
 			}
 			set
 			{
-				this.theGameSetups = value;
+				theGameSetups = value;
 				NotifyPropertyChanged("GameSetups");
 			}
 		}
@@ -214,7 +214,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theSteamAppPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theSteamAppPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theSteamAppPathFileName = value
@@ -227,11 +227,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theSteamAppPathFileName;
+				return theSteamAppPathFileName;
 			}
 			set
 			{
-				this.theSteamAppPathFileName = value;
+				theSteamAppPathFileName = value;
 				NotifyPropertyChanged("SteamAppPathFileName");
 				NotifyPropertyChanged("SteamAppPathFileNameUnprocessed");
 			}
@@ -241,11 +241,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theSteamLibraryPaths;
+				return theSteamLibraryPaths;
 			}
 			set
 			{
-				this.theSteamLibraryPaths = value;
+				theSteamLibraryPaths = value;
 				NotifyPropertyChanged("SteamLibraryPaths");
 			}
 		}
@@ -255,15 +255,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.theSetUpGamesGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (theSetUpGamesGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.theSetUpGamesGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					theSetUpGamesGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.theSetUpGamesGameSetupSelectedIndex;
+				return theSetUpGamesGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.theSetUpGamesGameSetupSelectedIndex = value;
+				theSetUpGamesGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("SetUpGamesGameSetupSelectedIndex");
 			}
 		}
@@ -272,13 +272,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadItemIdOrLink;
+				return theDownloadItemIdOrLink;
 			}
 			set
 			{
-				if (this.theDownloadItemIdOrLink != value)
+				if (theDownloadItemIdOrLink != value)
 				{
-					this.theDownloadItemIdOrLink = value;
+					theDownloadItemIdOrLink = value;
 					NotifyPropertyChanged("DownloadItemIdOrLink");
 				}
 			}
@@ -288,13 +288,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadOutputFolderOption;
+				return theDownloadOutputFolderOption;
 			}
 			set
 			{
-				if (this.theDownloadOutputFolderOption != value)
+				if (theDownloadOutputFolderOption != value)
 				{
-					this.theDownloadOutputFolderOption = value;
+					theDownloadOutputFolderOption = value;
 					NotifyPropertyChanged("DownloadOutputFolderOption");
 				}
 			}
@@ -304,13 +304,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadOutputWorkPath;
+				return theDownloadOutputWorkPath;
 			}
 			set
 			{
-				if (this.theDownloadOutputWorkPath != value)
+				if (theDownloadOutputWorkPath != value)
 				{
-					this.theDownloadOutputWorkPath = value;
+					theDownloadOutputWorkPath = value;
 					NotifyPropertyChanged("DownloadOutputWorkPath");
 				}
 			}
@@ -320,13 +320,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadUseItemIdIsChecked;
+				return theDownloadUseItemIdIsChecked;
 			}
 			set
 			{
-				if (this.theDownloadUseItemIdIsChecked != value)
+				if (theDownloadUseItemIdIsChecked != value)
 				{
-					this.theDownloadUseItemIdIsChecked = value;
+					theDownloadUseItemIdIsChecked = value;
 					NotifyPropertyChanged("DownloadUseItemIdIsChecked");
 				}
 			}
@@ -336,13 +336,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadPrependItemTitleIsChecked;
+				return theDownloadPrependItemTitleIsChecked;
 			}
 			set
 			{
-				if (this.theDownloadPrependItemTitleIsChecked != value)
+				if (theDownloadPrependItemTitleIsChecked != value)
 				{
-					this.theDownloadPrependItemTitleIsChecked = value;
+					theDownloadPrependItemTitleIsChecked = value;
 					NotifyPropertyChanged("DownloadPrependItemTitleIsChecked");
 				}
 			}
@@ -352,13 +352,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadAppendItemUpdateDateTimeIsChecked;
+				return theDownloadAppendItemUpdateDateTimeIsChecked;
 			}
 			set
 			{
-				if (this.theDownloadAppendItemUpdateDateTimeIsChecked != value)
+				if (theDownloadAppendItemUpdateDateTimeIsChecked != value)
 				{
-					this.theDownloadAppendItemUpdateDateTimeIsChecked = value;
+					theDownloadAppendItemUpdateDateTimeIsChecked = value;
 					NotifyPropertyChanged("DownloadAppendItemUpdateDateTimeIsChecked");
 				}
 			}
@@ -368,13 +368,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadReplaceSpacesWithUnderscoresIsChecked;
+				return theDownloadReplaceSpacesWithUnderscoresIsChecked;
 			}
 			set
 			{
-				if (this.theDownloadReplaceSpacesWithUnderscoresIsChecked != value)
+				if (theDownloadReplaceSpacesWithUnderscoresIsChecked != value)
 				{
-					this.theDownloadReplaceSpacesWithUnderscoresIsChecked = value;
+					theDownloadReplaceSpacesWithUnderscoresIsChecked = value;
 					NotifyPropertyChanged("DownloadReplaceSpacesWithUnderscoresIsChecked");
 				}
 			}
@@ -384,13 +384,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked;
+				return theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked;
 			}
 			set
 			{
-				if (this.theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked != value)
+				if (theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked != value)
 				{
-					this.theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked = value;
+					theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked = value;
 					NotifyPropertyChanged("DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked");
 				}
 			}
@@ -400,11 +400,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackPackagePathFolderOrFileName;
+				return theUnpackPackagePathFolderOrFileName;
 			}
 			set
 			{
-				this.theUnpackPackagePathFolderOrFileName = value;
+				theUnpackPackagePathFolderOrFileName = value;
 				NotifyPropertyChanged("UnpackPackagePathFolderOrFileName");
 			}
 		}
@@ -413,11 +413,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackOutputFolderOption;
+				return theUnpackOutputFolderOption;
 			}
 			set
 			{
-				this.theUnpackOutputFolderOption = value;
+				theUnpackOutputFolderOption = value;
 				NotifyPropertyChanged("UnpackOutputFolderOption");
 			}
 		}
@@ -426,11 +426,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackOutputSamePath;
+				return theUnpackOutputSamePath;
 			}
 			set
 			{
-				this.theUnpackOutputSamePath = value;
+				theUnpackOutputSamePath = value;
 				NotifyPropertyChanged("UnpackOutputSamePath");
 			}
 		}
@@ -439,11 +439,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackOutputSubfolderName;
+				return theUnpackOutputSubfolderName;
 			}
 			set
 			{
-				this.theUnpackOutputSubfolderName = value;
+				theUnpackOutputSubfolderName = value;
 				NotifyPropertyChanged("UnpackOutputSubfolderName");
 			}
 		}
@@ -452,11 +452,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackOutputFullPath;
+				return theUnpackOutputFullPath;
 			}
 			set
 			{
-				this.theUnpackOutputFullPath = value;
+				theUnpackOutputFullPath = value;
 				NotifyPropertyChanged("UnpackOutputFullPath");
 			}
 		}
@@ -466,15 +466,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.theUnpackGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (theUnpackGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.theUnpackGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					theUnpackGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.theUnpackGameSetupSelectedIndex;
+				return theUnpackGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.theUnpackGameSetupSelectedIndex = value;
+				theUnpackGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("UnpackGameSetupSelectedIndex");
 			}
 		}
@@ -483,13 +483,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackSearchField;
+				return theUnpackSearchField;
 			}
 			set
 			{
-				if (this.theUnpackSearchField != value)
+				if (theUnpackSearchField != value)
 				{
-					this.theUnpackSearchField = value;
+					theUnpackSearchField = value;
 					NotifyPropertyChanged("UnpackSearchField");
 				}
 			}
@@ -499,13 +499,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackSearchText;
+				return theUnpackSearchText;
 			}
 			set
 			{
-				if (this.theUnpackSearchText != value)
+				if (theUnpackSearchText != value)
 				{
-					this.theUnpackSearchText = value;
+					theUnpackSearchText = value;
 					NotifyPropertyChanged("UnpackSearchText");
 				}
 			}
@@ -515,11 +515,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackFolderForEachPackageIsChecked;
+				return theUnpackFolderForEachPackageIsChecked;
 			}
 			set
 			{
-				this.theUnpackFolderForEachPackageIsChecked = value;
+				theUnpackFolderForEachPackageIsChecked = value;
 				NotifyPropertyChanged("UnpackFolderForEachPackageIsChecked");
 			}
 		}
@@ -528,11 +528,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackKeepFullPathIsChecked;
+				return theUnpackKeepFullPathIsChecked;
 			}
 			set
 			{
-				this.theUnpackKeepFullPathIsChecked = value;
+				theUnpackKeepFullPathIsChecked = value;
 				NotifyPropertyChanged("UnpackKeepFullPathIsChecked");
 			}
 		}
@@ -541,11 +541,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackLogFileIsChecked;
+				return theUnpackLogFileIsChecked;
 			}
 			set
 			{
-				this.theUnpackLogFileIsChecked = value;
+				theUnpackLogFileIsChecked = value;
 				NotifyPropertyChanged("UnpackLogFileIsChecked");
 			}
 		}
@@ -554,13 +554,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackMode;
+				return theUnpackMode;
 			}
 			set
 			{
-				if (this.theUnpackMode != value)
+				if (theUnpackMode != value)
 				{
-					this.theUnpackMode = value;
+					theUnpackMode = value;
 					NotifyPropertyChanged("UnpackMode");
 				}
 			}
@@ -571,11 +571,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUnpackerIsRunning;
+				return theUnpackerIsRunning;
 			}
 			set
 			{
-				this.theUnpackerIsRunning = value;
+				theUnpackerIsRunning = value;
 				NotifyPropertyChanged("UnpackerIsRunning");
 			}
 		}
@@ -584,11 +584,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewMdlPathFileName;
+				return thePreviewMdlPathFileName;
 			}
 			set
 			{
-				this.thePreviewMdlPathFileName = value;
+				thePreviewMdlPathFileName = value;
 				NotifyPropertyChanged("PreviewMdlPathFileName");
 			}
 		}
@@ -597,11 +597,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewOverrideMdlVersion;
+				return thePreviewOverrideMdlVersion;
 			}
 			set
 			{
-				this.thePreviewOverrideMdlVersion = value;
+				thePreviewOverrideMdlVersion = value;
 				NotifyPropertyChanged("PreviewOverrideMdlVersion");
 			}
 		}
@@ -611,15 +611,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.thePreviewGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (thePreviewGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.thePreviewGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					thePreviewGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.thePreviewGameSetupSelectedIndex;
+				return thePreviewGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.thePreviewGameSetupSelectedIndex = value;
+				thePreviewGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("PreviewGameSetupSelectedIndex");
 			}
 		}
@@ -629,11 +629,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewDataViewerIsRunning;
+				return thePreviewDataViewerIsRunning;
 			}
 			set
 			{
-				this.thePreviewDataViewerIsRunning = value;
+				thePreviewDataViewerIsRunning = value;
 				NotifyPropertyChanged("PreviewDataViewerIsRunning");
 			}
 		}
@@ -643,11 +643,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePreviewViewerIsRunning;
+				return thePreviewViewerIsRunning;
 			}
 			set
 			{
-				this.thePreviewViewerIsRunning = value;
+				thePreviewViewerIsRunning = value;
 				NotifyPropertyChanged("PreviewViewerIsRunning");
 			}
 		}
@@ -656,11 +656,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileMdlPathFileName;
+				return theDecompileMdlPathFileName;
 			}
 			set
 			{
-				this.theDecompileMdlPathFileName = value;
+				theDecompileMdlPathFileName = value;
 				NotifyPropertyChanged("DecompileMdlPathFileName");
 			}
 		}
@@ -679,11 +679,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileOutputFolderOption;
+				return theDecompileOutputFolderOption;
 			}
 			set
 			{
-				this.theDecompileOutputFolderOption = value;
+				theDecompileOutputFolderOption = value;
 				NotifyPropertyChanged("DecompileOutputFolderOption");
 			}
 		}
@@ -692,11 +692,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileOutputSubfolderName;
+				return theDecompileOutputSubfolderName;
 			}
 			set
 			{
-				this.theDecompileOutputSubfolderName = value;
+				theDecompileOutputSubfolderName = value;
 				NotifyPropertyChanged("DecompileOutputSubfolderName");
 			}
 		}
@@ -705,11 +705,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileOutputFullPath;
+				return theDecompileOutputFullPath;
 			}
 			set
 			{
-				this.theDecompileOutputFullPath = value;
+				theDecompileOutputFullPath = value;
 				NotifyPropertyChanged("DecompileOutputFullPath");
 			}
 		}
@@ -718,11 +718,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileQcFileIsChecked;
+				return theDecompileQcFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileQcFileIsChecked = value;
+				theDecompileQcFileIsChecked = value;
 				NotifyPropertyChanged("DecompileQcFileIsChecked");
 			}
 		}
@@ -731,11 +731,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileGroupIntoQciFilesIsChecked;
+				return theDecompileGroupIntoQciFilesIsChecked;
 			}
 			set
 			{
-				this.theDecompileGroupIntoQciFilesIsChecked = value;
+				theDecompileGroupIntoQciFilesIsChecked = value;
 				NotifyPropertyChanged("DecompileGroupIntoQciFilesIsChecked");
 			}
 		}
@@ -744,11 +744,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileQcSkinFamilyOnSingleLineIsChecked;
+				return theDecompileQcSkinFamilyOnSingleLineIsChecked;
 			}
 			set
 			{
-				this.theDecompileQcSkinFamilyOnSingleLineIsChecked = value;
+				theDecompileQcSkinFamilyOnSingleLineIsChecked = value;
 				NotifyPropertyChanged("DecompileQcSkinFamilyOnSingleLineIsChecked");
 			}
 		}
@@ -757,11 +757,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked;
+				return theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked;
 			}
 			set
 			{
-				this.theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked = value;
+				theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked = value;
 				NotifyPropertyChanged("DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked");
 			}
 		}
@@ -770,11 +770,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileQcIncludeDefineBoneLinesIsChecked;
+				return theDecompileQcIncludeDefineBoneLinesIsChecked;
 			}
 			set
 			{
-				this.theDecompileQcIncludeDefineBoneLinesIsChecked = value;
+				theDecompileQcIncludeDefineBoneLinesIsChecked = value;
 				NotifyPropertyChanged("DecompileQcIncludeDefineBoneLinesIsChecked");
 			}
 		}
@@ -783,11 +783,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileQcUseMixedCaseForKeywordsIsChecked;
+				return theDecompileQcUseMixedCaseForKeywordsIsChecked;
 			}
 			set
 			{
-				this.theDecompileQcUseMixedCaseForKeywordsIsChecked = value;
+				theDecompileQcUseMixedCaseForKeywordsIsChecked = value;
 				NotifyPropertyChanged("DecompileQcUseMixedCaseForKeywordsIsChecked");
 			}
 		}
@@ -796,11 +796,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileReferenceMeshSmdFileIsChecked;
+				return theDecompileReferenceMeshSmdFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileReferenceMeshSmdFileIsChecked = value;
+				theDecompileReferenceMeshSmdFileIsChecked = value;
 				NotifyPropertyChanged("DecompileReferenceMeshSmdFileIsChecked");
 			}
 		}
@@ -809,11 +809,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileBoneAnimationSmdFilesIsChecked;
+				return theDecompileBoneAnimationSmdFilesIsChecked;
 			}
 			set
 			{
-				this.theDecompileBoneAnimationSmdFilesIsChecked = value;
+				theDecompileBoneAnimationSmdFilesIsChecked = value;
 				NotifyPropertyChanged("DecompileBoneAnimationSmdFilesIsChecked");
 			}
 		}
@@ -822,11 +822,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileBoneAnimationPlaceInSubfolderIsChecked;
+				return theDecompileBoneAnimationPlaceInSubfolderIsChecked;
 			}
 			set
 			{
-				this.theDecompileBoneAnimationPlaceInSubfolderIsChecked = value;
+				theDecompileBoneAnimationPlaceInSubfolderIsChecked = value;
 				NotifyPropertyChanged("DecompileBoneAnimationPlaceInSubfolderIsChecked");
 			}
 		}
@@ -835,11 +835,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileTextureBmpFileIsChecked;
+				return theDecompileTextureBmpFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileTextureBmpFileIsChecked = value;
+				theDecompileTextureBmpFileIsChecked = value;
 				NotifyPropertyChanged("DecompileTextureBmpFileIsChecked");
 			}
 		}
@@ -848,11 +848,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileLodMeshSmdFilesIsChecked;
+				return theDecompileLodMeshSmdFilesIsChecked;
 			}
 			set
 			{
-				this.theDecompileLodMeshSmdFilesIsChecked = value;
+				theDecompileLodMeshSmdFilesIsChecked = value;
 				NotifyPropertyChanged("DecompileLodMeshSmdFilesIsChecked");
 			}
 		}
@@ -861,11 +861,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompilePhysicsMeshSmdFileIsChecked;
+				return theDecompilePhysicsMeshSmdFileIsChecked;
 			}
 			set
 			{
-				this.theDecompilePhysicsMeshSmdFileIsChecked = value;
+				theDecompilePhysicsMeshSmdFileIsChecked = value;
 				NotifyPropertyChanged("DecompilePhysicsMeshSmdFileIsChecked");
 			}
 		}
@@ -874,11 +874,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileVertexAnimationVtaFileIsChecked;
+				return theDecompileVertexAnimationVtaFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileVertexAnimationVtaFileIsChecked = value;
+				theDecompileVertexAnimationVtaFileIsChecked = value;
 				NotifyPropertyChanged("DecompileVertexAnimationVtaFileIsChecked");
 			}
 		}
@@ -887,11 +887,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileProceduralBonesVrdFileIsChecked;
+				return theDecompileProceduralBonesVrdFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileProceduralBonesVrdFileIsChecked = value;
+				theDecompileProceduralBonesVrdFileIsChecked = value;
 				NotifyPropertyChanged("DecompileProceduralBonesVrdFileIsChecked");
 			}
 		}
@@ -900,11 +900,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileFolderForEachModelIsChecked;
+				return theDecompileFolderForEachModelIsChecked;
 			}
 			set
 			{
-				this.theDecompileFolderForEachModelIsChecked = value;
+				theDecompileFolderForEachModelIsChecked = value;
 				NotifyPropertyChanged("DecompileFolderForEachModelIsChecked");
 			}
 		}
@@ -913,11 +913,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompilePrefixFileNamesWithModelNameIsChecked;
+				return theDecompilePrefixFileNamesWithModelNameIsChecked;
 			}
 			set
 			{
-				this.theDecompilePrefixFileNamesWithModelNameIsChecked = value;
+				theDecompilePrefixFileNamesWithModelNameIsChecked = value;
 				NotifyPropertyChanged("DecompilePrefixFileNamesWithModelNameIsChecked");
 			}
 		}
@@ -926,11 +926,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileStricterFormatIsChecked;
+				return theDecompileStricterFormatIsChecked;
 			}
 			set
 			{
-				this.theDecompileStricterFormatIsChecked = value;
+				theDecompileStricterFormatIsChecked = value;
 				NotifyPropertyChanged("DecompileStricterFormatIsChecked");
 			}
 		}
@@ -939,11 +939,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileLogFileIsChecked;
+				return theDecompileLogFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileLogFileIsChecked = value;
+				theDecompileLogFileIsChecked = value;
 				NotifyPropertyChanged("DecompileLogFileIsChecked");
 			}
 		}
@@ -952,11 +952,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileDebugInfoFilesIsChecked;
+				return theDecompileDebugInfoFilesIsChecked;
 			}
 			set
 			{
-				this.theDecompileDebugInfoFilesIsChecked = value;
+				theDecompileDebugInfoFilesIsChecked = value;
 				NotifyPropertyChanged("DecompileDebugInfoFilesIsChecked");
 			}
 		}
@@ -965,11 +965,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileDeclareSequenceQciFileIsChecked;
+				return theDecompileDeclareSequenceQciFileIsChecked;
 			}
 			set
 			{
-				this.theDecompileDeclareSequenceQciFileIsChecked = value;
+				theDecompileDeclareSequenceQciFileIsChecked = value;
 				NotifyPropertyChanged("DecompileDeclareSequenceQciFileIsChecked");
 			}
 		}
@@ -978,11 +978,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileRemovePathFromSmdMaterialFileNamesIsChecked;
+				return theDecompileRemovePathFromSmdMaterialFileNamesIsChecked;
 			}
 			set
 			{
-				this.theDecompileRemovePathFromSmdMaterialFileNamesIsChecked = value;
+				theDecompileRemovePathFromSmdMaterialFileNamesIsChecked = value;
 				NotifyPropertyChanged("DecompileRemovePathFromSmdMaterialFileNamesIsChecked");
 			}
 		}
@@ -991,11 +991,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileUseNonValveUvConversionIsChecked;
+				return theDecompileUseNonValveUvConversionIsChecked;
 			}
 			set
 			{
-				this.theDecompileUseNonValveUvConversionIsChecked = value;
+				theDecompileUseNonValveUvConversionIsChecked = value;
 				NotifyPropertyChanged("DecompileUseNonValveUvConversionIsChecked");
 			}
 		}
@@ -1004,11 +1004,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileOverrideMdlVersion;
+				return theDecompileOverrideMdlVersion;
 			}
 			set
 			{
-				this.theDecompileOverrideMdlVersion = value;
+				theDecompileOverrideMdlVersion = value;
 				NotifyPropertyChanged("DecompileOverrideMdlVersion");
 			}
 		}
@@ -1017,11 +1017,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompileMode;
+				return theDecompileMode;
 			}
 			set
 			{
-				this.theDecompileMode = value;
+				theDecompileMode = value;
 				NotifyPropertyChanged("DecompileMode");
 			}
 		}
@@ -1031,11 +1031,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDecompilerIsRunning;
+				return theDecompilerIsRunning;
 			}
 			set
 			{
-				this.theDecompilerIsRunning = value;
+				theDecompilerIsRunning = value;
 				NotifyPropertyChanged("DecompilerIsRunning");
 			}
 		}
@@ -1044,11 +1044,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileQcPathFileName;
+				return theCompileQcPathFileName;
 			}
 			set
 			{
-				this.theCompileQcPathFileName = value;
+				theCompileQcPathFileName = value;
 				NotifyPropertyChanged("CompileQcPathFileName");
 			}
 		}
@@ -1077,11 +1077,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOutputFolderOption;
+				return theCompileOutputFolderOption;
 			}
 			set
 			{
-				this.theCompileOutputFolderOption = value;
+				theCompileOutputFolderOption = value;
 				NotifyPropertyChanged("CompileOutputFolderOption");
 			}
 		}
@@ -1090,11 +1090,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOutputSubfolderName;
+				return theCompileOutputSubfolderName;
 			}
 			set
 			{
-				this.theCompileOutputSubfolderName = value;
+				theCompileOutputSubfolderName = value;
 				NotifyPropertyChanged("CompileOutputSubfolderName");
 			}
 		}
@@ -1103,11 +1103,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOutputFullPath;
+				return theCompileOutputFullPath;
 			}
 			set
 			{
-				this.theCompileOutputFullPath = value;
+				theCompileOutputFullPath = value;
 				NotifyPropertyChanged("CompileOutputFullPath");
 			}
 		}
@@ -1127,15 +1127,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.theCompileGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (theCompileGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.theCompileGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					theCompileGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.theCompileGameSetupSelectedIndex;
+				return theCompileGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.theCompileGameSetupSelectedIndex = value;
+				theCompileGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("CompileGameSetupSelectedIndex");
 			}
 		}
@@ -1144,11 +1144,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileGoldSourceLogFileIsChecked;
+				return theCompileGoldSourceLogFileIsChecked;
 			}
 			set
 			{
-				this.theCompileGoldSourceLogFileIsChecked = value;
+				theCompileGoldSourceLogFileIsChecked = value;
 				NotifyPropertyChanged("CompileGoldSourceLogFileIsChecked");
 			}
 		}
@@ -1157,11 +1157,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileSourceLogFileIsChecked;
+				return theCompileSourceLogFileIsChecked;
 			}
 			set
 			{
-				this.theCompileSourceLogFileIsChecked = value;
+				theCompileSourceLogFileIsChecked = value;
 				NotifyPropertyChanged("CompileSourceLogFileIsChecked");
 			}
 		}
@@ -1170,11 +1170,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionDefineBonesIsChecked;
+				return theCompileOptionDefineBonesIsChecked;
 			}
 			set
 			{
-				this.theCompileOptionDefineBonesIsChecked = value;
+				theCompileOptionDefineBonesIsChecked = value;
 				NotifyPropertyChanged("CompileOptionDefineBonesIsChecked");
 			}
 		}
@@ -1183,11 +1183,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionDefineBonesCreateFileIsChecked;
+				return theCompileOptionDefineBonesCreateFileIsChecked;
 			}
 			set
 			{
-				this.theCompileOptionDefineBonesCreateFileIsChecked = value;
+				theCompileOptionDefineBonesCreateFileIsChecked = value;
 				NotifyPropertyChanged("CompileOptionDefineBonesCreateFileIsChecked");
 			}
 		}
@@ -1196,11 +1196,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionDefineBonesQciFileName;
+				return theCompileOptionDefineBonesQciFileName;
 			}
 			set
 			{
-				this.theCompileOptionDefineBonesQciFileName = value;
+				theCompileOptionDefineBonesQciFileName = value;
 				NotifyPropertyChanged("CompileOptionDefineBonesQciFileName");
 			}
 		}
@@ -1209,11 +1209,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionDefineBonesOverwriteQciFileIsChecked;
+				return theCompileOptionDefineBonesOverwriteQciFileIsChecked;
 			}
 			set
 			{
-				this.theCompileOptionDefineBonesOverwriteQciFileIsChecked = value;
+				theCompileOptionDefineBonesOverwriteQciFileIsChecked = value;
 				NotifyPropertyChanged("CompileOptionDefineBonesOverwriteQciFileIsChecked");
 			}
 		}
@@ -1222,11 +1222,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionDefineBonesModifyQcFileIsChecked;
+				return theCompileOptionDefineBonesModifyQcFileIsChecked;
 			}
 			set
 			{
-				this.theCompileOptionDefineBonesModifyQcFileIsChecked = value;
+				theCompileOptionDefineBonesModifyQcFileIsChecked = value;
 				NotifyPropertyChanged("CompileOptionDefineBonesModifyQcFileIsChecked");
 			}
 		}
@@ -1235,11 +1235,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionNoP4IsChecked;
+				return theCompileOptionNoP4IsChecked;
 			}
 			set
 			{
-				this.theCompileOptionNoP4IsChecked = value;
+				theCompileOptionNoP4IsChecked = value;
 				NotifyPropertyChanged("CompileOptionNoP4IsChecked");
 			}
 		}
@@ -1248,11 +1248,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionVerboseIsChecked;
+				return theCompileOptionVerboseIsChecked;
 			}
 			set
 			{
-				this.theCompileOptionVerboseIsChecked = value;
+				theCompileOptionVerboseIsChecked = value;
 				NotifyPropertyChanged("CompileOptionVerboseIsChecked");
 			}
 		}
@@ -1262,11 +1262,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileOptionsText;
+				return theCompileOptionsText;
 			}
 			set
 			{
-				this.theCompileOptionsText = value;
+				theCompileOptionsText = value;
 				NotifyPropertyChanged("CompileOptionsText");
 			}
 		}
@@ -1275,11 +1275,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompileMode;
+				return theCompileMode;
 			}
 			set
 			{
-				this.theCompileMode = value;
+				theCompileMode = value;
 				NotifyPropertyChanged("CompileMode");
 			}
 		}
@@ -1289,11 +1289,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompilerIsRunning;
+				return theCompilerIsRunning;
 			}
 			set
 			{
-				this.theCompilerIsRunning = value;
+				theCompilerIsRunning = value;
 				NotifyPropertyChanged("CompilerIsRunning");
 			}
 		}
@@ -1302,11 +1302,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePatchMdlPathFileName;
+				return thePatchMdlPathFileName;
 			}
 			set
 			{
-				this.thePatchMdlPathFileName = value;
+				thePatchMdlPathFileName = value;
 				NotifyPropertyChanged("PatchMdlPathFileName");
 			}
 		}
@@ -1315,11 +1315,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePatchMode;
+				return thePatchMode;
 			}
 			set
 			{
-				this.thePatchMode = value;
+				thePatchMode = value;
 				NotifyPropertyChanged("PatchMode");
 			}
 		}
@@ -1328,11 +1328,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewMdlPathFileName;
+				return theViewMdlPathFileName;
 			}
 			set
 			{
-				this.theViewMdlPathFileName = value;
+				theViewMdlPathFileName = value;
 				NotifyPropertyChanged("ViewMdlPathFileName");
 			}
 		}
@@ -1341,11 +1341,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewOverrideMdlVersion;
+				return theViewOverrideMdlVersion;
 			}
 			set
 			{
-				this.theViewOverrideMdlVersion = value;
+				theViewOverrideMdlVersion = value;
 				NotifyPropertyChanged("ViewOverrideMdlVersion");
 			}
 		}
@@ -1355,15 +1355,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.theViewGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (theViewGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.theViewGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					theViewGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.theViewGameSetupSelectedIndex;
+				return theViewGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.theViewGameSetupSelectedIndex = value;
+				theViewGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("ViewGameSetupSelectedIndex");
 			}
 		}
@@ -1373,11 +1373,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewDataViewerIsRunning;
+				return theViewDataViewerIsRunning;
 			}
 			set
 			{
-				this.theViewDataViewerIsRunning = value;
+				theViewDataViewerIsRunning = value;
 				NotifyPropertyChanged("ViewDataViewerIsRunning");
 			}
 		}
@@ -1387,11 +1387,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewViewerIsRunning;
+				return theViewViewerIsRunning;
 			}
 			set
 			{
-				this.theViewViewerIsRunning = value;
+				theViewViewerIsRunning = value;
 				NotifyPropertyChanged("ViewerIsRunning");
 			}
 		}
@@ -1400,11 +1400,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackMode;
+				return thePackMode;
 			}
 			set
 			{
-				this.thePackMode = value;
+				thePackMode = value;
 				NotifyPropertyChanged("PackMode");
 			}
 		}
@@ -1413,11 +1413,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackInputPathFileName;
+				return thePackInputPathFileName;
 			}
 			set
 			{
-				this.thePackInputPathFileName = value;
+				thePackInputPathFileName = value;
 				NotifyPropertyChanged("PackInputPath");
 			}
 		}
@@ -1426,11 +1426,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackOutputFolderOption;
+				return thePackOutputFolderOption;
 			}
 			set
 			{
-				this.thePackOutputFolderOption = value;
+				thePackOutputFolderOption = value;
 				NotifyPropertyChanged("PackOutputFolderOption");
 			}
 		}
@@ -1439,11 +1439,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackOutputParentPath;
+				return thePackOutputParentPath;
 			}
 			set
 			{
-				this.thePackOutputParentPath = value;
+				thePackOutputParentPath = value;
 				NotifyPropertyChanged("PackOutputParentPath");
 			}
 		}
@@ -1452,11 +1452,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackOutputPath;
+				return thePackOutputPath;
 			}
 			set
 			{
-				this.thePackOutputPath = value;
+				thePackOutputPath = value;
 				NotifyPropertyChanged("PackOutputPath");
 			}
 		}
@@ -1466,15 +1466,15 @@ namespace Crowbar
 			get
 			{
 				//NOTE: Must change in the Get() because theGameSetups might not have been read-in yet (i.e. GameSetups appear *after* this setting in XML file).
-				if (this.thePackGameSetupSelectedIndex >= this.theGameSetups.Count)
+				if (thePackGameSetupSelectedIndex >= theGameSetups.Count)
 				{
-					this.thePackGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
+					thePackGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.GameSetups.Count - 1;
 				}
-				return this.thePackGameSetupSelectedIndex;
+				return thePackGameSetupSelectedIndex;
 			}
 			set
 			{
-				this.thePackGameSetupSelectedIndex = value;
+				thePackGameSetupSelectedIndex = value;
 				NotifyPropertyChanged("PackGameSetupSelectedIndex");
 			}
 		}
@@ -1483,11 +1483,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackLogFileIsChecked;
+				return thePackLogFileIsChecked;
 			}
 			set
 			{
-				this.thePackLogFileIsChecked = value;
+				thePackLogFileIsChecked = value;
 				NotifyPropertyChanged("PackLogFileIsChecked");
 			}
 		}
@@ -1496,11 +1496,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackOptionMultiFileVpkIsChecked;
+				return thePackOptionMultiFileVpkIsChecked;
 			}
 			set
 			{
-				this.thePackOptionMultiFileVpkIsChecked = value;
+				thePackOptionMultiFileVpkIsChecked = value;
 				NotifyPropertyChanged("PackOptionMultiFileVpkIsChecked");
 			}
 		}
@@ -1509,11 +1509,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackGmaTitle;
+				return thePackGmaTitle;
 			}
 			set
 			{
-				this.thePackGmaTitle = value;
+				thePackGmaTitle = value;
 				NotifyPropertyChanged("PackGmaTitle");
 			}
 		}
@@ -1522,11 +1522,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackGmaItemTags;
+				return thePackGmaItemTags;
 			}
 			set
 			{
-				this.thePackGmaItemTags = value;
+				thePackGmaItemTags = value;
 				NotifyPropertyChanged("PackGmaItemTags");
 			}
 		}
@@ -1536,11 +1536,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackOptionsText;
+				return thePackOptionsText;
 			}
 			set
 			{
-				this.thePackOptionsText = value;
+				thePackOptionsText = value;
 				NotifyPropertyChanged("PackOptionsText");
 			}
 		}
@@ -1550,11 +1550,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackerIsRunning;
+				return thePackerIsRunning;
 			}
 			set
 			{
-				this.thePackerIsRunning = value;
+				thePackerIsRunning = value;
 				NotifyPropertyChanged("PackerIsRunning");
 			}
 		}
@@ -1563,13 +1563,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePublishGameSelectedIndex;
+				return thePublishGameSelectedIndex;
 			}
 			set
 			{
-				if (this.thePublishGameSelectedIndex != value)
+				if (thePublishGameSelectedIndex != value)
 				{
-					this.thePublishGameSelectedIndex = value;
+					thePublishGameSelectedIndex = value;
 					NotifyPropertyChanged("PublishGameSelectedIndex");
 				}
 			}
@@ -1579,13 +1579,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePublishSteamAppUserInfos;
+				return thePublishSteamAppUserInfos;
 			}
 			set
 			{
-				if (this.thePublishSteamAppUserInfos != value)
+				if (thePublishSteamAppUserInfos != value)
 				{
-					this.thePublishSteamAppUserInfos = value;
+					thePublishSteamAppUserInfos = value;
 					NotifyPropertyChanged("PublishSteamAppUserInfos");
 				}
 			}
@@ -1595,13 +1595,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePublishSearchField;
+				return thePublishSearchField;
 			}
 			set
 			{
-				if (this.thePublishSearchField != value)
+				if (thePublishSearchField != value)
 				{
-					this.thePublishSearchField = value;
+					thePublishSearchField = value;
 					NotifyPropertyChanged("PublishSearchField");
 				}
 			}
@@ -1611,13 +1611,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePublishSearchText;
+				return thePublishSearchText;
 			}
 			set
 			{
-				if (this.thePublishSearchText != value)
+				if (thePublishSearchText != value)
 				{
-					this.thePublishSearchText = value;
+					thePublishSearchText = value;
 					NotifyPropertyChanged("PublishSearchText");
 				}
 			}
@@ -1640,13 +1640,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenVpkFileIsChecked;
+				return theOptionsAutoOpenVpkFileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenVpkFileIsChecked != value)
+				if (theOptionsAutoOpenVpkFileIsChecked != value)
 				{
-					this.theOptionsAutoOpenVpkFileIsChecked = value;
+					theOptionsAutoOpenVpkFileIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenVpkFileIsChecked");
 				}
 			}
@@ -1656,11 +1656,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenVpkFileOption;
+				return theOptionsAutoOpenVpkFileOption;
 			}
 			set
 			{
-				this.theOptionsAutoOpenVpkFileOption = value;
+				theOptionsAutoOpenVpkFileOption = value;
 				NotifyPropertyChanged("OptionsAutoOpenVpkFileOption");
 			}
 		}
@@ -1669,13 +1669,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenGmaFileIsChecked;
+				return theOptionsAutoOpenGmaFileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenGmaFileIsChecked != value)
+				if (theOptionsAutoOpenGmaFileIsChecked != value)
 				{
-					this.theOptionsAutoOpenGmaFileIsChecked = value;
+					theOptionsAutoOpenGmaFileIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenGmaFileIsChecked");
 				}
 			}
@@ -1685,11 +1685,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenGmaFileOption;
+				return theOptionsAutoOpenGmaFileOption;
 			}
 			set
 			{
-				this.theOptionsAutoOpenGmaFileOption = value;
+				theOptionsAutoOpenGmaFileOption = value;
 				NotifyPropertyChanged("OptionsAutoOpenGmaFileOption");
 			}
 		}
@@ -1698,13 +1698,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenFpxFileIsChecked;
+				return theOptionsAutoOpenFpxFileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenFpxFileIsChecked != value)
+				if (theOptionsAutoOpenFpxFileIsChecked != value)
 				{
-					this.theOptionsAutoOpenFpxFileIsChecked = value;
+					theOptionsAutoOpenFpxFileIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenFpxFileIsChecked");
 				}
 			}
@@ -1714,13 +1714,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenMdlFileIsChecked;
+				return theOptionsAutoOpenMdlFileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenMdlFileIsChecked != value)
+				if (theOptionsAutoOpenMdlFileIsChecked != value)
 				{
-					this.theOptionsAutoOpenMdlFileIsChecked = value;
+					theOptionsAutoOpenMdlFileIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenMdlFileIsChecked");
 				}
 			}
@@ -1730,13 +1730,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenMdlFileForPreviewIsChecked;
+				return theOptionsAutoOpenMdlFileForPreviewIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenMdlFileForPreviewIsChecked != value)
+				if (theOptionsAutoOpenMdlFileForPreviewIsChecked != value)
 				{
-					this.theOptionsAutoOpenMdlFileForPreviewIsChecked = value;
+					theOptionsAutoOpenMdlFileForPreviewIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenMdlFileForPreviewIsChecked");
 				}
 			}
@@ -1746,13 +1746,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenMdlFileForDecompileIsChecked;
+				return theOptionsAutoOpenMdlFileForDecompileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenMdlFileForDecompileIsChecked != value)
+				if (theOptionsAutoOpenMdlFileForDecompileIsChecked != value)
 				{
-					this.theOptionsAutoOpenMdlFileForDecompileIsChecked = value;
+					theOptionsAutoOpenMdlFileForDecompileIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenMdlFileForDecompileIsChecked");
 				}
 			}
@@ -1762,13 +1762,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenMdlFileForViewIsChecked;
+				return theOptionsAutoOpenMdlFileForViewIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsAutoOpenMdlFileForViewIsChecked != value)
+				if (theOptionsAutoOpenMdlFileForViewIsChecked != value)
 				{
-					this.theOptionsAutoOpenMdlFileForViewIsChecked = value;
+					theOptionsAutoOpenMdlFileForViewIsChecked = value;
 					NotifyPropertyChanged("OptionsAutoOpenMdlFileForViewIsChecked");
 				}
 			}
@@ -1778,11 +1778,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenMdlFileOption;
+				return theOptionsAutoOpenMdlFileOption;
 			}
 			set
 			{
-				this.theOptionsAutoOpenMdlFileOption = value;
+				theOptionsAutoOpenMdlFileOption = value;
 				NotifyPropertyChanged("OptionsAutoOpenMdlFileOption");
 			}
 		}
@@ -1791,11 +1791,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenQcFileIsChecked;
+				return theOptionsAutoOpenQcFileIsChecked;
 			}
 			set
 			{
-				this.theOptionsAutoOpenQcFileIsChecked = value;
+				theOptionsAutoOpenQcFileIsChecked = value;
 				NotifyPropertyChanged("OptionsAutoOpenQcFileIsChecked");
 			}
 		}
@@ -1804,11 +1804,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsAutoOpenFolderOption;
+				return theOptionsAutoOpenFolderOption;
 			}
 			set
 			{
-				this.theOptionsAutoOpenFolderOption = value;
+				theOptionsAutoOpenFolderOption = value;
 				NotifyPropertyChanged("OptionsAutoOpenFolderOption");
 			}
 		}
@@ -1817,11 +1817,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropVpkFileOption;
+				return theOptionsDragAndDropVpkFileOption;
 			}
 			set
 			{
-				this.theOptionsDragAndDropVpkFileOption = value;
+				theOptionsDragAndDropVpkFileOption = value;
 				NotifyPropertyChanged("OptionsDragAndDropVpkFileOption");
 			}
 		}
@@ -1830,11 +1830,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropGmaFileOption;
+				return theOptionsDragAndDropGmaFileOption;
 			}
 			set
 			{
-				this.theOptionsDragAndDropGmaFileOption = value;
+				theOptionsDragAndDropGmaFileOption = value;
 				NotifyPropertyChanged("OptionsDragAndDropGmaFileOption");
 			}
 		}
@@ -1843,13 +1843,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropMdlFileForPreviewIsChecked;
+				return theOptionsDragAndDropMdlFileForPreviewIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsDragAndDropMdlFileForPreviewIsChecked != value)
+				if (theOptionsDragAndDropMdlFileForPreviewIsChecked != value)
 				{
-					this.theOptionsDragAndDropMdlFileForPreviewIsChecked = value;
+					theOptionsDragAndDropMdlFileForPreviewIsChecked = value;
 					NotifyPropertyChanged("OptionsDragAndDropMdlFileForPreviewIsChecked");
 				}
 			}
@@ -1859,13 +1859,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropMdlFileForDecompileIsChecked;
+				return theOptionsDragAndDropMdlFileForDecompileIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsDragAndDropMdlFileForDecompileIsChecked != value)
+				if (theOptionsDragAndDropMdlFileForDecompileIsChecked != value)
 				{
-					this.theOptionsDragAndDropMdlFileForDecompileIsChecked = value;
+					theOptionsDragAndDropMdlFileForDecompileIsChecked = value;
 					NotifyPropertyChanged("OptionsDragAndDropMdlFileForDecompileIsChecked");
 				}
 			}
@@ -1875,13 +1875,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropMdlFileForViewIsChecked;
+				return theOptionsDragAndDropMdlFileForViewIsChecked;
 			}
 			set
 			{
-				if (this.theOptionsDragAndDropMdlFileForViewIsChecked != value)
+				if (theOptionsDragAndDropMdlFileForViewIsChecked != value)
 				{
-					this.theOptionsDragAndDropMdlFileForViewIsChecked = value;
+					theOptionsDragAndDropMdlFileForViewIsChecked = value;
 					NotifyPropertyChanged("OptionsDragAndDropMdlFileForViewIsChecked");
 				}
 			}
@@ -1891,11 +1891,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropMdlFileOption;
+				return theOptionsDragAndDropMdlFileOption;
 			}
 			set
 			{
-				this.theOptionsDragAndDropMdlFileOption = value;
+				theOptionsDragAndDropMdlFileOption = value;
 				NotifyPropertyChanged("OptionsDragAndDropMdlFileOption");
 			}
 		}
@@ -1904,11 +1904,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDragAndDropFolderOption;
+				return theOptionsDragAndDropFolderOption;
 			}
 			set
 			{
-				this.theOptionsDragAndDropFolderOption = value;
+				theOptionsDragAndDropFolderOption = value;
 				NotifyPropertyChanged("OptionsDragAndDropFolderOption");
 			}
 		}
@@ -1917,11 +1917,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsContextMenuIntegrateMenuItemsIsChecked;
+				return theOptionsContextMenuIntegrateMenuItemsIsChecked;
 			}
 			set
 			{
-				this.theOptionsContextMenuIntegrateMenuItemsIsChecked = value;
+				theOptionsContextMenuIntegrateMenuItemsIsChecked = value;
 				NotifyPropertyChanged("OptionsContextMenuIntegrateMenuItemsIsChecked");
 			}
 		}
@@ -1930,11 +1930,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsContextMenuIntegrateSubMenuIsChecked;
+				return theOptionsContextMenuIntegrateSubMenuIsChecked;
 			}
 			set
 			{
-				this.theOptionsContextMenuIntegrateSubMenuIsChecked = value;
+				theOptionsContextMenuIntegrateSubMenuIsChecked = value;
 				NotifyPropertyChanged("OptionsContextMenuIntegrateSubMenuIsChecked");
 			}
 		}
@@ -1943,11 +1943,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsOpenWithCrowbarIsChecked;
+				return theOptionsOpenWithCrowbarIsChecked;
 			}
 			set
 			{
-				this.theOptionsOpenWithCrowbarIsChecked = value;
+				theOptionsOpenWithCrowbarIsChecked = value;
 				NotifyPropertyChanged("OptionsOpenWithCrowbarIsChecked");
 			}
 		}
@@ -1956,11 +1956,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsViewMdlFileIsChecked;
+				return theOptionsViewMdlFileIsChecked;
 			}
 			set
 			{
-				this.theOptionsViewMdlFileIsChecked = value;
+				theOptionsViewMdlFileIsChecked = value;
 				NotifyPropertyChanged("OptionsViewMdlFileIsChecked");
 			}
 		}
@@ -1969,11 +1969,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDecompileMdlFileIsChecked;
+				return theOptionsDecompileMdlFileIsChecked;
 			}
 			set
 			{
-				this.theOptionsDecompileMdlFileIsChecked = value;
+				theOptionsDecompileMdlFileIsChecked = value;
 				NotifyPropertyChanged("OptionsDecompileMdlFileIsChecked");
 			}
 		}
@@ -1982,11 +1982,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDecompileFolderIsChecked;
+				return theOptionsDecompileFolderIsChecked;
 			}
 			set
 			{
-				this.theOptionsDecompileFolderIsChecked = value;
+				theOptionsDecompileFolderIsChecked = value;
 				NotifyPropertyChanged("OptionsDecompileFolderIsChecked");
 			}
 		}
@@ -1995,11 +1995,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsDecompileFolderAndSubfoldersIsChecked;
+				return theOptionsDecompileFolderAndSubfoldersIsChecked;
 			}
 			set
 			{
-				this.theOptionsDecompileFolderAndSubfoldersIsChecked = value;
+				theOptionsDecompileFolderAndSubfoldersIsChecked = value;
 				NotifyPropertyChanged("OptionsDecompileFolderAndSubfoldersIsChecked");
 			}
 		}
@@ -2008,11 +2008,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsCompileQcFileIsChecked;
+				return theOptionsCompileQcFileIsChecked;
 			}
 			set
 			{
-				this.theOptionsCompileQcFileIsChecked = value;
+				theOptionsCompileQcFileIsChecked = value;
 				NotifyPropertyChanged("OptionsCompileQcFileIsChecked");
 			}
 		}
@@ -2021,11 +2021,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsCompileFolderIsChecked;
+				return theOptionsCompileFolderIsChecked;
 			}
 			set
 			{
-				this.theOptionsCompileFolderIsChecked = value;
+				theOptionsCompileFolderIsChecked = value;
 				NotifyPropertyChanged("OptionsCompileFolderIsChecked");
 			}
 		}
@@ -2034,11 +2034,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOptionsCompileFolderAndSubfoldersIsChecked;
+				return theOptionsCompileFolderAndSubfoldersIsChecked;
 			}
 			set
 			{
-				this.theOptionsCompileFolderAndSubfoldersIsChecked = value;
+				theOptionsCompileFolderAndSubfoldersIsChecked = value;
 				NotifyPropertyChanged("OptionsCompileFolderAndSubfoldersIsChecked");
 			}
 		}
@@ -2057,11 +2057,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUpdateDownloadPath;
+				return theUpdateDownloadPath;
 			}
 			set
 			{
-				this.theUpdateDownloadPath = value;
+				theUpdateDownloadPath = value;
 				NotifyPropertyChanged("UpdateDownloadPath");
 			}
 		}
@@ -2070,11 +2070,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUpdateUpdateToNewPathIsChecked;
+				return theUpdateUpdateToNewPathIsChecked;
 			}
 			set
 			{
-				this.theUpdateUpdateToNewPathIsChecked = value;
+				theUpdateUpdateToNewPathIsChecked = value;
 				NotifyPropertyChanged("UpdateUpdateToNewPathIsChecked");
 			}
 		}
@@ -2083,11 +2083,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUpdateUpdateDownloadPath;
+				return theUpdateUpdateDownloadPath;
 			}
 			set
 			{
-				this.theUpdateUpdateDownloadPath = value;
+				theUpdateUpdateDownloadPath = value;
 				NotifyPropertyChanged("UpdateUpdateDownloadPath");
 			}
 		}
@@ -2096,11 +2096,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theUpdateCopySettingsIsChecked;
+				return theUpdateCopySettingsIsChecked;
 			}
 			set
 			{
-				this.theUpdateCopySettingsIsChecked = value;
+				theUpdateCopySettingsIsChecked = value;
 				NotifyPropertyChanged("UpdateCopySettingsIsChecked");
 			}
 		}
@@ -2116,145 +2116,145 @@ namespace Crowbar
 		public void SetDefaultDownloadOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.DownloadUseItemIdIsChecked = true;
-			this.DownloadPrependItemTitleIsChecked = true;
-			this.DownloadAppendItemUpdateDateTimeIsChecked = true;
-			this.DownloadReplaceSpacesWithUnderscoresIsChecked = true;
-			this.DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked = true;
+			DownloadUseItemIdIsChecked = true;
+			DownloadPrependItemTitleIsChecked = true;
+			DownloadAppendItemUpdateDateTimeIsChecked = true;
+			DownloadReplaceSpacesWithUnderscoresIsChecked = true;
+			DownloadConvertToExpectedFileOrFolderCheckBoxIsChecked = true;
 		}
 
 		public void SetDefaultUnpackOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.UnpackOutputSubfolderName = "unpacked " + Version.Parse(Application.ProductVersion).ToString(2);
+			UnpackOutputSubfolderName = "unpacked " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultUnpackOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.UnpackFolderForEachPackageIsChecked = false;
-			this.UnpackKeepFullPathIsChecked = false;
-			this.UnpackLogFileIsChecked = false;
+			UnpackFolderForEachPackageIsChecked = false;
+			UnpackKeepFullPathIsChecked = false;
+			UnpackLogFileIsChecked = false;
 		}
 
 		public void SetDefaultDecompileOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.DecompileOutputSubfolderName = "decompiled " + Version.Parse(Application.ProductVersion).ToString(2);
+			DecompileOutputSubfolderName = "decompiled " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultDecompileReCreateFilesOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.DecompileQcFileIsChecked = true;
-			this.DecompileGroupIntoQciFilesIsChecked = false;
-			this.DecompileQcSkinFamilyOnSingleLineIsChecked = true;
-			this.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked = true;
-			this.DecompileQcIncludeDefineBoneLinesIsChecked = true;
-			this.DecompileQcUseMixedCaseForKeywordsIsChecked = false;
+			DecompileQcFileIsChecked = true;
+			DecompileGroupIntoQciFilesIsChecked = false;
+			DecompileQcSkinFamilyOnSingleLineIsChecked = true;
+			DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked = true;
+			DecompileQcIncludeDefineBoneLinesIsChecked = true;
+			DecompileQcUseMixedCaseForKeywordsIsChecked = false;
 
-			this.DecompileReferenceMeshSmdFileIsChecked = true;
-			this.DecompileRemovePathFromSmdMaterialFileNamesIsChecked = true;
-			this.DecompileUseNonValveUvConversionIsChecked = false;
+			DecompileReferenceMeshSmdFileIsChecked = true;
+			DecompileRemovePathFromSmdMaterialFileNamesIsChecked = true;
+			DecompileUseNonValveUvConversionIsChecked = false;
 
-			this.DecompileBoneAnimationSmdFilesIsChecked = true;
-			this.DecompileBoneAnimationPlaceInSubfolderIsChecked = true;
+			DecompileBoneAnimationSmdFilesIsChecked = true;
+			DecompileBoneAnimationPlaceInSubfolderIsChecked = true;
 
-			this.DecompileTextureBmpFilesIsChecked = true;
-			this.DecompileLodMeshSmdFilesIsChecked = true;
-			this.DecompilePhysicsMeshSmdFileIsChecked = true;
-			this.DecompileVertexAnimationVtaFileIsChecked = true;
-			this.DecompileProceduralBonesVrdFileIsChecked = true;
+			DecompileTextureBmpFilesIsChecked = true;
+			DecompileLodMeshSmdFilesIsChecked = true;
+			DecompilePhysicsMeshSmdFileIsChecked = true;
+			DecompileVertexAnimationVtaFileIsChecked = true;
+			DecompileProceduralBonesVrdFileIsChecked = true;
 		}
 
 		public void SetDefaultCompileOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.CompileOutputSubfolderName = "compiled " + Version.Parse(Application.ProductVersion).ToString(2);
+			CompileOutputSubfolderName = "compiled " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultCompileOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.CompileGoldSourceLogFileIsChecked = false;
-			this.CompileSourceLogFileIsChecked = false;
+			CompileGoldSourceLogFileIsChecked = false;
+			CompileSourceLogFileIsChecked = false;
 
-			this.CompileOptionNoP4IsChecked = true;
-			this.CompileOptionVerboseIsChecked = true;
+			CompileOptionNoP4IsChecked = true;
+			CompileOptionVerboseIsChecked = true;
 
-			this.CompileOptionDefineBonesIsChecked = false;
-			this.CompileOptionDefineBonesCreateFileIsChecked = false;
-			this.CompileOptionDefineBonesQciFileName = "DefineBones";
-			this.CompileOptionDefineBonesOverwriteQciFileIsChecked = false;
-			this.CompileOptionDefineBonesModifyQcFileIsChecked = false;
+			CompileOptionDefineBonesIsChecked = false;
+			CompileOptionDefineBonesCreateFileIsChecked = false;
+			CompileOptionDefineBonesQciFileName = "DefineBones";
+			CompileOptionDefineBonesOverwriteQciFileIsChecked = false;
+			CompileOptionDefineBonesModifyQcFileIsChecked = false;
 
-			this.CompileOptionsText = "";
+			CompileOptionsText = "";
 		}
 
 		public void SetDefaultPackOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.PackLogFileIsChecked = false;
+			PackLogFileIsChecked = false;
 
-			this.PackOptionMultiFileVpkIsChecked = false;
+			PackOptionMultiFileVpkIsChecked = false;
 
-			this.PackGmaTitle = "";
-			this.PackGmaItemTags = new BindingListEx<string>();
+			PackGmaTitle = "";
+			PackGmaItemTags = new BindingListEx<string>();
 
-			this.PackOptionsText = "";
+			PackOptionsText = "";
 		}
 
 		public void SetDefaultOptionsAutoOpenOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.OptionsAutoOpenVpkFileIsChecked = true;
-			this.OptionsAutoOpenVpkFileOption = AppEnums.ActionType.Unpack;
-			this.OptionsAutoOpenGmaFileIsChecked = true;
-			this.OptionsAutoOpenGmaFileOption = AppEnums.ActionType.Unpack;
-			this.OptionsAutoOpenFpxFileIsChecked = true;
+			OptionsAutoOpenVpkFileIsChecked = true;
+			OptionsAutoOpenVpkFileOption = AppEnums.ActionType.Unpack;
+			OptionsAutoOpenGmaFileIsChecked = true;
+			OptionsAutoOpenGmaFileOption = AppEnums.ActionType.Unpack;
+			OptionsAutoOpenFpxFileIsChecked = true;
 
-			this.OptionsAutoOpenMdlFileIsChecked = true;
-			this.OptionsAutoOpenMdlFileForPreviewIsChecked = false;
-			this.OptionsAutoOpenMdlFileForDecompileIsChecked = true;
-			this.OptionsAutoOpenMdlFileForViewIsChecked = false;
-			this.OptionsAutoOpenMdlFileOption = AppEnums.ActionType.Decompile;
+			OptionsAutoOpenMdlFileIsChecked = true;
+			OptionsAutoOpenMdlFileForPreviewIsChecked = false;
+			OptionsAutoOpenMdlFileForDecompileIsChecked = true;
+			OptionsAutoOpenMdlFileForViewIsChecked = false;
+			OptionsAutoOpenMdlFileOption = AppEnums.ActionType.Decompile;
 
-			this.OptionsAutoOpenQcFileIsChecked = true;
+			OptionsAutoOpenQcFileIsChecked = true;
 
-			this.OptionsAutoOpenFolderOption = AppEnums.ActionType.Decompile;
+			OptionsAutoOpenFolderOption = AppEnums.ActionType.Decompile;
 		}
 
 		public void SetDefaultOptionsDragAndDropOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
 
-			this.OptionsDragAndDropVpkFileOption = AppEnums.ActionType.Unpack;
-			this.OptionsDragAndDropGmaFileOption = AppEnums.ActionType.Unpack;
+			OptionsDragAndDropVpkFileOption = AppEnums.ActionType.Unpack;
+			OptionsDragAndDropGmaFileOption = AppEnums.ActionType.Unpack;
 
-			this.OptionsDragAndDropMdlFileForPreviewIsChecked = false;
-			this.OptionsDragAndDropMdlFileForDecompileIsChecked = true;
-			this.OptionsDragAndDropMdlFileForViewIsChecked = false;
-			this.OptionsDragAndDropMdlFileOption = AppEnums.ActionType.Decompile;
+			OptionsDragAndDropMdlFileForPreviewIsChecked = false;
+			OptionsDragAndDropMdlFileForDecompileIsChecked = true;
+			OptionsDragAndDropMdlFileForViewIsChecked = false;
+			OptionsDragAndDropMdlFileOption = AppEnums.ActionType.Decompile;
 
-			this.OptionsDragAndDropFolderOption = AppEnums.ActionType.Decompile;
+			OptionsDragAndDropFolderOption = AppEnums.ActionType.Decompile;
 		}
 
 		public void SetDefaultOptionsContextMenuOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.OptionsContextMenuIntegrateMenuItemsIsChecked = true;
-			this.OptionsContextMenuIntegrateSubMenuIsChecked = true;
+			OptionsContextMenuIntegrateMenuItemsIsChecked = true;
+			OptionsContextMenuIntegrateSubMenuIsChecked = true;
 
-			this.OptionsOpenWithCrowbarIsChecked = true;
-			this.OptionsViewMdlFileIsChecked = true;
+			OptionsOpenWithCrowbarIsChecked = true;
+			OptionsViewMdlFileIsChecked = true;
 
-			this.OptionsDecompileMdlFileIsChecked = true;
-			this.OptionsDecompileFolderIsChecked = true;
-			this.OptionsDecompileFolderAndSubfoldersIsChecked = true;
+			OptionsDecompileMdlFileIsChecked = true;
+			OptionsDecompileFolderIsChecked = true;
+			OptionsDecompileFolderAndSubfoldersIsChecked = true;
 
-			this.OptionsCompileQcFileIsChecked = true;
-			this.OptionsCompileFolderIsChecked = true;
-			this.OptionsCompileFolderAndSubfoldersIsChecked = true;
+			OptionsCompileQcFileIsChecked = true;
+			OptionsCompileFolderIsChecked = true;
+			OptionsCompileFolderAndSubfoldersIsChecked = true;
 		}
 
 #endregion

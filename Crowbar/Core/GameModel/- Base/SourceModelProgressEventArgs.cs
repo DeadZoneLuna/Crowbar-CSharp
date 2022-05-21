@@ -14,15 +14,15 @@ namespace Crowbar
 		public SourceModelProgressEventArgs(AppEnums.ProgressOptions progress, string message) : base()
 		{
 
-			this.theProgress = progress;
-			this.theMessage = message;
+			theProgress = progress;
+			theMessage = message;
 		}
 
 		public AppEnums.ProgressOptions Progress
 		{
 			get
 			{
-				return this.theProgress;
+				return theProgress;
 			}
 		}
 
@@ -30,11 +30,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theMessage;
+				return theMessage;
 			}
 			set
 			{
-				this.theMessage = value;
+				theMessage = value;
 			}
 		}
 

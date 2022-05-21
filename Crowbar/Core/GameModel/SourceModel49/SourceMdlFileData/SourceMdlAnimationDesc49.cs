@@ -13,9 +13,9 @@ namespace Crowbar
 	{
 		public SourceMdlAnimationDesc49()
 		{
-			this.theLinkedSequences = new List<SourceMdlSequenceDesc>();
+			theLinkedSequences = new List<SourceMdlSequenceDesc>();
 			//Me.theCorrectiveSubtractAnimationOptionIsUsed = False
-			this.theCorrectiveAnimationName = "";
+			theCorrectiveAnimationName = "";
 		}
 
 		//FROM: AlienSwarm_source\src\public\studio.h

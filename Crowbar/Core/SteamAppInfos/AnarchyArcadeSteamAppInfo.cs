@@ -18,12 +18,12 @@ namespace Crowbar
 		public AnarchyArcadeSteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(266430);
-			this.Name = "Anarchy Arcade";
-			this.UsesSteamUGC = true;
-			this.CanUseContentFolderOrFile = false;
+			ID = new AppId_t(266430);
+			Name = "Anarchy Arcade";
+			UsesSteamUGC = true;
+			CanUseContentFolderOrFile = false;
 			//Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-			this.TagsControlType = typeof(AnarchyArcadeTagsUserControl);
+			TagsControlType = typeof(AnarchyArcadeTagsUserControl);
 		}
 
 	}

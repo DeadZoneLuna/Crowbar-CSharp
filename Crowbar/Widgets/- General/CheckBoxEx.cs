@@ -20,25 +20,25 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theControlIsReadOnly;
+				return theControlIsReadOnly;
 			}
 			set
 			{
-				if (this.theControlIsReadOnly != value)
+				if (theControlIsReadOnly != value)
 				{
-					this.theControlIsReadOnly = value;
+					theControlIsReadOnly = value;
 
-					if (this.theControlIsReadOnly)
+					if (theControlIsReadOnly)
 					{
-						this.ForeColor = SystemColors.ControlText;
-						this.BackColor = SystemColors.Control;
+						ForeColor = SystemColors.ControlText;
+						BackColor = SystemColors.Control;
 						// [CheckBoxEx] Maybe: Somehow change backcolor of the box.
 						// [CheckBoxEx] Maybe: Somehow disable checkmarking of the box.
 					}
 					else
 					{
-						this.ForeColor = SystemColors.ControlText;
-						this.BackColor = SystemColors.Window;
+						ForeColor = SystemColors.ControlText;
+						BackColor = SystemColors.Window;
 					}
 				}
 			}

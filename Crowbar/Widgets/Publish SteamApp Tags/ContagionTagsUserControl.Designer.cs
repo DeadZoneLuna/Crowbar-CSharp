@@ -37,199 +37,199 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.EscapeCoopCheckBox = new CheckBoxEx();
-			this.ExtractionCoopCheckBox = new CheckBoxEx();
-			this.HuntedPvpCheckBox = new CheckBoxEx();
-			this.ContagionPanicClassicCheckBox = new CheckBoxEx();
-			this.ContagionPanicObjectiveCheckBox = new CheckBoxEx();
-			this.WeaponsModelTextureCheckBox = new CheckBoxEx();
-			this.SurvivorsModelTextureCheckBox = new CheckBoxEx();
-			this.ZombiesModelTextureCheckBox = new CheckBoxEx();
-			this.UserInterfaceCheckBox = new CheckBoxEx();
-			this.SoundsCheckBox = new CheckBoxEx();
-			this.FlashlightCheckBox = new CheckBoxEx();
-			this.SmartphoneWallpapersCheckBox = new CheckBoxEx();
-			this.MiscCheckBox = new CheckBoxEx();
-			this.FlatlineCheckBox = new CheckBoxEx();
-			this.SuspendLayout();
+			EscapeCoopCheckBox = new CheckBoxEx();
+			ExtractionCoopCheckBox = new CheckBoxEx();
+			HuntedPvpCheckBox = new CheckBoxEx();
+			ContagionPanicClassicCheckBox = new CheckBoxEx();
+			ContagionPanicObjectiveCheckBox = new CheckBoxEx();
+			WeaponsModelTextureCheckBox = new CheckBoxEx();
+			SurvivorsModelTextureCheckBox = new CheckBoxEx();
+			ZombiesModelTextureCheckBox = new CheckBoxEx();
+			UserInterfaceCheckBox = new CheckBoxEx();
+			SoundsCheckBox = new CheckBoxEx();
+			FlashlightCheckBox = new CheckBoxEx();
+			SmartphoneWallpapersCheckBox = new CheckBoxEx();
+			MiscCheckBox = new CheckBoxEx();
+			FlatlineCheckBox = new CheckBoxEx();
+			SuspendLayout();
 			//
 			//EscapeCoopCheckBox
 			//
-			this.EscapeCoopCheckBox.AutoSize = true;
-			this.EscapeCoopCheckBox.Location = new System.Drawing.Point(3, 3);
-			this.EscapeCoopCheckBox.Name = "EscapeCoopCheckBox";
-			this.EscapeCoopCheckBox.Size = new System.Drawing.Size(100, 17);
-			this.EscapeCoopCheckBox.TabIndex = 0;
-			this.EscapeCoopCheckBox.Text = "Escape (Co-op)";
-			this.EscapeCoopCheckBox.Tag = "Escape (Co-op)";
-			this.EscapeCoopCheckBox.UseVisualStyleBackColor = true;
+			EscapeCoopCheckBox.AutoSize = true;
+			EscapeCoopCheckBox.Location = new System.Drawing.Point(3, 3);
+			EscapeCoopCheckBox.Name = "EscapeCoopCheckBox";
+			EscapeCoopCheckBox.Size = new System.Drawing.Size(100, 17);
+			EscapeCoopCheckBox.TabIndex = 0;
+			EscapeCoopCheckBox.Text = "Escape (Co-op)";
+			EscapeCoopCheckBox.Tag = "Escape (Co-op)";
+			EscapeCoopCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ExtractionCoopCheckBox
 			//
-			this.ExtractionCoopCheckBox.AutoSize = true;
-			this.ExtractionCoopCheckBox.Location = new System.Drawing.Point(3, 26);
-			this.ExtractionCoopCheckBox.Name = "ExtractionCoopCheckBox";
-			this.ExtractionCoopCheckBox.Size = new System.Drawing.Size(115, 17);
-			this.ExtractionCoopCheckBox.TabIndex = 1;
-			this.ExtractionCoopCheckBox.Text = "Extraction (Co-op)";
-			this.ExtractionCoopCheckBox.Tag = "Extraction (Co-op)";
-			this.ExtractionCoopCheckBox.UseVisualStyleBackColor = true;
+			ExtractionCoopCheckBox.AutoSize = true;
+			ExtractionCoopCheckBox.Location = new System.Drawing.Point(3, 26);
+			ExtractionCoopCheckBox.Name = "ExtractionCoopCheckBox";
+			ExtractionCoopCheckBox.Size = new System.Drawing.Size(115, 17);
+			ExtractionCoopCheckBox.TabIndex = 1;
+			ExtractionCoopCheckBox.Text = "Extraction (Co-op)";
+			ExtractionCoopCheckBox.Tag = "Extraction (Co-op)";
+			ExtractionCoopCheckBox.UseVisualStyleBackColor = true;
 			//
 			//HuntedPvpCheckBox
 			//
-			this.HuntedPvpCheckBox.AutoSize = true;
-			this.HuntedPvpCheckBox.Location = new System.Drawing.Point(3, 49);
-			this.HuntedPvpCheckBox.Name = "HuntedPvpCheckBox";
-			this.HuntedPvpCheckBox.Size = new System.Drawing.Size(90, 17);
-			this.HuntedPvpCheckBox.TabIndex = 2;
-			this.HuntedPvpCheckBox.Text = "Hunted (PVP)";
-			this.HuntedPvpCheckBox.Tag = "Hunted (PVP)";
-			this.HuntedPvpCheckBox.UseVisualStyleBackColor = true;
+			HuntedPvpCheckBox.AutoSize = true;
+			HuntedPvpCheckBox.Location = new System.Drawing.Point(3, 49);
+			HuntedPvpCheckBox.Name = "HuntedPvpCheckBox";
+			HuntedPvpCheckBox.Size = new System.Drawing.Size(90, 17);
+			HuntedPvpCheckBox.TabIndex = 2;
+			HuntedPvpCheckBox.Text = "Hunted (PVP)";
+			HuntedPvpCheckBox.Tag = "Hunted (PVP)";
+			HuntedPvpCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ContagionPanicClassicCheckBox
 			//
-			this.ContagionPanicClassicCheckBox.AutoSize = true;
-			this.ContagionPanicClassicCheckBox.Location = new System.Drawing.Point(3, 95);
-			this.ContagionPanicClassicCheckBox.Name = "ContagionPanicClassicCheckBox";
-			this.ContagionPanicClassicCheckBox.Size = new System.Drawing.Size(169, 17);
-			this.ContagionPanicClassicCheckBox.TabIndex = 4;
-			this.ContagionPanicClassicCheckBox.Text = "Contagion Panic Classic (CPC)";
-			this.ContagionPanicClassicCheckBox.Tag = "Contagion Panic Classic (CPC)";
-			this.ContagionPanicClassicCheckBox.UseVisualStyleBackColor = true;
+			ContagionPanicClassicCheckBox.AutoSize = true;
+			ContagionPanicClassicCheckBox.Location = new System.Drawing.Point(3, 95);
+			ContagionPanicClassicCheckBox.Name = "ContagionPanicClassicCheckBox";
+			ContagionPanicClassicCheckBox.Size = new System.Drawing.Size(169, 17);
+			ContagionPanicClassicCheckBox.TabIndex = 4;
+			ContagionPanicClassicCheckBox.Text = "Contagion Panic Classic (CPC)";
+			ContagionPanicClassicCheckBox.Tag = "Contagion Panic Classic (CPC)";
+			ContagionPanicClassicCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ContagionPanicObjectiveCheckBox
 			//
-			this.ContagionPanicObjectiveCheckBox.AutoSize = true;
-			this.ContagionPanicObjectiveCheckBox.Location = new System.Drawing.Point(3, 118);
-			this.ContagionPanicObjectiveCheckBox.Name = "ContagionPanicObjectiveCheckBox";
-			this.ContagionPanicObjectiveCheckBox.Size = new System.Drawing.Size(184, 17);
-			this.ContagionPanicObjectiveCheckBox.TabIndex = 5;
-			this.ContagionPanicObjectiveCheckBox.Text = "Contagion Panic Objective (CPO)";
-			this.ContagionPanicObjectiveCheckBox.Tag = "Contagion Panic Objective (CPO)";
-			this.ContagionPanicObjectiveCheckBox.UseVisualStyleBackColor = true;
+			ContagionPanicObjectiveCheckBox.AutoSize = true;
+			ContagionPanicObjectiveCheckBox.Location = new System.Drawing.Point(3, 118);
+			ContagionPanicObjectiveCheckBox.Name = "ContagionPanicObjectiveCheckBox";
+			ContagionPanicObjectiveCheckBox.Size = new System.Drawing.Size(184, 17);
+			ContagionPanicObjectiveCheckBox.TabIndex = 5;
+			ContagionPanicObjectiveCheckBox.Text = "Contagion Panic Objective (CPO)";
+			ContagionPanicObjectiveCheckBox.Tag = "Contagion Panic Objective (CPO)";
+			ContagionPanicObjectiveCheckBox.UseVisualStyleBackColor = true;
 			//
 			//WeaponsModelTextureCheckBox
 			//
-			this.WeaponsModelTextureCheckBox.AutoSize = true;
-			this.WeaponsModelTextureCheckBox.Location = new System.Drawing.Point(3, 141);
-			this.WeaponsModelTextureCheckBox.Name = "WeaponsModelTextureCheckBox";
-			this.WeaponsModelTextureCheckBox.Size = new System.Drawing.Size(155, 17);
-			this.WeaponsModelTextureCheckBox.TabIndex = 6;
-			this.WeaponsModelTextureCheckBox.Text = "Weapons (Model/Texture) ";
-			this.WeaponsModelTextureCheckBox.Tag = "Weapons (Model/Texture) ";
-			this.WeaponsModelTextureCheckBox.UseVisualStyleBackColor = true;
+			WeaponsModelTextureCheckBox.AutoSize = true;
+			WeaponsModelTextureCheckBox.Location = new System.Drawing.Point(3, 141);
+			WeaponsModelTextureCheckBox.Name = "WeaponsModelTextureCheckBox";
+			WeaponsModelTextureCheckBox.Size = new System.Drawing.Size(155, 17);
+			WeaponsModelTextureCheckBox.TabIndex = 6;
+			WeaponsModelTextureCheckBox.Text = "Weapons (Model/Texture) ";
+			WeaponsModelTextureCheckBox.Tag = "Weapons (Model/Texture) ";
+			WeaponsModelTextureCheckBox.UseVisualStyleBackColor = true;
 			//
 			//SurvivorsModelTextureCheckBox
 			//
-			this.SurvivorsModelTextureCheckBox.AutoSize = true;
-			this.SurvivorsModelTextureCheckBox.Location = new System.Drawing.Point(3, 164);
-			this.SurvivorsModelTextureCheckBox.Name = "SurvivorsModelTextureCheckBox";
-			this.SurvivorsModelTextureCheckBox.Size = new System.Drawing.Size(155, 17);
-			this.SurvivorsModelTextureCheckBox.TabIndex = 7;
-			this.SurvivorsModelTextureCheckBox.Text = "Survivors (Model/Texture) ";
-			this.SurvivorsModelTextureCheckBox.Tag = "Survivors (Model/Texture) ";
-			this.SurvivorsModelTextureCheckBox.UseVisualStyleBackColor = true;
+			SurvivorsModelTextureCheckBox.AutoSize = true;
+			SurvivorsModelTextureCheckBox.Location = new System.Drawing.Point(3, 164);
+			SurvivorsModelTextureCheckBox.Name = "SurvivorsModelTextureCheckBox";
+			SurvivorsModelTextureCheckBox.Size = new System.Drawing.Size(155, 17);
+			SurvivorsModelTextureCheckBox.TabIndex = 7;
+			SurvivorsModelTextureCheckBox.Text = "Survivors (Model/Texture) ";
+			SurvivorsModelTextureCheckBox.Tag = "Survivors (Model/Texture) ";
+			SurvivorsModelTextureCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ZombiesModelTextureCheckBox
 			//
-			this.ZombiesModelTextureCheckBox.AutoSize = true;
-			this.ZombiesModelTextureCheckBox.Location = new System.Drawing.Point(3, 187);
-			this.ZombiesModelTextureCheckBox.Name = "ZombiesModelTextureCheckBox";
-			this.ZombiesModelTextureCheckBox.Size = new System.Drawing.Size(146, 17);
-			this.ZombiesModelTextureCheckBox.TabIndex = 8;
-			this.ZombiesModelTextureCheckBox.Text = "Zombies (Model/Texture)";
-			this.ZombiesModelTextureCheckBox.Tag = "Zombies (Model/Texture)";
-			this.ZombiesModelTextureCheckBox.UseVisualStyleBackColor = true;
+			ZombiesModelTextureCheckBox.AutoSize = true;
+			ZombiesModelTextureCheckBox.Location = new System.Drawing.Point(3, 187);
+			ZombiesModelTextureCheckBox.Name = "ZombiesModelTextureCheckBox";
+			ZombiesModelTextureCheckBox.Size = new System.Drawing.Size(146, 17);
+			ZombiesModelTextureCheckBox.TabIndex = 8;
+			ZombiesModelTextureCheckBox.Text = "Zombies (Model/Texture)";
+			ZombiesModelTextureCheckBox.Tag = "Zombies (Model/Texture)";
+			ZombiesModelTextureCheckBox.UseVisualStyleBackColor = true;
 			//
 			//UserInterfaceCheckBox
 			//
-			this.UserInterfaceCheckBox.AutoSize = true;
-			this.UserInterfaceCheckBox.Location = new System.Drawing.Point(3, 210);
-			this.UserInterfaceCheckBox.Name = "UserInterfaceCheckBox";
-			this.UserInterfaceCheckBox.Size = new System.Drawing.Size(96, 17);
-			this.UserInterfaceCheckBox.TabIndex = 9;
-			this.UserInterfaceCheckBox.Text = "User Interface";
-			this.UserInterfaceCheckBox.Tag = "User Interface";
-			this.UserInterfaceCheckBox.UseVisualStyleBackColor = true;
+			UserInterfaceCheckBox.AutoSize = true;
+			UserInterfaceCheckBox.Location = new System.Drawing.Point(3, 210);
+			UserInterfaceCheckBox.Name = "UserInterfaceCheckBox";
+			UserInterfaceCheckBox.Size = new System.Drawing.Size(96, 17);
+			UserInterfaceCheckBox.TabIndex = 9;
+			UserInterfaceCheckBox.Text = "User Interface";
+			UserInterfaceCheckBox.Tag = "User Interface";
+			UserInterfaceCheckBox.UseVisualStyleBackColor = true;
 			//
 			//SoundsCheckBox
 			//
-			this.SoundsCheckBox.AutoSize = true;
-			this.SoundsCheckBox.Location = new System.Drawing.Point(3, 233);
-			this.SoundsCheckBox.Name = "SoundsCheckBox";
-			this.SoundsCheckBox.Size = new System.Drawing.Size(61, 17);
-			this.SoundsCheckBox.TabIndex = 10;
-			this.SoundsCheckBox.Text = "Sounds";
-			this.SoundsCheckBox.Tag = "Sounds";
-			this.SoundsCheckBox.UseVisualStyleBackColor = true;
+			SoundsCheckBox.AutoSize = true;
+			SoundsCheckBox.Location = new System.Drawing.Point(3, 233);
+			SoundsCheckBox.Name = "SoundsCheckBox";
+			SoundsCheckBox.Size = new System.Drawing.Size(61, 17);
+			SoundsCheckBox.TabIndex = 10;
+			SoundsCheckBox.Text = "Sounds";
+			SoundsCheckBox.Tag = "Sounds";
+			SoundsCheckBox.UseVisualStyleBackColor = true;
 			//
 			//FlashlightCheckBox
 			//
-			this.FlashlightCheckBox.AutoSize = true;
-			this.FlashlightCheckBox.Location = new System.Drawing.Point(3, 256);
-			this.FlashlightCheckBox.Name = "FlashlightCheckBox";
-			this.FlashlightCheckBox.Size = new System.Drawing.Size(71, 17);
-			this.FlashlightCheckBox.TabIndex = 11;
-			this.FlashlightCheckBox.Text = "Flashlight";
-			this.FlashlightCheckBox.Tag = "Flashlight";
-			this.FlashlightCheckBox.UseVisualStyleBackColor = true;
+			FlashlightCheckBox.AutoSize = true;
+			FlashlightCheckBox.Location = new System.Drawing.Point(3, 256);
+			FlashlightCheckBox.Name = "FlashlightCheckBox";
+			FlashlightCheckBox.Size = new System.Drawing.Size(71, 17);
+			FlashlightCheckBox.TabIndex = 11;
+			FlashlightCheckBox.Text = "Flashlight";
+			FlashlightCheckBox.Tag = "Flashlight";
+			FlashlightCheckBox.UseVisualStyleBackColor = true;
 			//
 			//SmartphoneWallpapersCheckBox
 			//
-			this.SmartphoneWallpapersCheckBox.AutoSize = true;
-			this.SmartphoneWallpapersCheckBox.Location = new System.Drawing.Point(3, 279);
-			this.SmartphoneWallpapersCheckBox.Name = "SmartphoneWallpapersCheckBox";
-			this.SmartphoneWallpapersCheckBox.Size = new System.Drawing.Size(140, 17);
-			this.SmartphoneWallpapersCheckBox.TabIndex = 12;
-			this.SmartphoneWallpapersCheckBox.Text = "Smartphone Wallpapers";
-			this.SmartphoneWallpapersCheckBox.Tag = "Smartphone Wallpapers";
-			this.SmartphoneWallpapersCheckBox.UseVisualStyleBackColor = true;
+			SmartphoneWallpapersCheckBox.AutoSize = true;
+			SmartphoneWallpapersCheckBox.Location = new System.Drawing.Point(3, 279);
+			SmartphoneWallpapersCheckBox.Name = "SmartphoneWallpapersCheckBox";
+			SmartphoneWallpapersCheckBox.Size = new System.Drawing.Size(140, 17);
+			SmartphoneWallpapersCheckBox.TabIndex = 12;
+			SmartphoneWallpapersCheckBox.Text = "Smartphone Wallpapers";
+			SmartphoneWallpapersCheckBox.Tag = "Smartphone Wallpapers";
+			SmartphoneWallpapersCheckBox.UseVisualStyleBackColor = true;
 			//
 			//MiscCheckBox
 			//
-			this.MiscCheckBox.AutoSize = true;
-			this.MiscCheckBox.Location = new System.Drawing.Point(3, 302);
-			this.MiscCheckBox.Name = "MiscCheckBox";
-			this.MiscCheckBox.Size = new System.Drawing.Size(50, 17);
-			this.MiscCheckBox.TabIndex = 13;
-			this.MiscCheckBox.Text = "Misc.";
-			this.MiscCheckBox.Tag = "Misc";
-			this.MiscCheckBox.UseVisualStyleBackColor = true;
+			MiscCheckBox.AutoSize = true;
+			MiscCheckBox.Location = new System.Drawing.Point(3, 302);
+			MiscCheckBox.Name = "MiscCheckBox";
+			MiscCheckBox.Size = new System.Drawing.Size(50, 17);
+			MiscCheckBox.TabIndex = 13;
+			MiscCheckBox.Text = "Misc.";
+			MiscCheckBox.Tag = "Misc";
+			MiscCheckBox.UseVisualStyleBackColor = true;
 			//
 			//FlatlineCheckBox
 			//
-			this.FlatlineCheckBox.AutoSize = true;
-			this.FlatlineCheckBox.Location = new System.Drawing.Point(3, 72);
-			this.FlatlineCheckBox.Name = "FlatlineCheckBox";
-			this.FlatlineCheckBox.Size = new System.Drawing.Size(60, 17);
-			this.FlatlineCheckBox.TabIndex = 3;
-			this.FlatlineCheckBox.Text = "Flatline";
-			this.FlatlineCheckBox.Tag = "Flatline";
-			this.FlatlineCheckBox.UseVisualStyleBackColor = true;
+			FlatlineCheckBox.AutoSize = true;
+			FlatlineCheckBox.Location = new System.Drawing.Point(3, 72);
+			FlatlineCheckBox.Name = "FlatlineCheckBox";
+			FlatlineCheckBox.Size = new System.Drawing.Size(60, 17);
+			FlatlineCheckBox.TabIndex = 3;
+			FlatlineCheckBox.Text = "Flatline";
+			FlatlineCheckBox.Tag = "Flatline";
+			FlatlineCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ContagionTagsUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoScroll = true;
-			this.Controls.Add(this.FlatlineCheckBox);
-			this.Controls.Add(this.MiscCheckBox);
-			this.Controls.Add(this.SmartphoneWallpapersCheckBox);
-			this.Controls.Add(this.FlashlightCheckBox);
-			this.Controls.Add(this.SoundsCheckBox);
-			this.Controls.Add(this.UserInterfaceCheckBox);
-			this.Controls.Add(this.ZombiesModelTextureCheckBox);
-			this.Controls.Add(this.SurvivorsModelTextureCheckBox);
-			this.Controls.Add(this.WeaponsModelTextureCheckBox);
-			this.Controls.Add(this.ContagionPanicObjectiveCheckBox);
-			this.Controls.Add(this.ContagionPanicClassicCheckBox);
-			this.Controls.Add(this.HuntedPvpCheckBox);
-			this.Controls.Add(this.ExtractionCoopCheckBox);
-			this.Controls.Add(this.EscapeCoopCheckBox);
-			this.Name = "ContagionTagsUserControl";
-			this.Size = new System.Drawing.Size(188, 351);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			AutoScroll = true;
+			Controls.Add(FlatlineCheckBox);
+			Controls.Add(MiscCheckBox);
+			Controls.Add(SmartphoneWallpapersCheckBox);
+			Controls.Add(FlashlightCheckBox);
+			Controls.Add(SoundsCheckBox);
+			Controls.Add(UserInterfaceCheckBox);
+			Controls.Add(ZombiesModelTextureCheckBox);
+			Controls.Add(SurvivorsModelTextureCheckBox);
+			Controls.Add(WeaponsModelTextureCheckBox);
+			Controls.Add(ContagionPanicObjectiveCheckBox);
+			Controls.Add(ContagionPanicClassicCheckBox);
+			Controls.Add(HuntedPvpCheckBox);
+			Controls.Add(ExtractionCoopCheckBox);
+			Controls.Add(EscapeCoopCheckBox);
+			Name = "ContagionTagsUserControl";
+			Size = new System.Drawing.Size(188, 351);
+			ResumeLayout(false);
+			PerformLayout();
 
 		}
 

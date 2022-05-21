@@ -15,29 +15,29 @@ namespace Crowbar
 		//NOTE: Only here because XMLSerializer uses it.
 		public SteamAppUserInfo() : base()
 		{
-			this.Create();
+			Create();
 		}
 
 		public SteamAppUserInfo(uint iAppID)
 		{
-			this.theAppID = iAppID;
-			this.Create();
+			theAppID = iAppID;
+			Create();
 		}
 
 		private void Create()
 		{
-			this.theDraftItems = new BindingListEx<WorkshopItem>();
+			theDraftItems = new BindingListEx<WorkshopItem>();
 		}
 
 		public uint AppID
 		{
 			get
 			{
-				return this.theAppID;
+				return theAppID;
 			}
 			set
 			{
-				this.theAppID = value;
+				theAppID = value;
 			}
 		}
 
@@ -45,11 +45,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDraftItems;
+				return theDraftItems;
 			}
 			set
 			{
-				this.theDraftItems = value;
+				theDraftItems = value;
 			}
 		}
 

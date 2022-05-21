@@ -19,9 +19,9 @@ namespace Crowbar
 
 		public ApkFile(BinaryReader packageDirectoryFileReader, BinaryReader packageFileReader, ApkFileData apkFileData)
 		{
-			this.thePackageDirectoryInputFileReader = packageDirectoryFileReader;
-			this.theInputFileReader = packageFileReader;
-			this.theApkFileData = apkFileData;
+			thePackageDirectoryInputFileReader = packageDirectoryFileReader;
+			theInputFileReader = packageFileReader;
+			theApkFileData = apkFileData;
 		}
 
 #endregion
@@ -32,7 +32,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theApkFileData;
+				return theApkFileData;
 			}
 		}
 
@@ -42,17 +42,17 @@ namespace Crowbar
 
 		public override void ReadHeader()
 		{
-			this.theInputFileReader.BaseStream.Seek(0, SeekOrigin.Begin);
+			theInputFileReader.BaseStream.Seek(0, SeekOrigin.Begin);
 
-			this.theApkFileData.id = this.theInputFileReader.ReadUInt32();
-			this.theApkFileData.offsetOfFiles = this.theInputFileReader.ReadUInt32();
-			this.theApkFileData.fileCount = this.theInputFileReader.ReadUInt32();
-			this.theApkFileData.offsetOfDirectory = this.theInputFileReader.ReadUInt32();
+			theApkFileData.id = theInputFileReader.ReadUInt32();
+			theApkFileData.offsetOfFiles = theInputFileReader.ReadUInt32();
+			theApkFileData.fileCount = theInputFileReader.ReadUInt32();
+			theApkFileData.offsetOfDirectory = theInputFileReader.ReadUInt32();
 		}
 
 		public override void ReadEntries(BackgroundWorker bw)
 		{
-			if (!this.theApkFileData.IsSourcePackage)
+			if (!theApkFileData.IsSourcePackage)
 			{
 				return;
 			}
@@ -63,24 +63,24 @@ namespace Crowbar
 				StringBuilder entryDataOutputText = new StringBuilder();
 				string pathFileName = null;
 
-				this.theInputFileReader.BaseStream.Seek(this.theApkFileData.offsetOfDirectory, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(theApkFileData.offsetOfDirectory, SeekOrigin.Begin);
 
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(this.theApkFileData.fileCount - 1) for every iteration:
-				UInt32 tempVar = (uint)(this.theApkFileData.fileCount - 1);
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theApkFileData.fileCount - 1) for every iteration:
+				UInt32 tempVar = (uint)(theApkFileData.fileCount - 1);
 				for (UInt32 directoryEntryIndex = 0; directoryEntryIndex <= tempVar; directoryEntryIndex++)
 				{
 					entry = new ApkDirectoryEntry();
 					entryDataOutputText.Clear();
 
-					entry.pathFileNameSize = this.theInputFileReader.ReadUInt32();
-					pathFileName = FileManager.ReadNullTerminatedString(this.theInputFileReader);
+					entry.pathFileNameSize = theInputFileReader.ReadUInt32();
+					pathFileName = FileManager.ReadNullTerminatedString(theInputFileReader);
 					entry.thePathFileName = pathFileName.Replace('\\', '/');
-					entry.offsetOfFile = this.theInputFileReader.ReadUInt32();
-					entry.fileSize = this.theInputFileReader.ReadUInt32();
-					entry.offsetOfNextDirectoryEntry = this.theInputFileReader.ReadUInt32();
-					this.theInputFileReader.ReadUInt32();
+					entry.offsetOfFile = theInputFileReader.ReadUInt32();
+					entry.fileSize = theInputFileReader.ReadUInt32();
+					entry.offsetOfNextDirectoryEntry = theInputFileReader.ReadUInt32();
+					theInputFileReader.ReadUInt32();
 					entry.crc = 0;
-					this.theApkFileData.theEntries.Add(entry);
+					theApkFileData.theEntries.Add(entry);
 
 					entryDataOutputText.Append(entry.thePathFileName);
 					entryDataOutputText.Append(" crc=0x" + entry.crc.ToString("X8"));
@@ -88,7 +88,7 @@ namespace Crowbar
 					entryDataOutputText.Append(" fnumber=0");
 					entryDataOutputText.Append(" ofs=0x" + entry.offsetOfFile.ToString("X8"));
 					entryDataOutputText.Append(" sz=" + entry.fileSize.ToString("G0"));
-					this.theApkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
+					theApkFileData.theEntryDataOutputTexts.Add(entryDataOutputText.ToString());
 
 					NotifyPackEntryRead(entry, entryDataOutputText.ToString());
 				}
@@ -111,11 +111,11 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
+						theOutputFileWriter = new BinaryWriter(outputFileStream, System.Text.Encoding.ASCII);
 
-						this.theInputFileReader.BaseStream.Seek(entry.offsetOfFile, SeekOrigin.Begin);
-						byte[] bytes = this.theInputFileReader.ReadBytes((int)entry.fileSize);
-						this.theOutputFileWriter.Write(bytes);
+						theInputFileReader.BaseStream.Seek(entry.offsetOfFile, SeekOrigin.Begin);
+						byte[] bytes = theInputFileReader.ReadBytes((int)entry.fileSize);
+						theOutputFileWriter.Write(bytes);
 					}
 					catch (Exception ex)
 					{
@@ -123,9 +123,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theOutputFileWriter != null)
+						if (theOutputFileWriter != null)
 						{
-							this.theOutputFileWriter.Close();
+							theOutputFileWriter.Close();
 						}
 					}
 				}

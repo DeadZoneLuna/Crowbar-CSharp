@@ -20,7 +20,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return (this.id == ApkFileData.APK_ID);
+				return (id == ApkFileData.APK_ID);
 			}
 		}
 

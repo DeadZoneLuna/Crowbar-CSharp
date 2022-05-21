@@ -41,417 +41,417 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.ItemIdTextBox = new Crowbar.TextBoxEx();
-			this.DownloadButton = new System.Windows.Forms.Button();
-			this.LogTextBox = new Crowbar.RichTextBoxEx();
-			this.ItemIdOrLinkLabel = new System.Windows.Forms.Label();
-			this.OuputToLabel = new System.Windows.Forms.Label();
-			this.OutputPathComboBox = new System.Windows.Forms.ComboBox();
-			this.OutputPathTextBox = new Crowbar.TextBoxEx();
-			this.GotoOutputPathButton = new System.Windows.Forms.Button();
-			this.BrowseForOutputPathButton = new System.Windows.Forms.Button();
-			this.OptionsGroupBox = new Crowbar.GroupBoxEx();
-			this.OptionsGroupBoxFillPanel = new System.Windows.Forms.Panel();
-			this.UseIdCheckBox = new Crowbar.CheckBoxEx();
-			this.PrependTitleCheckBox = new Crowbar.CheckBoxEx();
-			this.AppendDateTimeCheckBox = new Crowbar.CheckBoxEx();
-			this.ReplaceSpacesWithUnderscoresCheckBox = new Crowbar.CheckBoxEx();
-			this.OptionsUseDefaultsButton = new System.Windows.Forms.Button();
-			this.ConvertToExpectedFileOrFolderCheckBox = new Crowbar.CheckBoxEx();
-			this.ExampleOutputFileNameLabel = new System.Windows.Forms.Label();
-			this.ExampleOutputFileNameTextBox = new Crowbar.TextBoxEx();
-			this.CancelDownloadButton = new System.Windows.Forms.Button();
-			this.DownloadProgressBar = new Crowbar.ProgressBarEx();
-			this.OpenWorkshopPageButton = new System.Windows.Forms.Button();
-			this.DocumentsOutputPathTextBox = new Crowbar.TextBoxEx();
-			this.DownloadedItemTextBox = new Crowbar.TextBoxEx();
-			this.DownloadedLabel = new System.Windows.Forms.Label();
-			this.GotoDownloadedItemButton = new System.Windows.Forms.Button();
-			this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.DownloadUserControlFillPanel = new System.Windows.Forms.Panel();
-			this.Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
-			this.DownloadButtonsPanel = new System.Windows.Forms.Panel();
-			this.PostDownloadPanel = new System.Windows.Forms.Panel();
-			this.UseInUnpackButton = new System.Windows.Forms.Button();
-			this.Timer1 = new System.Windows.Forms.Timer(this.components);
-			this.OptionsGroupBox.SuspendLayout();
-			this.OptionsGroupBoxFillPanel.SuspendLayout();
-			this.DownloadUserControlFillPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).BeginInit();
-			this.Options_LogSplitContainer.Panel1.SuspendLayout();
-			this.Options_LogSplitContainer.Panel2.SuspendLayout();
-			this.Options_LogSplitContainer.SuspendLayout();
-			this.DownloadButtonsPanel.SuspendLayout();
-			this.PostDownloadPanel.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			ItemIdTextBox = new Crowbar.TextBoxEx();
+			DownloadButton = new System.Windows.Forms.Button();
+			LogTextBox = new Crowbar.RichTextBoxEx();
+			ItemIdOrLinkLabel = new System.Windows.Forms.Label();
+			OuputToLabel = new System.Windows.Forms.Label();
+			OutputPathComboBox = new System.Windows.Forms.ComboBox();
+			OutputPathTextBox = new Crowbar.TextBoxEx();
+			GotoOutputPathButton = new System.Windows.Forms.Button();
+			BrowseForOutputPathButton = new System.Windows.Forms.Button();
+			OptionsGroupBox = new Crowbar.GroupBoxEx();
+			OptionsGroupBoxFillPanel = new System.Windows.Forms.Panel();
+			UseIdCheckBox = new Crowbar.CheckBoxEx();
+			PrependTitleCheckBox = new Crowbar.CheckBoxEx();
+			AppendDateTimeCheckBox = new Crowbar.CheckBoxEx();
+			ReplaceSpacesWithUnderscoresCheckBox = new Crowbar.CheckBoxEx();
+			OptionsUseDefaultsButton = new System.Windows.Forms.Button();
+			ConvertToExpectedFileOrFolderCheckBox = new Crowbar.CheckBoxEx();
+			ExampleOutputFileNameLabel = new System.Windows.Forms.Label();
+			ExampleOutputFileNameTextBox = new Crowbar.TextBoxEx();
+			CancelDownloadButton = new System.Windows.Forms.Button();
+			DownloadProgressBar = new Crowbar.ProgressBarEx();
+			OpenWorkshopPageButton = new System.Windows.Forms.Button();
+			DocumentsOutputPathTextBox = new Crowbar.TextBoxEx();
+			DownloadedItemTextBox = new Crowbar.TextBoxEx();
+			DownloadedLabel = new System.Windows.Forms.Label();
+			GotoDownloadedItemButton = new System.Windows.Forms.Button();
+			ToolTip1 = new System.Windows.Forms.ToolTip(components);
+			DownloadUserControlFillPanel = new System.Windows.Forms.Panel();
+			Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
+			DownloadButtonsPanel = new System.Windows.Forms.Panel();
+			PostDownloadPanel = new System.Windows.Forms.Panel();
+			UseInUnpackButton = new System.Windows.Forms.Button();
+			Timer1 = new System.Windows.Forms.Timer(components);
+			OptionsGroupBox.SuspendLayout();
+			OptionsGroupBoxFillPanel.SuspendLayout();
+			DownloadUserControlFillPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).BeginInit();
+			Options_LogSplitContainer.Panel1.SuspendLayout();
+			Options_LogSplitContainer.Panel2.SuspendLayout();
+			Options_LogSplitContainer.SuspendLayout();
+			DownloadButtonsPanel.SuspendLayout();
+			PostDownloadPanel.SuspendLayout();
+			SuspendLayout();
 			//
 			//ItemIdTextBox
 			//
-			this.ItemIdTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.ItemIdTextBox.CueBannerText = "";
-			this.ItemIdTextBox.Location = new System.Drawing.Point(87, 3);
-			this.ItemIdTextBox.Name = "ItemIdTextBox";
-			this.ItemIdTextBox.Size = new System.Drawing.Size(616, 22);
-			this.ItemIdTextBox.TabIndex = 1;
+			ItemIdTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			ItemIdTextBox.CueBannerText = "";
+			ItemIdTextBox.Location = new System.Drawing.Point(87, 3);
+			ItemIdTextBox.Name = "ItemIdTextBox";
+			ItemIdTextBox.Size = new System.Drawing.Size(616, 22);
+			ItemIdTextBox.TabIndex = 1;
 			//
 			//DownloadButton
 			//
-			this.DownloadButton.Location = new System.Drawing.Point(0, 0);
-			this.DownloadButton.Name = "DownloadButton";
-			this.DownloadButton.Size = new System.Drawing.Size(120, 23);
-			this.DownloadButton.TabIndex = 10;
-			this.DownloadButton.Text = "Download";
-			this.DownloadButton.UseVisualStyleBackColor = true;
+			DownloadButton.Location = new System.Drawing.Point(0, 0);
+			DownloadButton.Name = "DownloadButton";
+			DownloadButton.Size = new System.Drawing.Size(120, 23);
+			DownloadButton.TabIndex = 10;
+			DownloadButton.Text = "Download";
+			DownloadButton.UseVisualStyleBackColor = true;
 			//
 			//LogTextBox
 			//
-			this.LogTextBox.CueBannerText = "";
-			this.LogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LogTextBox.HideSelection = false;
-			this.LogTextBox.Location = new System.Drawing.Point(0, 26);
-			this.LogTextBox.Name = "LogTextBox";
-			this.LogTextBox.ReadOnly = true;
-			this.LogTextBox.Size = new System.Drawing.Size(770, 226);
-			this.LogTextBox.TabIndex = 13;
-			this.LogTextBox.Text = "";
+			LogTextBox.CueBannerText = "";
+			LogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			LogTextBox.HideSelection = false;
+			LogTextBox.Location = new System.Drawing.Point(0, 26);
+			LogTextBox.Name = "LogTextBox";
+			LogTextBox.ReadOnly = true;
+			LogTextBox.Size = new System.Drawing.Size(770, 226);
+			LogTextBox.TabIndex = 13;
+			LogTextBox.Text = "";
 			//
 			//ItemIdOrLinkLabel
 			//
-			this.ItemIdOrLinkLabel.AutoSize = true;
-			this.ItemIdOrLinkLabel.Location = new System.Drawing.Point(3, 8);
-			this.ItemIdOrLinkLabel.Name = "ItemIdOrLinkLabel";
-			this.ItemIdOrLinkLabel.Size = new System.Drawing.Size(82, 13);
-			this.ItemIdOrLinkLabel.TabIndex = 0;
-			this.ItemIdOrLinkLabel.Text = "Item ID or link:";
+			ItemIdOrLinkLabel.AutoSize = true;
+			ItemIdOrLinkLabel.Location = new System.Drawing.Point(3, 8);
+			ItemIdOrLinkLabel.Name = "ItemIdOrLinkLabel";
+			ItemIdOrLinkLabel.Size = new System.Drawing.Size(82, 13);
+			ItemIdOrLinkLabel.TabIndex = 0;
+			ItemIdOrLinkLabel.Text = "Item ID or link:";
 			//
 			//OuputToLabel
 			//
-			this.OuputToLabel.AutoSize = true;
-			this.OuputToLabel.Location = new System.Drawing.Point(3, 37);
-			this.OuputToLabel.Name = "OuputToLabel";
-			this.OuputToLabel.Size = new System.Drawing.Size(62, 13);
-			this.OuputToLabel.TabIndex = 3;
-			this.OuputToLabel.Text = "Output to:";
+			OuputToLabel.AutoSize = true;
+			OuputToLabel.Location = new System.Drawing.Point(3, 37);
+			OuputToLabel.Name = "OuputToLabel";
+			OuputToLabel.Size = new System.Drawing.Size(62, 13);
+			OuputToLabel.TabIndex = 3;
+			OuputToLabel.Text = "Output to:";
 			//
 			//OutputPathComboBox
 			//
-			this.OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OutputPathComboBox.FormattingEnabled = true;
-			this.OutputPathComboBox.Location = new System.Drawing.Point(87, 33);
-			this.OutputPathComboBox.Name = "OutputPathComboBox";
-			this.OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
-			this.OutputPathComboBox.TabIndex = 4;
+			OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			OutputPathComboBox.FormattingEnabled = true;
+			OutputPathComboBox.Location = new System.Drawing.Point(87, 33);
+			OutputPathComboBox.Name = "OutputPathComboBox";
+			OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
+			OutputPathComboBox.TabIndex = 4;
 			//
 			//OutputPathTextBox
 			//
-			this.OutputPathTextBox.AllowDrop = true;
-			this.OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OutputPathTextBox.CueBannerText = "";
-			this.OutputPathTextBox.Location = new System.Drawing.Point(233, 32);
-			this.OutputPathTextBox.Name = "OutputPathTextBox";
-			this.OutputPathTextBox.Size = new System.Drawing.Size(421, 22);
-			this.OutputPathTextBox.TabIndex = 5;
+			OutputPathTextBox.AllowDrop = true;
+			OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OutputPathTextBox.CueBannerText = "";
+			OutputPathTextBox.Location = new System.Drawing.Point(233, 32);
+			OutputPathTextBox.Name = "OutputPathTextBox";
+			OutputPathTextBox.Size = new System.Drawing.Size(421, 22);
+			OutputPathTextBox.TabIndex = 5;
 			//
 			//GotoOutputPathButton
 			//
-			this.GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
-			this.GotoOutputPathButton.Name = "GotoOutputPathButton";
-			this.GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoOutputPathButton.TabIndex = 8;
-			this.GotoOutputPathButton.Text = "Goto";
-			this.GotoOutputPathButton.UseVisualStyleBackColor = true;
+			GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
+			GotoOutputPathButton.Name = "GotoOutputPathButton";
+			GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
+			GotoOutputPathButton.TabIndex = 8;
+			GotoOutputPathButton.Text = "Goto";
+			GotoOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//BrowseForOutputPathButton
 			//
-			this.BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
-			this.BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
-			this.BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForOutputPathButton.TabIndex = 7;
-			this.BrowseForOutputPathButton.Text = "Browse...";
-			this.BrowseForOutputPathButton.UseVisualStyleBackColor = true;
+			BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
+			BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
+			BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForOutputPathButton.TabIndex = 7;
+			BrowseForOutputPathButton.Text = "Browse...";
+			BrowseForOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//OptionsGroupBox
 			//
-			this.OptionsGroupBox.Controls.Add(this.OptionsGroupBoxFillPanel);
-			this.OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OptionsGroupBox.IsReadOnly = false;
-			this.OptionsGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.OptionsGroupBox.Name = "OptionsGroupBox";
-			this.OptionsGroupBox.SelectedValue = null;
-			this.OptionsGroupBox.Size = new System.Drawing.Size(770, 193);
-			this.OptionsGroupBox.TabIndex = 9;
-			this.OptionsGroupBox.TabStop = false;
-			this.OptionsGroupBox.Text = "Output File Name Options";
+			OptionsGroupBox.Controls.Add(OptionsGroupBoxFillPanel);
+			OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			OptionsGroupBox.IsReadOnly = false;
+			OptionsGroupBox.Location = new System.Drawing.Point(0, 0);
+			OptionsGroupBox.Name = "OptionsGroupBox";
+			OptionsGroupBox.SelectedValue = null;
+			OptionsGroupBox.Size = new System.Drawing.Size(770, 193);
+			OptionsGroupBox.TabIndex = 9;
+			OptionsGroupBox.TabStop = false;
+			OptionsGroupBox.Text = "Output File Name Options";
 			//
 			//OptionsGroupBoxFillPanel
 			//
-			this.OptionsGroupBoxFillPanel.AutoScroll = true;
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.UseIdCheckBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.PrependTitleCheckBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.AppendDateTimeCheckBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.ReplaceSpacesWithUnderscoresCheckBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.OptionsUseDefaultsButton);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.ConvertToExpectedFileOrFolderCheckBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.ExampleOutputFileNameLabel);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.ExampleOutputFileNameTextBox);
-			this.OptionsGroupBoxFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OptionsGroupBoxFillPanel.Location = new System.Drawing.Point(3, 18);
-			this.OptionsGroupBoxFillPanel.Name = "OptionsGroupBoxFillPanel";
-			this.OptionsGroupBoxFillPanel.Size = new System.Drawing.Size(764, 172);
-			this.OptionsGroupBoxFillPanel.TabIndex = 8;
+			OptionsGroupBoxFillPanel.AutoScroll = true;
+			OptionsGroupBoxFillPanel.Controls.Add(UseIdCheckBox);
+			OptionsGroupBoxFillPanel.Controls.Add(PrependTitleCheckBox);
+			OptionsGroupBoxFillPanel.Controls.Add(AppendDateTimeCheckBox);
+			OptionsGroupBoxFillPanel.Controls.Add(ReplaceSpacesWithUnderscoresCheckBox);
+			OptionsGroupBoxFillPanel.Controls.Add(OptionsUseDefaultsButton);
+			OptionsGroupBoxFillPanel.Controls.Add(ConvertToExpectedFileOrFolderCheckBox);
+			OptionsGroupBoxFillPanel.Controls.Add(ExampleOutputFileNameLabel);
+			OptionsGroupBoxFillPanel.Controls.Add(ExampleOutputFileNameTextBox);
+			OptionsGroupBoxFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			OptionsGroupBoxFillPanel.Location = new System.Drawing.Point(3, 18);
+			OptionsGroupBoxFillPanel.Name = "OptionsGroupBoxFillPanel";
+			OptionsGroupBoxFillPanel.Size = new System.Drawing.Size(764, 172);
+			OptionsGroupBoxFillPanel.TabIndex = 8;
 			//
 			//UseIdCheckBox
 			//
-			this.UseIdCheckBox.AutoSize = true;
-			this.UseIdCheckBox.IsReadOnly = false;
-			this.UseIdCheckBox.Location = new System.Drawing.Point(3, 3);
-			this.UseIdCheckBox.Name = "UseIdCheckBox";
-			this.UseIdCheckBox.Size = new System.Drawing.Size(201, 17);
-			this.UseIdCheckBox.TabIndex = 0;
-			this.UseIdCheckBox.Text = "Use item ID instead of given name";
-			this.UseIdCheckBox.UseVisualStyleBackColor = true;
+			UseIdCheckBox.AutoSize = true;
+			UseIdCheckBox.IsReadOnly = false;
+			UseIdCheckBox.Location = new System.Drawing.Point(3, 3);
+			UseIdCheckBox.Name = "UseIdCheckBox";
+			UseIdCheckBox.Size = new System.Drawing.Size(201, 17);
+			UseIdCheckBox.TabIndex = 0;
+			UseIdCheckBox.Text = "Use item ID instead of given name";
+			UseIdCheckBox.UseVisualStyleBackColor = true;
 			//
 			//PrependTitleCheckBox
 			//
-			this.PrependTitleCheckBox.AutoSize = true;
-			this.PrependTitleCheckBox.IsReadOnly = false;
-			this.PrependTitleCheckBox.Location = new System.Drawing.Point(3, 26);
-			this.PrependTitleCheckBox.Name = "PrependTitleCheckBox";
-			this.PrependTitleCheckBox.Size = new System.Drawing.Size(117, 17);
-			this.PrependTitleCheckBox.TabIndex = 1;
-			this.PrependTitleCheckBox.Text = "Prepend item title";
-			this.PrependTitleCheckBox.UseVisualStyleBackColor = true;
+			PrependTitleCheckBox.AutoSize = true;
+			PrependTitleCheckBox.IsReadOnly = false;
+			PrependTitleCheckBox.Location = new System.Drawing.Point(3, 26);
+			PrependTitleCheckBox.Name = "PrependTitleCheckBox";
+			PrependTitleCheckBox.Size = new System.Drawing.Size(117, 17);
+			PrependTitleCheckBox.TabIndex = 1;
+			PrependTitleCheckBox.Text = "Prepend item title";
+			PrependTitleCheckBox.UseVisualStyleBackColor = true;
 			//
 			//AppendDateTimeCheckBox
 			//
-			this.AppendDateTimeCheckBox.AutoSize = true;
-			this.AppendDateTimeCheckBox.IsReadOnly = false;
-			this.AppendDateTimeCheckBox.Location = new System.Drawing.Point(3, 49);
-			this.AppendDateTimeCheckBox.Name = "AppendDateTimeCheckBox";
-			this.AppendDateTimeCheckBox.Size = new System.Drawing.Size(204, 17);
-			this.AppendDateTimeCheckBox.TabIndex = 2;
-			this.AppendDateTimeCheckBox.Text = "Append the item update date-time";
-			this.AppendDateTimeCheckBox.UseVisualStyleBackColor = true;
+			AppendDateTimeCheckBox.AutoSize = true;
+			AppendDateTimeCheckBox.IsReadOnly = false;
+			AppendDateTimeCheckBox.Location = new System.Drawing.Point(3, 49);
+			AppendDateTimeCheckBox.Name = "AppendDateTimeCheckBox";
+			AppendDateTimeCheckBox.Size = new System.Drawing.Size(204, 17);
+			AppendDateTimeCheckBox.TabIndex = 2;
+			AppendDateTimeCheckBox.Text = "Append the item update date-time";
+			AppendDateTimeCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ReplaceSpacesWithUnderscoresCheckBox
 			//
-			this.ReplaceSpacesWithUnderscoresCheckBox.AutoSize = true;
-			this.ReplaceSpacesWithUnderscoresCheckBox.IsReadOnly = false;
-			this.ReplaceSpacesWithUnderscoresCheckBox.Location = new System.Drawing.Point(3, 72);
-			this.ReplaceSpacesWithUnderscoresCheckBox.Name = "ReplaceSpacesWithUnderscoresCheckBox";
-			this.ReplaceSpacesWithUnderscoresCheckBox.Size = new System.Drawing.Size(195, 17);
-			this.ReplaceSpacesWithUnderscoresCheckBox.TabIndex = 3;
-			this.ReplaceSpacesWithUnderscoresCheckBox.Text = "Replace spaces with underscores";
-			this.ReplaceSpacesWithUnderscoresCheckBox.UseVisualStyleBackColor = true;
+			ReplaceSpacesWithUnderscoresCheckBox.AutoSize = true;
+			ReplaceSpacesWithUnderscoresCheckBox.IsReadOnly = false;
+			ReplaceSpacesWithUnderscoresCheckBox.Location = new System.Drawing.Point(3, 72);
+			ReplaceSpacesWithUnderscoresCheckBox.Name = "ReplaceSpacesWithUnderscoresCheckBox";
+			ReplaceSpacesWithUnderscoresCheckBox.Size = new System.Drawing.Size(195, 17);
+			ReplaceSpacesWithUnderscoresCheckBox.TabIndex = 3;
+			ReplaceSpacesWithUnderscoresCheckBox.Text = "Replace spaces with underscores";
+			ReplaceSpacesWithUnderscoresCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsUseDefaultsButton
 			//
-			this.OptionsUseDefaultsButton.Location = new System.Drawing.Point(3, 95);
-			this.OptionsUseDefaultsButton.Name = "OptionsUseDefaultsButton";
-			this.OptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
-			this.OptionsUseDefaultsButton.TabIndex = 4;
-			this.OptionsUseDefaultsButton.Text = "Use Defaults";
-			this.OptionsUseDefaultsButton.UseVisualStyleBackColor = true;
+			OptionsUseDefaultsButton.Location = new System.Drawing.Point(3, 95);
+			OptionsUseDefaultsButton.Name = "OptionsUseDefaultsButton";
+			OptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
+			OptionsUseDefaultsButton.TabIndex = 4;
+			OptionsUseDefaultsButton.Text = "Use Defaults";
+			OptionsUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//ConvertToExpectedFileOrFolderCheckBox
 			//
-			this.ConvertToExpectedFileOrFolderCheckBox.AutoSize = true;
-			this.ConvertToExpectedFileOrFolderCheckBox.IsReadOnly = false;
-			this.ConvertToExpectedFileOrFolderCheckBox.Location = new System.Drawing.Point(230, 3);
-			this.ConvertToExpectedFileOrFolderCheckBox.Name = "ConvertToExpectedFileOrFolderCheckBox";
-			this.ConvertToExpectedFileOrFolderCheckBox.Size = new System.Drawing.Size(196, 17);
-			this.ConvertToExpectedFileOrFolderCheckBox.TabIndex = 7;
-			this.ConvertToExpectedFileOrFolderCheckBox.Text = "Convert to expected file or folder";
-			this.ToolTip1.SetToolTip(this.ConvertToExpectedFileOrFolderCheckBox, "Example: Garry's Mod uses compressed GMA (LZMA) instead of GMA.");
-			this.ConvertToExpectedFileOrFolderCheckBox.UseVisualStyleBackColor = true;
+			ConvertToExpectedFileOrFolderCheckBox.AutoSize = true;
+			ConvertToExpectedFileOrFolderCheckBox.IsReadOnly = false;
+			ConvertToExpectedFileOrFolderCheckBox.Location = new System.Drawing.Point(230, 3);
+			ConvertToExpectedFileOrFolderCheckBox.Name = "ConvertToExpectedFileOrFolderCheckBox";
+			ConvertToExpectedFileOrFolderCheckBox.Size = new System.Drawing.Size(196, 17);
+			ConvertToExpectedFileOrFolderCheckBox.TabIndex = 7;
+			ConvertToExpectedFileOrFolderCheckBox.Text = "Convert to expected file or folder";
+			ToolTip1.SetToolTip(ConvertToExpectedFileOrFolderCheckBox, "Example: Garry's Mod uses compressed GMA (LZMA) instead of GMA.");
+			ConvertToExpectedFileOrFolderCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ExampleOutputFileNameLabel
 			//
-			this.ExampleOutputFileNameLabel.AutoSize = true;
-			this.ExampleOutputFileNameLabel.Location = new System.Drawing.Point(3, 131);
-			this.ExampleOutputFileNameLabel.Name = "ExampleOutputFileNameLabel";
-			this.ExampleOutputFileNameLabel.Size = new System.Drawing.Size(141, 13);
-			this.ExampleOutputFileNameLabel.TabIndex = 5;
-			this.ExampleOutputFileNameLabel.Text = "Example output file name:";
+			ExampleOutputFileNameLabel.AutoSize = true;
+			ExampleOutputFileNameLabel.Location = new System.Drawing.Point(3, 131);
+			ExampleOutputFileNameLabel.Name = "ExampleOutputFileNameLabel";
+			ExampleOutputFileNameLabel.Size = new System.Drawing.Size(141, 13);
+			ExampleOutputFileNameLabel.TabIndex = 5;
+			ExampleOutputFileNameLabel.Text = "Example output file name:";
 			//
 			//ExampleOutputFileNameTextBox
 			//
-			this.ExampleOutputFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.ExampleOutputFileNameTextBox.CueBannerText = "";
-			this.ExampleOutputFileNameTextBox.Location = new System.Drawing.Point(3, 147);
-			this.ExampleOutputFileNameTextBox.Name = "ExampleOutputFileNameTextBox";
-			this.ExampleOutputFileNameTextBox.ReadOnly = true;
-			this.ExampleOutputFileNameTextBox.Size = new System.Drawing.Size(758, 22);
-			this.ExampleOutputFileNameTextBox.TabIndex = 6;
+			ExampleOutputFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			ExampleOutputFileNameTextBox.CueBannerText = "";
+			ExampleOutputFileNameTextBox.Location = new System.Drawing.Point(3, 147);
+			ExampleOutputFileNameTextBox.Name = "ExampleOutputFileNameTextBox";
+			ExampleOutputFileNameTextBox.ReadOnly = true;
+			ExampleOutputFileNameTextBox.Size = new System.Drawing.Size(758, 22);
+			ExampleOutputFileNameTextBox.TabIndex = 6;
 			//
 			//CancelDownloadButton
 			//
-			this.CancelDownloadButton.Enabled = false;
-			this.CancelDownloadButton.Location = new System.Drawing.Point(126, 0);
-			this.CancelDownloadButton.Name = "CancelDownloadButton";
-			this.CancelDownloadButton.Size = new System.Drawing.Size(120, 23);
-			this.CancelDownloadButton.TabIndex = 11;
-			this.CancelDownloadButton.Text = "Cancel Download";
-			this.CancelDownloadButton.UseVisualStyleBackColor = true;
+			CancelDownloadButton.Enabled = false;
+			CancelDownloadButton.Location = new System.Drawing.Point(126, 0);
+			CancelDownloadButton.Name = "CancelDownloadButton";
+			CancelDownloadButton.Size = new System.Drawing.Size(120, 23);
+			CancelDownloadButton.TabIndex = 11;
+			CancelDownloadButton.Text = "Cancel Download";
+			CancelDownloadButton.UseVisualStyleBackColor = true;
 			//
 			//DownloadProgressBar
 			//
-			this.DownloadProgressBar.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DownloadProgressBar.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.DownloadProgressBar.Location = new System.Drawing.Point(252, 0);
-			this.DownloadProgressBar.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-			this.DownloadProgressBar.Name = "DownloadProgressBar";
-			this.DownloadProgressBar.Size = new System.Drawing.Size(515, 23);
-			this.DownloadProgressBar.TabIndex = 12;
+			DownloadProgressBar.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DownloadProgressBar.ForeColor = System.Drawing.SystemColors.ControlText;
+			DownloadProgressBar.Location = new System.Drawing.Point(252, 0);
+			DownloadProgressBar.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+			DownloadProgressBar.Name = "DownloadProgressBar";
+			DownloadProgressBar.Size = new System.Drawing.Size(515, 23);
+			DownloadProgressBar.TabIndex = 12;
 			//
 			//OpenWorkshopPageButton
 			//
-			this.OpenWorkshopPageButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.OpenWorkshopPageButton.Location = new System.Drawing.Point(709, 3);
-			this.OpenWorkshopPageButton.Name = "OpenWorkshopPageButton";
-			this.OpenWorkshopPageButton.Size = new System.Drawing.Size(64, 23);
-			this.OpenWorkshopPageButton.TabIndex = 2;
-			this.OpenWorkshopPageButton.Text = "Open";
-			this.OpenWorkshopPageButton.UseVisualStyleBackColor = true;
+			OpenWorkshopPageButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			OpenWorkshopPageButton.Location = new System.Drawing.Point(709, 3);
+			OpenWorkshopPageButton.Name = "OpenWorkshopPageButton";
+			OpenWorkshopPageButton.Size = new System.Drawing.Size(64, 23);
+			OpenWorkshopPageButton.TabIndex = 2;
+			OpenWorkshopPageButton.Text = "Open";
+			OpenWorkshopPageButton.UseVisualStyleBackColor = true;
 			//
 			//DocumentsOutputPathTextBox
 			//
-			this.DocumentsOutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DocumentsOutputPathTextBox.CueBannerText = "";
-			this.DocumentsOutputPathTextBox.Location = new System.Drawing.Point(233, 32);
-			this.DocumentsOutputPathTextBox.Name = "DocumentsOutputPathTextBox";
-			this.DocumentsOutputPathTextBox.ReadOnly = true;
-			this.DocumentsOutputPathTextBox.Size = new System.Drawing.Size(421, 22);
-			this.DocumentsOutputPathTextBox.TabIndex = 6;
+			DocumentsOutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DocumentsOutputPathTextBox.CueBannerText = "";
+			DocumentsOutputPathTextBox.Location = new System.Drawing.Point(233, 32);
+			DocumentsOutputPathTextBox.Name = "DocumentsOutputPathTextBox";
+			DocumentsOutputPathTextBox.ReadOnly = true;
+			DocumentsOutputPathTextBox.Size = new System.Drawing.Size(421, 22);
+			DocumentsOutputPathTextBox.TabIndex = 6;
 			//
 			//DownloadedItemTextBox
 			//
-			this.DownloadedItemTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DownloadedItemTextBox.CueBannerText = "";
-			this.DownloadedItemTextBox.Location = new System.Drawing.Point(83, 3);
-			this.DownloadedItemTextBox.Name = "DownloadedItemTextBox";
-			this.DownloadedItemTextBox.ReadOnly = true;
-			this.DownloadedItemTextBox.Size = new System.Drawing.Size(542, 22);
-			this.DownloadedItemTextBox.TabIndex = 15;
+			DownloadedItemTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DownloadedItemTextBox.CueBannerText = "";
+			DownloadedItemTextBox.Location = new System.Drawing.Point(83, 3);
+			DownloadedItemTextBox.Name = "DownloadedItemTextBox";
+			DownloadedItemTextBox.ReadOnly = true;
+			DownloadedItemTextBox.Size = new System.Drawing.Size(542, 22);
+			DownloadedItemTextBox.TabIndex = 15;
 			//
 			//DownloadedLabel
 			//
-			this.DownloadedLabel.AutoSize = true;
-			this.DownloadedLabel.Location = new System.Drawing.Point(0, 8);
-			this.DownloadedLabel.Name = "DownloadedLabel";
-			this.DownloadedLabel.Size = new System.Drawing.Size(77, 13);
-			this.DownloadedLabel.TabIndex = 14;
-			this.DownloadedLabel.Text = "Downloaded:";
+			DownloadedLabel.AutoSize = true;
+			DownloadedLabel.Location = new System.Drawing.Point(0, 8);
+			DownloadedLabel.Name = "DownloadedLabel";
+			DownloadedLabel.Size = new System.Drawing.Size(77, 13);
+			DownloadedLabel.TabIndex = 14;
+			DownloadedLabel.Text = "Downloaded:";
 			//
 			//GotoDownloadedItemButton
 			//
-			this.GotoDownloadedItemButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoDownloadedItemButton.Location = new System.Drawing.Point(727, 3);
-			this.GotoDownloadedItemButton.Name = "GotoDownloadedItemButton";
-			this.GotoDownloadedItemButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoDownloadedItemButton.TabIndex = 16;
-			this.GotoDownloadedItemButton.Text = "Goto";
-			this.GotoDownloadedItemButton.UseVisualStyleBackColor = true;
+			GotoDownloadedItemButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoDownloadedItemButton.Location = new System.Drawing.Point(727, 3);
+			GotoDownloadedItemButton.Name = "GotoDownloadedItemButton";
+			GotoDownloadedItemButton.Size = new System.Drawing.Size(43, 23);
+			GotoDownloadedItemButton.TabIndex = 16;
+			GotoDownloadedItemButton.Text = "Goto";
+			GotoDownloadedItemButton.UseVisualStyleBackColor = true;
 			//
 			//DownloadUserControlFillPanel
 			//
-			this.DownloadUserControlFillPanel.Controls.Add(this.ItemIdOrLinkLabel);
-			this.DownloadUserControlFillPanel.Controls.Add(this.ItemIdTextBox);
-			this.DownloadUserControlFillPanel.Controls.Add(this.OpenWorkshopPageButton);
-			this.DownloadUserControlFillPanel.Controls.Add(this.OuputToLabel);
-			this.DownloadUserControlFillPanel.Controls.Add(this.OutputPathComboBox);
-			this.DownloadUserControlFillPanel.Controls.Add(this.OutputPathTextBox);
-			this.DownloadUserControlFillPanel.Controls.Add(this.DocumentsOutputPathTextBox);
-			this.DownloadUserControlFillPanel.Controls.Add(this.BrowseForOutputPathButton);
-			this.DownloadUserControlFillPanel.Controls.Add(this.GotoOutputPathButton);
-			this.DownloadUserControlFillPanel.Controls.Add(this.Options_LogSplitContainer);
-			this.DownloadUserControlFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DownloadUserControlFillPanel.Location = new System.Drawing.Point(0, 0);
-			this.DownloadUserControlFillPanel.Name = "DownloadUserControlFillPanel";
-			this.DownloadUserControlFillPanel.Size = new System.Drawing.Size(776, 536);
-			this.DownloadUserControlFillPanel.TabIndex = 17;
+			DownloadUserControlFillPanel.Controls.Add(ItemIdOrLinkLabel);
+			DownloadUserControlFillPanel.Controls.Add(ItemIdTextBox);
+			DownloadUserControlFillPanel.Controls.Add(OpenWorkshopPageButton);
+			DownloadUserControlFillPanel.Controls.Add(OuputToLabel);
+			DownloadUserControlFillPanel.Controls.Add(OutputPathComboBox);
+			DownloadUserControlFillPanel.Controls.Add(OutputPathTextBox);
+			DownloadUserControlFillPanel.Controls.Add(DocumentsOutputPathTextBox);
+			DownloadUserControlFillPanel.Controls.Add(BrowseForOutputPathButton);
+			DownloadUserControlFillPanel.Controls.Add(GotoOutputPathButton);
+			DownloadUserControlFillPanel.Controls.Add(Options_LogSplitContainer);
+			DownloadUserControlFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			DownloadUserControlFillPanel.Location = new System.Drawing.Point(0, 0);
+			DownloadUserControlFillPanel.Name = "DownloadUserControlFillPanel";
+			DownloadUserControlFillPanel.Size = new System.Drawing.Size(776, 536);
+			DownloadUserControlFillPanel.TabIndex = 17;
 			//
 			//Options_LogSplitContainer
 			//
-			this.Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
-			this.Options_LogSplitContainer.Name = "Options_LogSplitContainer";
-			this.Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
+			Options_LogSplitContainer.Name = "Options_LogSplitContainer";
+			Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			//
 			//Options_LogSplitContainer.Panel1
 			//
-			this.Options_LogSplitContainer.Panel1.Controls.Add(this.OptionsGroupBox);
+			Options_LogSplitContainer.Panel1.Controls.Add(OptionsGroupBox);
 			//
 			//Options_LogSplitContainer.Panel2
 			//
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.LogTextBox);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.DownloadButtonsPanel);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.PostDownloadPanel);
-			this.Options_LogSplitContainer.Size = new System.Drawing.Size(770, 475);
-			this.Options_LogSplitContainer.SplitterDistance = 193;
-			this.Options_LogSplitContainer.TabIndex = 17;
+			Options_LogSplitContainer.Panel2.Controls.Add(LogTextBox);
+			Options_LogSplitContainer.Panel2.Controls.Add(DownloadButtonsPanel);
+			Options_LogSplitContainer.Panel2.Controls.Add(PostDownloadPanel);
+			Options_LogSplitContainer.Size = new System.Drawing.Size(770, 475);
+			Options_LogSplitContainer.SplitterDistance = 193;
+			Options_LogSplitContainer.TabIndex = 17;
 			//
 			//DownloadButtonsPanel
 			//
-			this.DownloadButtonsPanel.Controls.Add(this.DownloadButton);
-			this.DownloadButtonsPanel.Controls.Add(this.CancelDownloadButton);
-			this.DownloadButtonsPanel.Controls.Add(this.DownloadProgressBar);
-			this.DownloadButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DownloadButtonsPanel.Location = new System.Drawing.Point(0, 0);
-			this.DownloadButtonsPanel.Name = "DownloadButtonsPanel";
-			this.DownloadButtonsPanel.Size = new System.Drawing.Size(770, 26);
-			this.DownloadButtonsPanel.TabIndex = 19;
+			DownloadButtonsPanel.Controls.Add(DownloadButton);
+			DownloadButtonsPanel.Controls.Add(CancelDownloadButton);
+			DownloadButtonsPanel.Controls.Add(DownloadProgressBar);
+			DownloadButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			DownloadButtonsPanel.Location = new System.Drawing.Point(0, 0);
+			DownloadButtonsPanel.Name = "DownloadButtonsPanel";
+			DownloadButtonsPanel.Size = new System.Drawing.Size(770, 26);
+			DownloadButtonsPanel.TabIndex = 19;
 			//
 			//PostDownloadPanel
 			//
-			this.PostDownloadPanel.Controls.Add(this.UseInUnpackButton);
-			this.PostDownloadPanel.Controls.Add(this.DownloadedLabel);
-			this.PostDownloadPanel.Controls.Add(this.DownloadedItemTextBox);
-			this.PostDownloadPanel.Controls.Add(this.GotoDownloadedItemButton);
-			this.PostDownloadPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.PostDownloadPanel.Location = new System.Drawing.Point(0, 252);
-			this.PostDownloadPanel.Name = "PostDownloadPanel";
-			this.PostDownloadPanel.Size = new System.Drawing.Size(770, 26);
-			this.PostDownloadPanel.TabIndex = 18;
+			PostDownloadPanel.Controls.Add(UseInUnpackButton);
+			PostDownloadPanel.Controls.Add(DownloadedLabel);
+			PostDownloadPanel.Controls.Add(DownloadedItemTextBox);
+			PostDownloadPanel.Controls.Add(GotoDownloadedItemButton);
+			PostDownloadPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			PostDownloadPanel.Location = new System.Drawing.Point(0, 252);
+			PostDownloadPanel.Name = "PostDownloadPanel";
+			PostDownloadPanel.Size = new System.Drawing.Size(770, 26);
+			PostDownloadPanel.TabIndex = 18;
 			//
 			//UseInUnpackButton
 			//
-			this.UseInUnpackButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.UseInUnpackButton.Location = new System.Drawing.Point(631, 3);
-			this.UseInUnpackButton.Name = "UseInUnpackButton";
-			this.UseInUnpackButton.Size = new System.Drawing.Size(90, 23);
-			this.UseInUnpackButton.TabIndex = 17;
-			this.UseInUnpackButton.Text = "Use In Unpack";
-			this.UseInUnpackButton.UseVisualStyleBackColor = true;
+			UseInUnpackButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			UseInUnpackButton.Location = new System.Drawing.Point(631, 3);
+			UseInUnpackButton.Name = "UseInUnpackButton";
+			UseInUnpackButton.Size = new System.Drawing.Size(90, 23);
+			UseInUnpackButton.TabIndex = 17;
+			UseInUnpackButton.Text = "Use In Unpack";
+			UseInUnpackButton.UseVisualStyleBackColor = true;
 			//
 			//Timer1
 			//
-			this.Timer1.Interval = 1000;
+			Timer1.Interval = 1000;
 			//
 			//DownloadUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.DownloadUserControlFillPanel);
-			this.Name = "DownloadUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.OptionsGroupBox.ResumeLayout(false);
-			this.OptionsGroupBoxFillPanel.ResumeLayout(false);
-			this.OptionsGroupBoxFillPanel.PerformLayout();
-			this.DownloadUserControlFillPanel.ResumeLayout(false);
-			this.DownloadUserControlFillPanel.PerformLayout();
-			this.Options_LogSplitContainer.Panel1.ResumeLayout(false);
-			this.Options_LogSplitContainer.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).EndInit();
-			this.Options_LogSplitContainer.ResumeLayout(false);
-			this.DownloadButtonsPanel.ResumeLayout(false);
-			this.PostDownloadPanel.ResumeLayout(false);
-			this.PostDownloadPanel.PerformLayout();
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(DownloadUserControlFillPanel);
+			Name = "DownloadUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			OptionsGroupBox.ResumeLayout(false);
+			OptionsGroupBoxFillPanel.ResumeLayout(false);
+			OptionsGroupBoxFillPanel.PerformLayout();
+			DownloadUserControlFillPanel.ResumeLayout(false);
+			DownloadUserControlFillPanel.PerformLayout();
+			Options_LogSplitContainer.Panel1.ResumeLayout(false);
+			Options_LogSplitContainer.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).EndInit();
+			Options_LogSplitContainer.ResumeLayout(false);
+			DownloadButtonsPanel.ResumeLayout(false);
+			PostDownloadPanel.ResumeLayout(false);
+			PostDownloadPanel.PerformLayout();
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(DownloadUserControl_Load);

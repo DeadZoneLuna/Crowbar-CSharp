@@ -17,15 +17,15 @@ namespace Crowbar
 
 		public SourceSmdFile32(StreamWriter outputFileStream, SourceMdlFileData32 mdlFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
 		}
 
 		public SourceSmdFile32(StreamWriter outputFileStream, SourceMdlFileData32 mdlFileData, SourcePhyFileData phyFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
-			this.thePhyFileData = phyFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
+			thePhyFileData = phyFileData;
 		}
 
 #endregion
@@ -34,7 +34,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteHeaderSection()
@@ -43,7 +43,7 @@ namespace Crowbar
 
 			//version 1
 			line = "version 1";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteNodesSection(int lodIndex)
@@ -53,23 +53,23 @@ namespace Crowbar
 
 			//nodes
 			line = "nodes";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				name = this.theMdlFileData.theBones[boneIndex].theName;
+				name = theMdlFileData.theBones[boneIndex].theName;
 
 				line = "  ";
 				line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " \"";
 				line += name;
 				line += "\" ";
-				line += this.theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSection(int lodIndex)
@@ -78,7 +78,7 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -88,28 +88,28 @@ namespace Crowbar
 			{
 				line = "  time 0";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			theOutputFileStreamWriter.WriteLine(line);
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
 				line = "    ";
 				line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].position.x.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.theBones[boneIndex].position.x.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].position.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.theBones[boneIndex].position.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].position.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.theBones[boneIndex].position.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].rotation.x.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.theBones[boneIndex].rotation.x.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].rotation.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += theMdlFileData.theBones[boneIndex].rotation.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";
-				line += this.theMdlFileData.theBones[boneIndex].rotation.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].rotation.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteTrianglesSection(int lodIndex, SourceVtxModel06 aVtxModel, SourceMdlModel37 aModel, int bodyPartVertexIndexStart)
@@ -122,7 +122,7 @@ namespace Crowbar
 
 			//triangles
 			line = "triangles";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			SourceVtxModelLod06 aVtxLod = null;
 			SourceVtxMesh06 aVtxMesh = null;
@@ -147,7 +147,7 @@ namespace Crowbar
 					{
 						aVtxMesh = aVtxLod.theVtxMeshes[meshIndex];
 						materialIndex = aModel.theMeshes[meshIndex].materialIndex;
-						materialName = this.theMdlFileData.theTextures[materialIndex].theFileName;
+						materialName = theMdlFileData.theTextures[materialIndex].theFileName;
 						//TODO: This was used in previous versions, but maybe should leave as above.
 						//materialName = Path.GetFileName(Me.theSourceEngineModel.theMdlFileHeader.theTextures(materialIndex).theName)
 
@@ -172,9 +172,9 @@ namespace Crowbar
 										//------
 										//NOTE: studiomdl.exe will complain if texture name for eyeball is not at start of line.
 										materialLine = materialName;
-										vertex1Line = this.WriteVertexLine(aStripGroup, vtxIndexIndex, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
-										vertex2Line = this.WriteVertexLine(aStripGroup, vtxIndexIndex + 2, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
-										vertex3Line = this.WriteVertexLine(aStripGroup, vtxIndexIndex + 1, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
+										vertex1Line = WriteVertexLine(aStripGroup, vtxIndexIndex, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
+										vertex2Line = WriteVertexLine(aStripGroup, vtxIndexIndex + 2, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
+										vertex3Line = WriteVertexLine(aStripGroup, vtxIndexIndex + 1, lodIndex, meshVertexIndexStart, bodyPartVertexIndexStart);
 										if (vertex1Line.StartsWith("// ") || vertex2Line.StartsWith("// ") || vertex3Line.StartsWith("// "))
 										{
 											materialLine = "// " + materialLine;
@@ -191,10 +191,10 @@ namespace Crowbar
 												vertex3Line = "// " + vertex3Line;
 											}
 										}
-										this.theOutputFileStreamWriter.WriteLine(materialLine);
-										this.theOutputFileStreamWriter.WriteLine(vertex1Line);
-										this.theOutputFileStreamWriter.WriteLine(vertex2Line);
-										this.theOutputFileStreamWriter.WriteLine(vertex3Line);
+										theOutputFileStreamWriter.WriteLine(materialLine);
+										theOutputFileStreamWriter.WriteLine(vertex1Line);
+										theOutputFileStreamWriter.WriteLine(vertex2Line);
+										theOutputFileStreamWriter.WriteLine(vertex3Line);
 									}
 								}
 							}
@@ -208,7 +208,7 @@ namespace Crowbar
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteTrianglesSectionForPhysics()
@@ -217,7 +217,7 @@ namespace Crowbar
 
 			//triangles
 			line = "triangles";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			SourcePhyCollisionData collisionData = null;
 			SourceMdlBone37 aBone = null;
@@ -230,15 +230,15 @@ namespace Crowbar
 
 			try
 			{
-				if (this.thePhyFileData.theSourcePhyCollisionDatas != null)
+				if (thePhyFileData.theSourcePhyCollisionDatas != null)
 				{
-					for (int collisionDataIndex = 0; collisionDataIndex < this.thePhyFileData.theSourcePhyCollisionDatas.Count; collisionDataIndex++)
+					for (int collisionDataIndex = 0; collisionDataIndex < thePhyFileData.theSourcePhyCollisionDatas.Count; collisionDataIndex++)
 					{
-						collisionData = this.thePhyFileData.theSourcePhyCollisionDatas[collisionDataIndex];
+						collisionData = thePhyFileData.theSourcePhyCollisionDatas[collisionDataIndex];
 
-						if (collisionDataIndex < this.thePhyFileData.theSourcePhyPhysCollisionModels.Count)
+						if (collisionDataIndex < thePhyFileData.theSourcePhyPhysCollisionModels.Count)
 						{
-							aSourcePhysCollisionModel = this.thePhyFileData.theSourcePhyPhysCollisionModels[collisionDataIndex];
+							aSourcePhysCollisionModel = thePhyFileData.theSourcePhyPhysCollisionModels[collisionDataIndex];
 						}
 						else
 						{
@@ -249,19 +249,19 @@ namespace Crowbar
 						{
 							faceSection = collisionData.theFaceSections[faceSectionIndex];
 
-							if (faceSection.theBoneIndex >= this.theMdlFileData.theBones.Count)
+							if (faceSection.theBoneIndex >= theMdlFileData.theBones.Count)
 							{
 								continue;
 							}
-							if (aSourcePhysCollisionModel != null && this.theMdlFileData.theBoneNameToBoneIndexMap.ContainsKey(aSourcePhysCollisionModel.theName))
+							if (aSourcePhysCollisionModel != null && theMdlFileData.theBoneNameToBoneIndexMap.ContainsKey(aSourcePhysCollisionModel.theName))
 							{
-								boneIndex = this.theMdlFileData.theBoneNameToBoneIndexMap[aSourcePhysCollisionModel.theName];
+								boneIndex = theMdlFileData.theBoneNameToBoneIndexMap[aSourcePhysCollisionModel.theName];
 							}
 							else
 							{
 								boneIndex = faceSection.theBoneIndex;
 							}
-							aBone = this.theMdlFileData.theBones[boneIndex];
+							aBone = theMdlFileData.theBones[boneIndex];
 
 							for (int triangleIndex = 0; triangleIndex < faceSection.theFaces.Count; triangleIndex++)
 							{
@@ -269,14 +269,14 @@ namespace Crowbar
 
 								line = "  phy";
 								//line = "  collisionDataBlock_" + collisionDataIndex.ToString()
-								this.theOutputFileStreamWriter.WriteLine(line);
+								theOutputFileStreamWriter.WriteLine(line);
 
 								for (int vertexIndex = 0; vertexIndex < aTriangle.vertexIndex.Length; vertexIndex++)
 								{
 									//phyVertex = collisionData.theVertices(aTriangle.vertexIndex(vertexIndex))
 									phyVertex = faceSection.theVertices[aTriangle.vertexIndex[vertexIndex]];
 
-									aVectorTransformed = this.TransformPhyVertex(aBone, phyVertex.vertex, aSourcePhysCollisionModel);
+									aVectorTransformed = TransformPhyVertex(aBone, phyVertex.vertex, aSourcePhysCollisionModel);
 
 									line = "    ";
 									line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
@@ -299,7 +299,7 @@ namespace Crowbar
 									line += " 0 0";
 									//NOTE: The studiomdl.exe doesn't need the integer values at end.
 									//line += " 1 0"
-									this.theOutputFileStreamWriter.WriteLine(line);
+									theOutputFileStreamWriter.WriteLine(line);
 								}
 							}
 						}
@@ -312,7 +312,7 @@ namespace Crowbar
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		//'TODO: Write the firstAnimDesc's first frame's frameLines because it is used for "subtract" option.
@@ -388,13 +388,13 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			this.theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
+			theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
 			for (int frameIndex = 0; frameIndex < anAnimationDesc.frameCount; frameIndex++)
 			{
-				this.theAnimationFrameLines.Clear();
-				this.CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex);
+				theAnimationFrameLines.Clear();
+				CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex);
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -405,12 +405,12 @@ namespace Crowbar
 					line = "  time ";
 				}
 				line += frameIndex.ToString();
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
-				for (int i = 0; i < this.theAnimationFrameLines.Count; i++)
+				for (int i = 0; i < theAnimationFrameLines.Count; i++)
 				{
-					boneIndex = this.theAnimationFrameLines.Keys[i];
-					aFrameLine = this.theAnimationFrameLines.Values[i];
+					boneIndex = theAnimationFrameLines.Keys[i];
+					aFrameLine = theAnimationFrameLines.Values[i];
 
 					position.x = aFrameLine.position.x;
 					position.y = aFrameLine.position.y;
@@ -447,12 +447,12 @@ namespace Crowbar
 						line += aFrameLine.rotation.debug_text;
 					}
 
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion
@@ -485,13 +485,13 @@ namespace Crowbar
 				//	aVertex = Me.theVvdFileData.theFixedVertexesByLod(0)(vertexIndex)
 				//	'aVertex = Me.theSourceEngineModel.theVvdFileHeader.theFixedVertexesByLod(lodIndex)(aVtxVertex.originalMeshVertexIndex + meshVertexIndexStart)
 				//End If
-				aVertex = this.theMdlFileData.theBodyParts[0].theModels[0].theVertexes[vertexIndex];
+				aVertex = theMdlFileData.theBodyParts[0].theModels[0].theVertexes[vertexIndex];
 
 				line = "  ";
 				line += aVertex.boneWeight.bone[0].ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 
 				line += " ";
-				if ((this.theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0)
+				if ((theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0)
 				{
 					line += aVertex.position.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
@@ -507,7 +507,7 @@ namespace Crowbar
 				line += aVertex.position.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 
 				line += " ";
-				if ((this.theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0)
+				if ((theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0)
 				{
 					line += aVertex.normal.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
@@ -621,9 +621,9 @@ namespace Crowbar
 			aVector.z = 1 / 0.0254 * -vertex.y;
 			if (aSourcePhysCollisionModel != null)
 			{
-				if (this.theMdlFileData.theBoneNameToBoneIndexMap.ContainsKey(aSourcePhysCollisionModel.theName))
+				if (theMdlFileData.theBoneNameToBoneIndexMap.ContainsKey(aSourcePhysCollisionModel.theName))
 				{
-					aBone = this.theMdlFileData.theBones[this.theMdlFileData.theBoneNameToBoneIndexMap[aSourcePhysCollisionModel.theName]];
+					aBone = theMdlFileData.theBones[theMdlFileData.theBoneNameToBoneIndexMap[aSourcePhysCollisionModel.theName]];
 				}
 				else
 				{
@@ -1067,21 +1067,21 @@ namespace Crowbar
 
 			s = 0;
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				aBone = this.theMdlFileData.theBones[boneIndex];
+				aBone = theMdlFileData.theBones[boneIndex];
 				anAnimation = anAnimationDesc.theAnimations[boneIndex];
 
 				if (anAnimation != null)
 				{
-					if (this.theAnimationFrameLines.ContainsKey(boneIndex))
+					if (theAnimationFrameLines.ContainsKey(boneIndex))
 					{
-						aFrameLine = this.theAnimationFrameLines[boneIndex];
+						aFrameLine = theAnimationFrameLines[boneIndex];
 					}
 					else
 					{
 						aFrameLine = new AnimationFrameLine();
-						this.theAnimationFrameLines.Add(boneIndex, aFrameLine);
+						theAnimationFrameLines.Add(boneIndex, aFrameLine);
 					}
 
 					aFrameLine.rotationQuat = new SourceQuaternion();
@@ -1094,7 +1094,7 @@ namespace Crowbar
 
 					aFrameLine.rotation.debug_text = rot.debug_text;
 
-					pos = this.CalcBonePosition(frameIndex, s, aBone, anAnimation);
+					pos = CalcBonePosition(frameIndex, s, aBone, anAnimation);
 					aFrameLine.position = new SourceVector();
 					aFrameLine.position.x = pos.x;
 					aFrameLine.position.y = pos.y;
@@ -1117,7 +1117,7 @@ namespace Crowbar
 				}
 				else
 				{
-					angleVector.x = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[3], aBone.rotationScale.x);
+					angleVector.x = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[3], aBone.rotationScale.x);
 					//angle1[j] = pbone->value[j+3] + angle1[j] * pbone->scale[j+3];
 					angleVector.x = aBone.rotation.x + angleVector.x * aBone.rotationScale.x;
 				}
@@ -1128,7 +1128,7 @@ namespace Crowbar
 				}
 				else
 				{
-					angleVector.y = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[4], aBone.rotationScale.y);
+					angleVector.y = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[4], aBone.rotationScale.y);
 					angleVector.y = aBone.rotation.y + angleVector.y * aBone.rotationScale.y;
 				}
 				if (anAnimation.animationValueOffsets[5] <= 0)
@@ -1138,7 +1138,7 @@ namespace Crowbar
 				}
 				else
 				{
-					angleVector.z = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[5], aBone.rotationScale.z);
+					angleVector.z = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[5], aBone.rotationScale.z);
 					angleVector.z = aBone.rotation.z + angleVector.z * aBone.rotationScale.z;
 				}
 
@@ -1229,7 +1229,7 @@ namespace Crowbar
 				}
 				else
 				{
-					pos.x = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[0], aBone.positionScale.x);
+					pos.x = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[0], aBone.positionScale.x);
 					pos.x = aBone.position.x + pos.x * aBone.positionScale.x;
 				}
 
@@ -1240,7 +1240,7 @@ namespace Crowbar
 				}
 				else
 				{
-					pos.y = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[1], aBone.positionScale.y);
+					pos.y = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[1], aBone.positionScale.y);
 					pos.y = aBone.position.y + pos.y * aBone.positionScale.y;
 				}
 
@@ -1251,7 +1251,7 @@ namespace Crowbar
 				}
 				else
 				{
-					pos.z = this.ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[2], aBone.positionScale.z);
+					pos.z = ExtractAnimValue(frameIndex, anAnimation.theAnimationValues[2], aBone.positionScale.z);
 					pos.z = aBone.position.z + pos.z * aBone.positionScale.z;
 				}
 

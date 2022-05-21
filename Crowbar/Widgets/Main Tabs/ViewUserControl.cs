@@ -31,7 +31,7 @@ namespace Crowbar
 			{
 				if (disposing)
 				{
-					this.Free();
+					Free();
 					if (components != null)
 					{
 						components.Dispose();
@@ -50,17 +50,17 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.theModelViewers = new List<Viewer>();
+			theModelViewers = new List<Viewer>();
 
 			IList anEnumList = EnumHelper.ToList(typeof(AppEnums.SupportedMdlVersion));
-			this.OverrideMdlVersionComboBox.DisplayMember = "Value";
-			this.OverrideMdlVersionComboBox.ValueMember = "Key";
-			this.OverrideMdlVersionComboBox.DataSource = anEnumList;
-			this.OverrideMdlVersionComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, this.NameOfAppSettingOverrideMdlVersionName, false, DataSourceUpdateMode.OnPropertyChanged);
+			OverrideMdlVersionComboBox.DisplayMember = "Value";
+			OverrideMdlVersionComboBox.ValueMember = "Key";
+			OverrideMdlVersionComboBox.DataSource = anEnumList;
+			OverrideMdlVersionComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, NameOfAppSettingOverrideMdlVersionName, false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.UpdateDataBindings();
+			UpdateDataBindings();
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
 		}
@@ -70,21 +70,21 @@ namespace Crowbar
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
 
 			//RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf Me.ParsePathFileName
-			if (this.MdlPathFileNameTextBox.DataBindings["Text"] != null)
+			if (MdlPathFileNameTextBox.DataBindings["Text"] != null)
 			{
-				this.MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+				MdlPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 			}
-			this.MdlPathFileNameTextBox.DataBindings.Clear();
+			MdlPathFileNameTextBox.DataBindings.Clear();
 
-			this.OverrideMdlVersionComboBox.DataBindings.Clear();
+			OverrideMdlVersionComboBox.DataBindings.Clear();
 
-			this.FreeDataViewer();
-			this.FreeModelViewerWithModel();
-			if (this.theModelViewers != null)
+			FreeDataViewer();
+			FreeModelViewerWithModel();
+			if (theModelViewers != null)
 			{
-				foreach (Viewer aModelViewer in this.theModelViewers)
+				foreach (Viewer aModelViewer in theModelViewers)
 				{
-					this.FreeModelViewer(aModelViewer);
+					FreeModelViewer(aModelViewer);
 				}
 			}
 		}
@@ -97,11 +97,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewerType;
+				return theViewerType;
 			}
 			set
 			{
-				this.theViewerType = value;
+				theViewerType = value;
 			}
 		}
 
@@ -111,14 +111,14 @@ namespace Crowbar
 
 		public void RunDataViewer()
 		{
-			if (!this.AppSettingDataViewerIsRunning)
+			if (!AppSettingDataViewerIsRunning)
 			{
-				this.theDataViewer = new Viewer();
-				this.theDataViewer.ProgressChanged += this.DataViewerBackgroundWorker_ProgressChanged;
-				this.theDataViewer.RunWorkerCompleted += this.DataViewerBackgroundWorker_RunWorkerCompleted;
-				this.AppSettingDataViewerIsRunning = true;
+				theDataViewer = new Viewer();
+				theDataViewer.ProgressChanged += DataViewerBackgroundWorker_ProgressChanged;
+				theDataViewer.RunWorkerCompleted += DataViewerBackgroundWorker_RunWorkerCompleted;
+				AppSettingDataViewerIsRunning = true;
 				AppEnums.SupportedMdlVersion mdlVersionOverride = 0;
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					mdlVersionOverride = MainCROWBAR.TheApp.Settings.PreviewOverrideMdlVersion;
 				}
@@ -126,7 +126,7 @@ namespace Crowbar
 				{
 					mdlVersionOverride = MainCROWBAR.TheApp.Settings.ViewOverrideMdlVersion;
 				}
-				this.theDataViewer.Run(this.AppSettingMdlPathFileName, mdlVersionOverride);
+				theDataViewer.Run(AppSettingMdlPathFileName, mdlVersionOverride);
 
 				//TODO: If viewer is not running, give user indication of what prevents viewing.
 			}
@@ -139,11 +139,11 @@ namespace Crowbar
 		private void UpdateUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.MdlPathFileNameTextBox, this.BrowseForMdlFileButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(MdlPathFileNameTextBox, BrowseForMdlFileButton);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -168,12 +168,12 @@ namespace Crowbar
 
 			openFileWdw.Title = "Open the MDL file you want to view";
 			//openFileWdw.InitialDirectory = FileManager.GetPath(Me.AppSettingMdlPathFileName)
-			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(this.AppSettingMdlPathFileName);
+			openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(AppSettingMdlPathFileName);
 			if (string.IsNullOrEmpty(openFileWdw.InitialDirectory))
 			{
 				openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			}
-			openFileWdw.FileName = Path.GetFileName(this.AppSettingMdlPathFileName);
+			openFileWdw.FileName = Path.GetFileName(AppSettingMdlPathFileName);
 			openFileWdw.Filter = "Source Engine Model Files (*.mdl) | *.mdl";
 			openFileWdw.AddExtension = true;
 			openFileWdw.Multiselect = false;
@@ -184,13 +184,13 @@ namespace Crowbar
 				// Allow dialog window to completely disappear.
 				Application.DoEvents();
 
-				this.AppSettingMdlPathFileName = openFileWdw.FileName;
+				AppSettingMdlPathFileName = openFileWdw.FileName;
 			}
 		}
 
 		private void GotoMdlFileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			FileManager.OpenWindowsExplorer(this.AppSettingMdlPathFileName);
+			FileManager.OpenWindowsExplorer(AppSettingMdlPathFileName);
 		}
 
 		//Private Sub FromDecompileButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -220,32 +220,32 @@ namespace Crowbar
 
 		private void ViewButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.RunViewer(false);
+			RunViewer(false);
 		}
 
 		private void ViewAsReplacementButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.RunViewer(true);
+			RunViewer(true);
 		}
 
 		private void UseInDecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = this.AppSettingMdlPathFileName;
+			MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = AppSettingMdlPathFileName;
 		}
 
 		private void OpenViewerButton_Click(object sender, EventArgs e)
 		{
-			this.OpenViewer();
+			OpenViewer();
 		}
 
 		private void OpenMappingToolButton_Click(object sender, EventArgs e)
 		{
-			this.OpenMappingTool();
+			OpenMappingTool();
 		}
 
 		private void RunGameButton_Click(object sender, EventArgs e)
 		{
-			this.RunGame();
+			RunGame();
 		}
 
 #endregion
@@ -254,12 +254,12 @@ namespace Crowbar
 
 		private void AppSettings_PropertyChanged(System.Object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (!this.AppSettingDataViewerIsRunning)
+			if (!AppSettingDataViewerIsRunning)
 			{
-				if (e.PropertyName == this.NameOfAppSettingMdlPathFileName || e.PropertyName == this.NameOfAppSettingOverrideMdlVersionName)
+				if (e.PropertyName == NameOfAppSettingMdlPathFileName || e.PropertyName == NameOfAppSettingOverrideMdlVersionName)
 				{
-					this.UpdateWidgets(this.AppSettingViewerIsRunning);
-					this.RunDataViewer();
+					UpdateWidgets(AppSettingViewerIsRunning);
+					RunDataViewer();
 				}
 			}
 		}
@@ -270,27 +270,27 @@ namespace Crowbar
 
 			if (e.ProgressPercentage == 0)
 			{
-				this.InfoRichTextBox.Text = "";
+				InfoRichTextBox.Text = "";
 				//Me.InfoRichTextBox.AppendText(line + vbCr)
 				//Me.AppSettingDataViewerIsRunning = True
-				this.MessageTextBox.Text = "";
-				this.MessageTextBox.AppendText(line + "\r\n");
+				MessageTextBox.Text = "";
+				MessageTextBox.AppendText(line + "\r\n");
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.InfoRichTextBox.AppendText(line + "\r");
+				InfoRichTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
 				//Me.InfoRichTextBox.AppendText(line + vbCr)
-				this.MessageTextBox.AppendText(line + "\r\n");
+				MessageTextBox.AppendText(line + "\r\n");
 			}
 		}
 
 		private void DataViewerBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			this.FreeDataViewer();
-			this.AppSettingDataViewerIsRunning = false;
+			FreeDataViewer();
+			AppSettingDataViewerIsRunning = false;
 		}
 
 		private void ViewerBackgroundWorker_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -299,36 +299,36 @@ namespace Crowbar
 
 			if (e.ProgressPercentage == 0)
 			{
-				this.MessageTextBox.Text = "";
-				this.MessageTextBox.AppendText(line + "\r\n");
+				MessageTextBox.Text = "";
+				MessageTextBox.AppendText(line + "\r\n");
 
 				Viewer modelViewer = (Viewer)sender;
-				if (modelViewer == this.theModelViewerWithModel)
+				if (modelViewer == theModelViewerWithModel)
 				{
-					this.UpdateWidgets(true);
+					UpdateWidgets(true);
 				}
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.MessageTextBox.AppendText(line + "\r\n");
+				MessageTextBox.AppendText(line + "\r\n");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.MessageTextBox.AppendText(line + "\r\n");
+				MessageTextBox.AppendText(line + "\r\n");
 			}
 		}
 
 		private void ViewerBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			Viewer modelViewer = (Viewer)sender;
-			if (modelViewer == this.theModelViewerWithModel)
+			if (modelViewer == theModelViewerWithModel)
 			{
-				this.FreeModelViewerWithModel();
-				this.UpdateWidgets(false);
+				FreeModelViewerWithModel();
+				UpdateWidgets(false);
 			}
 			else
 			{
-				this.FreeModelViewer(modelViewer);
+				FreeModelViewer(modelViewer);
 			}
 		}
 
@@ -338,27 +338,27 @@ namespace Crowbar
 
 			if (e.ProgressPercentage == 0)
 			{
-				this.MessageTextBox.Text = "";
-				this.MessageTextBox.AppendText(line + "\r");
-				this.UpdateWidgets(true);
+				MessageTextBox.Text = "";
+				MessageTextBox.AppendText(line + "\r");
+				UpdateWidgets(true);
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.MessageTextBox.AppendText(line + "\r");
+				MessageTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.MessageTextBox.AppendText(line + "\r");
+				MessageTextBox.AppendText(line + "\r");
 			}
 		}
 
 		private void MappingToolBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			MappingTool mappingTool = (MappingTool)sender;
-			mappingTool.ProgressChanged -= this.MappingToolBackgroundWorker_ProgressChanged;
-			mappingTool.RunWorkerCompleted -= this.MappingToolBackgroundWorker_RunWorkerCompleted;
+			mappingTool.ProgressChanged -= MappingToolBackgroundWorker_ProgressChanged;
+			mappingTool.RunWorkerCompleted -= MappingToolBackgroundWorker_RunWorkerCompleted;
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 		}
 
 		private void GameAppBackgroundWorker_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -367,27 +367,27 @@ namespace Crowbar
 
 			if (e.ProgressPercentage == 0)
 			{
-				this.MessageTextBox.Text = "";
-				this.MessageTextBox.AppendText(line + "\r");
-				this.UpdateWidgets(true);
+				MessageTextBox.Text = "";
+				MessageTextBox.AppendText(line + "\r");
+				UpdateWidgets(true);
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.MessageTextBox.AppendText(line + "\r");
+				MessageTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.MessageTextBox.AppendText(line + "\r");
+				MessageTextBox.AppendText(line + "\r");
 			}
 		}
 
 		private void GameAppBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			GameApp gameApp = (GameApp)sender;
-			gameApp.ProgressChanged -= this.GameAppBackgroundWorker_ProgressChanged;
-			gameApp.RunWorkerCompleted -= this.GameAppBackgroundWorker_RunWorkerCompleted;
+			gameApp.ProgressChanged -= GameAppBackgroundWorker_ProgressChanged;
+			gameApp.RunWorkerCompleted -= GameAppBackgroundWorker_RunWorkerCompleted;
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 		}
 
 #endregion
@@ -398,7 +398,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return "PreviewMdlPathFileName";
 				}
@@ -413,7 +413,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return "PreviewOverrideMdlVersion";
 				}
@@ -428,7 +428,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return "PreviewGameSetupSelectedIndex";
 				}
@@ -443,7 +443,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return MainCROWBAR.TheApp.Settings.PreviewGameSetupSelectedIndex;
 				}
@@ -454,7 +454,7 @@ namespace Crowbar
 			}
 			set
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					MainCROWBAR.TheApp.Settings.PreviewGameSetupSelectedIndex = value;
 				}
@@ -469,7 +469,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return MainCROWBAR.TheApp.Settings.PreviewMdlPathFileName;
 				}
@@ -480,7 +480,7 @@ namespace Crowbar
 			}
 			set
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					MainCROWBAR.TheApp.Settings.PreviewMdlPathFileName = value;
 				}
@@ -495,7 +495,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return MainCROWBAR.TheApp.Settings.PreviewDataViewerIsRunning;
 				}
@@ -506,7 +506,7 @@ namespace Crowbar
 			}
 			set
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					MainCROWBAR.TheApp.Settings.PreviewDataViewerIsRunning = value;
 				}
@@ -521,7 +521,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return MainCROWBAR.TheApp.Settings.PreviewViewerIsRunning;
 				}
@@ -532,7 +532,7 @@ namespace Crowbar
 			}
 			set
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					MainCROWBAR.TheApp.Settings.PreviewViewerIsRunning = value;
 				}
@@ -547,7 +547,7 @@ namespace Crowbar
 		{
 			get
 			{
-				if (this.theViewerType == AppEnums.ViewerType.Preview)
+				if (theViewerType == AppEnums.ViewerType.Preview)
 				{
 					return "-preview";
 				}
@@ -564,41 +564,41 @@ namespace Crowbar
 
 		private void UpdateDataBindings()
 		{
-			this.MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, this.NameOfAppSettingMdlPathFileName, false, DataSourceUpdateMode.OnValidation);
+			MdlPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, NameOfAppSettingMdlPathFileName, false, DataSourceUpdateMode.OnValidation);
 			//AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf Me.ParsePathFileName
-			this.MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			MdlPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 
 			//NOTE: The DataSource, DisplayMember, and ValueMember need to be set before DataBindings, or else an exception is raised.
-			this.GameSetupComboBox.DisplayMember = "GameName";
-			this.GameSetupComboBox.ValueMember = "GameName";
-			this.GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
-			this.GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, this.NameOfAppSettingGameSetupSelectedIndex, false, DataSourceUpdateMode.OnPropertyChanged);
+			GameSetupComboBox.DisplayMember = "GameName";
+			GameSetupComboBox.ValueMember = "GameName";
+			GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
+			GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, NameOfAppSettingGameSetupSelectedIndex, false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void UpdateWidgets(bool modelViewerIsRunning)
 		{
-			this.AppSettingViewerIsRunning = modelViewerIsRunning;
+			AppSettingViewerIsRunning = modelViewerIsRunning;
 
-			if (string.IsNullOrEmpty(this.AppSettingMdlPathFileName) || !(Path.GetExtension(this.AppSettingMdlPathFileName).ToLower() == ".mdl") || !File.Exists(this.AppSettingMdlPathFileName))
+			if (string.IsNullOrEmpty(AppSettingMdlPathFileName) || !(Path.GetExtension(AppSettingMdlPathFileName).ToLower() == ".mdl") || !File.Exists(AppSettingMdlPathFileName))
 			{
-				this.ViewButton.Enabled = false;
-				this.ViewAsReplacementButton.Enabled = false;
-				this.UseInDecompileButton.Enabled = false;
+				ViewButton.Enabled = false;
+				ViewAsReplacementButton.Enabled = false;
+				UseInDecompileButton.Enabled = false;
 			}
 			else
 			{
-				this.ViewButton.Enabled = !modelViewerIsRunning;
-				this.ViewAsReplacementButton.Enabled = !modelViewerIsRunning;
-				this.UseInDecompileButton.Enabled = true;
+				ViewButton.Enabled = !modelViewerIsRunning;
+				ViewAsReplacementButton.Enabled = !modelViewerIsRunning;
+				UseInDecompileButton.Enabled = true;
 			}
 		}
 
 		private void RunViewer(bool viewAsReplacement)
 		{
-			this.theModelViewerWithModel = new Viewer();
-			this.theModelViewerWithModel.ProgressChanged += this.ViewerBackgroundWorker_ProgressChanged;
-			this.theModelViewerWithModel.RunWorkerCompleted += this.ViewerBackgroundWorker_RunWorkerCompleted;
-			this.theModelViewerWithModel.Run(this.AppSettingGameSetupSelectedIndex, this.AppSettingMdlPathFileName, viewAsReplacement, ViewAsReplacementSubfolderName);
+			theModelViewerWithModel = new Viewer();
+			theModelViewerWithModel.ProgressChanged += ViewerBackgroundWorker_ProgressChanged;
+			theModelViewerWithModel.RunWorkerCompleted += ViewerBackgroundWorker_RunWorkerCompleted;
+			theModelViewerWithModel.Run(AppSettingGameSetupSelectedIndex, AppSettingMdlPathFileName, viewAsReplacement, ViewAsReplacementSubfolderName);
 
 			//TODO: If viewer is not running, give user indication of what prevents viewing.
 		}
@@ -606,11 +606,11 @@ namespace Crowbar
 		private void OpenViewer()
 		{
 			Viewer aModelViewer = new Viewer();
-			aModelViewer.ProgressChanged += this.ViewerBackgroundWorker_ProgressChanged;
-			aModelViewer.RunWorkerCompleted += this.ViewerBackgroundWorker_RunWorkerCompleted;
-			aModelViewer.Run(this.AppSettingGameSetupSelectedIndex);
+			aModelViewer.ProgressChanged += ViewerBackgroundWorker_ProgressChanged;
+			aModelViewer.RunWorkerCompleted += ViewerBackgroundWorker_RunWorkerCompleted;
+			aModelViewer.Run(AppSettingGameSetupSelectedIndex);
 
-			this.theModelViewers.Add(aModelViewer);
+			theModelViewers.Add(aModelViewer);
 
 			//TODO: If viewer is not running, give user indication of what prevents viewing.
 		}
@@ -619,9 +619,9 @@ namespace Crowbar
 		{
 			MappingTool mappingTool = null;
 			mappingTool = new MappingTool();
-			mappingTool.ProgressChanged += this.MappingToolBackgroundWorker_ProgressChanged;
-			mappingTool.RunWorkerCompleted += this.MappingToolBackgroundWorker_RunWorkerCompleted;
-			mappingTool.Run(this.AppSettingGameSetupSelectedIndex);
+			mappingTool.ProgressChanged += MappingToolBackgroundWorker_ProgressChanged;
+			mappingTool.RunWorkerCompleted += MappingToolBackgroundWorker_RunWorkerCompleted;
+			mappingTool.Run(AppSettingGameSetupSelectedIndex);
 
 			//TODO: If viewer is not running, give user indication of what prevents viewing.
 		}
@@ -630,32 +630,32 @@ namespace Crowbar
 		{
 			GameApp gameApp = null;
 			gameApp = new GameApp();
-			gameApp.ProgressChanged += this.GameAppBackgroundWorker_ProgressChanged;
-			gameApp.RunWorkerCompleted += this.GameAppBackgroundWorker_RunWorkerCompleted;
-			gameApp.Run(this.AppSettingGameSetupSelectedIndex);
+			gameApp.ProgressChanged += GameAppBackgroundWorker_ProgressChanged;
+			gameApp.RunWorkerCompleted += GameAppBackgroundWorker_RunWorkerCompleted;
+			gameApp.Run(AppSettingGameSetupSelectedIndex);
 
 			//TODO: If gameApp is not running, give user indication of what prevents viewing.
 		}
 
 		private void FreeDataViewer()
 		{
-			if (this.theDataViewer != null)
+			if (theDataViewer != null)
 			{
-				this.theDataViewer.ProgressChanged -= this.DataViewerBackgroundWorker_ProgressChanged;
-				this.theDataViewer.RunWorkerCompleted -= this.DataViewerBackgroundWorker_RunWorkerCompleted;
-				this.theDataViewer.Dispose();
-				this.theDataViewer = null;
+				theDataViewer.ProgressChanged -= DataViewerBackgroundWorker_ProgressChanged;
+				theDataViewer.RunWorkerCompleted -= DataViewerBackgroundWorker_RunWorkerCompleted;
+				theDataViewer.Dispose();
+				theDataViewer = null;
 			}
 		}
 
 		private void FreeModelViewerWithModel()
 		{
-			if (this.theModelViewerWithModel != null)
+			if (theModelViewerWithModel != null)
 			{
-				this.theModelViewerWithModel.ProgressChanged -= this.ViewerBackgroundWorker_ProgressChanged;
-				this.theModelViewerWithModel.RunWorkerCompleted -= this.ViewerBackgroundWorker_RunWorkerCompleted;
-				this.theModelViewerWithModel.Dispose();
-				this.theModelViewerWithModel = null;
+				theModelViewerWithModel.ProgressChanged -= ViewerBackgroundWorker_ProgressChanged;
+				theModelViewerWithModel.RunWorkerCompleted -= ViewerBackgroundWorker_RunWorkerCompleted;
+				theModelViewerWithModel.Dispose();
+				theModelViewerWithModel = null;
 			}
 		}
 
@@ -663,12 +663,12 @@ namespace Crowbar
 		{
 			if (aModelViewer != null)
 			{
-				aModelViewer.ProgressChanged -= this.ViewerBackgroundWorker_ProgressChanged;
-				aModelViewer.RunWorkerCompleted -= this.ViewerBackgroundWorker_RunWorkerCompleted;
+				aModelViewer.ProgressChanged -= ViewerBackgroundWorker_ProgressChanged;
+				aModelViewer.RunWorkerCompleted -= ViewerBackgroundWorker_RunWorkerCompleted;
 				aModelViewer.Dispose();
 				aModelViewer = null;
 
-				this.theModelViewers.Remove(aModelViewer);
+				theModelViewers.Remove(aModelViewer);
 			}
 		}
 

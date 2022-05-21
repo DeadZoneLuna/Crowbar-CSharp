@@ -16,10 +16,10 @@ namespace Crowbar
 		public WorkshopItemBindingList() : base()
 		{
 
-			this.theDraftItemCount = 0;
-			this.theTemplateItemCount = 0;
-			this.theChangedItemCount = 0;
-			this.thePublishedItemCount = 0;
+			theDraftItemCount = 0;
+			theTemplateItemCount = 0;
+			theChangedItemCount = 0;
+			thePublishedItemCount = 0;
 		}
 
 #endregion
@@ -30,7 +30,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDraftItemCount;
+				return theDraftItemCount;
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theTemplateItemCount;
+				return theTemplateItemCount;
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theChangedItemCount;
+				return theChangedItemCount;
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePublishedItemCount;
+				return thePublishedItemCount;
 			}
 		}
 
@@ -71,19 +71,19 @@ namespace Crowbar
 				WorkshopItem item = this[e.NewIndex];
 				if (item.IsDraft)
 				{
-					this.theDraftItemCount += 1U;
+					theDraftItemCount += 1U;
 				}
 				else if (item.IsTemplate)
 				{
-					this.theTemplateItemCount += 1U;
+					theTemplateItemCount += 1U;
 				}
 				else if (item.IsChanged)
 				{
-					this.theChangedItemCount += 1U;
+					theChangedItemCount += 1U;
 				}
 				else
 				{
-					this.thePublishedItemCount += 1U;
+					thePublishedItemCount += 1U;
 				}
 			}
 			else if (e.ListChangedType == System.ComponentModel.ListChangedType.ItemDeleted && e.OldIndex == -2)
@@ -91,28 +91,28 @@ namespace Crowbar
 				WorkshopItem item = this[e.NewIndex];
 				if (item.IsDraft)
 				{
-					this.theDraftItemCount -= 1U;
+					theDraftItemCount -= 1U;
 				}
 				else if (item.IsTemplate)
 				{
-					this.theTemplateItemCount -= 1U;
+					theTemplateItemCount -= 1U;
 				}
 				else if (item.IsChanged)
 				{
-					this.theChangedItemCount -= 1U;
+					theChangedItemCount -= 1U;
 				}
 				else
 				{
-					this.thePublishedItemCount -= 1U;
+					thePublishedItemCount -= 1U;
 				}
 				//ElseIf e.ListChangedType = System.ComponentModel.ListChangedType.ItemDeleted AndAlso e.OldIndex = -1 Then
 			}
 			else if (e.ListChangedType == System.ComponentModel.ListChangedType.Reset)
 			{
-				this.theDraftItemCount = 0;
-				this.theTemplateItemCount = 0;
-				this.theChangedItemCount = 0;
-				this.thePublishedItemCount = 0;
+				theDraftItemCount = 0;
+				theTemplateItemCount = 0;
+				theChangedItemCount = 0;
+				thePublishedItemCount = 0;
 			}
 		}
 

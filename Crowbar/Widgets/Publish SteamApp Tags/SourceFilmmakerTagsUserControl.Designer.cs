@@ -37,45 +37,45 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.ComboBox1 = new System.Windows.Forms.ComboBox();
-			this.ComboBox2 = new System.Windows.Forms.ComboBox();
-			this.ComboBox3 = new System.Windows.Forms.ComboBox();
-			this.SuspendLayout();
+			ComboBox1 = new System.Windows.Forms.ComboBox();
+			ComboBox2 = new System.Windows.Forms.ComboBox();
+			ComboBox3 = new System.Windows.Forms.ComboBox();
+			SuspendLayout();
 			//
 			//ComboBox1
 			//
-			this.ComboBox1.FormattingEnabled = true;
-			this.ComboBox1.Location = new System.Drawing.Point(3, 3);
-			this.ComboBox1.Name = "ComboBox1";
-			this.ComboBox1.Size = new System.Drawing.Size(121, 21);
-			this.ComboBox1.TabIndex = 0;
+			ComboBox1.FormattingEnabled = true;
+			ComboBox1.Location = new System.Drawing.Point(3, 3);
+			ComboBox1.Name = "ComboBox1";
+			ComboBox1.Size = new System.Drawing.Size(121, 21);
+			ComboBox1.TabIndex = 0;
 			//
 			//ComboBox2
 			//
-			this.ComboBox2.FormattingEnabled = true;
-			this.ComboBox2.Location = new System.Drawing.Point(3, 30);
-			this.ComboBox2.Name = "ComboBox2";
-			this.ComboBox2.Size = new System.Drawing.Size(121, 21);
-			this.ComboBox2.TabIndex = 1;
+			ComboBox2.FormattingEnabled = true;
+			ComboBox2.Location = new System.Drawing.Point(3, 30);
+			ComboBox2.Name = "ComboBox2";
+			ComboBox2.Size = new System.Drawing.Size(121, 21);
+			ComboBox2.TabIndex = 1;
 			//
 			//ComboBox3
 			//
-			this.ComboBox3.FormattingEnabled = true;
-			this.ComboBox3.Location = new System.Drawing.Point(3, 57);
-			this.ComboBox3.Name = "ComboBox3";
-			this.ComboBox3.Size = new System.Drawing.Size(121, 21);
-			this.ComboBox3.TabIndex = 2;
+			ComboBox3.FormattingEnabled = true;
+			ComboBox3.Location = new System.Drawing.Point(3, 57);
+			ComboBox3.Name = "ComboBox3";
+			ComboBox3.Size = new System.Drawing.Size(121, 21);
+			ComboBox3.TabIndex = 2;
 			//
 			//SourceFilmmakerTagsUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.ComboBox3);
-			this.Controls.Add(this.ComboBox2);
-			this.Controls.Add(this.ComboBox1);
-			this.Name = "SourceFilmmakerTagsUserControl";
-			this.Size = new System.Drawing.Size(292, 418);
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(ComboBox3);
+			Controls.Add(ComboBox2);
+			Controls.Add(ComboBox1);
+			Name = "SourceFilmmakerTagsUserControl";
+			Size = new System.Drawing.Size(292, 418);
+			ResumeLayout(false);
 
 		}
 

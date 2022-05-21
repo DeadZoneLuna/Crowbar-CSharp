@@ -67,21 +67,21 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theControlIsReadOnly;
+				return theControlIsReadOnly;
 			}
 			set
 			{
-				if (this.theControlIsReadOnly != value)
+				if (theControlIsReadOnly != value)
 				{
-					this.theControlIsReadOnly = value;
+					theControlIsReadOnly = value;
 
-					if (this.theControlIsReadOnly)
+					if (theControlIsReadOnly)
 					{
-						this.ForeColor = SystemColors.GrayText;
+						ForeColor = SystemColors.GrayText;
 					}
 					else
 					{
-						this.ForeColor = SystemColors.ControlText;
+						ForeColor = SystemColors.ControlText;
 					}
 				}
 			}
@@ -96,7 +96,7 @@ namespace Crowbar
 				//Else
 				//	Return Nothing
 				//End If
-				return this.theRadioButtonList.ToArray();
+				return theRadioButtonList.ToArray();
 			}
 		}
 
@@ -140,7 +140,7 @@ namespace Crowbar
 				//Else
 				//	Return Nothing
 				//End If
-				return this.theSelectedValue;
+				return theSelectedValue;
 			}
 			set
 			{
@@ -149,11 +149,11 @@ namespace Crowbar
 				{
 					return;
 				}
-				this.SetValue(value);
+				SetValue(value);
 				RadioButton radioButton = null;
-				for (int i = 0; i < this.theRadioButtonList.Count; i++)
+				for (int i = 0; i < theRadioButtonList.Count; i++)
 				{
-					radioButton = this.theRadioButtonList[i];
+					radioButton = theRadioButtonList[i];
 					if (value.Equals(radioButton.Tag))
 					{
 						radioButton.Checked = true;
@@ -167,8 +167,8 @@ namespace Crowbar
 			if (e.Control is RadioButton)
 			{
 				RadioButton radioButton = (RadioButton)e.Control;
-				this.theRadioButtonList.Add(radioButton);
-				radioButton.CheckedChanged += this.RadioButton_CheckedChanged;
+				theRadioButtonList.Add(radioButton);
+				radioButton.CheckedChanged += RadioButton_CheckedChanged;
 			}
 			base.OnControlAdded(e);
 		}
@@ -178,8 +178,8 @@ namespace Crowbar
 			if (e.Control is RadioButton)
 			{
 				RadioButton radioButton = (RadioButton)e.Control;
-				this.theRadioButtonList.Remove(radioButton);
-				radioButton.CheckedChanged -= this.RadioButton_CheckedChanged;
+				theRadioButtonList.Remove(radioButton);
+				radioButton.CheckedChanged -= RadioButton_CheckedChanged;
 			}
 			base.OnControlRemoved(e);
 		}
@@ -207,7 +207,7 @@ namespace Crowbar
 				//		Return
 				//	End If
 				//Next
-				this.SetValue((System.Enum)radioButton.Tag);
+				SetValue((System.Enum)radioButton.Tag);
 			}
 		}
 
@@ -227,8 +227,8 @@ namespace Crowbar
 			//		'Next
 			//	End If
 			//Next
-			this.theSelectedValue = value;
-			this.OnSelectedValueChanged(new EventArgs());
+			theSelectedValue = value;
+			OnSelectedValueChanged(new EventArgs());
 		}
 
 		protected bool theControlIsReadOnly;

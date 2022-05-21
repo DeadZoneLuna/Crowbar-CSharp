@@ -40,514 +40,514 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Panel1 = new System.Windows.Forms.Panel();
-			this.GotoOutputPathButton = new System.Windows.Forms.Button();
-			this.BrowseForOutputPathButton = new System.Windows.Forms.Button();
-			this.OutputPathTextBox = new Crowbar.TextBoxEx();
-			this.OutputParentPathTextBox = new Crowbar.TextBoxEx();
-			this.OutputPathComboBox = new System.Windows.Forms.ComboBox();
-			this.InputComboBox = new System.Windows.Forms.ComboBox();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.GotoInputPathButton = new System.Windows.Forms.Button();
-			this.Label6 = new System.Windows.Forms.Label();
-			this.InputPathFileNameTextBox = new Crowbar.TextBoxEx();
-			this.BrowseForInputFolderOrFileNameButton = new System.Windows.Forms.Button();
-			this.Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
-			this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
-			this.OptionsGroupBoxFillPanel = new System.Windows.Forms.Panel();
-			this.PackerOptionsPanel = new System.Windows.Forms.Panel();
-			this.MultiFileVpkCheckBox = new System.Windows.Forms.CheckBox();
-			this.PackOptionsUseDefaultsButton = new System.Windows.Forms.Button();
-			this.LogFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.Label3 = new System.Windows.Forms.Label();
-			this.GameSetupComboBox = new System.Windows.Forms.ComboBox();
-			this.SetUpGamesButton = new System.Windows.Forms.Button();
-			this.GmaPanel = new System.Windows.Forms.Panel();
-			this.GmaTitleTextBox = new Crowbar.TextBoxEx();
-			this.GmaTitleLabel = new System.Windows.Forms.Label();
-			this.GmaGarrysModTagsUserControl = new Crowbar.GarrysModTagsUserControl();
-			this.DirectPackerOptionsLabel = new System.Windows.Forms.Label();
-			this.DirectPackerOptionsTextBox = new System.Windows.Forms.TextBox();
-			this.PackerOptionsTextBox = new System.Windows.Forms.TextBox();
-			this.PackerOptionsTextBoxMinScrollPanel = new System.Windows.Forms.Panel();
-			this.LogRichTextBox = new Crowbar.RichTextBoxEx();
-			this.PackButtonsPanel = new System.Windows.Forms.Panel();
-			this.PackButton = new System.Windows.Forms.Button();
-			this.SkipCurrentFolderButton = new System.Windows.Forms.Button();
-			this.CancelPackButton = new System.Windows.Forms.Button();
-			this.UseAllInPublishButton = new System.Windows.Forms.Button();
-			this.PostPackPanel = new System.Windows.Forms.Panel();
-			this.PackedFilesComboBox = new System.Windows.Forms.ComboBox();
-			this.UseInPublishButton = new System.Windows.Forms.Button();
-			this.GotoPackedFileButton = new System.Windows.Forms.Button();
-			this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.Panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).BeginInit();
-			this.Options_LogSplitContainer.Panel1.SuspendLayout();
-			this.Options_LogSplitContainer.Panel2.SuspendLayout();
-			this.Options_LogSplitContainer.SuspendLayout();
-			this.OptionsGroupBox.SuspendLayout();
-			this.OptionsGroupBoxFillPanel.SuspendLayout();
-			this.PackerOptionsPanel.SuspendLayout();
-			this.GmaPanel.SuspendLayout();
-			this.PackButtonsPanel.SuspendLayout();
-			this.PostPackPanel.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			Panel1 = new System.Windows.Forms.Panel();
+			GotoOutputPathButton = new System.Windows.Forms.Button();
+			BrowseForOutputPathButton = new System.Windows.Forms.Button();
+			OutputPathTextBox = new Crowbar.TextBoxEx();
+			OutputParentPathTextBox = new Crowbar.TextBoxEx();
+			OutputPathComboBox = new System.Windows.Forms.ComboBox();
+			InputComboBox = new System.Windows.Forms.ComboBox();
+			Label1 = new System.Windows.Forms.Label();
+			GotoInputPathButton = new System.Windows.Forms.Button();
+			Label6 = new System.Windows.Forms.Label();
+			InputPathFileNameTextBox = new Crowbar.TextBoxEx();
+			BrowseForInputFolderOrFileNameButton = new System.Windows.Forms.Button();
+			Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
+			OptionsGroupBox = new System.Windows.Forms.GroupBox();
+			OptionsGroupBoxFillPanel = new System.Windows.Forms.Panel();
+			PackerOptionsPanel = new System.Windows.Forms.Panel();
+			MultiFileVpkCheckBox = new System.Windows.Forms.CheckBox();
+			PackOptionsUseDefaultsButton = new System.Windows.Forms.Button();
+			LogFileCheckBox = new System.Windows.Forms.CheckBox();
+			Label3 = new System.Windows.Forms.Label();
+			GameSetupComboBox = new System.Windows.Forms.ComboBox();
+			SetUpGamesButton = new System.Windows.Forms.Button();
+			GmaPanel = new System.Windows.Forms.Panel();
+			GmaTitleTextBox = new Crowbar.TextBoxEx();
+			GmaTitleLabel = new System.Windows.Forms.Label();
+			GmaGarrysModTagsUserControl = new Crowbar.GarrysModTagsUserControl();
+			DirectPackerOptionsLabel = new System.Windows.Forms.Label();
+			DirectPackerOptionsTextBox = new System.Windows.Forms.TextBox();
+			PackerOptionsTextBox = new System.Windows.Forms.TextBox();
+			PackerOptionsTextBoxMinScrollPanel = new System.Windows.Forms.Panel();
+			LogRichTextBox = new Crowbar.RichTextBoxEx();
+			PackButtonsPanel = new System.Windows.Forms.Panel();
+			PackButton = new System.Windows.Forms.Button();
+			SkipCurrentFolderButton = new System.Windows.Forms.Button();
+			CancelPackButton = new System.Windows.Forms.Button();
+			UseAllInPublishButton = new System.Windows.Forms.Button();
+			PostPackPanel = new System.Windows.Forms.Panel();
+			PackedFilesComboBox = new System.Windows.Forms.ComboBox();
+			UseInPublishButton = new System.Windows.Forms.Button();
+			GotoPackedFileButton = new System.Windows.Forms.Button();
+			ToolTip1 = new System.Windows.Forms.ToolTip(components);
+			Panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).BeginInit();
+			Options_LogSplitContainer.Panel1.SuspendLayout();
+			Options_LogSplitContainer.Panel2.SuspendLayout();
+			Options_LogSplitContainer.SuspendLayout();
+			OptionsGroupBox.SuspendLayout();
+			OptionsGroupBoxFillPanel.SuspendLayout();
+			PackerOptionsPanel.SuspendLayout();
+			GmaPanel.SuspendLayout();
+			PackButtonsPanel.SuspendLayout();
+			PostPackPanel.SuspendLayout();
+			SuspendLayout();
 			//
 			//Panel1
 			//
-			this.Panel1.Controls.Add(this.GotoOutputPathButton);
-			this.Panel1.Controls.Add(this.BrowseForOutputPathButton);
-			this.Panel1.Controls.Add(this.OutputPathTextBox);
-			this.Panel1.Controls.Add(this.OutputParentPathTextBox);
-			this.Panel1.Controls.Add(this.OutputPathComboBox);
-			this.Panel1.Controls.Add(this.InputComboBox);
-			this.Panel1.Controls.Add(this.Label1);
-			this.Panel1.Controls.Add(this.GotoInputPathButton);
-			this.Panel1.Controls.Add(this.Label6);
-			this.Panel1.Controls.Add(this.InputPathFileNameTextBox);
-			this.Panel1.Controls.Add(this.BrowseForInputFolderOrFileNameButton);
-			this.Panel1.Controls.Add(this.Options_LogSplitContainer);
-			this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel1.Location = new System.Drawing.Point(0, 0);
-			this.Panel1.Name = "Panel1";
-			this.Panel1.Size = new System.Drawing.Size(776, 536);
-			this.Panel1.TabIndex = 3;
+			Panel1.Controls.Add(GotoOutputPathButton);
+			Panel1.Controls.Add(BrowseForOutputPathButton);
+			Panel1.Controls.Add(OutputPathTextBox);
+			Panel1.Controls.Add(OutputParentPathTextBox);
+			Panel1.Controls.Add(OutputPathComboBox);
+			Panel1.Controls.Add(InputComboBox);
+			Panel1.Controls.Add(Label1);
+			Panel1.Controls.Add(GotoInputPathButton);
+			Panel1.Controls.Add(Label6);
+			Panel1.Controls.Add(InputPathFileNameTextBox);
+			Panel1.Controls.Add(BrowseForInputFolderOrFileNameButton);
+			Panel1.Controls.Add(Options_LogSplitContainer);
+			Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel1.Location = new System.Drawing.Point(0, 0);
+			Panel1.Name = "Panel1";
+			Panel1.Size = new System.Drawing.Size(776, 536);
+			Panel1.TabIndex = 3;
 			//
 			//GotoOutputPathButton
 			//
-			this.GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
-			this.GotoOutputPathButton.Name = "GotoOutputPathButton";
-			this.GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoOutputPathButton.TabIndex = 27;
-			this.GotoOutputPathButton.Text = "Goto";
-			this.GotoOutputPathButton.UseVisualStyleBackColor = true;
+			GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
+			GotoOutputPathButton.Name = "GotoOutputPathButton";
+			GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
+			GotoOutputPathButton.TabIndex = 27;
+			GotoOutputPathButton.Text = "Goto";
+			GotoOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//BrowseForOutputPathButton
 			//
-			this.BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
-			this.BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
-			this.BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForOutputPathButton.TabIndex = 26;
-			this.BrowseForOutputPathButton.Text = "Browse...";
-			this.BrowseForOutputPathButton.UseVisualStyleBackColor = true;
+			BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
+			BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
+			BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForOutputPathButton.TabIndex = 26;
+			BrowseForOutputPathButton.Text = "Browse...";
+			BrowseForOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//OutputPathTextBox
 			//
-			this.OutputPathTextBox.AllowDrop = true;
-			this.OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OutputPathTextBox.CueBannerText = "";
-			this.OutputPathTextBox.Location = new System.Drawing.Point(223, 32);
-			this.OutputPathTextBox.Name = "OutputPathTextBox";
-			this.OutputPathTextBox.Size = new System.Drawing.Size(431, 22);
-			this.OutputPathTextBox.TabIndex = 25;
+			OutputPathTextBox.AllowDrop = true;
+			OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OutputPathTextBox.CueBannerText = "";
+			OutputPathTextBox.Location = new System.Drawing.Point(223, 32);
+			OutputPathTextBox.Name = "OutputPathTextBox";
+			OutputPathTextBox.Size = new System.Drawing.Size(431, 22);
+			OutputPathTextBox.TabIndex = 25;
 			//
 			//OutputParentPathTextBox
 			//
-			this.OutputParentPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OutputParentPathTextBox.CueBannerText = "";
-			this.OutputParentPathTextBox.Location = new System.Drawing.Point(223, 32);
-			this.OutputParentPathTextBox.Name = "OutputParentPathTextBox";
-			this.OutputParentPathTextBox.ReadOnly = true;
-			this.OutputParentPathTextBox.Size = new System.Drawing.Size(431, 22);
-			this.OutputParentPathTextBox.TabIndex = 24;
-			this.OutputParentPathTextBox.Visible = false;
+			OutputParentPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OutputParentPathTextBox.CueBannerText = "";
+			OutputParentPathTextBox.Location = new System.Drawing.Point(223, 32);
+			OutputParentPathTextBox.Name = "OutputParentPathTextBox";
+			OutputParentPathTextBox.ReadOnly = true;
+			OutputParentPathTextBox.Size = new System.Drawing.Size(431, 22);
+			OutputParentPathTextBox.TabIndex = 24;
+			OutputParentPathTextBox.Visible = false;
 			//
 			//OutputPathComboBox
 			//
-			this.OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OutputPathComboBox.FormattingEnabled = true;
-			this.OutputPathComboBox.Location = new System.Drawing.Point(77, 33);
-			this.OutputPathComboBox.Name = "OutputPathComboBox";
-			this.OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
-			this.OutputPathComboBox.TabIndex = 23;
+			OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			OutputPathComboBox.FormattingEnabled = true;
+			OutputPathComboBox.Location = new System.Drawing.Point(77, 33);
+			OutputPathComboBox.Name = "OutputPathComboBox";
+			OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
+			OutputPathComboBox.TabIndex = 23;
 			//
 			//InputComboBox
 			//
-			this.InputComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.InputComboBox.FormattingEnabled = true;
-			this.InputComboBox.Location = new System.Drawing.Point(77, 4);
-			this.InputComboBox.Name = "InputComboBox";
-			this.InputComboBox.Size = new System.Drawing.Size(140, 21);
-			this.InputComboBox.TabIndex = 0;
+			InputComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			InputComboBox.FormattingEnabled = true;
+			InputComboBox.Location = new System.Drawing.Point(77, 4);
+			InputComboBox.Name = "InputComboBox";
+			InputComboBox.Size = new System.Drawing.Size(140, 21);
+			InputComboBox.TabIndex = 0;
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Location = new System.Drawing.Point(3, 37);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(62, 13);
-			this.Label1.TabIndex = 22;
-			this.Label1.Text = "Output to:";
+			Label1.AutoSize = true;
+			Label1.Location = new System.Drawing.Point(3, 37);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(62, 13);
+			Label1.TabIndex = 22;
+			Label1.Text = "Output to:";
 			//
 			//GotoInputPathButton
 			//
-			this.GotoInputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoInputPathButton.Location = new System.Drawing.Point(730, 3);
-			this.GotoInputPathButton.Name = "GotoInputPathButton";
-			this.GotoInputPathButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoInputPathButton.TabIndex = 21;
-			this.GotoInputPathButton.Text = "Goto";
-			this.GotoInputPathButton.UseVisualStyleBackColor = true;
+			GotoInputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoInputPathButton.Location = new System.Drawing.Point(730, 3);
+			GotoInputPathButton.Name = "GotoInputPathButton";
+			GotoInputPathButton.Size = new System.Drawing.Size(43, 23);
+			GotoInputPathButton.TabIndex = 21;
+			GotoInputPathButton.Text = "Goto";
+			GotoInputPathButton.UseVisualStyleBackColor = true;
 			//
 			//Label6
 			//
-			this.Label6.AutoSize = true;
-			this.Label6.Location = new System.Drawing.Point(3, 8);
-			this.Label6.Name = "Label6";
-			this.Label6.Size = new System.Drawing.Size(74, 13);
-			this.Label6.TabIndex = 17;
-			this.Label6.Text = "Folder input:";
+			Label6.AutoSize = true;
+			Label6.Location = new System.Drawing.Point(3, 8);
+			Label6.Name = "Label6";
+			Label6.Size = new System.Drawing.Size(74, 13);
+			Label6.TabIndex = 17;
+			Label6.Text = "Folder input:";
 			//
 			//InputPathFileNameTextBox
 			//
-			this.InputPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.InputPathFileNameTextBox.CueBannerText = "";
-			this.InputPathFileNameTextBox.Location = new System.Drawing.Point(223, 3);
-			this.InputPathFileNameTextBox.Name = "InputPathFileNameTextBox";
-			this.InputPathFileNameTextBox.Size = new System.Drawing.Size(431, 22);
-			this.InputPathFileNameTextBox.TabIndex = 1;
+			InputPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			InputPathFileNameTextBox.CueBannerText = "";
+			InputPathFileNameTextBox.Location = new System.Drawing.Point(223, 3);
+			InputPathFileNameTextBox.Name = "InputPathFileNameTextBox";
+			InputPathFileNameTextBox.Size = new System.Drawing.Size(431, 22);
+			InputPathFileNameTextBox.TabIndex = 1;
 			//
 			//BrowseForInputFolderOrFileNameButton
 			//
-			this.BrowseForInputFolderOrFileNameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForInputFolderOrFileNameButton.Location = new System.Drawing.Point(660, 3);
-			this.BrowseForInputFolderOrFileNameButton.Name = "BrowseForInputFolderOrFileNameButton";
-			this.BrowseForInputFolderOrFileNameButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForInputFolderOrFileNameButton.TabIndex = 20;
-			this.BrowseForInputFolderOrFileNameButton.Text = "Browse...";
-			this.BrowseForInputFolderOrFileNameButton.UseVisualStyleBackColor = true;
+			BrowseForInputFolderOrFileNameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForInputFolderOrFileNameButton.Location = new System.Drawing.Point(660, 3);
+			BrowseForInputFolderOrFileNameButton.Name = "BrowseForInputFolderOrFileNameButton";
+			BrowseForInputFolderOrFileNameButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForInputFolderOrFileNameButton.TabIndex = 20;
+			BrowseForInputFolderOrFileNameButton.Text = "Browse...";
+			BrowseForInputFolderOrFileNameButton.UseVisualStyleBackColor = true;
 			//
 			//Options_LogSplitContainer
 			//
-			this.Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
-			this.Options_LogSplitContainer.Name = "Options_LogSplitContainer";
-			this.Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
+			Options_LogSplitContainer.Name = "Options_LogSplitContainer";
+			Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			//
 			//Options_LogSplitContainer.Panel1
 			//
-			this.Options_LogSplitContainer.Panel1.Controls.Add(this.OptionsGroupBox);
-			this.Options_LogSplitContainer.Panel1MinSize = 45;
+			Options_LogSplitContainer.Panel1.Controls.Add(OptionsGroupBox);
+			Options_LogSplitContainer.Panel1MinSize = 45;
 			//
 			//Options_LogSplitContainer.Panel2
 			//
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.LogRichTextBox);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.PackButtonsPanel);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.PostPackPanel);
-			this.Options_LogSplitContainer.Panel2MinSize = 45;
-			this.Options_LogSplitContainer.Size = new System.Drawing.Size(770, 472);
-			this.Options_LogSplitContainer.SplitterDistance = 260;
-			this.Options_LogSplitContainer.TabIndex = 29;
+			Options_LogSplitContainer.Panel2.Controls.Add(LogRichTextBox);
+			Options_LogSplitContainer.Panel2.Controls.Add(PackButtonsPanel);
+			Options_LogSplitContainer.Panel2.Controls.Add(PostPackPanel);
+			Options_LogSplitContainer.Panel2MinSize = 45;
+			Options_LogSplitContainer.Size = new System.Drawing.Size(770, 472);
+			Options_LogSplitContainer.SplitterDistance = 260;
+			Options_LogSplitContainer.TabIndex = 29;
 			//
 			//OptionsGroupBox
 			//
-			this.OptionsGroupBox.Controls.Add(this.OptionsGroupBoxFillPanel);
-			this.OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OptionsGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.OptionsGroupBox.Name = "OptionsGroupBox";
-			this.OptionsGroupBox.Size = new System.Drawing.Size(770, 260);
-			this.OptionsGroupBox.TabIndex = 0;
-			this.OptionsGroupBox.TabStop = false;
-			this.OptionsGroupBox.Text = "Options";
+			OptionsGroupBox.Controls.Add(OptionsGroupBoxFillPanel);
+			OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			OptionsGroupBox.Location = new System.Drawing.Point(0, 0);
+			OptionsGroupBox.Name = "OptionsGroupBox";
+			OptionsGroupBox.Size = new System.Drawing.Size(770, 260);
+			OptionsGroupBox.TabIndex = 0;
+			OptionsGroupBox.TabStop = false;
+			OptionsGroupBox.Text = "Options";
 			//
 			//OptionsGroupBoxFillPanel
 			//
-			this.OptionsGroupBoxFillPanel.AutoScroll = true;
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.PackerOptionsPanel);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.DirectPackerOptionsLabel);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.DirectPackerOptionsTextBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.PackerOptionsTextBox);
-			this.OptionsGroupBoxFillPanel.Controls.Add(this.PackerOptionsTextBoxMinScrollPanel);
-			this.OptionsGroupBoxFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OptionsGroupBoxFillPanel.Location = new System.Drawing.Point(3, 18);
-			this.OptionsGroupBoxFillPanel.Name = "OptionsGroupBoxFillPanel";
-			this.OptionsGroupBoxFillPanel.Size = new System.Drawing.Size(764, 239);
-			this.OptionsGroupBoxFillPanel.TabIndex = 19;
+			OptionsGroupBoxFillPanel.AutoScroll = true;
+			OptionsGroupBoxFillPanel.Controls.Add(PackerOptionsPanel);
+			OptionsGroupBoxFillPanel.Controls.Add(DirectPackerOptionsLabel);
+			OptionsGroupBoxFillPanel.Controls.Add(DirectPackerOptionsTextBox);
+			OptionsGroupBoxFillPanel.Controls.Add(PackerOptionsTextBox);
+			OptionsGroupBoxFillPanel.Controls.Add(PackerOptionsTextBoxMinScrollPanel);
+			OptionsGroupBoxFillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			OptionsGroupBoxFillPanel.Location = new System.Drawing.Point(3, 18);
+			OptionsGroupBoxFillPanel.Name = "OptionsGroupBoxFillPanel";
+			OptionsGroupBoxFillPanel.Size = new System.Drawing.Size(764, 239);
+			OptionsGroupBoxFillPanel.TabIndex = 19;
 			//
 			//PackerOptionsPanel
 			//
-			this.PackerOptionsPanel.AutoScroll = true;
-			this.PackerOptionsPanel.Controls.Add(this.MultiFileVpkCheckBox);
-			this.PackerOptionsPanel.Controls.Add(this.PackOptionsUseDefaultsButton);
-			this.PackerOptionsPanel.Controls.Add(this.LogFileCheckBox);
-			this.PackerOptionsPanel.Controls.Add(this.Label3);
-			this.PackerOptionsPanel.Controls.Add(this.GameSetupComboBox);
-			this.PackerOptionsPanel.Controls.Add(this.SetUpGamesButton);
-			this.PackerOptionsPanel.Controls.Add(this.GmaPanel);
-			this.PackerOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.PackerOptionsPanel.Location = new System.Drawing.Point(0, 0);
-			this.PackerOptionsPanel.Name = "PackerOptionsPanel";
-			this.PackerOptionsPanel.Size = new System.Drawing.Size(764, 153);
-			this.PackerOptionsPanel.TabIndex = 0;
+			PackerOptionsPanel.AutoScroll = true;
+			PackerOptionsPanel.Controls.Add(MultiFileVpkCheckBox);
+			PackerOptionsPanel.Controls.Add(PackOptionsUseDefaultsButton);
+			PackerOptionsPanel.Controls.Add(LogFileCheckBox);
+			PackerOptionsPanel.Controls.Add(Label3);
+			PackerOptionsPanel.Controls.Add(GameSetupComboBox);
+			PackerOptionsPanel.Controls.Add(SetUpGamesButton);
+			PackerOptionsPanel.Controls.Add(GmaPanel);
+			PackerOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			PackerOptionsPanel.Location = new System.Drawing.Point(0, 0);
+			PackerOptionsPanel.Name = "PackerOptionsPanel";
+			PackerOptionsPanel.Size = new System.Drawing.Size(764, 153);
+			PackerOptionsPanel.TabIndex = 0;
 			//
 			//MultiFileVpkCheckBox
 			//
-			this.MultiFileVpkCheckBox.AutoSize = true;
-			this.MultiFileVpkCheckBox.Location = new System.Drawing.Point(6, 51);
-			this.MultiFileVpkCheckBox.Name = "MultiFileVpkCheckBox";
-			this.MultiFileVpkCheckBox.Size = new System.Drawing.Size(125, 17);
-			this.MultiFileVpkCheckBox.TabIndex = 13;
-			this.MultiFileVpkCheckBox.Text = "Write multi-file VPK";
-			this.MultiFileVpkCheckBox.UseVisualStyleBackColor = true;
-			this.MultiFileVpkCheckBox.Visible = false;
+			MultiFileVpkCheckBox.AutoSize = true;
+			MultiFileVpkCheckBox.Location = new System.Drawing.Point(6, 51);
+			MultiFileVpkCheckBox.Name = "MultiFileVpkCheckBox";
+			MultiFileVpkCheckBox.Size = new System.Drawing.Size(125, 17);
+			MultiFileVpkCheckBox.TabIndex = 13;
+			MultiFileVpkCheckBox.Text = "Write multi-file VPK";
+			MultiFileVpkCheckBox.UseVisualStyleBackColor = true;
+			MultiFileVpkCheckBox.Visible = false;
 			//
 			//PackOptionsUseDefaultsButton
 			//
-			this.PackOptionsUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.PackOptionsUseDefaultsButton.Location = new System.Drawing.Point(674, 127);
-			this.PackOptionsUseDefaultsButton.Name = "PackOptionsUseDefaultsButton";
-			this.PackOptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
-			this.PackOptionsUseDefaultsButton.TabIndex = 12;
-			this.PackOptionsUseDefaultsButton.Text = "Use Defaults";
-			this.PackOptionsUseDefaultsButton.UseVisualStyleBackColor = true;
+			PackOptionsUseDefaultsButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			PackOptionsUseDefaultsButton.Location = new System.Drawing.Point(674, 127);
+			PackOptionsUseDefaultsButton.Name = "PackOptionsUseDefaultsButton";
+			PackOptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
+			PackOptionsUseDefaultsButton.TabIndex = 12;
+			PackOptionsUseDefaultsButton.Text = "Use Defaults";
+			PackOptionsUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//LogFileCheckBox
 			//
-			this.LogFileCheckBox.AutoSize = true;
-			this.LogFileCheckBox.Location = new System.Drawing.Point(6, 28);
-			this.LogFileCheckBox.Name = "LogFileCheckBox";
-			this.LogFileCheckBox.Size = new System.Drawing.Size(116, 17);
-			this.LogFileCheckBox.TabIndex = 4;
-			this.LogFileCheckBox.Text = "Write log to a file";
-			this.LogFileCheckBox.UseVisualStyleBackColor = true;
+			LogFileCheckBox.AutoSize = true;
+			LogFileCheckBox.Location = new System.Drawing.Point(6, 28);
+			LogFileCheckBox.Name = "LogFileCheckBox";
+			LogFileCheckBox.Size = new System.Drawing.Size(116, 17);
+			LogFileCheckBox.TabIndex = 4;
+			LogFileCheckBox.Text = "Write log to a file";
+			LogFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//Label3
 			//
-			this.Label3.AutoSize = true;
-			this.Label3.Location = new System.Drawing.Point(0, 5);
-			this.Label3.Name = "Label3";
-			this.Label3.Size = new System.Drawing.Size(165, 13);
-			this.Label3.TabIndex = 0;
-			this.Label3.Text = "Game that has the packer tool:";
+			Label3.AutoSize = true;
+			Label3.Location = new System.Drawing.Point(0, 5);
+			Label3.Name = "Label3";
+			Label3.Size = new System.Drawing.Size(165, 13);
+			Label3.TabIndex = 0;
+			Label3.Text = "Game that has the packer tool:";
 			//
 			//GameSetupComboBox
 			//
-			this.GameSetupComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.GameSetupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.GameSetupComboBox.FormattingEnabled = true;
-			this.GameSetupComboBox.Location = new System.Drawing.Point(171, 1);
-			this.GameSetupComboBox.Name = "GameSetupComboBox";
-			this.GameSetupComboBox.Size = new System.Drawing.Size(497, 21);
-			this.GameSetupComboBox.TabIndex = 1;
+			GameSetupComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			GameSetupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			GameSetupComboBox.FormattingEnabled = true;
+			GameSetupComboBox.Location = new System.Drawing.Point(171, 1);
+			GameSetupComboBox.Name = "GameSetupComboBox";
+			GameSetupComboBox.Size = new System.Drawing.Size(497, 21);
+			GameSetupComboBox.TabIndex = 1;
 			//
 			//SetUpGamesButton
 			//
-			this.SetUpGamesButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.SetUpGamesButton.Location = new System.Drawing.Point(674, 0);
-			this.SetUpGamesButton.Name = "SetUpGamesButton";
-			this.SetUpGamesButton.Size = new System.Drawing.Size(90, 23);
-			this.SetUpGamesButton.TabIndex = 2;
-			this.SetUpGamesButton.Text = "Set Up Games";
-			this.SetUpGamesButton.UseVisualStyleBackColor = true;
+			SetUpGamesButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			SetUpGamesButton.Location = new System.Drawing.Point(674, 0);
+			SetUpGamesButton.Name = "SetUpGamesButton";
+			SetUpGamesButton.Size = new System.Drawing.Size(90, 23);
+			SetUpGamesButton.TabIndex = 2;
+			SetUpGamesButton.Text = "Set Up Games";
+			SetUpGamesButton.UseVisualStyleBackColor = true;
 			//
 			//GmaPanel
 			//
-			this.GmaPanel.Controls.Add(this.GmaTitleTextBox);
-			this.GmaPanel.Controls.Add(this.GmaTitleLabel);
-			this.GmaPanel.Controls.Add(this.GmaGarrysModTagsUserControl);
-			this.GmaPanel.Location = new System.Drawing.Point(217, 29);
-			this.GmaPanel.Name = "GmaPanel";
-			this.GmaPanel.Size = new System.Drawing.Size(423, 122);
-			this.GmaPanel.TabIndex = 0;
+			GmaPanel.Controls.Add(GmaTitleTextBox);
+			GmaPanel.Controls.Add(GmaTitleLabel);
+			GmaPanel.Controls.Add(GmaGarrysModTagsUserControl);
+			GmaPanel.Location = new System.Drawing.Point(217, 29);
+			GmaPanel.Name = "GmaPanel";
+			GmaPanel.Size = new System.Drawing.Size(423, 122);
+			GmaPanel.TabIndex = 0;
 			//
 			//GmaTitleTextBox
 			//
-			this.GmaTitleTextBox.CueBannerText = "";
-			this.GmaTitleTextBox.Location = new System.Drawing.Point(42, 1);
-			this.GmaTitleTextBox.Name = "GmaTitleTextBox";
-			this.GmaTitleTextBox.Size = new System.Drawing.Size(317, 22);
-			this.GmaTitleTextBox.TabIndex = 14;
+			GmaTitleTextBox.CueBannerText = "";
+			GmaTitleTextBox.Location = new System.Drawing.Point(42, 1);
+			GmaTitleTextBox.Name = "GmaTitleTextBox";
+			GmaTitleTextBox.Size = new System.Drawing.Size(317, 22);
+			GmaTitleTextBox.TabIndex = 14;
 			//
 			//GmaTitleLabel
 			//
-			this.GmaTitleLabel.AutoSize = true;
-			this.GmaTitleLabel.Location = new System.Drawing.Point(3, 6);
-			this.GmaTitleLabel.Name = "GmaTitleLabel";
-			this.GmaTitleLabel.Size = new System.Drawing.Size(32, 13);
-			this.GmaTitleLabel.TabIndex = 4;
-			this.GmaTitleLabel.Text = "Title:";
+			GmaTitleLabel.AutoSize = true;
+			GmaTitleLabel.Location = new System.Drawing.Point(3, 6);
+			GmaTitleLabel.Name = "GmaTitleLabel";
+			GmaTitleLabel.Size = new System.Drawing.Size(32, 13);
+			GmaTitleLabel.TabIndex = 4;
+			GmaTitleLabel.Text = "Title:";
 			//
 			//GmaGarrysModTagsUserControl
 			//
-			this.GmaGarrysModTagsUserControl.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-			this.GmaGarrysModTagsUserControl.Location = new System.Drawing.Point(0, 28);
-			this.GmaGarrysModTagsUserControl.Name = "GmaGarrysModTagsUserControl";
-			this.GmaGarrysModTagsUserControl.Orientation = Crowbar.AppEnums.OrientationType.Horizontal;
-			this.GmaGarrysModTagsUserControl.Size = new System.Drawing.Size(362, 94);
-			this.GmaGarrysModTagsUserControl.TabIndex = 15;
+			GmaGarrysModTagsUserControl.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+			GmaGarrysModTagsUserControl.Location = new System.Drawing.Point(0, 28);
+			GmaGarrysModTagsUserControl.Name = "GmaGarrysModTagsUserControl";
+			GmaGarrysModTagsUserControl.Orientation = Crowbar.AppEnums.OrientationType.Horizontal;
+			GmaGarrysModTagsUserControl.Size = new System.Drawing.Size(362, 94);
+			GmaGarrysModTagsUserControl.TabIndex = 15;
 			//
 			//DirectPackerOptionsLabel
 			//
-			this.DirectPackerOptionsLabel.Location = new System.Drawing.Point(0, 154);
-			this.DirectPackerOptionsLabel.Name = "DirectPackerOptionsLabel";
-			this.DirectPackerOptionsLabel.Size = new System.Drawing.Size(764, 13);
-			this.DirectPackerOptionsLabel.TabIndex = 16;
-			this.DirectPackerOptionsLabel.Text = "Direct entry of command-line options (in case they are not included above):";
+			DirectPackerOptionsLabel.Location = new System.Drawing.Point(0, 154);
+			DirectPackerOptionsLabel.Name = "DirectPackerOptionsLabel";
+			DirectPackerOptionsLabel.Size = new System.Drawing.Size(764, 13);
+			DirectPackerOptionsLabel.TabIndex = 16;
+			DirectPackerOptionsLabel.Text = "Direct entry of command-line options (in case they are not included above):";
 			//
 			//DirectPackerOptionsTextBox
 			//
-			this.DirectPackerOptionsTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DirectPackerOptionsTextBox.Location = new System.Drawing.Point(0, 170);
-			this.DirectPackerOptionsTextBox.Name = "DirectPackerOptionsTextBox";
-			this.DirectPackerOptionsTextBox.Size = new System.Drawing.Size(764, 22);
-			this.DirectPackerOptionsTextBox.TabIndex = 17;
+			DirectPackerOptionsTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DirectPackerOptionsTextBox.Location = new System.Drawing.Point(0, 170);
+			DirectPackerOptionsTextBox.Name = "DirectPackerOptionsTextBox";
+			DirectPackerOptionsTextBox.Size = new System.Drawing.Size(764, 22);
+			DirectPackerOptionsTextBox.TabIndex = 17;
 			//
 			//PackerOptionsTextBox
 			//
-			this.PackerOptionsTextBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.PackerOptionsTextBox.Location = new System.Drawing.Point(0, 198);
-			this.PackerOptionsTextBox.Multiline = true;
-			this.PackerOptionsTextBox.Name = "PackerOptionsTextBox";
-			this.PackerOptionsTextBox.ReadOnly = true;
-			this.PackerOptionsTextBox.Size = new System.Drawing.Size(764, 37);
-			this.PackerOptionsTextBox.TabIndex = 18;
+			PackerOptionsTextBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			PackerOptionsTextBox.Location = new System.Drawing.Point(0, 198);
+			PackerOptionsTextBox.Multiline = true;
+			PackerOptionsTextBox.Name = "PackerOptionsTextBox";
+			PackerOptionsTextBox.ReadOnly = true;
+			PackerOptionsTextBox.Size = new System.Drawing.Size(764, 37);
+			PackerOptionsTextBox.TabIndex = 18;
 			//
 			//PackerOptionsTextBoxMinScrollPanel
 			//
-			this.PackerOptionsTextBoxMinScrollPanel.Location = new System.Drawing.Point(0, 198);
-			this.PackerOptionsTextBoxMinScrollPanel.Name = "PackerOptionsTextBoxMinScrollPanel";
-			this.PackerOptionsTextBoxMinScrollPanel.Size = new System.Drawing.Size(764, 37);
-			this.PackerOptionsTextBoxMinScrollPanel.TabIndex = 42;
+			PackerOptionsTextBoxMinScrollPanel.Location = new System.Drawing.Point(0, 198);
+			PackerOptionsTextBoxMinScrollPanel.Name = "PackerOptionsTextBoxMinScrollPanel";
+			PackerOptionsTextBoxMinScrollPanel.Size = new System.Drawing.Size(764, 37);
+			PackerOptionsTextBoxMinScrollPanel.TabIndex = 42;
 			//
 			//LogRichTextBox
 			//
-			this.LogRichTextBox.CueBannerText = "";
-			this.LogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LogRichTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.LogRichTextBox.HideSelection = false;
-			this.LogRichTextBox.Location = new System.Drawing.Point(0, 26);
-			this.LogRichTextBox.Name = "LogRichTextBox";
-			this.LogRichTextBox.ReadOnly = true;
-			this.LogRichTextBox.Size = new System.Drawing.Size(770, 156);
-			this.LogRichTextBox.TabIndex = 0;
-			this.LogRichTextBox.Text = "";
-			this.LogRichTextBox.WordWrap = false;
+			LogRichTextBox.CueBannerText = "";
+			LogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			LogRichTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			LogRichTextBox.HideSelection = false;
+			LogRichTextBox.Location = new System.Drawing.Point(0, 26);
+			LogRichTextBox.Name = "LogRichTextBox";
+			LogRichTextBox.ReadOnly = true;
+			LogRichTextBox.Size = new System.Drawing.Size(770, 156);
+			LogRichTextBox.TabIndex = 0;
+			LogRichTextBox.Text = "";
+			LogRichTextBox.WordWrap = false;
 			//
 			//PackButtonsPanel
 			//
-			this.PackButtonsPanel.Controls.Add(this.PackButton);
-			this.PackButtonsPanel.Controls.Add(this.SkipCurrentFolderButton);
-			this.PackButtonsPanel.Controls.Add(this.CancelPackButton);
-			this.PackButtonsPanel.Controls.Add(this.UseAllInPublishButton);
-			this.PackButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.PackButtonsPanel.Location = new System.Drawing.Point(0, 0);
-			this.PackButtonsPanel.Name = "PackButtonsPanel";
-			this.PackButtonsPanel.Size = new System.Drawing.Size(770, 26);
-			this.PackButtonsPanel.TabIndex = 5;
+			PackButtonsPanel.Controls.Add(PackButton);
+			PackButtonsPanel.Controls.Add(SkipCurrentFolderButton);
+			PackButtonsPanel.Controls.Add(CancelPackButton);
+			PackButtonsPanel.Controls.Add(UseAllInPublishButton);
+			PackButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			PackButtonsPanel.Location = new System.Drawing.Point(0, 0);
+			PackButtonsPanel.Name = "PackButtonsPanel";
+			PackButtonsPanel.Size = new System.Drawing.Size(770, 26);
+			PackButtonsPanel.TabIndex = 5;
 			//
 			//PackButton
 			//
-			this.PackButton.Location = new System.Drawing.Point(0, 0);
-			this.PackButton.Name = "PackButton";
-			this.PackButton.Size = new System.Drawing.Size(120, 23);
-			this.PackButton.TabIndex = 1;
-			this.PackButton.Text = "Pack";
-			this.PackButton.UseVisualStyleBackColor = true;
+			PackButton.Location = new System.Drawing.Point(0, 0);
+			PackButton.Name = "PackButton";
+			PackButton.Size = new System.Drawing.Size(120, 23);
+			PackButton.TabIndex = 1;
+			PackButton.Text = "Pack";
+			PackButton.UseVisualStyleBackColor = true;
 			//
 			//SkipCurrentFolderButton
 			//
-			this.SkipCurrentFolderButton.Enabled = false;
-			this.SkipCurrentFolderButton.Location = new System.Drawing.Point(126, 0);
-			this.SkipCurrentFolderButton.Name = "SkipCurrentFolderButton";
-			this.SkipCurrentFolderButton.Size = new System.Drawing.Size(120, 23);
-			this.SkipCurrentFolderButton.TabIndex = 2;
-			this.SkipCurrentFolderButton.Text = "Skip Current Folder";
-			this.SkipCurrentFolderButton.UseVisualStyleBackColor = true;
+			SkipCurrentFolderButton.Enabled = false;
+			SkipCurrentFolderButton.Location = new System.Drawing.Point(126, 0);
+			SkipCurrentFolderButton.Name = "SkipCurrentFolderButton";
+			SkipCurrentFolderButton.Size = new System.Drawing.Size(120, 23);
+			SkipCurrentFolderButton.TabIndex = 2;
+			SkipCurrentFolderButton.Text = "Skip Current Folder";
+			SkipCurrentFolderButton.UseVisualStyleBackColor = true;
 			//
 			//CancelPackButton
 			//
-			this.CancelPackButton.Enabled = false;
-			this.CancelPackButton.Location = new System.Drawing.Point(252, 0);
-			this.CancelPackButton.Name = "CancelPackButton";
-			this.CancelPackButton.Size = new System.Drawing.Size(120, 23);
-			this.CancelPackButton.TabIndex = 3;
-			this.CancelPackButton.Text = "Cancel Pack";
-			this.CancelPackButton.UseVisualStyleBackColor = true;
+			CancelPackButton.Enabled = false;
+			CancelPackButton.Location = new System.Drawing.Point(252, 0);
+			CancelPackButton.Name = "CancelPackButton";
+			CancelPackButton.Size = new System.Drawing.Size(120, 23);
+			CancelPackButton.TabIndex = 3;
+			CancelPackButton.Text = "Cancel Pack";
+			CancelPackButton.UseVisualStyleBackColor = true;
 			//
 			//UseAllInPublishButton
 			//
-			this.UseAllInPublishButton.Enabled = false;
-			this.UseAllInPublishButton.Location = new System.Drawing.Point(378, 0);
-			this.UseAllInPublishButton.Name = "UseAllInPublishButton";
-			this.UseAllInPublishButton.Size = new System.Drawing.Size(120, 23);
-			this.UseAllInPublishButton.TabIndex = 4;
-			this.UseAllInPublishButton.Text = "Use All in Publish";
-			this.UseAllInPublishButton.UseVisualStyleBackColor = true;
-			this.UseAllInPublishButton.Visible = false;
+			UseAllInPublishButton.Enabled = false;
+			UseAllInPublishButton.Location = new System.Drawing.Point(378, 0);
+			UseAllInPublishButton.Name = "UseAllInPublishButton";
+			UseAllInPublishButton.Size = new System.Drawing.Size(120, 23);
+			UseAllInPublishButton.TabIndex = 4;
+			UseAllInPublishButton.Text = "Use All in Publish";
+			UseAllInPublishButton.UseVisualStyleBackColor = true;
+			UseAllInPublishButton.Visible = false;
 			//
 			//PostPackPanel
 			//
-			this.PostPackPanel.Controls.Add(this.PackedFilesComboBox);
-			this.PostPackPanel.Controls.Add(this.UseInPublishButton);
-			this.PostPackPanel.Controls.Add(this.GotoPackedFileButton);
-			this.PostPackPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.PostPackPanel.Location = new System.Drawing.Point(0, 182);
-			this.PostPackPanel.Name = "PostPackPanel";
-			this.PostPackPanel.Size = new System.Drawing.Size(770, 26);
-			this.PostPackPanel.TabIndex = 6;
+			PostPackPanel.Controls.Add(PackedFilesComboBox);
+			PostPackPanel.Controls.Add(UseInPublishButton);
+			PostPackPanel.Controls.Add(GotoPackedFileButton);
+			PostPackPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			PostPackPanel.Location = new System.Drawing.Point(0, 182);
+			PostPackPanel.Name = "PostPackPanel";
+			PostPackPanel.Size = new System.Drawing.Size(770, 26);
+			PostPackPanel.TabIndex = 6;
 			//
 			//PackedFilesComboBox
 			//
-			this.PackedFilesComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.PackedFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.PackedFilesComboBox.FormattingEnabled = true;
-			this.PackedFilesComboBox.Location = new System.Drawing.Point(0, 4);
-			this.PackedFilesComboBox.Name = "PackedFilesComboBox";
-			this.PackedFilesComboBox.Size = new System.Drawing.Size(721, 21);
-			this.PackedFilesComboBox.TabIndex = 1;
+			PackedFilesComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			PackedFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			PackedFilesComboBox.FormattingEnabled = true;
+			PackedFilesComboBox.Location = new System.Drawing.Point(0, 4);
+			PackedFilesComboBox.Name = "PackedFilesComboBox";
+			PackedFilesComboBox.Size = new System.Drawing.Size(721, 21);
+			PackedFilesComboBox.TabIndex = 1;
 			//
 			//UseInPublishButton
 			//
-			this.UseInPublishButton.Enabled = false;
-			this.UseInPublishButton.Location = new System.Drawing.Point(632, 3);
-			this.UseInPublishButton.Name = "UseInPublishButton";
-			this.UseInPublishButton.Size = new System.Drawing.Size(89, 23);
-			this.UseInPublishButton.TabIndex = 3;
-			this.UseInPublishButton.Text = "Use in Publish";
-			this.UseInPublishButton.UseVisualStyleBackColor = true;
-			this.UseInPublishButton.Visible = false;
+			UseInPublishButton.Enabled = false;
+			UseInPublishButton.Location = new System.Drawing.Point(632, 3);
+			UseInPublishButton.Name = "UseInPublishButton";
+			UseInPublishButton.Size = new System.Drawing.Size(89, 23);
+			UseInPublishButton.TabIndex = 3;
+			UseInPublishButton.Text = "Use in Publish";
+			UseInPublishButton.UseVisualStyleBackColor = true;
+			UseInPublishButton.Visible = false;
 			//
 			//GotoPackedFileButton
 			//
-			this.GotoPackedFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoPackedFileButton.Location = new System.Drawing.Point(727, 3);
-			this.GotoPackedFileButton.Name = "GotoPackedFileButton";
-			this.GotoPackedFileButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoPackedFileButton.TabIndex = 4;
-			this.GotoPackedFileButton.Text = "Goto";
-			this.GotoPackedFileButton.UseVisualStyleBackColor = true;
+			GotoPackedFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoPackedFileButton.Location = new System.Drawing.Point(727, 3);
+			GotoPackedFileButton.Name = "GotoPackedFileButton";
+			GotoPackedFileButton.Size = new System.Drawing.Size(43, 23);
+			GotoPackedFileButton.TabIndex = 4;
+			GotoPackedFileButton.Text = "Goto";
+			GotoPackedFileButton.UseVisualStyleBackColor = true;
 			//
 			//PackUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.Panel1);
-			this.Name = "PackUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.Panel1.ResumeLayout(false);
-			this.Panel1.PerformLayout();
-			this.Options_LogSplitContainer.Panel1.ResumeLayout(false);
-			this.Options_LogSplitContainer.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).EndInit();
-			this.Options_LogSplitContainer.ResumeLayout(false);
-			this.OptionsGroupBox.ResumeLayout(false);
-			this.OptionsGroupBoxFillPanel.ResumeLayout(false);
-			this.OptionsGroupBoxFillPanel.PerformLayout();
-			this.PackerOptionsPanel.ResumeLayout(false);
-			this.PackerOptionsPanel.PerformLayout();
-			this.GmaPanel.ResumeLayout(false);
-			this.GmaPanel.PerformLayout();
-			this.PackButtonsPanel.ResumeLayout(false);
-			this.PostPackPanel.ResumeLayout(false);
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(Panel1);
+			Name = "PackUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			Panel1.ResumeLayout(false);
+			Panel1.PerformLayout();
+			Options_LogSplitContainer.Panel1.ResumeLayout(false);
+			Options_LogSplitContainer.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).EndInit();
+			Options_LogSplitContainer.ResumeLayout(false);
+			OptionsGroupBox.ResumeLayout(false);
+			OptionsGroupBoxFillPanel.ResumeLayout(false);
+			OptionsGroupBoxFillPanel.PerformLayout();
+			PackerOptionsPanel.ResumeLayout(false);
+			PackerOptionsPanel.PerformLayout();
+			GmaPanel.ResumeLayout(false);
+			GmaPanel.PerformLayout();
+			PackButtonsPanel.ResumeLayout(false);
+			PostPackPanel.ResumeLayout(false);
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
-			this.Load += new System.EventHandler(PackUserControl_Load);
+			Load += new System.EventHandler(PackUserControl_Load);
 			BrowseForInputFolderOrFileNameButton.Click += new System.EventHandler(BrowseForInputFolderOrFileNameButton_Click);
 			GotoInputPathButton.Click += new System.EventHandler(GotoInputPathButton_Click);
 			OutputPathTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(OutputPathTextBox_DragDrop);

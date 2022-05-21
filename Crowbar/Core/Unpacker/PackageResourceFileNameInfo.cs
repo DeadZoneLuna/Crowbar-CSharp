@@ -19,16 +19,16 @@ namespace Crowbar
 
 		protected PackageResourceFileNameInfo(PackageResourceFileNameInfo originalObject)
 		{
-			this.thePathFileName = originalObject.PathFileName;
-			this.theName = originalObject.Name;
-			this.theSize = originalObject.Size;
-			this.theCount = originalObject.Count;
-			this.theType = originalObject.Type;
-			this.theExtension = originalObject.Extension;
-			this.theResourceFileIsFolder = originalObject.IsFolder;
-			this.theArchivePathFileName = originalObject.ArchivePathFileName;
-			this.thePathFileNameExists = originalObject.ArchivePathFileNameExists;
-			this.theEntryIndex = originalObject.EntryIndex;
+			thePathFileName = originalObject.PathFileName;
+			theName = originalObject.Name;
+			theSize = originalObject.Size;
+			theCount = originalObject.Count;
+			theType = originalObject.Type;
+			theExtension = originalObject.Extension;
+			theResourceFileIsFolder = originalObject.IsFolder;
+			theArchivePathFileName = originalObject.ArchivePathFileName;
+			thePathFileNameExists = originalObject.ArchivePathFileNameExists;
+			theEntryIndex = originalObject.EntryIndex;
 		}
 
 		public object Clone()
@@ -42,11 +42,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePathFileName;
+				return thePathFileName;
 			}
 			set
 			{
-				this.thePathFileName = value;
+				thePathFileName = value;
 				NotifyPropertyChanged("PathFileName");
 			}
 		}
@@ -55,11 +55,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theName;
+				return theName;
 			}
 			set
 			{
-				this.theName = value;
+				theName = value;
 				NotifyPropertyChanged("Name");
 			}
 		}
@@ -68,11 +68,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theSize;
+				return theSize;
 			}
 			set
 			{
-				this.theSize = value;
+				theSize = value;
 				NotifyPropertyChanged("Size");
 			}
 		}
@@ -81,11 +81,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCount;
+				return theCount;
 			}
 			set
 			{
-				this.theCount = value;
+				theCount = value;
 				NotifyPropertyChanged("Count");
 			}
 		}
@@ -94,11 +94,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theType;
+				return theType;
 			}
 			set
 			{
-				this.theType = value;
+				theType = value;
 				NotifyPropertyChanged("Type");
 			}
 		}
@@ -107,11 +107,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theExtension;
+				return theExtension;
 			}
 			set
 			{
-				this.theExtension = value;
+				theExtension = value;
 				NotifyPropertyChanged("Extension");
 			}
 		}
@@ -120,11 +120,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theResourceFileIsFolder;
+				return theResourceFileIsFolder;
 			}
 			set
 			{
-				this.theResourceFileIsFolder = value;
+				theResourceFileIsFolder = value;
 				NotifyPropertyChanged("IsFolder");
 			}
 		}
@@ -133,11 +133,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theArchivePathFileName;
+				return theArchivePathFileName;
 			}
 			set
 			{
-				this.theArchivePathFileName = value;
+				theArchivePathFileName = value;
 				NotifyPropertyChanged("ArchivePathFileName");
 			}
 		}
@@ -146,11 +146,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePathFileNameExists;
+				return thePathFileNameExists;
 			}
 			set
 			{
-				this.thePathFileNameExists = value;
+				thePathFileNameExists = value;
 				NotifyPropertyChanged("PathFileNameExists");
 			}
 		}
@@ -159,11 +159,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theEntryIndex;
+				return theEntryIndex;
 			}
 			set
 			{
-				this.theEntryIndex = value;
+				theEntryIndex = value;
 				NotifyPropertyChanged("EntryIndex");
 			}
 		}

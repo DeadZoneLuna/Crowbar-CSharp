@@ -17,10 +17,10 @@ namespace Crowbar
 
 		public SourceVtxFile107(BinaryReader vtxFileReader, SourceVtxFileData107 vtxFileData)
 		{
-			this.theInputFileReader = vtxFileReader;
-			this.theVtxFileData = vtxFileData;
+			theInputFileReader = vtxFileReader;
+			theVtxFileData = vtxFileData;
 
-			this.theVtxFileData.theFileSeekLog.FileSize = this.theInputFileReader.BaseStream.Length;
+			theVtxFileData.theFileSeekLog.FileSize = theInputFileReader.BaseStream.Length;
 		}
 
 #endregion
@@ -35,31 +35,31 @@ namespace Crowbar
 			//Dim fileOffsetStart2 As Long
 			//Dim fileOffsetEnd2 As Long
 
-			fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+			fileOffsetStart = theInputFileReader.BaseStream.Position;
 
-			this.theVtxFileData.version = this.theInputFileReader.ReadInt32();
+			theVtxFileData.version = theInputFileReader.ReadInt32();
 
-			this.theVtxFileData.vertexCacheSize = this.theInputFileReader.ReadInt32();
-			this.theVtxFileData.maxBonesPerStrip = this.theInputFileReader.ReadUInt16();
-			this.theVtxFileData.maxBonesPerTri = this.theInputFileReader.ReadUInt16();
-			this.theVtxFileData.maxBonesPerVertex = this.theInputFileReader.ReadInt32();
+			theVtxFileData.vertexCacheSize = theInputFileReader.ReadInt32();
+			theVtxFileData.maxBonesPerStrip = theInputFileReader.ReadUInt16();
+			theVtxFileData.maxBonesPerTri = theInputFileReader.ReadUInt16();
+			theVtxFileData.maxBonesPerVertex = theInputFileReader.ReadInt32();
 
-			this.theVtxFileData.checksum = this.theInputFileReader.ReadInt32();
+			theVtxFileData.checksum = theInputFileReader.ReadInt32();
 
-			this.theVtxFileData.lodCount = this.theInputFileReader.ReadInt32();
+			theVtxFileData.lodCount = theInputFileReader.ReadInt32();
 
-			this.theVtxFileData.materialReplacementListOffset = this.theInputFileReader.ReadInt32();
+			theVtxFileData.materialReplacementListOffset = theInputFileReader.ReadInt32();
 
-			this.theVtxFileData.bodyPartCount = this.theInputFileReader.ReadInt32();
-			this.theVtxFileData.bodyPartOffset = this.theInputFileReader.ReadInt32();
+			theVtxFileData.bodyPartCount = theInputFileReader.ReadInt32();
+			theVtxFileData.bodyPartOffset = theInputFileReader.ReadInt32();
 
-			fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-			this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "VTX File Header (Actual version: " + this.theVtxFileData.version.ToString() + "; override version: 107)");
+			fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+			theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "VTX File Header (Actual version: " + theVtxFileData.version.ToString() + "; override version: 107)");
 		}
 
 		public void ReadSourceVtxBodyParts()
 		{
-			if (this.theVtxFileData.bodyPartCount > 0)
+			if (theVtxFileData.bodyPartCount > 0)
 			{
 				//'NOTE: Stuff that is part of determining vtx strip group size.
 				//Me.theFirstMeshWithStripGroups = Nothing
@@ -77,28 +77,28 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(this.theVtxFileData.bodyPartOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(theVtxFileData.bodyPartOffset, SeekOrigin.Begin);
 
-					this.theVtxFileData.theVtxBodyParts = new List<SourceVtxBodyPart107>(this.theVtxFileData.bodyPartCount);
-					for (int i = 0; i < this.theVtxFileData.bodyPartCount; i++)
+					theVtxFileData.theVtxBodyParts = new List<SourceVtxBodyPart107>(theVtxFileData.bodyPartCount);
+					for (int i = 0; i < theVtxFileData.bodyPartCount; i++)
 					{
-						bodyPartInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						bodyPartInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceVtxBodyPart107 aBodyPart = new SourceVtxBodyPart107();
 
-						aBodyPart.modelCount = this.theInputFileReader.ReadInt32();
-						aBodyPart.modelOffset = this.theInputFileReader.ReadInt32();
+						aBodyPart.modelCount = theInputFileReader.ReadInt32();
+						aBodyPart.modelOffset = theInputFileReader.ReadInt32();
 
-						this.theVtxFileData.theVtxBodyParts.Add(aBodyPart);
+						theVtxFileData.theVtxBodyParts.Add(aBodyPart);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBodyPart");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aBodyPart");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
-						this.ReadSourceVtxModels(bodyPartInputFileStreamPosition, aBodyPart);
+						ReadSourceVtxModels(bodyPartInputFileStreamPosition, aBodyPart);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 				}
 				catch (Exception ex)
@@ -110,7 +110,7 @@ namespace Crowbar
 
 		public void ReadUnreadBytes()
 		{
-			this.theVtxFileData.theFileSeekLog.LogUnreadBytes(this.theInputFileReader);
+			theVtxFileData.theFileSeekLog.LogUnreadBytes(theInputFileReader);
 		}
 
 #endregion
@@ -130,28 +130,28 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.modelOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(bodyPartInputFileStreamPosition + aBodyPart.modelOffset, SeekOrigin.Begin);
 
 					aBodyPart.theVtxModels = new List<SourceVtxModel107>(aBodyPart.modelCount);
 					for (int j = 0; j < aBodyPart.modelCount; j++)
 					{
-						modelInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						modelInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceVtxModel107 aModel = new SourceVtxModel107();
 
-						aModel.lodCount = this.theInputFileReader.ReadInt32();
-						aModel.lodOffset = this.theInputFileReader.ReadInt32();
+						aModel.lodCount = theInputFileReader.ReadInt32();
+						aModel.lodOffset = theInputFileReader.ReadInt32();
 
 						aBodyPart.theVtxModels.Add(aModel);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModel");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
-						this.ReadSourceVtxModelLods(modelInputFileStreamPosition, aModel);
+						ReadSourceVtxModelLods(modelInputFileStreamPosition, aModel);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 				}
 				catch (Exception ex)
@@ -174,29 +174,29 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.lodOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(modelInputFileStreamPosition + aModel.lodOffset, SeekOrigin.Begin);
 
 					aModel.theVtxModelLods = new List<SourceVtxModelLod107>(aModel.lodCount);
 					for (int j = 0; j < aModel.lodCount; j++)
 					{
-						modelLodInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						modelLodInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceVtxModelLod107 aModelLod = new SourceVtxModelLod107();
 
-						aModelLod.meshCount = this.theInputFileReader.ReadInt32();
-						aModelLod.meshOffset = this.theInputFileReader.ReadInt32();
-						aModelLod.switchPoint = this.theInputFileReader.ReadSingle();
+						aModelLod.meshCount = theInputFileReader.ReadInt32();
+						aModelLod.meshOffset = theInputFileReader.ReadInt32();
+						aModelLod.switchPoint = theInputFileReader.ReadSingle();
 
 						aModel.theVtxModelLods.Add(aModelLod);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModelLod");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aModelLod");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
-						this.ReadSourceVtxMeshes(modelLodInputFileStreamPosition, aModelLod);
+						ReadSourceVtxMeshes(modelLodInputFileStreamPosition, aModelLod);
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 				}
 				catch (Exception ex)
@@ -219,30 +219,30 @@ namespace Crowbar
 
 				try
 				{
-					this.theInputFileReader.BaseStream.Seek(modelLodInputFileStreamPosition + aModelLod.meshOffset, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(modelLodInputFileStreamPosition + aModelLod.meshOffset, SeekOrigin.Begin);
 
 					aModelLod.theVtxMeshes = new List<SourceVtxMesh107>(aModelLod.meshCount);
 					for (int j = 0; j < aModelLod.meshCount; j++)
 					{
-						meshInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-						fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+						meshInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+						fileOffsetStart = theInputFileReader.BaseStream.Position;
 						SourceVtxMesh107 aMesh = new SourceVtxMesh107();
 
 						//aMesh.stripGroupCount = Me.theInputFileReader.ReadInt32()
 						//aMesh.stripGroupOffset = Me.theInputFileReader.ReadInt32()
 						//'aMesh.flags = Me.theInputFileReader.ReadByte()
 						//------
-						aMesh.stripGroupCount = this.theInputFileReader.ReadInt16();
-						aMesh.flags = this.theInputFileReader.ReadByte();
-						aMesh.unknown = this.theInputFileReader.ReadByte();
-						aMesh.stripGroupOffset = this.theInputFileReader.ReadInt32();
+						aMesh.stripGroupCount = theInputFileReader.ReadInt16();
+						aMesh.flags = theInputFileReader.ReadByte();
+						aMesh.unknown = theInputFileReader.ReadByte();
+						aMesh.stripGroupOffset = theInputFileReader.ReadInt32();
 
 						aModelLod.theVtxMeshes.Add(aMesh);
 
-						fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-						this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh");
+						fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+						theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aMesh");
 
-						inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+						inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 						if (aMesh.stripGroupCount > 0 && aMesh.stripGroupOffset != 0)
 						{
@@ -264,11 +264,11 @@ namespace Crowbar
 							//	End If
 							//	Me.ReadSourceVtxStripGroups(meshInputFileStreamPosition, aMesh)
 							//Else
-							this.ReadSourceVtxStripGroups(meshInputFileStreamPosition, aMesh);
+							ReadSourceVtxStripGroups(meshInputFileStreamPosition, aMesh);
 							//End If
 						}
 
-						this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+						theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 					}
 				}
 				catch (Exception ex)
@@ -318,52 +318,52 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(meshInputFileStreamPosition + aMesh.stripGroupOffset, SeekOrigin.Begin);
+				theInputFileReader.BaseStream.Seek(meshInputFileStreamPosition + aMesh.stripGroupOffset, SeekOrigin.Begin);
 
 				aMesh.theVtxStripGroups = new List<SourceVtxStripGroup107>(aMesh.stripGroupCount);
 				for (int j = 0; j < aMesh.stripGroupCount; j++)
 				{
-					stripGroupInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
-					fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+					stripGroupInputFileStreamPosition = theInputFileReader.BaseStream.Position;
+					fileOffsetStart = theInputFileReader.BaseStream.Position;
 					SourceVtxStripGroup107 aStripGroup = new SourceVtxStripGroup107();
 
-					aStripGroup.vertexCount = this.theInputFileReader.ReadInt16();
-					aStripGroup.indexCount = this.theInputFileReader.ReadInt16();
-					aStripGroup.stripCount = this.theInputFileReader.ReadInt16();
-					aStripGroup.flags = this.theInputFileReader.ReadByte();
-					aStripGroup.unknown = this.theInputFileReader.ReadByte();
-					aStripGroup.vertexOffset = this.theInputFileReader.ReadInt32();
-					aStripGroup.indexOffset = this.theInputFileReader.ReadInt32();
-					aStripGroup.stripOffset = this.theInputFileReader.ReadInt32();
+					aStripGroup.vertexCount = theInputFileReader.ReadInt16();
+					aStripGroup.indexCount = theInputFileReader.ReadInt16();
+					aStripGroup.stripCount = theInputFileReader.ReadInt16();
+					aStripGroup.flags = theInputFileReader.ReadByte();
+					aStripGroup.unknown = theInputFileReader.ReadByte();
+					aStripGroup.vertexOffset = theInputFileReader.ReadInt32();
+					aStripGroup.indexOffset = theInputFileReader.ReadInt32();
+					aStripGroup.stripOffset = theInputFileReader.ReadInt32();
 
 					aMesh.theVtxStripGroups.Add(aStripGroup);
 
-					fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-					this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup");
+					fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+					theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup");
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (aStripGroup.vertexCount > 0 && aStripGroup.vertexOffset != 0)
 					{
 						if ((aStripGroup.flags & SourceVtxStripGroup107.STRIPGROUP_USES_STATIC_PROP_VERTEXES) > 0)
 						{
-							this.ReadSourceVtxVertexesForStaticProp(stripGroupInputFileStreamPosition, aStripGroup);
+							ReadSourceVtxVertexesForStaticProp(stripGroupInputFileStreamPosition, aStripGroup);
 						}
 						else
 						{
-							this.ReadSourceVtxVertexes(stripGroupInputFileStreamPosition, aStripGroup);
+							ReadSourceVtxVertexes(stripGroupInputFileStreamPosition, aStripGroup);
 						}
 					}
 					if (aStripGroup.indexCount > 0 && aStripGroup.indexOffset != 0)
 					{
-						this.ReadSourceVtxIndexes(stripGroupInputFileStreamPosition, aStripGroup);
+						ReadSourceVtxIndexes(stripGroupInputFileStreamPosition, aStripGroup);
 					}
 					if (aStripGroup.stripCount > 0 && aStripGroup.stripOffset != 0)
 					{
-						this.ReadSourceVtxStrips(stripGroupInputFileStreamPosition, aStripGroup);
+						ReadSourceVtxStrips(stripGroupInputFileStreamPosition, aStripGroup);
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 			}
 			catch (Exception ex)
@@ -383,15 +383,15 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.vertexOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.vertexOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aStripGroup.theVtxVertexesForStaticProp = new List<UInt16>(aStripGroup.vertexCount);
 				for (int j = 0; j < aStripGroup.vertexCount; j++)
 				{
 					//modelInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
-					UInt16 aVertexMeshIndex = this.theInputFileReader.ReadUInt16();
+					UInt16 aVertexMeshIndex = theInputFileReader.ReadUInt16();
 
 
 					aStripGroup.theVtxVertexesForStaticProp.Add(aVertexMeshIndex);
@@ -404,8 +404,8 @@ namespace Crowbar
 					//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxVertexesForStaticProp " + aStripGroup.theVtxVertexesForStaticProp.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxVertexesForStaticProp " + aStripGroup.theVtxVertexesForStaticProp.Count.ToString());
 			}
 			catch (Exception ex)
 			{
@@ -424,8 +424,8 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.vertexOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.vertexOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aStripGroup.theVtxVertexes = new List<SourceVtxVertex107>(aStripGroup.vertexCount);
 				for (int j = 0; j < aStripGroup.vertexCount; j++)
@@ -434,13 +434,13 @@ namespace Crowbar
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 					SourceVtxVertex107 aVertex = new SourceVtxVertex107();
 
-					aVertex.unknown01 = this.theInputFileReader.ReadInt16();
+					aVertex.unknown01 = theInputFileReader.ReadInt16();
 					for (int x = 0; x < aVertex.boneIndex.Length; x++)
 					{
-						aVertex.boneIndex[x] = this.theInputFileReader.ReadInt16();
+						aVertex.boneIndex[x] = theInputFileReader.ReadInt16();
 					}
-					aVertex.unknown02 = this.theInputFileReader.ReadInt16();
-					aVertex.originalMeshVertexIndex = this.theInputFileReader.ReadUInt16();
+					aVertex.unknown02 = theInputFileReader.ReadInt16();
+					aVertex.originalMeshVertexIndex = theInputFileReader.ReadUInt16();
 
 					aStripGroup.theVtxVertexes.Add(aVertex);
 
@@ -452,8 +452,8 @@ namespace Crowbar
 					//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxVertexes " + aStripGroup.theVtxVertexes.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxVertexes " + aStripGroup.theVtxVertexes.Count.ToString());
 			}
 			catch (Exception ex)
 			{
@@ -472,15 +472,15 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.indexOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.indexOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aStripGroup.theVtxIndexes = new List<ushort>(aStripGroup.indexCount);
 				for (int j = 0; j < aStripGroup.indexCount; j++)
 				{
 					//modelInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
-					ushort anIndex = this.theInputFileReader.ReadUInt16();
+					ushort anIndex = theInputFileReader.ReadUInt16();
 
 
 					aStripGroup.theVtxIndexes.Add(anIndex);
@@ -497,8 +497,8 @@ namespace Crowbar
 					//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxIndexes " + aStripGroup.theVtxIndexes.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxIndexes " + aStripGroup.theVtxIndexes.Count.ToString());
 			}
 			catch (Exception ex)
 			{
@@ -517,43 +517,43 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.stripOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(stripGroupInputFileStreamPosition + aStripGroup.stripOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aStripGroup.theVtxStrips = new List<SourceVtxStrip107>(aStripGroup.stripCount);
 				for (int j = 0; j < aStripGroup.stripCount; j++)
 				{
-					stripInputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					stripInputFileStreamPosition = theInputFileReader.BaseStream.Position;
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 					SourceVtxStrip107 aStrip = new SourceVtxStrip107();
 
-					aStrip.indexCount = this.theInputFileReader.ReadInt16();
-					aStrip.indexMeshIndex = this.theInputFileReader.ReadInt16();
-					aStrip.vertexCount = this.theInputFileReader.ReadInt16();
-					aStrip.vertexMeshIndex = this.theInputFileReader.ReadInt16();
+					aStrip.indexCount = theInputFileReader.ReadInt16();
+					aStrip.indexMeshIndex = theInputFileReader.ReadInt16();
+					aStrip.vertexCount = theInputFileReader.ReadInt16();
+					aStrip.vertexMeshIndex = theInputFileReader.ReadInt16();
 
-					aStrip.boneCount = this.theInputFileReader.ReadByte();
-					aStrip.flags = this.theInputFileReader.ReadByte();
-					aStrip.boneStateChangeCount = this.theInputFileReader.ReadInt16();
-					aStrip.boneStateChangeOffset = this.theInputFileReader.ReadInt32();
+					aStrip.boneCount = theInputFileReader.ReadByte();
+					aStrip.flags = theInputFileReader.ReadByte();
+					aStrip.boneStateChangeCount = theInputFileReader.ReadInt16();
+					aStrip.boneStateChangeOffset = theInputFileReader.ReadInt32();
 
 					aStripGroup.theVtxStrips.Add(aStrip);
 
 					//fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
 					//Me.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStrip")
 
-					inputFileStreamPosition = this.theInputFileReader.BaseStream.Position;
+					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (aStrip.boneStateChangeCount > 0 && aStrip.boneStateChangeOffset != 0)
 					{
-						this.ReadSourceVtxBoneStateChanges(stripInputFileStreamPosition, aStrip);
+						ReadSourceVtxBoneStateChanges(stripInputFileStreamPosition, aStrip);
 					}
 
-					this.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
+					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxStrips " + aStripGroup.theVtxStrips.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStripGroup.theVtxStrips " + aStripGroup.theVtxStrips.Count.ToString());
 			}
 			catch (Exception ex)
 			{
@@ -573,8 +573,8 @@ namespace Crowbar
 
 			try
 			{
-				this.theInputFileReader.BaseStream.Seek(stripInputFileStreamPosition + aStrip.boneStateChangeOffset, SeekOrigin.Begin);
-				fileOffsetStart = this.theInputFileReader.BaseStream.Position;
+				theInputFileReader.BaseStream.Seek(stripInputFileStreamPosition + aStrip.boneStateChangeOffset, SeekOrigin.Begin);
+				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aStrip.theVtxBoneStateChanges = new List<SourceVtxBoneStateChange107>(aStrip.boneStateChangeCount);
 				for (int j = 0; j < aStrip.boneStateChangeCount; j++)
@@ -583,8 +583,8 @@ namespace Crowbar
 					//fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 					SourceVtxBoneStateChange107 aBoneStateChange = new SourceVtxBoneStateChange107();
 
-					aBoneStateChange.hardwareId = this.theInputFileReader.ReadInt16();
-					aBoneStateChange.newBoneId = this.theInputFileReader.ReadInt16();
+					aBoneStateChange.hardwareId = theInputFileReader.ReadInt16();
+					aBoneStateChange.newBoneId = theInputFileReader.ReadInt16();
 
 					aStrip.theVtxBoneStateChanges.Add(aBoneStateChange);
 
@@ -596,8 +596,8 @@ namespace Crowbar
 					//Me.theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin)
 				}
 
-				fileOffsetEnd = this.theInputFileReader.BaseStream.Position - 1;
-				this.theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStrip.theVtxBoneStateChanges " + aStrip.theVtxBoneStateChanges.Count.ToString());
+				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				theVtxFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aStrip.theVtxBoneStateChanges " + aStrip.theVtxBoneStateChanges.Count.ToString());
 			}
 			catch (Exception ex)
 			{

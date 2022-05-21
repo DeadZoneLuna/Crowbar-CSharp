@@ -17,14 +17,14 @@ namespace Crowbar
 		public MacroDataGridView() : base()
 		{
 
-			this.InitializeComponent();
+			InitializeComponent();
 
-			this.RowHeadersWidth = 25;
-			this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			RowHeadersWidth = 25;
+			RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 
 			//Me.theWidgetTempOfAllowUserToAddRows = Me.AllowUserToAddRows
 			//Me.theWidgetTempOfAllowUserToDeleteRows = Me.AllowUserToDeleteRows
-			this.theWidgetIsOpening = true;
+			theWidgetIsOpening = true;
 			//Me.theMinimumRowCount = 0
 
 			//'NOTE: This "if" is here only so Forms can show in VS Designer. DesignMode property doesn't work in New().
@@ -35,7 +35,7 @@ namespace Crowbar
 
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.IsDisposed)
+			if (!IsDisposed)
 			{
 				if (disposing)
 				{
@@ -55,51 +55,51 @@ namespace Crowbar
 
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.DataGridViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			components = new System.ComponentModel.Container();
+			DataGridViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
 			//Me.InsertToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
 			//Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-			this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			//Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-			this.DataGridViewContextMenuStrip.SuspendLayout();
+			DataGridViewContextMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)this).BeginInit();
-			this.SuspendLayout();
+			SuspendLayout();
 
-			this.SetMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.SetMacroInSelectedGameSetupToolStripMenuItem.Name = "SetMacroInSelectedGameSetupToolStripMenuItem";
-			this.SetMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.SetMacroInSelectedGameSetupToolStripMenuItem.Text = "Set macro in selected game setup(s)";
+			SetMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			SetMacroInSelectedGameSetupToolStripMenuItem.Name = "SetMacroInSelectedGameSetupToolStripMenuItem";
+			SetMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			SetMacroInSelectedGameSetupToolStripMenuItem.Text = "Set macro in selected game setup(s)";
 
-			this.ClearMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ClearMacroInSelectedGameSetupToolStripMenuItem.Name = "ClearMacroInSelectedGameSetupToolStripMenuItem";
-			this.ClearMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.ClearMacroInSelectedGameSetupToolStripMenuItem.Text = "Clear macro in selected game setup(s)";
+			ClearMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			ClearMacroInSelectedGameSetupToolStripMenuItem.Name = "ClearMacroInSelectedGameSetupToolStripMenuItem";
+			ClearMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			ClearMacroInSelectedGameSetupToolStripMenuItem.Text = "Clear macro in selected game setup(s)";
 
-			this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Name = "ChangeToThisMacroInSelectedGameSetupToolStripMenuItem";
-			this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Text = "Change to this macro in selected game setup(s)";
+			ChangeToThisMacroInSelectedGameSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Name = "ChangeToThisMacroInSelectedGameSetupToolStripMenuItem";
+			ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Text = "Change to this macro in selected game setup(s)";
 
-			this.MacroMenuToolStripSeparator0 = new System.Windows.Forms.ToolStripSeparator();
-			this.MacroMenuToolStripSeparator0.Name = "MacroMenuToolStripSeparator0";
+			MacroMenuToolStripSeparator0 = new System.Windows.Forms.ToolStripSeparator();
+			MacroMenuToolStripSeparator0.Name = "MacroMenuToolStripSeparator0";
 
-			this.SetMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.SetMacroInAllGameSetupsToolStripMenuItem.Name = "SetMacroInAllGameSetupsToolStripMenuItem";
-			this.SetMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.SetMacroInAllGameSetupsToolStripMenuItem.Text = "Set macro in all game setups";
+			SetMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			SetMacroInAllGameSetupsToolStripMenuItem.Name = "SetMacroInAllGameSetupsToolStripMenuItem";
+			SetMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			SetMacroInAllGameSetupsToolStripMenuItem.Text = "Set macro in all game setups";
 
-			this.ClearMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ClearMacroInAllGameSetupsToolStripMenuItem.Name = "ClearMacroInAllGameSetupsToolStripMenuItem";
-			this.ClearMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.ClearMacroInAllGameSetupsToolStripMenuItem.Text = "Clear macro in all game setups";
+			ClearMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			ClearMacroInAllGameSetupsToolStripMenuItem.Name = "ClearMacroInAllGameSetupsToolStripMenuItem";
+			ClearMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			ClearMacroInAllGameSetupsToolStripMenuItem.Text = "Clear macro in all game setups";
 
-			this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Name = "ChangeToThisMacroInAllGameSetupsToolStripMenuItem";
-			this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Text = "Change to this macro in all game setups";
+			ChangeToThisMacroInAllGameSetupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Name = "ChangeToThisMacroInAllGameSetupsToolStripMenuItem";
+			ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Text = "Change to this macro in all game setups";
 
-			this.MacroMenuToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.MacroMenuToolStripSeparator1.Name = "MacroMenuToolStripSeparator1";
+			MacroMenuToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			MacroMenuToolStripSeparator1.Name = "MacroMenuToolStripSeparator1";
 
 			//'
 			//'InsertToolStripMenuItem
@@ -122,13 +122,13 @@ namespace Crowbar
 			//
 			//CopyToolStripMenuItem
 			//
-			this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
+			CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
 			//NOTE: Do not add in the standard CTRL-C shortcut key, because it works without adding, 
 			//      and adding it causes a selection of text within a cell to return Nothing from Me.GetClipboardContent().
 			//Me.CopyToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-			this.CopyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.CopyToolStripMenuItem.Text = "Copy";
+			CopyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			CopyToolStripMenuItem.Text = "Copy";
 			//'
 			//'PasteToolStripMenuItem
 			//'
@@ -141,25 +141,25 @@ namespace Crowbar
 			//DataGridViewContextMenuStrip
 			//
 			//Me.DataGridViewContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InsertToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.CopyToolStripMenuItem, Me.PasteToolStripMenuItem})
-			this.DataGridViewContextMenuStrip.Items.Add(this.SetMacroInSelectedGameSetupToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.ClearMacroInSelectedGameSetupToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.MacroMenuToolStripSeparator0);
-			this.DataGridViewContextMenuStrip.Items.Add(this.SetMacroInAllGameSetupsToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.ClearMacroInAllGameSetupsToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Items.Add(this.MacroMenuToolStripSeparator1);
-			this.DataGridViewContextMenuStrip.Items.Add(this.CopyToolStripMenuItem);
-			this.DataGridViewContextMenuStrip.Name = "DataGridViewContextMenuStrip";
-			this.DataGridViewContextMenuStrip.Size = new System.Drawing.Size(177, 114);
+			DataGridViewContextMenuStrip.Items.Add(SetMacroInSelectedGameSetupToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(ClearMacroInSelectedGameSetupToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(ChangeToThisMacroInSelectedGameSetupToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(MacroMenuToolStripSeparator0);
+			DataGridViewContextMenuStrip.Items.Add(SetMacroInAllGameSetupsToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(ClearMacroInAllGameSetupsToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(ChangeToThisMacroInAllGameSetupsToolStripMenuItem);
+			DataGridViewContextMenuStrip.Items.Add(MacroMenuToolStripSeparator1);
+			DataGridViewContextMenuStrip.Items.Add(CopyToolStripMenuItem);
+			DataGridViewContextMenuStrip.Name = "DataGridViewContextMenuStrip";
+			DataGridViewContextMenuStrip.Size = new System.Drawing.Size(177, 114);
 			//
 			//
 			//
-			this.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-			this.ContextMenuStrip = this.DataGridViewContextMenuStrip;
-			this.DataGridViewContextMenuStrip.ResumeLayout(false);
+			ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			ContextMenuStrip = DataGridViewContextMenuStrip;
+			DataGridViewContextMenuStrip.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)this).EndInit();
-			this.ResumeLayout(false);
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			DataGridViewContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(DataGridViewContextMenuStrip_Opening);
@@ -332,7 +332,7 @@ namespace Crowbar
 
 		private void CopyData()
 		{
-			DataObject data = this.GetClipboardContent();
+			DataObject data = GetClipboardContent();
 			try
 			{
 				if (data != null)
@@ -436,7 +436,7 @@ namespace Crowbar
 		{
 			base.OnDataSourceChanged(e);
 
-			this.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+			AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
 		}
 
 		protected override void OnKeyDown(System.Windows.Forms.KeyEventArgs e)
@@ -445,7 +445,7 @@ namespace Crowbar
 			{
 				if (e.KeyCode == Keys.C)
 				{
-					this.CopyData();
+					CopyData();
 					//ElseIf e.KeyCode = Keys.V Then
 					//	Me.PasteData()
 				}
@@ -475,11 +475,11 @@ namespace Crowbar
 			//      Maybe this is called when parent control is disposing.
 			//      Using Me.theWidgetIsOpening to only update when first opening.
 
-			if (this.theWidgetIsOpening && this.Visible && this.Columns.Count > 0)
+			if (theWidgetIsOpening && Visible && Columns.Count > 0)
 			{
-				this.theWidgetIsOpening = false;
+				theWidgetIsOpening = false;
 				//NOTE: This needs to be done here instead of Init because the DataGridView must be visible to auto resize.
-				this.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+				AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
 			}
 
 			base.OnVisibleChanged(e);
@@ -492,14 +492,14 @@ namespace Crowbar
 		private void DataGridViewContextMenuStrip_Opening(System.Object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			// Prevent certain exceptions by making sure datagridview is not in edit mode.
-			this.CancelEdit();
+			CancelEdit();
 
-			this.SetMacroInSelectedGameSetupToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
-			this.SetMacroInAllGameSetupsToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
-			this.ClearMacroInSelectedGameSetupToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
-			this.ClearMacroInAllGameSetupsToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
-			this.ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
-			this.ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
+			SetMacroInSelectedGameSetupToolStripMenuItem.Enabled = SelectedCells.Count > 0;
+			SetMacroInAllGameSetupsToolStripMenuItem.Enabled = SelectedCells.Count > 0;
+			ClearMacroInSelectedGameSetupToolStripMenuItem.Enabled = SelectedCells.Count > 0;
+			ClearMacroInAllGameSetupsToolStripMenuItem.Enabled = SelectedCells.Count > 0;
+			ChangeToThisMacroInSelectedGameSetupToolStripMenuItem.Enabled = SelectedCells.Count > 0;
+			ChangeToThisMacroInAllGameSetupsToolStripMenuItem.Enabled = SelectedCells.Count > 0;
 
 			//Me.InsertToolStripMenuItem.Enabled = Not Me.ReadOnly AndAlso Me.AllowUserToAddRows
 
@@ -508,7 +508,7 @@ namespace Crowbar
 			//Me.DeleteToolStripMenuItem.Enabled = Not Me.ReadOnly AndAlso Me.AllowUserToDeleteRows AndAlso Me.SelectedRows.Count > 0 AndAlso Me.SelectedRows.Count <= Me.Rows.Count - Me.theMinimumRowCount
 			//Me.AllowUserToAddRows = Me.theWidgetTempOfAllowUserToAddRows
 
-			this.CopyToolStripMenuItem.Enabled = this.SelectedCells.Count > 0;
+			CopyToolStripMenuItem.Enabled = SelectedCells.Count > 0;
 			//Me.PasteToolStripMenuItem.Enabled = Not Me.ReadOnly AndAlso Clipboard.ContainsText
 		}
 
@@ -528,7 +528,7 @@ namespace Crowbar
 
 		private void CopyToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.CopyData();
+			CopyData();
 		}
 
 		//Private Sub PasteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click

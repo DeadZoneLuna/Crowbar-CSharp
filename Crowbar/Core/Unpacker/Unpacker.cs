@@ -19,15 +19,15 @@ namespace Crowbar
 		public Unpacker() : base()
 		{
 
-			this.theUnpackedMdlFiles = new BindingListEx<string>();
-			this.theLogFiles = new BindingListEx<string>();
-			this.theUnpackedPaths = new List<string>();
-			this.theUnpackedRelativePathsAndFileNames = new BindingListEx<string>();
-			this.theUnpackedTempPathsAndPathFileNames = new List<string>();
+			theUnpackedMdlFiles = new BindingListEx<string>();
+			theLogFiles = new BindingListEx<string>();
+			theUnpackedPaths = new List<string>();
+			theUnpackedRelativePathsAndFileNames = new BindingListEx<string>();
+			theUnpackedTempPathsAndPathFileNames = new List<string>();
 
-			this.WorkerReportsProgress = true;
-			this.WorkerSupportsCancellation = true;
-			this.DoWork += this.Unpacker_DoWork;
+			WorkerReportsProgress = true;
+			WorkerSupportsCancellation = true;
+			DoWork += Unpacker_DoWork;
 		}
 
 #endregion
@@ -50,38 +50,38 @@ namespace Crowbar
 
 		public void Run(AppEnums.ArchiveAction unpackerAction, SortedList<string, List<int>> archivePathFileNameToEntryIndexesMap, bool outputPathIsExtendedWithPackageName, string selectedRelativeOutputPath)
 		{
-			this.theSynchronousWorkerIsActive = false;
+			theSynchronousWorkerIsActive = false;
 			UnpackerInputInfo info = new UnpackerInputInfo();
 			info.theArchiveAction = unpackerAction;
 			info.theArchivePathFileNameToEntryIndexesMap = archivePathFileNameToEntryIndexesMap;
 			info.theOutputPathIsExtendedWithPackageName = outputPathIsExtendedWithPackageName;
 			info.theSelectedRelativeOutputPath = selectedRelativeOutputPath;
-			this.RunWorkerAsync(info);
+			RunWorkerAsync(info);
 		}
 
 		public string RunSynchronous(AppEnums.ArchiveAction unpackerAction, SortedList<string, List<int>> archivePathFileNameToEntryIndexesMap, bool outputPathIsExtendedWithPackageName, string selectedRelativeOutputPath)
 		{
-			this.theSynchronousWorkerIsActive = true;
+			theSynchronousWorkerIsActive = true;
 			UnpackerInputInfo info = new UnpackerInputInfo();
 			info.theArchiveAction = unpackerAction;
 			info.theArchivePathFileNameToEntryIndexesMap = archivePathFileNameToEntryIndexesMap;
 			info.theOutputPathIsExtendedWithPackageName = outputPathIsExtendedWithPackageName;
 			info.theSelectedRelativeOutputPath = selectedRelativeOutputPath;
 
-			this.theRunSynchronousResultMessage = "";
+			theRunSynchronousResultMessage = "";
 			System.ComponentModel.DoWorkEventArgs e = new System.ComponentModel.DoWorkEventArgs(info);
-			this.OnDoWork(e);
-			return this.theRunSynchronousResultMessage;
+			OnDoWork(e);
+			return theRunSynchronousResultMessage;
 		}
 
 		public void UnpackFolderTreeFromVPK(string folderTreeToExtract)
 		{
-			this.theSynchronousWorkerIsActive = true;
+			theSynchronousWorkerIsActive = true;
 			UnpackerInputInfo info = new UnpackerInputInfo();
 			info.theArchiveAction = AppEnums.ArchiveAction.ExtractFolderTree;
 			info.theGamePath = folderTreeToExtract;
 			System.ComponentModel.DoWorkEventArgs e = new System.ComponentModel.DoWorkEventArgs(info);
-			this.OnDoWork(e);
+			OnDoWork(e);
 		}
 
 		//Public Sub GetTempPathFileNames(ByVal packInternalPathFileNames As List(Of String), ByRef tempPathFileNames As List(Of String))
@@ -105,16 +105,16 @@ namespace Crowbar
 			List<string> tempRelativePathsAndFileNames = new List<string>();
 
 			string topRelativePath = null;
-			foreach (string relativePathOrFileName in this.theUnpackedRelativePathsAndFileNames)
+			foreach (string relativePathOrFileName in theUnpackedRelativePathsAndFileNames)
 			{
 				topRelativePath = FileManager.GetTopFolderPath(relativePathOrFileName);
 				if (string.IsNullOrEmpty(topRelativePath))
 				{
-					tempRelativePathsAndFileNames.Add(Path.Combine(this.theOutputPath, relativePathOrFileName));
+					tempRelativePathsAndFileNames.Add(Path.Combine(theOutputPath, relativePathOrFileName));
 				}
 				else
 				{
-					tempRelativePathsAndFileNames.Add(Path.Combine(this.theOutputPath, topRelativePath));
+					tempRelativePathsAndFileNames.Add(Path.Combine(theOutputPath, topRelativePath));
 				}
 			}
 
@@ -124,12 +124,12 @@ namespace Crowbar
 		public void SkipCurrentPackage()
 		{
 			//NOTE: This might have thread race condition, but it probably doesn't matter.
-			this.theSkipCurrentPackIsActive = true;
+			theSkipCurrentPackIsActive = true;
 		}
 
 		public string GetOutputPathFileName(string relativePathFileName)
 		{
-			string pathFileName = Path.Combine(this.theOutputPath, relativePathFileName);
+			string pathFileName = Path.Combine(theOutputPath, relativePathFileName);
 
 			pathFileName = Path.GetFullPath(pathFileName);
 
@@ -138,17 +138,17 @@ namespace Crowbar
 
 		public string GetOutputPathOrOutputFileName()
 		{
-			return this.theOutputPathOrModelOutputFileName;
+			return theOutputPathOrModelOutputFileName;
 		}
 
 		public void DeleteTempUnpackFolder()
 		{
-			if (this.theUnpackedPathsAreInTempPath)
+			if (theUnpackedPathsAreInTempPath)
 			{
-				this.theUnpackedPathsAreInTempPath = false;
+				theUnpackedPathsAreInTempPath = false;
 				try
 				{
-					foreach (string unpackedPath in this.theUnpackedPaths)
+					foreach (string unpackedPath in theUnpackedPaths)
 					{
 						if (unpackedPath != null && Directory.Exists(unpackedPath))
 						{
@@ -173,48 +173,48 @@ namespace Crowbar
 
 		private void Unpacker_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
-			if (!this.theSynchronousWorkerIsActive)
+			if (!theSynchronousWorkerIsActive)
 			{
 				//TODO: This indication that work has started in backgroundworker seems unimportant and should probably be removed.
-				this.ReportProgress(0, "");
+				ReportProgress(0, "");
 			}
 
 			UnpackerInputInfo info = (UnpackerInputInfo)e.Argument;
-			this.theOutputPathIsExtendedWithPackageName = info.theOutputPathIsExtendedWithPackageName;
-			this.theSelectedRelativeOutputPath = info.theSelectedRelativeOutputPath;
+			theOutputPathIsExtendedWithPackageName = info.theOutputPathIsExtendedWithPackageName;
+			theSelectedRelativeOutputPath = info.theSelectedRelativeOutputPath;
 
-			this.theUnpackedPathsAreInTempPath = false;
+			theUnpackedPathsAreInTempPath = false;
 
 			AppEnums.StatusMessage status = 0;
 			if (info.theArchiveAction == AppEnums.ArchiveAction.ExtractFolderTree)
 			{
-				status = this.ExtractFolderTree(info.theGamePath);
+				status = ExtractFolderTree(info.theGamePath);
 			}
 			else
 			{
-				if (this.UnpackerInputsAreValid())
+				if (UnpackerInputsAreValid())
 				{
 					if (info.theArchiveAction == AppEnums.ArchiveAction.List)
 					{
-						this.List();
+						List();
 					}
 					else if (info.theArchiveAction == AppEnums.ArchiveAction.Unpack)
 					{
-						status = this.Unpack(info.theArchivePathFileNameToEntryIndexesMap);
+						status = Unpack(info.theArchivePathFileNameToEntryIndexesMap);
 						//ElseIf info.theArchiveAction = ArchiveAction.Extract Then
 						//	status = Me.Extract(info.theArchivePathFileNameToEntryIndexesMap)
 					}
 					else if (info.theArchiveAction == AppEnums.ArchiveAction.ExtractAndOpen)
 					{
-						status = this.ExtractWithoutLogging(info.theArchivePathFileNameToEntryIndexesMap);
+						status = ExtractWithoutLogging(info.theArchivePathFileNameToEntryIndexesMap);
 						if (status == AppEnums.StatusMessage.Success)
 						{
-							this.StartFile(Path.Combine(this.theOutputPath, this.theUnpackedRelativePathsAndFileNames[0]));
+							StartFile(Path.Combine(theOutputPath, theUnpackedRelativePathsAndFileNames[0]));
 						}
 					}
 					else if (info.theArchiveAction == AppEnums.ArchiveAction.ExtractToTemp)
 					{
-						status = this.ExtractWithoutLogging(info.theArchivePathFileNameToEntryIndexesMap);
+						status = ExtractWithoutLogging(info.theArchivePathFileNameToEntryIndexesMap);
 					}
 				}
 				else
@@ -222,9 +222,9 @@ namespace Crowbar
 					status = AppEnums.StatusMessage.Error;
 				}
 
-				e.Result = this.GetUnpackerOutputInfo(status);
+				e.Result = GetUnpackerOutputInfo(status);
 
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
 					e.Cancel = true;
 				}
@@ -271,12 +271,12 @@ namespace Crowbar
 			if (string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "Package file or folder has not been selected.");
+				WriteErrorMessage(1, "Package file or folder has not been selected.");
 			}
 			else if (MainCROWBAR.TheApp.Settings.UnpackMode == AppEnums.InputOptions.File && !File.Exists(MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName))
 			{
 				inputsAreValid = false;
-				this.WriteErrorMessage(1, "The package file, \"" + MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName + "\", does not exist.");
+				WriteErrorMessage(1, "The package file, \"" + MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName + "\", does not exist.");
 			}
 
 			return inputsAreValid;
@@ -288,34 +288,34 @@ namespace Crowbar
 
 			unpackResultInfo.theStatus = status;
 
-			if (this.theUnpackedMdlFiles.Count > 0)
+			if (theUnpackedMdlFiles.Count > 0)
 			{
-				unpackResultInfo.theUnpackedRelativePathFileNames = this.theUnpackedMdlFiles;
+				unpackResultInfo.theUnpackedRelativePathFileNames = theUnpackedMdlFiles;
 			}
-			else if (this.theUnpackedRelativePathsAndFileNames.Count > 0)
+			else if (theUnpackedRelativePathsAndFileNames.Count > 0)
 			{
-				unpackResultInfo.theUnpackedRelativePathFileNames = this.theUnpackedRelativePathsAndFileNames;
+				unpackResultInfo.theUnpackedRelativePathFileNames = theUnpackedRelativePathsAndFileNames;
 			}
 			else if (MainCROWBAR.TheApp.Settings.UnpackLogFileIsChecked)
 			{
-				unpackResultInfo.theUnpackedRelativePathFileNames = this.theLogFiles;
+				unpackResultInfo.theUnpackedRelativePathFileNames = theLogFiles;
 			}
 			else
 			{
 				unpackResultInfo.theUnpackedRelativePathFileNames = null;
 			}
 
-			if (unpackResultInfo.theUnpackedRelativePathFileNames == null || unpackResultInfo.theUnpackedRelativePathFileNames.Count <= 0 || this.theUnpackedMdlFiles.Count <= 0)
+			if (unpackResultInfo.theUnpackedRelativePathFileNames == null || unpackResultInfo.theUnpackedRelativePathFileNames.Count <= 0 || theUnpackedMdlFiles.Count <= 0)
 			{
-				this.theOutputPathOrModelOutputFileName = "";
+				theOutputPathOrModelOutputFileName = "";
 			}
 			else if (unpackResultInfo.theUnpackedRelativePathFileNames.Count == 1)
 			{
-				this.theOutputPathOrModelOutputFileName = Path.Combine(this.theOutputPath, unpackResultInfo.theUnpackedRelativePathFileNames[0]);
+				theOutputPathOrModelOutputFileName = Path.Combine(theOutputPath, unpackResultInfo.theUnpackedRelativePathFileNames[0]);
 			}
 			else
 			{
-				this.theOutputPathOrModelOutputFileName = this.theOutputPath;
+				theOutputPathOrModelOutputFileName = theOutputPath;
 			}
 
 			return unpackResultInfo;
@@ -323,22 +323,22 @@ namespace Crowbar
 
 		private void UpdateProgressStart(string line)
 		{
-			this.UpdateProgressInternal(0, line);
+			UpdateProgressInternal(0, line);
 		}
 
 		private void UpdateProgressStop(string line)
 		{
-			this.UpdateProgressInternal(100, "\r" + line);
+			UpdateProgressInternal(100, "\r" + line);
 		}
 
 		private void UpdateProgress()
 		{
-			this.UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, "");
 		}
 
 		private void WriteErrorMessage(int indentLevel, string line)
 		{
-			this.UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
+			UpdateProgress(indentLevel, "Crowbar ERROR: " + line);
 		}
 
 		private void UpdateProgress(int indentLevel, string line)
@@ -350,7 +350,7 @@ namespace Crowbar
 				indentedLine += "  ";
 			}
 			indentedLine += line;
-			this.UpdateProgressInternal(1, indentedLine);
+			UpdateProgressInternal(1, indentedLine);
 		}
 
 		private AppEnums.StatusMessage CreateLogTextFile()
@@ -365,33 +365,33 @@ namespace Crowbar
 
 				try
 				{
-					logPath = this.theOutputPath;
+					logPath = theOutputPath;
 					//logFileName = vpkPathFileName + " " + My.Resources.Unpack_LogFileNameSuffix
 					logFileName = Properties.Resources.Unpack_LogFileNameSuffix;
 					FileManager.CreatePath(logPath);
 					logPathFileName = Path.Combine(logPath, logFileName);
 
-					this.theLogFileStream = File.CreateText(logPathFileName);
-					this.theLogFileStream.AutoFlush = true;
+					theLogFileStream = File.CreateText(logPathFileName);
+					theLogFileStream.AutoFlush = true;
 
 					if (File.Exists(logPathFileName))
 					{
-						this.theLogFiles.Add(FileManager.GetRelativePathFileName(this.theOutputPath, logPathFileName));
+						theLogFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, logPathFileName));
 					}
 
-					this.theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
-					this.theLogFileStream.Flush();
+					theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
+					theLogFileStream.Flush();
 				}
 				catch (Exception ex)
 				{
-					this.UpdateProgress();
-					this.UpdateProgress(2, "ERROR: Crowbar tried to write the unpack log file but the system gave this message: " + ex.Message);
+					UpdateProgress();
+					UpdateProgress(2, "ERROR: Crowbar tried to write the unpack log file but the system gave this message: " + ex.Message);
 					status = AppEnums.StatusMessage.Error;
 				}
 			}
 			else
 			{
-				this.theLogFileStream = null;
+				theLogFileStream = null;
 			}
 
 			return status;
@@ -399,15 +399,15 @@ namespace Crowbar
 
 		private void UpdateProgressInternal(int progressValue, string line)
 		{
-			if (progressValue == 1 && this.theLogFileStream != null)
+			if (progressValue == 1 && theLogFileStream != null)
 			{
-				this.theLogFileStream.WriteLine(line);
-				this.theLogFileStream.Flush();
+				theLogFileStream.WriteLine(line);
+				theLogFileStream.Flush();
 			}
 
-			if (!this.theSynchronousWorkerIsActive)
+			if (!theSynchronousWorkerIsActive)
 			{
-				this.ReportProgress(progressValue, line);
+				ReportProgress(progressValue, line);
 			}
 		}
 
@@ -418,12 +418,12 @@ namespace Crowbar
 			// Example: 
 			//      Me.theGamePath = gamePath = "E:\Users\ZeqMacaw\Steam\steamapps\common\Half-Life 2\hl2"
 			//      gameRootPath              = "E:\Users\ZeqMacaw\Steam\steamapps\common\Half-Life 2"
-			this.theGamePath = gamePath;
+			theGamePath = gamePath;
 			string gameRootPath = FileManager.GetPath(gamePath);
 
 			try
 			{
-				this.ExtractFolderTreeFromArchivesInFolderRecursively(gameRootPath);
+				ExtractFolderTreeFromArchivesInFolderRecursively(gameRootPath);
 			}
 			catch (Exception ex)
 			{
@@ -437,15 +437,15 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			this.ExtractFolderTreeFromArchivesInFolder(packagePath);
+			ExtractFolderTreeFromArchivesInFolder(packagePath);
 
 			try
 			{
 				foreach (string aPathSubFolder in Directory.GetDirectories(packagePath))
 				{
-					this.ExtractFolderTreeFromArchivesInFolderRecursively(aPathSubFolder);
+					ExtractFolderTreeFromArchivesInFolderRecursively(aPathSubFolder);
 
-					if (this.CancellationPending)
+					if (CancellationPending)
 					{
 						return AppEnums.StatusMessage.Canceled;
 					}
@@ -469,9 +469,9 @@ namespace Crowbar
 				string packageFileNameFilter = "*.vpk";
 				foreach (string aPackagePathFileName in Directory.GetFiles(packagePath, packageFileNameFilter))
 				{
-					this.ExtractFolderTreeFromArchive(aPackagePathFileName);
+					ExtractFolderTreeFromArchive(aPackagePathFileName);
 
-					if (this.CancellationPending)
+					if (CancellationPending)
 					{
 						return AppEnums.StatusMessage.Canceled;
 					}
@@ -493,7 +493,7 @@ namespace Crowbar
 			//aVpkFileData = New BasePackageFileData()
 
 			FileStream inputFileStream = null;
-			this.theInputFileReader = null;
+			theInputFileReader = null;
 			try
 			{
 				inputFileStream = new FileStream(packagePathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -501,10 +501,10 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
+						theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
 
 						//Dim vpkFile As New VpkFile(Me.theInputFileReader, aVpkFileData)
-						BasePackageFile vpkFile = BasePackageFile.Create(packagePathFileName, this.theArchiveDirectoryInputFileReader, this.theInputFileReader, ref aPackageFileData);
+						BasePackageFile vpkFile = BasePackageFile.Create(packagePathFileName, theArchiveDirectoryInputFileReader, theInputFileReader, ref aPackageFileData);
 
 						vpkFile.ReadHeader();
 						vpkFile.ReadEntries(this);
@@ -515,9 +515,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theInputFileReader != null)
+						if (theInputFileReader != null)
 						{
-							this.theInputFileReader.Close();
+							theInputFileReader.Close();
 						}
 					}
 				}
@@ -535,7 +535,7 @@ namespace Crowbar
 				}
 			}
 
-			if (this.CancellationPending)
+			if (CancellationPending)
 			{
 				return AppEnums.StatusMessage.Canceled;
 			}
@@ -585,7 +585,7 @@ namespace Crowbar
 					if (pathFileName.StartsWith("models/"))
 					{
 						string aRelativePath = FileManager.GetPath(pathFileName);
-						string aPath = Path.Combine(this.theGamePath, aRelativePath);
+						string aPath = Path.Combine(theGamePath, aRelativePath);
 						if (!FileManager.PathExistsAfterTryToCreate(aPath))
 						{
 							//TODO: [ExtractFolderTreeFromArchive] Path was not created, so warn user.
@@ -618,21 +618,21 @@ namespace Crowbar
 				return;
 			}
 
-			this.theArchivePathFileNameToFileDataMap = new SortedList<string, BasePackageFileData>();
+			theArchivePathFileNameToFileDataMap = new SortedList<string, BasePackageFileData>();
 
 			try
 			{
 				if (MainCROWBAR.TheApp.Settings.UnpackMode == AppEnums.InputOptions.FolderRecursion)
 				{
-					this.ListArchivesInFolderRecursively(archivePath);
+					ListArchivesInFolderRecursively(archivePath);
 				}
 				else if (MainCROWBAR.TheApp.Settings.UnpackMode == AppEnums.InputOptions.Folder)
 				{
-					this.ListArchivesInFolder(archivePath);
+					ListArchivesInFolder(archivePath);
 				}
 				else
 				{
-					this.ListArchive(archivePathFileName, true);
+					ListArchive(archivePathFileName, true);
 				}
 			}
 			catch (Exception ex)
@@ -643,15 +643,15 @@ namespace Crowbar
 
 		private void ListArchivesInFolderRecursively(string archivePath)
 		{
-			this.ListArchivesInFolder(archivePath);
+			ListArchivesInFolder(archivePath);
 
 			try
 			{
 				foreach (string aPathSubFolder in Directory.GetDirectories(archivePath))
 				{
-					this.ListArchivesInFolderRecursively(aPathSubFolder);
+					ListArchivesInFolderRecursively(aPathSubFolder);
 
-					if (this.CancellationPending)
+					if (CancellationPending)
 					{
 						return;
 					}
@@ -672,9 +672,9 @@ namespace Crowbar
 				{
 					foreach (string anArchivePathFileName in Directory.GetFiles(archivePath, packageExtension))
 					{
-						this.ListArchive(anArchivePathFileName, false);
+						ListArchive(anArchivePathFileName, false);
 
-						if (this.CancellationPending)
+						if (CancellationPending)
 						{
 							return;
 						}
@@ -693,7 +693,7 @@ namespace Crowbar
 			BasePackageFileData aPackageFileData = null;
 
 			FileStream inputFileStream = null;
-			this.theInputFileReader = null;
+			theInputFileReader = null;
 			bool loopingIsNeeded = true;
 			while (loopingIsNeeded)
 			{
@@ -704,19 +704,19 @@ namespace Crowbar
 					{
 						try
 						{
-							this.theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
+							theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
 
-							BasePackageFile packageFile = BasePackageFile.Create(packageDirectoryPathFileName, this.theArchiveDirectoryInputFileReader, this.theInputFileReader, ref aPackageFileData);
+							BasePackageFile packageFile = BasePackageFile.Create(packageDirectoryPathFileName, theArchiveDirectoryInputFileReader, theInputFileReader, ref aPackageFileData);
 
 							packageFile.ReadHeader();
 							if (aPackageFileData != null && aPackageFileData.IsSourcePackage)
 							{
-								this.thePackageDirectoryPathFileName = packageDirectoryPathFileName;
-								this.thePackageFileData = aPackageFileData;
-								this.UpdateProgressInternal(1, "");
-								packageFile.PackEntryRead += this.Package_PackEntryRead;
+								thePackageDirectoryPathFileName = packageDirectoryPathFileName;
+								thePackageFileData = aPackageFileData;
+								UpdateProgressInternal(1, "");
+								packageFile.PackEntryRead += Package_PackEntryRead;
 								packageFile.ReadEntries(this);
-								packageFile.PackEntryRead -= this.Package_PackEntryRead;
+								packageFile.PackEntryRead -= Package_PackEntryRead;
 								loopingIsNeeded = false;
 							}
 							else if (checkForDirFile && Path.GetExtension(packageDirectoryPathFileName) == ".vpk")
@@ -749,9 +749,9 @@ namespace Crowbar
 						}
 						finally
 						{
-							if (this.theInputFileReader != null)
+							if (theInputFileReader != null)
 							{
-								this.theInputFileReader.Close();
+								theInputFileReader.Close();
 							}
 						}
 					}
@@ -768,7 +768,7 @@ namespace Crowbar
 					}
 				}
 
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
 					return;
 				}
@@ -820,33 +820,33 @@ namespace Crowbar
 			entry = e.Entry;
 			if (entry.archiveIndex != 0x7FFF)
 			{
-				vpkPath = FileManager.GetPath(this.thePackageDirectoryPathFileName);
-				vpkFileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.thePackageDirectoryPathFileName);
-				vpkFileNamePrefix = vpkFileNameWithoutExtension.Substring(0, vpkFileNameWithoutExtension.LastIndexOf(this.thePackageFileData.DirectoryFileNameSuffix));
-				archivePathFileName = Path.Combine(vpkPath, vpkFileNamePrefix + "_" + entry.archiveIndex.ToString("000") + this.thePackageFileData.FileExtension);
+				vpkPath = FileManager.GetPath(thePackageDirectoryPathFileName);
+				vpkFileNameWithoutExtension = Path.GetFileNameWithoutExtension(thePackageDirectoryPathFileName);
+				vpkFileNamePrefix = vpkFileNameWithoutExtension.Substring(0, vpkFileNameWithoutExtension.LastIndexOf(thePackageFileData.DirectoryFileNameSuffix));
+				archivePathFileName = Path.Combine(vpkPath, vpkFileNamePrefix + "_" + entry.archiveIndex.ToString("000") + thePackageFileData.FileExtension);
 			}
 			else
 			{
-				archivePathFileName = this.thePackageDirectoryPathFileName;
+				archivePathFileName = thePackageDirectoryPathFileName;
 			}
-			if (!this.theArchivePathFileNameToFileDataMap.Keys.Contains(archivePathFileName))
+			if (!theArchivePathFileNameToFileDataMap.Keys.Contains(archivePathFileName))
 			{
-				this.theArchivePathFileNameToFileDataMap.Add(archivePathFileName, this.thePackageFileData);
+				theArchivePathFileNameToFileDataMap.Add(archivePathFileName, thePackageFileData);
 			}
-			this.UpdateProgressInternal(2, archivePathFileName);
+			UpdateProgressInternal(2, archivePathFileName);
 			if (File.Exists(archivePathFileName))
 			{
-				this.UpdateProgressInternal(3, "True");
+				UpdateProgressInternal(3, "True");
 			}
 			else
 			{
-				this.UpdateProgressInternal(3, "False");
+				UpdateProgressInternal(3, "False");
 			}
 
 			line = e.EntryDataOutputText;
-			this.UpdateProgressInternal(4, line);
+			UpdateProgressInternal(4, line);
 
-			if (this.CancellationPending)
+			if (CancellationPending)
 			{
 				return;
 			}
@@ -856,22 +856,22 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			this.theSkipCurrentPackIsActive = false;
+			theSkipCurrentPackIsActive = false;
 
-			this.theUnpackedPaths.Clear();
-			this.theUnpackedRelativePathsAndFileNames.Clear();
-			this.theUnpackedMdlFiles.Clear();
-			this.theLogFiles.Clear();
+			theUnpackedPaths.Clear();
+			theUnpackedRelativePathsAndFileNames.Clear();
+			theUnpackedMdlFiles.Clear();
+			theLogFiles.Clear();
 
-			this.theOutputPath = this.GetOutputPath();
+			theOutputPath = GetOutputPath();
 			string vpkPathFileName = MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName;
 			if (File.Exists(vpkPathFileName))
 			{
-				this.theInputVpkPath = FileManager.GetPath(vpkPathFileName);
+				theInputVpkPath = FileManager.GetPath(vpkPathFileName);
 			}
 			else if (Directory.Exists(vpkPathFileName))
 			{
-				this.theInputVpkPath = vpkPathFileName;
+				theInputVpkPath = vpkPathFileName;
 			}
 
 			string progressDescriptionText = "Unpacking with " + MainCROWBAR.TheApp.GetProductNameAndVersion() + ": ";
@@ -901,21 +901,21 @@ namespace Crowbar
 				//End If
 				//------
 				progressDescriptionText += "\"" + vpkPathFileName + "\"";
-				this.UpdateProgressStart(progressDescriptionText + " ...");
-				this.ExtractFromArchive(vpkPathFileName, archivePathFileNameToEntryIndexMap);
+				UpdateProgressStart(progressDescriptionText + " ...");
+				ExtractFromArchive(vpkPathFileName, archivePathFileNameToEntryIndexMap);
 			}
 			catch (Exception ex)
 			{
 				status = AppEnums.StatusMessage.Error;
 			}
 
-			if (this.CancellationPending)
+			if (CancellationPending)
 			{
-				this.UpdateProgressStop("... " + progressDescriptionText + " canceled.");
+				UpdateProgressStop("... " + progressDescriptionText + " canceled.");
 			}
 			else
 			{
-				this.UpdateProgressStop("... " + progressDescriptionText + " finished.");
+				UpdateProgressStop("... " + progressDescriptionText + " finished.");
 			}
 
 			return status;
@@ -966,19 +966,19 @@ namespace Crowbar
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
 
-			this.theUnpackedPaths.Clear();
-			this.theUnpackedRelativePathsAndFileNames.Clear();
-			this.theUnpackedTempPathsAndPathFileNames.Clear();
+			theUnpackedPaths.Clear();
+			theUnpackedRelativePathsAndFileNames.Clear();
+			theUnpackedTempPathsAndPathFileNames.Clear();
 
 			// Create and add a folder to the Temp path, to prevent potential file collisions and to provide user more obvious folder name.
 			Guid guid = new Guid();
 			guid = Guid.NewGuid();
 			string folder = "Crowbar_" + guid.ToString();
-			this.theOutputPath = Path.Combine(Path.GetTempPath(), folder);
-			this.theUnpackedPathsAreInTempPath = true;
-			if (!FileManager.PathExistsAfterTryToCreate(this.theOutputPath))
+			theOutputPath = Path.Combine(Path.GetTempPath(), folder);
+			theUnpackedPathsAreInTempPath = true;
+			if (!FileManager.PathExistsAfterTryToCreate(theOutputPath))
 			{
-				this.theRunSynchronousResultMessage = "WARNING: Tried to create \"" + this.theOutputPath + "\" needed for extracting, but Windows did not allow it.";
+				theRunSynchronousResultMessage = "WARNING: Tried to create \"" + theOutputPath + "\" needed for extracting, but Windows did not allow it.";
 				status = AppEnums.StatusMessage.ErrorUnableToCreateTempFolder;
 				return status;
 			}
@@ -991,7 +991,7 @@ namespace Crowbar
 				string archivePathFileName = null;
 				List<int> archiveEntryIndexes = null;
 
-				this.theArchiveDirectoryFileNamePrefix = "";
+				theArchiveDirectoryFileNamePrefix = "";
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				string vpkPath = null;
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
@@ -1006,12 +1006,12 @@ namespace Crowbar
 					vpkPath = FileManager.GetPath(archivePathFileName);
 					vpkFileName = Path.GetFileName(archivePathFileName);
 
-					this.OpenArchiveDirectoryFile(this.theArchivePathFileNameToFileDataMap[archivePathFileName], archivePathFileName);
-					this.DoUnpackAction(this.theArchivePathFileNameToFileDataMap[archivePathFileName], vpkPath, vpkFileName, archiveEntryIndexes);
+					OpenArchiveDirectoryFile(theArchivePathFileNameToFileDataMap[archivePathFileName], archivePathFileName);
+					DoUnpackAction(theArchivePathFileNameToFileDataMap[archivePathFileName], vpkPath, vpkFileName, archiveEntryIndexes);
 				}
-				if (!string.IsNullOrEmpty(this.theArchiveDirectoryFileNamePrefix))
+				if (!string.IsNullOrEmpty(theArchiveDirectoryFileNamePrefix))
 				{
-					this.CloseArchiveDirectoryFile();
+					CloseArchiveDirectoryFile();
 				}
 			}
 			catch (Exception ex)
@@ -1101,7 +1101,7 @@ namespace Crowbar
 				string vpkRelativePathFileName = null;
 				//vpkPath = FileManager.GetPath(archiveDirectoryPathFileName)
 				vpkFileName = Path.GetFileName(archiveDirectoryPathFileName);
-				vpkRelativePath = FileManager.GetRelativePathFileName(this.theInputVpkPath, FileManager.GetPath(archiveDirectoryPathFileName));
+				vpkRelativePath = FileManager.GetRelativePathFileName(theInputVpkPath, FileManager.GetPath(archiveDirectoryPathFileName));
 				vpkRelativePathFileName = Path.Combine(vpkRelativePath, vpkFileName);
 
 				string vpkName = Path.GetFileNameWithoutExtension(archiveDirectoryPathFileName);
@@ -1111,11 +1111,11 @@ namespace Crowbar
 				//extractPath = Path.Combine(Me.theOutputPath, vpkFileNameWithoutExtension)
 
 				//Me.CreateLogTextFile(vpkName)
-				status = this.CreateLogTextFile();
+				status = CreateLogTextFile();
 
-				this.UpdateProgress();
+				UpdateProgress();
 				//Me.UpdateProgress(1, "Unpacking from """ + vpkRelativePathFileName + """ to """ + extractPath + """ ...")
-				this.UpdateProgress(1, "Unpacking from \"" + vpkRelativePathFileName + "\" to \"" + this.theOutputPath + "\" ...");
+				UpdateProgress(1, "Unpacking from \"" + vpkRelativePathFileName + "\" to \"" + theOutputPath + "\" ...");
 
 				//Me.DoUnpackAction(Me.theVpkFileDatas.Values(0), vpkPath, vpkFileName, entryIndexes)
 				//======
@@ -1126,7 +1126,7 @@ namespace Crowbar
 				string archivePathFileName = null;
 				List<int> archiveEntryIndexes = null;
 
-				this.theArchiveDirectoryFileNamePrefix = "";
+				theArchiveDirectoryFileNamePrefix = "";
 				for (int i = 0; i < archivePathFileNameToEntryIndexMap.Count; i++)
 				{
 					archivePathFileName = archivePathFileNameToEntryIndexMap.Keys[i];
@@ -1135,22 +1135,22 @@ namespace Crowbar
 					vpkPath = FileManager.GetPath(archivePathFileName);
 					vpkFileName = Path.GetFileName(archivePathFileName);
 
-					this.OpenArchiveDirectoryFile(this.theArchivePathFileNameToFileDataMap[archivePathFileName], archivePathFileName);
-					this.DoUnpackAction(this.theArchivePathFileNameToFileDataMap[archivePathFileName], vpkPath, vpkFileName, archiveEntryIndexes);
+					OpenArchiveDirectoryFile(theArchivePathFileNameToFileDataMap[archivePathFileName], archivePathFileName);
+					DoUnpackAction(theArchivePathFileNameToFileDataMap[archivePathFileName], vpkPath, vpkFileName, archiveEntryIndexes);
 				}
-				if (!string.IsNullOrEmpty(this.theArchiveDirectoryFileNamePrefix))
+				if (!string.IsNullOrEmpty(theArchiveDirectoryFileNamePrefix))
 				{
-					this.CloseArchiveDirectoryFile();
+					CloseArchiveDirectoryFile();
 				}
 				//End If
 
-				if (this.CancellationPending)
+				if (CancellationPending)
 				{
-					this.UpdateProgress(1, "... Unpacking from \"" + vpkRelativePathFileName + "\" canceled. Check above for any errors.");
+					UpdateProgress(1, "... Unpacking from \"" + vpkRelativePathFileName + "\" canceled. Check above for any errors.");
 				}
 				else
 				{
-					this.UpdateProgress(1, "... Unpacking from \"" + vpkRelativePathFileName + "\" finished. Check above for any errors.");
+					UpdateProgress(1, "... Unpacking from \"" + vpkRelativePathFileName + "\" finished. Check above for any errors.");
 				}
 			}
 			catch (Exception ex)
@@ -1159,11 +1159,11 @@ namespace Crowbar
 			}
 			finally
 			{
-				if (this.theLogFileStream != null)
+				if (theLogFileStream != null)
 				{
-					this.theLogFileStream.Flush();
-					this.theLogFileStream.Close();
-					this.theLogFileStream = null;
+					theLogFileStream.Flush();
+					theLogFileStream.Close();
+					theLogFileStream = null;
 				}
 			}
 
@@ -1197,25 +1197,25 @@ namespace Crowbar
 				vpkFileNamePrefix = "";
 			}
 
-			if (vpkFileNamePrefix != this.theArchiveDirectoryFileNamePrefix)
+			if (vpkFileNamePrefix != theArchiveDirectoryFileNamePrefix)
 			{
-				this.CloseArchiveDirectoryFile();
+				CloseArchiveDirectoryFile();
 
 				try
 				{
-					this.theArchiveDirectoryFileNamePrefix = vpkFileNamePrefix;
+					theArchiveDirectoryFileNamePrefix = vpkFileNamePrefix;
 
 					string vpkPath = FileManager.GetPath(archivePathFileName);
 					archiveDirectoryPathFileName = Path.Combine(vpkPath, vpkFileNamePrefix + vpkFileData.DirectoryFileNameSuffixWithExtension);
 
 					if (File.Exists(archiveDirectoryPathFileName))
 					{
-						this.theArchiveDirectoryInputFileStream = new FileStream(archiveDirectoryPathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-						if (this.theArchiveDirectoryInputFileStream != null)
+						theArchiveDirectoryInputFileStream = new FileStream(archiveDirectoryPathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+						if (theArchiveDirectoryInputFileStream != null)
 						{
 							try
 							{
-								this.theArchiveDirectoryInputFileReader = new BinaryReader(this.theArchiveDirectoryInputFileStream, System.Text.Encoding.ASCII);
+								theArchiveDirectoryInputFileReader = new BinaryReader(theArchiveDirectoryInputFileStream, System.Text.Encoding.ASCII);
 							}
 							catch (Exception ex)
 							{
@@ -1226,7 +1226,7 @@ namespace Crowbar
 				}
 				catch (Exception ex)
 				{
-					this.CloseArchiveDirectoryFile();
+					CloseArchiveDirectoryFile();
 					throw;
 				}
 			}
@@ -1234,15 +1234,15 @@ namespace Crowbar
 
 		private void CloseArchiveDirectoryFile()
 		{
-			if (this.theArchiveDirectoryInputFileReader != null)
+			if (theArchiveDirectoryInputFileReader != null)
 			{
-				this.theArchiveDirectoryInputFileReader.Close();
-				this.theArchiveDirectoryInputFileReader = null;
+				theArchiveDirectoryInputFileReader.Close();
+				theArchiveDirectoryInputFileReader = null;
 			}
-			if (this.theArchiveDirectoryInputFileStream != null)
+			if (theArchiveDirectoryInputFileStream != null)
 			{
-				this.theArchiveDirectoryInputFileStream.Close();
-				this.theArchiveDirectoryInputFileStream = null;
+				theArchiveDirectoryInputFileStream.Close();
+				theArchiveDirectoryInputFileStream = null;
 			}
 		}
 
@@ -1296,7 +1296,7 @@ namespace Crowbar
 			//	Next
 			//Else
 			//Me.UnpackEntryDatasToFiles(vpkFileData, vpkPathFileName, entries, extractPath)
-			this.UnpackEntryDatasToFiles(vpkFileData, vpkPathFileName, entries);
+			UnpackEntryDatasToFiles(vpkFileData, vpkPathFileName, entries);
 			//End If
 
 			//Directory.SetCurrentDirectory(currentPath)
@@ -1308,16 +1308,16 @@ namespace Crowbar
 			// Example: [03-Nov-2019] Left 4 Dead main multi-file VPK does not have a "pak01_048.vpk" file.
 			if (!File.Exists(vpkPathFileName))
 			{
-				this.UpdateProgress(2, "WARNING: Package file not found - \"" + vpkPathFileName + "\". The following files are indicated as being in the missing package file: ");
+				UpdateProgress(2, "WARNING: Package file not found - \"" + vpkPathFileName + "\". The following files are indicated as being in the missing package file: ");
 				foreach (BasePackageDirectoryEntry entry in entries)
 				{
-					this.UpdateProgress(3, "\"" + entry.thePathFileName + "\"");
+					UpdateProgress(3, "\"" + entry.thePathFileName + "\"");
 				}
 				return;
 			}
 
 			FileStream inputFileStream = null;
-			this.theInputFileReader = null;
+			theInputFileReader = null;
 
 			try
 			{
@@ -1326,20 +1326,20 @@ namespace Crowbar
 				{
 					try
 					{
-						this.theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
+						theInputFileReader = new BinaryReader(inputFileStream, System.Text.Encoding.ASCII);
 
 						//Dim packageDirectoryFileNameWithoutExtension As String = Path.GetFileNameWithoutExtension(vpkPathFileName)
-						string packageDirectoryFileNameWithoutExtension = this.GetPackageDirectoryFileNameWithoutExtension(vpkPathFileName, vpkFileData);
+						string packageDirectoryFileNameWithoutExtension = GetPackageDirectoryFileNameWithoutExtension(vpkPathFileName, vpkFileData);
 
 						//Dim vpkFile As New VpkFile(Me.theArchiveDirectoryInputFileReader, Me.theInputFileReader, vpkFileData)
-						BasePackageFile vpkFile = BasePackageFile.Create(vpkPathFileName, this.theArchiveDirectoryInputFileReader, this.theInputFileReader, ref vpkFileData);
+						BasePackageFile vpkFile = BasePackageFile.Create(vpkPathFileName, theArchiveDirectoryInputFileReader, theInputFileReader, ref vpkFileData);
 
 						foreach (BasePackageDirectoryEntry entry in entries)
 						{
 							//Me.UnpackEntryDataToFile(vpkFile, entry, extractPath)
-							this.UnpackEntryDataToFile(packageDirectoryFileNameWithoutExtension, vpkFile, entry);
+							UnpackEntryDataToFile(packageDirectoryFileNameWithoutExtension, vpkFile, entry);
 
-							if (this.CancellationPending)
+							if (CancellationPending)
 							{
 								break;
 							}
@@ -1351,9 +1351,9 @@ namespace Crowbar
 					}
 					finally
 					{
-						if (this.theInputFileReader != null)
+						if (theInputFileReader != null)
 						{
-							this.theInputFileReader.Close();
+							theInputFileReader.Close();
 						}
 					}
 				}
@@ -1375,13 +1375,13 @@ namespace Crowbar
 		private void UnpackEntryDataToFile(string packageFileNameWithoutExtension, BasePackageFile vpkFile, BasePackageDirectoryEntry entry)
 		{
 			string outputPathStart = null;
-			if (MainCROWBAR.TheApp.Settings.UnpackFolderForEachPackageIsChecked || this.theOutputPathIsExtendedWithPackageName)
+			if (MainCROWBAR.TheApp.Settings.UnpackFolderForEachPackageIsChecked || theOutputPathIsExtendedWithPackageName)
 			{
-				outputPathStart = Path.Combine(this.theOutputPath, packageFileNameWithoutExtension);
+				outputPathStart = Path.Combine(theOutputPath, packageFileNameWithoutExtension);
 			}
 			else
 			{
-				outputPathStart = this.theOutputPath;
+				outputPathStart = theOutputPath;
 			}
 
 			string entryPathFileName = null;
@@ -1401,7 +1401,7 @@ namespace Crowbar
 			}
 			else
 			{
-				string entryRelativePathFileName = FileManager.GetRelativePathFileName(this.theSelectedRelativeOutputPath, entryPathFileName);
+				string entryRelativePathFileName = FileManager.GetRelativePathFileName(theSelectedRelativeOutputPath, entryPathFileName);
 				outputPathFileName = Path.Combine(outputPathStart, entryRelativePathFileName);
 			}
 
@@ -1414,31 +1414,31 @@ namespace Crowbar
 
 			if (File.Exists(outputPathFileName))
 			{
-				if (!this.theUnpackedPaths.Contains(this.theOutputPath))
+				if (!theUnpackedPaths.Contains(theOutputPath))
 				{
-					this.theUnpackedPaths.Add(this.theOutputPath);
+					theUnpackedPaths.Add(theOutputPath);
 				}
-				this.theUnpackedRelativePathsAndFileNames.Add(FileManager.GetRelativePathFileName(this.theOutputPath, outputPathFileName));
+				theUnpackedRelativePathsAndFileNames.Add(FileManager.GetRelativePathFileName(theOutputPath, outputPathFileName));
 				//If Not Me.theUnpackedTempPathsAndPathFileNames.Contains(entry.thePathFileName) Then
 				//	Me.theUnpackedTempPathsAndPathFileNames.Add(entry.thePathFileName)
 				//End If
 				if (Path.GetExtension(outputPathFileName) == ".mdl")
 				{
-					this.theUnpackedMdlFiles.Add(FileManager.GetRelativePathFileName(this.theOutputPath, outputPathFileName));
+					theUnpackedMdlFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, outputPathFileName));
 				}
 
 				if (entry.thePathFileName.StartsWith("<"))
 				{
-					this.UpdateProgress(2, "Unpacked: \"" + entry.thePathFileName + "\" as \"" + entry.theRealPathFileName + "\"");
+					UpdateProgress(2, "Unpacked: \"" + entry.thePathFileName + "\" as \"" + entry.theRealPathFileName + "\"");
 				}
 				else
 				{
-					this.UpdateProgress(2, "Unpacked: " + entry.thePathFileName);
+					UpdateProgress(2, "Unpacked: " + entry.thePathFileName);
 				}
 			}
 			else
 			{
-				this.UpdateProgress(2, "WARNING: Not unpacked: " + entry.thePathFileName);
+				UpdateProgress(2, "WARNING: Not unpacked: " + entry.thePathFileName);
 			}
 		}
 

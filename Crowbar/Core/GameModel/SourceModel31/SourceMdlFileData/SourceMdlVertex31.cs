@@ -14,9 +14,9 @@ namespace Crowbar
 
 		public SourceMdlVertex31()
 		{
-			this.boneWeight = new SourceMdlBoneWeight31();
-			this.position = new SourceVector();
-			this.normal = new SourceVector();
+			boneWeight = new SourceMdlBoneWeight31();
+			position = new SourceVector();
+			normal = new SourceVector();
 		}
 
 		public SourceMdlBoneWeight31 boneWeight;

@@ -17,8 +17,8 @@ namespace Crowbar
 
 		public SourceVtaFile2531(StreamWriter outputFileStream, SourceMdlFileData2531 mdlFileData)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
 		}
 
 #endregion
@@ -27,7 +27,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteHeaderSection()
@@ -36,7 +36,7 @@ namespace Crowbar
 
 			//version 1
 			line = "version 1";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteNodesSection()
@@ -46,23 +46,23 @@ namespace Crowbar
 
 			//nodes
 			line = "nodes";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				name = this.theMdlFileData.theBones[boneIndex].theName;
+				name = theMdlFileData.theBones[boneIndex].theName;
 
 				line = "  ";
 				line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " \"";
 				line += name;
 				line += "\" ";
-				line += this.theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSectionForVertexAnimation()
@@ -71,7 +71,7 @@ namespace Crowbar
 
 			//skeleton
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -81,7 +81,7 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			int timeIndex = 0;
 			int flexTimeIndex = 0;
@@ -89,9 +89,9 @@ namespace Crowbar
 
 			timeIndex = 1;
 			//NOTE: The first frame was written in code above.
-			for (flexTimeIndex = 1; flexTimeIndex < this.theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
+			for (flexTimeIndex = 1; flexTimeIndex < theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
 			{
-				aFlexFrame = this.theMdlFileData.theFlexFrames[flexTimeIndex];
+				aFlexFrame = theMdlFileData.theFlexFrames[flexTimeIndex];
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -104,13 +104,13 @@ namespace Crowbar
 				line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " # ";
 				line += aFlexFrame.flexDescription;
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				timeIndex += 1;
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteVertexAnimationSection()
@@ -118,7 +118,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "vertexanimation";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -128,13 +128,13 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			try
 			{
 				SourceMdlModel2531 aBodyModel = null;
 				int vertexCount = 0;
-				aBodyModel = this.theMdlFileData.theBodyParts[0].theModels[0];
+				aBodyModel = theMdlFileData.theBodyParts[0].theModels[0];
 				if (aBodyModel.vertexListType == 0)
 				{
 					vertexCount = aBodyModel.theVertexesType0.Count;
@@ -167,21 +167,21 @@ namespace Crowbar
 					}
 					else if (aBodyModel.vertexListType == 1)
 					{
-						position.x = (aBodyModel.theVertexesType1[vertexIndex].positionX / 65535.0) * this.theMdlFileData.hullMinPosition.y;
-						position.y = (aBodyModel.theVertexesType1[vertexIndex].positionY / 65535.0) * this.theMdlFileData.hullMinPosition.z;
-						position.z = (aBodyModel.theVertexesType1[vertexIndex].positionZ / 65535.0) * this.theMdlFileData.hullMinPosition.x;
-						normal.x = (aBodyModel.theVertexesType1[vertexIndex].normalX / 65535.0) * this.theMdlFileData.hullMaxPosition.x;
-						normal.y = (aBodyModel.theVertexesType1[vertexIndex].normalY / 65535.0) * this.theMdlFileData.hullMaxPosition.y;
-						normal.z = (aBodyModel.theVertexesType1[vertexIndex].normalZ / 65535.0) * this.theMdlFileData.hullMaxPosition.z;
+						position.x = (aBodyModel.theVertexesType1[vertexIndex].positionX / 65535.0) * theMdlFileData.hullMinPosition.y;
+						position.y = (aBodyModel.theVertexesType1[vertexIndex].positionY / 65535.0) * theMdlFileData.hullMinPosition.z;
+						position.z = (aBodyModel.theVertexesType1[vertexIndex].positionZ / 65535.0) * theMdlFileData.hullMinPosition.x;
+						normal.x = (aBodyModel.theVertexesType1[vertexIndex].normalX / 65535.0) * theMdlFileData.hullMaxPosition.x;
+						normal.y = (aBodyModel.theVertexesType1[vertexIndex].normalY / 65535.0) * theMdlFileData.hullMaxPosition.y;
+						normal.z = (aBodyModel.theVertexesType1[vertexIndex].normalZ / 65535.0) * theMdlFileData.hullMaxPosition.z;
 					}
 					else if (aBodyModel.vertexListType == 2)
 					{
-						position.x = (aBodyModel.theVertexesType2[vertexIndex].positionX / 255.0) * this.theMdlFileData.hullMinPosition.y;
-						position.y = (aBodyModel.theVertexesType2[vertexIndex].positionY / 255.0) * this.theMdlFileData.hullMinPosition.z;
-						position.z = (aBodyModel.theVertexesType2[vertexIndex].positionZ / 255.0) * this.theMdlFileData.hullMinPosition.x;
-						normal.x = (aBodyModel.theVertexesType2[vertexIndex].normalX / 255.0) * this.theMdlFileData.hullMaxPosition.x;
-						normal.y = (aBodyModel.theVertexesType2[vertexIndex].normalY / 255.0) * this.theMdlFileData.hullMaxPosition.y;
-						normal.z = (aBodyModel.theVertexesType2[vertexIndex].normalZ / 255.0) * this.theMdlFileData.hullMaxPosition.z;
+						position.x = (aBodyModel.theVertexesType2[vertexIndex].positionX / 255.0) * theMdlFileData.hullMinPosition.y;
+						position.y = (aBodyModel.theVertexesType2[vertexIndex].positionY / 255.0) * theMdlFileData.hullMinPosition.z;
+						position.z = (aBodyModel.theVertexesType2[vertexIndex].positionZ / 255.0) * theMdlFileData.hullMinPosition.x;
+						normal.x = (aBodyModel.theVertexesType2[vertexIndex].normalX / 255.0) * theMdlFileData.hullMaxPosition.x;
+						normal.y = (aBodyModel.theVertexesType2[vertexIndex].normalY / 255.0) * theMdlFileData.hullMaxPosition.y;
+						normal.z = (aBodyModel.theVertexesType2[vertexIndex].normalZ / 255.0) * theMdlFileData.hullMaxPosition.z;
 					}
 					else
 					{
@@ -202,7 +202,7 @@ namespace Crowbar
 					line += normal.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += normal.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 			catch (Exception ex)
@@ -218,9 +218,9 @@ namespace Crowbar
 			{
 				timeIndex = 1;
 				//NOTE: The first frame was written in code above.
-				for (flexTimeIndex = 1; flexTimeIndex < this.theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
+				for (flexTimeIndex = 1; flexTimeIndex < theMdlFileData.theFlexFrames.Count; flexTimeIndex++)
 				{
-					aFlexFrame = this.theMdlFileData.theFlexFrames[flexTimeIndex];
+					aFlexFrame = theMdlFileData.theFlexFrames[flexTimeIndex];
 
 					if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 					{
@@ -233,11 +233,11 @@ namespace Crowbar
 					line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " # ";
 					line += aFlexFrame.flexDescription;
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 
 					for (int x = 0; x < aFlexFrame.flexes.Count; x++)
 					{
-						this.WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
+						WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
 					}
 
 					timeIndex += 1;
@@ -249,7 +249,7 @@ namespace Crowbar
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion
@@ -270,7 +270,7 @@ namespace Crowbar
 
 			try
 			{
-				aBodyModel = this.theMdlFileData.theBodyParts[0].theModels[0];
+				aBodyModel = theMdlFileData.theBodyParts[0].theModels[0];
 
 				for (int i = 0; i < aFlex.theVertAnims.Count; i++)
 				{
@@ -288,21 +288,21 @@ namespace Crowbar
 					}
 					else if (aBodyModel.vertexListType == 1)
 					{
-						position.x = (aBodyModel.theVertexesType1[vertexIndex].positionX / 65535.0) * this.theMdlFileData.hullMinPosition.y;
-						position.y = (aBodyModel.theVertexesType1[vertexIndex].positionY / 65535.0) * this.theMdlFileData.hullMinPosition.z;
-						position.z = (aBodyModel.theVertexesType1[vertexIndex].positionZ / 65535.0) * this.theMdlFileData.hullMinPosition.x;
-						normal.x = (aBodyModel.theVertexesType1[vertexIndex].normalX / 65535.0) * this.theMdlFileData.hullMaxPosition.x;
-						normal.y = (aBodyModel.theVertexesType1[vertexIndex].normalY / 65535.0) * this.theMdlFileData.hullMaxPosition.y;
-						normal.z = (aBodyModel.theVertexesType1[vertexIndex].normalZ / 65535.0) * this.theMdlFileData.hullMaxPosition.z;
+						position.x = (aBodyModel.theVertexesType1[vertexIndex].positionX / 65535.0) * theMdlFileData.hullMinPosition.y;
+						position.y = (aBodyModel.theVertexesType1[vertexIndex].positionY / 65535.0) * theMdlFileData.hullMinPosition.z;
+						position.z = (aBodyModel.theVertexesType1[vertexIndex].positionZ / 65535.0) * theMdlFileData.hullMinPosition.x;
+						normal.x = (aBodyModel.theVertexesType1[vertexIndex].normalX / 65535.0) * theMdlFileData.hullMaxPosition.x;
+						normal.y = (aBodyModel.theVertexesType1[vertexIndex].normalY / 65535.0) * theMdlFileData.hullMaxPosition.y;
+						normal.z = (aBodyModel.theVertexesType1[vertexIndex].normalZ / 65535.0) * theMdlFileData.hullMaxPosition.z;
 					}
 					else if (aBodyModel.vertexListType == 2)
 					{
-						position.x = (aBodyModel.theVertexesType2[vertexIndex].positionX / 255.0) * this.theMdlFileData.hullMinPosition.y;
-						position.y = (aBodyModel.theVertexesType2[vertexIndex].positionY / 255.0) * this.theMdlFileData.hullMinPosition.z;
-						position.z = (aBodyModel.theVertexesType2[vertexIndex].positionZ / 255.0) * this.theMdlFileData.hullMinPosition.x;
-						normal.x = (aBodyModel.theVertexesType2[vertexIndex].normalX / 255.0) * this.theMdlFileData.hullMaxPosition.x;
-						normal.y = (aBodyModel.theVertexesType2[vertexIndex].normalY / 255.0) * this.theMdlFileData.hullMaxPosition.y;
-						normal.z = (aBodyModel.theVertexesType2[vertexIndex].normalZ / 255.0) * this.theMdlFileData.hullMaxPosition.z;
+						position.x = (aBodyModel.theVertexesType2[vertexIndex].positionX / 255.0) * theMdlFileData.hullMinPosition.y;
+						position.y = (aBodyModel.theVertexesType2[vertexIndex].positionY / 255.0) * theMdlFileData.hullMinPosition.z;
+						position.z = (aBodyModel.theVertexesType2[vertexIndex].positionZ / 255.0) * theMdlFileData.hullMinPosition.x;
+						normal.x = (aBodyModel.theVertexesType2[vertexIndex].normalX / 255.0) * theMdlFileData.hullMaxPosition.x;
+						normal.y = (aBodyModel.theVertexesType2[vertexIndex].normalY / 255.0) * theMdlFileData.hullMaxPosition.y;
+						normal.z = (aBodyModel.theVertexesType2[vertexIndex].normalZ / 255.0) * theMdlFileData.hullMaxPosition.z;
 					}
 					else
 					{
@@ -472,7 +472,7 @@ namespace Crowbar
 					line += normal.y.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += normal.z.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 			catch (Exception ex)

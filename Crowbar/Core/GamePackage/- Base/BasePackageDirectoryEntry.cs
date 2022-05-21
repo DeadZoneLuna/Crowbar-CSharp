@@ -16,7 +16,7 @@ namespace Crowbar
 		{
 
 			// Write this value to avoid using multi-chunk stuff.
-			this.archiveIndex = 0x7FFF;
+			archiveIndex = 0x7FFF;
 		}
 
 		public UInt32 crc;

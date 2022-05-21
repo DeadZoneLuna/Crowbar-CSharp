@@ -18,12 +18,12 @@ namespace Crowbar
 		public BlackMesaSteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(362890);
-			this.Name = "Black Mesa";
-			this.UsesSteamUGC = true;
-			this.CanUseContentFolderOrFile = false;
+			ID = new AppId_t(362890);
+			Name = "Black Mesa";
+			UsesSteamUGC = true;
+			CanUseContentFolderOrFile = false;
 			//Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-			this.TagsControlType = typeof(BlackMesaTagsUserControl);
+			TagsControlType = typeof(BlackMesaTagsUserControl);
 		}
 
 	}

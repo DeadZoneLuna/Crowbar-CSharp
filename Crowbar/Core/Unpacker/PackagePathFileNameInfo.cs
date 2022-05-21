@@ -18,11 +18,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theRelativePathFileName;
+				return theRelativePathFileName;
 			}
 			set
 			{
-				this.theRelativePathFileName = value;
+				theRelativePathFileName = value;
 				NotifyPropertyChanged("RelativePathFileName");
 			}
 		}
@@ -31,11 +31,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePathFileName;
+				return thePathFileName;
 			}
 			set
 			{
-				this.thePathFileName = value;
+				thePathFileName = value;
 				NotifyPropertyChanged("PathFileName");
 			}
 		}

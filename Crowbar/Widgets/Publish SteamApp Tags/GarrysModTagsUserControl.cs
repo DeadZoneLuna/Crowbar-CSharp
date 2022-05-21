@@ -20,8 +20,8 @@ namespace Crowbar
 			InitializeComponent();
 
 			// Add any initialization after the InitializeComponent() call.
-			this.theOrientation = AppEnums.OrientationType.Vertical;
-			this.ChangeOrientation();
+			theOrientation = AppEnums.OrientationType.Vertical;
+			ChangeOrientation();
 		}
 
 		protected override void Init()
@@ -29,24 +29,24 @@ namespace Crowbar
 			base.Init();
 
 			IList anEnumList = EnumHelper.ToList(typeof(GarrysModSteamAppInfo.GarrysModTypeTags));
-			this.ComboBox1.DisplayMember = "Value";
-			this.ComboBox1.ValueMember = "Key";
-			this.ComboBox1.DataSource = anEnumList;
-			this.ComboBox1.SelectedValue = GarrysModSteamAppInfo.GarrysModTypeTags.ServerContent;
+			ComboBox1.DisplayMember = "Value";
+			ComboBox1.ValueMember = "Key";
+			ComboBox1.DataSource = anEnumList;
+			ComboBox1.SelectedValue = GarrysModSteamAppInfo.GarrysModTypeTags.ServerContent;
 
-			this.theCheckBoxes = new List<CheckBoxEx>();
-			this.GetAllCheckboxes(this.GroupBox1.Controls);
-			this.theCheckmarkedCheckBoxes = new List<CheckBoxEx>(2);
+			theCheckBoxes = new List<CheckBoxEx>();
+			GetAllCheckboxes(GroupBox1.Controls);
+			theCheckmarkedCheckBoxes = new List<CheckBoxEx>(2);
 		}
 
 		private void GetAllCheckboxes(ControlCollection iWidgets)
 		{
 			foreach (Control widget in iWidgets)
 			{
-				if (widget is CheckBoxEx && widget != this.AddonTagCheckBox)
+				if (widget is CheckBoxEx && widget != AddonTagCheckBox)
 				{
 					CheckBoxEx aCheckBox = (CheckBoxEx)widget;
-					this.theCheckBoxes.Add(aCheckBox);
+					theCheckBoxes.Add(aCheckBox);
 				}
 			}
 		}
@@ -55,12 +55,12 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theOrientation;
+				return theOrientation;
 			}
 			set
 			{
-				this.theOrientation = value;
-				this.ChangeOrientation();
+				theOrientation = value;
+				ChangeOrientation();
 			}
 		}
 
@@ -86,22 +86,22 @@ namespace Crowbar
 				if (!tags.Contains("Addon"))
 				{
 					tags.Add("Addon");
-					this.AddonTagCheckBox.Checked = true;
+					AddonTagCheckBox.Checked = true;
 					base.RaiseTagsPropertyChanged();
 				}
 
-				this.theCheckmarkedCheckBoxes.Clear();
-				foreach (CheckBoxEx selectedCheckBox in this.theCheckBoxes)
+				theCheckmarkedCheckBoxes.Clear();
+				foreach (CheckBoxEx selectedCheckBox in theCheckBoxes)
 				{
 					if (selectedCheckBox.Checked)
 					{
-						if (this.theCheckmarkedCheckBoxes.Count < 2)
+						if (theCheckmarkedCheckBoxes.Count < 2)
 						{
-							this.theCheckmarkedCheckBoxes.Add(selectedCheckBox);
+							theCheckmarkedCheckBoxes.Add(selectedCheckBox);
 						}
-						if (this.theCheckmarkedCheckBoxes.Count == 2)
+						if (theCheckmarkedCheckBoxes.Count == 2)
 						{
-							foreach (CheckBoxEx aCheckBox in this.theCheckBoxes)
+							foreach (CheckBoxEx aCheckBox in theCheckBoxes)
 							{
 								aCheckBox.Enabled = aCheckBox.Checked;
 							}
@@ -109,9 +109,9 @@ namespace Crowbar
 						}
 					}
 				}
-				if (this.theCheckmarkedCheckBoxes.Count < 2)
+				if (theCheckmarkedCheckBoxes.Count < 2)
 				{
-					foreach (CheckBoxEx aCheckBox in this.theCheckBoxes)
+					foreach (CheckBoxEx aCheckBox in theCheckBoxes)
 					{
 						aCheckBox.Enabled = true;
 					}
@@ -121,18 +121,18 @@ namespace Crowbar
 
 		protected override void OnCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!this.theCheckBoxesAreChangingViaMe)
+			if (!theCheckBoxesAreChangingViaMe)
 			{
 				CheckBoxEx selectedCheckBox = (CheckBoxEx)sender;
 				if (selectedCheckBox.Checked)
 				{
-					if (this.theCheckmarkedCheckBoxes.Count < 2)
+					if (theCheckmarkedCheckBoxes.Count < 2)
 					{
-						this.theCheckmarkedCheckBoxes.Add(selectedCheckBox);
+						theCheckmarkedCheckBoxes.Add(selectedCheckBox);
 					}
-					if (this.theCheckmarkedCheckBoxes.Count == 2)
+					if (theCheckmarkedCheckBoxes.Count == 2)
 					{
-						foreach (CheckBoxEx aCheckBox in this.theCheckBoxes)
+						foreach (CheckBoxEx aCheckBox in theCheckBoxes)
 						{
 							aCheckBox.Enabled = aCheckBox.Checked;
 						}
@@ -140,8 +140,8 @@ namespace Crowbar
 				}
 				else
 				{
-					this.theCheckmarkedCheckBoxes.Remove(selectedCheckBox);
-					foreach (CheckBoxEx aCheckBox in this.theCheckBoxes)
+					theCheckmarkedCheckBoxes.Remove(selectedCheckBox);
+					foreach (CheckBoxEx aCheckBox in theCheckBoxes)
 					{
 						aCheckBox.Enabled = true;
 					}
@@ -153,28 +153,28 @@ namespace Crowbar
 
 		private void ChangeOrientation()
 		{
-			if (this.theOrientation == AppEnums.OrientationType.Horizontal)
+			if (theOrientation == AppEnums.OrientationType.Horizontal)
 			{
 				//'Build
 				//Me.CheckBox1.Location = New System.Drawing.Point(6, 20)
 				//'Cartoon
 				//Me.CheckBox2.Location = New System.Drawing.Point(6, 43)
 				//Comic
-				this.CheckBox3.Location = new System.Drawing.Point(78, 20);
+				CheckBox3.Location = new System.Drawing.Point(78, 20);
 				//Fun
-				this.CheckBox4.Location = new System.Drawing.Point(78, 43);
+				CheckBox4.Location = new System.Drawing.Point(78, 43);
 				//Movie
-				this.CheckBox5.Location = new System.Drawing.Point(150, 20);
+				CheckBox5.Location = new System.Drawing.Point(150, 20);
 				//Realism
-				this.CheckBox6.Location = new System.Drawing.Point(150, 43);
+				CheckBox6.Location = new System.Drawing.Point(150, 43);
 				//Roleplay
-				this.CheckBox7.Location = new System.Drawing.Point(222, 20);
+				CheckBox7.Location = new System.Drawing.Point(222, 20);
 				//Scenic
-				this.CheckBox8.Location = new System.Drawing.Point(222, 43);
+				CheckBox8.Location = new System.Drawing.Point(222, 43);
 				//Water
-				this.CheckBox9.Location = new System.Drawing.Point(294, 20);
+				CheckBox9.Location = new System.Drawing.Point(294, 20);
 				//GroupBox1
-				this.GroupBox1.Size = new System.Drawing.Size(356, 68);
+				GroupBox1.Size = new System.Drawing.Size(356, 68);
 			}
 			else
 			{
@@ -183,21 +183,21 @@ namespace Crowbar
 				//'Cartoon
 				//Me.CheckBox2.Location = New System.Drawing.Point(6, 43)
 				//Comic
-				this.CheckBox3.Location = new System.Drawing.Point(6, 66);
+				CheckBox3.Location = new System.Drawing.Point(6, 66);
 				//Fun
-				this.CheckBox4.Location = new System.Drawing.Point(6, 89);
+				CheckBox4.Location = new System.Drawing.Point(6, 89);
 				//Movie
-				this.CheckBox5.Location = new System.Drawing.Point(6, 112);
+				CheckBox5.Location = new System.Drawing.Point(6, 112);
 				//Realism
-				this.CheckBox6.Location = new System.Drawing.Point(6, 135);
+				CheckBox6.Location = new System.Drawing.Point(6, 135);
 				//Roleplay
-				this.CheckBox7.Location = new System.Drawing.Point(6, 158);
+				CheckBox7.Location = new System.Drawing.Point(6, 158);
 				//Scenic
-				this.CheckBox8.Location = new System.Drawing.Point(6, 181);
+				CheckBox8.Location = new System.Drawing.Point(6, 181);
 				//Water
-				this.CheckBox9.Location = new System.Drawing.Point(6, 204);
+				CheckBox9.Location = new System.Drawing.Point(6, 204);
 				//GroupBox1
-				this.GroupBox1.Size = new System.Drawing.Size(161, 235);
+				GroupBox1.Size = new System.Drawing.Size(161, 235);
 			}
 		}
 

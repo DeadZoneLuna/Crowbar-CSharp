@@ -28,8 +28,8 @@ namespace Crowbar
 		// Only here to make compiler happy with anything that inherits from this class.
 		protected GameInfoTxtFile()
 		{
-			this.theGameInfoPathFileNames = new List<string>(2);
-			this.theBackupGameInfoPathFileNames = new SortedList<string, string>(2);
+			theGameInfoPathFileNames = new List<string>(2);
+			theBackupGameInfoPathFileNames = new SortedList<string, string>(2);
 		}
 
 #endregion
@@ -38,7 +38,7 @@ namespace Crowbar
 
 		public void WriteNewGamePath(string gameInfoPathFileName, string newGamePath)
 		{
-			this.MakeBackupOfGameInfoFile(gameInfoPathFileName, newGamePath);
+			MakeBackupOfGameInfoFile(gameInfoPathFileName, newGamePath);
 
 			StreamReader sr = null;
 			StreamWriter sw = null;
@@ -92,7 +92,7 @@ namespace Crowbar
 													else
 													{
 														sr.Close();
-														this.WriteModifiedFile(gameInfoPathFileName, newGamePath, textUptoPosition, textPastPosition);
+														WriteModifiedFile(gameInfoPathFileName, newGamePath, textUptoPosition, textPastPosition);
 													}
 												}
 												break;
@@ -123,21 +123,21 @@ namespace Crowbar
 		{
 			try
 			{
-				if (this.theGameInfoPathFileNames.Contains(gameInfoPathFileName))
+				if (theGameInfoPathFileNames.Contains(gameInfoPathFileName))
 				{
-					this.theGameInfoPathFileNames.Remove(gameInfoPathFileName);
+					theGameInfoPathFileNames.Remove(gameInfoPathFileName);
 
-					if (!this.theGameInfoPathFileNames.Contains(gameInfoPathFileName))
+					if (!theGameInfoPathFileNames.Contains(gameInfoPathFileName))
 					{
-						if (this.theBackupGameInfoPathFileNames.ContainsKey(gameInfoPathFileName))
+						if (theBackupGameInfoPathFileNames.ContainsKey(gameInfoPathFileName))
 						{
-							string backupPathFileName = this.theBackupGameInfoPathFileNames[gameInfoPathFileName];
+							string backupPathFileName = theBackupGameInfoPathFileNames[gameInfoPathFileName];
 
 							if (File.Exists(backupPathFileName))
 							{
 								File.Copy(backupPathFileName, gameInfoPathFileName, true);
 								File.Delete(backupPathFileName);
-								this.theBackupGameInfoPathFileNames.Remove(gameInfoPathFileName);
+								theBackupGameInfoPathFileNames.Remove(gameInfoPathFileName);
 							}
 						}
 					}
@@ -157,16 +157,16 @@ namespace Crowbar
 		{
 			try
 			{
-				this.theGameInfoPathFileNames.Add(gameInfoPathFileName);
+				theGameInfoPathFileNames.Add(gameInfoPathFileName);
 
-				if (!this.theBackupGameInfoPathFileNames.ContainsKey(gameInfoPathFileName))
+				if (!theBackupGameInfoPathFileNames.ContainsKey(gameInfoPathFileName))
 				{
 					if (File.Exists(gameInfoPathFileName))
 					{
 						string backupPathFileName = Path.Combine(FileManager.GetPath(gameInfoPathFileName), Path.GetFileNameWithoutExtension(gameInfoPathFileName) + "_" + newGamePath + Path.GetExtension(gameInfoPathFileName));
 
 						File.Copy(gameInfoPathFileName, backupPathFileName, true);
-						this.theBackupGameInfoPathFileNames.Add(gameInfoPathFileName, backupPathFileName);
+						theBackupGameInfoPathFileNames.Add(gameInfoPathFileName, backupPathFileName);
 					}
 				}
 			}

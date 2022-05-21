@@ -17,10 +17,10 @@ namespace Crowbar
 
 		public SourceVtaFile49(StreamWriter outputFileStream, SourceMdlFileData49 mdlFileData, SourceVvdFileData04 vvdFileData, SourceMdlBodyPart bodyPart)
 		{
-			this.theOutputFileStreamWriter = outputFileStream;
-			this.theMdlFileData = mdlFileData;
-			this.theVvdFileData = vvdFileData;
-			this.theBodyPart = bodyPart;
+			theOutputFileStreamWriter = outputFileStream;
+			theMdlFileData = mdlFileData;
+			theVvdFileData = vvdFileData;
+			theBodyPart = bodyPart;
 		}
 
 #endregion
@@ -29,7 +29,7 @@ namespace Crowbar
 
 		public void WriteHeaderComment()
 		{
-			Common.WriteHeaderComment(this.theOutputFileStreamWriter);
+			Common.WriteHeaderComment(theOutputFileStreamWriter);
 		}
 
 		public void WriteHeaderSection()
@@ -38,7 +38,7 @@ namespace Crowbar
 
 			//version 1
 			line = "version 1";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteNodesSection()
@@ -48,23 +48,23 @@ namespace Crowbar
 
 			//nodes
 			line = "nodes";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
-			for (int boneIndex = 0; boneIndex < this.theMdlFileData.theBones.Count; boneIndex++)
+			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-				name = this.theMdlFileData.theBones[boneIndex].theName;
+				name = theMdlFileData.theBones[boneIndex].theName;
 
 				line = "  ";
 				line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " \"";
 				line += name;
 				line += "\" ";
-				line += this.theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
-				this.theOutputFileStreamWriter.WriteLine(line);
+				line += theMdlFileData.theBones[boneIndex].parentBoneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteSkeletonSectionForVertexAnimation()
@@ -72,7 +72,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "skeleton";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -82,7 +82,7 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			int timeIndex = 0;
 			int flexTimeIndex = 0;
@@ -92,9 +92,9 @@ namespace Crowbar
 			//NOTE: The first frame was written in code above.
 			//For flexTimeIndex = 1 To Me.theMdlFileData.theFlexFrames.Count - 1
 			//	aFlexFrame = Me.theMdlFileData.theFlexFrames(flexTimeIndex)
-			for (flexTimeIndex = 1; flexTimeIndex < this.theBodyPart.theFlexFrames.Count; flexTimeIndex++)
+			for (flexTimeIndex = 1; flexTimeIndex < theBodyPart.theFlexFrames.Count; flexTimeIndex++)
 			{
-				aFlexFrame = this.theBodyPart.theFlexFrames[flexTimeIndex];
+				aFlexFrame = theBodyPart.theFlexFrames[flexTimeIndex];
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -107,13 +107,13 @@ namespace Crowbar
 				line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " # ";
 				line += aFlexFrame.flexDescription;
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				timeIndex += 1;
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 		public void WriteVertexAnimationSection()
@@ -121,7 +121,7 @@ namespace Crowbar
 			string line = "";
 
 			line = "vertexanimation";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 			{
@@ -131,18 +131,18 @@ namespace Crowbar
 			{
 				line = "  time 0 # basis shape key";
 			}
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 
 			int beginVertexIndex = 0;
 			int endVertexIndex = 0;
 			int bodyVertexCount = 0;
 			SourceMdlBodyPart aBodyPart = null;
 			SourceMdlModel aModel = null;
-			for (int bodyPartIndex = 0; bodyPartIndex < this.theMdlFileData.theBodyParts.Count; bodyPartIndex++)
+			for (int bodyPartIndex = 0; bodyPartIndex < theMdlFileData.theBodyParts.Count; bodyPartIndex++)
 			{
-				aBodyPart = this.theMdlFileData.theBodyParts[bodyPartIndex];
+				aBodyPart = theMdlFileData.theBodyParts[bodyPartIndex];
 
-				if (this.theBodyPart == aBodyPart)
+				if (theBodyPart == aBodyPart)
 				{
 					beginVertexIndex = bodyVertexCount;
 					endVertexIndex = bodyVertexCount;
@@ -157,7 +157,7 @@ namespace Crowbar
 					}
 				}
 
-				if (this.theBodyPart == aBodyPart)
+				if (theBodyPart == aBodyPart)
 				{
 					endVertexIndex = bodyVertexCount - 1;
 				}
@@ -169,15 +169,15 @@ namespace Crowbar
 				//For vertexIndex As Integer = 0 To Me.theVvdFileData.theVertexes.Count - 1
 				for (int vertexIndex = beginVertexIndex; vertexIndex <= endVertexIndex; vertexIndex++)
 				{
-					if (this.theVvdFileData.fixupCount == 0)
+					if (theVvdFileData.fixupCount == 0)
 					{
-						aVertex = this.theVvdFileData.theVertexes[vertexIndex];
+						aVertex = theVvdFileData.theVertexes[vertexIndex];
 					}
 					else
 					{
 						//NOTE: I don't know why lodIndex is not needed here, but using only lodIndex=0 matches what MDL Decompiler produces.
 						//      Maybe the listing by lodIndex is only needed internally by graphics engine.
-						aVertex = this.theVvdFileData.theFixedVertexesByLod[0][vertexIndex];
+						aVertex = theVvdFileData.theFixedVertexesByLod[0][vertexIndex];
 					}
 
 					line = "    ";
@@ -194,7 +194,7 @@ namespace Crowbar
 					line += aVertex.normalY.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
 					line += " ";
 					line += aVertex.normalZ.ToString("0.000000", MainCROWBAR.TheApp.InternalNumberFormat);
-					this.theOutputFileStreamWriter.WriteLine(line);
+					theOutputFileStreamWriter.WriteLine(line);
 				}
 			}
 			catch
@@ -209,9 +209,9 @@ namespace Crowbar
 			//NOTE: The first frame was written in code above.
 			//For flexTimeIndex = 1 To Me.theMdlFileData.theFlexFrames.Count - 1
 			//	aFlexFrame = Me.theMdlFileData.theFlexFrames(flexTimeIndex)
-			for (flexTimeIndex = 1; flexTimeIndex < this.theBodyPart.theFlexFrames.Count; flexTimeIndex++)
+			for (flexTimeIndex = 1; flexTimeIndex < theBodyPart.theFlexFrames.Count; flexTimeIndex++)
 			{
-				aFlexFrame = this.theBodyPart.theFlexFrames[flexTimeIndex];
+				aFlexFrame = theBodyPart.theFlexFrames[flexTimeIndex];
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
 				{
@@ -224,18 +224,18 @@ namespace Crowbar
 				line += timeIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " # ";
 				line += aFlexFrame.flexDescription;
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 
 				for (int x = 0; x < aFlexFrame.flexes.Count; x++)
 				{
-					this.WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
+					WriteVertexAnimLines(aFlexFrame.flexes[x], aFlexFrame.bodyAndMeshVertexIndexStarts[x]);
 				}
 
 				timeIndex += 1;
 			}
 
 			line = "end";
-			this.theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine(line);
 		}
 
 #endregion
@@ -268,15 +268,15 @@ namespace Crowbar
 				//        that contains both upper_right_lowerer and upper_left_lowerer.
 
 				vertexIndex = aVertAnim.index + bodyAndMeshVertexIndexStart;
-				if (this.theVvdFileData.fixupCount == 0)
+				if (theVvdFileData.fixupCount == 0)
 				{
-					aVertex = this.theVvdFileData.theVertexes[vertexIndex];
+					aVertex = theVvdFileData.theVertexes[vertexIndex];
 				}
 				else
 				{
 					//NOTE: I don't know why lodIndex is not needed here, but using only lodIndex=0 matches what MDL Decompiler produces.
 					//      Maybe the listing by lodIndex is only needed internally by graphics engine.
-					aVertex = this.theVvdFileData.theFixedVertexesByLod[0][vertexIndex];
+					aVertex = theVvdFileData.theFixedVertexesByLod[0][vertexIndex];
 				}
 
 				positionX = aVertex.positionX + aVertAnim.get_flDelta(0).TheFloatValue;
@@ -309,7 +309,7 @@ namespace Crowbar
 				//	line += aVertAnim.flDelta(0).the16BitValue.ToString()
 				//End If
 
-				this.theOutputFileStreamWriter.WriteLine(line);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 		}
 

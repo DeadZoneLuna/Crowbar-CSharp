@@ -40,737 +40,737 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.DebugInfoCheckBox = new System.Windows.Forms.CheckBox();
-			this.LogFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.DeclareSequenceQciCheckBox = new System.Windows.Forms.CheckBox();
-			this.FormatForStricterImportersCheckBox = new System.Windows.Forms.CheckBox();
-			this.UseMixedCaseForKeywordsCheckBox = new System.Windows.Forms.CheckBox();
-			this.RemovePathFromMaterialFileNamesCheckBox = new System.Windows.Forms.CheckBox();
-			this.UseNonValveUvConversionCheckBox = new System.Windows.Forms.CheckBox();
-			this.OverrideMdlVersionLabel = new System.Windows.Forms.Label();
-			this.OverrideMdlVersionComboBox = new System.Windows.Forms.ComboBox();
-			this.PrefixMeshFileNamesWithModelNameCheckBox = new System.Windows.Forms.CheckBox();
-			this.Panel2 = new System.Windows.Forms.Panel();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.DecompileComboBox = new System.Windows.Forms.ComboBox();
-			this.MdlPathFileNameTextBox = new Crowbar.TextBoxEx();
-			this.BrowseForMdlPathFolderOrFileNameButton = new System.Windows.Forms.Button();
-			this.GotoMdlButton = new System.Windows.Forms.Button();
-			this.GotoOutputPathButton = new System.Windows.Forms.Button();
-			this.BrowseForOutputPathButton = new System.Windows.Forms.Button();
-			this.OutputPathTextBox = new Crowbar.TextBoxEx();
-			this.OutputSubfolderTextBox = new Crowbar.TextBoxEx();
-			this.OutputPathComboBox = new System.Windows.Forms.ComboBox();
-			this.Label3 = new System.Windows.Forms.Label();
-			this.UseDefaultOutputSubfolderButton = new System.Windows.Forms.Button();
-			this.Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
-			this.DecompileOptionsPanel = new System.Windows.Forms.Panel();
-			this.ReCreateFilesGroupBox = new System.Windows.Forms.GroupBox();
-			this.Panel1 = new System.Windows.Forms.Panel();
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox = new System.Windows.Forms.CheckBox();
-			this.SkinFamilyOnSingleLineCheckBox = new System.Windows.Forms.CheckBox();
-			this.TextureBmpFilesCheckBox = new System.Windows.Forms.CheckBox();
-			this.DecompileOptionsUseDefaultsButton = new System.Windows.Forms.Button();
-			this.ComboBox2 = new System.Windows.Forms.ComboBox();
-			this.Label2 = new System.Windows.Forms.Label();
-			this.IncludeDefineBoneLinesCheckBox = new System.Windows.Forms.CheckBox();
-			this.GroupIntoQciFilesCheckBox = new System.Windows.Forms.CheckBox();
-			this.PlaceInAnimsSubfolderCheckBox = new System.Windows.Forms.CheckBox();
-			this.LodMeshSmdFilesCheckBox = new System.Windows.Forms.CheckBox();
-			this.ProceduralBonesVrdFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.BoneAnimationSmdFilesCheckBox = new System.Windows.Forms.CheckBox();
-			this.VertexAnimationVtaFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.PhysicsMeshSmdFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.ReferenceMeshSmdFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.QcFileCheckBox = new System.Windows.Forms.CheckBox();
-			this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
-			this.Panel3 = new System.Windows.Forms.Panel();
-			this.FolderForEachModelCheckBox = new System.Windows.Forms.CheckBox();
-			this.DecompilerLogTextBox = new Crowbar.RichTextBoxEx();
-			this.DecompileButtonsPanel = new System.Windows.Forms.Panel();
-			this.DecompileButton = new System.Windows.Forms.Button();
-			this.SkipCurrentModelButton = new System.Windows.Forms.Button();
-			this.CancelDecompileButton = new System.Windows.Forms.Button();
-			this.UseAllInCompileButton = new System.Windows.Forms.Button();
-			this.Panel4 = new System.Windows.Forms.Panel();
-			this.DecompiledFilesComboBox = new System.Windows.Forms.ComboBox();
-			this.UseInEditButton = new System.Windows.Forms.Button();
-			this.UseInCompileButton = new System.Windows.Forms.Button();
-			this.GotoDecompiledFileButton = new System.Windows.Forms.Button();
-			this.Panel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).BeginInit();
-			this.Options_LogSplitContainer.Panel1.SuspendLayout();
-			this.Options_LogSplitContainer.Panel2.SuspendLayout();
-			this.Options_LogSplitContainer.SuspendLayout();
-			this.DecompileOptionsPanel.SuspendLayout();
-			this.ReCreateFilesGroupBox.SuspendLayout();
-			this.Panel1.SuspendLayout();
-			this.OptionsGroupBox.SuspendLayout();
-			this.Panel3.SuspendLayout();
-			this.DecompileButtonsPanel.SuspendLayout();
-			this.Panel4.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			ToolTip1 = new System.Windows.Forms.ToolTip(components);
+			DebugInfoCheckBox = new System.Windows.Forms.CheckBox();
+			LogFileCheckBox = new System.Windows.Forms.CheckBox();
+			DeclareSequenceQciCheckBox = new System.Windows.Forms.CheckBox();
+			FormatForStricterImportersCheckBox = new System.Windows.Forms.CheckBox();
+			UseMixedCaseForKeywordsCheckBox = new System.Windows.Forms.CheckBox();
+			RemovePathFromMaterialFileNamesCheckBox = new System.Windows.Forms.CheckBox();
+			UseNonValveUvConversionCheckBox = new System.Windows.Forms.CheckBox();
+			OverrideMdlVersionLabel = new System.Windows.Forms.Label();
+			OverrideMdlVersionComboBox = new System.Windows.Forms.ComboBox();
+			PrefixMeshFileNamesWithModelNameCheckBox = new System.Windows.Forms.CheckBox();
+			Panel2 = new System.Windows.Forms.Panel();
+			Label1 = new System.Windows.Forms.Label();
+			DecompileComboBox = new System.Windows.Forms.ComboBox();
+			MdlPathFileNameTextBox = new Crowbar.TextBoxEx();
+			BrowseForMdlPathFolderOrFileNameButton = new System.Windows.Forms.Button();
+			GotoMdlButton = new System.Windows.Forms.Button();
+			GotoOutputPathButton = new System.Windows.Forms.Button();
+			BrowseForOutputPathButton = new System.Windows.Forms.Button();
+			OutputPathTextBox = new Crowbar.TextBoxEx();
+			OutputSubfolderTextBox = new Crowbar.TextBoxEx();
+			OutputPathComboBox = new System.Windows.Forms.ComboBox();
+			Label3 = new System.Windows.Forms.Label();
+			UseDefaultOutputSubfolderButton = new System.Windows.Forms.Button();
+			Options_LogSplitContainer = new System.Windows.Forms.SplitContainer();
+			DecompileOptionsPanel = new System.Windows.Forms.Panel();
+			ReCreateFilesGroupBox = new System.Windows.Forms.GroupBox();
+			Panel1 = new System.Windows.Forms.Panel();
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox = new System.Windows.Forms.CheckBox();
+			SkinFamilyOnSingleLineCheckBox = new System.Windows.Forms.CheckBox();
+			TextureBmpFilesCheckBox = new System.Windows.Forms.CheckBox();
+			DecompileOptionsUseDefaultsButton = new System.Windows.Forms.Button();
+			ComboBox2 = new System.Windows.Forms.ComboBox();
+			Label2 = new System.Windows.Forms.Label();
+			IncludeDefineBoneLinesCheckBox = new System.Windows.Forms.CheckBox();
+			GroupIntoQciFilesCheckBox = new System.Windows.Forms.CheckBox();
+			PlaceInAnimsSubfolderCheckBox = new System.Windows.Forms.CheckBox();
+			LodMeshSmdFilesCheckBox = new System.Windows.Forms.CheckBox();
+			ProceduralBonesVrdFileCheckBox = new System.Windows.Forms.CheckBox();
+			BoneAnimationSmdFilesCheckBox = new System.Windows.Forms.CheckBox();
+			VertexAnimationVtaFileCheckBox = new System.Windows.Forms.CheckBox();
+			PhysicsMeshSmdFileCheckBox = new System.Windows.Forms.CheckBox();
+			ReferenceMeshSmdFileCheckBox = new System.Windows.Forms.CheckBox();
+			QcFileCheckBox = new System.Windows.Forms.CheckBox();
+			OptionsGroupBox = new System.Windows.Forms.GroupBox();
+			Panel3 = new System.Windows.Forms.Panel();
+			FolderForEachModelCheckBox = new System.Windows.Forms.CheckBox();
+			DecompilerLogTextBox = new Crowbar.RichTextBoxEx();
+			DecompileButtonsPanel = new System.Windows.Forms.Panel();
+			DecompileButton = new System.Windows.Forms.Button();
+			SkipCurrentModelButton = new System.Windows.Forms.Button();
+			CancelDecompileButton = new System.Windows.Forms.Button();
+			UseAllInCompileButton = new System.Windows.Forms.Button();
+			Panel4 = new System.Windows.Forms.Panel();
+			DecompiledFilesComboBox = new System.Windows.Forms.ComboBox();
+			UseInEditButton = new System.Windows.Forms.Button();
+			UseInCompileButton = new System.Windows.Forms.Button();
+			GotoDecompiledFileButton = new System.Windows.Forms.Button();
+			Panel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).BeginInit();
+			Options_LogSplitContainer.Panel1.SuspendLayout();
+			Options_LogSplitContainer.Panel2.SuspendLayout();
+			Options_LogSplitContainer.SuspendLayout();
+			DecompileOptionsPanel.SuspendLayout();
+			ReCreateFilesGroupBox.SuspendLayout();
+			Panel1.SuspendLayout();
+			OptionsGroupBox.SuspendLayout();
+			Panel3.SuspendLayout();
+			DecompileButtonsPanel.SuspendLayout();
+			Panel4.SuspendLayout();
+			SuspendLayout();
 			//
 			//DebugInfoCheckBox
 			//
-			this.DebugInfoCheckBox.AutoSize = true;
-			this.DebugInfoCheckBox.Location = new System.Drawing.Point(3, 118);
-			this.DebugInfoCheckBox.Name = "DebugInfoCheckBox";
-			this.DebugInfoCheckBox.Size = new System.Drawing.Size(207, 17);
-			this.DebugInfoCheckBox.TabIndex = 14;
-			this.DebugInfoCheckBox.Text = "Decompile-info comments and files";
-			this.ToolTip1.SetToolTip(this.DebugInfoCheckBox, "Write comments and extra files that include decompile info useful in debugging.");
-			this.DebugInfoCheckBox.UseVisualStyleBackColor = true;
+			DebugInfoCheckBox.AutoSize = true;
+			DebugInfoCheckBox.Location = new System.Drawing.Point(3, 118);
+			DebugInfoCheckBox.Name = "DebugInfoCheckBox";
+			DebugInfoCheckBox.Size = new System.Drawing.Size(207, 17);
+			DebugInfoCheckBox.TabIndex = 14;
+			DebugInfoCheckBox.Text = "Decompile-info comments and files";
+			ToolTip1.SetToolTip(DebugInfoCheckBox, "Write comments and extra files that include decompile info useful in debugging.");
+			DebugInfoCheckBox.UseVisualStyleBackColor = true;
 			//
 			//LogFileCheckBox
 			//
-			this.LogFileCheckBox.AutoSize = true;
-			this.LogFileCheckBox.Location = new System.Drawing.Point(3, 95);
-			this.LogFileCheckBox.Name = "LogFileCheckBox";
-			this.LogFileCheckBox.Size = new System.Drawing.Size(116, 17);
-			this.LogFileCheckBox.TabIndex = 13;
-			this.LogFileCheckBox.Text = "Write log to a file";
-			this.ToolTip1.SetToolTip(this.LogFileCheckBox, "Write the decompile log to a file.");
-			this.LogFileCheckBox.UseVisualStyleBackColor = true;
+			LogFileCheckBox.AutoSize = true;
+			LogFileCheckBox.Location = new System.Drawing.Point(3, 95);
+			LogFileCheckBox.Name = "LogFileCheckBox";
+			LogFileCheckBox.Size = new System.Drawing.Size(116, 17);
+			LogFileCheckBox.TabIndex = 13;
+			LogFileCheckBox.Text = "Write log to a file";
+			ToolTip1.SetToolTip(LogFileCheckBox, "Write the decompile log to a file.");
+			LogFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DeclareSequenceQciCheckBox
 			//
-			this.DeclareSequenceQciCheckBox.AutoSize = true;
-			this.DeclareSequenceQciCheckBox.Location = new System.Drawing.Point(3, 164);
-			this.DeclareSequenceQciCheckBox.Name = "DeclareSequenceQciCheckBox";
-			this.DeclareSequenceQciCheckBox.Size = new System.Drawing.Size(160, 17);
-			this.DeclareSequenceQciCheckBox.TabIndex = 40;
-			this.DeclareSequenceQciCheckBox.Text = "$DeclareSequence QCI file";
-			this.ToolTip1.SetToolTip(this.DeclareSequenceQciCheckBox, "Write a QCI file with a $DeclareSequence line for each sequence in the MDL file. " + "Useful for getting sequences in correct order for multiplayer.");
-			this.DeclareSequenceQciCheckBox.UseVisualStyleBackColor = true;
+			DeclareSequenceQciCheckBox.AutoSize = true;
+			DeclareSequenceQciCheckBox.Location = new System.Drawing.Point(3, 164);
+			DeclareSequenceQciCheckBox.Name = "DeclareSequenceQciCheckBox";
+			DeclareSequenceQciCheckBox.Size = new System.Drawing.Size(160, 17);
+			DeclareSequenceQciCheckBox.TabIndex = 40;
+			DeclareSequenceQciCheckBox.Text = "$DeclareSequence QCI file";
+			ToolTip1.SetToolTip(DeclareSequenceQciCheckBox, "Write a QCI file with a $DeclareSequence line for each sequence in the MDL file. " + "Useful for getting sequences in correct order for multiplayer.");
+			DeclareSequenceQciCheckBox.UseVisualStyleBackColor = true;
 			//
 			//FormatForStricterImportersCheckBox
 			//
-			this.FormatForStricterImportersCheckBox.AutoSize = true;
-			this.FormatForStricterImportersCheckBox.Location = new System.Drawing.Point(3, 49);
-			this.FormatForStricterImportersCheckBox.Name = "FormatForStricterImportersCheckBox";
-			this.FormatForStricterImportersCheckBox.Size = new System.Drawing.Size(170, 17);
-			this.FormatForStricterImportersCheckBox.TabIndex = 12;
-			this.FormatForStricterImportersCheckBox.Text = "Format for stricter importers";
-			this.ToolTip1.SetToolTip(this.FormatForStricterImportersCheckBox, "Write decompiled files in a format that some importers expect, but is not as easy" + " to read.");
-			this.FormatForStricterImportersCheckBox.UseVisualStyleBackColor = true;
+			FormatForStricterImportersCheckBox.AutoSize = true;
+			FormatForStricterImportersCheckBox.Location = new System.Drawing.Point(3, 49);
+			FormatForStricterImportersCheckBox.Name = "FormatForStricterImportersCheckBox";
+			FormatForStricterImportersCheckBox.Size = new System.Drawing.Size(170, 17);
+			FormatForStricterImportersCheckBox.TabIndex = 12;
+			FormatForStricterImportersCheckBox.Text = "Format for stricter importers";
+			ToolTip1.SetToolTip(FormatForStricterImportersCheckBox, "Write decompiled files in a format that some importers expect, but is not as easy" + " to read.");
+			FormatForStricterImportersCheckBox.UseVisualStyleBackColor = true;
 			//
 			//UseMixedCaseForKeywordsCheckBox
 			//
-			this.UseMixedCaseForKeywordsCheckBox.AutoSize = true;
-			this.UseMixedCaseForKeywordsCheckBox.Location = new System.Drawing.Point(20, 95);
-			this.UseMixedCaseForKeywordsCheckBox.Name = "UseMixedCaseForKeywordsCheckBox";
-			this.UseMixedCaseForKeywordsCheckBox.Size = new System.Drawing.Size(217, 17);
-			this.UseMixedCaseForKeywordsCheckBox.TabIndex = 42;
-			this.UseMixedCaseForKeywordsCheckBox.Text = "Use MixedCase for keywords (Source)";
-			this.ToolTip1.SetToolTip(this.UseMixedCaseForKeywordsCheckBox, "$CommandLikeThis instead of $commandlikethis");
-			this.UseMixedCaseForKeywordsCheckBox.UseVisualStyleBackColor = true;
+			UseMixedCaseForKeywordsCheckBox.AutoSize = true;
+			UseMixedCaseForKeywordsCheckBox.Location = new System.Drawing.Point(20, 95);
+			UseMixedCaseForKeywordsCheckBox.Name = "UseMixedCaseForKeywordsCheckBox";
+			UseMixedCaseForKeywordsCheckBox.Size = new System.Drawing.Size(217, 17);
+			UseMixedCaseForKeywordsCheckBox.TabIndex = 42;
+			UseMixedCaseForKeywordsCheckBox.Text = "Use MixedCase for keywords (Source)";
+			ToolTip1.SetToolTip(UseMixedCaseForKeywordsCheckBox, "$CommandLikeThis instead of $commandlikethis");
+			UseMixedCaseForKeywordsCheckBox.UseVisualStyleBackColor = true;
 			//
 			//RemovePathFromMaterialFileNamesCheckBox
 			//
-			this.RemovePathFromMaterialFileNamesCheckBox.AutoSize = true;
-			this.RemovePathFromMaterialFileNamesCheckBox.Location = new System.Drawing.Point(20, 141);
-			this.RemovePathFromMaterialFileNamesCheckBox.Name = "RemovePathFromMaterialFileNamesCheckBox";
-			this.RemovePathFromMaterialFileNamesCheckBox.Size = new System.Drawing.Size(219, 17);
-			this.RemovePathFromMaterialFileNamesCheckBox.TabIndex = 41;
-			this.RemovePathFromMaterialFileNamesCheckBox.Text = "Remove path from material file names";
-			this.ToolTip1.SetToolTip(this.RemovePathFromMaterialFileNamesCheckBox, "Write only the file name in the SMD, even if a path was stored. This might cause " + "problem with $CDMaterials in QC file.");
-			this.RemovePathFromMaterialFileNamesCheckBox.UseVisualStyleBackColor = true;
+			RemovePathFromMaterialFileNamesCheckBox.AutoSize = true;
+			RemovePathFromMaterialFileNamesCheckBox.Location = new System.Drawing.Point(20, 141);
+			RemovePathFromMaterialFileNamesCheckBox.Name = "RemovePathFromMaterialFileNamesCheckBox";
+			RemovePathFromMaterialFileNamesCheckBox.Size = new System.Drawing.Size(219, 17);
+			RemovePathFromMaterialFileNamesCheckBox.TabIndex = 41;
+			RemovePathFromMaterialFileNamesCheckBox.Text = "Remove path from material file names";
+			ToolTip1.SetToolTip(RemovePathFromMaterialFileNamesCheckBox, "Write only the file name in the SMD, even if a path was stored. This might cause " + "problem with $CDMaterials in QC file.");
+			RemovePathFromMaterialFileNamesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//UseNonValveUvConversionCheckBox
 			//
-			this.UseNonValveUvConversionCheckBox.AutoSize = true;
-			this.UseNonValveUvConversionCheckBox.Location = new System.Drawing.Point(20, 164);
-			this.UseNonValveUvConversionCheckBox.Name = "UseNonValveUvConversionCheckBox";
-			this.UseNonValveUvConversionCheckBox.Size = new System.Drawing.Size(245, 17);
-			this.UseNonValveUvConversionCheckBox.TabIndex = 44;
-			this.UseNonValveUvConversionCheckBox.Text = "Use non-Valve UV conversion (GoldSource)";
-			this.ToolTip1.SetToolTip(this.UseNonValveUvConversionCheckBox, "[ u=s/width ] and [ v=1-(t/height) ] instead of Valve's [ u=s/(width-1) ] and [ v" + "=1-(t/(height-1)) ]");
-			this.UseNonValveUvConversionCheckBox.UseVisualStyleBackColor = true;
+			UseNonValveUvConversionCheckBox.AutoSize = true;
+			UseNonValveUvConversionCheckBox.Location = new System.Drawing.Point(20, 164);
+			UseNonValveUvConversionCheckBox.Name = "UseNonValveUvConversionCheckBox";
+			UseNonValveUvConversionCheckBox.Size = new System.Drawing.Size(245, 17);
+			UseNonValveUvConversionCheckBox.TabIndex = 44;
+			UseNonValveUvConversionCheckBox.Text = "Use non-Valve UV conversion (GoldSource)";
+			ToolTip1.SetToolTip(UseNonValveUvConversionCheckBox, "[ u=s/width ] and [ v=1-(t/height) ] instead of Valve's [ u=s/(width-1) ] and [ v" + "=1-(t/(height-1)) ]");
+			UseNonValveUvConversionCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OverrideMdlVersionLabel
 			//
-			this.OverrideMdlVersionLabel.AutoSize = true;
-			this.OverrideMdlVersionLabel.Location = new System.Drawing.Point(3, 202);
-			this.OverrideMdlVersionLabel.Name = "OverrideMdlVersionLabel";
-			this.OverrideMdlVersionLabel.Size = new System.Drawing.Size(120, 13);
-			this.OverrideMdlVersionLabel.TabIndex = 46;
-			this.OverrideMdlVersionLabel.Text = "Override MDL version:";
-			this.ToolTip1.SetToolTip(this.OverrideMdlVersionLabel, "Decompile based on this selected version instead of what is stored in MDL file.");
+			OverrideMdlVersionLabel.AutoSize = true;
+			OverrideMdlVersionLabel.Location = new System.Drawing.Point(3, 202);
+			OverrideMdlVersionLabel.Name = "OverrideMdlVersionLabel";
+			OverrideMdlVersionLabel.Size = new System.Drawing.Size(120, 13);
+			OverrideMdlVersionLabel.TabIndex = 46;
+			OverrideMdlVersionLabel.Text = "Override MDL version:";
+			ToolTip1.SetToolTip(OverrideMdlVersionLabel, "Decompile based on this selected version instead of what is stored in MDL file.");
 			//
 			//OverrideMdlVersionComboBox
 			//
-			this.OverrideMdlVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OverrideMdlVersionComboBox.FormattingEnabled = true;
-			this.OverrideMdlVersionComboBox.Location = new System.Drawing.Point(123, 199);
-			this.OverrideMdlVersionComboBox.Name = "OverrideMdlVersionComboBox";
-			this.OverrideMdlVersionComboBox.Size = new System.Drawing.Size(110, 21);
-			this.OverrideMdlVersionComboBox.TabIndex = 45;
-			this.ToolTip1.SetToolTip(this.OverrideMdlVersionComboBox, "Decompile based on this selected version instead of what is stored in MDL file.");
+			OverrideMdlVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			OverrideMdlVersionComboBox.FormattingEnabled = true;
+			OverrideMdlVersionComboBox.Location = new System.Drawing.Point(123, 199);
+			OverrideMdlVersionComboBox.Name = "OverrideMdlVersionComboBox";
+			OverrideMdlVersionComboBox.Size = new System.Drawing.Size(110, 21);
+			OverrideMdlVersionComboBox.TabIndex = 45;
+			ToolTip1.SetToolTip(OverrideMdlVersionComboBox, "Decompile based on this selected version instead of what is stored in MDL file.");
 			//
 			//PrefixMeshFileNamesWithModelNameCheckBox
 			//
-			this.PrefixMeshFileNamesWithModelNameCheckBox.AutoSize = true;
-			this.PrefixMeshFileNamesWithModelNameCheckBox.Location = new System.Drawing.Point(3, 26);
-			this.PrefixMeshFileNamesWithModelNameCheckBox.Name = "PrefixMeshFileNamesWithModelNameCheckBox";
-			this.PrefixMeshFileNamesWithModelNameCheckBox.Size = new System.Drawing.Size(231, 17);
-			this.PrefixMeshFileNamesWithModelNameCheckBox.TabIndex = 47;
-			this.PrefixMeshFileNamesWithModelNameCheckBox.Text = "Prefix mesh file names with model name";
-			this.ToolTip1.SetToolTip(this.PrefixMeshFileNamesWithModelNameCheckBox, "Avoid file name conflicts.");
-			this.PrefixMeshFileNamesWithModelNameCheckBox.UseVisualStyleBackColor = true;
+			PrefixMeshFileNamesWithModelNameCheckBox.AutoSize = true;
+			PrefixMeshFileNamesWithModelNameCheckBox.Location = new System.Drawing.Point(3, 26);
+			PrefixMeshFileNamesWithModelNameCheckBox.Name = "PrefixMeshFileNamesWithModelNameCheckBox";
+			PrefixMeshFileNamesWithModelNameCheckBox.Size = new System.Drawing.Size(231, 17);
+			PrefixMeshFileNamesWithModelNameCheckBox.TabIndex = 47;
+			PrefixMeshFileNamesWithModelNameCheckBox.Text = "Prefix mesh file names with model name";
+			ToolTip1.SetToolTip(PrefixMeshFileNamesWithModelNameCheckBox, "Avoid file name conflicts.");
+			PrefixMeshFileNamesWithModelNameCheckBox.UseVisualStyleBackColor = true;
 			//
 			//Panel2
 			//
-			this.Panel2.Controls.Add(this.Label1);
-			this.Panel2.Controls.Add(this.DecompileComboBox);
-			this.Panel2.Controls.Add(this.MdlPathFileNameTextBox);
-			this.Panel2.Controls.Add(this.BrowseForMdlPathFolderOrFileNameButton);
-			this.Panel2.Controls.Add(this.GotoMdlButton);
-			this.Panel2.Controls.Add(this.GotoOutputPathButton);
-			this.Panel2.Controls.Add(this.BrowseForOutputPathButton);
-			this.Panel2.Controls.Add(this.OutputPathTextBox);
-			this.Panel2.Controls.Add(this.OutputSubfolderTextBox);
-			this.Panel2.Controls.Add(this.OutputPathComboBox);
-			this.Panel2.Controls.Add(this.Label3);
-			this.Panel2.Controls.Add(this.UseDefaultOutputSubfolderButton);
-			this.Panel2.Controls.Add(this.Options_LogSplitContainer);
-			this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel2.Location = new System.Drawing.Point(0, 0);
-			this.Panel2.Margin = new System.Windows.Forms.Padding(2);
-			this.Panel2.Name = "Panel2";
-			this.Panel2.Size = new System.Drawing.Size(776, 536);
-			this.Panel2.TabIndex = 8;
+			Panel2.Controls.Add(Label1);
+			Panel2.Controls.Add(DecompileComboBox);
+			Panel2.Controls.Add(MdlPathFileNameTextBox);
+			Panel2.Controls.Add(BrowseForMdlPathFolderOrFileNameButton);
+			Panel2.Controls.Add(GotoMdlButton);
+			Panel2.Controls.Add(GotoOutputPathButton);
+			Panel2.Controls.Add(BrowseForOutputPathButton);
+			Panel2.Controls.Add(OutputPathTextBox);
+			Panel2.Controls.Add(OutputSubfolderTextBox);
+			Panel2.Controls.Add(OutputPathComboBox);
+			Panel2.Controls.Add(Label3);
+			Panel2.Controls.Add(UseDefaultOutputSubfolderButton);
+			Panel2.Controls.Add(Options_LogSplitContainer);
+			Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel2.Location = new System.Drawing.Point(0, 0);
+			Panel2.Margin = new System.Windows.Forms.Padding(2);
+			Panel2.Name = "Panel2";
+			Panel2.Size = new System.Drawing.Size(776, 536);
+			Panel2.TabIndex = 8;
 			//
 			//Label1
 			//
-			this.Label1.Location = new System.Drawing.Point(3, 8);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(64, 13);
-			this.Label1.TabIndex = 0;
-			this.Label1.Text = "MDL input:";
+			Label1.Location = new System.Drawing.Point(3, 8);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(64, 13);
+			Label1.TabIndex = 0;
+			Label1.Text = "MDL input:";
 			//
 			//DecompileComboBox
 			//
-			this.DecompileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.DecompileComboBox.FormattingEnabled = true;
-			this.DecompileComboBox.Location = new System.Drawing.Point(73, 4);
-			this.DecompileComboBox.Name = "DecompileComboBox";
-			this.DecompileComboBox.Size = new System.Drawing.Size(140, 21);
-			this.DecompileComboBox.TabIndex = 1;
+			DecompileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			DecompileComboBox.FormattingEnabled = true;
+			DecompileComboBox.Location = new System.Drawing.Point(73, 4);
+			DecompileComboBox.Name = "DecompileComboBox";
+			DecompileComboBox.Size = new System.Drawing.Size(140, 21);
+			DecompileComboBox.TabIndex = 1;
 			//
 			//MdlPathFileNameTextBox
 			//
-			this.MdlPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.MdlPathFileNameTextBox.CueBannerText = "";
-			this.MdlPathFileNameTextBox.Location = new System.Drawing.Point(219, 3);
-			this.MdlPathFileNameTextBox.Name = "MdlPathFileNameTextBox";
-			this.MdlPathFileNameTextBox.Size = new System.Drawing.Size(435, 22);
-			this.MdlPathFileNameTextBox.TabIndex = 1;
+			MdlPathFileNameTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			MdlPathFileNameTextBox.CueBannerText = "";
+			MdlPathFileNameTextBox.Location = new System.Drawing.Point(219, 3);
+			MdlPathFileNameTextBox.Name = "MdlPathFileNameTextBox";
+			MdlPathFileNameTextBox.Size = new System.Drawing.Size(435, 22);
+			MdlPathFileNameTextBox.TabIndex = 1;
 			//
 			//BrowseForMdlPathFolderOrFileNameButton
 			//
-			this.BrowseForMdlPathFolderOrFileNameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForMdlPathFolderOrFileNameButton.Location = new System.Drawing.Point(660, 3);
-			this.BrowseForMdlPathFolderOrFileNameButton.Name = "BrowseForMdlPathFolderOrFileNameButton";
-			this.BrowseForMdlPathFolderOrFileNameButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForMdlPathFolderOrFileNameButton.TabIndex = 2;
-			this.BrowseForMdlPathFolderOrFileNameButton.Text = "Browse...";
-			this.BrowseForMdlPathFolderOrFileNameButton.UseVisualStyleBackColor = true;
+			BrowseForMdlPathFolderOrFileNameButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForMdlPathFolderOrFileNameButton.Location = new System.Drawing.Point(660, 3);
+			BrowseForMdlPathFolderOrFileNameButton.Name = "BrowseForMdlPathFolderOrFileNameButton";
+			BrowseForMdlPathFolderOrFileNameButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForMdlPathFolderOrFileNameButton.TabIndex = 2;
+			BrowseForMdlPathFolderOrFileNameButton.Text = "Browse...";
+			BrowseForMdlPathFolderOrFileNameButton.UseVisualStyleBackColor = true;
 			//
 			//GotoMdlButton
 			//
-			this.GotoMdlButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoMdlButton.Location = new System.Drawing.Point(730, 3);
-			this.GotoMdlButton.Name = "GotoMdlButton";
-			this.GotoMdlButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoMdlButton.TabIndex = 3;
-			this.GotoMdlButton.Text = "Goto";
-			this.GotoMdlButton.UseVisualStyleBackColor = true;
+			GotoMdlButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoMdlButton.Location = new System.Drawing.Point(730, 3);
+			GotoMdlButton.Name = "GotoMdlButton";
+			GotoMdlButton.Size = new System.Drawing.Size(43, 23);
+			GotoMdlButton.TabIndex = 3;
+			GotoMdlButton.Text = "Goto";
+			GotoMdlButton.UseVisualStyleBackColor = true;
 			//
 			//GotoOutputPathButton
 			//
-			this.GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
-			this.GotoOutputPathButton.Name = "GotoOutputPathButton";
-			this.GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoOutputPathButton.TabIndex = 18;
-			this.GotoOutputPathButton.Text = "Goto";
-			this.GotoOutputPathButton.UseVisualStyleBackColor = true;
+			GotoOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoOutputPathButton.Location = new System.Drawing.Point(730, 32);
+			GotoOutputPathButton.Name = "GotoOutputPathButton";
+			GotoOutputPathButton.Size = new System.Drawing.Size(43, 23);
+			GotoOutputPathButton.TabIndex = 18;
+			GotoOutputPathButton.Text = "Goto";
+			GotoOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//BrowseForOutputPathButton
 			//
-			this.BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.BrowseForOutputPathButton.Enabled = false;
-			this.BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
-			this.BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
-			this.BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
-			this.BrowseForOutputPathButton.TabIndex = 17;
-			this.BrowseForOutputPathButton.Text = "Browse...";
-			this.BrowseForOutputPathButton.UseVisualStyleBackColor = true;
+			BrowseForOutputPathButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			BrowseForOutputPathButton.Enabled = false;
+			BrowseForOutputPathButton.Location = new System.Drawing.Point(660, 32);
+			BrowseForOutputPathButton.Name = "BrowseForOutputPathButton";
+			BrowseForOutputPathButton.Size = new System.Drawing.Size(64, 23);
+			BrowseForOutputPathButton.TabIndex = 17;
+			BrowseForOutputPathButton.Text = "Browse...";
+			BrowseForOutputPathButton.UseVisualStyleBackColor = true;
 			//
 			//OutputPathTextBox
 			//
-			this.OutputPathTextBox.AllowDrop = true;
-			this.OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OutputPathTextBox.CueBannerText = "";
-			this.OutputPathTextBox.Location = new System.Drawing.Point(219, 32);
-			this.OutputPathTextBox.Name = "OutputPathTextBox";
-			this.OutputPathTextBox.Size = new System.Drawing.Size(435, 22);
-			this.OutputPathTextBox.TabIndex = 16;
+			OutputPathTextBox.AllowDrop = true;
+			OutputPathTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OutputPathTextBox.CueBannerText = "";
+			OutputPathTextBox.Location = new System.Drawing.Point(219, 32);
+			OutputPathTextBox.Name = "OutputPathTextBox";
+			OutputPathTextBox.Size = new System.Drawing.Size(435, 22);
+			OutputPathTextBox.TabIndex = 16;
 			//
 			//OutputSubfolderTextBox
 			//
-			this.OutputSubfolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OutputSubfolderTextBox.CueBannerText = "";
-			this.OutputSubfolderTextBox.Location = new System.Drawing.Point(219, 32);
-			this.OutputSubfolderTextBox.Name = "OutputSubfolderTextBox";
-			this.OutputSubfolderTextBox.Size = new System.Drawing.Size(435, 22);
-			this.OutputSubfolderTextBox.TabIndex = 20;
-			this.OutputSubfolderTextBox.Visible = false;
+			OutputSubfolderTextBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OutputSubfolderTextBox.CueBannerText = "";
+			OutputSubfolderTextBox.Location = new System.Drawing.Point(219, 32);
+			OutputSubfolderTextBox.Name = "OutputSubfolderTextBox";
+			OutputSubfolderTextBox.Size = new System.Drawing.Size(435, 22);
+			OutputSubfolderTextBox.TabIndex = 20;
+			OutputSubfolderTextBox.Visible = false;
 			//
 			//OutputPathComboBox
 			//
-			this.OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OutputPathComboBox.FormattingEnabled = true;
-			this.OutputPathComboBox.Location = new System.Drawing.Point(73, 33);
-			this.OutputPathComboBox.Name = "OutputPathComboBox";
-			this.OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
-			this.OutputPathComboBox.TabIndex = 14;
+			OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			OutputPathComboBox.FormattingEnabled = true;
+			OutputPathComboBox.Location = new System.Drawing.Point(73, 33);
+			OutputPathComboBox.Name = "OutputPathComboBox";
+			OutputPathComboBox.Size = new System.Drawing.Size(140, 21);
+			OutputPathComboBox.TabIndex = 14;
 			//
 			//Label3
 			//
-			this.Label3.Location = new System.Drawing.Point(3, 37);
-			this.Label3.Name = "Label3";
-			this.Label3.Size = new System.Drawing.Size(62, 13);
-			this.Label3.TabIndex = 13;
-			this.Label3.Text = "Output to:";
+			Label3.Location = new System.Drawing.Point(3, 37);
+			Label3.Name = "Label3";
+			Label3.Size = new System.Drawing.Size(62, 13);
+			Label3.TabIndex = 13;
+			Label3.Text = "Output to:";
 			//
 			//UseDefaultOutputSubfolderButton
 			//
-			this.UseDefaultOutputSubfolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.UseDefaultOutputSubfolderButton.Location = new System.Drawing.Point(660, 32);
-			this.UseDefaultOutputSubfolderButton.Name = "UseDefaultOutputSubfolderButton";
-			this.UseDefaultOutputSubfolderButton.Size = new System.Drawing.Size(113, 23);
-			this.UseDefaultOutputSubfolderButton.TabIndex = 19;
-			this.UseDefaultOutputSubfolderButton.Text = "Use Default";
-			this.UseDefaultOutputSubfolderButton.UseVisualStyleBackColor = true;
+			UseDefaultOutputSubfolderButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			UseDefaultOutputSubfolderButton.Location = new System.Drawing.Point(660, 32);
+			UseDefaultOutputSubfolderButton.Name = "UseDefaultOutputSubfolderButton";
+			UseDefaultOutputSubfolderButton.Size = new System.Drawing.Size(113, 23);
+			UseDefaultOutputSubfolderButton.TabIndex = 19;
+			UseDefaultOutputSubfolderButton.Text = "Use Default";
+			UseDefaultOutputSubfolderButton.UseVisualStyleBackColor = true;
 			//
 			//Options_LogSplitContainer
 			//
-			this.Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
-			this.Options_LogSplitContainer.Name = "Options_LogSplitContainer";
-			this.Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			Options_LogSplitContainer.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			Options_LogSplitContainer.Location = new System.Drawing.Point(3, 61);
+			Options_LogSplitContainer.Name = "Options_LogSplitContainer";
+			Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			//
 			//Options_LogSplitContainer.Panel1
 			//
-			this.Options_LogSplitContainer.Panel1.Controls.Add(this.DecompileOptionsPanel);
-			this.Options_LogSplitContainer.Panel1MinSize = 45;
+			Options_LogSplitContainer.Panel1.Controls.Add(DecompileOptionsPanel);
+			Options_LogSplitContainer.Panel1MinSize = 45;
 			//
 			//Options_LogSplitContainer.Panel2
 			//
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.DecompilerLogTextBox);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.DecompileButtonsPanel);
-			this.Options_LogSplitContainer.Panel2.Controls.Add(this.Panel4);
-			this.Options_LogSplitContainer.Panel2MinSize = 45;
-			this.Options_LogSplitContainer.Size = new System.Drawing.Size(770, 472);
-			this.Options_LogSplitContainer.SplitterDistance = 250;
-			this.Options_LogSplitContainer.TabIndex = 12;
+			Options_LogSplitContainer.Panel2.Controls.Add(DecompilerLogTextBox);
+			Options_LogSplitContainer.Panel2.Controls.Add(DecompileButtonsPanel);
+			Options_LogSplitContainer.Panel2.Controls.Add(Panel4);
+			Options_LogSplitContainer.Panel2MinSize = 45;
+			Options_LogSplitContainer.Size = new System.Drawing.Size(770, 472);
+			Options_LogSplitContainer.SplitterDistance = 250;
+			Options_LogSplitContainer.TabIndex = 12;
 			//
 			//DecompileOptionsPanel
 			//
-			this.DecompileOptionsPanel.Controls.Add(this.ReCreateFilesGroupBox);
-			this.DecompileOptionsPanel.Controls.Add(this.OptionsGroupBox);
-			this.DecompileOptionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DecompileOptionsPanel.Location = new System.Drawing.Point(0, 0);
-			this.DecompileOptionsPanel.Name = "DecompileOptionsPanel";
-			this.DecompileOptionsPanel.Size = new System.Drawing.Size(770, 250);
-			this.DecompileOptionsPanel.TabIndex = 8;
+			DecompileOptionsPanel.Controls.Add(ReCreateFilesGroupBox);
+			DecompileOptionsPanel.Controls.Add(OptionsGroupBox);
+			DecompileOptionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			DecompileOptionsPanel.Location = new System.Drawing.Point(0, 0);
+			DecompileOptionsPanel.Name = "DecompileOptionsPanel";
+			DecompileOptionsPanel.Size = new System.Drawing.Size(770, 250);
+			DecompileOptionsPanel.TabIndex = 8;
 			//
 			//ReCreateFilesGroupBox
 			//
-			this.ReCreateFilesGroupBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left);
-			this.ReCreateFilesGroupBox.Controls.Add(this.Panel1);
-			this.ReCreateFilesGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.ReCreateFilesGroupBox.Name = "ReCreateFilesGroupBox";
-			this.ReCreateFilesGroupBox.Size = new System.Drawing.Size(522, 247);
-			this.ReCreateFilesGroupBox.TabIndex = 0;
-			this.ReCreateFilesGroupBox.TabStop = false;
-			this.ReCreateFilesGroupBox.Text = "Re-Create Files";
+			ReCreateFilesGroupBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left);
+			ReCreateFilesGroupBox.Controls.Add(Panel1);
+			ReCreateFilesGroupBox.Location = new System.Drawing.Point(0, 0);
+			ReCreateFilesGroupBox.Name = "ReCreateFilesGroupBox";
+			ReCreateFilesGroupBox.Size = new System.Drawing.Size(522, 247);
+			ReCreateFilesGroupBox.TabIndex = 0;
+			ReCreateFilesGroupBox.TabStop = false;
+			ReCreateFilesGroupBox.Text = "Re-Create Files";
 			//
 			//Panel1
 			//
-			this.Panel1.AutoScroll = true;
-			this.Panel1.Controls.Add(this.UseNonValveUvConversionCheckBox);
-			this.Panel1.Controls.Add(this.OnlyChangedMaterialsInTextureGroupLinesCheckBox);
-			this.Panel1.Controls.Add(this.UseMixedCaseForKeywordsCheckBox);
-			this.Panel1.Controls.Add(this.RemovePathFromMaterialFileNamesCheckBox);
-			this.Panel1.Controls.Add(this.SkinFamilyOnSingleLineCheckBox);
-			this.Panel1.Controls.Add(this.TextureBmpFilesCheckBox);
-			this.Panel1.Controls.Add(this.DecompileOptionsUseDefaultsButton);
-			this.Panel1.Controls.Add(this.ComboBox2);
-			this.Panel1.Controls.Add(this.Label2);
-			this.Panel1.Controls.Add(this.IncludeDefineBoneLinesCheckBox);
-			this.Panel1.Controls.Add(this.GroupIntoQciFilesCheckBox);
-			this.Panel1.Controls.Add(this.PlaceInAnimsSubfolderCheckBox);
-			this.Panel1.Controls.Add(this.LodMeshSmdFilesCheckBox);
-			this.Panel1.Controls.Add(this.ProceduralBonesVrdFileCheckBox);
-			this.Panel1.Controls.Add(this.BoneAnimationSmdFilesCheckBox);
-			this.Panel1.Controls.Add(this.VertexAnimationVtaFileCheckBox);
-			this.Panel1.Controls.Add(this.PhysicsMeshSmdFileCheckBox);
-			this.Panel1.Controls.Add(this.ReferenceMeshSmdFileCheckBox);
-			this.Panel1.Controls.Add(this.QcFileCheckBox);
-			this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel1.Location = new System.Drawing.Point(3, 18);
-			this.Panel1.Name = "Panel1";
-			this.Panel1.Size = new System.Drawing.Size(516, 226);
-			this.Panel1.TabIndex = 11;
+			Panel1.AutoScroll = true;
+			Panel1.Controls.Add(UseNonValveUvConversionCheckBox);
+			Panel1.Controls.Add(OnlyChangedMaterialsInTextureGroupLinesCheckBox);
+			Panel1.Controls.Add(UseMixedCaseForKeywordsCheckBox);
+			Panel1.Controls.Add(RemovePathFromMaterialFileNamesCheckBox);
+			Panel1.Controls.Add(SkinFamilyOnSingleLineCheckBox);
+			Panel1.Controls.Add(TextureBmpFilesCheckBox);
+			Panel1.Controls.Add(DecompileOptionsUseDefaultsButton);
+			Panel1.Controls.Add(ComboBox2);
+			Panel1.Controls.Add(Label2);
+			Panel1.Controls.Add(IncludeDefineBoneLinesCheckBox);
+			Panel1.Controls.Add(GroupIntoQciFilesCheckBox);
+			Panel1.Controls.Add(PlaceInAnimsSubfolderCheckBox);
+			Panel1.Controls.Add(LodMeshSmdFilesCheckBox);
+			Panel1.Controls.Add(ProceduralBonesVrdFileCheckBox);
+			Panel1.Controls.Add(BoneAnimationSmdFilesCheckBox);
+			Panel1.Controls.Add(VertexAnimationVtaFileCheckBox);
+			Panel1.Controls.Add(PhysicsMeshSmdFileCheckBox);
+			Panel1.Controls.Add(ReferenceMeshSmdFileCheckBox);
+			Panel1.Controls.Add(QcFileCheckBox);
+			Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel1.Location = new System.Drawing.Point(3, 18);
+			Panel1.Name = "Panel1";
+			Panel1.Size = new System.Drawing.Size(516, 226);
+			Panel1.TabIndex = 11;
 			//
 			//OnlyChangedMaterialsInTextureGroupLinesCheckBox
 			//
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.AutoSize = true;
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Location = new System.Drawing.Point(20, 49);
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Name = "OnlyChangedMaterialsInTextureGroupLinesCheckBox";
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Size = new System.Drawing.Size(264, 17);
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.TabIndex = 43;
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Text = "Only changed materials in $texturegroup lines";
-			this.OnlyChangedMaterialsInTextureGroupLinesCheckBox.UseVisualStyleBackColor = true;
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.AutoSize = true;
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.Location = new System.Drawing.Point(20, 49);
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.Name = "OnlyChangedMaterialsInTextureGroupLinesCheckBox";
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.Size = new System.Drawing.Size(264, 17);
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.TabIndex = 43;
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.Text = "Only changed materials in $texturegroup lines";
+			OnlyChangedMaterialsInTextureGroupLinesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//SkinFamilyOnSingleLineCheckBox
 			//
-			this.SkinFamilyOnSingleLineCheckBox.AutoSize = true;
-			this.SkinFamilyOnSingleLineCheckBox.Location = new System.Drawing.Point(20, 26);
-			this.SkinFamilyOnSingleLineCheckBox.Name = "SkinFamilyOnSingleLineCheckBox";
-			this.SkinFamilyOnSingleLineCheckBox.Size = new System.Drawing.Size(258, 17);
-			this.SkinFamilyOnSingleLineCheckBox.TabIndex = 39;
-			this.SkinFamilyOnSingleLineCheckBox.Text = "Each $texturegroup skin-family on single line";
-			this.SkinFamilyOnSingleLineCheckBox.UseVisualStyleBackColor = true;
+			SkinFamilyOnSingleLineCheckBox.AutoSize = true;
+			SkinFamilyOnSingleLineCheckBox.Location = new System.Drawing.Point(20, 26);
+			SkinFamilyOnSingleLineCheckBox.Name = "SkinFamilyOnSingleLineCheckBox";
+			SkinFamilyOnSingleLineCheckBox.Size = new System.Drawing.Size(258, 17);
+			SkinFamilyOnSingleLineCheckBox.TabIndex = 39;
+			SkinFamilyOnSingleLineCheckBox.Text = "Each $texturegroup skin-family on single line";
+			SkinFamilyOnSingleLineCheckBox.UseVisualStyleBackColor = true;
 			//
 			//TextureBmpFilesCheckBox
 			//
-			this.TextureBmpFilesCheckBox.AutoSize = true;
-			this.TextureBmpFilesCheckBox.Location = new System.Drawing.Point(318, 3);
-			this.TextureBmpFilesCheckBox.Name = "TextureBmpFilesCheckBox";
-			this.TextureBmpFilesCheckBox.Size = new System.Drawing.Size(181, 17);
-			this.TextureBmpFilesCheckBox.TabIndex = 38;
-			this.TextureBmpFilesCheckBox.Text = "Texture BMP files (GoldSource)";
-			this.TextureBmpFilesCheckBox.UseVisualStyleBackColor = true;
+			TextureBmpFilesCheckBox.AutoSize = true;
+			TextureBmpFilesCheckBox.Location = new System.Drawing.Point(318, 3);
+			TextureBmpFilesCheckBox.Name = "TextureBmpFilesCheckBox";
+			TextureBmpFilesCheckBox.Size = new System.Drawing.Size(181, 17);
+			TextureBmpFilesCheckBox.TabIndex = 38;
+			TextureBmpFilesCheckBox.Text = "Texture BMP files (GoldSource)";
+			TextureBmpFilesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DecompileOptionsUseDefaultsButton
 			//
-			this.DecompileOptionsUseDefaultsButton.Location = new System.Drawing.Point(213, 197);
-			this.DecompileOptionsUseDefaultsButton.Name = "DecompileOptionsUseDefaultsButton";
-			this.DecompileOptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
-			this.DecompileOptionsUseDefaultsButton.TabIndex = 37;
-			this.DecompileOptionsUseDefaultsButton.Text = "Use Defaults";
-			this.DecompileOptionsUseDefaultsButton.UseVisualStyleBackColor = true;
+			DecompileOptionsUseDefaultsButton.Location = new System.Drawing.Point(213, 197);
+			DecompileOptionsUseDefaultsButton.Name = "DecompileOptionsUseDefaultsButton";
+			DecompileOptionsUseDefaultsButton.Size = new System.Drawing.Size(90, 23);
+			DecompileOptionsUseDefaultsButton.TabIndex = 37;
+			DecompileOptionsUseDefaultsButton.Text = "Use Defaults";
+			DecompileOptionsUseDefaultsButton.UseVisualStyleBackColor = true;
 			//
 			//ComboBox2
 			//
-			this.ComboBox2.FormattingEnabled = true;
-			this.ComboBox2.Location = new System.Drawing.Point(80, 199);
-			this.ComboBox2.Name = "ComboBox2";
-			this.ComboBox2.Size = new System.Drawing.Size(125, 21);
-			this.ComboBox2.TabIndex = 15;
-			this.ComboBox2.Visible = false;
+			ComboBox2.FormattingEnabled = true;
+			ComboBox2.Location = new System.Drawing.Point(80, 199);
+			ComboBox2.Name = "ComboBox2";
+			ComboBox2.Size = new System.Drawing.Size(125, 21);
+			ComboBox2.TabIndex = 15;
+			ComboBox2.Visible = false;
 			//
 			//Label2
 			//
-			this.Label2.AutoSize = true;
-			this.Label2.Location = new System.Drawing.Point(3, 202);
-			this.Label2.Name = "Label2";
-			this.Label2.Size = new System.Drawing.Size(80, 13);
-			this.Label2.TabIndex = 23;
-			this.Label2.Text = "Model format:";
-			this.Label2.Visible = false;
+			Label2.AutoSize = true;
+			Label2.Location = new System.Drawing.Point(3, 202);
+			Label2.Name = "Label2";
+			Label2.Size = new System.Drawing.Size(80, 13);
+			Label2.TabIndex = 23;
+			Label2.Text = "Model format:";
+			Label2.Visible = false;
 			//
 			//IncludeDefineBoneLinesCheckBox
 			//
-			this.IncludeDefineBoneLinesCheckBox.AutoSize = true;
-			this.IncludeDefineBoneLinesCheckBox.Location = new System.Drawing.Point(20, 72);
-			this.IncludeDefineBoneLinesCheckBox.Name = "IncludeDefineBoneLinesCheckBox";
-			this.IncludeDefineBoneLinesCheckBox.Size = new System.Drawing.Size(286, 17);
-			this.IncludeDefineBoneLinesCheckBox.TabIndex = 2;
-			this.IncludeDefineBoneLinesCheckBox.Text = "Include $definebone lines (typical for view models)";
-			this.IncludeDefineBoneLinesCheckBox.UseVisualStyleBackColor = true;
+			IncludeDefineBoneLinesCheckBox.AutoSize = true;
+			IncludeDefineBoneLinesCheckBox.Location = new System.Drawing.Point(20, 72);
+			IncludeDefineBoneLinesCheckBox.Name = "IncludeDefineBoneLinesCheckBox";
+			IncludeDefineBoneLinesCheckBox.Size = new System.Drawing.Size(286, 17);
+			IncludeDefineBoneLinesCheckBox.TabIndex = 2;
+			IncludeDefineBoneLinesCheckBox.Text = "Include $definebone lines (typical for view models)";
+			IncludeDefineBoneLinesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//GroupIntoQciFilesCheckBox
 			//
-			this.GroupIntoQciFilesCheckBox.AutoSize = true;
-			this.GroupIntoQciFilesCheckBox.Location = new System.Drawing.Point(80, 3);
-			this.GroupIntoQciFilesCheckBox.Name = "GroupIntoQciFilesCheckBox";
-			this.GroupIntoQciFilesCheckBox.Size = new System.Drawing.Size(128, 17);
-			this.GroupIntoQciFilesCheckBox.TabIndex = 1;
-			this.GroupIntoQciFilesCheckBox.Text = "Group into QCI files";
-			this.GroupIntoQciFilesCheckBox.UseVisualStyleBackColor = true;
+			GroupIntoQciFilesCheckBox.AutoSize = true;
+			GroupIntoQciFilesCheckBox.Location = new System.Drawing.Point(80, 3);
+			GroupIntoQciFilesCheckBox.Name = "GroupIntoQciFilesCheckBox";
+			GroupIntoQciFilesCheckBox.Size = new System.Drawing.Size(128, 17);
+			GroupIntoQciFilesCheckBox.TabIndex = 1;
+			GroupIntoQciFilesCheckBox.Text = "Group into QCI files";
+			GroupIntoQciFilesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//PlaceInAnimsSubfolderCheckBox
 			//
-			this.PlaceInAnimsSubfolderCheckBox.AutoSize = true;
-			this.PlaceInAnimsSubfolderCheckBox.Location = new System.Drawing.Point(335, 141);
-			this.PlaceInAnimsSubfolderCheckBox.Name = "PlaceInAnimsSubfolderCheckBox";
-			this.PlaceInAnimsSubfolderCheckBox.Size = new System.Drawing.Size(159, 17);
-			this.PlaceInAnimsSubfolderCheckBox.TabIndex = 9;
-			this.PlaceInAnimsSubfolderCheckBox.Text = "Place in \"anims\" subfolder";
-			this.PlaceInAnimsSubfolderCheckBox.UseVisualStyleBackColor = true;
+			PlaceInAnimsSubfolderCheckBox.AutoSize = true;
+			PlaceInAnimsSubfolderCheckBox.Location = new System.Drawing.Point(335, 141);
+			PlaceInAnimsSubfolderCheckBox.Name = "PlaceInAnimsSubfolderCheckBox";
+			PlaceInAnimsSubfolderCheckBox.Size = new System.Drawing.Size(159, 17);
+			PlaceInAnimsSubfolderCheckBox.TabIndex = 9;
+			PlaceInAnimsSubfolderCheckBox.Text = "Place in \"anims\" subfolder";
+			PlaceInAnimsSubfolderCheckBox.UseVisualStyleBackColor = true;
 			//
 			//LodMeshSmdFilesCheckBox
 			//
-			this.LodMeshSmdFilesCheckBox.AutoSize = true;
-			this.LodMeshSmdFilesCheckBox.Location = new System.Drawing.Point(318, 26);
-			this.LodMeshSmdFilesCheckBox.Name = "LodMeshSmdFilesCheckBox";
-			this.LodMeshSmdFilesCheckBox.Size = new System.Drawing.Size(129, 17);
-			this.LodMeshSmdFilesCheckBox.TabIndex = 5;
-			this.LodMeshSmdFilesCheckBox.Text = "LOD mesh SMD files";
-			this.LodMeshSmdFilesCheckBox.UseVisualStyleBackColor = true;
+			LodMeshSmdFilesCheckBox.AutoSize = true;
+			LodMeshSmdFilesCheckBox.Location = new System.Drawing.Point(318, 26);
+			LodMeshSmdFilesCheckBox.Name = "LodMeshSmdFilesCheckBox";
+			LodMeshSmdFilesCheckBox.Size = new System.Drawing.Size(129, 17);
+			LodMeshSmdFilesCheckBox.TabIndex = 5;
+			LodMeshSmdFilesCheckBox.Text = "LOD mesh SMD files";
+			LodMeshSmdFilesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ProceduralBonesVrdFileCheckBox
 			//
-			this.ProceduralBonesVrdFileCheckBox.AutoSize = true;
-			this.ProceduralBonesVrdFileCheckBox.Location = new System.Drawing.Point(318, 95);
-			this.ProceduralBonesVrdFileCheckBox.Name = "ProceduralBonesVrdFileCheckBox";
-			this.ProceduralBonesVrdFileCheckBox.Size = new System.Drawing.Size(160, 17);
-			this.ProceduralBonesVrdFileCheckBox.TabIndex = 10;
-			this.ProceduralBonesVrdFileCheckBox.Text = "Procedural bones VRD file";
-			this.ProceduralBonesVrdFileCheckBox.UseVisualStyleBackColor = true;
+			ProceduralBonesVrdFileCheckBox.AutoSize = true;
+			ProceduralBonesVrdFileCheckBox.Location = new System.Drawing.Point(318, 95);
+			ProceduralBonesVrdFileCheckBox.Name = "ProceduralBonesVrdFileCheckBox";
+			ProceduralBonesVrdFileCheckBox.Size = new System.Drawing.Size(160, 17);
+			ProceduralBonesVrdFileCheckBox.TabIndex = 10;
+			ProceduralBonesVrdFileCheckBox.Text = "Procedural bones VRD file";
+			ProceduralBonesVrdFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//BoneAnimationSmdFilesCheckBox
 			//
-			this.BoneAnimationSmdFilesCheckBox.AutoSize = true;
-			this.BoneAnimationSmdFilesCheckBox.Location = new System.Drawing.Point(318, 118);
-			this.BoneAnimationSmdFilesCheckBox.Name = "BoneAnimationSmdFilesCheckBox";
-			this.BoneAnimationSmdFilesCheckBox.Size = new System.Drawing.Size(158, 17);
-			this.BoneAnimationSmdFilesCheckBox.TabIndex = 8;
-			this.BoneAnimationSmdFilesCheckBox.Text = "Bone animation SMD files";
-			this.BoneAnimationSmdFilesCheckBox.UseVisualStyleBackColor = true;
+			BoneAnimationSmdFilesCheckBox.AutoSize = true;
+			BoneAnimationSmdFilesCheckBox.Location = new System.Drawing.Point(318, 118);
+			BoneAnimationSmdFilesCheckBox.Name = "BoneAnimationSmdFilesCheckBox";
+			BoneAnimationSmdFilesCheckBox.Size = new System.Drawing.Size(158, 17);
+			BoneAnimationSmdFilesCheckBox.TabIndex = 8;
+			BoneAnimationSmdFilesCheckBox.Text = "Bone animation SMD files";
+			BoneAnimationSmdFilesCheckBox.UseVisualStyleBackColor = true;
 			//
 			//VertexAnimationVtaFileCheckBox
 			//
-			this.VertexAnimationVtaFileCheckBox.AutoSize = true;
-			this.VertexAnimationVtaFileCheckBox.Location = new System.Drawing.Point(318, 72);
-			this.VertexAnimationVtaFileCheckBox.Name = "VertexAnimationVtaFileCheckBox";
-			this.VertexAnimationVtaFileCheckBox.Size = new System.Drawing.Size(191, 17);
-			this.VertexAnimationVtaFileCheckBox.TabIndex = 7;
-			this.VertexAnimationVtaFileCheckBox.Text = "Vertex animation VTA file (flexes)";
-			this.VertexAnimationVtaFileCheckBox.UseVisualStyleBackColor = true;
+			VertexAnimationVtaFileCheckBox.AutoSize = true;
+			VertexAnimationVtaFileCheckBox.Location = new System.Drawing.Point(318, 72);
+			VertexAnimationVtaFileCheckBox.Name = "VertexAnimationVtaFileCheckBox";
+			VertexAnimationVtaFileCheckBox.Size = new System.Drawing.Size(191, 17);
+			VertexAnimationVtaFileCheckBox.TabIndex = 7;
+			VertexAnimationVtaFileCheckBox.Text = "Vertex animation VTA file (flexes)";
+			VertexAnimationVtaFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//PhysicsMeshSmdFileCheckBox
 			//
-			this.PhysicsMeshSmdFileCheckBox.AutoSize = true;
-			this.PhysicsMeshSmdFileCheckBox.Location = new System.Drawing.Point(318, 49);
-			this.PhysicsMeshSmdFileCheckBox.Name = "PhysicsMeshSmdFileCheckBox";
-			this.PhysicsMeshSmdFileCheckBox.Size = new System.Drawing.Size(138, 17);
-			this.PhysicsMeshSmdFileCheckBox.TabIndex = 6;
-			this.PhysicsMeshSmdFileCheckBox.Text = "Physics mesh SMD file";
-			this.PhysicsMeshSmdFileCheckBox.UseVisualStyleBackColor = true;
+			PhysicsMeshSmdFileCheckBox.AutoSize = true;
+			PhysicsMeshSmdFileCheckBox.Location = new System.Drawing.Point(318, 49);
+			PhysicsMeshSmdFileCheckBox.Name = "PhysicsMeshSmdFileCheckBox";
+			PhysicsMeshSmdFileCheckBox.Size = new System.Drawing.Size(138, 17);
+			PhysicsMeshSmdFileCheckBox.TabIndex = 6;
+			PhysicsMeshSmdFileCheckBox.Text = "Physics mesh SMD file";
+			PhysicsMeshSmdFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//ReferenceMeshSmdFileCheckBox
 			//
-			this.ReferenceMeshSmdFileCheckBox.AutoSize = true;
-			this.ReferenceMeshSmdFileCheckBox.Location = new System.Drawing.Point(3, 118);
-			this.ReferenceMeshSmdFileCheckBox.Name = "ReferenceMeshSmdFileCheckBox";
-			this.ReferenceMeshSmdFileCheckBox.Size = new System.Drawing.Size(153, 17);
-			this.ReferenceMeshSmdFileCheckBox.TabIndex = 3;
-			this.ReferenceMeshSmdFileCheckBox.Text = "Reference mesh SMD file";
-			this.ReferenceMeshSmdFileCheckBox.UseVisualStyleBackColor = true;
+			ReferenceMeshSmdFileCheckBox.AutoSize = true;
+			ReferenceMeshSmdFileCheckBox.Location = new System.Drawing.Point(3, 118);
+			ReferenceMeshSmdFileCheckBox.Name = "ReferenceMeshSmdFileCheckBox";
+			ReferenceMeshSmdFileCheckBox.Size = new System.Drawing.Size(153, 17);
+			ReferenceMeshSmdFileCheckBox.TabIndex = 3;
+			ReferenceMeshSmdFileCheckBox.Text = "Reference mesh SMD file";
+			ReferenceMeshSmdFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//QcFileCheckBox
 			//
-			this.QcFileCheckBox.AutoSize = true;
-			this.QcFileCheckBox.Location = new System.Drawing.Point(3, 3);
-			this.QcFileCheckBox.Name = "QcFileCheckBox";
-			this.QcFileCheckBox.Size = new System.Drawing.Size(60, 17);
-			this.QcFileCheckBox.TabIndex = 0;
-			this.QcFileCheckBox.Text = "QC file";
-			this.QcFileCheckBox.UseVisualStyleBackColor = true;
+			QcFileCheckBox.AutoSize = true;
+			QcFileCheckBox.Location = new System.Drawing.Point(3, 3);
+			QcFileCheckBox.Name = "QcFileCheckBox";
+			QcFileCheckBox.Size = new System.Drawing.Size(60, 17);
+			QcFileCheckBox.TabIndex = 0;
+			QcFileCheckBox.Text = "QC file";
+			QcFileCheckBox.UseVisualStyleBackColor = true;
 			//
 			//OptionsGroupBox
 			//
-			this.OptionsGroupBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.OptionsGroupBox.Controls.Add(this.Panel3);
-			this.OptionsGroupBox.Location = new System.Drawing.Point(528, 0);
-			this.OptionsGroupBox.Name = "OptionsGroupBox";
-			this.OptionsGroupBox.Size = new System.Drawing.Size(242, 247);
-			this.OptionsGroupBox.TabIndex = 6;
-			this.OptionsGroupBox.TabStop = false;
-			this.OptionsGroupBox.Text = "Options";
+			OptionsGroupBox.Anchor = (System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			OptionsGroupBox.Controls.Add(Panel3);
+			OptionsGroupBox.Location = new System.Drawing.Point(528, 0);
+			OptionsGroupBox.Name = "OptionsGroupBox";
+			OptionsGroupBox.Size = new System.Drawing.Size(242, 247);
+			OptionsGroupBox.TabIndex = 6;
+			OptionsGroupBox.TabStop = false;
+			OptionsGroupBox.Text = "Options";
 			//
 			//Panel3
 			//
-			this.Panel3.AutoScroll = true;
-			this.Panel3.Controls.Add(this.PrefixMeshFileNamesWithModelNameCheckBox);
-			this.Panel3.Controls.Add(this.OverrideMdlVersionLabel);
-			this.Panel3.Controls.Add(this.OverrideMdlVersionComboBox);
-			this.Panel3.Controls.Add(this.FolderForEachModelCheckBox);
-			this.Panel3.Controls.Add(this.DebugInfoCheckBox);
-			this.Panel3.Controls.Add(this.LogFileCheckBox);
-			this.Panel3.Controls.Add(this.DeclareSequenceQciCheckBox);
-			this.Panel3.Controls.Add(this.FormatForStricterImportersCheckBox);
-			this.Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Panel3.Location = new System.Drawing.Point(3, 18);
-			this.Panel3.Name = "Panel3";
-			this.Panel3.Size = new System.Drawing.Size(236, 226);
-			this.Panel3.TabIndex = 0;
+			Panel3.AutoScroll = true;
+			Panel3.Controls.Add(PrefixMeshFileNamesWithModelNameCheckBox);
+			Panel3.Controls.Add(OverrideMdlVersionLabel);
+			Panel3.Controls.Add(OverrideMdlVersionComboBox);
+			Panel3.Controls.Add(FolderForEachModelCheckBox);
+			Panel3.Controls.Add(DebugInfoCheckBox);
+			Panel3.Controls.Add(LogFileCheckBox);
+			Panel3.Controls.Add(DeclareSequenceQciCheckBox);
+			Panel3.Controls.Add(FormatForStricterImportersCheckBox);
+			Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+			Panel3.Location = new System.Drawing.Point(3, 18);
+			Panel3.Name = "Panel3";
+			Panel3.Size = new System.Drawing.Size(236, 226);
+			Panel3.TabIndex = 0;
 			//
 			//FolderForEachModelCheckBox
 			//
-			this.FolderForEachModelCheckBox.AutoSize = true;
-			this.FolderForEachModelCheckBox.Location = new System.Drawing.Point(3, 3);
-			this.FolderForEachModelCheckBox.Name = "FolderForEachModelCheckBox";
-			this.FolderForEachModelCheckBox.Size = new System.Drawing.Size(139, 17);
-			this.FolderForEachModelCheckBox.TabIndex = 11;
-			this.FolderForEachModelCheckBox.Text = "Folder for each model";
-			this.FolderForEachModelCheckBox.UseVisualStyleBackColor = true;
+			FolderForEachModelCheckBox.AutoSize = true;
+			FolderForEachModelCheckBox.Location = new System.Drawing.Point(3, 3);
+			FolderForEachModelCheckBox.Name = "FolderForEachModelCheckBox";
+			FolderForEachModelCheckBox.Size = new System.Drawing.Size(139, 17);
+			FolderForEachModelCheckBox.TabIndex = 11;
+			FolderForEachModelCheckBox.Text = "Folder for each model";
+			FolderForEachModelCheckBox.UseVisualStyleBackColor = true;
 			//
 			//DecompilerLogTextBox
 			//
-			this.DecompilerLogTextBox.CueBannerText = "";
-			this.DecompilerLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DecompilerLogTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.DecompilerLogTextBox.HideSelection = false;
-			this.DecompilerLogTextBox.Location = new System.Drawing.Point(0, 26);
-			this.DecompilerLogTextBox.Name = "DecompilerLogTextBox";
-			this.DecompilerLogTextBox.ReadOnly = true;
-			this.DecompilerLogTextBox.Size = new System.Drawing.Size(770, 166);
-			this.DecompilerLogTextBox.TabIndex = 0;
-			this.DecompilerLogTextBox.Text = "";
-			this.DecompilerLogTextBox.WordWrap = false;
+			DecompilerLogTextBox.CueBannerText = "";
+			DecompilerLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			DecompilerLogTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			DecompilerLogTextBox.HideSelection = false;
+			DecompilerLogTextBox.Location = new System.Drawing.Point(0, 26);
+			DecompilerLogTextBox.Name = "DecompilerLogTextBox";
+			DecompilerLogTextBox.ReadOnly = true;
+			DecompilerLogTextBox.Size = new System.Drawing.Size(770, 166);
+			DecompilerLogTextBox.TabIndex = 0;
+			DecompilerLogTextBox.Text = "";
+			DecompilerLogTextBox.WordWrap = false;
 			//
 			//DecompileButtonsPanel
 			//
-			this.DecompileButtonsPanel.Controls.Add(this.DecompileButton);
-			this.DecompileButtonsPanel.Controls.Add(this.SkipCurrentModelButton);
-			this.DecompileButtonsPanel.Controls.Add(this.CancelDecompileButton);
-			this.DecompileButtonsPanel.Controls.Add(this.UseAllInCompileButton);
-			this.DecompileButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DecompileButtonsPanel.Location = new System.Drawing.Point(0, 0);
-			this.DecompileButtonsPanel.Name = "DecompileButtonsPanel";
-			this.DecompileButtonsPanel.Size = new System.Drawing.Size(770, 26);
-			this.DecompileButtonsPanel.TabIndex = 7;
+			DecompileButtonsPanel.Controls.Add(DecompileButton);
+			DecompileButtonsPanel.Controls.Add(SkipCurrentModelButton);
+			DecompileButtonsPanel.Controls.Add(CancelDecompileButton);
+			DecompileButtonsPanel.Controls.Add(UseAllInCompileButton);
+			DecompileButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			DecompileButtonsPanel.Location = new System.Drawing.Point(0, 0);
+			DecompileButtonsPanel.Name = "DecompileButtonsPanel";
+			DecompileButtonsPanel.Size = new System.Drawing.Size(770, 26);
+			DecompileButtonsPanel.TabIndex = 7;
 			//
 			//DecompileButton
 			//
-			this.DecompileButton.Location = new System.Drawing.Point(0, 0);
-			this.DecompileButton.Name = "DecompileButton";
-			this.DecompileButton.Size = new System.Drawing.Size(120, 23);
-			this.DecompileButton.TabIndex = 2;
-			this.DecompileButton.Text = "&Decompile";
-			this.DecompileButton.UseVisualStyleBackColor = true;
+			DecompileButton.Location = new System.Drawing.Point(0, 0);
+			DecompileButton.Name = "DecompileButton";
+			DecompileButton.Size = new System.Drawing.Size(120, 23);
+			DecompileButton.TabIndex = 2;
+			DecompileButton.Text = "&Decompile";
+			DecompileButton.UseVisualStyleBackColor = true;
 			//
 			//SkipCurrentModelButton
 			//
-			this.SkipCurrentModelButton.Enabled = false;
-			this.SkipCurrentModelButton.Location = new System.Drawing.Point(126, 0);
-			this.SkipCurrentModelButton.Name = "SkipCurrentModelButton";
-			this.SkipCurrentModelButton.Size = new System.Drawing.Size(120, 23);
-			this.SkipCurrentModelButton.TabIndex = 3;
-			this.SkipCurrentModelButton.Text = "Skip Current Model";
-			this.SkipCurrentModelButton.UseVisualStyleBackColor = true;
+			SkipCurrentModelButton.Enabled = false;
+			SkipCurrentModelButton.Location = new System.Drawing.Point(126, 0);
+			SkipCurrentModelButton.Name = "SkipCurrentModelButton";
+			SkipCurrentModelButton.Size = new System.Drawing.Size(120, 23);
+			SkipCurrentModelButton.TabIndex = 3;
+			SkipCurrentModelButton.Text = "Skip Current Model";
+			SkipCurrentModelButton.UseVisualStyleBackColor = true;
 			//
 			//CancelDecompileButton
 			//
-			this.CancelDecompileButton.Enabled = false;
-			this.CancelDecompileButton.Location = new System.Drawing.Point(252, 0);
-			this.CancelDecompileButton.Name = "CancelDecompileButton";
-			this.CancelDecompileButton.Size = new System.Drawing.Size(120, 23);
-			this.CancelDecompileButton.TabIndex = 4;
-			this.CancelDecompileButton.Text = "Cancel Decompile";
-			this.CancelDecompileButton.UseVisualStyleBackColor = true;
+			CancelDecompileButton.Enabled = false;
+			CancelDecompileButton.Location = new System.Drawing.Point(252, 0);
+			CancelDecompileButton.Name = "CancelDecompileButton";
+			CancelDecompileButton.Size = new System.Drawing.Size(120, 23);
+			CancelDecompileButton.TabIndex = 4;
+			CancelDecompileButton.Text = "Cancel Decompile";
+			CancelDecompileButton.UseVisualStyleBackColor = true;
 			//
 			//UseAllInCompileButton
 			//
-			this.UseAllInCompileButton.Enabled = false;
-			this.UseAllInCompileButton.Location = new System.Drawing.Point(378, 0);
-			this.UseAllInCompileButton.Name = "UseAllInCompileButton";
-			this.UseAllInCompileButton.Size = new System.Drawing.Size(120, 23);
-			this.UseAllInCompileButton.TabIndex = 5;
-			this.UseAllInCompileButton.Text = "Use All in Compile";
-			this.UseAllInCompileButton.UseVisualStyleBackColor = true;
+			UseAllInCompileButton.Enabled = false;
+			UseAllInCompileButton.Location = new System.Drawing.Point(378, 0);
+			UseAllInCompileButton.Name = "UseAllInCompileButton";
+			UseAllInCompileButton.Size = new System.Drawing.Size(120, 23);
+			UseAllInCompileButton.TabIndex = 5;
+			UseAllInCompileButton.Text = "Use All in Compile";
+			UseAllInCompileButton.UseVisualStyleBackColor = true;
 			//
 			//Panel4
 			//
-			this.Panel4.Controls.Add(this.DecompiledFilesComboBox);
-			this.Panel4.Controls.Add(this.UseInEditButton);
-			this.Panel4.Controls.Add(this.UseInCompileButton);
-			this.Panel4.Controls.Add(this.GotoDecompiledFileButton);
-			this.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Panel4.Location = new System.Drawing.Point(0, 192);
-			this.Panel4.Name = "Panel4";
-			this.Panel4.Size = new System.Drawing.Size(770, 26);
-			this.Panel4.TabIndex = 8;
+			Panel4.Controls.Add(DecompiledFilesComboBox);
+			Panel4.Controls.Add(UseInEditButton);
+			Panel4.Controls.Add(UseInCompileButton);
+			Panel4.Controls.Add(GotoDecompiledFileButton);
+			Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+			Panel4.Location = new System.Drawing.Point(0, 192);
+			Panel4.Name = "Panel4";
+			Panel4.Size = new System.Drawing.Size(770, 26);
+			Panel4.TabIndex = 8;
 			//
 			//DecompiledFilesComboBox
 			//
-			this.DecompiledFilesComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.DecompiledFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.DecompiledFilesComboBox.FormattingEnabled = true;
-			this.DecompiledFilesComboBox.Location = new System.Drawing.Point(0, 4);
-			this.DecompiledFilesComboBox.Name = "DecompiledFilesComboBox";
-			this.DecompiledFilesComboBox.Size = new System.Drawing.Size(621, 21);
-			this.DecompiledFilesComboBox.TabIndex = 1;
+			DecompiledFilesComboBox.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			DecompiledFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			DecompiledFilesComboBox.FormattingEnabled = true;
+			DecompiledFilesComboBox.Location = new System.Drawing.Point(0, 4);
+			DecompiledFilesComboBox.Name = "DecompiledFilesComboBox";
+			DecompiledFilesComboBox.Size = new System.Drawing.Size(621, 21);
+			DecompiledFilesComboBox.TabIndex = 1;
 			//
 			//UseInEditButton
 			//
-			this.UseInEditButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.UseInEditButton.Enabled = false;
-			this.UseInEditButton.Location = new System.Drawing.Point(551, 3);
-			this.UseInEditButton.Name = "UseInEditButton";
-			this.UseInEditButton.Size = new System.Drawing.Size(72, 23);
-			this.UseInEditButton.TabIndex = 2;
-			this.UseInEditButton.Text = "Use in Edit";
-			this.UseInEditButton.UseVisualStyleBackColor = true;
-			this.UseInEditButton.Visible = false;
+			UseInEditButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			UseInEditButton.Enabled = false;
+			UseInEditButton.Location = new System.Drawing.Point(551, 3);
+			UseInEditButton.Name = "UseInEditButton";
+			UseInEditButton.Size = new System.Drawing.Size(72, 23);
+			UseInEditButton.TabIndex = 2;
+			UseInEditButton.Text = "Use in Edit";
+			UseInEditButton.UseVisualStyleBackColor = true;
+			UseInEditButton.Visible = false;
 			//
 			//UseInCompileButton
 			//
-			this.UseInCompileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.UseInCompileButton.Enabled = false;
-			this.UseInCompileButton.Location = new System.Drawing.Point(627, 3);
-			this.UseInCompileButton.Name = "UseInCompileButton";
-			this.UseInCompileButton.Size = new System.Drawing.Size(94, 23);
-			this.UseInCompileButton.TabIndex = 3;
-			this.UseInCompileButton.Text = "Use in Compile";
-			this.UseInCompileButton.UseVisualStyleBackColor = true;
+			UseInCompileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			UseInCompileButton.Enabled = false;
+			UseInCompileButton.Location = new System.Drawing.Point(627, 3);
+			UseInCompileButton.Name = "UseInCompileButton";
+			UseInCompileButton.Size = new System.Drawing.Size(94, 23);
+			UseInCompileButton.TabIndex = 3;
+			UseInCompileButton.Text = "Use in Compile";
+			UseInCompileButton.UseVisualStyleBackColor = true;
 			//
 			//GotoDecompiledFileButton
 			//
-			this.GotoDecompiledFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.GotoDecompiledFileButton.Location = new System.Drawing.Point(727, 3);
-			this.GotoDecompiledFileButton.Name = "GotoDecompiledFileButton";
-			this.GotoDecompiledFileButton.Size = new System.Drawing.Size(43, 23);
-			this.GotoDecompiledFileButton.TabIndex = 4;
-			this.GotoDecompiledFileButton.Text = "Goto";
-			this.GotoDecompiledFileButton.UseVisualStyleBackColor = true;
+			GotoDecompiledFileButton.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+			GotoDecompiledFileButton.Location = new System.Drawing.Point(727, 3);
+			GotoDecompiledFileButton.Name = "GotoDecompiledFileButton";
+			GotoDecompiledFileButton.Size = new System.Drawing.Size(43, 23);
+			GotoDecompiledFileButton.TabIndex = 4;
+			GotoDecompiledFileButton.Text = "Goto";
+			GotoDecompiledFileButton.UseVisualStyleBackColor = true;
 			//
 			//DecompileUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.Panel2);
-			this.Name = "DecompileUserControl";
-			this.Size = new System.Drawing.Size(776, 536);
-			this.Panel2.ResumeLayout(false);
-			this.Panel2.PerformLayout();
-			this.Options_LogSplitContainer.Panel1.ResumeLayout(false);
-			this.Options_LogSplitContainer.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)this.Options_LogSplitContainer).EndInit();
-			this.Options_LogSplitContainer.ResumeLayout(false);
-			this.DecompileOptionsPanel.ResumeLayout(false);
-			this.ReCreateFilesGroupBox.ResumeLayout(false);
-			this.Panel1.ResumeLayout(false);
-			this.Panel1.PerformLayout();
-			this.OptionsGroupBox.ResumeLayout(false);
-			this.Panel3.ResumeLayout(false);
-			this.Panel3.PerformLayout();
-			this.DecompileButtonsPanel.ResumeLayout(false);
-			this.Panel4.ResumeLayout(false);
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(Panel2);
+			Name = "DecompileUserControl";
+			Size = new System.Drawing.Size(776, 536);
+			Panel2.ResumeLayout(false);
+			Panel2.PerformLayout();
+			Options_LogSplitContainer.Panel1.ResumeLayout(false);
+			Options_LogSplitContainer.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)Options_LogSplitContainer).EndInit();
+			Options_LogSplitContainer.ResumeLayout(false);
+			DecompileOptionsPanel.ResumeLayout(false);
+			ReCreateFilesGroupBox.ResumeLayout(false);
+			Panel1.ResumeLayout(false);
+			Panel1.PerformLayout();
+			OptionsGroupBox.ResumeLayout(false);
+			Panel3.ResumeLayout(false);
+			Panel3.PerformLayout();
+			DecompileButtonsPanel.ResumeLayout(false);
+			Panel4.ResumeLayout(false);
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
-			this.Load += new System.EventHandler(DecompileUserControl_Load);
+			Load += new System.EventHandler(DecompileUserControl_Load);
 			BrowseForMdlPathFolderOrFileNameButton.Click += new System.EventHandler(BrowseForMdlPathFolderOrFileNameButton_Click);
 			GotoMdlButton.Click += new System.EventHandler(GotoMdlButton_Click);
 			OutputPathTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(OutputPathTextBox_DragDrop);

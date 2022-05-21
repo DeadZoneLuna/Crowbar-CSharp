@@ -14,7 +14,7 @@ namespace Crowbar
 		public SourceMdlFileData06() : base()
 		{
 
-			this.theChecksumIsValid = false;
+			theChecksumIsValid = false;
 		}
 
 		//Public Sub New()

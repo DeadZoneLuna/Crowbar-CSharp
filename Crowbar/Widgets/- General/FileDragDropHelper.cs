@@ -18,10 +18,10 @@ namespace Crowbar
 	{
 		public FileDragDropHelper(StartupDelegate startupAction, CleanupDelegate cleanupAction)
 		{
-			this.theStartupAction = startupAction;
-			this.theCleanupAction = cleanupAction;
-			this.theFunctionHasBeenCalledOnce = false;
-			this.pathFileNameIndex = 0;
+			theStartupAction = startupAction;
+			theCleanupAction = cleanupAction;
+			theFunctionHasBeenCalledOnce = false;
+			pathFileNameIndex = 0;
 		}
 
 		//Public Overrides Function GetDataPresent(format As String) As Boolean

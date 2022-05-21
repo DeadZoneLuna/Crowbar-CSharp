@@ -14,18 +14,18 @@ namespace Crowbar
 
 		public SourceMdlLinearBone()
 		{
-			this.theFlags = new List<int>();
-			this.theParents = new List<int>();
-			this.thePositions = new List<SourceVector>();
-			this.theQuaternions = new List<SourceQuaternion>();
-			this.theRotations = new List<SourceVector>();
-			this.thePoseToBoneDataColumn0s = new List<SourceVector>();
-			this.thePoseToBoneDataColumn1s = new List<SourceVector>();
-			this.thePoseToBoneDataColumn2s = new List<SourceVector>();
-			this.thePoseToBoneDataColumn3s = new List<SourceVector>();
-			this.thePositionScales = new List<SourceVector>();
-			this.theRotationScales = new List<SourceVector>();
-			this.theQAlignments = new List<SourceQuaternion>();
+			theFlags = new List<int>();
+			theParents = new List<int>();
+			thePositions = new List<SourceVector>();
+			theQuaternions = new List<SourceQuaternion>();
+			theRotations = new List<SourceVector>();
+			thePoseToBoneDataColumn0s = new List<SourceVector>();
+			thePoseToBoneDataColumn1s = new List<SourceVector>();
+			thePoseToBoneDataColumn2s = new List<SourceVector>();
+			thePoseToBoneDataColumn3s = new List<SourceVector>();
+			thePositionScales = new List<SourceVector>();
+			theRotationScales = new List<SourceVector>();
+			theQAlignments = new List<SourceQuaternion>();
 		}
 
 		//FROM: SourceEngine2007\src_main\public\studio.h

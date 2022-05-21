@@ -36,28 +36,28 @@ namespace Crowbar
 			{
 				base.ItemTags = value;
 
-				this.theCheckBoxesAreChangingViaMe = true;
+				theCheckBoxesAreChangingViaMe = true;
 
 				bool sectionIsSet = false;
-				sectionIsSet = this.SetSection(sectionIsSet, this.GameModeRadioButton, this.GameModePanel);
+				sectionIsSet = SetSection(sectionIsSet, GameModeRadioButton, GameModePanel);
 				if (!sectionIsSet)
 				{
-					sectionIsSet = this.SetSection(sectionIsSet, this.CustomModelsRadioButton, this.CustomModelsPanel);
+					sectionIsSet = SetSection(sectionIsSet, CustomModelsRadioButton, CustomModelsPanel);
 					if (!sectionIsSet)
 					{
-						sectionIsSet = this.SetSection(sectionIsSet, this.CustomSoundsRadioButton, this.CustomSoundsPanel);
+						sectionIsSet = SetSection(sectionIsSet, CustomSoundsRadioButton, CustomSoundsPanel);
 						if (!sectionIsSet)
 						{
-							sectionIsSet = this.SetSection(sectionIsSet, this.MiscellaneousRadioButton, this.MiscellaneousPanel);
+							sectionIsSet = SetSection(sectionIsSet, MiscellaneousRadioButton, MiscellaneousPanel);
 						}
 					}
 				}
 				if (!sectionIsSet)
 				{
-					this.GameModeRadioButton.Checked = true;
+					GameModeRadioButton.Checked = true;
 				}
 
-				this.theCheckBoxesAreChangingViaMe = false;
+				theCheckBoxesAreChangingViaMe = false;
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace Crowbar
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				this.ClearAllPanelsExceptGivenPanel(this.GameModePanel);
+				ClearAllPanelsExceptGivenPanel(GameModePanel);
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace Crowbar
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				this.ClearAllPanelsExceptGivenPanel(this.CustomModelsPanel);
+				ClearAllPanelsExceptGivenPanel(CustomModelsPanel);
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace Crowbar
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				this.ClearAllPanelsExceptGivenPanel(this.CustomSoundsPanel);
+				ClearAllPanelsExceptGivenPanel(CustomSoundsPanel);
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace Crowbar
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				this.ClearAllPanelsExceptGivenPanel(this.MiscellaneousPanel);
+				ClearAllPanelsExceptGivenPanel(MiscellaneousPanel);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace Crowbar
 		{
 			givenPanel.Enabled = true;
 			Panel aPanel = null;
-			foreach (Control widget in this.Controls)
+			foreach (Control widget in Controls)
 			{
 				if (widget is Panel)
 				{

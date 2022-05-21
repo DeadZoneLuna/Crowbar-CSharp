@@ -18,7 +18,7 @@ namespace Crowbar
 		//// a single index buffer
 		//struct StripGroupHeader_t
 		//{
-		//	// These are the arrays of all verts and indices for this mesh.  strips index into this.
+		//	// These are the arrays of all verts and indices for this mesh.  strips index into 
 		//	int numVerts;
 		//	int vertOffset;
 		//	inline Vertex_t *pVertex( int i ) const 

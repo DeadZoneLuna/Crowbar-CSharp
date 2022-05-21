@@ -1914,7 +1914,7 @@ namespace CrowbarSteamPipe
 			}
 		}
 
-		//NOTE: WriteLine only writes string until first LF or CR, so need to adjust how to send this.
+		//NOTE: WriteLine only writes string until first LF or CR, so need to adjust how to send 
 		//NOTE: From TextReader.ReadLine: A line is defined as a sequence of characters followed by 
 		//      a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, Environment.NewLine, or the end-of-stream marker.
 		//      https://docs.microsoft.com/en-us/dotnet/api/system.io.textreader.readline?view=netframework-4.0

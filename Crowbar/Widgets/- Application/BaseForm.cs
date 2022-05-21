@@ -17,7 +17,7 @@ namespace Crowbar
 
 			//TEST: See if this prevents the overlapping or larger text on Chinese Windows.
 			// This should allow Forms that inherit from this class and their widgets to use the system font instead of Visual Studio's default of Microsoft Sans Serif.
-			this.Font = new Font(SystemFonts.MessageBoxFont.Name, 8.25f);
+			Font = new Font(SystemFonts.MessageBoxFont.Name, 8.25f);
 			//Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0F, 13.0F)
 
 			// This call is required by the designer.
@@ -39,7 +39,7 @@ namespace Crowbar
 		protected override void OnDeactivate(EventArgs e)
 		{
 			base.OnDeactivate(e);
-			this.Validate();
+			Validate();
 		}
 
 		//' Reduce flicker and/or speed of redraw when resizing main window, partiularly in Win7 Aero mode.

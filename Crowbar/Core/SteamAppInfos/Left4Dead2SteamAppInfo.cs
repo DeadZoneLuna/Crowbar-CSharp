@@ -18,12 +18,12 @@ namespace Crowbar
 		public Left4Dead2SteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(550);
-			this.Name = "Left 4 Dead 2";
-			this.UsesSteamUGC = false;
-			this.CanUseContentFolderOrFile = false;
-			this.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files");
-			this.TagsControlType = typeof(Left4Dead2TagsUserControl);
+			ID = new AppId_t(550);
+			Name = "Left 4 Dead 2";
+			UsesSteamUGC = false;
+			CanUseContentFolderOrFile = false;
+			ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files");
+			TagsControlType = typeof(Left4Dead2TagsUserControl);
 		}
 
 	}

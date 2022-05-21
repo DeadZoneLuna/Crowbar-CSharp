@@ -22,17 +22,17 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.SuspendLayout();
+			SuspendLayout();
 			//
 			//TagsBaseUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Name = "TagsBaseUserControl";
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Name = "TagsBaseUserControl";
+			ResumeLayout(false);
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
-			this.Load += new System.EventHandler(TagsBaseUserControl_Load);
+			Load += new System.EventHandler(TagsBaseUserControl_Load);
 		}
 
 	}

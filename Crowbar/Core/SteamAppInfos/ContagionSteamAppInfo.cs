@@ -18,12 +18,12 @@ namespace Crowbar
 		public ContagionSteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(238430);
-			this.Name = "Contagion";
-			this.UsesSteamUGC = true;
-			this.CanUseContentFolderOrFile = true;
-			this.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files");
-			this.TagsControlType = typeof(ContagionTagsUserControl);
+			ID = new AppId_t(238430);
+			Name = "Contagion";
+			UsesSteamUGC = true;
+			CanUseContentFolderOrFile = true;
+			ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files");
+			TagsControlType = typeof(ContagionTagsUserControl);
 		}
 
 	}

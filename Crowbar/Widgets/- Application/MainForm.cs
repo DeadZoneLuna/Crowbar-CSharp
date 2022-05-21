@@ -43,46 +43,46 @@ namespace Crowbar
 		{
 			try
 			{
-				this.Location = MainCROWBAR.TheApp.Settings.WindowLocation;
-				this.Size = MainCROWBAR.TheApp.Settings.WindowSize;
-				this.WindowState = MainCROWBAR.TheApp.Settings.WindowState;
+				Location = MainCROWBAR.TheApp.Settings.WindowLocation;
+				Size = MainCROWBAR.TheApp.Settings.WindowSize;
+				WindowState = MainCROWBAR.TheApp.Settings.WindowState;
 
 				// Ensure minimum size of window. 
 				//     Usually MinimumSize Handles this, but MinimumSize changes when Windows Theme Message Box Font Is something weird Like "SimSun-ExtB" 8pt.
 				//     Thus, set the minimum size manually here.
 				int minimumWidth = 800;
 				int minimumHeight = 600;
-				if (this.MinimumSize.Width < minimumWidth || this.MinimumSize.Height < minimumHeight)
+				if (MinimumSize.Width < minimumWidth || MinimumSize.Height < minimumHeight)
 				{
-					this.MinimumSize = new Size(minimumWidth, minimumHeight);
+					MinimumSize = new Size(minimumWidth, minimumHeight);
 				}
-				if (this.Width < this.MinimumSize.Width)
+				if (Width < MinimumSize.Width)
 				{
-					this.Width = this.MinimumSize.Width;
+					Width = MinimumSize.Width;
 				}
-				if (this.Height < this.MinimumSize.Height)
+				if (Height < MinimumSize.Height)
 				{
-					this.Height = this.MinimumSize.Height;
+					Height = MinimumSize.Height;
 				}
 
 				if (MainCROWBAR.TheApp.CommandLineOption_Settings_IsEnabled)
 				{
-					MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex = this.MainTabControl.TabPages.IndexOf(this.UpdateTabPage);
+					MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex = MainTabControl.TabPages.IndexOf(UpdateTabPage);
 				}
-				this.MainTabControl.SelectedIndex = MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex;
+				MainTabControl.SelectedIndex = MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex;
 
 				Screen aScreen = Screen.FromControl(this);
 				//WorkingArea means the area of the screen without the Windows taskbar.
 				Rectangle aScreenWorkingArea = aScreen.WorkingArea;
 				// Ensure at least 60 px of Title Bar visible
-				if (this.Location.X < aScreenWorkingArea.Left || this.Location.X + 60 > aScreenWorkingArea.Left + aScreenWorkingArea.Width)
+				if (Location.X < aScreenWorkingArea.Left || Location.X + 60 > aScreenWorkingArea.Left + aScreenWorkingArea.Width)
 				{
-					this.Left = aScreenWorkingArea.Left;
+					Left = aScreenWorkingArea.Left;
 				}
 				// Ensure top visible
-				if (this.Location.Y < aScreenWorkingArea.Top || this.Location.Y + this.Size.Height > aScreenWorkingArea.Top + aScreenWorkingArea.Height)
+				if (Location.Y < aScreenWorkingArea.Top || Location.Y + Size.Height > aScreenWorkingArea.Top + aScreenWorkingArea.Height)
 				{
-					this.Top = aScreenWorkingArea.Top;
+					Top = aScreenWorkingArea.Top;
 				}
 			}
 			catch (Exception ex)
@@ -105,70 +105,70 @@ namespace Crowbar
 			//	'MessageBox.Show(text.ToString())
 			//End If
 			ReadOnlyCollection<string> commandLineValues = new ReadOnlyCollection<string>(System.Environment.GetCommandLineArgs());
-			this.Startup(commandLineValues);
+			Startup(commandLineValues);
 
-			this.PreviewViewUserControl.RunDataViewer();
-			this.ViewViewUserControl.RunDataViewer();
+			PreviewViewUserControl.RunDataViewer();
+			ViewViewUserControl.RunDataViewer();
 
-			this.SetUpGamesUserControl1.GoBackButton.Click += this.SetUpGamesGoBackButton_Click;
-			this.DownloadUserControl1.UseInUnpackButton.Click += this.DownloadUserControl1_UseInUnpackButton_Click;
-			this.UnpackUserControl1.UseAllInDecompileButton.Click += this.UnpackUserControl_UseAllInDecompileButton_Click;
-			this.UnpackUserControl1.UseInPreviewButton.Click += this.UnpackUserControl_UseInPreviewButton_Click;
-			this.UnpackUserControl1.UseInDecompileButton.Click += this.UnpackUserControl_UseInDecompileButton_Click;
-			this.PreviewViewUserControl.SetUpGameButton.Click += this.PreviewSetUpGamesButton_Click;
-			this.PreviewViewUserControl.UseInDecompileButton.Click += this.ViewUserControl_UseInDecompileButton_Click;
-			this.DecompilerUserControl1.UseAllInCompileButton.Click += this.DecompilerUserControl1_UseAllInCompileButton_Click;
+			SetUpGamesUserControl1.GoBackButton.Click += SetUpGamesGoBackButton_Click;
+			DownloadUserControl1.UseInUnpackButton.Click += DownloadUserControl1_UseInUnpackButton_Click;
+			UnpackUserControl1.UseAllInDecompileButton.Click += UnpackUserControl_UseAllInDecompileButton_Click;
+			UnpackUserControl1.UseInPreviewButton.Click += UnpackUserControl_UseInPreviewButton_Click;
+			UnpackUserControl1.UseInDecompileButton.Click += UnpackUserControl_UseInDecompileButton_Click;
+			PreviewViewUserControl.SetUpGameButton.Click += PreviewSetUpGamesButton_Click;
+			PreviewViewUserControl.UseInDecompileButton.Click += ViewUserControl_UseInDecompileButton_Click;
+			DecompilerUserControl1.UseAllInCompileButton.Click += DecompilerUserControl1_UseAllInCompileButton_Click;
 			//AddHandler Me.DecompilerUserControl1.UseInEditButton.Click, AddressOf Me.DecompilerUserControl1_UseInEditButton_Click
-			this.DecompilerUserControl1.UseInCompileButton.Click += this.DecompilerUserControl1_UseInCompileButton_Click;
-			this.CompilerUserControl1.EditGameSetupButton.Click += this.CompileSetUpGamesButton_Click;
+			DecompilerUserControl1.UseInCompileButton.Click += DecompilerUserControl1_UseInCompileButton_Click;
+			CompilerUserControl1.EditGameSetupButton.Click += CompileSetUpGamesButton_Click;
 			//AddHandler Me.CompilerUserControl1.UseAllInPackButton.Click, AddressOf Me.CompilerUserControl1_UseAllInPackButton_Click
-			this.CompilerUserControl1.UseInViewButton.Click += this.CompilerUserControl1_UseInViewButton_Click;
+			CompilerUserControl1.UseInViewButton.Click += CompilerUserControl1_UseInViewButton_Click;
 			//AddHandler Me.CompilerUserControl1.UseInPackButton.Click, AddressOf Me.CompilerUserControl1_UseInPackButton_Click
-			this.ViewViewUserControl.SetUpGameButton.Click += this.ViewSetUpGamesButton_Click;
-			this.ViewViewUserControl.UseInDecompileButton.Click += this.ViewUserControl_UseInDecompileButton_Click;
-			this.PackUserControl1.SetUpGamesButton.Click += this.PackSetUpGamesButton_Click;
-			this.PackUserControl1.UseAllInPublishButton.Click += this.PackUserControl1_UseAllInPublishButton_Click;
-			this.PublishUserControl1.UseInDownloadToolStripMenuItem.Click += this.PublishUserControl1_UseInDownloadToolStripMenuItem_Click;
-			this.UpdateUserControl1.UpdateAvailable += this.UpdateUserControl1_UpdateAvailable;
+			ViewViewUserControl.SetUpGameButton.Click += ViewSetUpGamesButton_Click;
+			ViewViewUserControl.UseInDecompileButton.Click += ViewUserControl_UseInDecompileButton_Click;
+			PackUserControl1.SetUpGamesButton.Click += PackSetUpGamesButton_Click;
+			PackUserControl1.UseAllInPublishButton.Click += PackUserControl1_UseAllInPublishButton_Click;
+			PublishUserControl1.UseInDownloadToolStripMenuItem.Click += PublishUserControl1_UseInDownloadToolStripMenuItem_Click;
+			UpdateUserControl1.UpdateAvailable += UpdateUserControl1_UpdateAvailable;
 
-			this.UpdateUserControl1.CheckForUpdate();
+			UpdateUserControl1.CheckForUpdate();
 		}
 
 		private void Free()
 		{
-			this.SetUpGamesUserControl1.GoBackButton.Click -= this.SetUpGamesGoBackButton_Click;
-			this.DownloadUserControl1.UseInUnpackButton.Click -= this.DownloadUserControl1_UseInUnpackButton_Click;
-			this.UnpackUserControl1.UseAllInDecompileButton.Click -= this.UnpackUserControl_UseAllInDecompileButton_Click;
-			this.UnpackUserControl1.UseInPreviewButton.Click -= this.UnpackUserControl_UseInPreviewButton_Click;
-			this.UnpackUserControl1.UseInDecompileButton.Click -= this.UnpackUserControl_UseInDecompileButton_Click;
-			this.PreviewViewUserControl.SetUpGameButton.Click -= this.PreviewSetUpGamesButton_Click;
-			this.PreviewViewUserControl.UseInDecompileButton.Click -= this.ViewUserControl_UseInDecompileButton_Click;
-			this.DecompilerUserControl1.UseAllInCompileButton.Click -= this.DecompilerUserControl1_UseAllInCompileButton_Click;
+			SetUpGamesUserControl1.GoBackButton.Click -= SetUpGamesGoBackButton_Click;
+			DownloadUserControl1.UseInUnpackButton.Click -= DownloadUserControl1_UseInUnpackButton_Click;
+			UnpackUserControl1.UseAllInDecompileButton.Click -= UnpackUserControl_UseAllInDecompileButton_Click;
+			UnpackUserControl1.UseInPreviewButton.Click -= UnpackUserControl_UseInPreviewButton_Click;
+			UnpackUserControl1.UseInDecompileButton.Click -= UnpackUserControl_UseInDecompileButton_Click;
+			PreviewViewUserControl.SetUpGameButton.Click -= PreviewSetUpGamesButton_Click;
+			PreviewViewUserControl.UseInDecompileButton.Click -= ViewUserControl_UseInDecompileButton_Click;
+			DecompilerUserControl1.UseAllInCompileButton.Click -= DecompilerUserControl1_UseAllInCompileButton_Click;
 			//RemoveHandler Me.DecompilerUserControl1.UseInEditButton.Click, AddressOf Me.DecompilerUserControl1_UseInEditButton_Click
-			this.DecompilerUserControl1.UseInCompileButton.Click -= this.DecompilerUserControl1_UseInCompileButton_Click;
-			this.CompilerUserControl1.EditGameSetupButton.Click -= this.CompileSetUpGamesButton_Click;
+			DecompilerUserControl1.UseInCompileButton.Click -= DecompilerUserControl1_UseInCompileButton_Click;
+			CompilerUserControl1.EditGameSetupButton.Click -= CompileSetUpGamesButton_Click;
 			//RemoveHandler Me.CompilerUserControl1.UseAllInPackButton.Click, AddressOf Me.CompilerUserControl1_UseAllInPackButton_Click
-			this.CompilerUserControl1.UseInViewButton.Click -= this.CompilerUserControl1_UseInViewButton_Click;
+			CompilerUserControl1.UseInViewButton.Click -= CompilerUserControl1_UseInViewButton_Click;
 			//RemoveHandler Me.CompilerUserControl1.UseInPackButton.Click, AddressOf Me.CompilerUserControl1_UseInPackButton_Click
-			this.ViewViewUserControl.SetUpGameButton.Click -= this.ViewSetUpGamesButton_Click;
-			this.ViewViewUserControl.UseInDecompileButton.Click -= this.ViewUserControl_UseInDecompileButton_Click;
-			this.PackUserControl1.SetUpGamesButton.Click -= this.PackSetUpGamesButton_Click;
-			this.PackUserControl1.UseAllInPublishButton.Click -= this.PackUserControl1_UseAllInPublishButton_Click;
-			this.PublishUserControl1.UseInDownloadToolStripMenuItem.Click -= this.PublishUserControl1_UseInDownloadToolStripMenuItem_Click;
-			this.UpdateUserControl1.UpdateAvailable -= this.UpdateUserControl1_UpdateAvailable;
+			ViewViewUserControl.SetUpGameButton.Click -= ViewSetUpGamesButton_Click;
+			ViewViewUserControl.UseInDecompileButton.Click -= ViewUserControl_UseInDecompileButton_Click;
+			PackUserControl1.SetUpGamesButton.Click -= PackSetUpGamesButton_Click;
+			PackUserControl1.UseAllInPublishButton.Click -= PackUserControl1_UseAllInPublishButton_Click;
+			PublishUserControl1.UseInDownloadToolStripMenuItem.Click -= PublishUserControl1_UseInDownloadToolStripMenuItem_Click;
+			UpdateUserControl1.UpdateAvailable -= UpdateUserControl1_UpdateAvailable;
 
-			if (this.WindowState == FormWindowState.Normal)
+			if (WindowState == FormWindowState.Normal)
 			{
-				MainCROWBAR.TheApp.Settings.WindowLocation = this.Location;
-				MainCROWBAR.TheApp.Settings.WindowSize = this.Size;
+				MainCROWBAR.TheApp.Settings.WindowLocation = Location;
+				MainCROWBAR.TheApp.Settings.WindowSize = Size;
 			}
 			else
 			{
-				MainCROWBAR.TheApp.Settings.WindowLocation = this.RestoreBounds.Location;
-				MainCROWBAR.TheApp.Settings.WindowSize = this.RestoreBounds.Size;
+				MainCROWBAR.TheApp.Settings.WindowLocation = RestoreBounds.Location;
+				MainCROWBAR.TheApp.Settings.WindowSize = RestoreBounds.Size;
 			}
-			MainCROWBAR.TheApp.Settings.WindowState = this.WindowState;
-			MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex = this.MainTabControl.SelectedIndex;
+			MainCROWBAR.TheApp.Settings.WindowState = WindowState;
+			MainCROWBAR.TheApp.Settings.MainWindowSelectedTabIndex = MainTabControl.SelectedIndex;
 		}
 
 #endregion
@@ -186,7 +186,7 @@ namespace Crowbar
 				string command = commandLineValues[1];
 				if (!string.IsNullOrEmpty(command) && !MainCROWBAR.TheApp.CommandLineValueIsAnAppSetting(command))
 				{
-					this.SetDroppedPathFileName(true, command);
+					SetDroppedPathFileName(true, command);
 
 					//'TEST: Every file selected and dropped onto EXE is a string in the array, starting at index 1. Index 0 is the EXE path file name.
 					//Dim text As New StringBuilder()
@@ -204,7 +204,7 @@ namespace Crowbar
 
 		private void MainForm_Load(object sender, System.EventArgs e)
 		{
-			this.Init();
+			Init();
 
 			//TEST [UNHANDLED EXCEPTION] Use these lines to raise an exception and show the unhandled exception window.
 			//Dim documentsPath As String
@@ -213,7 +213,7 @@ namespace Crowbar
 
 		private void MainForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
 		{
-			this.Free();
+			Free();
 		}
 
 		private void MainForm_DragEnter(System.Object sender, System.Windows.Forms.DragEventArgs e)
@@ -234,12 +234,12 @@ namespace Crowbar
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{
 				string[] pathFileNames = (string[])e.Data.GetData(DataFormats.FileDrop);
-				this.SetDroppedPathFileName(false, pathFileNames[0]);
+				SetDroppedPathFileName(false, pathFileNames[0]);
 			}
 			else if (e.Data.GetDataPresent(DataFormats.Text))
 			{
 				string urlText = (e.Data.GetData(DataFormats.Text) == null ? null : Convert.ToString(e.Data.GetData(DataFormats.Text)));
-				this.SetDroppedUrlText(false, urlText);
+				SetDroppedUrlText(false, urlText);
 				//ElseIf e.Data.GetDataPresent(DataFormats.Html) Then
 				//	'Version:0.9
 				//	'StartHTML:00000145
@@ -264,52 +264,52 @@ namespace Crowbar
 		{
 			int gameSetupIndex = MainCROWBAR.TheApp.Settings.SetUpGamesGameSetupSelectedIndex;
 
-			if (this.theTabThatCalledSetUpGames == this.PreviewTabPage)
+			if (theTabThatCalledSetUpGames == PreviewTabPage)
 			{
 				MainCROWBAR.TheApp.Settings.PreviewGameSetupSelectedIndex = gameSetupIndex;
 			}
-			else if (this.theTabThatCalledSetUpGames == this.CompileTabPage)
+			else if (theTabThatCalledSetUpGames == CompileTabPage)
 			{
 				MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex = gameSetupIndex;
 			}
-			else if (this.theTabThatCalledSetUpGames == this.ViewTabPage)
+			else if (theTabThatCalledSetUpGames == ViewTabPage)
 			{
 				MainCROWBAR.TheApp.Settings.ViewGameSetupSelectedIndex = gameSetupIndex;
 			}
 
-			this.SetUpGamesUserControl1.GoBackButton.Enabled = false;
-			this.MainTabControl.SelectTab(this.theTabThatCalledSetUpGames);
+			SetUpGamesUserControl1.GoBackButton.Enabled = false;
+			MainTabControl.SelectTab(theTabThatCalledSetUpGames);
 		}
 
 		private void DownloadUserControl1_UseInUnpackButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.UnpackTabPage);
+			MainTabControl.SelectTab(UnpackTabPage);
 		}
 
 		private void UnpackUserControl_UseAllInDecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.DecompileTabPage);
+			MainTabControl.SelectTab(DecompileTabPage);
 		}
 
 		private void UnpackUserControl_UseInPreviewButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.PreviewTabPage);
+			MainTabControl.SelectTab(PreviewTabPage);
 		}
 
 		private void UnpackUserControl_UseInDecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.DecompileTabPage);
+			MainTabControl.SelectTab(DecompileTabPage);
 		}
 
 		private void PreviewSetUpGamesButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.theTabThatCalledSetUpGames = this.PreviewTabPage;
-			this.SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.PreviewGameSetupSelectedIndex);
+			theTabThatCalledSetUpGames = PreviewTabPage;
+			SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.PreviewGameSetupSelectedIndex);
 		}
 
 		private void DecompilerUserControl1_UseAllInCompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.CompileTabPage);
+			MainTabControl.SelectTab(CompileTabPage);
 		}
 
 		//Private Sub DecompilerUserControl1_UseInEditButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -318,13 +318,13 @@ namespace Crowbar
 
 		private void DecompilerUserControl1_UseInCompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.CompileTabPage);
+			MainTabControl.SelectTab(CompileTabPage);
 		}
 
 		private void CompileSetUpGamesButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.theTabThatCalledSetUpGames = this.CompileTabPage;
-			this.SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex);
+			theTabThatCalledSetUpGames = CompileTabPage;
+			SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex);
 		}
 
 		//Private Sub CompilerUserControl1_UseAllInPackButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -333,7 +333,7 @@ namespace Crowbar
 
 		private void CompilerUserControl1_UseInViewButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.ViewTabPage);
+			MainTabControl.SelectTab(ViewTabPage);
 		}
 
 		//Private Sub CompilerUserControl1_UseInPackButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -342,40 +342,40 @@ namespace Crowbar
 
 		private void ViewSetUpGamesButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.theTabThatCalledSetUpGames = this.ViewTabPage;
-			this.SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.ViewGameSetupSelectedIndex);
+			theTabThatCalledSetUpGames = ViewTabPage;
+			SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.ViewGameSetupSelectedIndex);
 		}
 
 		private void ViewUserControl_UseInDecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.DecompileTabPage);
+			MainTabControl.SelectTab(DecompileTabPage);
 		}
 
 		private void PackSetUpGamesButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.theTabThatCalledSetUpGames = this.PackTabPage;
-			this.SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.PackGameSetupSelectedIndex);
+			theTabThatCalledSetUpGames = PackTabPage;
+			SelectSetUpGamesFromAnotherTab(MainCROWBAR.TheApp.Settings.PackGameSetupSelectedIndex);
 		}
 
 		private void PackUserControl1_UseAllInPublishButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.PublishTabPage);
+			MainTabControl.SelectTab(PublishTabPage);
 		}
 
 		private void PublishUserControl1_UseInDownloadToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.MainTabControl.SelectTab(this.DownloadTabPage);
+			MainTabControl.SelectTab(DownloadTabPage);
 		}
 
 		private void UpdateUserControl1_UpdateAvailable(System.Object sender, UpdateUserControl.UpdateAvailableEventArgs e)
 		{
 			if (e.UpdateIsAvailable)
 			{
-				this.UpdateTabPage.Text = "Update Available";
+				UpdateTabPage.Text = "Update Available";
 			}
 			else
 			{
-				this.UpdateTabPage.Text = "Update";
+				UpdateTabPage.Text = "Update";
 			}
 		}
 
@@ -402,8 +402,8 @@ namespace Crowbar
 						if (line.StartsWith("URL="))
 						{
 							string urlText = line.Replace("URL=", "");
-							this.MainTabControl.SelectTab(this.DownloadTabPage);
-							this.DownloadUserControl1.ItemIdTextBox.Text = urlText;
+							MainTabControl.SelectTab(DownloadTabPage);
+							DownloadUserControl1.ItemIdTextBox.Text = urlText;
 							break;
 						}
 					}
@@ -421,11 +421,11 @@ namespace Crowbar
 				}
 				else
 				{
-					if (this.MainTabControl.SelectedTab == this.UnpackTabPage)
+					if (MainTabControl.SelectedTab == UnpackTabPage)
 					{
 						vpkAction = AppEnums.ActionType.Unpack;
 					}
-					else if (this.MainTabControl.SelectedTab == this.PublishTabPage)
+					else if (MainTabControl.SelectedTab == PublishTabPage)
 					{
 						vpkAction = AppEnums.ActionType.Publish;
 					}
@@ -437,14 +437,14 @@ namespace Crowbar
 				if (vpkAction == AppEnums.ActionType.Unpack)
 				{
 					MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = pathFileName;
-					this.MainTabControl.SelectTab(this.UnpackTabPage);
-					this.UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
+					MainTabControl.SelectTab(UnpackTabPage);
+					UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
 				}
 				else if (vpkAction == AppEnums.ActionType.Publish)
 				{
-					this.MainTabControl.SelectTab(this.PublishTabPage);
-					this.PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
-					this.PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
+					MainTabControl.SelectTab(PublishTabPage);
+					PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
+					PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
 				}
 			}
 			else if (extension == ".gma")
@@ -459,11 +459,11 @@ namespace Crowbar
 				}
 				else
 				{
-					if (this.MainTabControl.SelectedTab == this.UnpackTabPage)
+					if (MainTabControl.SelectedTab == UnpackTabPage)
 					{
 						vpkAction = AppEnums.ActionType.Unpack;
 					}
-					else if (this.MainTabControl.SelectedTab == this.PublishTabPage)
+					else if (MainTabControl.SelectedTab == PublishTabPage)
 					{
 						vpkAction = AppEnums.ActionType.Publish;
 					}
@@ -475,14 +475,14 @@ namespace Crowbar
 				if (vpkAction == AppEnums.ActionType.Unpack)
 				{
 					MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = pathFileName;
-					this.MainTabControl.SelectTab(this.UnpackTabPage);
-					this.UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
+					MainTabControl.SelectTab(UnpackTabPage);
+					UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
 				}
 				else if (vpkAction == AppEnums.ActionType.Publish)
 				{
-					this.MainTabControl.SelectTab(this.PublishTabPage);
-					this.PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
-					this.PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
+					MainTabControl.SelectTab(PublishTabPage);
+					PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
+					PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
 				}
 			}
 			else if (extension == ".fpx")
@@ -502,13 +502,13 @@ namespace Crowbar
 				if (vpkAction == AppEnums.ActionType.Unpack)
 				{
 					MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = pathFileName;
-					this.MainTabControl.SelectTab(this.UnpackTabPage);
-					this.UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
+					MainTabControl.SelectTab(UnpackTabPage);
+					UnpackUserControl1.RunUnpackerToGetListOfPackageContents();
 				}
 			}
 			else if (extension == ".mdl")
 			{
-				this.SetMdlDrop(setViaAutoOpen, pathFileName);
+				SetMdlDrop(setViaAutoOpen, pathFileName);
 				//ElseIf extension = ".exe" Then
 				//	Me.SetCompilerExePathFileName(pathFileName)
 			}
@@ -529,25 +529,25 @@ namespace Crowbar
 				if (qcAction == AppEnums.ActionType.Compile)
 				{
 					MainCROWBAR.TheApp.Settings.CompileQcPathFileName = pathFileName;
-					this.MainTabControl.SelectTab(this.CompileTabPage);
+					MainTabControl.SelectTab(CompileTabPage);
 				}
 			}
 			else if (extension == ".bmp" || extension == ".gif" || extension == ".jpeg" || extension == ".jpg" || extension == ".png" || extension == ".wmf")
 			{
-				this.MainTabControl.SelectTab(this.PublishTabPage);
-				this.PublishUserControl1.ItemPreviewImagePathFileNameTextBox.Text = pathFileName;
-				this.PublishUserControl1.ItemPreviewImagePathFileNameTextBox.DataBindings["Text"].WriteValue();
+				MainTabControl.SelectTab(PublishTabPage);
+				PublishUserControl1.ItemPreviewImagePathFileNameTextBox.Text = pathFileName;
+				PublishUserControl1.ItemPreviewImagePathFileNameTextBox.DataBindings["Text"].WriteValue();
 			}
 			else
 			{
-				this.SetFolderDrop(setViaAutoOpen, pathFileName);
+				SetFolderDrop(setViaAutoOpen, pathFileName);
 			}
 		}
 
 		private void SetDroppedUrlText(bool setViaAutoOpen, string urlText)
 		{
-			this.MainTabControl.SelectTab(this.DownloadTabPage);
-			this.DownloadUserControl1.ItemIdTextBox.Text = urlText;
+			MainTabControl.SelectTab(DownloadTabPage);
+			DownloadUserControl1.ItemIdTextBox.Text = urlText;
 		}
 
 		private void SetMdlDrop(bool setViaAutoOpen, string pathFileName)
@@ -576,51 +576,51 @@ namespace Crowbar
 			}
 			else
 			{
-				if (this.MainTabControl.SelectedTab == this.PreviewTabPage)
+				if (MainTabControl.SelectedTab == PreviewTabPage)
 				{
 					mdlAction = AppEnums.ActionType.Preview;
 					MainCROWBAR.TheApp.Settings.PreviewMdlPathFileName = pathFileName;
 					if (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileForPreviewIsChecked)
 					{
-						this.SetMdlDropSetUp(pathFileName);
+						SetMdlDropSetUp(pathFileName);
 					}
 				}
-				else if (this.MainTabControl.SelectedTab == this.DecompileTabPage)
+				else if (MainTabControl.SelectedTab == DecompileTabPage)
 				{
 					mdlAction = AppEnums.ActionType.Decompile;
 					MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = pathFileName;
 					if (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileForDecompileIsChecked)
 					{
-						this.SetMdlDropSetUp(pathFileName);
+						SetMdlDropSetUp(pathFileName);
 					}
 				}
-				else if (this.MainTabControl.SelectedTab == this.ViewTabPage)
+				else if (MainTabControl.SelectedTab == ViewTabPage)
 				{
 					mdlAction = AppEnums.ActionType.View;
 					MainCROWBAR.TheApp.Settings.ViewMdlPathFileName = pathFileName;
 					if (MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileForViewIsChecked)
 					{
-						this.SetMdlDropSetUp(pathFileName);
+						SetMdlDropSetUp(pathFileName);
 					}
 				}
 				else
 				{
 					mdlAction = MainCROWBAR.TheApp.Settings.OptionsDragAndDropMdlFileOption;
-					this.SetMdlDropSetUp(pathFileName);
+					SetMdlDropSetUp(pathFileName);
 				}
 			}
 
 			if (mdlAction == AppEnums.ActionType.Preview)
 			{
-				this.MainTabControl.SelectTab(this.PreviewTabPage);
+				MainTabControl.SelectTab(PreviewTabPage);
 			}
 			else if (mdlAction == AppEnums.ActionType.Decompile)
 			{
-				this.MainTabControl.SelectTab(this.DecompileTabPage);
+				MainTabControl.SelectTab(DecompileTabPage);
 			}
 			else if (mdlAction == AppEnums.ActionType.View)
 			{
-				this.MainTabControl.SelectTab(this.ViewTabPage);
+				MainTabControl.SelectTab(ViewTabPage);
 			}
 		}
 
@@ -654,24 +654,24 @@ namespace Crowbar
 				else
 				{
 					folderAction = MainCROWBAR.TheApp.Settings.OptionsDragAndDropFolderOption;
-					selectedTab = this.MainTabControl.SelectedTab;
-					if (selectedTab == this.PublishTabPage)
+					selectedTab = MainTabControl.SelectedTab;
+					if (selectedTab == PublishTabPage)
 					{
 						folderAction = AppEnums.ActionType.Publish;
 					}
-					else if (selectedTab == this.UnpackTabPage)
+					else if (selectedTab == UnpackTabPage)
 					{
 						folderAction = AppEnums.ActionType.Unpack;
 					}
-					else if (selectedTab == this.DecompileTabPage)
+					else if (selectedTab == DecompileTabPage)
 					{
 						folderAction = AppEnums.ActionType.Decompile;
 					}
-					else if (selectedTab == this.CompileTabPage)
+					else if (selectedTab == CompileTabPage)
 					{
 						folderAction = AppEnums.ActionType.Compile;
 					}
-					else if (selectedTab == this.PackTabPage)
+					else if (selectedTab == PackTabPage)
 					{
 						folderAction = AppEnums.ActionType.Pack;
 					}
@@ -723,28 +723,28 @@ namespace Crowbar
 			if (folderAction == AppEnums.ActionType.Unpack)
 			{
 				MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName = pathFileName;
-				this.MainTabControl.SelectTab(this.UnpackTabPage);
+				MainTabControl.SelectTab(UnpackTabPage);
 			}
 			else if (folderAction == AppEnums.ActionType.Decompile)
 			{
 				MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = pathFileName;
-				this.MainTabControl.SelectTab(this.DecompileTabPage);
+				MainTabControl.SelectTab(DecompileTabPage);
 			}
 			else if (folderAction == AppEnums.ActionType.Compile)
 			{
 				MainCROWBAR.TheApp.Settings.CompileQcPathFileName = pathFileName;
-				this.MainTabControl.SelectTab(this.CompileTabPage);
+				MainTabControl.SelectTab(CompileTabPage);
 			}
 			else if (folderAction == AppEnums.ActionType.Pack)
 			{
 				MainCROWBAR.TheApp.Settings.PackInputPath = pathFileName;
-				this.MainTabControl.SelectTab(this.PackTabPage);
+				MainTabControl.SelectTab(PackTabPage);
 			}
 			else if (folderAction == AppEnums.ActionType.Publish)
 			{
-				this.PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
-				this.PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
-				this.MainTabControl.SelectTab(this.PublishTabPage);
+				PublishUserControl1.ItemContentPathFileNameTextBox.Text = pathFileName;
+				PublishUserControl1.ItemContentPathFileNameTextBox.DataBindings["Text"].WriteValue();
+				MainTabControl.SelectTab(PublishTabPage);
 			}
 		}
 
@@ -752,8 +752,8 @@ namespace Crowbar
 		{
 			MainCROWBAR.TheApp.Settings.SetUpGamesGameSetupSelectedIndex = gameSetupIndex;
 
-			this.SetUpGamesUserControl1.GoBackButton.Enabled = true;
-			this.MainTabControl.SelectTab(this.SetUpGamesTabPage);
+			SetUpGamesUserControl1.GoBackButton.Enabled = true;
+			MainTabControl.SelectTab(SetUpGamesTabPage);
 		}
 
 #endregion

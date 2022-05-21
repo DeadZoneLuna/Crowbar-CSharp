@@ -21,34 +21,34 @@ namespace Crowbar
 		{
 			//MyBase.New()
 
-			this.theGameName = "Left 4 Dead 2";
-			this.theGameEngine = AppEnums.GameEngine.Source;
-			this.theGamePathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\left4dead2\\gameinfo.txt";
-			this.theGameAppPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\left4dead2.exe";
-			this.theGameAppOptions = "";
-			this.theCompilerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\studiomdl.exe";
-			this.theViewerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\hlmv.exe";
-			this.theMappingToolPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\hammer.exe";
-			this.thePackerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\vpk.exe";
+			theGameName = "Left 4 Dead 2";
+			theGameEngine = AppEnums.GameEngine.Source;
+			theGamePathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\left4dead2\\gameinfo.txt";
+			theGameAppPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\left4dead2.exe";
+			theGameAppOptions = "";
+			theCompilerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\studiomdl.exe";
+			theViewerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\hlmv.exe";
+			theMappingToolPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\hammer.exe";
+			thePackerPathFileName = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\left 4 dead 2\\bin\\vpk.exe";
 		}
 
 		protected GameSetup(GameSetup originalObject)
 		{
-			this.theGameName = originalObject.GameName;
-			this.theGameEngine = originalObject.GameEngine;
+			theGameName = originalObject.GameName;
+			theGameEngine = originalObject.GameEngine;
 			//Me.theGamePathFileName = originalObject.GamePathFileName
 			//Me.theGameAppPathFileName = originalObject.GameAppPathFileName
-			this.theGamePathFileName = originalObject.GamePathFileNameUnprocessed;
-			this.theGameAppPathFileName = originalObject.GameAppPathFileNameUnprocessed;
-			this.theGameAppOptions = originalObject.GameAppOptions;
+			theGamePathFileName = originalObject.GamePathFileNameUnprocessed;
+			theGameAppPathFileName = originalObject.GameAppPathFileNameUnprocessed;
+			theGameAppOptions = originalObject.GameAppOptions;
 			//Me.theCompilerPathFileName = originalObject.CompilerPathFileName
 			//Me.theViewerPathFileName = originalObject.ViewerPathFileName
 			//Me.theMappingToolPathFileName = originalObject.MappingToolPathFileName
 			//Me.theUnpackerPathFileName = originalObject.UnpackerPathFileName
-			this.theCompilerPathFileName = originalObject.CompilerPathFileNameUnprocessed;
-			this.theViewerPathFileName = originalObject.ViewerPathFileNameUnprocessed;
-			this.theMappingToolPathFileName = originalObject.MappingToolPathFileNameUnprocessed;
-			this.thePackerPathFileName = originalObject.PackerPathFileNameUnprocessed;
+			theCompilerPathFileName = originalObject.CompilerPathFileNameUnprocessed;
+			theViewerPathFileName = originalObject.ViewerPathFileNameUnprocessed;
+			theMappingToolPathFileName = originalObject.MappingToolPathFileNameUnprocessed;
+			thePackerPathFileName = originalObject.PackerPathFileNameUnprocessed;
 		}
 
 		public object Clone()
@@ -64,13 +64,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGameName;
+				return theGameName;
 			}
 			set
 			{
-				if (this.theGameName != value)
+				if (theGameName != value)
 				{
-					this.theGameName = value;
+					theGameName = value;
 					NotifyPropertyChanged("GameName");
 				}
 			}
@@ -80,13 +80,13 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGameEngine;
+				return theGameEngine;
 			}
 			set
 			{
-				if (this.theGameEngine != value)
+				if (theGameEngine != value)
 				{
-					this.theGameEngine = value;
+					theGameEngine = value;
 					NotifyPropertyChanged("GameEngine");
 				}
 			}
@@ -97,7 +97,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theGamePathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theGamePathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theGamePathFileName = value
@@ -110,11 +110,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGamePathFileName;
+				return theGamePathFileName;
 			}
 			set
 			{
-				this.theGamePathFileName = value;
+				theGamePathFileName = value;
 				NotifyPropertyChanged("GamePathFileName");
 				NotifyPropertyChanged("GamePathFileNameUnprocessed");
 			}
@@ -125,7 +125,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theGameAppPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theGameAppPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theGameAppPathFileName = value
@@ -138,11 +138,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGameAppPathFileName;
+				return theGameAppPathFileName;
 			}
 			set
 			{
-				this.theGameAppPathFileName = value;
+				theGameAppPathFileName = value;
 				NotifyPropertyChanged("GameAppPathFileName");
 				NotifyPropertyChanged("GameAppPathFileNameUnprocessed");
 			}
@@ -152,11 +152,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theGameAppOptions;
+				return theGameAppOptions;
 			}
 			set
 			{
-				this.theGameAppOptions = value;
+				theGameAppOptions = value;
 				NotifyPropertyChanged("GameAppOptions");
 			}
 		}
@@ -166,7 +166,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theCompilerPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theCompilerPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theCompilerPathFileName = value
@@ -179,11 +179,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCompilerPathFileName;
+				return theCompilerPathFileName;
 			}
 			set
 			{
-				this.theCompilerPathFileName = value;
+				theCompilerPathFileName = value;
 				NotifyPropertyChanged("CompilerPathFileName");
 				NotifyPropertyChanged("CompilerPathFileNameUnprocessed");
 			}
@@ -194,7 +194,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theViewerPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theViewerPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theViewerPathFileName = value
@@ -207,11 +207,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theViewerPathFileName;
+				return theViewerPathFileName;
 			}
 			set
 			{
-				this.theViewerPathFileName = value;
+				theViewerPathFileName = value;
 				NotifyPropertyChanged("ViewerPathFileName");
 				NotifyPropertyChanged("ViewerPathFileNameUnprocessed");
 			}
@@ -222,7 +222,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.theMappingToolPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(theMappingToolPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theMappingToolPathFileName = value
@@ -235,11 +235,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theMappingToolPathFileName;
+				return theMappingToolPathFileName;
 			}
 			set
 			{
-				this.theMappingToolPathFileName = value;
+				theMappingToolPathFileName = value;
 				NotifyPropertyChanged("MappingToolPathFileName");
 				NotifyPropertyChanged("MappingToolPathFileNameUnprocessed");
 			}
@@ -250,7 +250,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return MainCROWBAR.TheApp.GetProcessedPathFileName(this.thePackerPathFileName);
+				return MainCROWBAR.TheApp.GetProcessedPathFileName(thePackerPathFileName);
 			}
 			//Set(ByVal value As String)
 			//	Me.theUnpackerPathFileName = value
@@ -263,11 +263,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.thePackerPathFileName;
+				return thePackerPathFileName;
 			}
 			set
 			{
-				this.thePackerPathFileName = value;
+				thePackerPathFileName = value;
 				NotifyPropertyChanged("PackerPathFileName");
 				NotifyPropertyChanged("PackerPathFileNameUnprocessed");
 			}

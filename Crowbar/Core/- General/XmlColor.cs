@@ -36,7 +36,7 @@ namespace Crowbar
 
 		public XmlColor(Color color)
 		{
-			this.theColor = color;
+			theColor = color;
 		}
 
 		[XmlText()]
@@ -44,11 +44,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return ColorTranslator.ToHtml(this.theColor);
+				return ColorTranslator.ToHtml(theColor);
 			}
 			set
 			{
-				this.theColor = ColorTranslator.FromHtml(value);
+				theColor = ColorTranslator.FromHtml(value);
 			}
 		}
 
@@ -57,11 +57,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theColor.ToArgb();
+				return theColor.ToArgb();
 			}
 			set
 			{
-				this.theColor = Color.FromArgb(value);
+				theColor = Color.FromArgb(value);
 			}
 		}
 

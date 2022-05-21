@@ -14,7 +14,7 @@ namespace Crowbar
 
 		public SourceMdlWeightList()
 		{
-			this.theWeights = new List<double>();
+			theWeights = new List<double>();
 		}
 
 		public string theName;

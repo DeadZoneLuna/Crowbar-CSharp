@@ -38,72 +38,72 @@ namespace Crowbar
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgreementRequiresAcceptanceForm));
-			this.TextBox1 = new Crowbar.TextBoxEx();
-			this.OpenSteamSubscriberAgreementButton = new System.Windows.Forms.Button();
-			this.CancelDeleteButton = new System.Windows.Forms.Button();
-			this.OpenWorkshopPageButton = new System.Windows.Forms.Button();
-			this.SuspendLayout();
+			TextBox1 = new Crowbar.TextBoxEx();
+			OpenSteamSubscriberAgreementButton = new System.Windows.Forms.Button();
+			CancelDeleteButton = new System.Windows.Forms.Button();
+			OpenWorkshopPageButton = new System.Windows.Forms.Button();
+			SuspendLayout();
 			//
 			//TextBox1
 			//
-			this.TextBox1.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
-			this.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.TextBox1.CueBannerText = "";
-			this.TextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-			this.TextBox1.Location = new System.Drawing.Point(12, 12);
-			this.TextBox1.Multiline = true;
-			this.TextBox1.Name = "TextBox1";
-			this.TextBox1.ReadOnly = true;
-			this.TextBox1.Size = new System.Drawing.Size(333, 110);
-			this.TextBox1.TabIndex = 0;
-			this.TextBox1.TabStop = false;
-			this.TextBox1.Text = resources.GetString("TextBox1.Text");
-			this.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			TextBox1.Anchor = (System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
+			TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			TextBox1.CueBannerText = "";
+			TextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+			TextBox1.Location = new System.Drawing.Point(12, 12);
+			TextBox1.Multiline = true;
+			TextBox1.Name = "TextBox1";
+			TextBox1.ReadOnly = true;
+			TextBox1.Size = new System.Drawing.Size(333, 110);
+			TextBox1.TabIndex = 0;
+			TextBox1.TabStop = false;
+			TextBox1.Text = resources.GetString("TextBox1.Text");
+			TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			//
 			//OpenSteamSubscriberAgreementButton
 			//
-			this.OpenSteamSubscriberAgreementButton.Location = new System.Drawing.Point(78, 128);
-			this.OpenSteamSubscriberAgreementButton.Name = "OpenSteamSubscriberAgreementButton";
-			this.OpenSteamSubscriberAgreementButton.Size = new System.Drawing.Size(200, 23);
-			this.OpenSteamSubscriberAgreementButton.TabIndex = 1;
-			this.OpenSteamSubscriberAgreementButton.Text = "Open Steam Subscriber Agreement";
-			this.OpenSteamSubscriberAgreementButton.UseVisualStyleBackColor = true;
+			OpenSteamSubscriberAgreementButton.Location = new System.Drawing.Point(78, 128);
+			OpenSteamSubscriberAgreementButton.Name = "OpenSteamSubscriberAgreementButton";
+			OpenSteamSubscriberAgreementButton.Size = new System.Drawing.Size(200, 23);
+			OpenSteamSubscriberAgreementButton.TabIndex = 1;
+			OpenSteamSubscriberAgreementButton.Text = "Open Steam Subscriber Agreement";
+			OpenSteamSubscriberAgreementButton.UseVisualStyleBackColor = true;
 			//
 			//CancelDeleteButton
 			//
-			this.CancelDeleteButton.Location = new System.Drawing.Point(141, 186);
-			this.CancelDeleteButton.Name = "CancelDeleteButton";
-			this.CancelDeleteButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelDeleteButton.TabIndex = 3;
-			this.CancelDeleteButton.Text = "Cancel";
-			this.CancelDeleteButton.UseVisualStyleBackColor = true;
+			CancelDeleteButton.Location = new System.Drawing.Point(141, 186);
+			CancelDeleteButton.Name = "CancelDeleteButton";
+			CancelDeleteButton.Size = new System.Drawing.Size(75, 23);
+			CancelDeleteButton.TabIndex = 3;
+			CancelDeleteButton.Text = "Cancel";
+			CancelDeleteButton.UseVisualStyleBackColor = true;
 			//
 			//OpenWorkshopPageButton
 			//
-			this.OpenWorkshopPageButton.Location = new System.Drawing.Point(116, 157);
-			this.OpenWorkshopPageButton.Name = "OpenWorkshopPageButton";
-			this.OpenWorkshopPageButton.Size = new System.Drawing.Size(125, 23);
-			this.OpenWorkshopPageButton.TabIndex = 2;
-			this.OpenWorkshopPageButton.Text = "Open Workshop Page";
-			this.OpenWorkshopPageButton.UseVisualStyleBackColor = true;
+			OpenWorkshopPageButton.Location = new System.Drawing.Point(116, 157);
+			OpenWorkshopPageButton.Name = "OpenWorkshopPageButton";
+			OpenWorkshopPageButton.Size = new System.Drawing.Size(125, 23);
+			OpenWorkshopPageButton.TabIndex = 2;
+			OpenWorkshopPageButton.Text = "Open Workshop Page";
+			OpenWorkshopPageButton.UseVisualStyleBackColor = true;
 			//
 			//AgreementRequiresAcceptanceForm
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(357, 221);
-			this.ControlBox = false;
-			this.Controls.Add(this.OpenWorkshopPageButton);
-			this.Controls.Add(this.CancelDeleteButton);
-			this.Controls.Add(this.OpenSteamSubscriberAgreementButton);
-			this.Controls.Add(this.TextBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Name = "AgreementRequiresAcceptanceForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Steam Subscriber Agreement Requires Acceptance";
-			this.TopMost = true;
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(357, 221);
+			ControlBox = false;
+			Controls.Add(OpenWorkshopPageButton);
+			Controls.Add(CancelDeleteButton);
+			Controls.Add(OpenSteamSubscriberAgreementButton);
+			Controls.Add(TextBox1);
+			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			Name = "AgreementRequiresAcceptanceForm";
+			StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			Text = "Steam Subscriber Agreement Requires Acceptance";
+			TopMost = true;
+			ResumeLayout(false);
+			PerformLayout();
 
 //INSTANT C# NOTE: Converted design-time event handler wireups:
 			OpenSteamSubscriberAgreementButton.Click += new System.EventHandler(OpenSteamSubscriberAgreementButton_Click);

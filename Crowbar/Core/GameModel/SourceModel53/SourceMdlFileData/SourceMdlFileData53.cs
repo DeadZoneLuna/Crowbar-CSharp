@@ -15,12 +15,12 @@ namespace Crowbar
 		{
 
 			//NOTE: Set an extremely large number so that the calculations later will work well.
-			this.theSectionFrameMinFrameCount = 2000000;
+			theSectionFrameMinFrameCount = 2000000;
 
 			//Me.theMdlFileOnlyHasAnimations = False
-			this.theFirstAnimationDesc = null;
-			this.theFirstAnimationDescFrameLines = new SortedList<int, AnimationFrameLine>();
-			this.theWeightLists = new List<SourceMdlWeightList>();
+			theFirstAnimationDesc = null;
+			theFirstAnimationDescFrameLines = new SortedList<int, AnimationFrameLine>();
+			theWeightLists = new List<SourceMdlWeightList>();
 		}
 
 		//FROM: SourceEngineAlienSwarm_source\public\studio.h

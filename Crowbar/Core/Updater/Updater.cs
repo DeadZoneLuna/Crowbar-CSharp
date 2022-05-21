@@ -39,15 +39,15 @@ namespace Crowbar
 
 		public void CheckForUpdate(ProgressChangedEventHandler given_ProgressChanged, RunWorkerCompletedEventHandler given_RunWorkerCompleted)
 		{
-			this.theDownloadTaskIsEnabled = false;
-			this.theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theCheckForUpdateBackgroundWorker, this.CheckForUpdate_DoWork, given_ProgressChanged, given_RunWorkerCompleted, null);
+			theDownloadTaskIsEnabled = false;
+			theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theCheckForUpdateBackgroundWorker, CheckForUpdate_DoWork, given_ProgressChanged, given_RunWorkerCompleted, null);
 		}
 
 		public void CancelCheckForUpdate()
 		{
-			if (this.theCheckForUpdateBackgroundWorker != null && this.theCheckForUpdateBackgroundWorker.IsBusy)
+			if (theCheckForUpdateBackgroundWorker != null && theCheckForUpdateBackgroundWorker.IsBusy)
 			{
-				this.theCheckForUpdateBackgroundWorker.CancelAsync();
+				theCheckForUpdateBackgroundWorker.CancelAsync();
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace Crowbar
 		{
 			BackgroundWorkerEx bw = (BackgroundWorkerEx)sender;
 
-			this.theAppVersion = null;
+			theAppVersion = null;
 			ulong fileSize = 0;
 			bool securityProtocolIsSupported = true;
 
@@ -67,7 +67,7 @@ namespace Crowbar
 			//      .NET 4.0 does not support TLS 1.2 and does not have an SecurityProtocolType Enum value for TLS1.2.
 			//      To use in .NET 4.0, use the number: CType(3072, SecurityProtocolType)
 			//      [Not sure] Need .NET 4.5 (or above) installed.
-			//NOTE: GitHub API requires this.
+			//NOTE: GitHub API requires 
 			try
 			{
 				ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
@@ -89,7 +89,7 @@ namespace Crowbar
 					//      Get the latest release: https://api.github.com/repos/ZeqMacaw/Crowbar/releases/latest
 					request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/ZeqMacaw/Crowbar/releases/latest");
 					request.Method = "GET";
-					//NOTE: GitHub API suggests using something like this.
+					//NOTE: GitHub API suggests using something like 
 					request.UserAgent = "ZeqMacaw_Crowbar";
 				}
 				catch (Exception ex)
@@ -123,7 +123,7 @@ namespace Crowbar
 							}
 							//NOTE: Must append ".0.0" to version so that Version comparisons are correct.
 							string appVersionText = appVersionTag + ".0.0";
-							this.theAppVersion = new Version(appVersionText);
+							theAppVersion = new Version(appVersionText);
 
 							//Dim appVersionIsNewer As Boolean = appVersion > My.Application.Info.Version
 							//Dim appVersionIsOlder As Boolean = appVersion < My.Application.Info.Version
@@ -133,11 +133,11 @@ namespace Crowbar
 						}
 						else
 						{
-							this.theAppVersion = null;
+							theAppVersion = null;
 						}
 
 						//NOTE: File name needs to be in this form: "Crowbar_" + whatever; usually date + "_" + app version (e.g. 0.68) + ".7z"
-						this.theRemoteFileLink = "";
+						theRemoteFileLink = "";
 						ArrayList assets = (ArrayList)root["assets"];
 						Dictionary<string, object> asset = null;
 						string assetName = null;
@@ -147,8 +147,8 @@ namespace Crowbar
 							assetName = (asset["name"] == null ? null : Convert.ToString(asset["name"]));
 							if (assetName.StartsWith("Crowbar_") && assetName.EndsWith("_" + appVersionTag + ".7z"))
 							{
-								this.theRemoteFileLink = (asset["browser_download_url"] == null ? null : Convert.ToString(asset["browser_download_url"]));
-								this.theLocalFileName = (asset["name"] == null ? null : Convert.ToString(asset["name"]));
+								theRemoteFileLink = (asset["browser_download_url"] == null ? null : Convert.ToString(asset["browser_download_url"]));
+								theLocalFileName = (asset["name"] == null ? null : Convert.ToString(asset["name"]));
 								fileSize = Convert.ToUInt64(asset["size"]);
 								break;
 							}
@@ -156,7 +156,7 @@ namespace Crowbar
 					}
 					catch (Exception ex)
 					{
-						this.theAppVersion = null;
+						theAppVersion = null;
 					}
 					finally
 					{
@@ -179,17 +179,17 @@ namespace Crowbar
 			{
 				updateCheckStatusMessage = "Unable to get update info because \"TLS 1.2\" protocol unavailable.";
 			}
-			else if (this.theAppVersion == null || string.IsNullOrEmpty(this.theRemoteFileLink))
+			else if (theAppVersion == null || string.IsNullOrEmpty(theRemoteFileLink))
 			{
 				updateCheckStatusMessage = "Unable to get update info. Please try again later.";
 			}
-			else if (this.theAppVersion == Version.Parse(Application.ProductVersion))
+			else if (theAppVersion == Version.Parse(Application.ProductVersion))
 			{
 				updateCheckStatusMessage = "Crowbar is up to date.";
 			}
-			else if (this.theAppVersion > Version.Parse(Application.ProductVersion))
+			else if (theAppVersion > Version.Parse(Application.ProductVersion))
 			{
-				updateCheckStatusMessage = "Update to version " + this.theAppVersion.ToString(2) + " available.   Size: " + MathModule.ByteUnitsConversion(fileSize);
+				updateCheckStatusMessage = "Update to version " + theAppVersion.ToString(2) + " available.   Size: " + MathModule.ByteUnitsConversion(fileSize);
 				outputInfo.UpdateIsAvailable = true;
 			}
 			else
@@ -201,8 +201,8 @@ namespace Crowbar
 			string lastCheckedMessage = "   Last checked: " + now.ToLongDateString() + " " + now.ToShortTimeString();
 
 			outputInfo.StatusMessage = updateCheckStatusMessage + lastCheckedMessage;
-			outputInfo.DownloadIsEnabled = this.theDownloadTaskIsEnabled;
-			outputInfo.UpdateIsEnabled = this.theUpdateTaskIsEnabled;
+			outputInfo.DownloadIsEnabled = theDownloadTaskIsEnabled;
+			outputInfo.UpdateIsEnabled = theUpdateTaskIsEnabled;
 			e.Result = outputInfo;
 		}
 
@@ -212,43 +212,43 @@ namespace Crowbar
 
 		public void Download(ProgressChangedEventHandler checkForUpdate_ProgressChanged, RunWorkerCompletedEventHandler checkForUpdate_RunWorkerCompleted, DownloadProgressChangedEventHandler download_DownloadProgressChanged, AsyncCompletedEventHandler download_DownloadFileCompleted, string localPath)
 		{
-			this.theDownloadProgressChangedHandler = download_DownloadProgressChanged;
-			this.theDownloadFileCompletedHandler = download_DownloadFileCompleted;
-			this.theLocalPath = localPath;
-			this.theDownloadTaskIsEnabled = true;
-			this.theUpdateTaskIsEnabled = false;
-			this.theCheckForUpdateRunWorkerCompletedHandler = checkForUpdate_RunWorkerCompleted;
-			this.theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theCheckForUpdateBackgroundWorker, this.CheckForUpdate_DoWork, checkForUpdate_ProgressChanged, this.CheckForUpdate_RunWorkerCompleted, null);
+			theDownloadProgressChangedHandler = download_DownloadProgressChanged;
+			theDownloadFileCompletedHandler = download_DownloadFileCompleted;
+			theLocalPath = localPath;
+			theDownloadTaskIsEnabled = true;
+			theUpdateTaskIsEnabled = false;
+			theCheckForUpdateRunWorkerCompletedHandler = checkForUpdate_RunWorkerCompleted;
+			theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theCheckForUpdateBackgroundWorker, CheckForUpdate_DoWork, checkForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, null);
 		}
 
 		public void CancelDownload()
 		{
-			this.CancelCheckForUpdate();
-			if (this.theWebClient != null && this.theWebClient.IsBusy)
+			CancelCheckForUpdate();
+			if (theWebClient != null && theWebClient.IsBusy)
 			{
-				this.theWebClient.CancelAsync();
+				theWebClient.CancelAsync();
 			}
 		}
 
 		private void DownloadAfterCheckForUpdate()
 		{
-			if (this.theUpdateTaskIsEnabled && this.theAppVersion <= Version.Parse(Application.ProductVersion))
+			if (theUpdateTaskIsEnabled && theAppVersion <= Version.Parse(Application.ProductVersion))
 			{
 				return;
 			}
 
-			this.theLocalPathFileName = Path.Combine(this.theLocalPath, this.theLocalFileName);
-			this.theLocalPathFileName = FileManager.GetTestedPathFileName(this.theLocalPathFileName);
+			theLocalPathFileName = Path.Combine(theLocalPath, theLocalFileName);
+			theLocalPathFileName = FileManager.GetTestedPathFileName(theLocalPathFileName);
 
-			if (FileManager.PathExistsAfterTryToCreate(this.theLocalPath))
+			if (FileManager.PathExistsAfterTryToCreate(theLocalPath))
 			{
-				Uri remoteFileUri = new Uri(this.theRemoteFileLink);
+				Uri remoteFileUri = new Uri(theRemoteFileLink);
 
-				this.theWebClient = new WebClient();
-				this.theWebClient.DownloadProgressChanged += this.theDownloadProgressChangedHandler;
+				theWebClient = new WebClient();
+				theWebClient.DownloadProgressChanged += theDownloadProgressChangedHandler;
 				//AddHandler Me.theWebClient.DownloadFileCompleted, Me.theDownloadFileCompletedHandler
-				this.theWebClient.DownloadFileCompleted += this.Download_DownloadFileCompleted;
-				this.theWebClient.DownloadFileAsync(remoteFileUri, this.theLocalPathFileName, this.theLocalPathFileName);
+				theWebClient.DownloadFileCompleted += Download_DownloadFileCompleted;
+				theWebClient.DownloadFileAsync(remoteFileUri, theLocalPathFileName, theLocalPathFileName);
 			}
 		}
 
@@ -258,24 +258,24 @@ namespace Crowbar
 
 		public void Update(ProgressChangedEventHandler checkForUpdate_ProgressChanged, RunWorkerCompletedEventHandler checkForUpdate_RunWorkerCompleted, DownloadProgressChangedEventHandler download_DownloadProgressChanged, AsyncCompletedEventHandler download_DownloadFileCompleted, string localPath, ProgressChangedEventHandler update_ProgressChanged, RunWorkerCompletedEventHandler update_RunWorkerCompleted)
 		{
-			this.theDownloadProgressChangedHandler = download_DownloadProgressChanged;
-			this.theDownloadFileCompletedHandler = download_DownloadFileCompleted;
-			this.theUpdateProgressChangedHandler = update_ProgressChanged;
-			this.theUpdateRunWorkerCompletedHandler = update_RunWorkerCompleted;
-			this.theLocalPath = localPath;
-			this.theDownloadTaskIsEnabled = true;
-			this.theUpdateTaskIsEnabled = true;
-			this.theCheckForUpdateRunWorkerCompletedHandler = checkForUpdate_RunWorkerCompleted;
-			this.theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theCheckForUpdateBackgroundWorker, this.CheckForUpdate_DoWork, checkForUpdate_ProgressChanged, this.CheckForUpdate_RunWorkerCompleted, null);
+			theDownloadProgressChangedHandler = download_DownloadProgressChanged;
+			theDownloadFileCompletedHandler = download_DownloadFileCompleted;
+			theUpdateProgressChangedHandler = update_ProgressChanged;
+			theUpdateRunWorkerCompletedHandler = update_RunWorkerCompleted;
+			theLocalPath = localPath;
+			theDownloadTaskIsEnabled = true;
+			theUpdateTaskIsEnabled = true;
+			theCheckForUpdateRunWorkerCompletedHandler = checkForUpdate_RunWorkerCompleted;
+			theCheckForUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theCheckForUpdateBackgroundWorker, CheckForUpdate_DoWork, checkForUpdate_ProgressChanged, CheckForUpdate_RunWorkerCompleted, null);
 		}
 
 		public void CancelUpdate()
 		{
-			this.CancelCheckForUpdate();
-			this.CancelDownload();
-			if (this.theUpdateBackgroundWorker != null && this.theUpdateBackgroundWorker.IsBusy)
+			CancelCheckForUpdate();
+			CancelDownload();
+			if (theUpdateBackgroundWorker != null && theUpdateBackgroundWorker.IsBusy)
 			{
-				this.theUpdateBackgroundWorker.CancelAsync();
+				theUpdateBackgroundWorker.CancelAsync();
 			}
 		}
 
@@ -283,7 +283,7 @@ namespace Crowbar
 
 		private void UpdateAfterDownload()
 		{
-			this.theUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(this.theUpdateBackgroundWorker, this.Update_DoWork, this.theUpdateProgressChangedHandler, this.theUpdateRunWorkerCompletedHandler, null);
+			theUpdateBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(theUpdateBackgroundWorker, Update_DoWork, theUpdateProgressChangedHandler, theUpdateRunWorkerCompletedHandler, null);
 		}
 
 		//NOTE: This is run in a background thread.
@@ -292,10 +292,10 @@ namespace Crowbar
 			MainCROWBAR.TheApp.WriteUpdaterFiles();
 
 			string currentFolder = Directory.GetCurrentDirectory();
-			Directory.SetCurrentDirectory(this.theLocalPath);
+			Directory.SetCurrentDirectory(theLocalPath);
 
-			this.Decompress();
-			this.OpenNewVersion();
+			Decompress();
+			OpenNewVersion();
 
 			Directory.SetCurrentDirectory(currentFolder);
 
@@ -314,7 +314,7 @@ namespace Crowbar
 				//      the length of the arguments added to the length of the full path to the process must be less than 2080. 
 				//      On Windows 7 and later versions, the length must be less than 32699. 
 				sevenZrExeProcess.StartInfo.FileName = MainCROWBAR.TheApp.SevenZrExePathFileName;
-				sevenZrExeProcess.StartInfo.Arguments = "x \"" + this.theLocalFileName + "\"";
+				sevenZrExeProcess.StartInfo.Arguments = "x \"" + theLocalFileName + "\"";
 #if DEBUG
 				sevenZrExeProcess.StartInfo.CreateNoWindow = false;
 #else
@@ -325,7 +325,7 @@ namespace Crowbar
 			}
 			catch (Exception ex)
 			{
-				throw new System.Exception("Crowbar tried to decompress the file \"" + this.theLocalPathFileName + "\" but Windows gave this message: " + ex.Message);
+				throw new System.Exception("Crowbar tried to decompress the file \"" + theLocalPathFileName + "\" but Windows gave this message: " + ex.Message);
 			}
 			finally
 			{
@@ -334,9 +334,9 @@ namespace Crowbar
 
 			try
 			{
-				if (File.Exists(this.theLocalPathFileName))
+				if (File.Exists(theLocalPathFileName))
 				{
-					File.Delete(this.theLocalPathFileName);
+					File.Delete(theLocalPathFileName);
 				}
 			}
 			catch (Exception ex)
@@ -348,7 +348,7 @@ namespace Crowbar
 		//NOTE: This is run in a background thread.
 		private void OpenNewVersion()
 		{
-			string newCrowbarPathFileName = Path.Combine(this.theLocalPath, "Crowbar.exe");
+			string newCrowbarPathFileName = Path.Combine(theLocalPath, "Crowbar.exe");
 			if (File.Exists(newCrowbarPathFileName))
 			{
 				// Run CrowbarLauncher.exe and exit Crowbar.
@@ -413,12 +413,12 @@ namespace Crowbar
 			}
 			else
 			{
-				if (this.theDownloadTaskIsEnabled)
+				if (theDownloadTaskIsEnabled)
 				{
-					this.DownloadAfterCheckForUpdate();
+					DownloadAfterCheckForUpdate();
 				}
 			}
-			this.theCheckForUpdateRunWorkerCompletedHandler(sender, e);
+			theCheckForUpdateRunWorkerCompletedHandler(sender, e);
 		}
 
 		private void Download_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -428,16 +428,16 @@ namespace Crowbar
 			}
 			else
 			{
-				if (this.theUpdateTaskIsEnabled)
+				if (theUpdateTaskIsEnabled)
 				{
-					this.UpdateAfterDownload();
+					UpdateAfterDownload();
 				}
 			}
 
 			WebClient client = (WebClient)sender;
-			client.DownloadFileCompleted -= this.Download_DownloadFileCompleted;
+			client.DownloadFileCompleted -= Download_DownloadFileCompleted;
 			client = null;
-			this.theDownloadFileCompletedHandler(sender, e);
+			theDownloadFileCompletedHandler(sender, e);
 		}
 
 #endregion

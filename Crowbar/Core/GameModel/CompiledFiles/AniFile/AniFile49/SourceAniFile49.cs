@@ -16,14 +16,14 @@ namespace Crowbar
 
 		public SourceAniFile49(BinaryReader aniFileReader, SourceFileData aniFileData, SourceFileData mdlFileData)
 		{
-			this.theInputFileReader = aniFileReader;
-			this.theMdlFileData = (SourceMdlFileData49)aniFileData;
-			this.theRealMdlFileData = (SourceMdlFileData49)mdlFileData;
+			theInputFileReader = aniFileReader;
+			theMdlFileData = (SourceMdlFileData49)aniFileData;
+			theRealMdlFileData = (SourceMdlFileData49)mdlFileData;
 
-			this.theMdlFileData.theFileSeekLog.FileSize = this.theInputFileReader.BaseStream.Length;
+			theMdlFileData.theFileSeekLog.FileSize = theInputFileReader.BaseStream.Length;
 
 			//NOTE: Need the bone data from the real MDL file because SourceAniFile inherits SourceMdlFile.ReadMdlAnimation() that uses the data.
-			this.theMdlFileData.theBones = this.theRealMdlFileData.theBones;
+			theMdlFileData.theBones = theRealMdlFileData.theBones;
 		}
 
 #endregion
@@ -34,7 +34,7 @@ namespace Crowbar
 		//Public Sub ReadAniBlocks(ByVal delegateReadAniAnimation As ReadAniAnimationDelegate)
 		public void ReadAnimationAniBlocks()
 		{
-			if (this.theRealMdlFileData.theAnimationDescs != null)
+			if (theRealMdlFileData.theAnimationDescs != null)
 			{
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				int sectionIndex = 0;
@@ -42,11 +42,11 @@ namespace Crowbar
 				int sectionFrameCount = 0;
 //INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				SourceMdlAnimationSection section = null;
-				foreach (SourceMdlAnimationDesc49 anAnimationDesc in this.theRealMdlFileData.theAnimationDescs)
+				foreach (SourceMdlAnimationDesc49 anAnimationDesc in theRealMdlFileData.theAnimationDescs)
 				{
 					try
 					{
-						long animBlockInputFileStreamPosition = this.theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
+						long animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
 						//Dim animBlockInputFileStreamEndPosition As Long = Me.theRealMdlFileData.theAnimBlocks(anAnimationDesc.animBlock).dataEnd
 	//					Dim sectionIndex As Integer
 
@@ -73,23 +73,23 @@ namespace Crowbar
 										sectionFrameCount = anAnimationDesc.frameCount - ((sectionCount - 2) * anAnimationDesc.sectionFrameCount);
 									}
 
-									animBlockInputFileStreamPosition = this.theRealMdlFileData.theAnimBlocks[section.animBlock].dataStart;
+									animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[section.animBlock].dataStart;
 									//animBlockInputFileStreamEndPosition = Me.theRealMdlFileData.theAnimBlocks(section.animBlock).dataEnd
-									this.ReadAnimationFrames(animBlockInputFileStreamPosition + section.animOffset, anAnimationDesc, sectionFrameCount, sectionIndex, (sectionIndex >= sectionCount - 2) || (anAnimationDesc.frameCount == (sectionIndex + 1) * anAnimationDesc.sectionFrameCount));
+									ReadAnimationFrames(animBlockInputFileStreamPosition + section.animOffset, anAnimationDesc, sectionFrameCount, sectionIndex, (sectionIndex >= sectionCount - 2) || (anAnimationDesc.frameCount == (sectionIndex + 1) * anAnimationDesc.sectionFrameCount));
 								}
 							}
 						}
 						else if (anAnimationDesc.animBlock > 0)
 						{
 							sectionIndex = 0;
-							this.ReadAnimationFrames(animBlockInputFileStreamPosition + anAnimationDesc.animOffset, anAnimationDesc, anAnimationDesc.frameCount, sectionIndex, true);
+							ReadAnimationFrames(animBlockInputFileStreamPosition + anAnimationDesc.animOffset, anAnimationDesc, anAnimationDesc.frameCount, sectionIndex, true);
 						}
 
 						//NOTE: These seem to always be stored in the MDL file for MDL44.
-						if (this.theMdlFileData.version != 44 && anAnimationDesc.animBlock > 0)
+						if (theMdlFileData.version != 44 && anAnimationDesc.animBlock > 0)
 						{
-							this.ReadMdlIkRules(animBlockInputFileStreamPosition + anAnimationDesc.animblockIkRuleOffset, anAnimationDesc);
-							this.ReadLocalHierarchies(animBlockInputFileStreamPosition, anAnimationDesc);
+							ReadMdlIkRules(animBlockInputFileStreamPosition + anAnimationDesc.animblockIkRuleOffset, anAnimationDesc);
+							ReadLocalHierarchies(animBlockInputFileStreamPosition, anAnimationDesc);
 						}
 					}
 					catch (Exception ex)

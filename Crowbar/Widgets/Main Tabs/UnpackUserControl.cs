@@ -36,17 +36,17 @@ namespace Crowbar
 			}
 			InitializeComponent();
 
-			this.CustomMenu = new ContextMenuStrip();
-			this.CustomMenu.Items.Add(this.DeleteSearchToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.DeleteAllSearchesToolStripMenuItem);
-			this.PackageTreeView.ContextMenuStrip = this.CustomMenu;
+			CustomMenu = new ContextMenuStrip();
+			CustomMenu.Items.Add(DeleteSearchToolStripMenuItem);
+			CustomMenu.Items.Add(DeleteAllSearchesToolStripMenuItem);
+			PackageTreeView.ContextMenuStrip = CustomMenu;
 
-			this.theSearchCount = 0;
+			theSearchCount = 0;
 
 			//NOTE: Try-Catch is needed so that widget will be shown in MainForm Designer without raising exception.
 			try
 			{
-				this.Init();
+				Init();
 			}
 			catch (Exception ex)
 			{
@@ -60,37 +60,37 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.thePackageFileNames = new BindingListEx<PackagePathFileNameInfo>();
+			thePackageFileNames = new BindingListEx<PackagePathFileNameInfo>();
 
-			this.PackagePathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackPackagePathFolderOrFileName", false, DataSourceUpdateMode.OnValidation);
+			PackagePathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackPackagePathFolderOrFileName", false, DataSourceUpdateMode.OnValidation);
 
-			this.OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputFullPath", false, DataSourceUpdateMode.OnValidation);
-			this.OutputSamePathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputSamePath", false, DataSourceUpdateMode.OnValidation);
-			this.OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
-			this.UpdateOutputPathComboBox();
-			this.UpdateOutputPathWidgets();
+			OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputFullPath", false, DataSourceUpdateMode.OnValidation);
+			OutputSamePathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputSamePath", false, DataSourceUpdateMode.OnValidation);
+			OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "UnpackOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
+			UpdateOutputPathComboBox();
+			UpdateOutputPathWidgets();
 
 			//NOTE: Adding folder icon here means it is first in the image list, which is the icon used by default 
 			Bitmap anIcon = Win32Api.GetShellIcon("folder", Win32Api.FILE_ATTRIBUTE_DIRECTORY);
-			this.ImageList1.Images.Add("<Folder>", anIcon);
+			ImageList1.Images.Add("<Folder>", anIcon);
 			//NOTE: The TreeView.Sorted property does not show in Intellisense or Properties window.
-			this.PackageTreeView.Sorted = true;
-			this.PackageTreeView.TreeViewNodeSorter = new NodeSorter();
+			PackageTreeView.Sorted = true;
+			PackageTreeView.TreeViewNodeSorter = new NodeSorter();
 			//Me.PackageTreeView.Nodes.Add("<root>", "<root>")
 
-			this.PackageListView.Columns.Add("Name", 100);
-			this.PackageListView.Columns.Add("Size (bytes)", 100);
-			this.PackageListView.Columns.Add("Count", 50);
-			this.PackageListView.Columns.Add("Type", 100);
-			this.PackageListView.Columns.Add("Extension", 100);
-			this.PackageListView.Columns.Add("Archive", 100);
-			this.theSortColumnIndex = 0;
-			this.PackageListView.ListViewItemSorter = new FolderAndFileListViewItemComparer(this.theSortColumnIndex, this.PackageListView.Sorting);
+			PackageListView.Columns.Add("Name", 100);
+			PackageListView.Columns.Add("Size (bytes)", 100);
+			PackageListView.Columns.Add("Count", 50);
+			PackageListView.Columns.Add("Type", 100);
+			PackageListView.Columns.Add("Extension", 100);
+			PackageListView.Columns.Add("Archive", 100);
+			theSortColumnIndex = 0;
+			PackageListView.ListViewItemSorter = new FolderAndFileListViewItemComparer(theSortColumnIndex, PackageListView.Sorting);
 
-			this.SearchToolStripComboBox.ComboBox.DisplayMember = "Value";
-			this.SearchToolStripComboBox.ComboBox.ValueMember = "Key";
-			this.SearchToolStripComboBox.ComboBox.DataSource = EnumHelper.ToList(typeof(AppEnums.UnpackSearchFieldOptions));
-			this.SearchToolStripComboBox.ComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackSearchField", false, DataSourceUpdateMode.OnPropertyChanged);
+			SearchToolStripComboBox.ComboBox.DisplayMember = "Value";
+			SearchToolStripComboBox.ComboBox.ValueMember = "Key";
+			SearchToolStripComboBox.ComboBox.DataSource = EnumHelper.ToList(typeof(AppEnums.UnpackSearchFieldOptions));
+			SearchToolStripComboBox.ComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackSearchField", false, DataSourceUpdateMode.OnPropertyChanged);
 
 			//'NOTE: The DataSource, DisplayMember, and ValueMember need to be set before DataBindings, or else an exception is raised.
 			//Me.GameSetupComboBox.DisplayMember = "GameName"
@@ -98,57 +98,57 @@ namespace Crowbar
 			//Me.GameSetupComboBox.DataSource = TheApp.Settings.GameSetups
 			//Me.GameSetupComboBox.DataBindings.Add("SelectedIndex", TheApp.Settings, "UnpackGameSetupSelectedIndex", False, DataSourceUpdateMode.OnPropertyChanged)
 
-			this.InitUnpackerOptions();
+			InitUnpackerOptions();
 
-			this.theOutputPathOrOutputFileName = "";
-			this.theUnpackedRelativePathFileNames = new BindingListEx<string>();
-			this.UnpackedFilesComboBox.DataSource = this.theUnpackedRelativePathFileNames;
+			theOutputPathOrOutputFileName = "";
+			theUnpackedRelativePathFileNames = new BindingListEx<string>();
+			UnpackedFilesComboBox.DataSource = theUnpackedRelativePathFileNames;
 
-			this.UpdateUnpackMode();
-			this.UpdateWidgets(false);
+			UpdateUnpackMode();
+			UpdateWidgets(false);
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
 
-			this.PackagePathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			PackagePathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 		}
 
 		private void InitUnpackerOptions()
 		{
-			this.FolderForEachPackageCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackFolderForEachPackageIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.KeepFullPathCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackKeepFullPathIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.LogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			FolderForEachPackageCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackFolderForEachPackageIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			KeepFullPathCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackKeepFullPathIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			LogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "UnpackLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void Free()
 		{
-			this.PackagePathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			PackagePathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= this.ListerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= this.ListerBackgroundWorker_RunWorkerCompleted;
-			this.theSearchBackgroundWorker.ProgressChanged -= this.SearchBackgroundWorker_ProgressChanged;
-			this.theSearchBackgroundWorker.RunWorkerCompleted -= this.SearchBackgroundWorker_RunWorkerCompleted;
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= this.UnpackerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= this.UnpackerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= ListerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= ListerBackgroundWorker_RunWorkerCompleted;
+			theSearchBackgroundWorker.ProgressChanged -= SearchBackgroundWorker_ProgressChanged;
+			theSearchBackgroundWorker.RunWorkerCompleted -= SearchBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= UnpackerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= UnpackerBackgroundWorker_RunWorkerCompleted;
 
-			this.UnpackComboBox.DataBindings.Clear();
-			this.PackagePathFileNameTextBox.DataBindings.Clear();
+			UnpackComboBox.DataBindings.Clear();
+			PackagePathFileNameTextBox.DataBindings.Clear();
 
-			this.OutputPathTextBox.DataBindings.Clear();
-			this.OutputSamePathTextBox.DataBindings.Clear();
-			this.OutputSubfolderTextBox.DataBindings.Clear();
+			OutputPathTextBox.DataBindings.Clear();
+			OutputSamePathTextBox.DataBindings.Clear();
+			OutputSubfolderTextBox.DataBindings.Clear();
 
-			this.FreeUnpackerOptions();
+			FreeUnpackerOptions();
 
-			this.UnpackedFilesComboBox.DataSource = null;
+			UnpackedFilesComboBox.DataSource = null;
 		}
 
 		private void FreeUnpackerOptions()
 		{
-			this.FolderForEachPackageCheckBox.DataBindings.Clear();
-			this.KeepFullPathCheckBox.DataBindings.Clear();
-			this.LogFileCheckBox.DataBindings.Clear();
+			FolderForEachPackageCheckBox.DataBindings.Clear();
+			KeepFullPathCheckBox.DataBindings.Clear();
+			LogFileCheckBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -177,25 +177,25 @@ namespace Crowbar
 				return;
 			}
 
-			this.PackageTreeView.Nodes.Clear();
-			this.PackageTreeView.Nodes.Add("<root>", "<refreshing>");
-			this.theUnpackedRelativePathFileNames.Clear();
-			this.UpdateWidgets(true);
+			PackageTreeView.Nodes.Clear();
+			PackageTreeView.Nodes.Add("<root>", "<refreshing>");
+			theUnpackedRelativePathFileNames.Clear();
+			UpdateWidgets(true);
 			//Me.PackageTreeView.Nodes(0).Text = "<refreshing>"
-			this.PackageTreeView.Nodes[0].Nodes.Clear();
-			this.PackageTreeView.Nodes[0].Tag = null;
-			this.PackageListView.Items.Clear();
-			this.RefreshListingToolStripButton.Image = Properties.Resources.CancelRefresh;
-			this.RefreshListingToolStripButton.Text = "Cancel";
-			this.SkipCurrentPackageButton.Enabled = false;
+			PackageTreeView.Nodes[0].Nodes.Clear();
+			PackageTreeView.Nodes[0].Tag = null;
+			PackageListView.Items.Clear();
+			RefreshListingToolStripButton.Image = Properties.Resources.CancelRefresh;
+			RefreshListingToolStripButton.Text = "Cancel";
+			SkipCurrentPackageButton.Enabled = false;
 			//Me.CancelUnpackButton.Text = "Cancel Listing"
-			this.CancelUnpackButton.Enabled = false;
-			this.UnpackerLogTextBox.Text = "";
-			this.thePackageCount = 0;
-			this.UpdateSelectionCounts();
+			CancelUnpackButton.Enabled = false;
+			UnpackerLogTextBox.Text = "";
+			thePackageCount = 0;
+			UpdateSelectionCounts();
 
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged += this.ListerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted += this.ListerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged += ListerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted += ListerBackgroundWorker_RunWorkerCompleted;
 
 			//TODO: Change to using a separate "Unpacker" object; maybe create a new class specifically for listing.
 			//      Want to use a separate object so the gui isn't disabled and enabled while running, 
@@ -214,10 +214,10 @@ namespace Crowbar
 		private void UnpackUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio often inexplicably extending the right side of these textboxes.
-			this.PackagePathFileNameTextBox.Size = new System.Drawing.Size(this.BrowseForPackagePathFolderOrFileNameButton.Left - this.BrowseForPackagePathFolderOrFileNameButton.Margin.Left - this.PackagePathFileNameTextBox.Margin.Right - this.PackagePathFileNameTextBox.Left, 21);
-			this.OutputPathTextBox.Size = new System.Drawing.Size(this.BrowseForOutputPathButton.Left - this.BrowseForOutputPathButton.Margin.Left - this.OutputPathTextBox.Margin.Right - this.OutputPathTextBox.Left, 21);
-			this.OutputSamePathTextBox.Size = new System.Drawing.Size(this.BrowseForOutputPathButton.Left - this.BrowseForOutputPathButton.Margin.Left - this.OutputSamePathTextBox.Margin.Right - this.OutputSamePathTextBox.Left, 21);
-			this.OutputSubfolderTextBox.Size = new System.Drawing.Size(this.BrowseForOutputPathButton.Left - this.BrowseForOutputPathButton.Margin.Left - this.OutputSubfolderTextBox.Margin.Right - this.OutputSubfolderTextBox.Left, 21);
+			PackagePathFileNameTextBox.Size = new System.Drawing.Size(BrowseForPackagePathFolderOrFileNameButton.Left - BrowseForPackagePathFolderOrFileNameButton.Margin.Left - PackagePathFileNameTextBox.Margin.Right - PackagePathFileNameTextBox.Left, 21);
+			OutputPathTextBox.Size = new System.Drawing.Size(BrowseForOutputPathButton.Left - BrowseForOutputPathButton.Margin.Left - OutputPathTextBox.Margin.Right - OutputPathTextBox.Left, 21);
+			OutputSamePathTextBox.Size = new System.Drawing.Size(BrowseForOutputPathButton.Left - BrowseForOutputPathButton.Margin.Left - OutputSamePathTextBox.Margin.Right - OutputSamePathTextBox.Left, 21);
+			OutputSubfolderTextBox.Size = new System.Drawing.Size(BrowseForOutputPathButton.Left - BrowseForOutputPathButton.Margin.Left - OutputSubfolderTextBox.Margin.Right - OutputSubfolderTextBox.Left, 21);
 		}
 
 #endregion
@@ -307,17 +307,17 @@ namespace Crowbar
 
 		private void OutputPathTextBox_Validated(object sender, EventArgs e)
 		{
-			this.UpdateOutputPathTextBox();
+			UpdateOutputPathTextBox();
 		}
 
 		private void BrowseForOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForOutputPath();
+			BrowseForOutputPath();
 		}
 
 		private void GotoOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.GotoFolder();
+			GotoFolder();
 		}
 
 		private void UseDefaultOutputSubfolderButton_Click(object sender, EventArgs e)
@@ -332,15 +332,15 @@ namespace Crowbar
 
 		private void PackageTreeView_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			this.UpdateSelectionPathText();
-			this.ShowFilesInSelectedFolder();
+			UpdateSelectionPathText();
+			ShowFilesInSelectedFolder();
 		}
 
 		private void PackageTreeView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
-			if (this.PackageTreeView.SelectedNode != null)
+			if (PackageTreeView.SelectedNode != null)
 			{
-				this.RunUnpackerToExtractFilesInternal(AppEnums.ArchiveAction.ExtractToTemp, null);
+				RunUnpackerToExtractFilesInternal(AppEnums.ArchiveAction.ExtractToTemp, null);
 			}
 		}
 
@@ -366,7 +366,7 @@ namespace Crowbar
 
 			//Me.UpdateSelectionPathText()
 			//Me.ShowFilesInSelectedFolder()
-			this.PackageListView.SelectedItems.Clear();
+			PackageListView.SelectedItems.Clear();
 		}
 
 		//'NOTE: Need this because listview item stays selected when selecting its parent folder.
@@ -381,57 +381,57 @@ namespace Crowbar
 		//NOTE: This is only needed because TreeView BackColor does not automatically change when Windows Theme is switched.
 		private void PackageTreeView_SystemColorsChanged(object sender, EventArgs e)
 		{
-			this.PackageTreeView.BackColor = SystemColors.Control;
+			PackageTreeView.BackColor = SystemColors.Control;
 		}
 
 		private void CustomMenu_Opening(System.Object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			this.DeleteSearchToolStripMenuItem.Enabled = this.PackageTreeView.SelectedNode != null && this.PackageTreeView.SelectedNode.Text.StartsWith("<Found>");
-			this.DeleteAllSearchesToolStripMenuItem.Enabled = this.theSearchCount > 0;
+			DeleteSearchToolStripMenuItem.Enabled = PackageTreeView.SelectedNode != null && PackageTreeView.SelectedNode.Text.StartsWith("<Found>");
+			DeleteAllSearchesToolStripMenuItem.Enabled = theSearchCount > 0;
 		}
 
 		private void DeleteSearchToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.DeleteSearch();
+			DeleteSearch();
 		}
 
 		private void CopyAllToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.DeleteAllSearches();
+			DeleteAllSearches();
 		}
 
 		private void PackageListView_ColumnClick(object sender, ColumnClickEventArgs e)
 		{
-			if (e.Column != this.theSortColumnIndex)
+			if (e.Column != theSortColumnIndex)
 			{
-				this.theSortColumnIndex = e.Column;
-				this.PackageListView.Sorting = SortOrder.Ascending;
+				theSortColumnIndex = e.Column;
+				PackageListView.Sorting = SortOrder.Ascending;
 			}
 			else
 			{
-				if (this.PackageListView.Sorting == SortOrder.Ascending)
+				if (PackageListView.Sorting == SortOrder.Ascending)
 				{
-					this.PackageListView.Sorting = SortOrder.Descending;
+					PackageListView.Sorting = SortOrder.Descending;
 				}
 				else
 				{
-					this.PackageListView.Sorting = SortOrder.Ascending;
+					PackageListView.Sorting = SortOrder.Ascending;
 				}
 			}
 
-			this.PackageListView.ListViewItemSorter = new FolderAndFileListViewItemComparer(e.Column, this.PackageListView.Sorting);
+			PackageListView.ListViewItemSorter = new FolderAndFileListViewItemComparer(e.Column, PackageListView.Sorting);
 		}
 
 		private void PackageListView_DoubleClick(object sender, EventArgs e)
 		{
-			this.OpenSelectedFolderOrFile();
+			OpenSelectedFolderOrFile();
 		}
 
 		private void PackageListView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
-			if (this.PackageListView.SelectedItems.Count > 0)
+			if (PackageListView.SelectedItems.Count > 0)
 			{
-				this.RunUnpackerToExtractFiles(AppEnums.ArchiveAction.ExtractToTemp, this.PackageListView.SelectedItems);
+				RunUnpackerToExtractFiles(AppEnums.ArchiveAction.ExtractToTemp, PackageListView.SelectedItems);
 			}
 		}
 
@@ -451,38 +451,38 @@ namespace Crowbar
 		{
 			if (e.KeyCode == Keys.A && e.Control)
 			{
-				this.PackageListView.BeginUpdate();
-				foreach (ListViewItem i in this.PackageListView.Items)
+				PackageListView.BeginUpdate();
+				foreach (ListViewItem i in PackageListView.Items)
 				{
 					i.Selected = true;
 				}
-				this.PackageListView.EndUpdate();
+				PackageListView.EndUpdate();
 			}
 		}
 
 		private void PackageListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			this.UpdateSelectionCounts();
+			UpdateSelectionCounts();
 		}
 
 		private void FindToolStripTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Return)
 			{
-				this.FindSubstringInFileNames();
+				FindSubstringInFileNames();
 			}
 		}
 
 		private void FindToolStripButton_Click(object sender, EventArgs e)
 		{
-			this.FindSubstringInFileNames();
+			FindSubstringInFileNames();
 		}
 
 		private void RefreshListingToolStripButton_Click(object sender, EventArgs e)
 		{
-			if (this.RefreshListingToolStripButton.Text == "Refresh")
+			if (RefreshListingToolStripButton.Text == "Refresh")
 			{
-				this.RunUnpackerToGetListOfPackageContents();
+				RunUnpackerToGetListOfPackageContents();
 			}
 			else
 			{
@@ -497,13 +497,13 @@ namespace Crowbar
 
 		private void UnpackButton_Click(System.Object sender, System.EventArgs e)
 		{
-			if (this.PackageListView.SelectedItems.Count > 0)
+			if (PackageListView.SelectedItems.Count > 0)
 			{
-				this.RunUnpackerToExtractFiles(AppEnums.ArchiveAction.Unpack, this.PackageListView.SelectedItems);
+				RunUnpackerToExtractFiles(AppEnums.ArchiveAction.Unpack, PackageListView.SelectedItems);
 			}
 			else
 			{
-				this.RunUnpackerToExtractFilesInternal(AppEnums.ArchiveAction.Unpack, null);
+				RunUnpackerToExtractFilesInternal(AppEnums.ArchiveAction.Unpack, null);
 			}
 		}
 
@@ -524,18 +524,18 @@ namespace Crowbar
 
 		private void UseInPreviewButton_Click(System.Object sender, System.EventArgs e)
 		{
-			MainCROWBAR.TheApp.Settings.PreviewMdlPathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(this.theUnpackedRelativePathFileNames[this.UnpackedFilesComboBox.SelectedIndex]);
+			MainCROWBAR.TheApp.Settings.PreviewMdlPathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(theUnpackedRelativePathFileNames[UnpackedFilesComboBox.SelectedIndex]);
 			//TheApp.Settings.PreviewGameSetupSelectedIndex = TheApp.Settings.UnpackGameSetupSelectedIndex
 		}
 
 		private void UseInDecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(this.theUnpackedRelativePathFileNames[this.UnpackedFilesComboBox.SelectedIndex]);
+			MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(theUnpackedRelativePathFileNames[UnpackedFilesComboBox.SelectedIndex]);
 		}
 
 		private void GotoUnpackedFileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			string pathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(this.theUnpackedRelativePathFileNames[this.UnpackedFilesComboBox.SelectedIndex]);
+			string pathFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathFileName(theUnpackedRelativePathFileNames[UnpackedFilesComboBox.SelectedIndex]);
 			FileManager.OpenWindowsExplorer(pathFileName);
 		}
 
@@ -547,25 +547,25 @@ namespace Crowbar
 		{
 			if (e.PropertyName == "UnpackPackagePathFolderOrFileName")
 			{
-				this.UpdateUnpackMode();
-				this.UpdateOutputPathWidgets();
-				this.RunUnpackerToGetListOfPackageContents();
+				UpdateUnpackMode();
+				UpdateOutputPathWidgets();
+				RunUnpackerToGetListOfPackageContents();
 			}
 			else if (e.PropertyName == "UnpackMode")
 			{
-				this.RunUnpackerToGetListOfPackageContents();
+				RunUnpackerToGetListOfPackageContents();
 			}
 			else if (e.PropertyName == "UnpackOutputFolderOption")
 			{
-				this.UpdateOutputPathWidgets();
+				UpdateOutputPathWidgets();
 			}
 			else if (e.PropertyName == "UnpackGameSetupSelectedIndex")
 			{
-				this.UpdateGameModelsOutputPathTextBox();
+				UpdateGameModelsOutputPathTextBox();
 			}
 			else if (e.PropertyName.StartsWith("Unpack") && e.PropertyName.EndsWith("IsChecked"))
 			{
-				this.UpdateWidgets(MainCROWBAR.TheApp.Settings.UnpackerIsRunning);
+				UpdateWidgets(MainCROWBAR.TheApp.Settings.UnpackerIsRunning);
 			}
 		}
 
@@ -590,21 +590,21 @@ namespace Crowbar
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.theEntryIndex = -1;
-				this.thePackageCount += 1;
-				this.UpdateContentsGroupBox();
+				theEntryIndex = -1;
+				thePackageCount += 1;
+				UpdateContentsGroupBox();
 			}
 			else if (e.ProgressPercentage == 2)
 			{
-				this.theArchivePathFileName = line;
+				theArchivePathFileName = line;
 			}
 			else if (e.ProgressPercentage == 3)
 			{
-				this.theArchivePathFileNameExists = (line == "True");
+				theArchivePathFileNameExists = (line == "True");
 			}
 			else if (e.ProgressPercentage == 4)
 			{
-				this.theEntryIndex += 1;
+				theEntryIndex += 1;
 
 				//Example output:
 				//addonimage.jpg crc=0x50ea4a15 metadatasz=0 fnumber=32767 ofs=0x0 sz=10749
@@ -631,11 +631,11 @@ namespace Crowbar
 				List<PackageResourceFileNameInfo> list = null;
 				if (foldersAndFileName.Length == 1)
 				{
-					treeNode = this.PackageTreeView.Nodes[0];
+					treeNode = PackageTreeView.Nodes[0];
 				}
 				else
 				{
-					parentTreeNode = this.PackageTreeView.Nodes[0];
+					parentTreeNode = PackageTreeView.Nodes[0];
 					string resourcePathFileName = "";
 					for (int nameIndex = 0; nameIndex <= foldersAndFileName.Length - 2; nameIndex++)
 					{
@@ -660,9 +660,9 @@ namespace Crowbar
 								{
 									info.Count += 1UL;
 									info.Size += fileSize;
-									if (this.theArchivePathFileNameExists)
+									if (theArchivePathFileNameExists)
 									{
-										info.ArchivePathFileNameExists = this.theArchivePathFileNameExists;
+										info.ArchivePathFileNameExists = theArchivePathFileNameExists;
 										TreeNode temp = new TreeNode();
 										treeNode.ForeColor = temp.ForeColor;
 									}
@@ -687,7 +687,7 @@ namespace Crowbar
 							//NOTE: Because same folder can be in multiple archives, don't bother showing which archive the folder is in. Crowbar only shows the first one added to the list.
 							resourceInfo.ArchivePathFileName = "";
 							// Using this field to determine when to dim the folder in the treeview and listview.
-							resourceInfo.ArchivePathFileNameExists = this.theArchivePathFileNameExists;
+							resourceInfo.ArchivePathFileNameExists = theArchivePathFileNameExists;
 							if (!resourceInfo.ArchivePathFileNameExists)
 							{
 								treeNode.ForeColor = SystemColors.GrayText;
@@ -748,9 +748,9 @@ namespace Crowbar
 					}
 					resourceInfo.Extension = fileExtension;
 					resourceInfo.IsFolder = false;
-					resourceInfo.ArchivePathFileName = this.theArchivePathFileName;
-					resourceInfo.ArchivePathFileNameExists = this.theArchivePathFileNameExists;
-					resourceInfo.EntryIndex = this.theEntryIndex;
+					resourceInfo.ArchivePathFileName = theArchivePathFileName;
+					resourceInfo.ArchivePathFileNameExists = theArchivePathFileNameExists;
+					resourceInfo.EntryIndex = theEntryIndex;
 
 					if (treeNode.Tag == null)
 					{
@@ -766,7 +766,7 @@ namespace Crowbar
 
 					//Me.SetNodeText(treeNode, list.Count)
 				}
-				this.PackageTreeView.Nodes[0].Expand();
+				PackageTreeView.Nodes[0].Expand();
 				//Catch ex As Exception
 				//	'TODO: Try to catch an out-of-memory exception. Probably not going to work, though.
 				//	Dim worker As Unpacker = CType(sender, Unpacker)
@@ -776,16 +776,16 @@ namespace Crowbar
 			}
 			else if (e.ProgressPercentage == 50)
 			{
-				this.UnpackerLogTextBox.Text = "";
-				this.UnpackerLogTextBox.AppendText(line + "\r");
+				UnpackerLogTextBox.Text = "";
+				UnpackerLogTextBox.AppendText(line + "\r");
 				//NOTE: Set the textbox to show first line of text.
-				this.UnpackerLogTextBox.Select(0, 0);
+				UnpackerLogTextBox.Select(0, 0);
 			}
 			else if (e.ProgressPercentage == 51)
 			{
-				this.UnpackerLogTextBox.AppendText(line + "\r");
+				UnpackerLogTextBox.AppendText(line + "\r");
 				//NOTE: Set the textbox to show first line of text.
-				this.UnpackerLogTextBox.Select(0, 0);
+				UnpackerLogTextBox.Select(0, 0);
 			}
 			else if (e.ProgressPercentage == 100)
 			{
@@ -794,67 +794,67 @@ namespace Crowbar
 
 		private void ListerBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= this.ListerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= this.ListerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= ListerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= ListerBackgroundWorker_RunWorkerCompleted;
 
 			if (!e.Cancelled)
 			{
 				UnpackerOutputInfo unpackResultInfo = (UnpackerOutputInfo)e.Result;
-				if (this.PackageTreeView.Nodes[0].Nodes.Count == 0 && this.PackageTreeView.Nodes[0].Tag == null)
+				if (PackageTreeView.Nodes[0].Nodes.Count == 0 && PackageTreeView.Nodes[0].Tag == null)
 				{
-					this.PackageTreeView.Nodes.Clear();
+					PackageTreeView.Nodes.Clear();
 				}
 				else
 				{
-					this.PackageTreeView.Nodes[0].Text = "<root>";
+					PackageTreeView.Nodes[0].Text = "<root>";
 				}
 			}
 			else
 			{
-				this.PackageTreeView.Nodes[0].Text = "<root-incomplete>";
+				PackageTreeView.Nodes[0].Text = "<root-incomplete>";
 			}
 
-			if (this.PackageTreeView.Nodes.Count > 0)
+			if (PackageTreeView.Nodes.Count > 0)
 			{
-				this.PackageTreeView.Nodes[0].Expand();
-				this.PackageTreeView.SelectedNode = this.PackageTreeView.Nodes[0];
-				this.ShowFilesInSelectedFolder();
+				PackageTreeView.Nodes[0].Expand();
+				PackageTreeView.SelectedNode = PackageTreeView.Nodes[0];
+				ShowFilesInSelectedFolder();
 			}
-			this.UpdateSelectionPathText();
-			this.RefreshListingToolStripButton.Image = Properties.Resources.Refresh;
-			this.RefreshListingToolStripButton.Text = "Refresh";
-			//IMPORTANT: Update the toolstrip so the Refresh button does not disappear. Not sure why it disappears without this.
-			this.ToolStrip1.PerformLayout();
-			this.UpdateWidgets(false);
+			UpdateSelectionPathText();
+			RefreshListingToolStripButton.Image = Properties.Resources.Refresh;
+			RefreshListingToolStripButton.Text = "Refresh";
+			//IMPORTANT: Update the toolstrip so the Refresh button does not disappear. Not sure why it disappears without 
+			ToolStrip1.PerformLayout();
+			UpdateWidgets(false);
 		}
 
 		private void SearchBackgroundWorker_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			if (e.ProgressPercentage == 1)
 			{
-				this.theResultsRootTreeNode.Text = "<Found> " + this.theTextToFind + " (" + this.theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
+				theResultsRootTreeNode.Text = "<Found> " + theTextToFind + " (" + theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
 			}
 		}
 
 		private void SearchBackgroundWorker_RunWorkerCompleted(System.Object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			string resultsText = "<Found> " + this.theTextToFind + " (" + this.theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
+			string resultsText = "<Found> " + theTextToFind + " (" + theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
 			if (e.Cancelled)
 			{
 				resultsText += " <incomplete>";
 			}
-			this.theResultsRootTreeNode.Text = resultsText;
+			theResultsRootTreeNode.Text = resultsText;
 
-			this.theSearchBackgroundWorker.DoWork -= this.CreateTreeNodesThatMatchTextToFind;
-			this.theSearchBackgroundWorker.ProgressChanged -= this.SearchBackgroundWorker_ProgressChanged;
-			this.theSearchBackgroundWorker.RunWorkerCompleted -= this.SearchBackgroundWorker_RunWorkerCompleted;
+			theSearchBackgroundWorker.DoWork -= CreateTreeNodesThatMatchTextToFind;
+			theSearchBackgroundWorker.ProgressChanged -= SearchBackgroundWorker_ProgressChanged;
+			theSearchBackgroundWorker.RunWorkerCompleted -= SearchBackgroundWorker_RunWorkerCompleted;
 
-			this.FindToolStripButton.Image = Properties.Resources.Find;
-			this.FindToolStripButton.Text = "Find";
-			this.theSelectedTreeNode.Nodes.Add(this.theResultsRootTreeNode);
-			this.PackageTreeView.SelectedNode = this.theResultsRootTreeNode;
+			FindToolStripButton.Image = Properties.Resources.Find;
+			FindToolStripButton.Text = "Find";
+			theSelectedTreeNode.Nodes.Add(theResultsRootTreeNode);
+			PackageTreeView.SelectedNode = theResultsRootTreeNode;
 
-			this.theSearchCount += 1;
+			theSearchCount += 1;
 		}
 
 		private void UnpackerBackgroundWorker_ProgressChanged(System.Object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -870,18 +870,18 @@ namespace Crowbar
 			{
 				//TODO: Having the updating of disabled widgets here is unusual, so why not move this to before calling the backgroundworker?
 				//      One advantage to doing before call: Indicates to user that action has started even when opening file takes a while.
-				this.UnpackerLogTextBox.Text = "";
-				this.UnpackerLogTextBox.AppendText(line + "\r");
-				this.theOutputPathOrOutputFileName = "";
-				this.UpdateWidgets(true);
+				UnpackerLogTextBox.Text = "";
+				UnpackerLogTextBox.AppendText(line + "\r");
+				theOutputPathOrOutputFileName = "";
+				UpdateWidgets(true);
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.UnpackerLogTextBox.AppendText(line + "\r");
+				UnpackerLogTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.UnpackerLogTextBox.AppendText(line + "\r");
+				UnpackerLogTextBox.AppendText(line + "\r");
 			}
 		}
 
@@ -891,14 +891,14 @@ namespace Crowbar
 			{
 				UnpackerOutputInfo unpackResultInfo = (UnpackerOutputInfo)e.Result;
 
-				this.UpdateUnpackedRelativePathFileNames(unpackResultInfo.theUnpackedRelativePathFileNames);
-				this.theOutputPathOrOutputFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathOrOutputFileName();
+				UpdateUnpackedRelativePathFileNames(unpackResultInfo.theUnpackedRelativePathFileNames);
+				theOutputPathOrOutputFileName = MainCROWBAR.TheApp.Unpacker.GetOutputPathOrOutputFileName();
 			}
 
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= this.UnpackerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= this.UnpackerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged -= UnpackerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= UnpackerBackgroundWorker_RunWorkerCompleted;
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 		}
 
 #endregion
@@ -909,16 +909,16 @@ namespace Crowbar
 		{
 			IList anEnumList = EnumHelper.ToList(typeof(AppEnums.UnpackOutputPathOptions));
 
-			this.OutputPathComboBox.DataBindings.Clear();
+			OutputPathComboBox.DataBindings.Clear();
 			try
 			{
 				//TODO: Delete this line when game addons folder option is implemented.
 				anEnumList.RemoveAt((System.Int32)AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
 
-				this.OutputPathComboBox.DisplayMember = "Value";
-				this.OutputPathComboBox.ValueMember = "Key";
-				this.OutputPathComboBox.DataSource = anEnumList;
-				this.OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
+				OutputPathComboBox.DisplayMember = "Value";
+				OutputPathComboBox.ValueMember = "Key";
+				OutputPathComboBox.DataSource = anEnumList;
+				OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				// Do not use this line because it will override the value automatically assigned by the data bindings above.
 				//Me.OutputPathComboBox.SelectedIndex = 0
@@ -931,15 +931,15 @@ namespace Crowbar
 
 		private void UpdateOutputPathWidgets()
 		{
-			this.GameModelsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
-			this.OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder);
-			this.OutputSamePathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder);
-			this.OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
-			this.BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
-			this.GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
-			this.UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
-			this.UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
-			this.UpdateOutputPathWidgets(MainCROWBAR.TheApp.Settings.UnpackerIsRunning);
+			GameModelsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
+			OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder);
+			OutputSamePathTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder);
+			OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
+			BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
+			GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder) || (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder);
+			UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
+			UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.Subfolder);
+			UpdateOutputPathWidgets(MainCROWBAR.TheApp.Settings.UnpackerIsRunning);
 
 			if (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.SameFolder)
 			{
@@ -948,14 +948,14 @@ namespace Crowbar
 			}
 			else if (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.GameAddonsFolder)
 			{
-				this.UpdateGameModelsOutputPathTextBox();
+				UpdateGameModelsOutputPathTextBox();
 			}
 		}
 
 		private void UpdateOutputPathWidgets(bool unpackerIsRunning)
 		{
-			this.BrowseForOutputPathButton.Enabled = (!unpackerIsRunning) && (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder);
-			this.GotoOutputPathButton.Enabled = (!unpackerIsRunning);
+			BrowseForOutputPathButton.Enabled = (!unpackerIsRunning) && (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder);
+			GotoOutputPathButton.Enabled = (!unpackerIsRunning);
 		}
 
 		private void UpdateGameModelsOutputPathTextBox()
@@ -970,7 +970,7 @@ namespace Crowbar
 				gamePath = FileManager.GetPath(gameSetup.GamePathFileName);
 				gameModelsPath = Path.Combine(gamePath, "models");
 
-				this.GameModelsOutputPathTextBox.Text = gameModelsPath;
+				GameModelsOutputPathTextBox.Text = gameModelsPath;
 			}
 		}
 
@@ -978,7 +978,7 @@ namespace Crowbar
 		{
 			if (MainCROWBAR.TheApp.Settings.UnpackOutputFolderOption == AppEnums.UnpackOutputPathOptions.WorkFolder)
 			{
-				if (string.IsNullOrEmpty(this.OutputPathTextBox.Text))
+				if (string.IsNullOrEmpty(OutputPathTextBox.Text))
 				{
 					try
 					{
@@ -1062,13 +1062,13 @@ namespace Crowbar
 
 		private void UpdateContentsGroupBox()
 		{
-			if (this.thePackageCount > 1)
+			if (thePackageCount > 1)
 			{
-				this.ContentsGroupBox.Text = "Contents of " + this.thePackageCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + " packages";
+				ContentsGroupBox.Text = "Contents of " + thePackageCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + " packages";
 			}
 			else
 			{
-				this.ContentsGroupBox.Text = "Contents of package";
+				ContentsGroupBox.Text = "Contents of package";
 			}
 		}
 
@@ -1076,47 +1076,47 @@ namespace Crowbar
 		{
 			MainCROWBAR.TheApp.Settings.UnpackerIsRunning = unpackerIsRunning;
 
-			this.UnpackComboBox.Enabled = !unpackerIsRunning;
-			this.PackagePathFileNameTextBox.Enabled = !unpackerIsRunning;
-			this.BrowseForPackagePathFolderOrFileNameButton.Enabled = !unpackerIsRunning;
+			UnpackComboBox.Enabled = !unpackerIsRunning;
+			PackagePathFileNameTextBox.Enabled = !unpackerIsRunning;
+			BrowseForPackagePathFolderOrFileNameButton.Enabled = !unpackerIsRunning;
 
-			this.OutputPathComboBox.Enabled = !unpackerIsRunning;
-			this.OutputPathTextBox.Enabled = !unpackerIsRunning;
-			this.OutputSamePathTextBox.Enabled = !unpackerIsRunning;
-			this.OutputSubfolderTextBox.Enabled = !unpackerIsRunning;
-			this.UseDefaultOutputSubfolderButton.Enabled = !unpackerIsRunning;
-			this.UpdateOutputPathWidgets(unpackerIsRunning);
+			OutputPathComboBox.Enabled = !unpackerIsRunning;
+			OutputPathTextBox.Enabled = !unpackerIsRunning;
+			OutputSamePathTextBox.Enabled = !unpackerIsRunning;
+			OutputSubfolderTextBox.Enabled = !unpackerIsRunning;
+			UseDefaultOutputSubfolderButton.Enabled = !unpackerIsRunning;
+			UpdateOutputPathWidgets(unpackerIsRunning);
 
 			//Me.SelectionGroupBox.Enabled = Not unpackerIsRunning
 
-			this.OptionsGroupBox.Enabled = !unpackerIsRunning;
+			OptionsGroupBox.Enabled = !unpackerIsRunning;
 
 			//Me.UnpackButton.Enabled = (Not unpackerIsRunning) AndAlso (Me.PackageTreeView.Nodes(0).Nodes.Count > 0)
 			List<PackageResourceFileNameInfo> folderResourceInfos = null;
-			if (this.PackageTreeView.Nodes.Count > 0)
+			if (PackageTreeView.Nodes.Count > 0)
 			{
-				folderResourceInfos = (List<PackageResourceFileNameInfo>)(this.PackageTreeView.Nodes[0].Tag);
+				folderResourceInfos = (List<PackageResourceFileNameInfo>)(PackageTreeView.Nodes[0].Tag);
 			}
-			this.UnpackButton.Enabled = (!unpackerIsRunning) && (folderResourceInfos != null) && (folderResourceInfos.Count > 0);
-			this.SkipCurrentPackageButton.Enabled = unpackerIsRunning;
-			this.CancelUnpackButton.Enabled = unpackerIsRunning;
-			this.UseAllInDecompileButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(this.theOutputPathOrOutputFileName) && this.theUnpackedRelativePathFileNames.Count > 0;
+			UnpackButton.Enabled = (!unpackerIsRunning) && (folderResourceInfos != null) && (folderResourceInfos.Count > 0);
+			SkipCurrentPackageButton.Enabled = unpackerIsRunning;
+			CancelUnpackButton.Enabled = unpackerIsRunning;
+			UseAllInDecompileButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(theOutputPathOrOutputFileName) && theUnpackedRelativePathFileNames.Count > 0;
 
-			this.UnpackedFilesComboBox.Enabled = !unpackerIsRunning && this.theUnpackedRelativePathFileNames.Count > 0;
-			this.UseInPreviewButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(this.theOutputPathOrOutputFileName) && this.theUnpackedRelativePathFileNames.Count > 0;
-			this.UseInDecompileButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(this.theOutputPathOrOutputFileName) && this.theUnpackedRelativePathFileNames.Count > 0;
-			this.GotoUnpackedFileButton.Enabled = !unpackerIsRunning && this.theUnpackedRelativePathFileNames.Count > 0;
+			UnpackedFilesComboBox.Enabled = !unpackerIsRunning && theUnpackedRelativePathFileNames.Count > 0;
+			UseInPreviewButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(theOutputPathOrOutputFileName) && theUnpackedRelativePathFileNames.Count > 0;
+			UseInDecompileButton.Enabled = !unpackerIsRunning && !string.IsNullOrEmpty(theOutputPathOrOutputFileName) && theUnpackedRelativePathFileNames.Count > 0;
+			GotoUnpackedFileButton.Enabled = !unpackerIsRunning && theUnpackedRelativePathFileNames.Count > 0;
 		}
 
 		private void UpdateUnpackedRelativePathFileNames(BindingListEx<string> iUnpackedRelativePathFileNames)
 		{
 			if (iUnpackedRelativePathFileNames != null)
 			{
-				this.theUnpackedRelativePathFileNames = iUnpackedRelativePathFileNames;
-				this.theUnpackedRelativePathFileNames.Sort();
+				theUnpackedRelativePathFileNames = iUnpackedRelativePathFileNames;
+				theUnpackedRelativePathFileNames.Sort();
 				//NOTE: Need to set to nothing first to force it to update.
-				this.UnpackedFilesComboBox.DataSource = null;
-				this.UnpackedFilesComboBox.DataSource = this.theUnpackedRelativePathFileNames;
+				UnpackedFilesComboBox.DataSource = null;
+				UnpackedFilesComboBox.DataSource = theUnpackedRelativePathFileNames;
 			}
 		}
 
@@ -1127,7 +1127,7 @@ namespace Crowbar
 
 			anEnumList = EnumHelper.ToList(typeof(AppEnums.InputOptions));
 			previousSelectedInputOption = MainCROWBAR.TheApp.Settings.UnpackMode;
-			this.UnpackComboBox.DataBindings.Clear();
+			UnpackComboBox.DataBindings.Clear();
 			try
 			{
 				if (File.Exists(MainCROWBAR.TheApp.Settings.UnpackPackagePathFolderOrFileName))
@@ -1159,10 +1159,10 @@ namespace Crowbar
 					//	Exit Try
 				}
 
-				this.UnpackComboBox.DisplayMember = "Value";
-				this.UnpackComboBox.ValueMember = "Key";
-				this.UnpackComboBox.DataSource = anEnumList;
-				this.UnpackComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackMode", false, DataSourceUpdateMode.OnPropertyChanged);
+				UnpackComboBox.DisplayMember = "Value";
+				UnpackComboBox.ValueMember = "Key";
+				UnpackComboBox.DataSource = anEnumList;
+				UnpackComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "UnpackMode", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				if (EnumHelper.Contains(previousSelectedInputOption, anEnumList))
 				{
@@ -1182,7 +1182,7 @@ namespace Crowbar
 		private void UpdateSelectionPathText()
 		{
 			string selectionPathText = "";
-			TreeNode aTreeNode = this.PackageTreeView.SelectedNode;
+			TreeNode aTreeNode = PackageTreeView.SelectedNode;
 			while (aTreeNode != null)
 			{
 				if (!aTreeNode.Text.StartsWith("<Found>"))
@@ -1191,7 +1191,7 @@ namespace Crowbar
 				}
 				aTreeNode = aTreeNode.Parent;
 			}
-			this.SelectionPathTextBox.Text = selectionPathText;
+			SelectionPathTextBox.Text = selectionPathText;
 		}
 
 		//Private Sub SetNodeText(ByVal treeNode As TreeNode, ByVal fileCount As Integer)
@@ -1212,9 +1212,9 @@ namespace Crowbar
 
 		private void ShowFilesInSelectedFolder()
 		{
-			this.PackageListView.Items.Clear();
+			PackageListView.Items.Clear();
 
-			TreeNode selectedTreeNode = this.PackageTreeView.SelectedNode;
+			TreeNode selectedTreeNode = PackageTreeView.SelectedNode;
 			if (selectedTreeNode != null && selectedTreeNode.Tag != null)
 			{
 				List<PackageResourceFileNameInfo> list = null;
@@ -1252,7 +1252,7 @@ namespace Crowbar
 					item.SubItems.Add(info.Extension);
 					item.SubItems.Add(info.ArchivePathFileName);
 
-					if (!this.ImageList1.Images.ContainsKey(info.Extension))
+					if (!ImageList1.Images.ContainsKey(info.Extension))
 					{
 						if (info.IsFolder)
 						{
@@ -1262,7 +1262,7 @@ namespace Crowbar
 						{
 							anIcon = Win32Api.GetShellIcon(info.Name);
 						}
-						this.ImageList1.Images.Add(info.Extension, anIcon);
+						ImageList1.Images.Add(info.Extension, anIcon);
 					}
 					item.ImageKey = info.Extension;
 
@@ -1272,57 +1272,57 @@ namespace Crowbar
 						//item.BackColor = SystemColors
 					}
 
-					this.PackageListView.Items.Add(item);
+					PackageListView.Items.Add(item);
 				}
 
-				this.PackageListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+				PackageListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 			}
 
-			this.UpdateSelectionCounts();
+			UpdateSelectionCounts();
 		}
 
 		//NOTE: Searches the folder (and its subfolders) selected in treeview.
 		private void FindSubstringInFileNames()
 		{
-			this.theTextToFind = this.FindToolStripTextBox.Text;
-			if (!string.IsNullOrWhiteSpace(this.theTextToFind))
+			theTextToFind = FindToolStripTextBox.Text;
+			if (!string.IsNullOrWhiteSpace(theTextToFind))
 			{
-				this.theSelectedTreeNode = this.PackageTreeView.SelectedNode;
-				if (this.theSelectedTreeNode == null)
+				theSelectedTreeNode = PackageTreeView.SelectedNode;
+				if (theSelectedTreeNode == null)
 				{
-					this.theSelectedTreeNode = this.PackageTreeView.Nodes[0];
+					theSelectedTreeNode = PackageTreeView.Nodes[0];
 				}
 
-				this.FindToolStripButton.Image = Properties.Resources.CancelSearch;
-				this.FindToolStripButton.Text = "Cancel";
+				FindToolStripButton.Image = Properties.Resources.CancelSearch;
+				FindToolStripButton.Text = "Cancel";
 
-				this.theResultsFileCount = 0;
-				this.theResultsFolderCount = 0;
-				this.theResultsCount = 0;
-				string resultsRootTreeNodeText = "<Found> " + this.theTextToFind + " (" + this.theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ") <searching>";
-				this.theResultsRootTreeNode = new TreeNode(resultsRootTreeNodeText);
+				theResultsFileCount = 0;
+				theResultsFolderCount = 0;
+				theResultsCount = 0;
+				string resultsRootTreeNodeText = "<Found> " + theTextToFind + " (" + theResultsCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ") <searching>";
+				theResultsRootTreeNode = new TreeNode(resultsRootTreeNodeText);
 
 				if (MainCROWBAR.TheApp.Settings.UnpackSearchField == AppEnums.UnpackSearchFieldOptions.FilesAndFolders)
 				{
 					string resultsFoldersTreeNodeText = "<Folders found> (0)";
-					this.theResultsFoldersTreeNode = new TreeNode(resultsFoldersTreeNodeText);
-					this.theResultsRootTreeNode.Nodes.Add(this.theResultsFoldersTreeNode);
+					theResultsFoldersTreeNode = new TreeNode(resultsFoldersTreeNodeText);
+					theResultsRootTreeNode.Nodes.Add(theResultsFoldersTreeNode);
 				}
 
-				this.theSearchBackgroundWorker = new BackgroundWorker();
-				this.theSearchBackgroundWorker.WorkerReportsProgress = true;
-				this.theSearchBackgroundWorker.WorkerSupportsCancellation = true;
-				this.theSearchBackgroundWorker.DoWork += this.CreateTreeNodesThatMatchTextToFind;
-				this.theSearchBackgroundWorker.ProgressChanged += this.SearchBackgroundWorker_ProgressChanged;
-				this.theSearchBackgroundWorker.RunWorkerCompleted += this.SearchBackgroundWorker_RunWorkerCompleted;
-				this.theSearchBackgroundWorker.RunWorkerAsync(this.theResultsCount);
+				theSearchBackgroundWorker = new BackgroundWorker();
+				theSearchBackgroundWorker.WorkerReportsProgress = true;
+				theSearchBackgroundWorker.WorkerSupportsCancellation = true;
+				theSearchBackgroundWorker.DoWork += CreateTreeNodesThatMatchTextToFind;
+				theSearchBackgroundWorker.ProgressChanged += SearchBackgroundWorker_ProgressChanged;
+				theSearchBackgroundWorker.RunWorkerCompleted += SearchBackgroundWorker_RunWorkerCompleted;
+				theSearchBackgroundWorker.RunWorkerAsync(theResultsCount);
 			}
 		}
 
 		//NOTE: This is run in a background thread.
 		private void CreateTreeNodesThatMatchTextToFind(object sender, DoWorkEventArgs e)
 		{
-			this.CreateTreeNodesThatMatchTextToFind(e, this.theSelectedTreeNode, this.theResultsRootTreeNode);
+			CreateTreeNodesThatMatchTextToFind(e, theSelectedTreeNode, theResultsRootTreeNode);
 		}
 
 		//NOTE: This is run in a background thread.
@@ -1331,7 +1331,7 @@ namespace Crowbar
 			List<PackageResourceFileNameInfo> list = null;
 			list = (List<PackageResourceFileNameInfo>)treeNodeToSearch.Tag;
 
-			if (this.theSearchBackgroundWorker.CancellationPending)
+			if (theSearchBackgroundWorker.CancellationPending)
 			{
 				e.Cancel = true;
 				return;
@@ -1341,7 +1341,7 @@ namespace Crowbar
 			{
 				string infoName = null;
 				List<PackageResourceFileNameInfo> currentResultsTreeNodeList = (List<PackageResourceFileNameInfo>)currentResultsTreeNode.Tag;
-				List<PackageResourceFileNameInfo> currentResultsFolderTreeNodeList = (List<PackageResourceFileNameInfo>)this.theResultsFoldersTreeNode.Tag;
+				List<PackageResourceFileNameInfo> currentResultsFolderTreeNodeList = (List<PackageResourceFileNameInfo>)theResultsFoldersTreeNode.Tag;
 
 				TreeNode nodeClone = null;
 				foreach (PackageResourceFileNameInfo info in list)
@@ -1349,7 +1349,7 @@ namespace Crowbar
 					if (!info.IsFolder)
 					{
 						infoName = info.Name.ToLower();
-						if (infoName.Contains(this.theTextToFind.ToLower()))
+						if (infoName.Contains(theTextToFind.ToLower()))
 						{
 							if (currentResultsTreeNodeList == null)
 							{
@@ -1358,38 +1358,38 @@ namespace Crowbar
 							}
 							currentResultsTreeNodeList.Add(info);
 
-							this.theResultsFileCount += 1;
-							this.theSearchBackgroundWorker.ReportProgress(1);
+							theResultsFileCount += 1;
+							theSearchBackgroundWorker.ReportProgress(1);
 						}
 					}
 					else if (MainCROWBAR.TheApp.Settings.UnpackSearchField == AppEnums.UnpackSearchFieldOptions.FilesAndFolders)
 					{
 						infoName = info.Name.ToLower();
-						if (infoName.Contains(this.theTextToFind.ToLower()))
+						if (infoName.Contains(theTextToFind.ToLower()))
 						{
 							if (currentResultsFolderTreeNodeList == null)
 							{
 								currentResultsFolderTreeNodeList = new List<PackageResourceFileNameInfo>();
-								this.theResultsFoldersTreeNode.Tag = currentResultsFolderTreeNodeList;
+								theResultsFoldersTreeNode.Tag = currentResultsFolderTreeNodeList;
 							}
 							PackageResourceFileNameInfo infoClone = (PackageResourceFileNameInfo)info.Clone();
 							infoClone.Name = infoClone.PathFileName;
 							currentResultsFolderTreeNodeList.Add(infoClone);
 
-							this.theResultsFolderCount += 1;
+							theResultsFolderCount += 1;
 
 							//If Not Me.theResultsFoldersTreeNode.Nodes.ContainsKey(info.Name) Then
-							this.theResultsFoldersTreeNode.Text = "<Folders found> (" + this.theResultsFolderCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
+							theResultsFoldersTreeNode.Text = "<Folders found> (" + theResultsFolderCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + ")";
 
 							//TODO: Add a special Tag to above node that allows double-clicking on it to go to real folder.
 							//End If
 
 							//Me.theResultsCount += 1
-							this.theSearchBackgroundWorker.ReportProgress(1);
+							theSearchBackgroundWorker.ReportProgress(1);
 						}
 					}
 
-					if (this.theSearchBackgroundWorker.CancellationPending)
+					if (theSearchBackgroundWorker.CancellationPending)
 					{
 						e.Cancel = true;
 						return;
@@ -1408,18 +1408,18 @@ namespace Crowbar
 							nodeClone = new TreeNode(node.Text);
 							nodeClone.Name = node.Name;
 							currentResultsTreeNode.Nodes.Add(nodeClone);
-							count = this.theResultsFileCount;
+							count = theResultsFileCount;
 
-							this.CreateTreeNodesThatMatchTextToFind(e, node, nodeClone);
+							CreateTreeNodesThatMatchTextToFind(e, node, nodeClone);
 
-							if (this.theSearchBackgroundWorker.CancellationPending)
+							if (theSearchBackgroundWorker.CancellationPending)
 							{
 								e.Cancel = true;
 								return;
 							}
 
-							this.theResultsCount = this.theResultsFileCount + this.theResultsFolderCount;
-							if (count == this.theResultsFileCount)
+							theResultsCount = theResultsFileCount + theResultsFolderCount;
+							if (count == theResultsFileCount)
 							{
 								currentResultsTreeNode.Nodes.Remove(nodeClone);
 							}
@@ -1442,7 +1442,7 @@ namespace Crowbar
 										}
 									}
 
-									if (this.theSearchBackgroundWorker.CancellationPending)
+									if (theSearchBackgroundWorker.CancellationPending)
 									{
 										e.Cancel = true;
 										return;
@@ -1452,7 +1452,7 @@ namespace Crowbar
 						}
 					}
 
-					if (this.theSearchBackgroundWorker.CancellationPending)
+					if (theSearchBackgroundWorker.CancellationPending)
 					{
 						e.Cancel = true;
 						return;
@@ -1467,19 +1467,19 @@ namespace Crowbar
 			UInt64 totalFileCount = 0;
 			UInt64 selectedByteCount = 0;
 
-			TreeNode selectedTreeNode = this.PackageTreeView.SelectedNode;
+			TreeNode selectedTreeNode = PackageTreeView.SelectedNode;
 			if (selectedTreeNode != null && selectedTreeNode.Tag != null)
 			{
 				List<PackageResourceFileNameInfo> list = null;
 				list = (List<PackageResourceFileNameInfo>)selectedTreeNode.Tag;
 
 				//fileCount = list.Count
-				foreach (ListViewItem item in this.PackageListView.Items)
+				foreach (ListViewItem item in PackageListView.Items)
 				{
 					totalFileCount += ((PackageResourceFileNameInfo)item.Tag).Count;
 				}
 
-				foreach (ListViewItem item in this.PackageListView.SelectedItems)
+				foreach (ListViewItem item in PackageListView.SelectedItems)
 				{
 					selectedFileCount += ((PackageResourceFileNameInfo)item.Tag).Count;
 					selectedByteCount += ((PackageResourceFileNameInfo)item.Tag).Size;
@@ -1488,11 +1488,11 @@ namespace Crowbar
 			//Me.UpdateSelectionCountsRecursive(selectedTreeNode, fileCount, sizeTotal)
 
 			//Me.FilesSelectedCountToolStripLabel.Text = Me.PackageListView.SelectedItems.Count.ToString("N0", TheApp.InternalCultureInfo) + "/" + fileCount.ToString("N0", TheApp.InternalCultureInfo)
-			this.FilesSelectedCountToolStripLabel.Text = selectedFileCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + "/" + totalFileCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo);
-			this.SizeSelectedTotalToolStripLabel.Text = selectedByteCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo);
+			FilesSelectedCountToolStripLabel.Text = selectedFileCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo) + "/" + totalFileCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo);
+			SizeSelectedTotalToolStripLabel.Text = selectedByteCount.ToString("N0", MainCROWBAR.TheApp.InternalCultureInfo);
 
 			//IMPORTANT: Update the toolstrip so the items are resized properly. Needed because of the 'springing' textbox.
-			this.ToolStrip1.PerformLayout();
+			ToolStrip1.PerformLayout();
 		}
 
 		//Private Sub UpdateSelectionCountsRecursive(ByVal currentTreeNode As TreeNode, ByRef fileCount As Integer, ByRef sizeTotal As Long)
@@ -1527,9 +1527,9 @@ namespace Crowbar
 				{
 					if (resourceInfo.IsFolder)
 					{
-						folderNode = GetNodeFromPath(this.PackageTreeView.Nodes[0], treeNode.FullPath + "\\" + resourceInfo.Name);
+						folderNode = GetNodeFromPath(PackageTreeView.Nodes[0], treeNode.FullPath + "\\" + resourceInfo.Name);
 						folderResourceInfos = (List<PackageResourceFileNameInfo>)folderNode.Tag;
-						archivePathFileNameToEntryIndexMap = this.GetEntriesFromFolderEntry(folderResourceInfos, folderNode, archivePathFileNameToEntryIndexMap);
+						archivePathFileNameToEntryIndexMap = GetEntriesFromFolderEntry(folderResourceInfos, folderNode, archivePathFileNameToEntryIndexMap);
 					}
 					else
 					{
@@ -1583,18 +1583,18 @@ namespace Crowbar
 
 		private void OpenSelectedFolderOrFile()
 		{
-			ListViewItem selectedItem = this.PackageListView.SelectedItems[0];
+			ListViewItem selectedItem = PackageListView.SelectedItems[0];
 
 			PackageResourceFileNameInfo resourceInfo = (PackageResourceFileNameInfo)selectedItem.Tag;
 
 			if (resourceInfo.IsFolder)
 			{
-				TreeNode selectedTreeNode = this.PackageTreeView.SelectedNode;
+				TreeNode selectedTreeNode = PackageTreeView.SelectedNode;
 				if (selectedTreeNode == null)
 				{
-					selectedTreeNode = this.PackageTreeView.Nodes[0];
+					selectedTreeNode = PackageTreeView.Nodes[0];
 				}
-				this.PackageTreeView.SelectedNode = selectedTreeNode.Nodes[resourceInfo.Name];
+				PackageTreeView.SelectedNode = selectedTreeNode.Nodes[resourceInfo.Name];
 			}
 			else
 			{
@@ -1617,7 +1617,7 @@ namespace Crowbar
 				selectedResourceInfos.Add(selectedResourceInfo);
 			}
 
-			this.RunUnpackerToExtractFilesInternal(unpackerAction, selectedResourceInfos);
+			RunUnpackerToExtractFilesInternal(unpackerAction, selectedResourceInfos);
 		}
 
 		private void RunUnpackerToExtractFilesInternal(AppEnums.ArchiveAction unpackerAction, List<PackageResourceFileNameInfo> selectedResourceInfos)
@@ -1627,10 +1627,10 @@ namespace Crowbar
 			bool outputPathIsExtendedWithPackageName = false;
 			string selectedRelativeOutputPath = null;
 
-			selectedNode = this.PackageTreeView.SelectedNode;
+			selectedNode = PackageTreeView.SelectedNode;
 			if (selectedNode == null)
 			{
-				selectedNode = this.PackageTreeView.Nodes[0];
+				selectedNode = PackageTreeView.Nodes[0];
 			}
 
 			if (selectedResourceInfos == null)
@@ -1656,22 +1656,22 @@ namespace Crowbar
 				selectedRelativeOutputPath = FileManager.GetPath(selectedResourceInfos[0].PathFileName);
 			}
 
-			archivePathFileNameToEntryIndexMap = this.GetEntriesFromFolderEntry(selectedResourceInfos, selectedNode, archivePathFileNameToEntryIndexMap);
+			archivePathFileNameToEntryIndexMap = GetEntriesFromFolderEntry(selectedResourceInfos, selectedNode, archivePathFileNameToEntryIndexMap);
 
-			MainCROWBAR.TheApp.Unpacker.ProgressChanged += this.UnpackerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted += this.UnpackerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Unpacker.ProgressChanged += UnpackerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted += UnpackerBackgroundWorker_RunWorkerCompleted;
 
 			if (unpackerAction == AppEnums.ArchiveAction.ExtractToTemp)
 			{
 				string message = MainCROWBAR.TheApp.Unpacker.RunSynchronous(unpackerAction, archivePathFileNameToEntryIndexMap, outputPathIsExtendedWithPackageName, selectedRelativeOutputPath);
 				if (!string.IsNullOrEmpty(message))
 				{
-					this.UnpackerLogTextBox.AppendText(message + "\r");
+					UnpackerLogTextBox.AppendText(message + "\r");
 				}
 
 				List<string> tempRelativePathsAndFileNames = MainCROWBAR.TheApp.Unpacker.GetTempRelativePathsAndFileNames();
 
-				this.DoDragAndDrop(tempRelativePathsAndFileNames);
+				DoDragAndDrop(tempRelativePathsAndFileNames);
 			}
 			else
 			{
@@ -1696,26 +1696,26 @@ namespace Crowbar
 
 				dragDropDataObject.SetFileDropList(pathAndFileNameCollection);
 
-				DragDropEffects result = this.PackageListView.DoDragDrop(dragDropDataObject, DragDropEffects.Move);
+				DragDropEffects result = PackageListView.DoDragDrop(dragDropDataObject, DragDropEffects.Move);
 				MainCROWBAR.TheApp.Unpacker.DeleteTempUnpackFolder();
 
-				MainCROWBAR.TheApp.Unpacker.ProgressChanged -= this.UnpackerBackgroundWorker_ProgressChanged;
-				MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= this.UnpackerBackgroundWorker_RunWorkerCompleted;
+				MainCROWBAR.TheApp.Unpacker.ProgressChanged -= UnpackerBackgroundWorker_ProgressChanged;
+				MainCROWBAR.TheApp.Unpacker.RunWorkerCompleted -= UnpackerBackgroundWorker_RunWorkerCompleted;
 
-				this.UpdateWidgets(false);
+				UpdateWidgets(false);
 			}
 		}
 
 		private void DeleteSearch()
 		{
-			this.PackageTreeView.SelectedNode.Parent.Nodes.Remove(this.PackageTreeView.SelectedNode);
-			this.theSearchCount -= 1;
+			PackageTreeView.SelectedNode.Parent.Nodes.Remove(PackageTreeView.SelectedNode);
+			theSearchCount -= 1;
 		}
 
 		private void DeleteAllSearches()
 		{
-			this.RecursivelyDeleteSearchNodes(this.PackageTreeView.Nodes);
-			this.theSearchCount = 0;
+			RecursivelyDeleteSearchNodes(PackageTreeView.Nodes);
+			theSearchCount = 0;
 		}
 
 		private void RecursivelyDeleteSearchNodes(TreeNodeCollection nodes)
@@ -1730,7 +1730,7 @@ namespace Crowbar
 				}
 				else
 				{
-					this.RecursivelyDeleteSearchNodes(aNode.Nodes);
+					RecursivelyDeleteSearchNodes(aNode.Nodes);
 				}
 			}
 		}

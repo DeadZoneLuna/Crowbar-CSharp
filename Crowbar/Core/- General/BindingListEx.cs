@@ -34,7 +34,7 @@ namespace Crowbar
 			BindingListEx<T> otherList = (BindingListEx<T>)otherObject;
 			if (otherList != null)
 			{
-				return this.Equals(otherList);
+				return Equals(otherList);
 			}
 			else
 			{
@@ -49,10 +49,10 @@ namespace Crowbar
 				return false;
 			}
 			bool result = false;
-			if (this.Count == otherList.Count)
+			if (Count == otherList.Count)
 			{
 				result = true;
-				for (int i = 0; i < this.Count; i++)
+				for (int i = 0; i < Count; i++)
 				{
 					if (!(this[i].Equals(otherList[i])))
 					{
@@ -102,12 +102,12 @@ namespace Crowbar
 		public void InsertItemSorted(int index, T item, string nProperty)
 		{
 			_sort = FindPropertyDescriptor(nProperty);
-			this.InsertItemSorted(index, item, _sort);
+			InsertItemSorted(index, item, _sort);
 		}
 
 		public void InsertItemSorted(int index, T item, PropertyDescriptor sortedProperty)
 		{
-			index = this.FindInsertionIndex(index, item, sortedProperty);
+			index = FindInsertionIndex(index, item, sortedProperty);
 			base.InsertItem(index, item);
 		}
 
@@ -131,7 +131,7 @@ namespace Crowbar
 
 		public override void EndNew(int itemIndex)
 		{
-			if (_sort != null && itemIndex == this.Count - 1)
+			if (_sort != null && itemIndex == Count - 1)
 			{
 				ApplySortCore(_sort, _dir);
 			}
@@ -155,7 +155,7 @@ namespace Crowbar
 		{
 			try
 			{
-				this.OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, index, -2));
+				OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, index, -2));
 			}
 			catch
 			{
@@ -169,7 +169,7 @@ namespace Crowbar
 		protected int FindInsertionIndex(int index, T item, PropertyDescriptor sortedProperty)
 		{
 			int insertionIndex = 0;
-			List<T> items = (List<T>)this.Items;
+			List<T> items = (List<T>)Items;
 			if (items != null && sortedProperty != null)
 			{
 				PropertyComparer<T> pc = new PropertyComparer<T>(sortedProperty, ListSortDirection.Ascending);
@@ -223,7 +223,7 @@ namespace Crowbar
 
 		protected override void ApplySortCore(PropertyDescriptor nProperty, ListSortDirection direction)
 		{
-			List<T> items = (List<T>)this.Items;
+			List<T> items = (List<T>)Items;
 			if (items != null && nProperty != null)
 			{
 				PropertyComparer<T> pc = new PropertyComparer<T>(nProperty, direction);

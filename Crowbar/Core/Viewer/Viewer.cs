@@ -19,11 +19,11 @@ namespace Crowbar
 		public Viewer() : base()
 		{
 
-			this.isDisposed = false;
+			isDisposed = false;
 
-			this.WorkerReportsProgress = true;
-			this.WorkerSupportsCancellation = true;
-			this.DoWork += this.ModelViewer_DoWork;
+			WorkerReportsProgress = true;
+			WorkerSupportsCancellation = true;
+			DoWork += ModelViewer_DoWork;
 		}
 
 #region IDisposable Support
@@ -37,16 +37,16 @@ namespace Crowbar
 
 		protected void Dispose(bool disposing)
 		{
-			if (!this.isDisposed)
+			if (!isDisposed)
 			{
 				//Me.Halt(False)
 				if (disposing)
 				{
-					this.Free();
+					Free();
 				}
 				//NOTE: free shared unmanaged resources
 			}
-			this.isDisposed = true;
+			isDisposed = true;
 			base.Dispose(disposing);
 		}
 
@@ -67,8 +67,8 @@ namespace Crowbar
 
 		private void Free()
 		{
-			this.Halt(false);
-			this.FreeViewModel();
+			Halt(false);
+			FreeViewModel();
 		}
 
 #endregion
@@ -83,7 +83,7 @@ namespace Crowbar
 			info.mdlPathFileName = inputMdlPathFileName;
 			info.viewAsReplacement = viewAsReplacement;
 			info.viewAsReplacementExtraSubfolder = viewAsReplacementExtraSubfolder;
-			this.RunWorkerAsync(info);
+			RunWorkerAsync(info);
 		}
 
 		public void Run(string inputMdlPathFileName, AppEnums.SupportedMdlVersion mdlVersionOverride)
@@ -92,7 +92,7 @@ namespace Crowbar
 			info.viewerAction = ViewerInfo.ViewerActionType.GetData;
 			info.mdlPathFileName = inputMdlPathFileName;
 			info.mdlVersionOverride = mdlVersionOverride;
-			this.RunWorkerAsync(info);
+			RunWorkerAsync(info);
 		}
 
 		public void Run(int gameSetupSelectedIndex)
@@ -100,7 +100,7 @@ namespace Crowbar
 			ViewerInfo info = new ViewerInfo();
 			info.viewerAction = ViewerInfo.ViewerActionType.OpenViewer;
 			info.gameSetupSelectedIndex = gameSetupSelectedIndex;
-			this.RunWorkerAsync(info);
+			RunWorkerAsync(info);
 		}
 
 		//Public Sub Halt()
@@ -121,15 +121,15 @@ namespace Crowbar
 
 		private void Halt(bool calledFromBackgroundThread)
 		{
-			if (this.theHlmvAppProcess != null)
+			if (theHlmvAppProcess != null)
 			{
 				//RemoveHandler Me.theHlmvAppProcess.Exited, AddressOf HlmvApp_Exited
 
 				try
 				{
-					if (!this.theHlmvAppProcess.HasExited && !this.theHlmvAppProcess.CloseMainWindow())
+					if (!theHlmvAppProcess.HasExited && !theHlmvAppProcess.CloseMainWindow())
 					{
-						this.theHlmvAppProcess.Kill();
+						theHlmvAppProcess.Kill();
 					}
 				}
 				catch (Exception ex)
@@ -139,14 +139,14 @@ namespace Crowbar
 				finally
 				{
 					//NOTE: Due to threading, Me.theHlmvAppProcess might be Nothing at this point.
-					if (this.theHlmvAppProcess != null)
+					if (theHlmvAppProcess != null)
 					{
-						this.theHlmvAppProcess.Close();
+						theHlmvAppProcess.Close();
 						//NOTE: This raises an exception when the background thread has already completed its work.
 						//If calledFromBackgroundThread Then
 						//	Me.UpdateProgressStop("Model viewer closed.")
 						//End If
-						this.theHlmvAppProcess = null;
+						theHlmvAppProcess = null;
 					}
 				}
 			}
@@ -158,33 +158,33 @@ namespace Crowbar
 
 		private void ModelViewer_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
-			this.ReportProgress(0, "");
+			ReportProgress(0, "");
 
 			ViewerInfo info = (ViewerInfo)e.Argument;
 
-			this.theInputMdlPathFileName = info.mdlPathFileName;
-			this.theViewAsReplacementExtraSubfolder = info.viewAsReplacementExtraSubfolder;
-			this.theInputMdlIsViewedAsReplacement = info.viewAsReplacement;
-			this.theGameSetup = MainCROWBAR.TheApp.Settings.GameSetups[info.gameSetupSelectedIndex];
+			theInputMdlPathFileName = info.mdlPathFileName;
+			theViewAsReplacementExtraSubfolder = info.viewAsReplacementExtraSubfolder;
+			theInputMdlIsViewedAsReplacement = info.viewAsReplacement;
+			theGameSetup = MainCROWBAR.TheApp.Settings.GameSetups[info.gameSetupSelectedIndex];
 
 			if (ViewerInputsAreOkay(info.viewerAction))
 			{
 				if (info.viewerAction == ViewerInfo.ViewerActionType.GetData)
 				{
-					this.ViewData(info.mdlVersionOverride);
+					ViewData(info.mdlVersionOverride);
 				}
 				else if (info.viewerAction == ViewerInfo.ViewerActionType.ViewModel)
 				{
 					//Me.UpdateProgress(1, "Model viewer opening ...")
-					this.UpdateProgress(1, "Model viewer opened.");
-					this.ViewModel();
+					UpdateProgress(1, "Model viewer opened.");
+					ViewModel();
 					//Me.UpdateProgress(1, "Model viewer opened.")
 				}
 				else if (info.viewerAction == ViewerInfo.ViewerActionType.OpenViewer)
 				{
 					//Me.UpdateProgress(1, "Model viewer opening ...")
-					this.UpdateProgress(1, "Model viewer opened.");
-					this.OpenViewer();
+					UpdateProgress(1, "Model viewer opened.");
+					OpenViewer();
 					//Me.UpdateProgress(1, "Model viewer opened.")
 				}
 			}
@@ -198,16 +198,16 @@ namespace Crowbar
 
 			if (viewerAction == ViewerInfo.ViewerActionType.GetData || viewerAction == ViewerInfo.ViewerActionType.ViewModel)
 			{
-				if (string.IsNullOrEmpty(this.theInputMdlPathFileName))
+				if (string.IsNullOrEmpty(theInputMdlPathFileName))
 				{
-					this.UpdateProgressStart("");
-					this.WriteErrorMessage("MDL file is blank.");
+					UpdateProgressStart("");
+					WriteErrorMessage("MDL file is blank.");
 					inputsAreValid = false;
 				}
-				else if (!File.Exists(this.theInputMdlPathFileName))
+				else if (!File.Exists(theInputMdlPathFileName))
 				{
-					this.UpdateProgressStart("");
-					this.WriteErrorMessage("MDL file does not exist.");
+					UpdateProgressStart("");
+					WriteErrorMessage("MDL file does not exist.");
 					inputsAreValid = false;
 				}
 			}
@@ -216,15 +216,15 @@ namespace Crowbar
 			{
 				string gamePath = null;
 				string modelViewerPathFileName = null;
-				gamePath = FileManager.GetPath(this.theGameSetup.GamePathFileName);
+				gamePath = FileManager.GetPath(theGameSetup.GamePathFileName);
 				//modelViewerPathFileName = Path.Combine(FileManager.GetPath(Me.theGameSetup.CompilerPathFileName), "hlmv.exe")
-				modelViewerPathFileName = this.theGameSetup.ViewerPathFileName;
+				modelViewerPathFileName = theGameSetup.ViewerPathFileName;
 
 				if (!File.Exists(modelViewerPathFileName))
 				{
 					inputsAreValid = false;
-					this.WriteErrorMessage("The model viewer, \"" + modelViewerPathFileName + "\", does not exist.");
-					this.UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+					WriteErrorMessage("The model viewer, \"" + modelViewerPathFileName + "\", does not exist.");
+					UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
 				}
 			}
 
@@ -238,13 +238,13 @@ namespace Crowbar
 		private void ViewData(AppEnums.SupportedMdlVersion mdlVersionOverride)
 		{
 			string progressDescriptionText = "Getting model data for ";
-			progressDescriptionText += "\"" + Path.GetFileName(this.theInputMdlPathFileName) + "\"";
+			progressDescriptionText += "\"" + Path.GetFileName(theInputMdlPathFileName) + "\"";
 
-			this.UpdateProgressStart(progressDescriptionText + " ...");
+			UpdateProgressStart(progressDescriptionText + " ...");
 
-			this.ShowDataFromMdlFile(mdlVersionOverride);
+			ShowDataFromMdlFile(mdlVersionOverride);
 
-			this.UpdateProgressStop("... " + progressDescriptionText + " finished.");
+			UpdateProgressStop("... " + progressDescriptionText + " finished.");
 		}
 
 		private void ShowDataFromMdlFile(AppEnums.SupportedMdlVersion mdlVersionOverride)
@@ -253,45 +253,45 @@ namespace Crowbar
 			int version = 0;
 			try
 			{
-				if (File.Exists(this.theInputMdlPathFileName))
+				if (File.Exists(theInputMdlPathFileName))
 				{
-					model = SourceModel.Create(this.theInputMdlPathFileName, mdlVersionOverride, ref version);
+					model = SourceModel.Create(theInputMdlPathFileName, mdlVersionOverride, ref version);
 					if (model != null)
 					{
-						List<string> textLines = model.GetOverviewTextLines(this.theInputMdlPathFileName, mdlVersionOverride);
-						this.UpdateProgress();
+						List<string> textLines = model.GetOverviewTextLines(theInputMdlPathFileName, mdlVersionOverride);
+						UpdateProgress();
 						foreach (string aTextLine in textLines)
 						{
-							this.UpdateProgress(1, aTextLine);
+							UpdateProgress(1, aTextLine);
 						}
 					}
 					else
 					{
-						this.UpdateProgress(1, "ERROR: Model version not currently supported: " + version.ToString());
-						this.UpdateProgress(1, "       Try changing 'Override MDL version' option.");
+						UpdateProgress(1, "ERROR: Model version not currently supported: " + version.ToString());
+						UpdateProgress(1, "       Try changing 'Override MDL version' option.");
 					}
 				}
 				else
 				{
-					this.UpdateProgress(1, "ERROR: Model file not found: " + "\"" + this.theInputMdlPathFileName + "\"");
+					UpdateProgress(1, "ERROR: Model file not found: " + "\"" + theInputMdlPathFileName + "\"");
 				}
 			}
 			catch (Exception ex)
 			{
-				this.WriteErrorMessage(ex.Message);
+				WriteErrorMessage(ex.Message);
 			}
 		}
 
 		private void ViewModel()
 		{
-			this.InitViewModel();
-			this.RunHlmvApp(true);
-			this.FreeViewModel();
+			InitViewModel();
+			RunHlmvApp(true);
+			FreeViewModel();
 		}
 
 		private void OpenViewer()
 		{
-			this.RunHlmvApp(false);
+			RunHlmvApp(false);
 		}
 
 		private void RunHlmvApp(bool viewerIsOpeningModel)
@@ -303,17 +303,17 @@ namespace Crowbar
 			string gameModelsPath = null;
 			string currentFolder = "";
 
-			if (this.theInputMdlIsViewedAsReplacement)
+			if (theInputMdlIsViewedAsReplacement)
 			{
-				tempGamePath = this.GetTempGamePath();
+				tempGamePath = GetTempGamePath();
 			}
 			else
 			{
-				tempGamePath = FileManager.GetPath(this.theGameSetup.GamePathFileName);
+				tempGamePath = FileManager.GetPath(theGameSetup.GamePathFileName);
 			}
-			gameFileName = Path.GetFileName(this.theGameSetup.GamePathFileName);
+			gameFileName = Path.GetFileName(theGameSetup.GamePathFileName);
 			//modelViewerPathFileName = Path.Combine(FileManager.GetPath(Me.theGameSetup.CompilerPathFileName), "hlmv.exe")
-			modelViewerPathFileName = this.theGameSetup.ViewerPathFileName;
+			modelViewerPathFileName = theGameSetup.ViewerPathFileName;
 			gameModelsPath = Path.Combine(tempGamePath, "models");
 
 			//TODO: Counter-Strike: Source and Portal (and maybe others) do not have a "models" folder.
@@ -328,7 +328,7 @@ namespace Crowbar
 			string arguments = "";
 			if (gameFileName.ToLower() == "gameinfo.txt")
 			{
-				gamePath = FileManager.GetPath(this.theGameSetup.GamePathFileName);
+				gamePath = FileManager.GetPath(theGameSetup.GamePathFileName);
 				//NOTE: The -olddialogs param adds "(Steam) Load Model" menu item, which usually means HLMV can then open a model from anywhere in file system via the "Load Model" menu item.
 				//      This also allows some HLMVs to open MDL v49 via the View button.
 				arguments += " -olddialogs -game \"";
@@ -338,18 +338,18 @@ namespace Crowbar
 			if (viewerIsOpeningModel)
 			{
 				arguments += " \"";
-				if (this.theInputMdlIsViewedAsReplacement)
+				if (theInputMdlIsViewedAsReplacement)
 				{
-					arguments += this.theInputMdlRelativePathName;
+					arguments += theInputMdlRelativePathName;
 				}
 				else
 				{
-					arguments += this.theInputMdlPathFileName;
+					arguments += theInputMdlPathFileName;
 				}
 				arguments += "\"";
 			}
 
-			this.theHlmvAppProcess = new Process();
+			theHlmvAppProcess = new Process();
 			ProcessStartInfo hlmvAppProcessStartInfo = new ProcessStartInfo(modelViewerPathFileName, arguments);
 			hlmvAppProcessStartInfo.CreateNoWindow = true;
 			hlmvAppProcessStartInfo.RedirectStandardError = true;
@@ -358,12 +358,12 @@ namespace Crowbar
 			//NOTE: Instead of using asynchronous running, use synchronous and wait for process to exit, 
 			//      so this background thread won't complete until model viewer is closed.
 			//      This allows background thread to announce to main thread when model viewer process exits.
-			this.theHlmvAppProcess.EnableRaisingEvents = false;
-			this.theHlmvAppProcess.StartInfo = hlmvAppProcessStartInfo;
+			theHlmvAppProcess.EnableRaisingEvents = false;
+			theHlmvAppProcess.StartInfo = hlmvAppProcessStartInfo;
 
-			this.theHlmvAppProcess.Start();
-			this.theHlmvAppProcess.WaitForExit();
-			this.Halt(true);
+			theHlmvAppProcess.Start();
+			theHlmvAppProcess.WaitForExit();
+			Halt(true);
 
 			//TODO: Test if this code works if placed immediately after starting process, to prevent a second view from setting current folder to what the first view was using as a temp current folder.
 			if (!string.IsNullOrEmpty(currentFolder))
@@ -374,23 +374,23 @@ namespace Crowbar
 
 		private void InitViewModel()
 		{
-			if (this.theGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			if (theGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
 				string gamePath = null;
 				string gameModelsPath = null;
 
-				gamePath = FileManager.GetPath(this.theGameSetup.GamePathFileName);
+				gamePath = FileManager.GetPath(theGameSetup.GamePathFileName);
 				gameModelsPath = Path.Combine(gamePath, "models");
 
-				if (!this.theInputMdlPathFileName.StartsWith(gameModelsPath))
+				if (!theInputMdlPathFileName.StartsWith(gameModelsPath))
 				{
 					//NOTE: Avoid any changes and copying if user used the "View" button.
-					if (this.theInputMdlIsViewedAsReplacement)
+					if (theInputMdlIsViewedAsReplacement)
 					{
-						this.ModifyGameInfoFile();
+						ModifyGameInfoFile();
 
-						this.theInputMdlRelativePathName = this.CreateReplacementModelFiles();
-						if (string.IsNullOrEmpty(this.theInputMdlRelativePathName))
+						theInputMdlRelativePathName = CreateReplacementModelFiles();
+						if (string.IsNullOrEmpty(theInputMdlRelativePathName))
 						{
 							return;
 						}
@@ -404,13 +404,13 @@ namespace Crowbar
 
 		private void FreeViewModel()
 		{
-			if (this.theGameSetup.GameEngine == AppEnums.GameEngine.Source)
+			if (theGameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
-				this.RevertGameInfoFile();
+				RevertGameInfoFile();
 
-				if (this.theInputMdlIsViewedAsReplacement)
+				if (theInputMdlIsViewedAsReplacement)
 				{
-					this.DeleteReplacementModelFiles();
+					DeleteReplacementModelFiles();
 				}
 
 				//TODO: Uncomment this after CopyMaterialAndTextureFiles() has been redone.
@@ -420,7 +420,7 @@ namespace Crowbar
 
 		private string GetTempGamePath()
 		{
-			string gamePath = FileManager.GetPath(this.theGameSetup.GamePathFileName);
+			string gamePath = FileManager.GetPath(theGameSetup.GamePathFileName);
 
 			//NOTE: These two lines change gamePath from actual gamePath to the new "crowbar" gamePath for temp use.
 			gamePath = FileManager.GetPath(gamePath);
@@ -431,16 +431,16 @@ namespace Crowbar
 
 		private void ModifyGameInfoFile()
 		{
-			this.theGameInfoFile = GameInfoTxtFile.Create();
-			this.theGameInfoFile.WriteNewGamePath(this.theGameSetup.GamePathFileName, "crowbar");
+			theGameInfoFile = GameInfoTxtFile.Create();
+			theGameInfoFile.WriteNewGamePath(theGameSetup.GamePathFileName, "crowbar");
 		}
 
 		private void RevertGameInfoFile()
 		{
-			if (this.theGameInfoFile != null)
+			if (theGameInfoFile != null)
 			{
-				this.theGameInfoFile.RestoreGameInfoFile(this.theGameSetup.GamePathFileName);
-				this.theGameInfoFile = null;
+				theGameInfoFile.RestoreGameInfoFile(theGameSetup.GamePathFileName);
+				theGameInfoFile = null;
 			}
 		}
 
@@ -453,17 +453,17 @@ namespace Crowbar
 			string gamePath = null;
 			string gameModelsPath = null;
 			string gameModelsTempPath = null;
-			replacementMdlRelativePath = this.theViewAsReplacementExtraSubfolder;
-			gamePath = this.GetTempGamePath();
+			replacementMdlRelativePath = theViewAsReplacementExtraSubfolder;
+			gamePath = GetTempGamePath();
 			gameModelsPath = Path.Combine(gamePath, "models");
 			gameModelsTempPath = Path.Combine(gameModelsPath, replacementMdlRelativePath);
 
 			if (FileManager.PathExistsAfterTryToCreate(gameModelsTempPath))
 			{
-				string replacementMdlFileName = Path.GetFileName(this.theInputMdlPathFileName);
+				string replacementMdlFileName = Path.GetFileName(theInputMdlPathFileName);
 				replacementMdlRelativePathFileName = Path.Combine(replacementMdlRelativePath, replacementMdlFileName);
-				this.thePathForModelFiles = gameModelsPath;
-				this.thePathForModelFilesForViewAsReplacement = gameModelsTempPath;
+				thePathForModelFiles = gameModelsPath;
+				thePathForModelFilesForViewAsReplacement = gameModelsTempPath;
 				replacementMdlPathFileName = Path.Combine(gameModelsTempPath, replacementMdlFileName);
 
 				try
@@ -472,11 +472,11 @@ namespace Crowbar
 					{
 						File.Delete(replacementMdlPathFileName);
 					}
-					File.Copy(this.theInputMdlPathFileName, replacementMdlPathFileName);
+					File.Copy(theInputMdlPathFileName, replacementMdlPathFileName);
 				}
 				catch (Exception ex)
 				{
-					this.WriteErrorMessage("Crowbar tried to copy the file \"" + this.theInputMdlPathFileName + "\" to \"" + replacementMdlPathFileName + "\" but Windows gave this message: " + ex.Message);
+					WriteErrorMessage("Crowbar tried to copy the file \"" + theInputMdlPathFileName + "\" to \"" + replacementMdlPathFileName + "\" but Windows gave this message: " + ex.Message);
 				}
 
 				if (File.Exists(replacementMdlPathFileName))
@@ -485,7 +485,7 @@ namespace Crowbar
 					int version = 0;
 					try
 					{
-						model = SourceModel.Create(this.theInputMdlPathFileName, AppEnums.SupportedMdlVersion.DoNotOverride, ref version);
+						model = SourceModel.Create(theInputMdlPathFileName, AppEnums.SupportedMdlVersion.DoNotOverride, ref version);
 						if (model != null)
 						{
 							model.WriteMdlFileNameToMdlFile(replacementMdlPathFileName, replacementMdlRelativePathFileName);
@@ -493,17 +493,17 @@ namespace Crowbar
 						}
 						else
 						{
-							this.WriteErrorMessage("Model version not currently supported: " + version.ToString());
+							WriteErrorMessage("Model version not currently supported: " + version.ToString());
 							return "";
 						}
 					}
 					catch (FormatException ex)
 					{
-						this.WriteErrorMessage(ex.Message);
+						WriteErrorMessage(ex.Message);
 					}
 					catch (Exception ex)
 					{
-						this.WriteErrorMessage("Crowbar tried to write to the temporary replacement MDL file but the system gave this message: " + ex.Message);
+						WriteErrorMessage("Crowbar tried to write to the temporary replacement MDL file but the system gave this message: " + ex.Message);
 						return "";
 					}
 
@@ -512,10 +512,10 @@ namespace Crowbar
 					string replacementMdlPath = null;
 					string targetFileName = null;
 					string targetPathFileName = "";
-					inputMdlPath = FileManager.GetPath(this.theInputMdlPathFileName);
-					inputMdlFileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.theInputMdlPathFileName);
+					inputMdlPath = FileManager.GetPath(theInputMdlPathFileName);
+					inputMdlFileNameWithoutExtension = Path.GetFileNameWithoutExtension(theInputMdlPathFileName);
 					replacementMdlPath = FileManager.GetPath(replacementMdlPathFileName);
-					this.theModelFilesForViewAsReplacement = new List<string>();
+					theModelFilesForViewAsReplacement = new List<string>();
 					foreach (string inputPathFileName in Directory.GetFiles(inputMdlPath, inputMdlFileNameWithoutExtension + ".*"))
 					{
 						try
@@ -526,18 +526,18 @@ namespace Crowbar
 							{
 								File.Copy(inputPathFileName, targetPathFileName);
 							}
-							this.theModelFilesForViewAsReplacement.Add(targetPathFileName);
+							theModelFilesForViewAsReplacement.Add(targetPathFileName);
 						}
 						catch (Exception ex)
 						{
-							this.WriteErrorMessage("Crowbar tried to copy the file \"" + inputPathFileName + "\" to \"" + targetPathFileName + "\" but Windows gave this message: " + ex.Message);
+							WriteErrorMessage("Crowbar tried to copy the file \"" + inputPathFileName + "\" to \"" + targetPathFileName + "\" but Windows gave this message: " + ex.Message);
 						}
 					}
 				}
 			}
 			else
 			{
-				this.WriteErrorMessage("Crowbar tried to create \"" + gameModelsTempPath + "\", but it failed.");
+				WriteErrorMessage("Crowbar tried to create \"" + gameModelsTempPath + "\", but it failed.");
 				replacementMdlRelativePathFileName = "";
 			}
 
@@ -546,21 +546,21 @@ namespace Crowbar
 
 		private void DeleteReplacementModelFiles()
 		{
-			if (this.theModelFilesForViewAsReplacement == null)
+			if (theModelFilesForViewAsReplacement == null)
 			{
 				return;
 			}
 
 			string pathFileName = null;
-			for (int modelFileIndex = this.theModelFilesForViewAsReplacement.Count - 1; modelFileIndex >= 0; modelFileIndex--)
+			for (int modelFileIndex = theModelFilesForViewAsReplacement.Count - 1; modelFileIndex >= 0; modelFileIndex--)
 			{
 				try
 				{
-					pathFileName = this.theModelFilesForViewAsReplacement[modelFileIndex];
+					pathFileName = theModelFilesForViewAsReplacement[modelFileIndex];
 					if (File.Exists(pathFileName))
 					{
 						File.Delete(pathFileName);
-						this.theModelFilesForViewAsReplacement.RemoveAt(modelFileIndex);
+						theModelFilesForViewAsReplacement.RemoveAt(modelFileIndex);
 					}
 				}
 				catch (Exception ex)
@@ -574,9 +574,9 @@ namespace Crowbar
 			{
 				//NOTE: Give a little time for other Viewer threads to complete; otherwise the Delete will not happen.
 				System.Threading.Thread.Sleep(500);
-				if (Directory.Exists(this.thePathForModelFilesForViewAsReplacement))
+				if (Directory.Exists(thePathForModelFilesForViewAsReplacement))
 				{
-					Directory.Delete(this.thePathForModelFilesForViewAsReplacement);
+					Directory.Delete(thePathForModelFilesForViewAsReplacement);
 				}
 			}
 			catch (Exception ex)
@@ -588,9 +588,9 @@ namespace Crowbar
 			{
 				//NOTE: Give a little time for other Viewer threads to complete; otherwise the Delete will not happen.
 				System.Threading.Thread.Sleep(500);
-				if (Directory.Exists(this.thePathForModelFiles))
+				if (Directory.Exists(thePathForModelFiles))
 				{
-					Directory.Delete(this.thePathForModelFiles);
+					Directory.Delete(thePathForModelFiles);
 				}
 			}
 			catch (Exception ex)
@@ -604,7 +604,7 @@ namespace Crowbar
 			string tempPath = null;
 			string tempFolder = null;
 			string inputMaterialsPath = null;
-			tempPath = FileManager.GetPath(this.theInputMdlPathFileName);
+			tempPath = FileManager.GetPath(theInputMdlPathFileName);
 			do
 			{
 				if (tempPath.Length <= 3)
@@ -619,7 +619,7 @@ namespace Crowbar
 
 			string gamePath = null;
 			string gameMaterialsPath = null;
-			gamePath = this.GetTempGamePath();
+			gamePath = GetTempGamePath();
 			gameMaterialsPath = Path.Combine(gamePath, "materials");
 
 			if (inputMaterialsPath != gameMaterialsPath && Directory.Exists(inputMaterialsPath))
@@ -632,7 +632,7 @@ namespace Crowbar
 					{
 						ConversionHelper.CopyDirectory(inputMaterialsPath, gameMaterialsPath);
 						//Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(inputMaterialsPath, gameMaterialsPath);
-						this.theGameMaterialsFolder = gameMaterialsPath;
+						theGameMaterialsFolder = gameMaterialsPath;
 					}
 					else
 					{
@@ -649,18 +649,18 @@ namespace Crowbar
 
 		private void DeleteMaterialAndTextureFiles()
 		{
-			if (this.theGameMaterialsFolder != null)
+			if (theGameMaterialsFolder != null)
 			{
 				try
 				{
 					string gamePath = null;
 					string gameMaterialsPath = null;
-					gamePath = this.GetTempGamePath();
+					gamePath = GetTempGamePath();
 					gameMaterialsPath = Path.Combine(gamePath, "materials");
 
-					if (this.theGameMaterialsFolder == gameMaterialsPath)
+					if (theGameMaterialsFolder == gameMaterialsPath)
 					{
-						this.theGameMaterialsFolder = "";
+						theGameMaterialsFolder = "";
 
 						if (Directory.Exists(gameMaterialsPath))
 						{
@@ -677,22 +677,22 @@ namespace Crowbar
 
 		private void UpdateProgressStart(string line)
 		{
-			this.UpdateProgressInternal(0, line);
+			UpdateProgressInternal(0, line);
 		}
 
 		private void UpdateProgressStop(string line)
 		{
-			this.UpdateProgressInternal(100, "\r" + line);
+			UpdateProgressInternal(100, "\r" + line);
 		}
 
 		private void UpdateProgress()
 		{
-			this.UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, "");
 		}
 
 		private void WriteErrorMessage(string line)
 		{
-			this.UpdateProgressInternal(1, "ERROR: " + line);
+			UpdateProgressInternal(1, "ERROR: " + line);
 		}
 
 		private void UpdateProgress(int indentLevel, string line)
@@ -704,7 +704,7 @@ namespace Crowbar
 				indentedLine += "  ";
 			}
 			indentedLine += line;
-			this.UpdateProgressInternal(1, indentedLine);
+			UpdateProgressInternal(1, indentedLine);
 		}
 
 		private void UpdateProgressInternal(int progressValue, string line)
@@ -716,7 +716,7 @@ namespace Crowbar
 			//    Me.theLogFileStream.Flush()
 			//End If
 
-			this.ReportProgress(progressValue, line);
+			ReportProgress(progressValue, line);
 		}
 
 #endregion

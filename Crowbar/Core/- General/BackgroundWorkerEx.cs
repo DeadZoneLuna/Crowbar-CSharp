@@ -49,12 +49,12 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theDoWorkHandler;
+				return theDoWorkHandler;
 			}
 			set
 			{
-				this.theDoWorkHandler = value;
-				this.DoWork += this.theDoWorkHandler;
+				theDoWorkHandler = value;
+				DoWork += theDoWorkHandler;
 			}
 		}
 
@@ -62,12 +62,12 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theProgressChangedHandler;
+				return theProgressChangedHandler;
 			}
 			set
 			{
-				this.theProgressChangedHandler = value;
-				this.ProgressChanged += this.theProgressChangedHandler;
+				theProgressChangedHandler = value;
+				ProgressChanged += theProgressChangedHandler;
 			}
 		}
 
@@ -75,11 +75,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theExternalRunWorkerCompletedHandler;
+				return theExternalRunWorkerCompletedHandler;
 			}
 			set
 			{
-				this.theExternalRunWorkerCompletedHandler = value;
+				theExternalRunWorkerCompletedHandler = value;
 			}
 		}
 
@@ -89,9 +89,9 @@ namespace Crowbar
 
 		public void Kill()
 		{
-			this.DoWork -= this.theDoWorkHandler;
-			this.ProgressChanged -= this.theProgressChangedHandler;
-			this.RunWorkerCompleted -= this.BWE_RunWorkerCompleted;
+			DoWork -= theDoWorkHandler;
+			ProgressChanged -= theProgressChangedHandler;
+			RunWorkerCompleted -= BWE_RunWorkerCompleted;
 		}
 
 #endregion
@@ -107,8 +107,8 @@ namespace Crowbar
 			//RemoveHandler bw.RunWorkerCompleted, AddressOf Me.BWE_RunWorkerCompleted
 			//Me.theExternalRunWorkerCompletedHandler(bw, e)
 			//======
-			this.Kill();
-			this.theExternalRunWorkerCompletedHandler(this, e);
+			Kill();
+			theExternalRunWorkerCompletedHandler(this, e);
 		}
 
 #endregion

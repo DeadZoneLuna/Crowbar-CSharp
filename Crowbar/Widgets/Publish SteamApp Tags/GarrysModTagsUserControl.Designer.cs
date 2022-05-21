@@ -39,207 +39,207 @@ namespace Crowbar
 		[System.Diagnostics.DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.ComboBox1 = new System.Windows.Forms.ComboBox();
-			this.Label1 = new System.Windows.Forms.Label();
-			this.CheckBox1 = new Crowbar.CheckBoxEx();
-			this.CheckBox2 = new Crowbar.CheckBoxEx();
-			this.CheckBox3 = new Crowbar.CheckBoxEx();
-			this.CheckBox4 = new Crowbar.CheckBoxEx();
-			this.CheckBox5 = new Crowbar.CheckBoxEx();
-			this.CheckBox6 = new Crowbar.CheckBoxEx();
-			this.CheckBox7 = new Crowbar.CheckBoxEx();
-			this.CheckBox8 = new Crowbar.CheckBoxEx();
-			this.CheckBox9 = new Crowbar.CheckBoxEx();
-			this.GroupBox1 = new Crowbar.GroupBoxEx();
-			this.AddonTagCheckBox = new Crowbar.CheckBoxEx();
-			this.Label2 = new System.Windows.Forms.Label();
-			this.GroupBox1.SuspendLayout();
-			this.SuspendLayout();
+			ComboBox1 = new System.Windows.Forms.ComboBox();
+			Label1 = new System.Windows.Forms.Label();
+			CheckBox1 = new Crowbar.CheckBoxEx();
+			CheckBox2 = new Crowbar.CheckBoxEx();
+			CheckBox3 = new Crowbar.CheckBoxEx();
+			CheckBox4 = new Crowbar.CheckBoxEx();
+			CheckBox5 = new Crowbar.CheckBoxEx();
+			CheckBox6 = new Crowbar.CheckBoxEx();
+			CheckBox7 = new Crowbar.CheckBoxEx();
+			CheckBox8 = new Crowbar.CheckBoxEx();
+			CheckBox9 = new Crowbar.CheckBoxEx();
+			GroupBox1 = new Crowbar.GroupBoxEx();
+			AddonTagCheckBox = new Crowbar.CheckBoxEx();
+			Label2 = new System.Windows.Forms.Label();
+			GroupBox1.SuspendLayout();
+			SuspendLayout();
 			//
 			//ComboBox1
 			//
-			this.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ComboBox1.FormattingEnabled = true;
-			this.ComboBox1.Location = new System.Drawing.Point(42, 0);
-			this.ComboBox1.Name = "ComboBox1";
-			this.ComboBox1.Size = new System.Drawing.Size(110, 21);
-			this.ComboBox1.TabIndex = 1;
-			this.ComboBox1.Tag = "TagsEnabled";
+			ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			ComboBox1.FormattingEnabled = true;
+			ComboBox1.Location = new System.Drawing.Point(42, 0);
+			ComboBox1.Name = "ComboBox1";
+			ComboBox1.Size = new System.Drawing.Size(110, 21);
+			ComboBox1.TabIndex = 1;
+			ComboBox1.Tag = "TagsEnabled";
 			//
 			//Label1
 			//
-			this.Label1.AutoSize = true;
-			this.Label1.Location = new System.Drawing.Point(3, 4);
-			this.Label1.Name = "Label1";
-			this.Label1.Size = new System.Drawing.Size(33, 13);
-			this.Label1.TabIndex = 0;
-			this.Label1.Text = "Type:";
+			Label1.AutoSize = true;
+			Label1.Location = new System.Drawing.Point(3, 4);
+			Label1.Name = "Label1";
+			Label1.Size = new System.Drawing.Size(33, 13);
+			Label1.TabIndex = 0;
+			Label1.Text = "Type:";
 			//
 			//CheckBox1
 			//
-			this.CheckBox1.AutoSize = true;
-			this.CheckBox1.IsReadOnly = false;
-			this.CheckBox1.Location = new System.Drawing.Point(6, 20);
-			this.CheckBox1.Name = "CheckBox1";
-			this.CheckBox1.Size = new System.Drawing.Size(52, 17);
-			this.CheckBox1.TabIndex = 0;
-			this.CheckBox1.Tag = "Build";
-			this.CheckBox1.Text = "Build";
-			this.CheckBox1.UseVisualStyleBackColor = true;
+			CheckBox1.AutoSize = true;
+			CheckBox1.IsReadOnly = false;
+			CheckBox1.Location = new System.Drawing.Point(6, 20);
+			CheckBox1.Name = "CheckBox1";
+			CheckBox1.Size = new System.Drawing.Size(52, 17);
+			CheckBox1.TabIndex = 0;
+			CheckBox1.Tag = "Build";
+			CheckBox1.Text = "Build";
+			CheckBox1.UseVisualStyleBackColor = true;
 			//
 			//CheckBox2
 			//
-			this.CheckBox2.AutoSize = true;
-			this.CheckBox2.IsReadOnly = false;
-			this.CheckBox2.Location = new System.Drawing.Point(6, 43);
-			this.CheckBox2.Name = "CheckBox2";
-			this.CheckBox2.Size = new System.Drawing.Size(68, 17);
-			this.CheckBox2.TabIndex = 1;
-			this.CheckBox2.Tag = "Cartoon";
-			this.CheckBox2.Text = "Cartoon";
-			this.CheckBox2.UseVisualStyleBackColor = true;
+			CheckBox2.AutoSize = true;
+			CheckBox2.IsReadOnly = false;
+			CheckBox2.Location = new System.Drawing.Point(6, 43);
+			CheckBox2.Name = "CheckBox2";
+			CheckBox2.Size = new System.Drawing.Size(68, 17);
+			CheckBox2.TabIndex = 1;
+			CheckBox2.Tag = "Cartoon";
+			CheckBox2.Text = "Cartoon";
+			CheckBox2.UseVisualStyleBackColor = true;
 			//
 			//CheckBox3
 			//
-			this.CheckBox3.AutoSize = true;
-			this.CheckBox3.IsReadOnly = false;
-			this.CheckBox3.Location = new System.Drawing.Point(6, 66);
-			this.CheckBox3.Name = "CheckBox3";
-			this.CheckBox3.Size = new System.Drawing.Size(57, 17);
-			this.CheckBox3.TabIndex = 2;
-			this.CheckBox3.Tag = "Comic";
-			this.CheckBox3.Text = "Comic";
-			this.CheckBox3.UseVisualStyleBackColor = true;
+			CheckBox3.AutoSize = true;
+			CheckBox3.IsReadOnly = false;
+			CheckBox3.Location = new System.Drawing.Point(6, 66);
+			CheckBox3.Name = "CheckBox3";
+			CheckBox3.Size = new System.Drawing.Size(57, 17);
+			CheckBox3.TabIndex = 2;
+			CheckBox3.Tag = "Comic";
+			CheckBox3.Text = "Comic";
+			CheckBox3.UseVisualStyleBackColor = true;
 			//
 			//CheckBox4
 			//
-			this.CheckBox4.AutoSize = true;
-			this.CheckBox4.IsReadOnly = false;
-			this.CheckBox4.Location = new System.Drawing.Point(6, 89);
-			this.CheckBox4.Name = "CheckBox4";
-			this.CheckBox4.Size = new System.Drawing.Size(46, 17);
-			this.CheckBox4.TabIndex = 3;
-			this.CheckBox4.Tag = "Fun";
-			this.CheckBox4.Text = "Fun";
-			this.CheckBox4.UseVisualStyleBackColor = true;
+			CheckBox4.AutoSize = true;
+			CheckBox4.IsReadOnly = false;
+			CheckBox4.Location = new System.Drawing.Point(6, 89);
+			CheckBox4.Name = "CheckBox4";
+			CheckBox4.Size = new System.Drawing.Size(46, 17);
+			CheckBox4.TabIndex = 3;
+			CheckBox4.Tag = "Fun";
+			CheckBox4.Text = "Fun";
+			CheckBox4.UseVisualStyleBackColor = true;
 			//
 			//CheckBox5
 			//
-			this.CheckBox5.AutoSize = true;
-			this.CheckBox5.IsReadOnly = false;
-			this.CheckBox5.Location = new System.Drawing.Point(6, 112);
-			this.CheckBox5.Name = "CheckBox5";
-			this.CheckBox5.Size = new System.Drawing.Size(57, 17);
-			this.CheckBox5.TabIndex = 4;
-			this.CheckBox5.Tag = "Movie";
-			this.CheckBox5.Text = "Movie";
-			this.CheckBox5.UseVisualStyleBackColor = true;
+			CheckBox5.AutoSize = true;
+			CheckBox5.IsReadOnly = false;
+			CheckBox5.Location = new System.Drawing.Point(6, 112);
+			CheckBox5.Name = "CheckBox5";
+			CheckBox5.Size = new System.Drawing.Size(57, 17);
+			CheckBox5.TabIndex = 4;
+			CheckBox5.Tag = "Movie";
+			CheckBox5.Text = "Movie";
+			CheckBox5.UseVisualStyleBackColor = true;
 			//
 			//CheckBox6
 			//
-			this.CheckBox6.AutoSize = true;
-			this.CheckBox6.IsReadOnly = false;
-			this.CheckBox6.Location = new System.Drawing.Point(6, 135);
-			this.CheckBox6.Name = "CheckBox6";
-			this.CheckBox6.Size = new System.Drawing.Size(65, 17);
-			this.CheckBox6.TabIndex = 5;
-			this.CheckBox6.Tag = "Realism";
-			this.CheckBox6.Text = "Realism";
-			this.CheckBox6.UseVisualStyleBackColor = true;
+			CheckBox6.AutoSize = true;
+			CheckBox6.IsReadOnly = false;
+			CheckBox6.Location = new System.Drawing.Point(6, 135);
+			CheckBox6.Name = "CheckBox6";
+			CheckBox6.Size = new System.Drawing.Size(65, 17);
+			CheckBox6.TabIndex = 5;
+			CheckBox6.Tag = "Realism";
+			CheckBox6.Text = "Realism";
+			CheckBox6.UseVisualStyleBackColor = true;
 			//
 			//CheckBox7
 			//
-			this.CheckBox7.AutoSize = true;
-			this.CheckBox7.IsReadOnly = false;
-			this.CheckBox7.Location = new System.Drawing.Point(6, 158);
-			this.CheckBox7.Name = "CheckBox7";
-			this.CheckBox7.Size = new System.Drawing.Size(70, 17);
-			this.CheckBox7.TabIndex = 6;
-			this.CheckBox7.Tag = "Roleplay";
-			this.CheckBox7.Text = "Roleplay";
-			this.CheckBox7.UseVisualStyleBackColor = true;
+			CheckBox7.AutoSize = true;
+			CheckBox7.IsReadOnly = false;
+			CheckBox7.Location = new System.Drawing.Point(6, 158);
+			CheckBox7.Name = "CheckBox7";
+			CheckBox7.Size = new System.Drawing.Size(70, 17);
+			CheckBox7.TabIndex = 6;
+			CheckBox7.Tag = "Roleplay";
+			CheckBox7.Text = "Roleplay";
+			CheckBox7.UseVisualStyleBackColor = true;
 			//
 			//CheckBox8
 			//
-			this.CheckBox8.AutoSize = true;
-			this.CheckBox8.IsReadOnly = false;
-			this.CheckBox8.Location = new System.Drawing.Point(6, 181);
-			this.CheckBox8.Name = "CheckBox8";
-			this.CheckBox8.Size = new System.Drawing.Size(58, 17);
-			this.CheckBox8.TabIndex = 7;
-			this.CheckBox8.Tag = "Scenic";
-			this.CheckBox8.Text = "Scenic";
-			this.CheckBox8.UseVisualStyleBackColor = true;
+			CheckBox8.AutoSize = true;
+			CheckBox8.IsReadOnly = false;
+			CheckBox8.Location = new System.Drawing.Point(6, 181);
+			CheckBox8.Name = "CheckBox8";
+			CheckBox8.Size = new System.Drawing.Size(58, 17);
+			CheckBox8.TabIndex = 7;
+			CheckBox8.Tag = "Scenic";
+			CheckBox8.Text = "Scenic";
+			CheckBox8.UseVisualStyleBackColor = true;
 			//
 			//CheckBox9
 			//
-			this.CheckBox9.AutoSize = true;
-			this.CheckBox9.IsReadOnly = false;
-			this.CheckBox9.Location = new System.Drawing.Point(6, 204);
-			this.CheckBox9.Name = "CheckBox9";
-			this.CheckBox9.Size = new System.Drawing.Size(57, 17);
-			this.CheckBox9.TabIndex = 8;
-			this.CheckBox9.Tag = "Water";
-			this.CheckBox9.Text = "Water";
-			this.CheckBox9.UseVisualStyleBackColor = true;
+			CheckBox9.AutoSize = true;
+			CheckBox9.IsReadOnly = false;
+			CheckBox9.Location = new System.Drawing.Point(6, 204);
+			CheckBox9.Name = "CheckBox9";
+			CheckBox9.Size = new System.Drawing.Size(57, 17);
+			CheckBox9.TabIndex = 8;
+			CheckBox9.Tag = "Water";
+			CheckBox9.Text = "Water";
+			CheckBox9.UseVisualStyleBackColor = true;
 			//
 			//GroupBox1
 			//
-			this.GroupBox1.Controls.Add(this.CheckBox1);
-			this.GroupBox1.Controls.Add(this.CheckBox9);
-			this.GroupBox1.Controls.Add(this.CheckBox2);
-			this.GroupBox1.Controls.Add(this.CheckBox8);
-			this.GroupBox1.Controls.Add(this.CheckBox3);
-			this.GroupBox1.Controls.Add(this.CheckBox7);
-			this.GroupBox1.Controls.Add(this.CheckBox4);
-			this.GroupBox1.Controls.Add(this.CheckBox6);
-			this.GroupBox1.Controls.Add(this.CheckBox5);
-			this.GroupBox1.IsReadOnly = false;
-			this.GroupBox1.Location = new System.Drawing.Point(3, 27);
-			this.GroupBox1.Name = "GroupBox1";
-			this.GroupBox1.SelectedValue = null;
-			this.GroupBox1.Size = new System.Drawing.Size(151, 228);
-			this.GroupBox1.TabIndex = 2;
-			this.GroupBox1.TabStop = false;
-			this.GroupBox1.Text = "Choose up to two";
+			GroupBox1.Controls.Add(CheckBox1);
+			GroupBox1.Controls.Add(CheckBox9);
+			GroupBox1.Controls.Add(CheckBox2);
+			GroupBox1.Controls.Add(CheckBox8);
+			GroupBox1.Controls.Add(CheckBox3);
+			GroupBox1.Controls.Add(CheckBox7);
+			GroupBox1.Controls.Add(CheckBox4);
+			GroupBox1.Controls.Add(CheckBox6);
+			GroupBox1.Controls.Add(CheckBox5);
+			GroupBox1.IsReadOnly = false;
+			GroupBox1.Location = new System.Drawing.Point(3, 27);
+			GroupBox1.Name = "GroupBox1";
+			GroupBox1.SelectedValue = null;
+			GroupBox1.Size = new System.Drawing.Size(151, 228);
+			GroupBox1.TabIndex = 2;
+			GroupBox1.TabStop = false;
+			GroupBox1.Text = "Choose up to two";
 			//
 			//AddonTagCheckBox
 			//
-			this.AddonTagCheckBox.AutoSize = true;
-			this.AddonTagCheckBox.Enabled = false;
-			this.AddonTagCheckBox.IsReadOnly = false;
-			this.AddonTagCheckBox.Location = new System.Drawing.Point(72, 261);
-			this.AddonTagCheckBox.Name = "AddonTagCheckBox";
-			this.AddonTagCheckBox.Size = new System.Drawing.Size(61, 17);
-			this.AddonTagCheckBox.TabIndex = 9;
-			this.AddonTagCheckBox.Tag = "Addon";
-			this.AddonTagCheckBox.Text = "Addon";
-			this.AddonTagCheckBox.UseVisualStyleBackColor = true;
+			AddonTagCheckBox.AutoSize = true;
+			AddonTagCheckBox.Enabled = false;
+			AddonTagCheckBox.IsReadOnly = false;
+			AddonTagCheckBox.Location = new System.Drawing.Point(72, 261);
+			AddonTagCheckBox.Name = "AddonTagCheckBox";
+			AddonTagCheckBox.Size = new System.Drawing.Size(61, 17);
+			AddonTagCheckBox.TabIndex = 9;
+			AddonTagCheckBox.Tag = "Addon";
+			AddonTagCheckBox.Text = "Addon";
+			AddonTagCheckBox.UseVisualStyleBackColor = true;
 			//
 			//Label2
 			//
-			this.Label2.AutoSize = true;
-			this.Label2.Location = new System.Drawing.Point(3, 262);
-			this.Label2.Name = "Label2";
-			this.Label2.Size = new System.Drawing.Size(63, 13);
-			this.Label2.TabIndex = 10;
-			this.Label2.Text = "Always set:";
+			Label2.AutoSize = true;
+			Label2.Location = new System.Drawing.Point(3, 262);
+			Label2.Name = "Label2";
+			Label2.Size = new System.Drawing.Size(63, 13);
+			Label2.TabIndex = 10;
+			Label2.Text = "Always set:";
 			//
 			//GarrysModTagsUserControl
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.Label2);
-			this.Controls.Add(this.AddonTagCheckBox);
-			this.Controls.Add(this.GroupBox1);
-			this.Controls.Add(this.Label1);
-			this.Controls.Add(this.ComboBox1);
-			this.Name = "GarrysModTagsUserControl";
-			this.Size = new System.Drawing.Size(168, 299);
-			this.GroupBox1.ResumeLayout(false);
-			this.GroupBox1.PerformLayout();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new System.Drawing.SizeF(6.0F, 13.0F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			Controls.Add(Label2);
+			Controls.Add(AddonTagCheckBox);
+			Controls.Add(GroupBox1);
+			Controls.Add(Label1);
+			Controls.Add(ComboBox1);
+			Name = "GarrysModTagsUserControl";
+			Size = new System.Drawing.Size(168, 299);
+			GroupBox1.ResumeLayout(false);
+			GroupBox1.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
 
 		}
 

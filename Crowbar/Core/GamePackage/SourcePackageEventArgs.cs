@@ -14,15 +14,15 @@ namespace Crowbar
 		public SourcePackageEventArgs(BasePackageDirectoryEntry entry, string entryDataOutputText) : base()
 		{
 
-			this.theEntry = entry;
-			this.theEntryDataOutputText = entryDataOutputText;
+			theEntry = entry;
+			theEntryDataOutputText = entryDataOutputText;
 		}
 
 		public BasePackageDirectoryEntry Entry
 		{
 			get
 			{
-				return this.theEntry;
+				return theEntry;
 			}
 		}
 
@@ -30,11 +30,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theEntryDataOutputText;
+				return theEntryDataOutputText;
 			}
 			set
 			{
-				this.theEntryDataOutputText = value;
+				theEntryDataOutputText = value;
 			}
 		}
 

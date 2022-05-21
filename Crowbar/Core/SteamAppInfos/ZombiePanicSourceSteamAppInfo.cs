@@ -18,12 +18,12 @@ namespace Crowbar
 		public ZombiePanicSourceSteamAppInfo() : base()
 		{
 
-			this.ID = new AppId_t(17500);
-			this.Name = "Zombie Panic! Source";
-			this.UsesSteamUGC = true;
-			this.CanUseContentFolderOrFile = false;
+			ID = new AppId_t(17500);
+			Name = "Zombie Panic! Source";
+			UsesSteamUGC = true;
+			CanUseContentFolderOrFile = false;
 			//Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-			this.TagsControlType = typeof(ZombiePanicSourceTagsUserControl);
+			TagsControlType = typeof(ZombiePanicSourceTagsUserControl);
 		}
 
 		public enum ZombiePanicSourceTypeTags

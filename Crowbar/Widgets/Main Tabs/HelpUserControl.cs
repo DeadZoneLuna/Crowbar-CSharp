@@ -23,7 +23,7 @@ namespace Crowbar
 			//NOTE: Try-Catch is needed so that widget will be shown in MainForm without raising exception.
 			try
 			{
-				this.Init();
+				Init();
 			}
 			catch
 			{
@@ -36,10 +36,10 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.TutorialLinkLabel.Links.Add(0, this.TutorialLinkLabel.Text.Length, AppConstants.HelpTutorialLink);
-			this.ContentsLinkLabel.Links.Add(0, this.ContentsLinkLabel.Text.Length, AppConstants.HelpContentsLink);
-			this.IndexLinkLabel.Links.Add(0, this.IndexLinkLabel.Text.Length, AppConstants.HelpIndexLink);
-			this.TipsLinkLabel.Links.Add(0, this.TipsLinkLabel.Text.Length, AppConstants.HelpTipsLink);
+			TutorialLinkLabel.Links.Add(0, TutorialLinkLabel.Text.Length, AppConstants.HelpTutorialLink);
+			ContentsLinkLabel.Links.Add(0, ContentsLinkLabel.Text.Length, AppConstants.HelpContentsLink);
+			IndexLinkLabel.Links.Add(0, IndexLinkLabel.Text.Length, AppConstants.HelpIndexLink);
+			TipsLinkLabel.Links.Add(0, TipsLinkLabel.Text.Length, AppConstants.HelpTipsLink);
 		}
 
 		//Private Sub Free()

@@ -22,10 +22,10 @@ namespace Crowbar
 
 		public BitmapFile(string bmpPathFileName, UInt32 width, UInt32 height, List<byte> data)
 		{
-			this.thePathFileName = bmpPathFileName;
-			this.theWidth = width;
-			this.theHeight = height;
-			this.theData = data;
+			thePathFileName = bmpPathFileName;
+			theWidth = width;
+			theHeight = height;
+			theData = data;
 		}
 
 #endregion
@@ -142,7 +142,7 @@ namespace Crowbar
 			BinaryWriter outputFileWriter = null;
 			try
 			{
-				outputFileStream = new FileStream(this.thePathFileName, FileMode.OpenOrCreate);
+				outputFileStream = new FileStream(thePathFileName, FileMode.OpenOrCreate);
 				if (outputFileStream != null)
 				{
 					try
@@ -159,12 +159,12 @@ namespace Crowbar
 						UInt32 dataSize = 0;
 						//paddedWidthUsedInFile = CUInt(MathModule.AlignLong(Me.theWidth, 3))
 						//NOTE: Align to 4 byte boundary.
-						alignedWidthUsedInFile = (uint)MathModule.AlignLong(this.theWidth, 4);
+						alignedWidthUsedInFile = (uint)MathModule.AlignLong(theWidth, 4);
 						fileHeaderSize = 14;
 						infoHeaderSize = 40;
 						// 256 * size of BitmapRgbQuad = 256 * 4 = 1024
 						paletteSize = 1024;
-						dataSize = alignedWidthUsedInFile * this.theHeight;
+						dataSize = alignedWidthUsedInFile * theHeight;
 
 						//	// Write file header
 						outputFileWriter.Write('B');
@@ -177,7 +177,7 @@ namespace Crowbar
 						//	// Write info header
 						outputFileWriter.Write(infoHeaderSize);
 						outputFileWriter.Write(alignedWidthUsedInFile);
-						outputFileWriter.Write(this.theHeight);
+						outputFileWriter.Write(theHeight);
 						outputFileWriter.Write((ushort)1);
 						outputFileWriter.Write((ushort)8);
 						outputFileWriter.Write((uint)0);
@@ -188,36 +188,36 @@ namespace Crowbar
 						outputFileWriter.Write((uint)0);
 
 						//	// Write palette (bmih.biClrUsed entries)
-						for (int dataIndex = this.theData.Count - 768; dataIndex < this.theData.Count; dataIndex += 3)
+						for (int dataIndex = theData.Count - 768; dataIndex < theData.Count; dataIndex += 3)
 						{
-							outputFileWriter.Write(this.theData[dataIndex + 2]);
-							outputFileWriter.Write(this.theData[dataIndex + 1]);
-							outputFileWriter.Write(this.theData[dataIndex]);
+							outputFileWriter.Write(theData[dataIndex + 2]);
+							outputFileWriter.Write(theData[dataIndex + 1]);
+							outputFileWriter.Write(theData[dataIndex]);
 							outputFileWriter.Write((byte)0);
 						}
 
 						//	// Write bitmap bits (remainder of file)
 						// Write the rows in reverse order.
-						int startOfLastRowOffset = (int)(this.theData.Count - 768 - this.theWidth);
+						int startOfLastRowOffset = (int)(theData.Count - 768 - theWidth);
 						//For dataStoredIndex As Integer = startOfLastRowOffset To 0 Step CInt(-Me.theWidth)
 						int dataStoredIndex = startOfLastRowOffset;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of this.theHeight - 1UI for every iteration:
-						uint tempVar = this.theHeight - 1U;
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of theHeight - 1UI for every iteration:
+						uint tempVar = theHeight - 1U;
 						for (uint rowIndex = 0; rowIndex <= tempVar; rowIndex++)
 						{
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (int)(dataStoredIndex + this.theWidth - 1) for every iteration:
-							int tempVar2 = (int)(dataStoredIndex + this.theWidth - 1);
+//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (int)(dataStoredIndex + theWidth - 1) for every iteration:
+							int tempVar2 = (int)(dataStoredIndex + theWidth - 1);
 							for (int dataIndex = dataStoredIndex; dataIndex <= tempVar2; dataIndex++)
 							{
-								outputFileWriter.Write(this.theData[dataIndex]);
+								outputFileWriter.Write(theData[dataIndex]);
 							}
 //INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (int)(dataStoredIndex + alignedWidthUsedInFile - 1) for every iteration:
 							int tempVar3 = (int)(dataStoredIndex + alignedWidthUsedInFile - 1);
-							for (int paddingIndex = (int)(dataStoredIndex + this.theWidth); paddingIndex <= tempVar3; paddingIndex++)
+							for (int paddingIndex = (int)(dataStoredIndex + theWidth); paddingIndex <= tempVar3; paddingIndex++)
 							{
 								outputFileWriter.Write((byte)0);
 							}
-							dataStoredIndex -= (int)this.theWidth;
+							dataStoredIndex -= (int)theWidth;
 						}
 					}
 					catch (Exception ex)

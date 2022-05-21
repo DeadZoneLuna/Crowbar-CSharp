@@ -20,7 +20,7 @@ namespace Crowbar
 		{
 			get
 			{
-				return (this.id == GmaFileData.GMA_ID);
+				return (id == GmaFileData.GMA_ID);
 			}
 		}
 

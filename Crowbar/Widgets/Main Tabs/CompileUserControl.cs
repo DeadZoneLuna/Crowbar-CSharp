@@ -29,48 +29,48 @@ namespace Crowbar
 
 		private void Init()
 		{
-			this.QcPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileQcPathFileName", false, DataSourceUpdateMode.OnValidation);
+			QcPathFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileQcPathFileName", false, DataSourceUpdateMode.OnValidation);
 
-			this.OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOutputFullPath", false, DataSourceUpdateMode.OnValidation);
-			this.OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
-			this.InitOutputPathComboBox();
-			this.UpdateOutputPathWidgets();
+			OutputPathTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOutputFullPath", false, DataSourceUpdateMode.OnValidation);
+			OutputSubfolderTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOutputSubfolderName", false, DataSourceUpdateMode.OnValidation);
+			InitOutputPathComboBox();
+			UpdateOutputPathWidgets();
 
 			//NOTE: The DataSource, DisplayMember, and ValueMember need to be set before DataBindings, or else an exception is raised.
-			this.GameSetupComboBox.DisplayMember = "GameName";
-			this.GameSetupComboBox.ValueMember = "GameName";
-			this.GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
-			this.GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "CompileGameSetupSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
+			GameSetupComboBox.DisplayMember = "GameName";
+			GameSetupComboBox.ValueMember = "GameName";
+			GameSetupComboBox.DataSource = MainCROWBAR.TheApp.Settings.GameSetups;
+			GameSetupComboBox.DataBindings.Add("SelectedIndex", MainCROWBAR.TheApp.Settings, "CompileGameSetupSelectedIndex", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			this.InitCrowbarOptions();
-			this.InitCompilerOptions();
+			InitCrowbarOptions();
+			InitCompilerOptions();
 
-			this.theCompiledRelativePathFileNames = new BindingListEx<string>();
-			this.CompiledFilesComboBox.DataSource = this.theCompiledRelativePathFileNames;
+			theCompiledRelativePathFileNames = new BindingListEx<string>();
+			CompiledFilesComboBox.DataSource = theCompiledRelativePathFileNames;
 
-			this.UpdateCompileMode();
-			this.UpdateWidgets(false);
-			this.UpdateCompilerOptions();
+			UpdateCompileMode();
+			UpdateWidgets(false);
+			UpdateCompilerOptions();
 
 			MainCROWBAR.TheApp.Settings.PropertyChanged += AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Compiler.ProgressChanged += this.CompilerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Compiler.RunWorkerCompleted += this.CompilerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Compiler.ProgressChanged += CompilerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Compiler.RunWorkerCompleted += CompilerBackgroundWorker_RunWorkerCompleted;
 
-			this.QcPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			QcPathFileNameTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 		}
 
 		private void InitOutputPathComboBox()
 		{
 			IList anEnumList = EnumHelper.ToList(typeof(AppEnums.CompileOutputPathOptions));
 
-			this.OutputPathComboBox.DataBindings.Clear();
+			OutputPathComboBox.DataBindings.Clear();
 			try
 			{
-				this.OutputPathComboBox.DisplayMember = "Value";
-				this.OutputPathComboBox.ValueMember = "Key";
-				this.OutputPathComboBox.DataSource = anEnumList;
-				this.OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "CompileOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
+				OutputPathComboBox.DisplayMember = "Value";
+				OutputPathComboBox.ValueMember = "Key";
+				OutputPathComboBox.DataSource = anEnumList;
+				OutputPathComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "CompileOutputFolderOption", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				// Do not use this line because it will override the value automatically assigned by the data bindings above.
 				//Me.OutputPathComboBox.SelectedIndex = 0
@@ -83,56 +83,56 @@ namespace Crowbar
 
 		private void InitCrowbarOptions()
 		{
-			this.GoldSourceEngineLogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileGoldSourceLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.SourceEngineLogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileSourceLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			GoldSourceEngineLogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileGoldSourceLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			SourceEngineLogFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileSourceLogFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void InitCompilerOptions()
 		{
-			this.theSelectedCompilerOptions = new List<string>();
+			theSelectedCompilerOptions = new List<string>();
 
 			// GoldSource
 
 			// Source
 
-			this.CompilerOptionDefineBonesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.CompilerOptionDefineBonesWriteQciFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesCreateFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.CompilerOptionDefineBonesFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesQciFileName", false, DataSourceUpdateMode.OnValidation);
-			this.CompilerOptionDefineBonesOverwriteQciFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesOverwriteQciFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.CompilerOptionDefineBonesModifyQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesModifyQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.CompilerOptionNoP4CheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionNoP4IsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.CompilerOptionVerboseCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionVerboseIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
-			this.UpdateCompilerOptionDefineBonesWidgets();
+			CompilerOptionDefineBonesCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			CompilerOptionDefineBonesWriteQciFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesCreateFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			CompilerOptionDefineBonesFileNameTextBox.DataBindings.Add("Text", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesQciFileName", false, DataSourceUpdateMode.OnValidation);
+			CompilerOptionDefineBonesOverwriteQciFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesOverwriteQciFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			CompilerOptionDefineBonesModifyQcFileCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionDefineBonesModifyQcFileIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			CompilerOptionNoP4CheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionNoP4IsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			CompilerOptionVerboseCheckBox.DataBindings.Add("Checked", MainCROWBAR.TheApp.Settings, "CompileOptionVerboseIsChecked", false, DataSourceUpdateMode.OnPropertyChanged);
+			UpdateCompilerOptionDefineBonesWidgets();
 		}
 
 		private void Free()
 		{
-			this.QcPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
-			this.OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			QcPathFileNameTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
+			OutputPathTextBox.DataBindings["Text"].Parse -= FileManager.ParsePathFileName;
 			MainCROWBAR.TheApp.Settings.PropertyChanged -= AppSettings_PropertyChanged;
-			MainCROWBAR.TheApp.Compiler.ProgressChanged -= this.CompilerBackgroundWorker_ProgressChanged;
-			MainCROWBAR.TheApp.Compiler.RunWorkerCompleted -= this.CompilerBackgroundWorker_RunWorkerCompleted;
+			MainCROWBAR.TheApp.Compiler.ProgressChanged -= CompilerBackgroundWorker_ProgressChanged;
+			MainCROWBAR.TheApp.Compiler.RunWorkerCompleted -= CompilerBackgroundWorker_RunWorkerCompleted;
 
-			this.QcPathFileNameTextBox.DataBindings.Clear();
+			QcPathFileNameTextBox.DataBindings.Clear();
 
-			this.OutputPathTextBox.DataBindings.Clear();
-			this.OutputSubfolderTextBox.DataBindings.Clear();
+			OutputPathTextBox.DataBindings.Clear();
+			OutputSubfolderTextBox.DataBindings.Clear();
 
-			this.GameSetupComboBox.DataSource = null;
-			this.GameSetupComboBox.DataBindings.Clear();
+			GameSetupComboBox.DataSource = null;
+			GameSetupComboBox.DataBindings.Clear();
 
-			this.FreeCrowbarOptions();
-			this.FreeCompilerOptions();
+			FreeCrowbarOptions();
+			FreeCompilerOptions();
 
-			this.CompileComboBox.DataBindings.Clear();
+			CompileComboBox.DataBindings.Clear();
 
-			this.CompiledFilesComboBox.DataBindings.Clear();
+			CompiledFilesComboBox.DataBindings.Clear();
 		}
 
 		private void FreeCrowbarOptions()
 		{
-			this.GoldSourceEngineLogFileCheckBox.DataBindings.Clear();
-			this.SourceEngineLogFileCheckBox.DataBindings.Clear();
+			GoldSourceEngineLogFileCheckBox.DataBindings.Clear();
+			SourceEngineLogFileCheckBox.DataBindings.Clear();
 		}
 
 		private void FreeCompilerOptions()
@@ -144,10 +144,10 @@ namespace Crowbar
 			//RemoveHandler Me.CompilerOptionNoP4CheckBox.CheckedChanged, AddressOf Me.CompilerOptionNoP4CheckBox_CheckedChanged
 			//RemoveHandler Me.CompilerOptionVerboseCheckBox.CheckedChanged, AddressOf Me.CompilerOptionVerboseCheckBox_CheckedChanged
 
-			this.CompilerOptionDefineBonesCheckBox.DataBindings.Clear();
-			this.CompilerOptionDefineBonesFileNameTextBox.DataBindings.Clear();
-			this.CompilerOptionNoP4CheckBox.DataBindings.Clear();
-			this.CompilerOptionVerboseCheckBox.DataBindings.Clear();
+			CompilerOptionDefineBonesCheckBox.DataBindings.Clear();
+			CompilerOptionDefineBonesFileNameTextBox.DataBindings.Clear();
+			CompilerOptionNoP4CheckBox.DataBindings.Clear();
+			CompilerOptionVerboseCheckBox.DataBindings.Clear();
 		}
 
 #endregion
@@ -161,14 +161,14 @@ namespace Crowbar
 		private void CompileUserControl_Load(object sender, EventArgs e)
 		{
 			//NOTE: This code prevents Visual Studio or Windows often inexplicably extending the right side of these widgets.
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.QcPathFileNameTextBox, this.BrowseForQcPathFolderOrFileNameButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.OutputPathTextBox, this.BrowseForOutputPathButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.OutputSubfolderTextBox, this.BrowseForOutputPathButton);
-			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(this.GameModelsOutputPathTextBox, this.BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(QcPathFileNameTextBox, BrowseForQcPathFolderOrFileNameButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(OutputPathTextBox, BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(OutputSubfolderTextBox, BrowseForOutputPathButton);
+			Workarounds.WorkaroundForFrameworkAnchorRightSizingBug(GameModelsOutputPathTextBox, BrowseForOutputPathButton);
 
-			if (!this.DesignMode)
+			if (!DesignMode)
 			{
-				this.Init();
+				Init();
 			}
 		}
 
@@ -313,17 +313,17 @@ namespace Crowbar
 
 		private void OutputPathTextBox_Validated(object sender, EventArgs e)
 		{
-			this.UpdateOutputPathTextBox();
+			UpdateOutputPathTextBox();
 		}
 
 		private void BrowseForOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.BrowseForOutputPath();
+			BrowseForOutputPath();
 		}
 
 		private void GotoOutputPathButton_Click(object sender, EventArgs e)
 		{
-			this.GotoFolder();
+			GotoFolder();
 		}
 
 		private void UseDefaultOutputSubfolderButton_Click(object sender, EventArgs e)
@@ -379,12 +379,12 @@ namespace Crowbar
 
 		private void DirectCompilerOptionsTextBox_TextChanged(System.Object sender, System.EventArgs e)
 		{
-			this.SetCompilerOptionsText();
+			SetCompilerOptionsText();
 		}
 
 		private void CompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.RunCompiler();
+			RunCompiler();
 		}
 
 		private void SkipCurrentModelButton_Click(System.Object sender, System.EventArgs e)
@@ -404,13 +404,13 @@ namespace Crowbar
 
 		private void UseInViewButton_Click(System.Object sender, System.EventArgs e)
 		{
-			MainCROWBAR.TheApp.Settings.ViewMdlPathFileName = MainCROWBAR.TheApp.Compiler.GetOutputPathFileName(this.theCompiledRelativePathFileNames[this.CompiledFilesComboBox.SelectedIndex]);
+			MainCROWBAR.TheApp.Settings.ViewMdlPathFileName = MainCROWBAR.TheApp.Compiler.GetOutputPathFileName(theCompiledRelativePathFileNames[CompiledFilesComboBox.SelectedIndex]);
 			MainCROWBAR.TheApp.Settings.ViewGameSetupSelectedIndex = MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex;
 		}
 
 		private void RecompileButton_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Recompile();
+			Recompile();
 		}
 
 		private void UseInPackButton_Click(System.Object sender, System.EventArgs e)
@@ -420,7 +420,7 @@ namespace Crowbar
 
 		private void GotoCompiledMdlButton_Click(System.Object sender, System.EventArgs e)
 		{
-			string pathFileName = MainCROWBAR.TheApp.Compiler.GetOutputPathFileName(this.theCompiledRelativePathFileNames[this.CompiledFilesComboBox.SelectedIndex]);
+			string pathFileName = MainCROWBAR.TheApp.Compiler.GetOutputPathFileName(theCompiledRelativePathFileNames[CompiledFilesComboBox.SelectedIndex]);
 			FileManager.OpenWindowsExplorer(pathFileName);
 		}
 
@@ -432,44 +432,44 @@ namespace Crowbar
 		{
 			if (e.PropertyName == "CompileQcPathFileName")
 			{
-				this.UpdateCompileMode();
-				this.SetCompilerOptionsText();
+				UpdateCompileMode();
+				SetCompilerOptionsText();
 			}
 			else if (e.PropertyName == "CompileOutputFolderOption")
 			{
-				this.UpdateOutputPathWidgets();
+				UpdateOutputPathWidgets();
 			}
 			else if (e.PropertyName == "CompileGameSetupSelectedIndex")
 			{
-				this.UpdateGameModelsOutputPathTextBox();
-				this.UpdateCompilerOptions();
-				this.UpdateCompileButton();
+				UpdateGameModelsOutputPathTextBox();
+				UpdateCompilerOptions();
+				UpdateCompileButton();
 			}
 			else if (e.PropertyName == "CompileOptionDefineBonesIsChecked")
 			{
-				this.EditCompilerOptionsText("definebones", MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked);
-				this.SetCompilerOptionsText();
-				this.UpdateCompilerOptionDefineBonesWidgets();
+				EditCompilerOptionsText("definebones", MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked);
+				SetCompilerOptionsText();
+				UpdateCompilerOptionDefineBonesWidgets();
 			}
 			else if (e.PropertyName == "CompileOptionDefineBonesCreateFileIsChecked")
 			{
-				this.UpdateCompilerOptionDefineBonesWidgets();
+				UpdateCompilerOptionDefineBonesWidgets();
 				//ElseIf e.PropertyName = "CompileOptionDefineBonesModifyQcFileIsChecked" Then
 				//	Me.UpdateCompilerOptionDefineBonesWidgets()
 			}
 			else if (e.PropertyName == "CompileOptionNoP4IsChecked")
 			{
-				this.EditCompilerOptionsText("nop4", MainCROWBAR.TheApp.Settings.CompileOptionNoP4IsChecked);
-				this.SetCompilerOptionsText();
+				EditCompilerOptionsText("nop4", MainCROWBAR.TheApp.Settings.CompileOptionNoP4IsChecked);
+				SetCompilerOptionsText();
 			}
 			else if (e.PropertyName == "CompileOptionVerboseIsChecked")
 			{
-				this.EditCompilerOptionsText("verbose", MainCROWBAR.TheApp.Settings.CompileOptionVerboseIsChecked);
-				this.SetCompilerOptionsText();
+				EditCompilerOptionsText("verbose", MainCROWBAR.TheApp.Settings.CompileOptionVerboseIsChecked);
+				SetCompilerOptionsText();
 			}
 			else if (e.PropertyName.StartsWith("Compile") && e.PropertyName.EndsWith("IsChecked"))
 			{
-				this.UpdateWidgets(MainCROWBAR.TheApp.Settings.CompilerIsRunning);
+				UpdateWidgets(MainCROWBAR.TheApp.Settings.CompilerIsRunning);
 			}
 		}
 
@@ -493,17 +493,17 @@ namespace Crowbar
 			//End If
 			if (e.ProgressPercentage == 0)
 			{
-				this.CompileLogRichTextBox.Text = "";
-				this.CompileLogRichTextBox.AppendText(line + "\r");
-				this.UpdateWidgets(true);
+				CompileLogRichTextBox.Text = "";
+				CompileLogRichTextBox.AppendText(line + "\r");
+				UpdateWidgets(true);
 			}
 			else if (e.ProgressPercentage == 1)
 			{
-				this.CompileLogRichTextBox.AppendText(line + "\r");
+				CompileLogRichTextBox.AppendText(line + "\r");
 			}
 			else if (e.ProgressPercentage == 100)
 			{
-				this.CompileLogRichTextBox.AppendText(line + "\r");
+				CompileLogRichTextBox.AppendText(line + "\r");
 			}
 		}
 
@@ -526,10 +526,10 @@ namespace Crowbar
 				{
 					statusText = "Compile succeeded";
 				}
-				this.UpdateCompiledRelativePathFileNames(compileResultInfo.theCompiledRelativePathFileNames);
+				UpdateCompiledRelativePathFileNames(compileResultInfo.theCompiledRelativePathFileNames);
 			}
 
-			this.UpdateWidgets(false);
+			UpdateWidgets(false);
 		}
 
 #endregion
@@ -554,19 +554,19 @@ namespace Crowbar
 
 		private void UpdateOutputPathWidgets()
 		{
-			this.GameModelsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder);
-			this.OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
-			this.OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
-			this.BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
-			this.BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
-			this.GotoOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
-			this.GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
-			this.UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
-			this.UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
+			GameModelsOutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder);
+			OutputPathTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
+			OutputSubfolderTextBox.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
+			BrowseForOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
+			BrowseForOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
+			GotoOutputPathButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
+			GotoOutputPathButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder) || (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder);
+			UseDefaultOutputSubfolderButton.Enabled = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
+			UseDefaultOutputSubfolderButton.Visible = (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.Subfolder);
 
 			if (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.GameModelsFolder)
 			{
-				this.UpdateGameModelsOutputPathTextBox();
+				UpdateGameModelsOutputPathTextBox();
 			}
 		}
 
@@ -582,7 +582,7 @@ namespace Crowbar
 				gamePath = FileManager.GetPath(gameSetup.GamePathFileName);
 				gameModelsPath = Path.Combine(gamePath, "models");
 
-				this.GameModelsOutputPathTextBox.Text = gameModelsPath;
+				GameModelsOutputPathTextBox.Text = gameModelsPath;
 			}
 		}
 
@@ -590,7 +590,7 @@ namespace Crowbar
 		{
 			if (MainCROWBAR.TheApp.Settings.CompileOutputFolderOption == AppEnums.CompileOutputPathOptions.WorkFolder)
 			{
-				if (string.IsNullOrEmpty(this.OutputPathTextBox.Text))
+				if (string.IsNullOrEmpty(OutputPathTextBox.Text))
 				{
 					try
 					{
@@ -675,24 +675,24 @@ namespace Crowbar
 
 		private void UpdateCompilerOptionDefineBonesWidgets()
 		{
-			this.CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled = this.CompilerOptionDefineBonesCheckBox.Checked;
-			this.CompilerOptionDefineBonesFileNameTextBox.Enabled = this.CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && this.CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
-			this.CompilerOptionDefineBonesOverwriteQciFileCheckBox.Enabled = this.CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && this.CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
-			this.CompilerOptionDefineBonesModifyQcFileCheckBox.Enabled = this.CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && this.CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
+			CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled = CompilerOptionDefineBonesCheckBox.Checked;
+			CompilerOptionDefineBonesFileNameTextBox.Enabled = CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
+			CompilerOptionDefineBonesOverwriteQciFileCheckBox.Enabled = CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
+			CompilerOptionDefineBonesModifyQcFileCheckBox.Enabled = CompilerOptionDefineBonesWriteQciFileCheckBox.Enabled && CompilerOptionDefineBonesWriteQciFileCheckBox.Checked;
 
-			this.UpdateCompileButton();
+			UpdateCompileButton();
 		}
 
 		private void UpdateCompileButton()
 		{
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[MainCROWBAR.TheApp.Settings.CompileGameSetupSelectedIndex];
-			if (this.CompilerOptionDefineBonesCheckBox.Checked && gameSetup.GameEngine == AppEnums.GameEngine.Source)
+			if (CompilerOptionDefineBonesCheckBox.Checked && gameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
-				this.CompileButton.Text = "&Compile DefineBones";
+				CompileButton.Text = "&Compile DefineBones";
 			}
 			else
 			{
-				this.CompileButton.Text = "&Compile";
+				CompileButton.Text = "&Compile";
 			}
 		}
 
@@ -700,9 +700,9 @@ namespace Crowbar
 		{
 			MainCROWBAR.TheApp.Settings.CompilerIsRunning = compilerIsRunning;
 
-			this.CompileComboBox.Enabled = !compilerIsRunning;
-			this.QcPathFileNameTextBox.Enabled = !compilerIsRunning;
-			this.BrowseForQcPathFolderOrFileNameButton.Enabled = !compilerIsRunning;
+			CompileComboBox.Enabled = !compilerIsRunning;
+			QcPathFileNameTextBox.Enabled = !compilerIsRunning;
+			BrowseForQcPathFolderOrFileNameButton.Enabled = !compilerIsRunning;
 
 			//Me.OutputSubfolderNameRadioButton.Enabled = Not compilerIsRunning
 			//Me.OutputSubfolderNameTextBox.Enabled = Not compilerIsRunning
@@ -710,25 +710,25 @@ namespace Crowbar
 			//Me.OutputFullPathRadioButton.Enabled = Not compilerIsRunning
 			//Me.OutputFullPathTextBox.Enabled = Not compilerIsRunning
 			//Me.BrowseForOutputPathNameButton.Enabled = Not compilerIsRunning
-			this.OutputPathComboBox.Enabled = !compilerIsRunning;
-			this.OutputPathTextBox.Enabled = !compilerIsRunning;
-			this.OutputSubfolderTextBox.Enabled = !compilerIsRunning;
-			this.BrowseForOutputPathButton.Enabled = !compilerIsRunning;
-			this.GotoOutputPathButton.Enabled = !compilerIsRunning;
-			this.UseDefaultOutputSubfolderButton.Enabled = !compilerIsRunning;
+			OutputPathComboBox.Enabled = !compilerIsRunning;
+			OutputPathTextBox.Enabled = !compilerIsRunning;
+			OutputSubfolderTextBox.Enabled = !compilerIsRunning;
+			BrowseForOutputPathButton.Enabled = !compilerIsRunning;
+			GotoOutputPathButton.Enabled = !compilerIsRunning;
+			UseDefaultOutputSubfolderButton.Enabled = !compilerIsRunning;
 
-			this.OptionsGroupBox.Enabled = !compilerIsRunning;
+			OptionsGroupBox.Enabled = !compilerIsRunning;
 
-			this.CompileButton.Enabled = !compilerIsRunning;
-			this.SkipCurrentModelButton.Enabled = compilerIsRunning;
-			this.CancelCompileButton.Enabled = compilerIsRunning;
-			this.UseAllInPackButton.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0;
+			CompileButton.Enabled = !compilerIsRunning;
+			SkipCurrentModelButton.Enabled = compilerIsRunning;
+			CancelCompileButton.Enabled = compilerIsRunning;
+			UseAllInPackButton.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0;
 
-			this.CompiledFilesComboBox.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0;
-			this.UseInViewButton.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0 && (Path.GetExtension(this.theCompiledRelativePathFileNames[this.CompiledFilesComboBox.SelectedIndex]) == ".mdl");
-			this.RecompileButton.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0;
-			this.UseInPackButton.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0;
-			this.GotoCompiledMdlButton.Enabled = !compilerIsRunning && this.theCompiledRelativePathFileNames.Count > 0;
+			CompiledFilesComboBox.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0;
+			UseInViewButton.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0 && (Path.GetExtension(theCompiledRelativePathFileNames[CompiledFilesComboBox.SelectedIndex]) == ".mdl");
+			RecompileButton.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0;
+			UseInPackButton.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0;
+			GotoCompiledMdlButton.Enabled = !compilerIsRunning && theCompiledRelativePathFileNames.Count > 0;
 		}
 
 		private void UpdateCompiledRelativePathFileNames(BindingListEx<string> iCompiledRelativePathFileNames)
@@ -739,12 +739,12 @@ namespace Crowbar
 				//For Each pathFileName As String In iCompiledRelativePathFileNames
 				//	Me.theCompiledRelativePathFileNames.Add(pathFileName)
 				//Next
-				this.theCompiledRelativePathFileNames = iCompiledRelativePathFileNames;
+				theCompiledRelativePathFileNames = iCompiledRelativePathFileNames;
 				//NOTE: Do not sort because the list is already sorted by file and then by folder.
 				//Me.theCompiledRelativePathFileNames.Sort()
 				//NOTE: Need to set to nothing first to force it to update.
-				this.CompiledFilesComboBox.DataSource = null;
-				this.CompiledFilesComboBox.DataSource = this.theCompiledRelativePathFileNames;
+				CompiledFilesComboBox.DataSource = null;
+				CompiledFilesComboBox.DataSource = theCompiledRelativePathFileNames;
 			}
 		}
 
@@ -755,7 +755,7 @@ namespace Crowbar
 
 			anEnumList = EnumHelper.ToList(typeof(AppEnums.InputOptions));
 			previousSelectedInputOption = MainCROWBAR.TheApp.Settings.CompileMode;
-			this.CompileComboBox.DataBindings.Clear();
+			CompileComboBox.DataBindings.Clear();
 			try
 			{
 				if (File.Exists(MainCROWBAR.TheApp.Settings.CompileQcPathFileName))
@@ -775,10 +775,10 @@ namespace Crowbar
 					//	Exit Try
 				}
 
-				this.CompileComboBox.DisplayMember = "Value";
-				this.CompileComboBox.ValueMember = "Key";
-				this.CompileComboBox.DataSource = anEnumList;
-				this.CompileComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "CompileMode", false, DataSourceUpdateMode.OnPropertyChanged);
+				CompileComboBox.DisplayMember = "Value";
+				CompileComboBox.ValueMember = "Key";
+				CompileComboBox.DataSource = anEnumList;
+				CompileComboBox.DataBindings.Add("SelectedValue", MainCROWBAR.TheApp.Settings, "CompileMode", false, DataSourceUpdateMode.OnPropertyChanged);
 
 				if (EnumHelper.Contains(previousSelectedInputOption, anEnumList))
 				{
@@ -822,26 +822,26 @@ namespace Crowbar
 
 			if (gameSetup.GameEngine == AppEnums.GameEngine.GoldSource)
 			{
-				this.CompilerOptionsGoldSourceEnginePanel.Visible = true;
-				this.CompilerOptionsSourceEnginePanel.Visible = false;
+				CompilerOptionsGoldSourceEnginePanel.Visible = true;
+				CompilerOptionsSourceEnginePanel.Visible = false;
 
 				//Me.EditCompilerOptionsText("definebones", TheApp.Settings.CompileOptionDefineBonesIsChecked)
 
-				this.EditCompilerOptionsText("definebones", false);
-				this.EditCompilerOptionsText("nop4", false);
-				this.EditCompilerOptionsText("verbose", false);
+				EditCompilerOptionsText("definebones", false);
+				EditCompilerOptionsText("nop4", false);
+				EditCompilerOptionsText("verbose", false);
 			}
 			else
 			{
-				this.CompilerOptionsGoldSourceEnginePanel.Visible = false;
-				this.CompilerOptionsSourceEnginePanel.Visible = true;
+				CompilerOptionsGoldSourceEnginePanel.Visible = false;
+				CompilerOptionsSourceEnginePanel.Visible = true;
 
-				this.EditCompilerOptionsText("definebones", MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked);
-				this.EditCompilerOptionsText("nop4", MainCROWBAR.TheApp.Settings.CompileOptionNoP4IsChecked);
-				this.EditCompilerOptionsText("verbose", MainCROWBAR.TheApp.Settings.CompileOptionVerboseIsChecked);
+				EditCompilerOptionsText("definebones", MainCROWBAR.TheApp.Settings.CompileOptionDefineBonesIsChecked);
+				EditCompilerOptionsText("nop4", MainCROWBAR.TheApp.Settings.CompileOptionNoP4IsChecked);
+				EditCompilerOptionsText("verbose", MainCROWBAR.TheApp.Settings.CompileOptionVerboseIsChecked);
 			}
 
-			this.SetCompilerOptionsText();
+			SetCompilerOptionsText();
 		}
 
 		private void EditCompilerOptionsText(string iCompilerOption, bool optionIsEnabled)
@@ -851,17 +851,17 @@ namespace Crowbar
 
 			if (optionIsEnabled)
 			{
-				if (!this.theSelectedCompilerOptions.Contains(compilerOption))
+				if (!theSelectedCompilerOptions.Contains(compilerOption))
 				{
-					this.theSelectedCompilerOptions.Add(compilerOption);
-					this.theSelectedCompilerOptions.Sort();
+					theSelectedCompilerOptions.Add(compilerOption);
+					theSelectedCompilerOptions.Sort();
 				}
 			}
 			else
 			{
-				if (this.theSelectedCompilerOptions.Contains(compilerOption))
+				if (theSelectedCompilerOptions.Contains(compilerOption))
 				{
-					this.theSelectedCompilerOptions.Remove(compilerOption);
+					theSelectedCompilerOptions.Remove(compilerOption);
 				}
 			}
 		}
@@ -892,46 +892,46 @@ namespace Crowbar
 			//NOTE: Available in Framework 4.0:
 			//TheApp.Settings.CompilerOptionsText = String.Join(" ", Me.compilerOptions)
 			//------
-			foreach (string compilerOption in this.theSelectedCompilerOptions)
+			foreach (string compilerOption in theSelectedCompilerOptions)
 			{
 				MainCROWBAR.TheApp.Settings.CompileOptionsText += " ";
 				MainCROWBAR.TheApp.Settings.CompileOptionsText += compilerOption;
 			}
-			if (!string.IsNullOrEmpty(this.DirectCompilerOptionsTextBox.Text.Trim()))
+			if (!string.IsNullOrEmpty(DirectCompilerOptionsTextBox.Text.Trim()))
 			{
 				MainCROWBAR.TheApp.Settings.CompileOptionsText += " ";
-				MainCROWBAR.TheApp.Settings.CompileOptionsText += this.DirectCompilerOptionsTextBox.Text;
+				MainCROWBAR.TheApp.Settings.CompileOptionsText += DirectCompilerOptionsTextBox.Text;
 			}
 
-			this.CompilerOptionsTextBox.Text = "\"";
-			this.CompilerOptionsTextBox.Text += gameSetup.CompilerPathFileName;
-			this.CompilerOptionsTextBox.Text += "\"";
+			CompilerOptionsTextBox.Text = "\"";
+			CompilerOptionsTextBox.Text += gameSetup.CompilerPathFileName;
+			CompilerOptionsTextBox.Text += "\"";
 
 			if (gameSetup.GameEngine == AppEnums.GameEngine.Source)
 			{
-				this.CompilerOptionsTextBox.Text += " ";
-				this.CompilerOptionsTextBox.Text += "-game";
-				this.CompilerOptionsTextBox.Text += " ";
-				this.CompilerOptionsTextBox.Text += "\"";
-				this.CompilerOptionsTextBox.Text += FileManager.GetPath(gamePathFileName);
-				this.CompilerOptionsTextBox.Text += "\"";
+				CompilerOptionsTextBox.Text += " ";
+				CompilerOptionsTextBox.Text += "-game";
+				CompilerOptionsTextBox.Text += " ";
+				CompilerOptionsTextBox.Text += "\"";
+				CompilerOptionsTextBox.Text += FileManager.GetPath(gamePathFileName);
+				CompilerOptionsTextBox.Text += "\"";
 			}
 
 			if (!string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.CompileOptionsText.Trim()))
 			{
-				this.CompilerOptionsTextBox.Text += MainCROWBAR.TheApp.Settings.CompileOptionsText;
+				CompilerOptionsTextBox.Text += MainCROWBAR.TheApp.Settings.CompileOptionsText;
 			}
 
-			this.CompilerOptionsTextBox.Text += " ";
-			this.CompilerOptionsTextBox.Text += "\"";
-			this.CompilerOptionsTextBox.Text += qcFileName;
-			this.CompilerOptionsTextBox.Text += "\"";
+			CompilerOptionsTextBox.Text += " ";
+			CompilerOptionsTextBox.Text += "\"";
+			CompilerOptionsTextBox.Text += qcFileName;
+			CompilerOptionsTextBox.Text += "\"";
 		}
 
 		private void Recompile()
 		{
 			//TODO: Compile the selected QC.
-			this.RunCompiler();
+			RunCompiler();
 		}
 
 #endregion

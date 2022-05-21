@@ -15,9 +15,9 @@ namespace Crowbar
 		public SourceMdlAnimation10() : base()
 		{
 
-			for (int offsetIndex = 0; offsetIndex < this.animationValueOffsets.Length; offsetIndex++)
+			for (int offsetIndex = 0; offsetIndex < animationValueOffsets.Length; offsetIndex++)
 			{
-				this.theAnimationValues[offsetIndex] = new List<SourceMdlAnimationValue10>();
+				theAnimationValues[offsetIndex] = new List<SourceMdlAnimationValue10>();
 			}
 		}
 

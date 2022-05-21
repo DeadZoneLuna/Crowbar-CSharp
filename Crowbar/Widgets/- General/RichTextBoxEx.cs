@@ -38,21 +38,21 @@ namespace Crowbar
 				InstanceFieldsInitialized = true;
 			}
 
-			this.CustomMenu = new ContextMenuStrip();
-			this.CustomMenu.Items.Add(this.UndoToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.RedoToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.Separator0ToolStripSeparator);
-			this.CustomMenu.Items.Add(this.CutToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.CopyToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.PasteToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.DeleteToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.Separator1ToolStripSeparator);
-			this.CustomMenu.Items.Add(this.SelectAllToolStripMenuItem);
-			this.CustomMenu.Items.Add(this.CopyAllToolStripMenuItem);
+			CustomMenu = new ContextMenuStrip();
+			CustomMenu.Items.Add(UndoToolStripMenuItem);
+			CustomMenu.Items.Add(RedoToolStripMenuItem);
+			CustomMenu.Items.Add(Separator0ToolStripSeparator);
+			CustomMenu.Items.Add(CutToolStripMenuItem);
+			CustomMenu.Items.Add(CopyToolStripMenuItem);
+			CustomMenu.Items.Add(PasteToolStripMenuItem);
+			CustomMenu.Items.Add(DeleteToolStripMenuItem);
+			CustomMenu.Items.Add(Separator1ToolStripSeparator);
+			CustomMenu.Items.Add(SelectAllToolStripMenuItem);
+			CustomMenu.Items.Add(CopyAllToolStripMenuItem);
 
-			this.ContextMenuStrip = this.CustomMenu;
+			ContextMenuStrip = CustomMenu;
 
-			this.theCueBannerText = "";
+			theCueBannerText = "";
 		}
 
 #endregion
@@ -70,11 +70,11 @@ namespace Crowbar
 		{
 			get
 			{
-				return this.theCueBannerText;
+				return theCueBannerText;
 			}
 			set
 			{
-				this.theCueBannerText = value;
+				theCueBannerText = value;
 			}
 		}
 
@@ -102,19 +102,19 @@ namespace Crowbar
 		{
 			base.OnPaint(e);
 
-			if (!string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text) && this.theOriginalFont != null)
+			if (!string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text) && theOriginalFont != null)
 			{
 				//Dim drawFont As System.Drawing.Font = New System.Drawing.Font(Me.theOriginalFont.FontFamily, Me.theOriginalFont.Size, Me.theOriginalFont.Style, Me.theOriginalFont.Unit)
-				System.Drawing.Font drawFont = new System.Drawing.Font(this.theOriginalFont.FontFamily, this.theOriginalFont.Size, FontStyle.Italic, this.theOriginalFont.Unit);
+				System.Drawing.Font drawFont = new System.Drawing.Font(theOriginalFont.FontFamily, theOriginalFont.Size, FontStyle.Italic, theOriginalFont.Unit);
 
 				Color drawForeColor = SystemColors.GrayText;
 				Color drawBackColor = SystemColors.Control;
 				if (drawForeColor == drawBackColor)
 				{
-					drawForeColor = this.ForeColor;
-					drawBackColor = this.BackColor;
+					drawForeColor = ForeColor;
+					drawBackColor = BackColor;
 				}
-				TextRenderer.DrawText(e.Graphics, this.theCueBannerText, drawFont, new Point(1, 0), drawForeColor, drawBackColor);
+				TextRenderer.DrawText(e.Graphics, theCueBannerText, drawFont, new Point(1, 0), drawForeColor, drawBackColor);
 				//======
 				//' Draw higlight.
 				//Dim higlightForeColor As Color = SystemColors.ControlLightLight
@@ -147,21 +147,21 @@ namespace Crowbar
 			//End If
 
 			// This did not solve the bug.
-			if (this.theOriginalFont == null)
+			if (theOriginalFont == null)
 			{
 				return;
 			}
 
-			if (GetStyle(ControlStyles.UserPaint) != (!string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text)))
+			if (GetStyle(ControlStyles.UserPaint) != (!string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text)))
 			{
-				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				if (this.theOriginalFont != null)
+				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				if (theOriginalFont != null)
 				{
-					this.Font = new System.Drawing.Font(this.theOriginalFont.FontFamily, this.theOriginalFont.Size, this.theOriginalFont.Style, this.theOriginalFont.Unit);
+					Font = new System.Drawing.Font(theOriginalFont.FontFamily, theOriginalFont.Size, theOriginalFont.Style, theOriginalFont.Unit);
 				}
-				this.Invalidate();
+				Invalidate();
 			}
 		}
 
@@ -169,20 +169,20 @@ namespace Crowbar
 		{
 			base.OnVisibleChanged(e);
 
-			if (this.theOriginalFont == null)
+			if (theOriginalFont == null)
 			{
 				//NOTE: Font gets changed at some point after changing style, messing up when cue banner is turned off, 
 				//      so save the Font after widget is visible for first time, but before changing style within the widget.
-				this.theOriginalFont = new System.Drawing.Font(this.Font.FontFamily, this.Font.Size, this.Font.Style, this.Font.Unit);
+				theOriginalFont = new System.Drawing.Font(Font.FontFamily, Font.Size, Font.Style, Font.Unit);
 
 				//SetStyle(ControlStyles.UserPaint, Me.theCueBannerText <> "")
-				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
-				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(this.theCueBannerText) && string.IsNullOrEmpty(this.Text));
+				SetStyle(ControlStyles.AllPaintingInWmPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.DoubleBuffer, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
+				SetStyle(ControlStyles.UserPaint, !string.IsNullOrEmpty(theCueBannerText) && string.IsNullOrEmpty(Text));
 
 				//WORKAROUND - Without these two lines, selecting individual characters with the mouse often selects to end of words.
-				this.AutoWordSelection = true;
-				this.AutoWordSelection = false;
+				AutoWordSelection = true;
+				AutoWordSelection = false;
 			}
 		}
 
@@ -192,55 +192,55 @@ namespace Crowbar
 
 		private void CustomMenu_Opening(System.Object sender, System.EventArgs e)
 		{
-			this.UndoToolStripMenuItem.Enabled = !this.ReadOnly && this.CanUndo;
-			this.RedoToolStripMenuItem.Enabled = !this.ReadOnly && this.CanRedo;
-			this.CutToolStripMenuItem.Enabled = !this.ReadOnly && this.SelectionLength > 0;
-			this.CopyToolStripMenuItem.Enabled = this.SelectionLength > 0;
-			this.PasteToolStripMenuItem.Enabled = !this.ReadOnly && Clipboard.ContainsText();
-			this.DeleteToolStripMenuItem.Enabled = !this.ReadOnly && this.SelectionLength > 0;
-			this.SelectAllToolStripMenuItem.Enabled = this.TextLength > 0 && this.SelectionLength < this.TextLength;
-			this.CopyAllToolStripMenuItem.Enabled = this.TextLength > 0 && this.SelectionLength < this.TextLength;
+			UndoToolStripMenuItem.Enabled = !ReadOnly && CanUndo;
+			RedoToolStripMenuItem.Enabled = !ReadOnly && CanRedo;
+			CutToolStripMenuItem.Enabled = !ReadOnly && SelectionLength > 0;
+			CopyToolStripMenuItem.Enabled = SelectionLength > 0;
+			PasteToolStripMenuItem.Enabled = !ReadOnly && Clipboard.ContainsText();
+			DeleteToolStripMenuItem.Enabled = !ReadOnly && SelectionLength > 0;
+			SelectAllToolStripMenuItem.Enabled = TextLength > 0 && SelectionLength < TextLength;
+			CopyAllToolStripMenuItem.Enabled = TextLength > 0 && SelectionLength < TextLength;
 		}
 
 		private void UndoToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Undo();
+			Undo();
 		}
 
 		private void RedoToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Redo();
+			Redo();
 		}
 
 		private void CutToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Cut();
+			Cut();
 		}
 
 		private void CopyToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Copy();
+			Copy();
 		}
 
 		private void PasteToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.Paste();
+			Paste();
 		}
 
 		private void DeleteToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.SelectedText = "";
+			SelectedText = "";
 		}
 
 		private void SelectAllToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.SelectAll();
+			SelectAll();
 		}
 
 		private void CopyAllToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
 		{
-			this.SelectAll();
-			this.Copy();
+			SelectAll();
+			Copy();
 			//Me.SelectionLength = 0
 		}
 

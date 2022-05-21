@@ -15,33 +15,33 @@ namespace Crowbar
 
 		public FileSeekLog()
 		{
-			this.theFileSeekList = new SortedList<long, long>();
-			this.theFileSeekDescriptionList = new SortedList<long, string>();
+			theFileSeekList = new SortedList<long, long>();
+			theFileSeekDescriptionList = new SortedList<long, string>();
 		}
 
 		public bool ContainsKey(long startOffset)
 		{
-			return this.theFileSeekList.ContainsKey(startOffset);
+			return theFileSeekList.ContainsKey(startOffset);
 		}
 
 		public void Add(long startOffset, long endOffset, string description)
 		{
 			try
 			{
-				if (this.theFileSeekList.ContainsKey(startOffset) && this.theFileSeekList[startOffset] == endOffset)
+				if (theFileSeekList.ContainsKey(startOffset) && theFileSeekList[startOffset] == endOffset)
 				{
-					this.theFileSeekDescriptionList[startOffset] += "; " + description;
+					theFileSeekDescriptionList[startOffset] += "; " + description;
 				}
-				else if (this.theFileSeekList.ContainsKey(startOffset))
+				else if (theFileSeekList.ContainsKey(startOffset))
 				{
-					string temp = this.theFileSeekDescriptionList[startOffset];
-					this.theFileSeekDescriptionList[startOffset] = "[ERROR] ";
-					this.theFileSeekDescriptionList[startOffset] += temp + "; [" + startOffset.ToString() + " - " + endOffset.ToString() + "] " + description;
+					string temp = theFileSeekDescriptionList[startOffset];
+					theFileSeekDescriptionList[startOffset] = "[ERROR] ";
+					theFileSeekDescriptionList[startOffset] += temp + "; [" + startOffset.ToString() + " - " + endOffset.ToString() + "] " + description;
 				}
 				else
 				{
-					this.theFileSeekList.Add(startOffset, endOffset);
-					this.theFileSeekDescriptionList.Add(startOffset, description);
+					theFileSeekList.Add(startOffset, endOffset);
+					theFileSeekDescriptionList.Add(startOffset, description);
 				}
 			}
 			catch (Exception ex)
@@ -54,13 +54,13 @@ namespace Crowbar
 		{
 			try
 			{
-				if (this.theFileSeekList.ContainsKey(startOffset))
+				if (theFileSeekList.ContainsKey(startOffset))
 				{
-					this.theFileSeekList.Remove(startOffset);
+					theFileSeekList.Remove(startOffset);
 				}
-				if (this.theFileSeekDescriptionList.ContainsKey(startOffset))
+				if (theFileSeekDescriptionList.ContainsKey(startOffset))
 				{
-					this.theFileSeekDescriptionList.Remove(startOffset);
+					theFileSeekDescriptionList.Remove(startOffset);
 				}
 			}
 			catch (Exception ex)
@@ -71,22 +71,22 @@ namespace Crowbar
 
 		public void Clear()
 		{
-			this.theFileSeekList.Clear();
-			this.theFileSeekDescriptionList.Clear();
+			theFileSeekList.Clear();
+			theFileSeekDescriptionList.Clear();
 		}
 
 		public long FileSize
 		{
 			get
 			{
-				return this.theFileSize;
+				return theFileSize;
 			}
 			set
 			{
-				if (this.theFileSize != value)
+				if (theFileSize != value)
 				{
-					this.theFileSize = value;
-					this.Add(this.theFileSize, this.theFileSize, "END OF FILE + 1 (File size)");
+					theFileSize = value;
+					Add(theFileSize, theFileSize, "END OF FILE + 1 (File size)");
 				}
 			}
 		}
@@ -105,15 +105,15 @@ namespace Crowbar
 				if (expectedAlignOffsetEnd > -1 && expectedAlignOffsetEnd != fileOffsetEnd2)
 				{
 					description = "[ERROR: Should end at " + expectedAlignOffsetEnd.ToString() + "] " + description;
-					description += " - " + fileOffsetStart2.ToString() + ":" + this.GetByteValues(inputFileReader, fileOffsetStart2, fileOffsetEnd2, ref allZeroesWereFound);
-					description += " - " + (fileOffsetEnd2 + 1).ToString() + ":" + this.GetByteValues(inputFileReader, fileOffsetEnd2 + 1, expectedAlignOffsetEnd, ref allZeroesWereFound);
+					description += " - " + fileOffsetStart2.ToString() + ":" + GetByteValues(inputFileReader, fileOffsetStart2, fileOffsetEnd2, ref allZeroesWereFound);
+					description += " - " + (fileOffsetEnd2 + 1).ToString() + ":" + GetByteValues(inputFileReader, fileOffsetEnd2 + 1, expectedAlignOffsetEnd, ref allZeroesWereFound);
 				}
 				else
 				{
-					description += this.GetByteValues(inputFileReader, fileOffsetStart2, fileOffsetEnd2, ref allZeroesWereFound);
+					description += GetByteValues(inputFileReader, fileOffsetStart2, fileOffsetEnd2, ref allZeroesWereFound);
 				}
 
-				this.Add(fileOffsetStart2, fileOffsetEnd2, description);
+				Add(fileOffsetStart2, fileOffsetEnd2, description);
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace Crowbar
 			//End If
 			//Me.LogToEndAndAlignToNextStart(inputFileReader, Me.theFileSeekList.Values(Me.theFileSeekList.Count - 1), byteAlignmentCount, description)
 			//NOTE: The "- 2" skips the final value that should be the "END OF FILE + 1 (File size)".
-			this.LogToEndAndAlignToNextStart(inputFileReader, this.theFileSeekList.Values[this.theFileSeekList.Count - 2], byteAlignmentCount, description);
+			LogToEndAndAlignToNextStart(inputFileReader, theFileSeekList.Values[theFileSeekList.Count - 2], byteAlignmentCount, description);
 		}
 
 		public void LogUnreadBytes(BinaryReader inputFileReader)
@@ -147,14 +147,14 @@ namespace Crowbar
 			offsetEnd = -1;
 			try
 			{
-				for (int i = 0; i < this.theFileSeekList.Count; i++)
+				for (int i = 0; i < theFileSeekList.Count; i++)
 				{
-					offsetStart = this.theFileSeekList.Keys[i];
+					offsetStart = theFileSeekList.Keys[i];
 
 					if (offsetEnd < offsetStart - 1)
 					{
 						description = "[ERROR] Unread bytes";
-						byteValues = this.GetByteValues(inputFileReader, offsetEnd + 1, offsetStart - 1, ref allZeroesWereFound);
+						byteValues = GetByteValues(inputFileReader, offsetEnd + 1, offsetStart - 1, ref allZeroesWereFound);
 						if (allZeroesWereFound)
 						{
 							description += " (all zeroes)";
@@ -166,11 +166,11 @@ namespace Crowbar
 						description += byteValues;
 
 						// Can't add into the list that is being iterated, so use temp list.
-						if (this.theFileSeekList.ContainsKey(offsetEnd + 1))
+						if (theFileSeekList.ContainsKey(offsetEnd + 1))
 						{
-							string temp = this.theFileSeekDescriptionList[offsetEnd + 1];
-							this.theFileSeekDescriptionList[offsetEnd + 1] = "[ERROR] ";
-							this.theFileSeekDescriptionList[offsetEnd + 1] += temp + "; [" + (offsetEnd + 1).ToString() + " - " + (offsetStart - 1).ToString() + "] " + description;
+							string temp = theFileSeekDescriptionList[offsetEnd + 1];
+							theFileSeekDescriptionList[offsetEnd + 1] = "[ERROR] ";
+							theFileSeekDescriptionList[offsetEnd + 1] += temp + "; [" + (offsetEnd + 1).ToString() + " - " + (offsetStart - 1).ToString() + "] " + description;
 						}
 						else
 						{
@@ -179,12 +179,12 @@ namespace Crowbar
 						}
 					}
 
-					offsetEnd = this.theFileSeekList.Values[i];
+					offsetEnd = theFileSeekList.Values[i];
 				}
 
 				for (int i = 0; i < tempFileSeekList.Count; i++)
 				{
-					this.Add(tempFileSeekList.Keys[i], tempFileSeekList.Values[i], tempFileSeekDescriptionList.Values[i]);
+					Add(tempFileSeekList.Keys[i], tempFileSeekList.Values[i], tempFileSeekDescriptionList.Values[i]);
 				}
 			}
 			catch (Exception ex)
@@ -192,7 +192,7 @@ namespace Crowbar
 				int debug = 4242;
 			}
 
-			this.LogErrors();
+			LogErrors();
 		}
 
 		public long theFileSize;
@@ -206,14 +206,14 @@ namespace Crowbar
 
 			try
 			{
-				for (int i = 0; i < this.theFileSeekList.Count; i++)
+				for (int i = 0; i < theFileSeekList.Count; i++)
 				{
-					offsetStart = this.theFileSeekList.Keys[i];
-					offsetEnd = this.theFileSeekList.Values[i];
+					offsetStart = theFileSeekList.Keys[i];
+					offsetEnd = theFileSeekList.Values[i];
 
-					if ((i < this.theFileSeekList.Count - 1) && (offsetEnd + 1 != this.theFileSeekList.Keys[i + 1]))
+					if ((i < theFileSeekList.Count - 1) && (offsetEnd + 1 != theFileSeekList.Keys[i + 1]))
 					{
-						this.theFileSeekDescriptionList[offsetStart] = "[ERROR] [End offset is incorrect] " + this.theFileSeekDescriptionList[offsetStart];
+						theFileSeekDescriptionList[offsetStart] = "[ERROR] [End offset is incorrect] " + theFileSeekDescriptionList[offsetStart];
 					}
 				}
 			}
