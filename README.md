@@ -1,5 +1,4 @@
-# Crowbar-CSharp-Test
-Test convert into C# (with Tangible Software Solutions) &amp; fixes to able running
-(`Based on 0.71 version`)
+## Crowbar-CSharp
+Converted crowbar from VB.NET into C# with able running with full features `Based on 0.71 version`
 
 Original repo: https://github.com/ZeqMacaw/Crowbar
