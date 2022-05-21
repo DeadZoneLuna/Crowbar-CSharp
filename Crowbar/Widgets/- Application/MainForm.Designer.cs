@@ -409,7 +409,10 @@ namespace Crowbar
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainForm";
             this.Text = "Crowbar";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += MainForm_Load;
+            this.FormClosed += MainForm_FormClosed;
+            base.DragEnter += MainForm_DragEnter;
+            base.DragDrop += MainForm_DragDrop;
             this.MainTabControl.ResumeLayout(false);
             this.SetUpGamesTabPage.ResumeLayout(false);
             this.DownloadTabPage.ResumeLayout(false);
@@ -425,8 +428,7 @@ namespace Crowbar
             this.AboutTabPage.ResumeLayout(false);
             this.UpdateTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
-
-		}
+        }
 		internal System.Windows.Forms.TabControl MainTabControl;
 		internal System.Windows.Forms.ToolTip MainToolTip;
 		internal System.Windows.Forms.TabPage SetUpGamesTabPage;
