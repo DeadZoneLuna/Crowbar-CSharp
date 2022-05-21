@@ -25,7 +25,7 @@ namespace Crowbar
 				string inputLine = null;
 				string modifiedLine = null;
 
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
+				//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				int pos = 0;
 				while (!(inputFileStream.EndOfStream))
 				{
@@ -42,7 +42,7 @@ namespace Crowbar
 						modifiedLine = modifiedLine.Trim();
 
 						// Need to remove any comment after the file name token (which may or may not be double-quoted).
-	//					Dim pos As Integer
+						//					Dim pos As Integer
 						if (modifiedLine.StartsWith("\""))
 						{
 							pos = modifiedLine.IndexOf("\"", 1);
@@ -97,7 +97,7 @@ namespace Crowbar
 		}
 
 		public void WriteKeyValues(string keyValuesText, string commandOrOptionText, int indentLevel = 0)
-        {
+		{
 			string lineLevel = new string('\t', indentLevel);
 			string startText = "mdlkeyvalue" + "\n";
 			string startText2 = "\"mdlkeyvalue\"";
@@ -181,9 +181,9 @@ namespace Crowbar
 
 		#region Private Methods
 		internal virtual void WriteTextLines(string text, int indentCount)
-        {
+		{
 
-        }
+		}
 
 		protected List<List<short>> GetSkinFamiliesOfChangedMaterials(List<List<short>> iSkinFamilies)
 		{
