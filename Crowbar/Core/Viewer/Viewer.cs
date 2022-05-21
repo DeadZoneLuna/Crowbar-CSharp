@@ -630,7 +630,8 @@ namespace Crowbar
 				{
 					if (FileManager.PathExistsAfterTryToCreate(gameMaterialsPath))
 					{
-						Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(inputMaterialsPath, gameMaterialsPath);
+						ConversionHelper.CopyDirectory(inputMaterialsPath, gameMaterialsPath);
+						//Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(inputMaterialsPath, gameMaterialsPath);
 						this.theGameMaterialsFolder = gameMaterialsPath;
 					}
 					else

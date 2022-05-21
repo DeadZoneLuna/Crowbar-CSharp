@@ -26,16 +26,16 @@ namespace Crowbar
 				errorReportText += "###### ";
 				errorReportText += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 				errorReportText += "   ";
-				errorReportText += My.MyApplication.Application.Info.ProductName;
+				errorReportText += Application.ProductName;
 				errorReportText += " ";
-				errorReportText += My.MyApplication.Application.Info.Version.ToString(2);
+				errorReportText += Version.Parse(Application.ProductVersion).ToString(2);
 				errorReportText += "\r\n";
 				errorReportText += "\r\n";
 
 				errorReportText += "=== Steps to reproduce the error ===";
 				errorReportText += "\r\n";
 				errorReportText += "[Describe the last few tasks you did in ";
-				errorReportText += My.MyApplication.Application.Info.ProductName;
+				errorReportText += Application.ProductName;
 				errorReportText += " before the error occurred.]";
 				errorReportText += "\r\n";
 				errorReportText += "\r\n";
@@ -43,7 +43,7 @@ namespace Crowbar
 				errorReportText += "=== What you expected to see ===";
 				errorReportText += "\r\n";
 				errorReportText += "[Explain what you expected ";
-				errorReportText += My.MyApplication.Application.Info.ProductName;
+				errorReportText += Application.ProductName;
 				errorReportText += " to do.]";
 				errorReportText += "\r\n";
 				errorReportText += "\r\n";

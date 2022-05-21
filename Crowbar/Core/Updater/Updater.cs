@@ -183,11 +183,11 @@ namespace Crowbar
 			{
 				updateCheckStatusMessage = "Unable to get update info. Please try again later.";
 			}
-			else if (this.theAppVersion == My.MyApplication.Application.Info.Version)
+			else if (this.theAppVersion == Version.Parse(Application.ProductVersion))
 			{
 				updateCheckStatusMessage = "Crowbar is up to date.";
 			}
-			else if (this.theAppVersion > My.MyApplication.Application.Info.Version)
+			else if (this.theAppVersion > Version.Parse(Application.ProductVersion))
 			{
 				updateCheckStatusMessage = "Update to version " + this.theAppVersion.ToString(2) + " available.   Size: " + MathModule.ByteUnitsConversion(fileSize);
 				outputInfo.UpdateIsAvailable = true;
@@ -232,7 +232,7 @@ namespace Crowbar
 
 		private void DownloadAfterCheckForUpdate()
 		{
-			if (this.theUpdateTaskIsEnabled && this.theAppVersion <= My.MyApplication.Application.Info.Version)
+			if (this.theUpdateTaskIsEnabled && this.theAppVersion <= Version.Parse(Application.ProductVersion))
 			{
 				return;
 			}

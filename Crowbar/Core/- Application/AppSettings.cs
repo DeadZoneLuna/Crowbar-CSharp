@@ -2126,7 +2126,7 @@ namespace Crowbar
 		public void SetDefaultUnpackOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.UnpackOutputSubfolderName = "unpacked " + My.MyApplication.Application.Info.Version.ToString(2);
+			this.UnpackOutputSubfolderName = "unpacked " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultUnpackOptions()
@@ -2140,7 +2140,7 @@ namespace Crowbar
 		public void SetDefaultDecompileOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.DecompileOutputSubfolderName = "decompiled " + My.MyApplication.Application.Info.Version.ToString(2);
+			this.DecompileOutputSubfolderName = "decompiled " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultDecompileReCreateFilesOptions()
@@ -2170,7 +2170,7 @@ namespace Crowbar
 		public void SetDefaultCompileOutputSubfolderName()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-			this.CompileOutputSubfolderName = "compiled " + My.MyApplication.Application.Info.Version.ToString(2);
+			this.CompileOutputSubfolderName = "compiled " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		public void SetDefaultCompileOptions()

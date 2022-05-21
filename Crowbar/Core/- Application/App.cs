@@ -347,9 +347,9 @@ namespace Crowbar
 			customDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ZeqMacaw");
 			customDataPath += Path.DirectorySeparatorChar.ToString();
 			//customDataPath += "Crowbar"
-			customDataPath += My.MyApplication.Application.Info.ProductName;
+			customDataPath += Application.ProductName;//My.MyApplication.Application.Info.ProductName;
 			customDataPath += " ";
-			customDataPath += My.MyApplication.Application.Info.Version.ToString(2);
+			customDataPath += Version.Parse(Application.ProductVersion).ToString(2);//My.MyApplication.Application.Info.Version.ToString(2);
 
 			FileManager.CreatePath(customDataPath);
 			//End If
@@ -500,10 +500,10 @@ namespace Crowbar
 
 		public string GetProductNameAndVersion()
 		{
-			string result = My.MyApplication.Application.Info.ProductName;
+			string result = Application.ProductName;//My.MyApplication.Application.Info.ProductName;
 
 			result += " ";
-			result += My.MyApplication.Application.Info.Version.ToString(2);
+			result += Version.Parse(Application.ProductVersion).ToString(2);//My.MyApplication.Application.Info.Version.ToString(2);
 
 			return result;
 		}

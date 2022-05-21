@@ -5,9 +5,52 @@
 //	The methods in this class replicate the behavior of miscellaneous VB features.
 //----------------------------------------------------------------------------------------
 using System;
+using System.IO;
+using System.Reflection;
 
 public static class ConversionHelper
 {
+	public static string AssemblyCopyright
+	{
+		get
+		{
+			object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+			if (attributes.Length == 0)
+			{
+				return "";
+			}
+			return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+		}
+	}
+
+	public static void CopyDirectory(string sourceDirectory, string targetDirectory)
+	{
+		var diSource = new DirectoryInfo(sourceDirectory);
+		var diTarget = new DirectoryInfo(targetDirectory);
+
+		CopyDirectory(diSource, diTarget);
+	}
+
+	public static void CopyDirectory(DirectoryInfo source, DirectoryInfo target)
+	{
+		Directory.CreateDirectory(target.FullName);
+
+		// Copy each file into the new directory.
+		foreach (FileInfo fi in source.GetFiles())
+		{
+			Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+			fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+		}
+
+		// Copy each subdirectory using recursion.
+		foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+		{
+			DirectoryInfo nextTargetSubDir =
+				target.CreateSubdirectory(diSourceSubDir.Name);
+			CopyDirectory(diSourceSubDir, nextTargetSubDir);
+		}
+	}
+
 	public static void MidStatement(ref string target, int oneBasedStart, char insert)
 	{
 		//These 'MidStatement' method overloads replicate the behavior of the VB 'Mid' statement (which is unrelated to the VB 'Mid' function)

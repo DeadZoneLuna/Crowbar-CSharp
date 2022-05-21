@@ -29,18 +29,18 @@ namespace Crowbar
 			//NOTE: Customize the application's assembly information in the "Application" pane of the project 
 			//    properties dialog (under the "Project" menu).
 
-			this.ProductNameLinkLabel.Text = My.MyApplication.Application.Info.ProductName;
-			this.ProductNameLinkLabel.Links.Add(0, My.MyApplication.Application.Info.ProductName.Length, Properties.Resources.About_ProductLink);
+			this.ProductNameLinkLabel.Text = Application.ProductName;
+			this.ProductNameLinkLabel.Links.Add(0, Application.ProductName.Length, Properties.Resources.About_ProductLink);
 
 			this.GotoSteamGroupLinkLabel.Text = Properties.Resources.About_GotoSteamGroupText;
 			this.GotoSteamGroupLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamGroupText.Length, Properties.Resources.About_ProductLink);
 
-			this.ProductInfoTextBox.Text = "Version " + My.MyApplication.Application.Info.Version.ToString(2) + "\r\n";
-			this.ProductInfoTextBox.Text += My.MyApplication.Application.Info.Copyright + "\r\n";
-			this.ProductInfoTextBox.Text += My.MyApplication.Application.Info.CompanyName;
+			this.ProductInfoTextBox.Text = "Version " + Version.Parse(Application.ProductVersion).ToString(2) + "\r\n";
+			this.ProductInfoTextBox.Text += ConversionHelper.AssemblyCopyright + "\r\n";
+			this.ProductInfoTextBox.Text += Application.CompanyName;
 
-			this.AuthorLinkLabel.Text = My.MyApplication.Application.Info.CompanyName;
-			this.AuthorLinkLabel.Links.Add(0, My.MyApplication.Application.Info.CompanyName.Length, Properties.Resources.About_AuthorLink);
+			this.AuthorLinkLabel.Text = Application.CompanyName;
+			this.AuthorLinkLabel.Links.Add(0, Application.CompanyName.Length, Properties.Resources.About_AuthorLink);
 
 			this.GotoSteamProfileLinkLabel.Text = Properties.Resources.About_GotoSteamProfileText;
 			this.GotoSteamProfileLinkLabel.Links.Add(0, Properties.Resources.About_GotoSteamProfileText.Length, Properties.Resources.About_AuthorLink);

@@ -43,7 +43,7 @@ namespace Crowbar
 			this.DownloadFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 			this.UpdateFolderTextBox.DataBindings["Text"].Parse += FileManager.ParsePathFileName;
 
-			this.CurrentVersionLabel.Text = "Current Version: " + My.MyApplication.Application.Info.Version.ToString(2);
+			this.CurrentVersionLabel.Text = "Current Version: " + Version.Parse(Application.ProductVersion).ToString(2);
 		}
 
 		private void Free()
