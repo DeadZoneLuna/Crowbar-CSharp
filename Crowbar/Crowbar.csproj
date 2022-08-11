@@ -109,8 +109,12 @@
     <Folder Include="Core\GameModel\UncompiledFiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConversionHelper.cs" />
-    <Compile Include="NumericHelper.cs" />
+    <Compile Include="..\Shared\ConversionHelper.cs">
+      <Link>ConversionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\NumericHelper.cs">
+      <Link>NumericHelper.cs</Link>
+    </Compile>
     <Compile Include="Core\- Application\App.cs" />
     <Compile Include="Core\- Application\AppConstants.cs" />
     <Compile Include="Core\- Application\AppEnums.cs" />
@@ -153,9 +157,7 @@
     <Compile Include="Core\- General\MathModule.cs" />
     <Compile Include="Core\- General\PropertyComparer.cs" />
     <Compile Include="Core\- General\Win32Api.cs" />
-    <Compile Include="Core\- General\WindowsJob.cs" />
     <Compile Include="Core\Decompiler\DecompilerOutputInfo.cs" />
-    <Compile Include="Core\Decompiler\DecompilerInputInfo.cs" />
     <Compile Include="Core\Decompiler\Decompiler.cs">
       <SubType>Component</SubType>
     </Compile>

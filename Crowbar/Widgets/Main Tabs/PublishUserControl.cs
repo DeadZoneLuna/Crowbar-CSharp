@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -1440,8 +1439,7 @@ namespace Crowbar
 				GetUserSteamID();
 			}
 
-			//INSTANT C# TODO TASK: The following line could not be converted:
-			//Dim editableTextBoxesAreReadOnly As Boolean = (theSelectedItem.IsPublished) AndAlso (theSelectedItem.OwnerID < > theUserSteamID)
+						//Dim editableTextBoxesAreReadOnly As Boolean = (theSelectedItem.IsPublished) AndAlso (theSelectedItem.OwnerID < > theUserSteamID)
 			bool editableTextBoxesAreReadOnly = theSelectedItem.IsPublished && theSelectedItem.OwnerID != theUserSteamID;
 			bool editableNonTextWidgetsAreEnabled = (theSelectedItem.IsDraft) || (theSelectedItem.IsTemplate) || (theSelectedItem.OwnerID == theUserSteamID);
 

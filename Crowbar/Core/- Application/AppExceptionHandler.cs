@@ -1,20 +1,14 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
+﻿using System;
 using System.IO;
 using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Crowbar
 {
 	public class AppExceptionHandler
 	{
-
 		public void Application_ThreadException(object sender, ThreadExceptionEventArgs t)
 		{
 			UnhandledExceptionWindow anUnhandledExceptionWindow = new UnhandledExceptionWindow();
@@ -51,9 +45,7 @@ namespace Crowbar
 				errorReportText += "=== Context info ===";
 				errorReportText += "\r\n";
 				if (MainCROWBAR.TheApp == null)
-				{
 					errorReportText += "Exception occured before or after TheApp's lifetime.";
-				}
 				else
 				{
 					//If TheApp.Settings.ViewerIsRunning Then
@@ -116,7 +108,5 @@ namespace Crowbar
 				sw.Close();
 			}
 		}
-
 	}
-
 }

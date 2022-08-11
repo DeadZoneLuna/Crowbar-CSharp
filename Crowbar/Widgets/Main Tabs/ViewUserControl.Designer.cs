@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -305,7 +304,6 @@ namespace Crowbar
 			GroupBox1.ResumeLayout(false);
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(UpdateUserControl_Load);
 			BrowseForMdlFileButton.Click += new System.EventHandler(BrowseForMdlFileButton_Click);
 			GotoMdlFileButton.Click += new System.EventHandler(GotoMdlFileButton_Click);

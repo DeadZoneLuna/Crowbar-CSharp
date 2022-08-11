@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -986,7 +985,6 @@ namespace Crowbar
 			ResumeLayout(false);
 			PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Disposed += new System.EventHandler(OptionsUserControl_Disposed);
 			AutoOpenVpkFileForUnpackRadioButton.CheckedChanged += new System.EventHandler(AutoOpenVpkFileRadioButton_CheckedChanged);
 			AutoOpenVpkFileForPublishRadioButton.CheckedChanged += new System.EventHandler(AutoOpenVpkFileRadioButton_CheckedChanged);

@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -769,7 +768,6 @@ namespace Crowbar
 			Panel4.ResumeLayout(false);
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Load += new System.EventHandler(DecompileUserControl_Load);
 			BrowseForMdlPathFolderOrFileNameButton.Click += new System.EventHandler(BrowseForMdlPathFolderOrFileNameButton_Click);
 			GotoMdlButton.Click += new System.EventHandler(GotoMdlButton_Click);

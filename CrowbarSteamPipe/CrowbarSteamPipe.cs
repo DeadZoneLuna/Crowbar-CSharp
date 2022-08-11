@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -1448,7 +1447,6 @@ namespace CrowbarSteamPipe
 
 						bool queryResult = false;
 						SteamUGCDetails_t itemDetails = new SteamUGCDetails_t();
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(pCallResult.m_unNumResultsReturned - 1) for every iteration:
 						uint tempVar = (uint)(pCallResult.m_unNumResultsReturned - 1);
 						for (uint resultItemIndex = 0; resultItemIndex <= tempVar; resultItemIndex++)
 						{

@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -161,7 +160,6 @@ namespace Crowbar
 			((System.ComponentModel.ISupportInitialize)this).EndInit();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			DataGridViewContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(DataGridViewContextMenuStrip_Opening);
 			CopyToolStripMenuItem.Click += new System.EventHandler(CopyToolStripMenuItem_Click);
 		}

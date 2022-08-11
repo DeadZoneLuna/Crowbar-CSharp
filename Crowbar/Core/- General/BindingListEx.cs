@@ -1,12 +1,6 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -17,18 +11,22 @@ namespace Crowbar
 {
 	public class BindingListEx<T> : BindingList<T>, IEquatable<BindingListEx<T>>
 	{
-#region Create and Destroy
+		#region Data
+		private object theContainer;
+		//Private failedToAdd As Boolean
 
+		private bool _isSorted;
+		private ListSortDirection _dir = ListSortDirection.Ascending;
+		private PropertyDescriptor _sort = null;
+		#endregion
+
+		#region Create and Destroy
 		public BindingListEx() : base()
 		{
-
-			//failedToAdd = False
 		}
+		#endregion
 
-#endregion
-
-#region Operators
-
+		#region Operators
 		public override bool Equals(object otherObject)
 		{
 			BindingListEx<T> otherList = (BindingListEx<T>)otherObject;
@@ -44,29 +42,20 @@ namespace Crowbar
 
 		new public bool Equals(BindingListEx<T> otherList)
 		{
-			if (otherList == null)
-			{
+			if (otherList == null || Count != otherList.Count)
 				return false;
-			}
-			bool result = false;
-			if (Count == otherList.Count)
+
+			for (int i = 0; i < Count; i++)
 			{
-				result = true;
-				for (int i = 0; i < Count; i++)
-				{
-					if (!(this[i].Equals(otherList[i])))
-					{
-						return false;
-					}
-				}
+				if (!this[i].Equals(otherList[i]))
+					return false;
 			}
-			return result;
+
+			return true;
 		}
+		#endregion
 
-#endregion
-
-#region Properties
-
+		#region Properties
 		[XmlIgnore()]
 		public object Container
 		{
@@ -79,11 +68,9 @@ namespace Crowbar
 				theContainer = value;
 			}
 		}
+		#endregion
 
-#endregion
-
-#region Methods
-
+		#region Methods
 		//Public Function GetItemByName(ByVal name As String) As T
 		//	Dim sortedProperty As PropertyDescriptor = FindPropertyDescriptor("Name")
 		//	If sortedProperty IsNot Nothing Then
@@ -107,7 +94,7 @@ namespace Crowbar
 
 		public void InsertItemSorted(int index, T item, PropertyDescriptor sortedProperty)
 		{
-			index = FindInsertionIndex(index, item, sortedProperty);
+			index = FindInsertionIndex(item, sortedProperty);
 			base.InsertItem(index, item);
 		}
 
@@ -132,20 +119,16 @@ namespace Crowbar
 		public override void EndNew(int itemIndex)
 		{
 			if (_sort != null && itemIndex == Count - 1)
-			{
 				ApplySortCore(_sort, _dir);
-			}
+
 			base.EndNew(itemIndex);
 		}
+		#endregion
 
-#endregion
+		#region Event Handlers
+		#endregion
 
-#region Event Handlers
-
-#endregion
-
-#region Private Methods
-
+		#region Private Methods
 		// Override so that an extra ListChanged event with ListChangedType.ItemDeleted  
 		// is raised BEFORE the item is deleted. 
 		//NOTE: Can't set NewIndex to negative number, so change OldIndex to something other than -1.
@@ -160,41 +143,35 @@ namespace Crowbar
 			catch
 			{
 			}
-			T removedItem = Items[index];
 			//NOTE: The base class RemoveItem raises the expected ListChanged event with 
 			//      ListChangedType.ItemDeleted and the already-deleted item's index.
 			base.RemoveItem(index);
 		}
 
-		protected int FindInsertionIndex(int index, T item, PropertyDescriptor sortedProperty)
+		protected int FindInsertionIndex(T item, PropertyDescriptor sortedProperty)
 		{
-			int insertionIndex = 0;
 			List<T> items = (List<T>)Items;
 			if (items != null && sortedProperty != null)
 			{
 				PropertyComparer<T> pc = new PropertyComparer<T>(sortedProperty, ListSortDirection.Ascending);
 				int itemIndex = items.BinarySearch(item, pc);
 				if (itemIndex < 0)
+					return itemIndex ^ -1;
+
+				// Find last (instead of arbitrary) index with the given value.
+				int insertionIndex = itemIndex + 1;
+				while (insertionIndex < items.Count)
 				{
-					insertionIndex = itemIndex ^ -1;
-				}
-				else
-				{
-					// Find last (instead of arbitrary) index with the given value.
+					itemIndex = items.BinarySearch(insertionIndex, items.Count - insertionIndex, item, pc);
+					if (itemIndex < 0)
+						break;
+
 					insertionIndex = itemIndex + 1;
-					while (insertionIndex < items.Count)
-					{
-						itemIndex = items.BinarySearch(insertionIndex, items.Count - insertionIndex, item, pc);
-						if (itemIndex < 0)
-						{
-							break;
-						}
-						//insertionIndex += 1
-						insertionIndex = itemIndex + 1;
-					}
 				}
+				return insertionIndex;
 			}
-			return insertionIndex;
+
+			return 0;
 		}
 
 		protected override bool SupportsSortingCore
@@ -223,6 +200,7 @@ namespace Crowbar
 
 		protected override void ApplySortCore(PropertyDescriptor nProperty, ListSortDirection direction)
 		{
+			_isSorted = false;
 			List<T> items = (List<T>)Items;
 			if (items != null && nProperty != null)
 			{
@@ -232,10 +210,6 @@ namespace Crowbar
 				//NOTE: Although this is convention to raise a "Reset" event, require code to manually call a reset instead.
 				//' Raise the ListChanged Reset event so bound controls refresh their values.
 				//Me.OnListChanged(New ListChangedEventArgs(ListChangedType.Reset, -1))
-			}
-			else
-			{
-				_isSorted = false;
 			}
 		}
 
@@ -247,12 +221,7 @@ namespace Crowbar
 		protected PropertyDescriptor FindPropertyDescriptor(string nProperty)
 		{
 			PropertyDescriptorCollection pdc = TypeDescriptor.GetProperties(typeof(T));
-			PropertyDescriptor prop = null;
-			if (pdc != null)
-			{
-				prop = pdc.Find(nProperty, true);
-			}
-			return prop;
+			return pdc != null ? pdc.Find(nProperty, true) : null;
 		}
 
 		protected override bool SupportsSearchingCore
@@ -265,20 +234,14 @@ namespace Crowbar
 
 		protected override int FindCore(PropertyDescriptor propertyDesc, object key)
 		{
-			int i = 0;
 			System.Reflection.PropertyInfo propInfo = typeof(T).GetProperty(propertyDesc.Name);
-			T item = default(T);
 			if (key != null)
 			{
-				for (i = 0; i < Count; i++)
+				for (int i = 0; i < Count; i++)
 				{
-//INSTANT C# WARNING: Casting to a generic type parameter may result in a runtime exception:
-//ORIGINAL LINE: item = CType(Items(i), T)
-					item = (T)Items[i];
+					T item = Items[i];
 					if (propInfo.GetValue(item, null).Equals(key))
-					{
 						return i;
-					}
 				}
 			}
 			return -1;
@@ -326,20 +289,6 @@ namespace Crowbar
 		//		index += 1
 		//	Next
 		//End Sub
-
-#endregion
-
-#region Data
-
-		private object theContainer;
-		//Private failedToAdd As Boolean
-
-		private bool _isSorted;
-		private ListSortDirection _dir = ListSortDirection.Ascending;
-		private PropertyDescriptor _sort = null;
-
-#endregion
-
+		#endregion
 	}
-
 }

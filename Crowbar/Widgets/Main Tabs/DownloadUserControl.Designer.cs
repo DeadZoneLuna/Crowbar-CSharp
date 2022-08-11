@@ -8,7 +8,6 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -453,7 +452,6 @@ namespace Crowbar
 			PostDownloadPanel.PerformLayout();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(DownloadUserControl_Load);
 			OpenWorkshopPageButton.Click += new System.EventHandler(OpenWorkshopPageButton_Click);
 			OutputPathTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(OutputPathTextBox_DragDrop);

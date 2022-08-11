@@ -1,23 +1,240 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
-using System.ComponentModel;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 // Purpose: Stores application-related settings, such as UI widget locations and auto-recover data.
-
 namespace Crowbar
 {
 	public class AppSettings : INotifyPropertyChanged
 	{
-#region Create and Destroy
+		#region Data
+		// General
+		private bool theAppIsSingleInstance;
+		private Point theWindowLocation;
+		private Size theWindowSize;
+		private FormWindowState theWindowState;
+		private Color theAboutTabBackgroundColor;
+		private int theMainWindowSelectedTabIndex;
 
+		// Set Up Games tab
+
+		private BindingListExAutoSort<GameSetup> theGameSetups;
+		private string theSteamAppPathFileName;
+		private BindingListEx<SteamLibraryPath> theSteamLibraryPaths;
+		private int theSetUpGamesGameSetupSelectedIndex;
+
+		// Download tab
+
+		private string theDownloadItemIdOrLink;
+		private AppEnums.DownloadOutputPathOptions theDownloadOutputFolderOption;
+		private string theDownloadOutputWorkPath;
+		private bool theDownloadUseItemIdIsChecked;
+		private bool theDownloadPrependItemTitleIsChecked;
+		private bool theDownloadAppendItemUpdateDateTimeIsChecked;
+		private bool theDownloadReplaceSpacesWithUnderscoresIsChecked;
+		private bool theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked;
+
+		// Unpack tab
+
+		private AppEnums.ContainerType theUnpackContainerType;
+		private string theUnpackPackagePathFolderOrFileName;
+		//Private theUnpackOutputFolderOption As OutputFolderOptions
+		private AppEnums.UnpackOutputPathOptions theUnpackOutputFolderOption;
+		private string theUnpackOutputSamePath;
+		private string theUnpackOutputSubfolderName;
+		private string theUnpackOutputFullPath;
+		private string theUnpackPackagePathFileName;
+		private int theUnpackGameSetupSelectedIndex;
+		private AppEnums.UnpackSearchFieldOptions theUnpackSearchField;
+		private string theUnpackSearchText;
+
+		private bool theUnpackFolderForEachPackageIsChecked;
+		private bool theUnpackKeepFullPathIsChecked;
+		private bool theUnpackLogFileIsChecked;
+
+		private AppEnums.InputOptions theUnpackMode;
+		private bool theUnpackerIsRunning;
+
+		// Preview tab
+
+		private string thePreviewMdlPathFileName;
+		private AppEnums.SupportedMdlVersion thePreviewOverrideMdlVersion;
+		private int thePreviewGameSetupSelectedIndex;
+
+		private bool thePreviewDataViewerIsRunning;
+		private bool thePreviewViewerIsRunning;
+
+		// Decompile tab
+
+		private string theDecompileMdlPathFileName;
+		//Private theDecompileOutputFolderOption As OutputFolderOptions
+		private AppEnums.DecompileOutputPathOptions theDecompileOutputFolderOption;
+		private string theDecompileOutputSubfolderName;
+		private string theDecompileOutputFullPath;
+		//Private theDecompileOutputPathName As String
+
+		private bool theDecompileQcFileIsChecked;
+		private bool theDecompileGroupIntoQciFilesIsChecked;
+		private bool theDecompileQcSkinFamilyOnSingleLineIsChecked;
+		private bool theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked;
+		private bool theDecompileQcIncludeDefineBoneLinesIsChecked;
+		private bool theDecompileQcUseMixedCaseForKeywordsIsChecked;
+
+		private bool theDecompileReferenceMeshSmdFileIsChecked;
+		private bool theDecompileRemovePathFromSmdMaterialFileNamesIsChecked;
+		private bool theDecompileUseNonValveUvConversionIsChecked;
+
+		private bool theDecompileBoneAnimationSmdFilesIsChecked;
+		private bool theDecompileBoneAnimationPlaceInSubfolderIsChecked;
+
+		private bool theDecompileTextureBmpFileIsChecked;
+		private bool theDecompileLodMeshSmdFilesIsChecked;
+		private bool theDecompilePhysicsMeshSmdFileIsChecked;
+		private bool theDecompileVertexAnimationVtaFileIsChecked;
+		private bool theDecompileProceduralBonesVrdFileIsChecked;
+
+		private bool theDecompileDeclareSequenceQciFileIsChecked;
+
+		private bool theDecompileFolderForEachModelIsChecked;
+		private bool theDecompilePrefixFileNamesWithModelNameIsChecked;
+		private bool theDecompileStricterFormatIsChecked;
+		private bool theDecompileLogFileIsChecked;
+		private bool theDecompileDebugInfoFilesIsChecked;
+
+		private AppEnums.SupportedMdlVersion theDecompileOverrideMdlVersion;
+
+		private AppEnums.InputOptions theDecompileMode;
+		private bool theDecompilerIsRunning;
+
+		// Compile tab
+
+		private string theCompileQcPathFileName;
+		private AppEnums.InputOptions theCompileMode;
+
+		private bool theCompileOutputFolderIsChecked;
+		//Private theCompileOutputFolderOption As OutputFolderOptions
+		private AppEnums.CompileOutputPathOptions theCompileOutputFolderOption;
+		private string theCompileOutputSubfolderName;
+		private string theCompileOutputFullPath;
+
+		private int theCompileGameSetupSelectedIndex;
+
+		// GoldSource engine
+		private bool theCompileGoldSourceLogFileIsChecked;
+
+		// Source engine
+		private bool theCompileSourceLogFileIsChecked;
+		private bool theCompileOptionDefineBonesIsChecked;
+		private bool theCompileOptionDefineBonesCreateFileIsChecked;
+		private string theCompileOptionDefineBonesQciFileName;
+		private bool theCompileOptionDefineBonesOverwriteQciFileIsChecked;
+		private bool theCompileOptionDefineBonesModifyQcFileIsChecked;
+		private bool theCompileOptionNoP4IsChecked;
+		private bool theCompileOptionVerboseIsChecked;
+
+		private string theCompileOptionsText;
+
+		private bool theCompilerIsRunning;
+
+		// Patch tab
+
+		private AppEnums.InputOptions thePatchMode;
+		private string thePatchMdlPathFileName;
+
+		// View tab
+
+		private string theViewMdlPathFileName;
+		private AppEnums.SupportedMdlVersion theViewOverrideMdlVersion;
+		private int theViewGameSetupSelectedIndex;
+
+		private bool theViewDataViewerIsRunning;
+		private bool theViewViewerIsRunning;
+
+		// Pack tab
+
+		private AppEnums.PackInputOptions thePackMode;
+		private string thePackInputPathFileName;
+
+		private AppEnums.PackOutputPathOptions thePackOutputFolderOption;
+		private string thePackOutputParentPath;
+		private string thePackOutputPath;
+
+		private int thePackGameSetupSelectedIndex;
+
+		private bool thePackLogFileIsChecked;
+		private bool thePackOptionMultiFileVpkIsChecked;
+
+		private string thePackGmaTitle;
+		private BindingListEx<string> thePackGmaItemTags;
+
+		private string thePackOptionsText;
+
+		private bool thePackerIsRunning;
+
+		// Publish tab
+
+		private int thePublishGameSelectedIndex;
+		private BindingListExAutoSort<SteamAppUserInfo> thePublishSteamAppUserInfos;
+		private AppEnums.PublishSearchFieldOptions thePublishSearchField;
+		private string thePublishSearchText;
+		//Private thePublishDragDroppedContentPath As String
+
+		// Options tab
+
+		private bool theOptionsAutoOpenVpkFileIsChecked;
+		private AppEnums.ActionType theOptionsAutoOpenVpkFileOption;
+		private bool theOptionsAutoOpenGmaFileIsChecked;
+		private AppEnums.ActionType theOptionsAutoOpenGmaFileOption;
+		private bool theOptionsAutoOpenFpxFileIsChecked;
+
+		private bool theOptionsAutoOpenMdlFileIsChecked;
+		private bool theOptionsAutoOpenMdlFileForPreviewIsChecked;
+		private bool theOptionsAutoOpenMdlFileForDecompileIsChecked;
+		private bool theOptionsAutoOpenMdlFileForViewIsChecked;
+		private AppEnums.ActionType theOptionsAutoOpenMdlFileOption;
+
+		private bool theOptionsAutoOpenQcFileIsChecked;
+		//Private theOptionsAutoOpenQcFileOption As ActionType
+
+		private AppEnums.ActionType theOptionsAutoOpenFolderOption;
+
+		private AppEnums.ActionType theOptionsDragAndDropVpkFileOption;
+		private AppEnums.ActionType theOptionsDragAndDropGmaFileOption;
+
+		private bool theOptionsDragAndDropMdlFileForPreviewIsChecked;
+		private bool theOptionsDragAndDropMdlFileForDecompileIsChecked;
+		private bool theOptionsDragAndDropMdlFileForViewIsChecked;
+		private AppEnums.ActionType theOptionsDragAndDropMdlFileOption;
+
+		//Private theOptionsDragAndDropQcFileOption As ActionType
+
+		private AppEnums.ActionType theOptionsDragAndDropFolderOption;
+
+		private bool theOptionsContextMenuIntegrateMenuItemsIsChecked;
+		private bool theOptionsContextMenuIntegrateSubMenuIsChecked;
+
+		private bool theOptionsOpenWithCrowbarIsChecked;
+		private bool theOptionsViewMdlFileIsChecked;
+		private bool theOptionsDecompileMdlFileIsChecked;
+		private bool theOptionsDecompileFolderIsChecked;
+		private bool theOptionsDecompileFolderAndSubfoldersIsChecked;
+		private bool theOptionsCompileQcFileIsChecked;
+		private bool theOptionsCompileFolderIsChecked;
+		private bool theOptionsCompileFolderAndSubfoldersIsChecked;
+
+		// Update tab
+
+		private string theUpdateDownloadPath;
+		private bool theUpdateUpdateToNewPathIsChecked;
+		private string theUpdateUpdateDownloadPath;
+		private bool theUpdateCopySettingsIsChecked;
+		#endregion
+
+		#region Create and Destroy
 		public AppSettings()
 		{
 			//MyBase.New()
@@ -42,7 +259,7 @@ namespace Crowbar
 			theSteamLibraryPaths = new BindingListEx<SteamLibraryPath>();
 			theSetUpGamesGameSetupSelectedIndex = 0;
 
-			theDownloadItemIdOrLink = "";
+			theDownloadItemIdOrLink = string.Empty;
 			theDownloadOutputFolderOption = AppEnums.DownloadOutputPathOptions.DocumentsFolder;
 			theDownloadOutputWorkPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			SetDefaultDownloadOptions();
@@ -120,10 +337,9 @@ namespace Crowbar
 
 			//Me.Init()
 		}
+		#endregion
 
-#endregion
-
-#region Init and Free
+		#region Init and Free
 
 		//Public Sub Init()
 		//End Sub
@@ -131,10 +347,9 @@ namespace Crowbar
 		//Private Sub Free()
 		//End Sub
 
-#endregion
+		#endregion
 
-#region Properties
-
+		#region Properties
 		public bool AppIsSingleInstance
 		{
 			get
@@ -2104,15 +2319,13 @@ namespace Crowbar
 				NotifyPropertyChanged("UpdateCopySettingsIsChecked");
 			}
 		}
+		#endregion
 
-#endregion
+		#region Core Event Handlers
 
-#region Core Event Handlers
+		#endregion
 
-#endregion
-
-#region Methods
-
+		#region Methods
 		public void SetDefaultDownloadOptions()
 		{
 			//NOTE: Call the properties so the NotifyPropertyChanged events are raised.
@@ -2188,7 +2401,7 @@ namespace Crowbar
 			CompileOptionDefineBonesOverwriteQciFileIsChecked = false;
 			CompileOptionDefineBonesModifyQcFileIsChecked = false;
 
-			CompileOptionsText = "";
+			CompileOptionsText = string.Empty;
 		}
 
 		public void SetDefaultPackOptions()
@@ -2198,10 +2411,10 @@ namespace Crowbar
 
 			PackOptionMultiFileVpkIsChecked = false;
 
-			PackGmaTitle = "";
+			PackGmaTitle = string.Empty;
 			PackGmaItemTags = new BindingListEx<string>();
 
-			PackOptionsText = "";
+			PackOptionsText = string.Empty;
 		}
 
 		public void SetDefaultOptionsAutoOpenOptions()
@@ -2256,250 +2469,18 @@ namespace Crowbar
 			OptionsCompileFolderIsChecked = true;
 			OptionsCompileFolderAndSubfoldersIsChecked = true;
 		}
+		#endregion
 
-#endregion
-
-#region Events
-
+		#region Events
 		public event PropertyChangedEventHandler PropertyChanged;
+		#endregion
 
-#endregion
-
-#region Private Methods
-
+		#region Private Methods
 		protected void NotifyPropertyChanged(string info)
 		{
 			if (PropertyChanged != null)
 				PropertyChanged(this, new PropertyChangedEventArgs(info));
 		}
-
-#endregion
-
-#region Data
-
-		// General
-		private bool theAppIsSingleInstance;
-		private Point theWindowLocation;
-		private Size theWindowSize;
-		private FormWindowState theWindowState;
-		private Color theAboutTabBackgroundColor;
-		private int theMainWindowSelectedTabIndex;
-
-		// Set Up Games tab
-
-		private BindingListExAutoSort<GameSetup> theGameSetups;
-		private string theSteamAppPathFileName;
-		private BindingListEx<SteamLibraryPath> theSteamLibraryPaths;
-		private int theSetUpGamesGameSetupSelectedIndex;
-
-		// Download tab
-
-		private string theDownloadItemIdOrLink;
-		private AppEnums.DownloadOutputPathOptions theDownloadOutputFolderOption;
-		private string theDownloadOutputWorkPath;
-		private bool theDownloadUseItemIdIsChecked;
-		private bool theDownloadPrependItemTitleIsChecked;
-		private bool theDownloadAppendItemUpdateDateTimeIsChecked;
-		private bool theDownloadReplaceSpacesWithUnderscoresIsChecked;
-		private bool theDownloadConvertToExpectedFileOrFolderCheckBoxIsChecked;
-
-		// Unpack tab
-
-		private AppEnums.ContainerType theUnpackContainerType;
-		private string theUnpackPackagePathFolderOrFileName;
-		//Private theUnpackOutputFolderOption As OutputFolderOptions
-		private AppEnums.UnpackOutputPathOptions theUnpackOutputFolderOption;
-		private string theUnpackOutputSamePath;
-		private string theUnpackOutputSubfolderName;
-		private string theUnpackOutputFullPath;
-		private string theUnpackPackagePathFileName;
-		private int theUnpackGameSetupSelectedIndex;
-		private AppEnums.UnpackSearchFieldOptions theUnpackSearchField;
-		private string theUnpackSearchText;
-
-		private bool theUnpackFolderForEachPackageIsChecked;
-		private bool theUnpackKeepFullPathIsChecked;
-		private bool theUnpackLogFileIsChecked;
-
-		private AppEnums.InputOptions theUnpackMode;
-		private bool theUnpackerIsRunning;
-
-		// Preview tab
-
-		private string thePreviewMdlPathFileName;
-		private AppEnums.SupportedMdlVersion thePreviewOverrideMdlVersion;
-		private int thePreviewGameSetupSelectedIndex;
-
-		private bool thePreviewDataViewerIsRunning;
-		private bool thePreviewViewerIsRunning;
-
-		// Decompile tab
-
-		private string theDecompileMdlPathFileName;
-		//Private theDecompileOutputFolderOption As OutputFolderOptions
-		private AppEnums.DecompileOutputPathOptions theDecompileOutputFolderOption;
-		private string theDecompileOutputSubfolderName;
-		private string theDecompileOutputFullPath;
-		//Private theDecompileOutputPathName As String
-
-		private bool theDecompileQcFileIsChecked;
-		private bool theDecompileGroupIntoQciFilesIsChecked;
-		private bool theDecompileQcSkinFamilyOnSingleLineIsChecked;
-		private bool theDecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked;
-		private bool theDecompileQcIncludeDefineBoneLinesIsChecked;
-		private bool theDecompileQcUseMixedCaseForKeywordsIsChecked;
-
-		private bool theDecompileReferenceMeshSmdFileIsChecked;
-		private bool theDecompileRemovePathFromSmdMaterialFileNamesIsChecked;
-		private bool theDecompileUseNonValveUvConversionIsChecked;
-
-		private bool theDecompileBoneAnimationSmdFilesIsChecked;
-		private bool theDecompileBoneAnimationPlaceInSubfolderIsChecked;
-
-		private bool theDecompileTextureBmpFileIsChecked;
-		private bool theDecompileLodMeshSmdFilesIsChecked;
-		private bool theDecompilePhysicsMeshSmdFileIsChecked;
-		private bool theDecompileVertexAnimationVtaFileIsChecked;
-		private bool theDecompileProceduralBonesVrdFileIsChecked;
-
-		private bool theDecompileDeclareSequenceQciFileIsChecked;
-
-		private bool theDecompileFolderForEachModelIsChecked;
-		private bool theDecompilePrefixFileNamesWithModelNameIsChecked;
-		private bool theDecompileStricterFormatIsChecked;
-		private bool theDecompileLogFileIsChecked;
-		private bool theDecompileDebugInfoFilesIsChecked;
-
-		private AppEnums.SupportedMdlVersion theDecompileOverrideMdlVersion;
-
-		private AppEnums.InputOptions theDecompileMode;
-		private bool theDecompilerIsRunning;
-
-		// Compile tab
-
-		private string theCompileQcPathFileName;
-		private AppEnums.InputOptions theCompileMode;
-
-		private bool theCompileOutputFolderIsChecked;
-		//Private theCompileOutputFolderOption As OutputFolderOptions
-		private AppEnums.CompileOutputPathOptions theCompileOutputFolderOption;
-		private string theCompileOutputSubfolderName;
-		private string theCompileOutputFullPath;
-
-		private int theCompileGameSetupSelectedIndex;
-
-		// GoldSource engine
-		private bool theCompileGoldSourceLogFileIsChecked;
-
-		// Source engine
-		private bool theCompileSourceLogFileIsChecked;
-		private bool theCompileOptionDefineBonesIsChecked;
-		private bool theCompileOptionDefineBonesCreateFileIsChecked;
-		private string theCompileOptionDefineBonesQciFileName;
-		private bool theCompileOptionDefineBonesOverwriteQciFileIsChecked;
-		private bool theCompileOptionDefineBonesModifyQcFileIsChecked;
-		private bool theCompileOptionNoP4IsChecked;
-		private bool theCompileOptionVerboseIsChecked;
-
-		private string theCompileOptionsText;
-
-		private bool theCompilerIsRunning;
-
-		// Patch tab
-
-		private AppEnums.InputOptions thePatchMode;
-		private string thePatchMdlPathFileName;
-
-		// View tab
-
-		private string theViewMdlPathFileName;
-		private AppEnums.SupportedMdlVersion theViewOverrideMdlVersion;
-		private int theViewGameSetupSelectedIndex;
-
-		private bool theViewDataViewerIsRunning;
-		private bool theViewViewerIsRunning;
-
-		// Pack tab
-
-		private AppEnums.PackInputOptions thePackMode;
-		private string thePackInputPathFileName;
-
-		private AppEnums.PackOutputPathOptions thePackOutputFolderOption;
-		private string thePackOutputParentPath;
-		private string thePackOutputPath;
-
-		private int thePackGameSetupSelectedIndex;
-
-		private bool thePackLogFileIsChecked;
-		private bool thePackOptionMultiFileVpkIsChecked;
-
-		private string thePackGmaTitle;
-		private BindingListEx<string> thePackGmaItemTags;
-
-		private string thePackOptionsText;
-
-		private bool thePackerIsRunning;
-
-		// Publish tab
-
-		private int thePublishGameSelectedIndex;
-		private BindingListExAutoSort<SteamAppUserInfo> thePublishSteamAppUserInfos;
-		private AppEnums.PublishSearchFieldOptions thePublishSearchField;
-		private string thePublishSearchText;
-		//Private thePublishDragDroppedContentPath As String
-
-		// Options tab
-
-		private bool theOptionsAutoOpenVpkFileIsChecked;
-		private AppEnums.ActionType theOptionsAutoOpenVpkFileOption;
-		private bool theOptionsAutoOpenGmaFileIsChecked;
-		private AppEnums.ActionType theOptionsAutoOpenGmaFileOption;
-		private bool theOptionsAutoOpenFpxFileIsChecked;
-
-		private bool theOptionsAutoOpenMdlFileIsChecked;
-		private bool theOptionsAutoOpenMdlFileForPreviewIsChecked;
-		private bool theOptionsAutoOpenMdlFileForDecompileIsChecked;
-		private bool theOptionsAutoOpenMdlFileForViewIsChecked;
-		private AppEnums.ActionType theOptionsAutoOpenMdlFileOption;
-
-		private bool theOptionsAutoOpenQcFileIsChecked;
-		//Private theOptionsAutoOpenQcFileOption As ActionType
-
-		private AppEnums.ActionType theOptionsAutoOpenFolderOption;
-
-		private AppEnums.ActionType theOptionsDragAndDropVpkFileOption;
-		private AppEnums.ActionType theOptionsDragAndDropGmaFileOption;
-
-		private bool theOptionsDragAndDropMdlFileForPreviewIsChecked;
-		private bool theOptionsDragAndDropMdlFileForDecompileIsChecked;
-		private bool theOptionsDragAndDropMdlFileForViewIsChecked;
-		private AppEnums.ActionType theOptionsDragAndDropMdlFileOption;
-
-		//Private theOptionsDragAndDropQcFileOption As ActionType
-
-		private AppEnums.ActionType theOptionsDragAndDropFolderOption;
-
-		private bool theOptionsContextMenuIntegrateMenuItemsIsChecked;
-		private bool theOptionsContextMenuIntegrateSubMenuIsChecked;
-
-		private bool theOptionsOpenWithCrowbarIsChecked;
-		private bool theOptionsViewMdlFileIsChecked;
-		private bool theOptionsDecompileMdlFileIsChecked;
-		private bool theOptionsDecompileFolderIsChecked;
-		private bool theOptionsDecompileFolderAndSubfoldersIsChecked;
-		private bool theOptionsCompileQcFileIsChecked;
-		private bool theOptionsCompileFolderIsChecked;
-		private bool theOptionsCompileFolderAndSubfoldersIsChecked;
-
-		// Update tab
-
-		private string theUpdateDownloadPath;
-		private bool theUpdateUpdateToNewPathIsChecked;
-		private string theUpdateUpdateDownloadPath;
-		private bool theUpdateCopySettingsIsChecked;
-
-#endregion
-
+		#endregion
 	}
-
 }

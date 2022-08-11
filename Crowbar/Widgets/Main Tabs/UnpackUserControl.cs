@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -1514,41 +1513,32 @@ namespace Crowbar
 
 		private SortedList<string, List<int>> GetEntriesFromFolderEntry(List<PackageResourceFileNameInfo> resourceInfos, TreeNode treeNode, SortedList<string, List<int>> archivePathFileNameToEntryIndexMap)
 		{
-			TreeNode folderNode = null;
-			List<PackageResourceFileNameInfo> folderResourceInfos = null;
+			if (resourceInfos == null)
+				return archivePathFileNameToEntryIndexMap;
 
-			if (resourceInfos != null)
+			foreach (PackageResourceFileNameInfo resourceInfo in resourceInfos)
 			{
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string archivePathFileName = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int archiveEntryIndex = 0;
-				foreach (PackageResourceFileNameInfo resourceInfo in resourceInfos)
+				if (resourceInfo.IsFolder)
 				{
-					if (resourceInfo.IsFolder)
+					TreeNode folderNode = GetNodeFromPath(PackageTreeView.Nodes[0], treeNode.FullPath + "\\" + resourceInfo.Name);
+					List<PackageResourceFileNameInfo> folderResourceInfos = (List<PackageResourceFileNameInfo>)folderNode.Tag;
+					archivePathFileNameToEntryIndexMap = GetEntriesFromFolderEntry(folderResourceInfos, folderNode, archivePathFileNameToEntryIndexMap);
+				}
+				else
+				{
+					List<int> archiveEntryIndexes;
+					string archivePathFileName = resourceInfo.ArchivePathFileName;
+					int archiveEntryIndex = resourceInfo.EntryIndex;
+					if (archivePathFileNameToEntryIndexMap.Keys.Contains(archivePathFileName))
 					{
-						folderNode = GetNodeFromPath(PackageTreeView.Nodes[0], treeNode.FullPath + "\\" + resourceInfo.Name);
-						folderResourceInfos = (List<PackageResourceFileNameInfo>)folderNode.Tag;
-						archivePathFileNameToEntryIndexMap = GetEntriesFromFolderEntry(folderResourceInfos, folderNode, archivePathFileNameToEntryIndexMap);
+						archiveEntryIndexes = archivePathFileNameToEntryIndexMap[archivePathFileName];
+						archiveEntryIndexes.Add(archiveEntryIndex);
 					}
 					else
 					{
-	//					Dim archivePathFileName As String
-	//					Dim archiveEntryIndex As Integer
-						archivePathFileName = resourceInfo.ArchivePathFileName;
-						archiveEntryIndex = resourceInfo.EntryIndex;
-						List<int> archiveEntryIndexes = null;
-						if (archivePathFileNameToEntryIndexMap.Keys.Contains(archivePathFileName))
-						{
-							archiveEntryIndexes = archivePathFileNameToEntryIndexMap[archivePathFileName];
-							archiveEntryIndexes.Add(archiveEntryIndex);
-						}
-						else
-						{
-							archiveEntryIndexes = new List<int>();
-							archiveEntryIndexes.Add(archiveEntryIndex);
-							archivePathFileNameToEntryIndexMap.Add(archivePathFileName, archiveEntryIndexes);
-						}
+						archiveEntryIndexes = new List<int>();
+						archiveEntryIndexes.Add(archiveEntryIndex);
+						archivePathFileNameToEntryIndexMap.Add(archivePathFileName, archiveEntryIndexes);
 					}
 				}
 			}

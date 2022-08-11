@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -559,7 +558,6 @@ namespace Crowbar
 					//Dim steamID As Steamworks.CSteamID = Steamworks.SteamUser.GetSteamID()
 
 					theBackgroundWorker.ReportProgress(1, totalCount);
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(resultsCount - 1) for every iteration:
 					uint tempVar = (uint)(resultsCount - 1);
 					for (uint i = 0; i <= tempVar; i++)
 					{
@@ -817,7 +815,6 @@ namespace Crowbar
 			if (textLineCount > 0)
 			{
 				//NOTE: Do not add CRLF to last line.
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of textLineCount - 2 for every iteration:
 				int tempVar = textLineCount - 2;
 				for (int i = 0; i <= tempVar; i++)
 				{

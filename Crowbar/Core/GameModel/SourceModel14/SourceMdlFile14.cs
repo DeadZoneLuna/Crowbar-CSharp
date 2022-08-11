@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -1034,18 +1033,13 @@ namespace Crowbar
 		public void BuildBoneTransforms()
 		{
 			theMdlFileData.theBoneTransforms = new List<SourceBoneTransform10>(theMdlFileData.theBones.Count);
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-			SourceMdlBone10 aBone = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-			int parentBoneIndex = 0;
 			for (int boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 			{
-	//			Dim aBone As SourceMdlBone10
+				//Dim aBone As SourceMdlBone10
 				SourceBoneTransform10 boneTransform = new SourceBoneTransform10();
-	//			Dim parentBoneIndex As Integer
+				//Dim parentBoneIndex As Integer
 
-				aBone = theMdlFileData.theBones[boneIndex];
-
+				SourceMdlBone10 aBone = theMdlFileData.theBones[boneIndex];
 				SourceVector boneMatrixColumn0 = new SourceVector();
 				SourceVector boneMatrixColumn1 = new SourceVector();
 				SourceVector boneMatrixColumn2 = new SourceVector();
@@ -1058,7 +1052,7 @@ namespace Crowbar
 				boneMatrixColumn3.y = aBone.position.y;
 				boneMatrixColumn3.z = aBone.position.z;
 
-				parentBoneIndex = theMdlFileData.theBones[boneIndex].parentBoneIndex;
+				int parentBoneIndex = theMdlFileData.theBones[boneIndex].parentBoneIndex;
 				if (parentBoneIndex == -1)
 				{
 					boneTransform.matrixColumn0.x = boneMatrixColumn0.x;
@@ -1078,7 +1072,7 @@ namespace Crowbar
 				{
 					SourceBoneTransform10 parentBoneTransform = theMdlFileData.theBoneTransforms[parentBoneIndex];
 
-					//			R_ConcatTransforms( g_bonetransform[pbones[i].parent], bonematrix, g_bonetransform[i] );
+					//R_ConcatTransforms( g_bonetransform[pbones[i].parent], bonematrix, g_bonetransform[i] );
 					MathModule.R_ConcatTransforms(parentBoneTransform.matrixColumn0, parentBoneTransform.matrixColumn1, parentBoneTransform.matrixColumn2, parentBoneTransform.matrixColumn3, boneMatrixColumn0, boneMatrixColumn1, boneMatrixColumn2, boneMatrixColumn3, ref boneTransform.matrixColumn0, ref boneTransform.matrixColumn1, ref boneTransform.matrixColumn2, ref boneTransform.matrixColumn3);
 				}
 
@@ -1585,7 +1579,6 @@ namespace Crowbar
 				//FROM: [1999] HLStandardSDK\SourceCode\utils\studiomdl\studiomdl.c
 				//      Void ResizeTexture(s_texture_t * ptexture)
 				//          ptexture->size = ptexture->skinwidth * ptexture->skinheight + 256 * 3;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of aTexture.width * aTexture.height + 256 * 3 for every iteration:
 				long tempVar = aTexture.width * aTexture.height + 256 * 3;
 				for (long byteIndex = 0; byteIndex < tempVar; byteIndex++)
 				{

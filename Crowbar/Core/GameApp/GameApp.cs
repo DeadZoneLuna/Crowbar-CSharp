@@ -1,49 +1,36 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Diagnostics;
-using System.Windows.Forms;
-
 using System.ComponentModel;
-using System.IO;
 
 namespace Crowbar
 {
 	public class GameApp : BackgroundWorker
 	{
-#region Create and Destroy
+		#region Data
+		private bool isDisposed;
+		private int theGameSetupSelectedIndex;
+		private Process theGameAppProcess;
+		#endregion
 
+		#region Create and Destroy
 		public GameApp() : base()
 		{
-
 			isDisposed = false;
-
 			WorkerReportsProgress = true;
 			WorkerSupportsCancellation = true;
 			DoWork += GameApp_DoWork;
 		}
 
-#region IDisposable Support
-
-		//Public Sub Dispose() Implements IDisposable.Dispose
-		//	' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) below.
-		//	Dispose(True)
-		//	GC.SuppressFinalize(Me)
-		//End Sub
-
+		#region IDisposable Support
 		protected void Dispose(bool disposing)
 		{
-			if (!isDisposed)
-			{
-				if (disposing)
-				{
-					Halt(false);
-				}
-				//NOTE: free shared unmanaged resources
-			}
+			if (!isDisposed && disposing)
+				Halt(false);
+
+			//NOTE: free shared unmanaged resources
 			isDisposed = true;
 			base.Dispose(disposing);
 		}
@@ -52,26 +39,15 @@ namespace Crowbar
 		{
 			// Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
 			Dispose(false);
-//INSTANT C# NOTE: The base class Finalize method is automatically called from the destructor:
 			//base.Finalize();
 		}
+		#endregion
+		#endregion
 
-#endregion
+		#region Init and Free
+		#endregion
 
-#endregion
-
-#region Init and Free
-
-		//Private Sub Init()
-		//End Sub
-
-		//Private Sub Free()
-		//End Sub
-
-#endregion
-
-#region Methods
-
+		#region Methods
 		public void Run(int gameSetupSelectedIndex)
 		{
 			GameAppInfo info = new GameAppInfo();
@@ -83,15 +59,12 @@ namespace Crowbar
 		{
 			Halt(false);
 		}
+		#endregion
 
-#endregion
+		#region Event Handlers
+		#endregion
 
-#region Event Handlers
-
-#endregion
-
-#region Private Methods that can be called in either the main thread or the background thread
-
+		#region Private Methods that can be called in either the main thread or the background thread
 		private void Halt(bool calledFromBackgroundThread)
 		{
 			if (theGameAppProcess != null && !theGameAppProcess.HasExited)
@@ -99,13 +72,13 @@ namespace Crowbar
 				try
 				{
 					if (!theGameAppProcess.CloseMainWindow())
-					{
 						theGameAppProcess.Kill();
-					}
 				}
 				catch (Exception ex)
 				{
-					int debug = 4242;
+					#if DEBUG
+					Console.WriteLine("GameApp (Halt): " + ex.Message);
+					#endif
 				}
 				finally
 				{
@@ -118,14 +91,12 @@ namespace Crowbar
 				}
 			}
 		}
+		#endregion
 
-#endregion
-
-#region Private Methods that are called in the background thread
-
-		private void GameApp_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
+		#region Private Methods that are called in the background thread
+		private void GameApp_DoWork(object sender, DoWorkEventArgs e)
 		{
-			ReportProgress(0, "");
+			ReportProgress(0, string.Empty);
 
 			GameAppInfo info = (GameAppInfo)e.Argument;
 
@@ -140,42 +111,26 @@ namespace Crowbar
 		//TODO: Check inputs as done in Compiler.CompilerInputsAreValid().
 		private bool GameAppInputsAreOkay()
 		{
-			bool inputsAreValid = true;
-
-
-			GameSetup gameSetup = null;
-			string gameAppPathFileName = null;
-			gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[theGameSetupSelectedIndex];
-			gameAppPathFileName = gameSetup.GameAppPathFileName;
+			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[theGameSetupSelectedIndex];
+			string gameAppPathFileName = gameSetup.GameAppPathFileName;
 
 			if (!File.Exists(gameAppPathFileName))
 			{
-				inputsAreValid = false;
 				WriteErrorMessage("The game's executable, \"" + gameAppPathFileName + "\", does not exist.");
 				UpdateProgress(1, Properties.Resources.ErrorMessageSDKMissingCause);
+				return false;
 			}
 
-			return inputsAreValid;
+			return true;
 		}
 
 		private void RunGameApp()
 		{
-			string gameAppPathFileName = null;
-			//Dim steamAppPathFileName As String
-			//Dim gameAppId As String
-			string gamePath = null;
-			string gameFileName = null;
-			string gameAppOptions = null;
-			//Dim currentFolder As String
-
 			GameSetup gameSetup = MainCROWBAR.TheApp.Settings.GameSetups[theGameSetupSelectedIndex];
-			gamePath = FileManager.GetPath(gameSetup.GamePathFileName);
-			gameFileName = Path.GetFileName(gameSetup.GamePathFileName);
-			gameAppPathFileName = gameSetup.GameAppPathFileName;
-			gameAppOptions = gameSetup.GameAppOptions;
-
-			//currentFolder = Directory.GetCurrentDirectory()
-			//Directory.SetCurrentDirectory(gameModelsPath)
+			string gamePath = FileManager.GetPath(gameSetup.GamePathFileName);
+			//string gameFileName = Path.GetFileName(gameSetup.GamePathFileName);
+			string gameAppPathFileName = gameSetup.GameAppPathFileName;
+			string gameAppOptions = gameSetup.GameAppOptions;
 
 			string arguments = "";
 			arguments += " -game \"";
@@ -198,8 +153,6 @@ namespace Crowbar
 			theGameAppProcess.WaitForExit();
 			theGameAppProcess.Close();
 			theGameAppProcess = null;
-
-			//Directory.SetCurrentDirectory(currentFolder)
 		}
 
 		private void UpdateProgressStart(string line)
@@ -214,7 +167,7 @@ namespace Crowbar
 
 		private void UpdateProgress()
 		{
-			UpdateProgressInternal(1, "");
+			UpdateProgressInternal(1, string.Empty);
 		}
 
 		private void WriteErrorMessage(string line)
@@ -224,12 +177,9 @@ namespace Crowbar
 
 		private void UpdateProgress(int indentLevel, string line)
 		{
-			string indentedLine = "";
-
+			string indentedLine = string.Empty;
 			for (int i = 1; i <= indentLevel; i++)
-			{
 				indentedLine += "  ";
-			}
 			indentedLine += line;
 			UpdateProgressInternal(1, indentedLine);
 		}
@@ -245,19 +195,6 @@ namespace Crowbar
 
 			ReportProgress(progressValue, line);
 		}
-
-#endregion
-
-#region Data
-
-		private bool isDisposed;
-
-		private int theGameSetupSelectedIndex;
-
-		private Process theGameAppProcess;
-
-#endregion
-
+		#endregion
 	}
-
 }

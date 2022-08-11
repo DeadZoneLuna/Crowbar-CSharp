@@ -1,17 +1,7 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
-namespace Crowbar
+﻿namespace Crowbar
 {
 	public class BitmapInfoHeader
 	{
-
 		//FROM: c:\Program Files (x86)\Windows Kits\8.1\Include\um\wingdi.h
 		//typedef struct tagBITMAPINFOHEADER{
 		//        DWORD      biSize;
@@ -27,18 +17,16 @@ namespace Crowbar
 		//        DWORD      biClrImportant;
 		//} BITMAPINFOHEADER, FAR *LPBITMAPINFOHEADER, *PBITMAPINFOHEADER;
 
-		public UInt32 size;
-		public Int32 width;
-		public Int32 height;
-		public UInt16 planes;
-		public UInt16 bitCount;
-		public UInt32 compression;
-		public UInt32 sizeImage;
-		public Int32 xPelsPerMeter;
-		public Int32 yPelsPerMeter;
-		public UInt32 clrUsed;
-		public UInt32 clrImportant;
-
+		public uint size;
+		public int width;
+		public int height;
+		public ushort planes;
+		public ushort bitCount;
+		public uint compression;
+		public uint sizeImage;
+		public int xPelsPerMeter;
+		public int yPelsPerMeter;
+		public uint clrUsed;
+		public uint clrImportant;
 	}
-
 }

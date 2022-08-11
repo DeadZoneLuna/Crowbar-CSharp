@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1021,7 +1020,6 @@ namespace Crowbar
 			((System.ComponentModel.ISupportInitialize)DataGridView8).EndInit();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			BrowseForMdlFileButton.Click += new System.EventHandler(BrowseForMdlFileButton_Click);
 			GotoMdlFileButton.Click += new System.EventHandler(GotoMdlFileButton_Click);
 		}

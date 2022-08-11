@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Web.Script.Serialization;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -546,7 +545,6 @@ namespace Crowbar
 			PostPackPanel.ResumeLayout(false);
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Load += new System.EventHandler(PackUserControl_Load);
 			BrowseForInputFolderOrFileNameButton.Click += new System.EventHandler(BrowseForInputFolderOrFileNameButton_Click);
 			GotoInputPathButton.Click += new System.EventHandler(GotoInputPathButton_Click);

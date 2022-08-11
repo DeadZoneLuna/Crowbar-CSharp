@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -246,7 +245,6 @@ namespace Crowbar
 									{
 										aStrip = aStripGroup.theVtxStrips[vtxStripIndex];
 
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of aStrip.indexCount - 3 for every iteration:
 										int tempVar = aStrip.indexCount - 3;
 										for (int vtxIndexIndex = 0; vtxIndexIndex <= tempVar; vtxIndexIndex += 3)
 										{
@@ -431,7 +429,6 @@ namespace Crowbar
 
 				if (aBodyModel.vertexListType == 0)
 				{
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of aBodyModel.theVertexesType0(vertexIndex).boneIndex.Length for every iteration:
 					int tempVar = aBodyModel.theVertexesType0[vertexIndex].boneIndex.Length;
 					for (int i = 0; i < tempVar; i++)
 					{

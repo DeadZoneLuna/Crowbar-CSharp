@@ -1,17 +1,15 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.ComponentModel;
 
 namespace Crowbar
 {
 	public class BindingListExAutoSort<T> : BindingListEx<T>
 	{
+		private string theSortedPropertyName;
+		private PropertyDescriptor theSortedProperty;
+
 		public BindingListExAutoSort(string nProperty)
 		{
 			theSortedPropertyName = nProperty;
@@ -20,14 +18,14 @@ namespace Crowbar
 
 		protected override void InsertItem(int index, T item)
 		{
-			base.InsertItemSorted(index, item, theSortedProperty);
+			InsertItemSorted(index, item, theSortedProperty);
 		}
 
 		//Public Overloads Sub ResetItem(ByVal index As Integer)
 		//	MyBase.ResetItem(index)
 		//End Sub
 
-		protected override void OnListChanged(System.ComponentModel.ListChangedEventArgs e)
+		protected override void OnListChanged(ListChangedEventArgs e)
 		{
 			//If e.ListChangedType = ListChangedType.ItemChanged AndAlso e.PropertyDescriptor IsNot Nothing AndAlso e.PropertyDescriptor.Name = Me.theSortedPropertyName Then
 			//	Dim obj As Object = Me.Items(e.NewIndex)
@@ -43,11 +41,7 @@ namespace Crowbar
 			{
 				object obj = Items[e.NewIndex];
 				Items.RemoveAt(e.NewIndex);
-//INSTANT C# WARNING: Casting to a generic type parameter may result in a runtime exception:
-//ORIGINAL LINE: Dim insertionIndex As Integer
-				int insertionIndex = FindInsertionIndex(0, (T)obj, theSortedProperty);
-//INSTANT C# WARNING: Casting to a generic type parameter may result in a runtime exception:
-//ORIGINAL LINE: Me.Items.Insert(insertionIndex, CType(obj, T))
+				int insertionIndex = FindInsertionIndex((T)obj, theSortedProperty);
 				Items.Insert(insertionIndex, (T)obj);
 				ListChangedEventArgs aEventArgs = new ListChangedEventArgs(ListChangedType.ItemMoved, insertionIndex, e.NewIndex);
 				base.OnListChanged(aEventArgs);
@@ -56,10 +50,5 @@ namespace Crowbar
 			}
 			base.OnListChanged(e);
 		}
-
-		private string theSortedPropertyName;
-		private PropertyDescriptor theSortedProperty;
-
 	}
-
 }

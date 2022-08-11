@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -36,37 +35,26 @@ namespace Crowbar
 		{
 			if (theRealMdlFileData.theAnimationDescs != null)
 			{
-				long animBlockInputFileStreamPosition = 0;
-				long animBlockInputFileStreamEndPosition = 0;
-				SourceMdlAnimationDesc52 anAnimationDesc = null;
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionFrameCount = 0;
 				for (int anAnimDescIndex = 0; anAnimDescIndex < theRealMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
 				{
-					anAnimationDesc = theRealMdlFileData.theAnimationDescs[anAnimDescIndex];
-
-					animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
-					animBlockInputFileStreamEndPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataEnd;
+					SourceMdlAnimationDesc52 anAnimationDesc = theRealMdlFileData.theAnimationDescs[anAnimDescIndex];
+					long animBlockInputFileStreamPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataStart;
+					long animBlockInputFileStreamEndPosition = theRealMdlFileData.theAnimBlocks[anAnimationDesc.animBlock].dataEnd;
 
 					try
 					{
-	//					Dim sectionIndex As Integer
+						int sectionIndex = 0;
 						if (anAnimationDesc.theSections != null && anAnimationDesc.theSections.Count > 0)
 						{
-	//						Dim sectionFrameCount As Integer
 							int sectionCount = anAnimationDesc.theSections.Count;
 
 							for (sectionIndex = 0; sectionIndex < sectionCount; sectionIndex++)
 							{
 								if (anAnimationDesc.theSections[sectionIndex].animBlock > 0)
 								{
+									int sectionFrameCount;
 									if (sectionIndex < sectionCount - 2)
-									{
 										sectionFrameCount = anAnimationDesc.sectionFrameCount;
-									}
 									else
 									{
 										//NOTE: Due to the weird calculation of sectionCount in studiomdl, this line is called twice, which means there are two "last" sections.

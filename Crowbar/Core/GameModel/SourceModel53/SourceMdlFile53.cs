@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -1091,41 +1090,27 @@ namespace Crowbar
 		{
 			if (theMdlFileData.theAnimationDescs != null)
 			{
-				long animInputFileStreamPosition = 0;
-				SourceMdlAnimationDesc52 anAnimationDesc = null;
-				List<SourceMdlAnimation> aSectionOfAnimation = null;
-				SourceAniFrameAnim52 aSectionOfFrameAnimation = null;
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionFrameCount = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionCount = 0;
-				long adjustedAnimOffset = 0;
+				List<SourceMdlAnimation> aSectionOfAnimation;
+				SourceAniFrameAnim52 aSectionOfFrameAnimation;
 				for (int anAnimDescIndex = 0; anAnimDescIndex < theMdlFileData.theAnimationDescs.Count; anAnimDescIndex++)
 				{
-					anAnimationDesc = theMdlFileData.theAnimationDescs[anAnimDescIndex];
-
-					animInputFileStreamPosition = anAnimationDesc.theOffsetStart;
+					SourceMdlAnimationDesc52 anAnimationDesc = theMdlFileData.theAnimationDescs[anAnimDescIndex];
+					long animInputFileStreamPosition = anAnimationDesc.theOffsetStart;
 
 					if (theMdlFileData.theFirstAnimationDesc == null && anAnimationDesc.theName[0] != '@')
-					{
 						theMdlFileData.theFirstAnimationDesc = anAnimationDesc;
-					}
 
+					int sectionCount;
+					int sectionFrameCount;
 					if ((anAnimationDesc.flags & SourceMdlAnimationDesc.STUDIO_FRAMEANIM) != 0)
 					{
 						anAnimationDesc.theSectionsOfFrameAnim = new List<SourceAniFrameAnim52>();
 						aSectionOfFrameAnimation = new SourceAniFrameAnim52();
 						anAnimationDesc.theSectionsOfFrameAnim.Add(aSectionOfFrameAnimation);
 
-	//					Dim sectionIndex As Integer
+						int sectionIndex;
 						if (anAnimationDesc.sectionOffset != 0 && anAnimationDesc.sectionFrameCount > 0)
 						{
-	//						Dim sectionFrameCount As Integer
-	//						Dim sectionCount As Integer
-
 							//TODO: Shouldn't this be set to largest sectionFrameCount?
 							theMdlFileData.theSectionFrameCount = anAnimationDesc.sectionFrameCount;
 							if (theMdlFileData.theSectionFrameMinFrameCount >= anAnimationDesc.frameCount)
@@ -1156,9 +1141,7 @@ namespace Crowbar
 										aSectionOfFrameAnimation = anAnimationDesc.theSectionsOfFrameAnim[sectionIndex];
 
 										if (sectionIndex < sectionCount - 2)
-										{
 											sectionFrameCount = anAnimationDesc.sectionFrameCount;
-										}
 										else
 										{
 											//NOTE: Due to the weird calculation of sectionCount in studiomdl, this line is called twice, which means there are two "last" sections.
@@ -1216,7 +1199,7 @@ namespace Crowbar
 									if (anAnimationDesc.theSections[sectionIndex2].animBlock == 0)
 									{
 										//NOTE: This is weird, but it fits with a few oddball models (such as L4D2 "left4dead2\ghostanim.mdl") while not messing up the normal ones.
-										adjustedAnimOffset = anAnimationDesc.theSections[sectionIndex2].animOffset + (anAnimationDesc.animOffset - anAnimationDesc.theSections[0].animOffset);
+										long adjustedAnimOffset = anAnimationDesc.theSections[sectionIndex2].animOffset + (anAnimationDesc.animOffset - anAnimationDesc.theSections[0].animOffset);
 
 										aSectionOfAnimation = anAnimationDesc.theSectionsOfAnimations[sectionIndex2];
 
@@ -2818,51 +2801,34 @@ namespace Crowbar
 			//	}
 			if (theMdlFileData.localNodeCount > 0 && theMdlFileData.localNodeNameOffset != 0)
 			{
-				long localNodeNameInputFileStreamPosition = 0;
-				long inputFileStreamPosition = 0;
-				long fileOffsetStart = 0;
-				long fileOffsetEnd = 0;
-				long fileOffsetStart2 = 0;
-				long fileOffsetEnd2 = 0;
-
 				theInputFileReader.BaseStream.Seek(theMdlFileData.localNodeNameOffset, SeekOrigin.Begin);
-				fileOffsetStart = theInputFileReader.BaseStream.Position;
+				long fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				theMdlFileData.theLocalNodeNames = new List<string>(theMdlFileData.localNodeCount);
-				int localNodeNameOffset = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string aLocalNodeName = null;
+
+				string aLocalNodeName = string.Empty;
 				for (int i = 0; i < theMdlFileData.localNodeCount; i++)
 				{
-					localNodeNameInputFileStreamPosition = theInputFileReader.BaseStream.Position;
-	//				Dim aLocalNodeName As String
-					localNodeNameOffset = theInputFileReader.ReadInt32();
-
-					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
+					int localNodeNameOffset = theInputFileReader.ReadInt32();
+					long inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (localNodeNameOffset != 0)
 					{
 						theInputFileReader.BaseStream.Seek(localNodeNameOffset, SeekOrigin.Begin);
-						fileOffsetStart2 = theInputFileReader.BaseStream.Position;
+						long fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
 						aLocalNodeName = FileManager.ReadNullTerminatedString(theInputFileReader);
 
-						fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+						long fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
 						if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
-						{
 							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aLocalNodeName = " + aLocalNodeName);
-						}
-					}
-					else
-					{
-						aLocalNodeName = "";
 					}
 					theMdlFileData.theLocalNodeNames.Add(aLocalNodeName);
 
 					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
-				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				long fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
 				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theMdlFileData.theLocalNodeNames " + theMdlFileData.theLocalNodeNames.Count.ToString());
 
 				theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(theInputFileReader, fileOffsetEnd, 4, "theMdlFileData.theLocalNodeNames alignment");
@@ -3282,11 +3248,11 @@ namespace Crowbar
 
 				for (int x = 0; x <= 2; x++)
 				{
-					aVertAnim.set_deltaUShort(x, theInputFileReader.ReadUInt16());
+					aVertAnim.deltaUShort(x, theInputFileReader.ReadUInt16());
 				}
 				for (int x = 0; x <= 2; x++)
 				{
-					aVertAnim.set_nDeltaUShort(x, theInputFileReader.ReadUInt16());
+					aVertAnim.nDeltaUShort(x, theInputFileReader.ReadUInt16());
 				}
 
 				if (aFlex.vertAnimType == aFlex.STUDIO_VERT_ANIM_WRINKLE)
@@ -3822,54 +3788,35 @@ namespace Crowbar
 		{
 			if (theMdlFileData.texturePathCount > 0)
 			{
-				long texturePathInputFileStreamPosition = 0;
-				long inputFileStreamPosition = 0;
-				long fileOffsetStart = 0;
-				long fileOffsetEnd = 0;
-				long fileOffsetStart2 = 0;
-				long fileOffsetEnd2 = 0;
-
 				theInputFileReader.BaseStream.Seek(theMdlFileData.texturePathOffset, SeekOrigin.Begin);
-				fileOffsetStart = theInputFileReader.BaseStream.Position;
+				long fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				theMdlFileData.theTexturePaths = new List<string>(theMdlFileData.texturePathCount);
-				int texturePathOffset = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string aTexturePath = null;
+
+				string aTexturePath = string.Empty;
 				for (int i = 0; i < theMdlFileData.texturePathCount; i++)
 				{
-					texturePathInputFileStreamPosition = theInputFileReader.BaseStream.Position;
-	//				Dim aTexturePath As String
-					texturePathOffset = theInputFileReader.ReadInt32();
-
-					inputFileStreamPosition = theInputFileReader.BaseStream.Position;
+					int texturePathOffset = theInputFileReader.ReadInt32();
+					long inputFileStreamPosition = theInputFileReader.BaseStream.Position;
 
 					if (texturePathOffset != 0)
 					{
 						theInputFileReader.BaseStream.Seek(texturePathOffset, SeekOrigin.Begin);
-						fileOffsetStart2 = theInputFileReader.BaseStream.Position;
-
-						aTexturePath = FileManager.ReadNullTerminatedString(theInputFileReader);
+						long fileOffsetStart2 = theInputFileReader.BaseStream.Position;
 
 						//TEST: Convert all forward slashes to backward slashes.
-						aTexturePath = FileManager.GetNormalizedPathFileName(aTexturePath);
+						aTexturePath = FileManager.GetNormalizedPathFileName(FileManager.ReadNullTerminatedString(theInputFileReader));
 
-						fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
+						long fileOffsetEnd2 = theInputFileReader.BaseStream.Position - 1;
 						if (!theMdlFileData.theFileSeekLog.ContainsKey(fileOffsetStart2))
-						{
 							theMdlFileData.theFileSeekLog.Add(fileOffsetStart2, fileOffsetEnd2, "aTexturePath = " + aTexturePath);
-						}
-					}
-					else
-					{
-						aTexturePath = "";
 					}
 					theMdlFileData.theTexturePaths.Add(aTexturePath);
 
 					theInputFileReader.BaseStream.Seek(inputFileStreamPosition, SeekOrigin.Begin);
 				}
 
-				fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
+				long fileOffsetEnd = theInputFileReader.BaseStream.Position - 1;
 				theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "theMdlFileData.theTexturePaths " + theMdlFileData.theTexturePaths.Count.ToString());
 
 				theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(theInputFileReader, fileOffsetEnd, 4, "theMdlFileData.theTexturePaths alignment");
@@ -4650,7 +4597,6 @@ namespace Crowbar
 											aFlexFrame = null;
 											if (flexDescToFlexFrames[aFlex.flexDescIndex] != null)
 											{
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of flexDescToFlexFrames(aFlex.flexDescIndex).Count for every iteration:
 												int tempVar = flexDescToFlexFrames[aFlex.flexDescIndex].Count;
 												for (int x = 0; x < tempVar; x++)
 												{

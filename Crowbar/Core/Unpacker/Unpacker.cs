@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -971,10 +970,7 @@ namespace Crowbar
 			theUnpackedTempPathsAndPathFileNames.Clear();
 
 			// Create and add a folder to the Temp path, to prevent potential file collisions and to provide user more obvious folder name.
-			Guid guid = new Guid();
-			guid = Guid.NewGuid();
-			string folder = "Crowbar_" + guid.ToString();
-			theOutputPath = Path.Combine(Path.GetTempPath(), folder);
+			theOutputPath = Path.Combine(Path.GetTempPath(), "Crowbar_" + Guid.NewGuid().ToString());
 			theUnpackedPathsAreInTempPath = true;
 			if (!FileManager.PathExistsAfterTryToCreate(theOutputPath))
 			{
@@ -983,36 +979,21 @@ namespace Crowbar
 				return status;
 			}
 
-			//Dim vpkPathFileName As String
-			//vpkPathFileName = TheApp.Settings.UnpackPackagePathFolderOrFileName
-
 			try
 			{
-				string archivePathFileName = null;
-				List<int> archiveEntryIndexes = null;
-
-				theArchiveDirectoryFileNamePrefix = "";
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string vpkPath = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string vpkFileName = null;
+				theArchiveDirectoryFileNamePrefix = string.Empty;
 				for (int i = 0; i < archivePathFileNameToEntryIndexMap.Count; i++)
 				{
-					archivePathFileName = archivePathFileNameToEntryIndexMap.Keys[i];
-					archiveEntryIndexes = archivePathFileNameToEntryIndexMap.Values[i];
+					string archivePathFileName = archivePathFileNameToEntryIndexMap.Keys[i];
+					List<int> archiveEntryIndexes = archivePathFileNameToEntryIndexMap.Values[i];
 
-	//				Dim vpkPath As String
-	//				Dim vpkFileName As String
-					vpkPath = FileManager.GetPath(archivePathFileName);
-					vpkFileName = Path.GetFileName(archivePathFileName);
-
+					string vpkPath = FileManager.GetPath(archivePathFileName);
+					string vpkFileName = Path.GetFileName(archivePathFileName);
 					OpenArchiveDirectoryFile(theArchivePathFileNameToFileDataMap[archivePathFileName], archivePathFileName);
 					DoUnpackAction(theArchivePathFileNameToFileDataMap[archivePathFileName], vpkPath, vpkFileName, archiveEntryIndexes);
 				}
 				if (!string.IsNullOrEmpty(theArchiveDirectoryFileNamePrefix))
-				{
 					CloseArchiveDirectoryFile();
-				}
 			}
 			catch (Exception ex)
 			{

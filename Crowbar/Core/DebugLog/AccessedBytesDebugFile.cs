@@ -1,120 +1,57 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
 
 namespace Crowbar
 {
 	public class AccessedBytesDebugFile
 	{
+		#region Data
+		private StreamWriter theOutputFileStreamWriter;
+		#endregion
 
-#region Creation and Destruction
-
+		#region Creation and Destruction
 		public AccessedBytesDebugFile(StreamWriter outputFileStream)
 		{
 			theOutputFileStreamWriter = outputFileStream;
 		}
+		#endregion
 
-#endregion
-
-#region Methods
-
+		#region Methods
 		public void WriteHeaderComment()
 		{
-			string line = "";
-
-			line = "// ";
-			line += MainCROWBAR.TheApp.GetHeaderComment();
-			theOutputFileStreamWriter.WriteLine(line);
+			theOutputFileStreamWriter.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
 		}
 
 		public void WriteFileSeekLog(FileSeekLog aFileSeekLog)
 		{
-			string line = "====== File Size ======";
-
-			WriteLogLine(0, line);
-
-			line = aFileSeekLog.theFileSize.ToString("N0");
-			WriteLogLine(1, line);
-
-			line = "====== File Seek Log ======";
-			WriteLogLine(0, line);
-
-			//line = "--- Summary ---"
-			//Me.WriteLogLine(0, line)
-
-			long offsetStart = 0;
-			long offsetEnd;
-			//offsetStart = -1
-			//offsetEnd = -1
-			//For i As Integer = 0 To aFileSeekLog.theFileSeekList.Count - 1
-			//	If offsetStart = -1 Then
-			//		offsetStart = aFileSeekLog.theFileSeekList.Keys(i)
-			//	End If
-			//	offsetEnd = aFileSeekLog.theFileSeekList.Values(i)
-
-			//	If aFileSeekLog.theFileSeekDescriptionList.Values(i).StartsWith("[ERROR] Unread bytes") Then
-			//		If i > 0 Then
-			//			line = offsetStart.ToString("N0") + " - " + (aFileSeekLog.theFileSeekList.Keys(i) - 1).ToString("N0")
-			//			Me.WriteLogLine(1, line)
-			//		End If
-			//		If aFileSeekLog.theFileSeekDescriptionList.Values(i).StartsWith("[ERROR] Unread bytes (all zeroes)") Then
-			//			line = aFileSeekLog.theFileSeekList.Keys(i).ToString("N0") + " - " + offsetEnd.ToString("N0") + " [ERROR] Unread bytes (all zeroes)"
-			//		Else
-			//			line = aFileSeekLog.theFileSeekList.Keys(i).ToString("N0") + " - " + offsetEnd.ToString("N0") + " [ERROR] Unread bytes (non-zero)"
-			//		End If
-			//		Me.WriteLogLine(1, line)
-			//		offsetStart = -1
-			//	ElseIf (i = aFileSeekLog.theFileSeekList.Count - 1) OrElse (offsetEnd + 1 <> aFileSeekLog.theFileSeekList.Keys(i + 1)) Then
-			//		line = offsetStart.ToString("N0") + " - " + offsetEnd.ToString("N0")
-			//		Me.WriteLogLine(1, line)
-			//		offsetStart = -1
-			//	End If
-			//Next
-
-			//line = "------------------------"
-			//Me.WriteLogLine(0, line)
-			//line = "--- Each Section or Loop ---"
-			//Me.WriteLogLine(0, line)
-
-			offsetEnd = -1;
+			WriteLogLine(0, "====== File Size ======");
+			WriteLogLine(1, aFileSeekLog.theFileSize.ToString("N0"));
+			WriteLogLine(0, "====== File Seek Log ======");
 			for (int i = 0; i < aFileSeekLog.theFileSeekList.Count; i++)
 			{
-				offsetStart = aFileSeekLog.theFileSeekList.Keys[i];
-				offsetEnd = aFileSeekLog.theFileSeekList.Values[i];
-
-				line = offsetStart.ToString("N0") + " - " + offsetEnd.ToString("N0") + " " + aFileSeekLog.theFileSeekDescriptionList.Values[i];
-				WriteLogLine(1, line);
+				long offsetStart = aFileSeekLog.theFileSeekList.Keys[i];
+				long offsetEnd = aFileSeekLog.theFileSeekList.Values[i];
+				WriteLogLine(1, offsetStart.ToString("N0") + " - " + offsetEnd.ToString("N0") + " " + aFileSeekLog.theFileSeekDescriptionList.Values[i]);
 			}
-
-			line = "========================";
-			WriteLogLine(0, line);
+			WriteLogLine(0, "========================");
 		}
+		#endregion
 
-#endregion
-
-#region Private Methods
-
+		#region Private Methods
 		private void WriteFileSeparatorLines()
 		{
-			string line = null;
-
 			WriteLogLine(0, "");
 			WriteLogLine(0, "");
-			line = "################################################################################";
-			WriteLogLine(0, line);
+			WriteLogLine(0, "################################################################################");
 			WriteLogLine(0, "");
 			WriteLogLine(0, "");
 		}
 
 		private void WriteLogLine(int indentLevel, string line)
 		{
-			string indentedLine = "";
+			string indentedLine = string.Empty;
 			for (int i = 1; i <= indentLevel; i++)
 			{
 				indentedLine += "\t";
@@ -123,15 +60,6 @@ namespace Crowbar
 			theOutputFileStreamWriter.WriteLine(indentedLine);
 			theOutputFileStreamWriter.Flush();
 		}
-
-#endregion
-
-#region Data
-
-		private StreamWriter theOutputFileStreamWriter;
-
-#endregion
-
+		#endregion
 	}
-
 }

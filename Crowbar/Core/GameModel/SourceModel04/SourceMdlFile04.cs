@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -567,7 +566,6 @@ namespace Crowbar
 				fileOffsetStart = theInputFileReader.BaseStream.Position;
 
 				aMesh.theTextureBmpData = new List<byte>((int)(aMesh.textureWidth * aMesh.textureHeight));
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of aMesh.textureWidth * aMesh.textureHeight + 256 * 3 for every iteration:
 				long tempVar = aMesh.textureWidth * aMesh.textureHeight + 256 * 3;
 				for (long byteIndex = 0; byteIndex < tempVar; byteIndex++)
 				{

@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -742,8 +741,8 @@ namespace Crowbar
 		private void WriteGroupFlex()
 		{
 			WriteFlexLines();
-			WriteFlexControllerLines();
-			WriteFlexRuleLines();
+			WriteFlexControllerLines(theMdlFileData.theFlexControllers, true);
+			WriteFlexRuleLines(theMdlFileData.theFlexRules, theMdlFileData.theFlexDescs, theMdlFileData.theFlexControllers);
 		}
 
 		private void WriteFlexLines()
@@ -806,195 +805,10 @@ namespace Crowbar
 					line += frameIndex.ToString();
 					theOutputFileStreamWriter.WriteLine(line);
 				}
-				//======
-				//Dim aBodyPart As SourceMdlBodyPart
-				//Dim aModel As SourceMdlModel
-				//Dim frameIndex As Integer
-				//Dim flexDescHasBeenWritten As List(Of Integer)
-				//Dim meshVertexIndexStart As Integer
-				//frameIndex = 0
-				//flexDescHasBeenWritten = New List(Of Integer)
-
-				//line = vbTab
-				//line += "defaultflex frame "
-				//line += frameIndex.ToString()
-				//Me.theOutputFileStreamWriter.WriteLine(line)
-
-				//For bodyPartIndex As Integer = 0 To theSourceEngineModel.theMdlFileHeader.theBodyParts.Count - 1
-				//	aBodyPart = theSourceEngineModel.theMdlFileHeader.theBodyParts(bodyPartIndex)
-
-				//	If aBodyPart.theModels IsNot Nothing AndAlso aBodyPart.theModels.Count > 0 Then
-				//		For modelIndex As Integer = 0 To aBodyPart.theModels.Count - 1
-				//			aModel = aBodyPart.theModels(modelIndex)
-
-				//			If aModel.theMeshes IsNot Nothing AndAlso aModel.theMeshes.Count > 0 Then
-				//				For meshIndex As Integer = 0 To aModel.theMeshes.Count - 1
-				//					Dim aMesh As SourceMdlMesh
-				//					aMesh = aModel.theMeshes(meshIndex)
-
-				//					meshVertexIndexStart = Me.theSourceEngineModel.theMdlFileHeader.theBodyParts(bodyPartIndex).theModels(modelIndex).theMeshes(meshIndex).vertexIndexStart
-
-				//					If aMesh.theFlexes IsNot Nothing AndAlso aMesh.theFlexes.Count > 0 Then
-				//						For flexIndex As Integer = 0 To aMesh.theFlexes.Count - 1
-				//							Dim aFlex As SourceMdlFlex
-				//							aFlex = aMesh.theFlexes(flexIndex)
-
-				//							If flexDescHasBeenWritten.Contains(aFlex.flexDescIndex) Then
-				//								Continue For
-				//							Else
-				//								flexDescHasBeenWritten.Add(aFlex.flexDescIndex)
-				//							End If
-
-				//							line = vbTab
-				//							Dim aFlexDescPartnerIndex As Integer
-				//							'Dim aFlexPartner As SourceMdlFlex
-				//							aFlexDescPartnerIndex = aMesh.theFlexes(flexIndex).flexDescPartnerIndex
-				//							If aFlexDescPartnerIndex > 0 Then
-				//								'aFlexPartner = theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlexDescPartnerIndex)
-				//								If Not flexDescHasBeenWritten.Contains(aFlex.flexDescPartnerIndex) Then
-				//									flexDescHasBeenWritten.Add(aFlex.flexDescPartnerIndex)
-				//								End If
-				//								line += "flexpair """
-				//								Dim flexName As String
-				//								flexName = theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theName
-				//								line += flexName.Remove(flexName.Length - 1, 1)
-				//								line += """"
-				//								line += " "
-				//								line += Me.GetSplit(aFlex, meshVertexIndexStart).ToString("0.######", TheApp.InternalNumberFormat)
-
-				//								theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theDescIsUsedByFlex = True
-				//								theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescPartnerIndex).theDescIsUsedByFlex = True
-				//							Else
-				//								line += "flex """
-				//								line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theName
-				//								line += """"
-
-				//								theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theDescIsUsedByFlex = True
-				//							End If
-				//							line += " frame "
-				//							'NOTE: Start at second frame because first frame is "basis" frame.
-				//							frameIndex += 1
-				//							line += frameIndex.ToString()
-				//							'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theVtaFrameIndex.ToString()
-				//							Me.theOutputFileStreamWriter.WriteLine(line)
-				//						Next
-				//					End If
-				//				Next
-				//			End If
-				//		Next
-				//	End If
-				//Next
-
 				line = "\t";
 				line += "}";
 				theOutputFileStreamWriter.WriteLine(line);
 			}
-		}
-
-		private void WriteFlexControllerLines()
-		{
-			string line = "";
-
-			//NOTE: Writes out flexcontrollers correctly for teenangst zoey.
-			if (theMdlFileData.theFlexControllers != null && theMdlFileData.theFlexControllers.Count > 0)
-			{
-				SourceMdlFlexController aFlexController = null;
-
-				line = "";
-				theOutputFileStreamWriter.WriteLine(line);
-
-				for (int i = 0; i < theMdlFileData.theFlexControllers.Count; i++)
-				{
-					aFlexController = theMdlFileData.theFlexControllers[i];
-
-					line = "\t";
-					line += "flexcontroller ";
-					line += aFlexController.theType;
-					line += " ";
-					line += "range ";
-					line += aFlexController.min.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					line += " ";
-					line += aFlexController.max.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					line += " \"";
-					line += aFlexController.theName;
-					line += "\"";
-					theOutputFileStreamWriter.WriteLine(line);
-				}
-			}
-		}
-
-		private void WriteFlexRuleLines()
-		{
-			string line = "";
-
-			//NOTE: All flex rules are correct for teenangst zoey.
-			if (theMdlFileData.theFlexRules != null && theMdlFileData.theFlexRules.Count > 0)
-			{
-				SourceMdlFlexRule aFlexRule = null;
-
-				line = "";
-				theOutputFileStreamWriter.WriteLine(line);
-
-				for (int i = 0; i < theMdlFileData.theFlexDescs.Count; i++)
-				{
-					SourceMdlFlexDesc flexDesc = theMdlFileData.theFlexDescs[i];
-
-					if (!flexDesc.theDescIsUsedByFlex && flexDesc.theDescIsUsedByFlexRule)
-					{
-						line = "\t";
-						line += "localvar ";
-						line += flexDesc.theName;
-						theOutputFileStreamWriter.WriteLine(line);
-					}
-				}
-
-				for (int i = 0; i < theMdlFileData.theFlexRules.Count; i++)
-				{
-					aFlexRule = theMdlFileData.theFlexRules[i];
-					//line = Me.GetFlexRule(aFlexRule)
-					line = Common.GetFlexRule(theMdlFileData.theFlexDescs, theMdlFileData.theFlexControllers, aFlexRule);
-					theOutputFileStreamWriter.WriteLine(line);
-				}
-			}
-		}
-
-		//#define clamp(val, min, max) (((val) > (max)) ? (max) : (((val) < (min)) ? (min) : (val)))
-		private double Clamp(double val, double min, double max)
-		{
-			if (val > max)
-			{
-				return max;
-			}
-			else if (val < min)
-			{
-				return min;
-			}
-			else
-			{
-				return val;
-			}
-		}
-
-		//inline float RemapValClamped( float val, float A, float B, float C, float D)
-		//{
-		//	if ( A == B )
-		//		return val >= B ? D : C;
-		//	float cVal = (val - A) / (B - A);
-		//	cVal = clamp( cVal, 0.0f, 1.0f );
-
-		//	return C + (D - C) * cVal;
-		//}
-		private double RemapValClamped(double val, double A, double B, double C, double D)
-		{
-			if (A == B)
-			{
-				return 0;
-			}
-
-			double cVal = (val - A) / (B - A);
-			cVal = Clamp(cVal, 0.0F, 1.0F);
-
-			return C + (D - C) * cVal;
 		}
 
 		//Private Function GetFlexRule(ByVal aFlexRule As SourceMdlFlexRule) As String
@@ -3323,21 +3137,10 @@ namespace Crowbar
 			if (aSeqDesc.autoLayerCount > 0)
 			{
 				string line = "";
-				SourceMdlAutoLayer layer = null;
-				string otherSequenceName = null;
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string influenceStart = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string influencePeak = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string influenceTail = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string influenceEnd = null;
 				for (int j = 0; j < aSeqDesc.theAutoLayers.Count; j++)
 				{
-					layer = aSeqDesc.theAutoLayers[j];
-					otherSequenceName = theMdlFileData.theSequenceDescs[layer.sequenceIndex].theName;
+					SourceMdlAutoLayer layer = aSeqDesc.theAutoLayers[j];
+					string otherSequenceName = theMdlFileData.theSequenceDescs[layer.sequenceIndex].theName;
 
 					if (layer.flags == 0)
 					{
@@ -3359,10 +3162,10 @@ namespace Crowbar
 						line += otherSequenceName;
 						line += "\"";
 
-	//					Dim influenceStart As String
-	//					Dim influencePeak As String
-	//					Dim influenceTail As String
-	//					Dim influenceEnd As String
+						string influenceStart;
+						string influencePeak;
+						string influenceTail;
+						string influenceEnd;
 						if ((layer.flags & SourceMdlAutoLayer.STUDIO_AL_POSE) == 0)
 						{
 							SourceMdlAnimationDesc52 anAnimationDesc = theMdlFileData.theAnimationDescs[aSeqDesc.theAnimDescIndexes[0]];
@@ -3399,14 +3202,11 @@ namespace Crowbar
 						{
 							line += " noblend";
 						}
-						if ((layer.flags & SourceMdlAutoLayer.STUDIO_AL_POSE) > 0)
+						if (((layer.flags & SourceMdlAutoLayer.STUDIO_AL_POSE) > 0) && theMdlFileData.thePoseParamDescs != null && theMdlFileData.thePoseParamDescs.Count > layer.poseIndex)
 						{
-							if (theMdlFileData.thePoseParamDescs != null && theMdlFileData.thePoseParamDescs.Count > layer.poseIndex)
-							{
-								line += " poseparameter";
-								line += " ";
-								line += theMdlFileData.thePoseParamDescs[layer.poseIndex].theName;
-							}
+							line += " poseparameter";
+							line += " ";
+							line += theMdlFileData.thePoseParamDescs[layer.poseIndex].theName;
 						}
 						if ((layer.flags & SourceMdlAutoLayer.STUDIO_AL_LOCAL) > 0)
 						{
@@ -3469,59 +3269,37 @@ namespace Crowbar
 
 		private void WriteCmdListLocalHierarchyOption(SourceMdlAnimationDesc52 anAnimationDesc)
 		{
-			string line = "";
+			if (anAnimationDesc.theLocalHierarchies == null)
+				return;
 
-			if (anAnimationDesc.theLocalHierarchies != null)
+			for (int hierarchyIndex = 0; hierarchyIndex < anAnimationDesc.theLocalHierarchies.Count; hierarchyIndex++)
 			{
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				SourceMdlLocalHierarchy aLocalHierarchy = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int frameCount = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				double startInfluence = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				double peakInfluence = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				double tailInfluence = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				double endInfluence = 0;
-				for (int hierarchyIndex = 0; hierarchyIndex < anAnimationDesc.theLocalHierarchies.Count; hierarchyIndex++)
-				{
-	//				Dim aLocalHierarchy As SourceMdlLocalHierarchy
-	//				Dim frameCount As Integer
-	//				Dim startInfluence As Double
-	//				Dim peakInfluence As Double
-	//				Dim tailInfluence As Double
-	//				Dim endInfluence As Double
+				SourceMdlLocalHierarchy aLocalHierarchy = anAnimationDesc.theLocalHierarchies[0];
+				int frameCount = anAnimationDesc.frameCount;
+				double startInfluence = aLocalHierarchy.startInfluence * (frameCount - 1);
+				double peakInfluence = aLocalHierarchy.peakInfluence * (frameCount - 1);
+				double tailInfluence = aLocalHierarchy.tailInfluence * (frameCount - 1);
+				double endInfluence = aLocalHierarchy.endInfluence * (frameCount - 1);
 
-					aLocalHierarchy = anAnimationDesc.theLocalHierarchies[0];
-					frameCount = anAnimationDesc.frameCount;
-					startInfluence = aLocalHierarchy.startInfluence * (frameCount - 1);
-					peakInfluence = aLocalHierarchy.peakInfluence * (frameCount - 1);
-					tailInfluence = aLocalHierarchy.tailInfluence * (frameCount - 1);
-					endInfluence = aLocalHierarchy.endInfluence * (frameCount - 1);
+				string line = "\t";
+				line += "localhierarchy";
+				line += " \"";
+				line += theMdlFileData.theBones[aLocalHierarchy.boneIndex].theName;
+				line += "\"";
+				line += " \"";
+				if (aLocalHierarchy.boneNewParentIndex >= 0 && aLocalHierarchy.boneNewParentIndex < theMdlFileData.theBones.Count)
+					line += theMdlFileData.theBones[aLocalHierarchy.boneNewParentIndex].theName;
 
-					line = "\t";
-					line += "localhierarchy";
-					line += " \"";
-					line += theMdlFileData.theBones[aLocalHierarchy.boneIndex].theName;
-					line += "\"";
-					line += " \"";
-					if (aLocalHierarchy.boneNewParentIndex >= 0 && aLocalHierarchy.boneNewParentIndex < theMdlFileData.theBones.Count)
-					{
-						line += theMdlFileData.theBones[aLocalHierarchy.boneNewParentIndex].theName;
-					}
-					line += "\"";
-					line += " range ";
-					line += startInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					line += " ";
-					line += peakInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					line += " ";
-					line += tailInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					line += " ";
-					line += endInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
-					theOutputFileStreamWriter.WriteLine(line);
-				}
+				line += "\"";
+				line += " range ";
+				line += startInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += " ";
+				line += peakInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += " ";
+				line += tailInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
+				line += " ";
+				line += endInfluence.ToString("0.######", MainCROWBAR.TheApp.InternalNumberFormat);
+				theOutputFileStreamWriter.WriteLine(line);
 			}
 		}
 

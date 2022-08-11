@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -767,7 +766,6 @@ namespace Crowbar
 			PostUnpackPanel.ResumeLayout(false);
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Load += new System.EventHandler(UnpackUserControl_Load);
 			BrowseForPackagePathFolderOrFileNameButton.Click += new System.EventHandler(BrowseForPackagePathFolderOrFileNameButton_Click);
 			GotoPackageButton.Click += new System.EventHandler(GotoPackageButton_Click);

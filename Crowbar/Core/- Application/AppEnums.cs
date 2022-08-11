@@ -1,18 +1,12 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.ComponentModel;
 
 namespace Crowbar
 {
 	public static class AppEnums
 	{
-
 		public enum InputOptions
 		{
 			[Description("File")]
@@ -307,7 +301,5 @@ namespace Crowbar
 			[Description("Vertical")]
 			Vertical
 		}
-
 	}
-
 }

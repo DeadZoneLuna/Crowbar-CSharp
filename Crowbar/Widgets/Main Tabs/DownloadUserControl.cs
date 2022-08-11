@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -406,7 +405,7 @@ namespace Crowbar
 						//NOTE: Do not use Directory.Move() because it raises exception when trying to move between drives.
 						//Directory.Move(outputInfo.ContentFolderOrFileName, targetOutputPath)
 						//======
-						System.IO.Directory.Move(outputInfo.ContentFolderOrFileName, targetOutputPath);
+						FileManager.CopyFolder(outputInfo.ContentFolderOrFileName, targetOutputPath, true);
 
 						if (Directory.Exists(targetOutputPath))
 						{

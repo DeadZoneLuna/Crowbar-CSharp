@@ -1,15 +1,11 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
 
 namespace Crowbar
 {
+	//TODO: Unused? Maybe this can be used in Crowbar in the future (but hasn't been updated for a long time...)
 	internal static class ParseSMD
 	{
 
@@ -687,5 +683,4 @@ namespace Crowbar
 		private static char[] whitespaceSeparators = {};
 
 	}
-
 }

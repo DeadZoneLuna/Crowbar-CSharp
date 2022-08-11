@@ -1,37 +1,38 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
 
 namespace Crowbar
 {
 	public class BitmapFile
 	{
+		#region Data
+		//Protected theInputFileReader As BinaryReader
+		//Protected theOutputFileWriter As BinaryWriter
 
-#region Creation and Destruction
+		public string thePathFileName;
+		public uint theWidth;
+		public uint theHeight;
+		public List<byte> theData;
+		#endregion
 
+		#region Creation and Destruction
 		//Public Sub New(ByVal mdlFileReader As BinaryReader, ByVal mdlFileData As SourceMdlFileData10)
 		//	Me.theInputFileReader = mdlFileReader
 		//	Me.theMdlFileData = mdlFileData
 		//End Sub
 
-		public BitmapFile(string bmpPathFileName, UInt32 width, UInt32 height, List<byte> data)
+		public BitmapFile(string bmpPathFileName, uint width, uint height, List<byte> data)
 		{
 			thePathFileName = bmpPathFileName;
 			theWidth = width;
 			theHeight = height;
 			theData = data;
 		}
+		#endregion
 
-#endregion
-
-#region Methods
-
+		#region Methods
 		//int WriteBMPfile (char *szFile, byte *pbBits, int width, int height, byte *pbPalette)
 		//{
 		//	int i, rc = 0;
@@ -152,21 +153,16 @@ namespace Crowbar
 						//	biTrueWidth = ((width + 3) & ~3);
 						//	cbBmpBits = biTrueWidth * height;
 						//	cbPalBytes = 256 * sizeof( RGBQUAD );
-						UInt32 alignedWidthUsedInFile = 0;
-						UInt32 fileHeaderSize = 0;
-						UInt32 infoHeaderSize = 0;
-						UInt32 paletteSize = 0;
-						UInt32 dataSize = 0;
 						//paddedWidthUsedInFile = CUInt(MathModule.AlignLong(Me.theWidth, 3))
 						//NOTE: Align to 4 byte boundary.
-						alignedWidthUsedInFile = (uint)MathModule.AlignLong(theWidth, 4);
-						fileHeaderSize = 14;
-						infoHeaderSize = 40;
+						uint alignedWidthUsedInFile = (uint)MathModule.AlignLong(theWidth, 4);
+						uint fileHeaderSize = 14;
+						uint infoHeaderSize = 40;
 						// 256 * size of BitmapRgbQuad = 256 * 4 = 1024
-						paletteSize = 1024;
-						dataSize = alignedWidthUsedInFile * theHeight;
+						uint paletteSize = 1024;
+						uint dataSize = alignedWidthUsedInFile * theHeight;
 
-						//	// Write file header
+						// Write file header
 						outputFileWriter.Write('B');
 						outputFileWriter.Write('M');
 						outputFileWriter.Write(fileHeaderSize + infoHeaderSize + paletteSize + dataSize);
@@ -174,7 +170,7 @@ namespace Crowbar
 						outputFileWriter.Write((ushort)0);
 						outputFileWriter.Write(fileHeaderSize + infoHeaderSize + paletteSize);
 
-						//	// Write info header
+						// Write info header
 						outputFileWriter.Write(infoHeaderSize);
 						outputFileWriter.Write(alignedWidthUsedInFile);
 						outputFileWriter.Write(theHeight);
@@ -187,7 +183,7 @@ namespace Crowbar
 						outputFileWriter.Write((uint)256);
 						outputFileWriter.Write((uint)0);
 
-						//	// Write palette (bmih.biClrUsed entries)
+						// Write palette (bmih.biClrUsed entries)
 						for (int dataIndex = theData.Count - 768; dataIndex < theData.Count; dataIndex += 3)
 						{
 							outputFileWriter.Write(theData[dataIndex + 2]);
@@ -196,27 +192,19 @@ namespace Crowbar
 							outputFileWriter.Write((byte)0);
 						}
 
-						//	// Write bitmap bits (remainder of file)
+						// Write bitmap bits (remainder of file)
 						// Write the rows in reverse order.
 						int startOfLastRowOffset = (int)(theData.Count - 768 - theWidth);
-						//For dataStoredIndex As Integer = startOfLastRowOffset To 0 Step CInt(-Me.theWidth)
 						int dataStoredIndex = startOfLastRowOffset;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of theHeight - 1UI for every iteration:
 						uint tempVar = theHeight - 1U;
 						for (uint rowIndex = 0; rowIndex <= tempVar; rowIndex++)
 						{
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (int)(dataStoredIndex + theWidth - 1) for every iteration:
 							int tempVar2 = (int)(dataStoredIndex + theWidth - 1);
 							for (int dataIndex = dataStoredIndex; dataIndex <= tempVar2; dataIndex++)
-							{
 								outputFileWriter.Write(theData[dataIndex]);
-							}
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (int)(dataStoredIndex + alignedWidthUsedInFile - 1) for every iteration:
 							int tempVar3 = (int)(dataStoredIndex + alignedWidthUsedInFile - 1);
 							for (int paddingIndex = (int)(dataStoredIndex + theWidth); paddingIndex <= tempVar3; paddingIndex++)
-							{
 								outputFileWriter.Write((byte)0);
-							}
 							dataStoredIndex -= (int)theWidth;
 						}
 					}
@@ -227,9 +215,7 @@ namespace Crowbar
 					finally
 					{
 						if (outputFileWriter != null)
-						{
 							outputFileWriter.Close();
-						}
 					}
 				}
 			}
@@ -240,31 +226,12 @@ namespace Crowbar
 			finally
 			{
 				if (outputFileStream != null)
-				{
 					outputFileStream.Close();
-				}
 			}
 		}
+		#endregion
 
-#endregion
-
-#region Private Methods
-
-#endregion
-
-#region Data
-
-		//Protected theInputFileReader As BinaryReader
-		//Protected theOutputFileWriter As BinaryWriter
-
-		public string thePathFileName;
-		public UInt32 theWidth;
-		public UInt32 theHeight;
-		public List<byte> theData;
-
-#endregion
-
-
+		#region Private Methods
+		#endregion
 	}
-
 }

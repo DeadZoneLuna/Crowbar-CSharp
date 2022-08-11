@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -36,11 +35,8 @@ namespace Crowbar
 		{
 			if (theRealMdlFileData.theAnimationDescs != null)
 			{
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				int sectionIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				int sectionFrameCount = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 				SourceMdlAnimationSection section = null;
 				foreach (SourceMdlAnimationDesc49 anAnimationDesc in theRealMdlFileData.theAnimationDescs)
 				{

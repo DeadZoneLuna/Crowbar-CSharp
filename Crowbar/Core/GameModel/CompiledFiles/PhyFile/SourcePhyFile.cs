@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -73,8 +72,6 @@ namespace Crowbar
 
 			thePhyFileData.theSourcePhyMaxConvexPieces = 0;
 			thePhyFileData.theSourcePhyCollisionDatas = new List<SourcePhyCollisionData>();
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-			double w = 0;
 			for (int solidIndex = 0; solidIndex < thePhyFileData.solidCount; solidIndex++)
 			{
 				SourcePhyCollisionData collisionData = new SourcePhyCollisionData();
@@ -242,7 +239,7 @@ namespace Crowbar
 					phyVertex.vertex.x = theInputFileReader.ReadSingle();
 					phyVertex.vertex.y = theInputFileReader.ReadSingle();
 					phyVertex.vertex.z = theInputFileReader.ReadSingle();
-					w = theInputFileReader.ReadSingle();
+					double w = theInputFileReader.ReadSingle();
 
 					faceSection0Vertices.Add(phyVertex);
 				}

@@ -1,17 +1,15 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
 
 namespace Crowbar
 {
 	public class FileSeekLog
 	{
+		public long theFileSize;
+		public SortedList<long, long> theFileSeekList;
+		public SortedList<long, string> theFileSeekDescriptionList;
 
 		public FileSeekLog()
 		{
@@ -29,9 +27,7 @@ namespace Crowbar
 			try
 			{
 				if (theFileSeekList.ContainsKey(startOffset) && theFileSeekList[startOffset] == endOffset)
-				{
 					theFileSeekDescriptionList[startOffset] += "; " + description;
-				}
 				else if (theFileSeekList.ContainsKey(startOffset))
 				{
 					string temp = theFileSeekDescriptionList[startOffset];
@@ -44,7 +40,7 @@ namespace Crowbar
 					theFileSeekDescriptionList.Add(startOffset, description);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				int debug = 4242;
 			}
@@ -55,15 +51,11 @@ namespace Crowbar
 			try
 			{
 				if (theFileSeekList.ContainsKey(startOffset))
-				{
 					theFileSeekList.Remove(startOffset);
-				}
 				if (theFileSeekDescriptionList.ContainsKey(startOffset))
-				{
 					theFileSeekDescriptionList.Remove(startOffset);
-				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				int debug = 4242;
 			}
@@ -93,11 +85,8 @@ namespace Crowbar
 
 		public void LogToEndAndAlignToNextStart(BinaryReader inputFileReader, long fileOffsetEnd, int byteAlignmentCount, string description, long expectedAlignOffsetEnd = -1)
 		{
-			long fileOffsetStart2 = 0;
-			long fileOffsetEnd2 = 0;
-
-			fileOffsetStart2 = fileOffsetEnd + 1;
-			fileOffsetEnd2 = MathModule.AlignLong(fileOffsetStart2, byteAlignmentCount) - 1;
+			long fileOffsetStart2 = fileOffsetEnd + 1;
+			long fileOffsetEnd2 = MathModule.AlignLong(fileOffsetStart2, byteAlignmentCount) - 1;
 			inputFileReader.BaseStream.Seek(fileOffsetEnd2 + 1, SeekOrigin.Begin);
 			if (fileOffsetEnd2 >= fileOffsetStart2)
 			{
@@ -109,9 +98,7 @@ namespace Crowbar
 					description += " - " + (fileOffsetEnd2 + 1).ToString() + ":" + GetByteValues(inputFileReader, fileOffsetEnd2 + 1, expectedAlignOffsetEnd, ref allZeroesWereFound);
 				}
 				else
-				{
 					description += GetByteValues(inputFileReader, fileOffsetStart2, fileOffsetEnd2, ref allZeroesWereFound);
-				}
 
 				Add(fileOffsetStart2, fileOffsetEnd2, description);
 			}
@@ -135,34 +122,26 @@ namespace Crowbar
 
 		public void LogUnreadBytes(BinaryReader inputFileReader)
 		{
-			long offsetStart = 0;
-			long offsetEnd = 0;
-			string description = null;
-			string byteValues = null;
 			bool allZeroesWereFound = false;
 			SortedList<long, long> tempFileSeekList = new SortedList<long, long>();
 			SortedList<long, string> tempFileSeekDescriptionList = new SortedList<long, string>();
 
-			offsetStart = -1;
-			offsetEnd = -1;
+			long offsetEnd = -1;
 			try
 			{
 				for (int i = 0; i < theFileSeekList.Count; i++)
 				{
-					offsetStart = theFileSeekList.Keys[i];
+					long offsetStart = theFileSeekList.Keys[i];
 
 					if (offsetEnd < offsetStart - 1)
 					{
-						description = "[ERROR] Unread bytes";
-						byteValues = GetByteValues(inputFileReader, offsetEnd + 1, offsetStart - 1, ref allZeroesWereFound);
+						string description = "[ERROR] Unread bytes";
+						string byteValues = GetByteValues(inputFileReader, offsetEnd + 1, offsetStart - 1, ref allZeroesWereFound);
 						if (allZeroesWereFound)
-						{
 							description += " (all zeroes)";
-						}
 						else
-						{
 							description += " (non-zero)";
-						}
+
 						description += byteValues;
 
 						// Can't add into the list that is being iterated, so use temp list.
@@ -187,17 +166,13 @@ namespace Crowbar
 					Add(tempFileSeekList.Keys[i], tempFileSeekList.Values[i], tempFileSeekDescriptionList.Values[i]);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				int debug = 4242;
 			}
 
 			LogErrors();
 		}
-
-		public long theFileSize;
-		public SortedList<long, long> theFileSeekList;
-		public SortedList<long, string> theFileSeekDescriptionList;
 
 		private void LogErrors()
 		{
@@ -225,22 +200,14 @@ namespace Crowbar
 
 		private string GetByteValues(BinaryReader inputFileReader, long fileOffsetStart2, long fileOffsetEnd2, ref bool allZeroesWereFound)
 		{
-			string byteValues = null;
-
 			long inputFileStreamPosition = inputFileReader.BaseStream.Position;
 
-			byte byteValue = 0;
-
-			long adjustedFileOffsetEnd2 = 0;
+			byte byteValue;
+			long adjustedFileOffsetEnd2 = fileOffsetEnd2;
 			if ((fileOffsetEnd2 - fileOffsetStart2) > 20)
-			{
 				adjustedFileOffsetEnd2 = fileOffsetStart2 + 20;
-			}
-			else
-			{
-				adjustedFileOffsetEnd2 = fileOffsetEnd2;
-			}
 
+			string byteValues;
 			try
 			{
 				inputFileReader.BaseStream.Seek(fileOffsetStart2, SeekOrigin.Begin);
@@ -282,7 +249,5 @@ namespace Crowbar
 
 			return byteValues;
 		}
-
 	}
-
 }

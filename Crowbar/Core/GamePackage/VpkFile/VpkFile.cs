@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -107,7 +106,6 @@ namespace Crowbar
 				try
 				{
 					theInputFileReader.BaseStream.Seek(theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theVpkFileData.theEntryCount - 1) for every iteration:
 					uint tempVar = (uint)(theVpkFileData.theEntryCount - 1);
 					for (uint i = 0; i <= tempVar; i++)
 					{
@@ -314,7 +312,6 @@ namespace Crowbar
 			StringBuilder entryDataOutputText = new StringBuilder();
 
 			theInputFileReader.BaseStream.Seek(theVpkFileData.theDirectoryOffset, SeekOrigin.Begin);
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theVpkFileData.theEntryCount - 1) for every iteration:
 			uint tempVar = (uint)(theVpkFileData.theEntryCount - 1);
 			for (uint i = 0; i <= tempVar; i++)
 			{

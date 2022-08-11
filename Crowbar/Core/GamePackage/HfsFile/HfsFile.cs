@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -53,7 +52,6 @@ namespace Crowbar
 			//    char {4}     - Signature (HF) (0x06054648)
 			byte aByte = 0;
 			UInt32 aDoubleWord = 0;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of theInputFileReader.BaseStream.Length for every iteration:
 			long tempVar = theInputFileReader.BaseStream.Length;
 			for (long offset = 1; offset <= tempVar; offset++)
 			{

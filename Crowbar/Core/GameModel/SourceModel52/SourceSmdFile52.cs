@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -393,49 +392,28 @@ namespace Crowbar
 
 		public void WriteSkeletonSectionForAnimation(SourceMdlSequenceDescBase aSequenceDescBase, SourceMdlAnimationDescBase anAnimationDescBase)
 		{
-			string line = "";
-			SourceMdlBone aBone = null;
-			int boneIndex = 0;
-			AnimationFrameLine aFrameLine = null;
+			int boneIndex;
+			AnimationFrameLine aFrameLine;
 			SourceVector position = new SourceVector();
 			SourceVector rotation = new SourceVector();
-			//Dim tempRotation As New SourceVector()
-			SourceMdlSequenceDesc aSequenceDesc = null;
-			SourceMdlAnimationDesc52 anAnimationDesc = null;
-			//Dim beforeMovementFrameRotation As New SourceVector()
-			//Dim previousFrameRotation As New SourceVector()
-			//Dim beforeMovementFramePosition As New SourceVector()
-			//Dim previousFramePosition As New SourceVector()
-
-			aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
-			anAnimationDesc = (SourceMdlAnimationDesc52)anAnimationDescBase;
+			SourceMdlSequenceDesc aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
+			SourceMdlAnimationDesc52 anAnimationDesc = (SourceMdlAnimationDesc52)anAnimationDescBase;
 
 			//skeleton
-			line = "skeleton";
+			string line = "skeleton";
 			theOutputFileStreamWriter.WriteLine(line);
 
 			if (theMdlFileData.theBones != null)
 			{
 				theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionFrameIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				SourceAniFrameAnim52 aSectionOfAnimation = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				BoneConstantInfo49 aBoneConstantInfo = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				BoneFrameDataInfo49 aBoneFrameDataInfo = null;
 				for (int frameIndex = 0; frameIndex < anAnimationDesc.frameCount; frameIndex++)
 				{
 					theAnimationFrameLines.Clear();
 
 					if ((anAnimationDesc.flags & SourceMdlAnimationDesc.STUDIO_FRAMEANIM) != 0)
 					{
-	//					Dim sectionFrameIndex As Integer
-	//					Dim sectionIndex As Integer
-	//					Dim aSectionOfAnimation As SourceAniFrameAnim52
+						int sectionIndex;
+						int sectionFrameIndex;
 						if (anAnimationDesc.sectionFrameCount == 0)
 						{
 							sectionIndex = 0;
@@ -446,14 +424,11 @@ namespace Crowbar
 							sectionIndex = Convert.ToInt32(Math.Truncate(frameIndex / (double)anAnimationDesc.sectionFrameCount));
 							sectionFrameIndex = frameIndex - (sectionIndex * anAnimationDesc.sectionFrameCount);
 						}
-						aSectionOfAnimation = anAnimationDesc.theSectionsOfFrameAnim[sectionIndex];
 
-	//					Dim aBoneConstantInfo As BoneConstantInfo49
-	//					Dim aBoneFrameDataInfo As BoneFrameDataInfo49
-
+						SourceAniFrameAnim52 aSectionOfAnimation = anAnimationDesc.theSectionsOfFrameAnim[sectionIndex];
 						for (boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 						{
-							aBone = theMdlFileData.theBones[boneIndex];
+							SourceMdlBone aBone = theMdlFileData.theBones[boneIndex];
 
 							aFrameLine = new AnimationFrameLine();
 							theAnimationFrameLines.Add(boneIndex, aFrameLine);
@@ -487,7 +462,7 @@ namespace Crowbar
 							int boneFlag = aSectionOfAnimation.theBoneFlags[boneIndex];
 							if (aSectionOfAnimation.theBoneConstantInfos != null)
 							{
-								aBoneConstantInfo = aSectionOfAnimation.theBoneConstantInfos[boneIndex];
+								BoneConstantInfo49 aBoneConstantInfo = aSectionOfAnimation.theBoneConstantInfos[boneIndex];
 								if ((boneFlag & SourceAniFrameAnim49.STUDIO_FRAME_RAWROT) > 0)
 								{
 									aFrameLine.rotation = MathModule.ToEulerAngles(aBoneConstantInfo.theConstantRawRot.quaternion);
@@ -508,7 +483,7 @@ namespace Crowbar
 							}
 							if (aSectionOfAnimation.theBoneFrameDataInfos != null)
 							{
-								aBoneFrameDataInfo = aSectionOfAnimation.theBoneFrameDataInfos[sectionFrameIndex][boneIndex];
+								BoneFrameDataInfo49 aBoneFrameDataInfo = aSectionOfAnimation.theBoneFrameDataInfos[sectionFrameIndex][boneIndex];
 								//If (boneFlag And SourceAniFrameAnim.STUDIO_FRAME_ANIMROT) > 0 Then
 								if ((boneFlag & SourceAniFrameAnim49.STUDIO_FRAME_FULLANIMPOS) > 0)
 								{
@@ -546,18 +521,12 @@ namespace Crowbar
 						}
 					}
 					else
-					{
 						CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex);
-					}
 
 					if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
-					{
 						line = "time ";
-					}
 					else
-					{
 						line = "  time ";
-					}
 					line += frameIndex.ToString();
 					theOutputFileStreamWriter.WriteLine(line);
 
@@ -703,30 +672,18 @@ namespace Crowbar
 				if (movements != null && frameIndex > 0)
 				{
 					int previousFrameIndex = 0;
-					SourceVector vecPos = null;
-					SourceVector vecAngle = null;
-
-					previousFrameIndex = 0;
-					vecPos = new SourceVector();
-					vecAngle = new SourceVector();
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double f = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double d = 0;
+					SourceVector vecPos = new SourceVector();
+					SourceVector vecAngle = new SourceVector();
 					foreach (SourceMdlMovement aMovement in movements)
 					{
 						if (frameIndex <= aMovement.endframeIndex)
 						{
-	//						Dim f As Double
-	//						Dim d As Double
-							f = (frameIndex - previousFrameIndex) / (double)(aMovement.endframeIndex - previousFrameIndex);
-							d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
+							double f = (frameIndex - previousFrameIndex) / (double)(aMovement.endframeIndex - previousFrameIndex);
+							double d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
 							vecPos.x = vecPos.x + d * aMovement.vector.x;
 							vecPos.y = vecPos.y + d * aMovement.vector.y;
 							vecPos.z = vecPos.z + d * aMovement.vector.z;
 							vecAngle.y = vecAngle.y * (1 - f) + MathModule.DegreesToRadians(aMovement.angle) * f;
-
 							break;
 						}
 						else

@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -65,7 +64,6 @@ namespace Crowbar
 
 				theInputFileReader.BaseStream.Seek(theApkFileData.offsetOfDirectory, SeekOrigin.Begin);
 
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of (uint)(theApkFileData.fileCount - 1) for every iteration:
 				UInt32 tempVar = (uint)(theApkFileData.fileCount - 1);
 				for (UInt32 directoryEntryIndex = 0; directoryEntryIndex <= tempVar; directoryEntryIndex++)
 				{

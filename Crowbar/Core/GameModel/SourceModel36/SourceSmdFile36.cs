@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -374,21 +373,11 @@ namespace Crowbar
 
 		public void WriteSkeletonSectionForAnimation(SourceMdlSequenceDescBase aSequenceDescBase, SourceMdlAnimationDescBase anAnimationDescBase)
 		{
-			string line = "";
-			int boneIndex = 0;
-			AnimationFrameLine aFrameLine = null;
-			SourceVector position = new SourceVector();
-			SourceVector rotation = new SourceVector();
-			SourceVector tempRotation = new SourceVector();
-			SourceMdlSequenceDesc aSequenceDesc = null;
-			SourceMdlAnimationDesc36 anAnimationDesc = null;
-			double tempValue = 0;
-
-			aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
-			anAnimationDesc = (SourceMdlAnimationDesc36)anAnimationDescBase;
+			SourceMdlSequenceDesc aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
+			SourceMdlAnimationDesc36 anAnimationDesc = (SourceMdlAnimationDesc36)anAnimationDescBase;
 
 			//skeleton
-			line = "skeleton";
+			string line = "skeleton";
 			theOutputFileStreamWriter.WriteLine(line);
 
 			theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
@@ -398,23 +387,19 @@ namespace Crowbar
 				CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex);
 
 				if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
-				{
 					line = "time ";
-				}
 				else
-				{
 					line = "  time ";
-				}
 				line += frameIndex.ToString();
 				theOutputFileStreamWriter.WriteLine(line);
 
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				double perFrameMovement = 0;
+				double perFrameMovement;
 				for (int i = 0; i < theAnimationFrameLines.Count; i++)
 				{
-					boneIndex = theAnimationFrameLines.Keys[i];
-					aFrameLine = theAnimationFrameLines.Values[i];
+					int boneIndex = theAnimationFrameLines.Keys[i];
+					AnimationFrameLine aFrameLine = theAnimationFrameLines.Values[i];
 
+					SourceVector position = new SourceVector();
 					position.x = aFrameLine.position.x;
 					position.y = aFrameLine.position.y;
 					position.z = aFrameLine.position.z;
@@ -422,8 +407,6 @@ namespace Crowbar
 					{
 						if (anAnimationDesc.theMovements != null)
 						{
-	//						Dim perFrameMovement As Double
-							int startFrameIndex = 0;
 							foreach (SourceMdlMovement aMovement in anAnimationDesc.theMovements)
 							{
 								if (frameIndex <= aMovement.endframeIndex)
@@ -450,11 +433,12 @@ namespace Crowbar
 							}
 						}
 
-						tempValue = position.x;
+						double tempValue = position.x;
 						position.x = position.y;
 						position.y = -tempValue;
 					}
 
+					SourceVector rotation = new SourceVector();
 					rotation.x = aFrameLine.rotation.x;
 					rotation.y = aFrameLine.rotation.y;
 					rotation.z = aFrameLine.rotation.z;
@@ -462,8 +446,6 @@ namespace Crowbar
 					{
 						if (anAnimationDesc.theMovements != null)
 						{
-	//						Dim perFrameMovement As Double
-							int startFrameIndex = 0;
 							foreach (SourceMdlMovement aMovement in anAnimationDesc.theMovements)
 							{
 								if (frameIndex <= aMovement.endframeIndex)

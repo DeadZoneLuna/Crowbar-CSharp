@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +12,7 @@ namespace Crowbar
 	public class SourceSmdFile49
 	{
 
-#region Creation and Destruction
+		#region Creation and Destruction
 
 		public SourceSmdFile49(StreamWriter outputFileStream, SourceMdlFileData49 mdlFileData)
 		{
@@ -35,9 +34,9 @@ namespace Crowbar
 			thePhyFileData = phyFileData;
 		}
 
-#endregion
+		#endregion
 
-#region Methods
+		#region Methods
 
 		public void WriteHeaderComment()
 		{
@@ -245,7 +244,7 @@ namespace Crowbar
 						aVtxMesh = aVtxLod.theVtxMeshes[meshIndex];
 						materialIndex = aModel.theMeshes[meshIndex].materialIndex;
 						materialPathFileName = theMdlFileData.theTextures[materialIndex].thePathFileName;
-						materialFileName = theMdlFileData.theModifiedTextureFileNames[materialIndex];
+						materialFileName = theMdlFileData.theModifiedTextureFileNames[theMdlFileData.theSkinFamilies[0][materialIndex]];//theMdlFileData.theModifiedTextureFileNames[materialIndex];
 
 						meshVertexIndexStart = aModel.theMeshes[meshIndex].vertexIndexStart;
 
@@ -334,7 +333,8 @@ namespace Crowbar
 			{
 				if (thePhyFileData.theSourcePhyCollisionDatas != null)
 				{
-					ProcessTransformsForPhysics();
+					bool isStatic = (theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0;
+					ProcessTransformsForPhysics(isStatic);
 
 					for (int collisionDataIndex = 0; collisionDataIndex < thePhyFileData.theSourcePhyCollisionDatas.Count; collisionDataIndex++)
 					{
@@ -382,7 +382,7 @@ namespace Crowbar
 									//phyVertex = collisionData.theVertices(aTriangle.vertexIndex(vertexIndex))
 									phyVertex = faceSection.theVertices[aTriangle.vertexIndex[vertexIndex]];
 
-									aVectorTransformed = TransformPhyVertex(aBone, phyVertex.vertex, aSourcePhysCollisionModel);
+									aVectorTransformed = TransformPhyVertex(aBone, phyVertex.vertex, faceSection, isStatic);
 
 									line = "    ";
 									line += boneIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
@@ -423,58 +423,32 @@ namespace Crowbar
 
 		public void WriteSkeletonSectionForAnimation(SourceMdlSequenceDescBase aSequenceDescBase, SourceMdlAnimationDescBase anAnimationDescBase, bool onlyWriteCorrectiveAnimationRootBones = false)
 		{
-			string line = "";
-			SourceMdlBone aBone = null;
-			int boneIndex = 0;
-			AnimationFrameLine aFrameLine = null;
+			int boneIndex;
+			AnimationFrameLine aFrameLine;
 			SourceVector position = new SourceVector();
 			SourceVector rotation = new SourceVector();
-			SourceVector tempRotation = new SourceVector();
-			SourceMdlSequenceDesc aSequenceDesc = null;
-			SourceMdlAnimationDesc49 anAnimationDesc = null;
-			bool thisIsForFirstSequence = false;
-			SourceVector beforeMovementFrameRotation = new SourceVector();
-			SourceVector previousFrameRotation = new SourceVector();
-			SourceVector beforeMovementFramePosition = new SourceVector();
-			SourceVector previousFramePosition = new SourceVector();
+			SourceMdlSequenceDesc aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
+			SourceMdlAnimationDesc49 anAnimationDesc = (SourceMdlAnimationDesc49)anAnimationDescBase;
 
-			aSequenceDesc = (SourceMdlSequenceDesc)aSequenceDescBase;
-			anAnimationDesc = (SourceMdlAnimationDesc49)anAnimationDescBase;
-
-			thisIsForFirstSequence = anAnimationDesc.theName[0] == '@' && anAnimationDesc.theAnimIsLinkedToSequence && (anAnimationDesc.theLinkedSequences[0] == theMdlFileData.theSequenceDescs[0]);
+			bool thisIsForFirstSequence = anAnimationDesc.theName[0] == '@' && anAnimationDesc.theAnimIsLinkedToSequence && (anAnimationDesc.theLinkedSequences[0] == theMdlFileData.theSequenceDescs[0]);
 
 			//skeleton
-			line = "skeleton";
+			string line = "skeleton";
 			theOutputFileStreamWriter.WriteLine(line);
-
 			if (theMdlFileData.theBones != null)
 			{
 				theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
-
 				int frameCount = anAnimationDesc.frameCount;
 				if (onlyWriteCorrectiveAnimationRootBones)
-				{
 					frameCount = 1;
-				}
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionFrameIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				int sectionIndex = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				SourceAniFrameAnim49 aSectionOfAnimation = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				BoneConstantInfo49 aBoneConstantInfo = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				BoneFrameDataInfo49 aBoneFrameDataInfo = null;
+
+				int sectionFrameIndex;
+				int sectionIndex;
 				for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
 				{
 					theAnimationFrameLines.Clear();
-
 					if ((anAnimationDesc.flags & SourceMdlAnimationDesc.STUDIO_FRAMEANIM) != 0)
 					{
-	//					Dim sectionFrameIndex As Integer
-	//					Dim sectionIndex As Integer
-	//					Dim aSectionOfAnimation As SourceAniFrameAnim49
 						if (anAnimationDesc.sectionFrameCount == 0)
 						{
 							sectionIndex = 0;
@@ -485,19 +459,14 @@ namespace Crowbar
 							sectionIndex = Convert.ToInt32(Math.Truncate(frameIndex / (double)anAnimationDesc.sectionFrameCount));
 							sectionFrameIndex = frameIndex - (sectionIndex * anAnimationDesc.sectionFrameCount);
 						}
-						aSectionOfAnimation = anAnimationDesc.theSectionsOfFrameAnim[sectionIndex];
 
-	//					Dim aBoneConstantInfo As BoneConstantInfo49
-	//					Dim aBoneFrameDataInfo As BoneFrameDataInfo49
-
+						SourceAniFrameAnim49 aSectionOfAnimation = anAnimationDesc.theSectionsOfFrameAnim[sectionIndex];
 						for (boneIndex = 0; boneIndex < theMdlFileData.theBones.Count; boneIndex++)
 						{
-							aBone = theMdlFileData.theBones[boneIndex];
+							SourceMdlBone aBone = theMdlFileData.theBones[boneIndex];
 
 							if (onlyWriteCorrectiveAnimationRootBones && aBone.parentBoneIndex != -1)
-							{
 								continue;
-							}
 
 							aFrameLine = new AnimationFrameLine();
 							theAnimationFrameLines.Add(boneIndex, aFrameLine);
@@ -619,7 +588,7 @@ namespace Crowbar
 							byte boneFlag = aSectionOfAnimation.theBoneFlags[boneIndex];
 							if (aSectionOfAnimation.theBoneConstantInfos != null)
 							{
-								aBoneConstantInfo = aSectionOfAnimation.theBoneConstantInfos[boneIndex];
+								BoneConstantInfo49 aBoneConstantInfo = aSectionOfAnimation.theBoneConstantInfos[boneIndex];
 								if ((boneFlag & SourceAniFrameAnim49.STUDIO_FRAME_RAWROT) > 0)
 								{
 									aFrameLine.rotation = MathModule.ToEulerAngles(aBoneConstantInfo.theConstantRawRot.quaternion);
@@ -640,7 +609,7 @@ namespace Crowbar
 							}
 							if (aSectionOfAnimation.theBoneFrameDataInfos != null)
 							{
-								aBoneFrameDataInfo = aSectionOfAnimation.theBoneFrameDataInfos[sectionFrameIndex][boneIndex];
+								BoneFrameDataInfo49 aBoneFrameDataInfo = aSectionOfAnimation.theBoneFrameDataInfos[sectionFrameIndex][boneIndex];
 								if ((boneFlag & SourceAniFrameAnim49.STUDIO_FRAME_ANIMROT) > 0)
 								{
 									aFrameLine.rotation = MathModule.ToEulerAngles(aBoneFrameDataInfo.theAnimRotation.quaternion);
@@ -673,18 +642,12 @@ namespace Crowbar
 						}
 					}
 					else
-					{
 						CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex, onlyWriteCorrectiveAnimationRootBones);
-					}
 
 					if (MainCROWBAR.TheApp.Settings.DecompileStricterFormatIsChecked)
-					{
 						line = "time ";
-					}
 					else
-					{
 						line = "  time ";
-					}
 					line += frameIndex.ToString();
 					theOutputFileStreamWriter.WriteLine(line);
 
@@ -1043,13 +1006,13 @@ namespace Crowbar
 			theOutputFileStreamWriter.WriteLine(line);
 		}
 
-#endregion
+		#endregion
 
-#region Private Delegates
+		#region Private Delegates
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		private void AdjustPositionAndRotation(int boneIndex, SourceVector iPosition, SourceVector iRotation, bool thisIsForFirstSequence, ref SourceVector oPosition, ref SourceVector oRotation)
 		{
@@ -1558,30 +1521,18 @@ namespace Crowbar
 				if (movements != null && frameIndex > 0)
 				{
 					int previousEndFrameIndex = 0;
-					SourceVector vecPos = null;
-					SourceVector vecAngle = null;
-
-					previousEndFrameIndex = 0;
-					vecPos = new SourceVector();
-					vecAngle = new SourceVector();
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double f = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double d = 0;
+					SourceVector vecPos = new SourceVector();
+					SourceVector vecAngle = new SourceVector();
 					foreach (SourceMdlMovement aMovement in movements)
 					{
 						if (frameIndex <= aMovement.endframeIndex)
 						{
-	//						Dim f As Double
-	//						Dim d As Double
-							f = (frameIndex - previousEndFrameIndex) / (double)(aMovement.endframeIndex - previousEndFrameIndex);
-							d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
+							double f = (frameIndex - previousEndFrameIndex) / (double)(aMovement.endframeIndex - previousEndFrameIndex);
+							double d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
 							vecPos.x = vecPos.x + d * aMovement.vector.x;
 							vecPos.y = vecPos.y + d * aMovement.vector.y;
 							vecPos.z = vecPos.z + d * aMovement.vector.z;
 							vecAngle.y = vecAngle.y * (1 - f) + aMovement.angle * f;
-
 							break;
 						}
 						else
@@ -1630,9 +1581,8 @@ namespace Crowbar
 					//oPosition.z = iPosition.z + vecPos.z
 					//oRotation.z = iRotation.z + vecAngle.y
 					//------
-					SourceVector tmp = new SourceVector();
 					oRotation.z = MathModule.DegreesToRadians(MathModule.RadiansToDegrees(iRotation.z) + vecAngle.y);
-					tmp = MathModule.VectorYawRotate(iPosition, MathModule.DegreesToRadians(vecAngle.y));
+					SourceVector tmp = MathModule.VectorYawRotate(iPosition, MathModule.DegreesToRadians(vecAngle.y));
 					oPosition.x = tmp.x + vecPos.x;
 					oPosition.y = tmp.y + vecPos.y;
 					oPosition.z = tmp.z + vecPos.z;
@@ -1772,577 +1722,58 @@ namespace Crowbar
 
 		private void CalculateFirstAnimDescFrameLinesForPhysics(ref AnimationFrameLine aFirstAnimationDescFrameLine)
 		{
-			int boneIndex = 0;
-			AnimationFrameLine aFrameLine = null;
-			int frameIndex = 0;
-			int frameLineIndex = 0;
 			SourceMdlSequenceDesc aSequenceDesc = null;
-			SourceMdlAnimationDesc49 anAnimationDesc = null;
+			SourceMdlAnimationDesc49 anAnimationDesc = theMdlFileData.theAnimationDescs[0];
 
-			aSequenceDesc = null;
-			anAnimationDesc = theMdlFileData.theAnimationDescs[0];
+			if (theAnimationFrameLines != null) theAnimationFrameLines.Clear();
+			else theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
+			int frameIndex = 0;
+			CalcAnimation(aSequenceDesc, anAnimationDesc, 0);
 
-			theAnimationFrameLines = new SortedList<int, AnimationFrameLine>();
-			frameIndex = 0;
-			theAnimationFrameLines.Clear();
-			//If (anAnimationDesc.flags And SourceMdlAnimationDesc.STUDIO_ALLZEROS) = 0 Then
-			CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex);
-			//End If
+			int boneIndex = theAnimationFrameLines.Keys[0];
 
-			frameLineIndex = 0;
-			boneIndex = theAnimationFrameLines.Keys[frameLineIndex];
-			aFrameLine = theAnimationFrameLines.Values[frameLineIndex];
+			if (boneIndex > 0)
+				Console.WriteLine($"ALARM!!!! {boneIndex}");
 
-			aFirstAnimationDescFrameLine.rotation = new SourceVector();
-			aFirstAnimationDescFrameLine.position = new SourceVector();
+			AnimationFrameLine aFrameLine = theAnimationFrameLines.Values[boneIndex];
 
-			aFirstAnimationDescFrameLine.rotation.x = aFrameLine.rotation.x;
-			aFirstAnimationDescFrameLine.rotation.y = aFrameLine.rotation.y;
-			//If Me.theSourceEngineModel.theMdlFileHeader.theBones(boneIndex).parentBoneIndex = -1 Then
-			//	Dim z As Double
-			//	z = aFrameLine.rotation.z
-			//	z += MathModule.DegreesToRadians(-90)
-			//	aFirstAnimationDescFrameLine.rotation.z = z
-			//Else
-			aFirstAnimationDescFrameLine.rotation.z = aFrameLine.rotation.z;
-			//End If
-
-			//'NOTE: Only adjust position if bone is a root bone. Do not know why.
-			//'If Me.theSourceEngineModel.theMdlFileHeader.theBones(boneIndex).parentBoneIndex = -1 Then
-			//'TEST: Try this version, because of "sequence_blend from Game Zombie" model.
-			//If Me.theMdlFileData.theBones(boneIndex).parentBoneIndex = -1 AndAlso (aFrameLine.position.debug_text.StartsWith("raw") OrElse aFrameLine.rotation.debug_text = "anim+bone") Then
-			//	aFirstAnimationDescFrameLine.position.x = aFrameLine.position.y
-			//	aFirstAnimationDescFrameLine.position.y = (-aFrameLine.position.x)
-			//	aFirstAnimationDescFrameLine.position.z = aFrameLine.position.z
-			//Else
-			aFirstAnimationDescFrameLine.position.x = aFrameLine.position.x;
-			aFirstAnimationDescFrameLine.position.y = aFrameLine.position.y;
-			aFirstAnimationDescFrameLine.position.z = aFrameLine.position.z;
-			//End If
+			aFirstAnimationDescFrameLine.rotation = new SourceVector(aFrameLine.rotation.x, aFrameLine.rotation.y, aFrameLine.rotation.z);
+			aFirstAnimationDescFrameLine.position = new SourceVector(aFrameLine.position.x, aFrameLine.position.y, aFrameLine.position.z);
+			aFirstAnimationDescFrameLine.rotationQuat = new SourceQuaternion(aFrameLine.rotationQuat.x, aFrameLine.rotationQuat.y, aFrameLine.rotationQuat.z, aFrameLine.rotationQuat.w);
 		}
 
-		private void ProcessTransformsForPhysics()
+		private void ProcessTransformsForPhysics(bool isStatic)
 		{
-			if (thePhyFileData.theSourcePhyIsCollisionModel)
+			if (thePhyFileData.theSourcePhyCollisionDatas.Count == 1)
 			{
 				AnimationFrameLine aFirstAnimationDescFrameLine = new AnimationFrameLine();
 				CalculateFirstAnimDescFrameLinesForPhysics(ref aFirstAnimationDescFrameLine);
 
-				SourceVector position = null;
-				SourceVector rotation = null;
-				position = aFirstAnimationDescFrameLine.position;
-				rotation = aFirstAnimationDescFrameLine.rotation;
+				SourceVector rotation = aFirstAnimationDescFrameLine.rotation.Swap(Common.VecOrder.YZX);
+				MathModule.AngleMatrix(rotation.x + MathModule.DegreesToRadians(180), rotation.y + MathModule.DegreesToRadians(isStatic ? -90 : 180), rotation.z + MathModule.DegreesToRadians(180),
+					ref poseToWorldColumn0,
+					ref poseToWorldColumn1,
+					ref poseToWorldColumn2,
+					ref poseToWorldColumn3);
 
-				//MathModule.AngleMatrix(rotation.y, rotation.z, rotation.x, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-				//MathModule.AngleMatrix(rotation.x, rotation.y, rotation.z, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-				//Me.worldToPoseColumn3.x = position.x
-				//Me.worldToPoseColumn3.y = position.y
-				//Me.worldToPoseColumn3.z = position.z
-				//------
-				//MathModule.AngleMatrix(rotation.x, rotation.y, rotation.z, poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3)
-				//poseToWorldColumn3.x = position.x
-				//poseToWorldColumn3.y = position.y
-				//poseToWorldColumn3.z = position.z
-				//MathModule.MatrixInvert(poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-				//------
-				MathModule.AngleMatrix(rotation.x, rotation.y, rotation.z + MathModule.DegreesToRadians(-90), ref poseToWorldColumn0, ref poseToWorldColumn1, ref poseToWorldColumn2, ref poseToWorldColumn3);
-				poseToWorldColumn3.x = position.y;
-				poseToWorldColumn3.y = -position.x;
-				poseToWorldColumn3.z = position.z;
-				MathModule.MatrixInvert(poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3, ref worldToPoseColumn0, ref worldToPoseColumn1, ref worldToPoseColumn2, ref worldToPoseColumn3);
+				poseToWorldColumn3 = aFirstAnimationDescFrameLine.position;
+				MathModule.MatrixInvert(poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3,
+					ref worldToPoseColumn0,
+					ref worldToPoseColumn1,
+					ref worldToPoseColumn2,
+					ref worldToPoseColumn3);
 			}
 		}
 
-		private SourceVector TransformPhyVertex(SourceMdlBone aBone, SourceVector vertex, SourcePhyPhysCollisionModel aSourcePhysCollisionModel)
+		private SourceVector TransformPhyVertex(SourceMdlBone aBone, SourceVector vertex, SourcePhyFaceSection convexMesh, bool isStatic)
 		{
-			SourceVector aVectorTransformed = new SourceVector();
-			SourceVector aVector = new SourceVector();
+			SourceVector aVectorTransformed = vertex.Swap(Common.VecOrder.XZY).InvertZ() * MathModule.MeterInInches;
 
-			//NOTE: Too small.
-			//aVectorTransformed.x = vertex.x
-			//aVectorTransformed.y = vertex.y
-			//aVectorTransformed.z = vertex.z
-			//------
-			//NOTE: Rotated for:
-			//      simple_shape
-			//      L4D2 w_models\weapons\w_minigun
-			//aVectorTransformed.x = 1 / 0.0254 * vertex.x
-			//aVectorTransformed.y = 1 / 0.0254 * vertex.y
-			//aVectorTransformed.z = 1 / 0.0254 * vertex.z
-			//------
-			//NOTE: Works for:
-			//      simple_shape
-			//      L4D2 w_models\weapons\w_minigun
-			//      L4D2 w_models\weapons\w_smg_uzi
-			//      L4D2 props_vehicles\van
-			//aVectorTransformed.x = 1 / 0.0254 * vertex.z
-			//aVectorTransformed.y = 1 / 0.0254 * -vertex.x
-			//aVectorTransformed.z = 1 / 0.0254 * -vertex.y
-			//------
-			//NOTE: Rotated for:
-			//      L4D2 w_models\weapons\w_minigun
-			//aVectorTransformed.x = 1 / 0.0254 * vertex.x
-			//aVectorTransformed.y = 1 / 0.0254 * -vertex.y
-			//aVectorTransformed.z = 1 / 0.0254 * vertex.z
-			//------
-			//NOTE: Rotated for:
-			//      L4D2 props_vehicles\van
-			//aVectorTransformed.x = 1 / 0.0254 * vertex.z
-			//aVectorTransformed.y = 1 / 0.0254 * -vertex.y
-			//aVectorTransformed.z = 1 / 0.0254 * vertex.x
-			//------
-			//NOTE: Rotated for:
-			//      L4D2 w_models\weapons\w_minigun
-			//aVector.x = 1 / 0.0254 * vertex.x
-			//aVector.y = 1 / 0.0254 * vertex.y
-			//aVector.z = 1 / 0.0254 * vertex.z
-			//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//------
-			//NOTE: Rotated for:
-			//      L4D2 w_models\weapons\w_minigun
-			//aVector.x = 1 / 0.0254 * vertex.x
-			//aVector.y = 1 / 0.0254 * -vertex.y
-			//aVector.z = 1 / 0.0254 * vertex.z
-			//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//------
-			//NOTE: Works for:
-			//      L4D2 w_models\weapons\w_minigun
-			//      L4D2 w_models\weapons\w_smg_uzi
-			//NOTE: Rotated for:
-			//      simple_shape
-			//      L4D2 props_vehicles\van
-			//NOTE: Each mesh piece rotated for:
-			//      L4D2 survivors\survivor_producer
-			//aVector.x = 1 / 0.0254 * vertex.z
-			//aVector.y = 1 / 0.0254 * -vertex.y
-			//aVector.z = 1 / 0.0254 * vertex.x
-			//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//------
-			//NOTE: Works for:
-			//      simple_shape
-			//      L4D2 props_vehicles\van
-			//      L4D2 survivors\survivor_producer
-			//      L4D2 w_models\weapons\w_autoshot_m4super
-			//      L4D2 w_models\weapons\w_desert_eagle
-			//      L4D2 w_models\weapons\w_minigun
-			//      L4D2 w_models\weapons\w_rifle_m16a2
-			//      L4D2 w_models\weapons\w_smg_uzi
-			//NOTE: Rotated for:
-			//      L4D2 w_models\weapons\w_desert_rifle
-			//      L4D2 w_models\weapons\w_shotgun_spas
-			//If Me.thePhyFileData.theSourcePhyIsCollisionModel Then
-			//	aVectorTransformed.x = 1 / 0.0254 * vertex.z
-			//	aVectorTransformed.y = 1 / 0.0254 * -vertex.x
-			//	aVectorTransformed.z = 1 / 0.0254 * -vertex.y
-			//Else
-			//	'NOTE: Correct:
-			//	'      Team Fortress 2\tf2_misc_dir\models\player\demo.mdl
-			//	aVector.x = 1 / 0.0254 * vertex.x
-			//	aVector.y = 1 / 0.0254 * vertex.z
-			//	aVector.z = 1 / 0.0254 * -vertex.y
-			//	aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//End If
-			//------
-			//TODO: [TransformPhyVertex] Merge the various code blocks (separated by MDL version) into one code block.
-			if (theMdlFileData.version >= 44 && theMdlFileData.version <= 47)
-			{
-				// This works for various weapons and vehicles in HL2.
-				if (thePhyFileData.theSourcePhyIsCollisionModel)
-				{
-					aVectorTransformed.x = 1 / 0.0254 * vertex.z;
-					aVectorTransformed.y = 1 / 0.0254 * -vertex.x;
-					aVectorTransformed.z = 1 / 0.0254 * -vertex.y;
-				}
-				else
-				{
-					aVector.x = 1 / 0.0254 * vertex.x;
-					aVector.y = 1 / 0.0254 * vertex.z;
-					aVector.z = 1 / 0.0254 * -vertex.y;
-					aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3);
-				}
-			}
-			else
-			{
-				if (thePhyFileData.theSourcePhyIsCollisionModel)
-				{
-					//Dim copyOfVector As New SourceVector()
-					//'copyOfVector.x = 1 / 0.0254 * vertex.x
-					//'copyOfVector.y = 1 / 0.0254 * vertex.y
-					//'copyOfVector.z = 1 / 0.0254 * vertex.z
-					//'copyOfVector.x = 1 / 0.0254 * vertex.x
-					//'copyOfVector.y = 1 / 0.0254 * vertex.z
-					//'copyOfVector.z = 1 / 0.0254 * -vertex.y
-					//copyOfVector.x = 1 / 0.0254 * vertex.z
-					//copyOfVector.y = 1 / 0.0254 * -vertex.x
-					//copyOfVector.z = 1 / 0.0254 * -vertex.y
-					//aVector = MathModule.VectorTransform(copyOfVector, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-					//'aVector.x = 1 / 0.0254 * vertex.z
-					//'aVector.y = 1 / 0.0254 * -vertex.x
-					//'aVector.z = 1 / 0.0254 * -vertex.y
-					//'aVectorTransformed.x = 1 / 0.0254 * vertex.z
-					//'aVectorTransformed.y = 1 / 0.0254 * -vertex.x
-					//'aVectorTransformed.z = 1 / 0.0254 * -vertex.y
+			if (thePhyFileData.theSourcePhyCollisionDatas.Count == 1 || isStatic)
+				aVectorTransformed = MathModule.VectorTransform(aVectorTransformed, worldToPoseColumn0, worldToPoseColumn1, worldToPoseColumn2, worldToPoseColumn3);
 
-					//Dim debug As Integer = 4242
-
-					//'Dim temp As Double
-					//'temp = aVector.y
-					//'aVector.y = aVector.z
-					//'aVector.z = -temp
-					//'------
-					//'aVector.y = -aVector.y
-					//'------
-					//'Dim temp As Double
-					//'temp = aVector.x
-					//'aVector.x = aVector.z
-					//'aVector.z = -aVector.y
-					//'aVector.y = -temp
-					//'------
-					//'Dim temp As Double
-					//'temp = aVector.x
-					//'aVectorTransformed.x = aVector.z
-					//'aVectorTransformed.z = -aVector.y
-					//'aVectorTransformed.y = -temp
-
-					//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-
-					//[2017-12-22]
-					// Correct for cube_like_mesh
-					//aVectorTransformed.x = 1 / 0.0254 * vertex.z
-					//aVectorTransformed.y = 1 / 0.0254 * -vertex.x
-					//aVectorTransformed.z = 1 / 0.0254 * -vertex.y
-					//------
-					// Correct for L4D2 w_models/weapons/w_desert_rifle.mdl
-					//aVectorTransformed.x = 1 / 0.0254 * vertex.z
-					//aVectorTransformed.y = 1 / 0.0254 * -vertex.y
-					//aVectorTransformed.z = 1 / 0.0254 * vertex.x
-					//------
-					//aVector.x = 1 / 0.0254 * vertex.z
-					//aVector.y = 1 / 0.0254 * -vertex.x
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.y
-					//aVector.z = 1 / 0.0254 * vertex.z
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * -vertex.z
-					//aVector.z = 1 / 0.0254 * vertex.y
-					//aVectorTransformed = MathModule.VectorTransform(aVector, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVector.x = 1 / 0.0254 * vertex.z
-					//aVector.y = 1 / 0.0254 * -vertex.x
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.y
-					//aVector.z = 1 / 0.0254 * vertex.z
-					//aVectorTransformed = MathModule.VectorITransform(aVector, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.y
-					//aVector.z = 1 / 0.0254 * vertex.z
-					//aVector.x = 1 / 0.0254 * vertex.x  
-					//aVector.y = 1 / 0.0254 * vertex.z  
-					//aVector.z = 1 / 0.0254 * -vertex.y 
-					//aVector.x = 1 / 0.0254 * -vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * vertex.y
-					//aVector.x = 1 / 0.0254 * vertex.y
-					//aVector.y = 1 / 0.0254 * -vertex.x
-					//aVector.z = 1 / 0.0254 * vertex.z
-					//aVector.x = 1 / 0.0254 * -vertex.y
-					//aVector.y = 1 / 0.0254 * vertex.x
-					//aVector.z = 1 / 0.0254 * vertex.z
-					//aVector.x = 1 / 0.0254 * vertex.y
-					//aVector.y = 1 / 0.0254 * -vertex.x
-					//aVector.z = 1 / 0.0254 * -vertex.z   
-					//aVector.x = 1 / 0.0254 * vertex.y
-					//aVector.y = 1 / 0.0254 * vertex.x
-					//aVector.z = 1 / 0.0254 * -vertex.z
-					// Correct for cube_like_mesh
-					// Correct for L4D2 w_models/weapons/w_desert_rifle.mdl
-					// Incorrect for L4D2 w_models/weapons/w_rifle_m16a2.mdl
-					//aVector.x = 1 / 0.0254 * -vertex.y
-					//aVector.y = 1 / 0.0254 * -vertex.x
-					//aVector.z = 1 / 0.0254 * -vertex.z
-					//aVectorTransformed = MathModule.VectorITransform(aVector, Me.poseToWorldColumn0, Me.poseToWorldColumn1, Me.poseToWorldColumn2, Me.poseToWorldColumn3)
-					//======
-					//'FROM: collisionmodel.cpp ConvertToWorldSpace()
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-					//'Dim worldToBoneColumn0 As New SourceVector()
-					//'Dim worldToBoneColumn1 As New SourceVector()
-					//'Dim worldToBoneColumn2 As New SourceVector()
-					//'Dim worldToBoneColumn3 As New SourceVector()
-					//'MathModule.AngleMatrix(aBone.rotation.x, aBone.rotation.y, aBone.rotation.z, worldToBoneColumn0, worldToBoneColumn1, worldToBoneColumn2, worldToBoneColumn3)
-					//'worldToBoneColumn3.x = aBone.position.x
-					//'worldToBoneColumn3.y = aBone.position.y
-					//'worldToBoneColumn3.z = aBone.position.z
-					//'aVector.x = aVectorTransformed.x
-					//'aVector.y = aVectorTransformed.y
-					//'aVector.z = aVectorTransformed.z
-					//'aVectorTransformed = MathModule.VectorTransform(aVector, worldToBoneColumn0, worldToBoneColumn1, worldToBoneColumn2, worldToBoneColumn3)
-					//aVector.x = aVectorTransformed.x
-					//aVector.y = aVectorTransformed.y
-					//aVector.z = aVectorTransformed.z
-					//aVectorTransformed = MathModule.VectorTransform(aVector, poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3)
-					//======
-					//'FROM: collisionmodel.cpp ConvertToWorldSpace()
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					//aVectorTransformed = MathModule.VectorTransform(aVector, poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3)
-					//aVector.x = aVectorTransformed.x
-					//aVector.y = aVectorTransformed.y
-					//aVector.z = aVectorTransformed.z
-					//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-					//======
-					//'FROM: collisionmodel.cpp ConvertToWorldSpace()
-					// ''NOTE: These 3 lines work for airport_fuel_truck, ambulance, and army_truck, but not w_desert_file and w_rifle_m16a2.
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.z
-					//aVector.z = 1 / 0.0254 * -vertex.y
-					// ''NOTE: These 3 lines work for w_desert_file and w_rifle_m16a2, but not ambulance and army_truck.
-					//'aVector.x = 1 / 0.0254 * vertex.x
-					//'aVector.y = 1 / 0.0254 * -vertex.y
-					//'aVector.z = 1 / 0.0254 * vertex.z
-					//aVectorTransformed = MathModule.VectorTransform(aVector, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-					//aVector.x = aVectorTransformed.x
-					//aVector.y = aVectorTransformed.y
-					//aVector.z = aVectorTransformed.z
-					//'aVector.x = aVectorTransformed.x
-					//'aVector.y = aVectorTransformed.z
-					//'aVector.z = -aVectorTransformed.y
-					//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-					//======
-					//FROM: collisionmodel.cpp ConvertToWorldSpace()
-					if ((theMdlFileData.flags & SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0)
-					{
-						//NOTE: These 3 lines do not work for airport_fuel_truck, ambulance, and army_truck.
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * vertex.z
-						//aVector.z = 1 / 0.0254 * -vertex.y
-						//aVector.x = 1 / 0.0254 * vertex.y
-						//aVector.y = 1 / 0.0254 * -vertex.x
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//aVector.x = 1 / 0.0254 * -vertex.y
-						//aVector.y = 1 / 0.0254 * -vertex.x
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * vertex.y
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * vertex.z
-						//aVector.z = 1 / 0.0254 * vertex.y
-						//' Still need a rotate 90 on the z.
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * -vertex.y
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//aVector.x = 1 / 0.0254 * -vertex.y
-						//aVector.y = 1 / 0.0254 * vertex.x
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * -vertex.z
-						//aVector.z = 1 / 0.0254 * vertex.y
-						//aVector.x = 1 / 0.0254 * vertex.z
-						//aVector.y = 1 / 0.0254 * -vertex.x
-						//aVector.z = 1 / 0.0254 * -vertex.y
-
-						//aVectorTransformed = MathModule.VectorTransform(aVector, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-						//aVector.x = aVectorTransformed.x
-						//aVector.y = aVectorTransformed.y
-						//aVector.z = aVectorTransformed.z
-						//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-
-						//------
-
-						//TEST: Works for props_vehciles that use $staticprop.
-						aVector.x = 1 / 0.0254 * vertex.z;
-						aVector.y = 1 / 0.0254 * -vertex.x;
-						aVector.z = 1 / 0.0254 * -vertex.y;
-						aVectorTransformed = MathModule.VectorTransform(aVector, worldToPoseColumn0, worldToPoseColumn1, worldToPoseColumn2, worldToPoseColumn3);
-						aVector.x = aVectorTransformed.x;
-						aVector.y = aVectorTransformed.z;
-						aVector.z = -aVectorTransformed.y;
-						aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3);
-					}
-					else
-					{
-						//NOTE: These 3 lines work for w_desert_file and w_rifle_m16a2, but not ambulance and army_truck.
-						//TEST: Did not work for 50_cal. Rotated 180. Original model has phys mesh rotated oddly, anyway.
-						//TEST: Incorrect. Need to 180 on the Y and -1 on scale Z. Noticable on w_minigun.
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * -vertex.y
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//TEST: Incorrect. Need to 180 on the Y. Noticable on w_minigun.
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * vertex.y
-						//aVector.z = 1 / 0.0254 * vertex.z
-						//TEST: Incorrect. Need to -1 on scale Z. Noticable on w_minigun.
-						//aVector.x = 1 / 0.0254 * vertex.x
-						//aVector.y = 1 / 0.0254 * vertex.y
-						//aVector.z = 1 / 0.0254 * -vertex.z
-						//TEST: Works for w_minigun.
-						//TEST: Works for 50cal, but be aware that the phys mesh does not look right for the model. It does look like original model, though.
-						//TEST: Does not work for Garry's Mod addon "dodge_daytona" 236224475.
-						aVector.x = 1 / 0.0254 * vertex.x;
-						aVector.y = 1 / 0.0254 * -vertex.y;
-						aVector.z = 1 / 0.0254 * -vertex.z;
-
-						aVectorTransformed = MathModule.VectorTransform(aVector, worldToPoseColumn0, worldToPoseColumn1, worldToPoseColumn2, worldToPoseColumn3);
-						aVector.x = aVectorTransformed.x;
-						aVector.y = aVectorTransformed.y;
-						aVector.z = aVectorTransformed.z;
-						aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3);
-					}
-				}
-				else
-				{
-					//FROM: collisionmodel.cpp ConvertToBoneSpace()
-					//aVector.x = 1 / 0.0254 * vertex.x
-					//aVector.y = 1 / 0.0254 * vertex.y
-					//aVector.z = 1 / 0.0254 * vertex.z
-					aVector.x = 1 / 0.0254 * vertex.x;
-					aVector.y = 1 / 0.0254 * vertex.z;
-					aVector.z = 1 / 0.0254 * -vertex.y;
-					aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3);
-				}
-			}
-
-			//If Me.theMdlFileData.theBoneTransforms IsNot Nothing Then
-			//	Dim transform As SourceMdlBoneTransform
-			//	Dim boneIndex As Integer
-			//	Dim preToBoneColumn0 As New SourceVector()
-			//	Dim preToBoneColumn1 As New SourceVector()
-			//	Dim preToBoneColumn2 As New SourceVector()
-			//	Dim preToBoneColumn3 As New SourceVector()
-			//	Dim boneToPostColumn0 As New SourceVector()
-			//	Dim boneToPostColumn1 As New SourceVector()
-			//	Dim boneToPostColumn2 As New SourceVector()
-			//	Dim boneToPostColumn3 As New SourceVector()
-
-			//	'TODO: Find the real boneIndex based on boneName
-			//	boneIndex = 0
-			//	transform = Me.theMdlFileData.theBoneTransforms(boneIndex)
-
-			//	'MathModule.MatrixInvert(poseToWorldColumn0, poseToWorldColumn1, poseToWorldColumn2, poseToWorldColumn3, Me.worldToPoseColumn0, Me.worldToPoseColumn1, Me.worldToPoseColumn2, Me.worldToPoseColumn3)
-			//	MathModule.R_ConcatTransforms(transform.preTransformColumn0, transform.preTransformColumn1, transform.preTransformColumn2, transform.preTransformColumn3, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3, preToBoneColumn0, preToBoneColumn1, preToBoneColumn2, preToBoneColumn3)
-			//	MathModule.R_ConcatTransforms(preToBoneColumn0, preToBoneColumn1, preToBoneColumn2, preToBoneColumn3, transform.postTransformColumn0, transform.postTransformColumn1, transform.postTransformColumn2, transform.postTransformColumn3, boneToPostColumn0, boneToPostColumn1, boneToPostColumn2, boneToPostColumn3)
-			//	aVectorTransformed = MathModule.VectorITransform(aVector, boneToPostColumn0, boneToPostColumn1, boneToPostColumn2, boneToPostColumn3)
-			//Else
-			//	aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//End If
-
-
-
-			//------
-			//NOTE: Works for:
-			//      survivor_producer
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * aVector.x
-			//phyVertex.y = 1 / 0.0254 * aVector.z
-			//phyVertex.z = 1 / 0.0254 * -aVector.y
-			//------
-			//NOTE: These two lines match orientation for cstrike it_lampholder1 model, 
-			//      but still doesn't compile properly.
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * aVector.z
-			//phyVertex.y = 1 / 0.0254 * -aVector.x
-			//phyVertex.z = 1 / 0.0254 * -aVector.y
-			//------
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * aVector.y
-			//phyVertex.y = 1 / 0.0254 * aVector.x
-			//phyVertex.z = 1 / 0.0254 * -aVector.z
-			//------
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * aVector.x
-			//phyVertex.y = 1 / 0.0254 * aVector.y
-			//phyVertex.z = 1 / 0.0254 * -aVector.z
-			//------
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * -aVector.y
-			//phyVertex.y = 1 / 0.0254 * aVector.x
-			//phyVertex.z = 1 / 0.0254 * aVector.z
-			//------
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * -aVector.y
-			//phyVertex.y = 1 / 0.0254 * aVector.x
-			//phyVertex.z = 1 / 0.0254 * aVector.z
-			//------
-			//NOTE: Does not work for:
-			//      w_smg_uzi()
-			//phyVertex.x = 1 / 0.0254 * aVector.z
-			//phyVertex.y = 1 / 0.0254 * aVector.y
-			//phyVertex.z = 1 / 0.0254 * aVector.x
-			//------
-			//NOTE: Works for:
-			//      w_smg_uzi()
-			//NOTE: Does not work for:
-			//      survivor_producer
-			//phyVertex.x = 1 / 0.0254 * aVector.z
-			//phyVertex.y = 1 / 0.0254 * -aVector.y
-			//phyVertex.z = 1 / 0.0254 * aVector.x
-			//------
-			//phyVertex.x = 1 / 0.0254 * aVector.z
-			//phyVertex.y = 1 / 0.0254 * -aVector.y
-			//phyVertex.z = 1 / 0.0254 * -aVector.x
-			//------
-			//If Me.theSourceEngineModel.thePhyFileHeader.theSourcePhyIsCollisionModel Then
-			//	'TEST: Does not rotate L4D2's van phys mesh correctly.
-			//	'aVector.x = 1 / 0.0254 * phyVertex.vertex.x
-			//	'aVector.y = 1 / 0.0254 * phyVertex.vertex.y
-			//	'aVector.z = 1 / 0.0254 * phyVertex.vertex.z
-			//	'TEST:  Does not rotate L4D2's van phys mesh correctly.
-			//	'aVector.x = 1 / 0.0254 * phyVertex.vertex.y
-			//	'aVector.y = 1 / 0.0254 * -phyVertex.vertex.x
-			//	'aVector.z = 1 / 0.0254 * phyVertex.vertex.z
-			//	'TEST: Does not rotate L4D2's van phys mesh correctly.
-			//	'aVector.x = 1 / 0.0254 * phyVertex.vertex.z
-			//	'aVector.y = 1 / 0.0254 * -phyVertex.vertex.y
-			//	'aVector.z = 1 / 0.0254 * phyVertex.vertex.x
-			//	'TEST: Does not rotate L4D2's van phys mesh correctly.
-			//	'aVector.x = 1 / 0.0254 * phyVertex.vertex.x
-			//	'aVector.y = 1 / 0.0254 * phyVertex.vertex.z
-			//	'aVector.z = 1 / 0.0254 * -phyVertex.vertex.y
-			//	'TEST: Works for L4D2's van phys mesh.
-			//	'      Does not work for L4D2 w_model\weapons\w_minigun.mdl.
-			//	aVector.x = 1 / 0.0254 * vertex.z
-			//	aVector.y = 1 / 0.0254 * -vertex.x
-			//	aVector.z = 1 / 0.0254 * -vertex.y
-			//Else
-			//	'TEST: Does not work for L4D2 w_model\weapons\w_minigun.mdl.
-			//	aVector.x = 1 / 0.0254 * vertex.x
-			//	aVector.y = 1 / 0.0254 * vertex.z
-			//	aVector.z = 1 / 0.0254 * -vertex.y
-
-			//	aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
-			//End If
-			//------
-			//TEST: Does not rotate L4D2's van phys mesh correctly.
-			//aVector.x = 1 / 0.0254 * phyVertex.vertex.x
-			//aVector.y = 1 / 0.0254 * phyVertex.vertex.y
-			//aVector.z = 1 / 0.0254 * phyVertex.vertex.z
-			//TEST: Does not rotate L4D2's van phys mesh correctly.
-			//aVector.x = 1 / 0.0254 * phyVertex.vertex.y
-			//aVector.y = 1 / 0.0254 * -phyVertex.vertex.x
-			//aVector.z = 1 / 0.0254 * phyVertex.vertex.z
-			//TEST: works for survivor_producer; matches ref and phy meshes of van, but both are rotated 90 degrees on z-axis
-			//aVector.x = 1 / 0.0254 * phyVertex.vertex.x
-			//aVector.y = 1 / 0.0254 * phyVertex.vertex.z
-			//aVector.z = 1 / 0.0254 * -phyVertex.vertex.y
-
-			//aVectorTransformed = MathModule.VectorITransform(aVector, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3)
+			if (!isStatic)
+				aVectorTransformed = MathModule.VectorITransform(aVectorTransformed, aBone.poseToBoneColumn0, aBone.poseToBoneColumn1, aBone.poseToBoneColumn2, aBone.poseToBoneColumn3);
 
 			return aVectorTransformed;
 		}
@@ -3323,9 +2754,9 @@ namespace Crowbar
 			return v1;
 		}
 
-#endregion
+		#endregion
 
-#region Data
+		#region Data
 
 		private StreamWriter theOutputFileStreamWriter;
 		private SourceMdlFileData49 theMdlFileData;
@@ -3346,7 +2777,7 @@ namespace Crowbar
 		private SourceVector previousFrameRotation = new SourceVector();
 		private SourceVector frame0Position = new SourceVector();
 
-#endregion
+		#endregion
 
 	}
 

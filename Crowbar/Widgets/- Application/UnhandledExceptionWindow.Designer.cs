@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -110,7 +109,6 @@ namespace Crowbar
 			ResumeLayout(false);
 			PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(LinkLabel1_LinkClicked);
 			ExitButton.Click += new System.EventHandler(CloseButton_Click);
 			CopyErrorReportButton.Click += new System.EventHandler(CopyErrorReportButton_Click);

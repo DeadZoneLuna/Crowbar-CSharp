@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.IO;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -525,7 +524,6 @@ namespace Crowbar
 			Panel1.PerformLayout();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			GameSetupComboBox.SelectedIndexChanged += new System.EventHandler(GameSetupComboBox_SelectedIndexChanged);
 			AddGameSetupButton.Click += new System.EventHandler(AddGameSetupButton_Click);
 			BrowseForGamePathFileNameButton.Click += new System.EventHandler(BrowseForGamePathFileNameButton_Click);

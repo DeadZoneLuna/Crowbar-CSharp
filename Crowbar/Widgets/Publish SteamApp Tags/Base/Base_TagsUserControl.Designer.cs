@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +30,6 @@ namespace Crowbar
 			Name = "TagsBaseUserControl";
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Load += new System.EventHandler(TagsBaseUserControl_Load);
 		}
 

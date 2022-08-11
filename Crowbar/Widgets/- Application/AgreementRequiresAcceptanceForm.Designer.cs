@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -105,7 +104,6 @@ namespace Crowbar
 			ResumeLayout(false);
 			PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			OpenSteamSubscriberAgreementButton.Click += new System.EventHandler(OpenSteamSubscriberAgreementButton_Click);
 			OpenWorkshopPageButton.Click += new System.EventHandler(OpenWorkshopPageButton_Click);
 			CancelDeleteButton.Click += new System.EventHandler(CancelDeleteButton_Click);

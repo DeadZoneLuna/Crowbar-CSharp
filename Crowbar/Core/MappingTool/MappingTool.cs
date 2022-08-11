@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -52,7 +51,6 @@ namespace Crowbar
 		{
 			// Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
 			Dispose(false);
-//INSTANT C# NOTE: The base class Finalize method is automatically called from the destructor:
 			//base.Finalize();
 		}
 

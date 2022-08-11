@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -702,7 +701,6 @@ namespace Crowbar
 			PostCompilePanel.ResumeLayout(false);
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			Load += new System.EventHandler(CompileUserControl_Load);
 			BrowseForQcPathFolderOrFileNameButton.Click += new System.EventHandler(BrowseForQcPathFolderOrFileNameButton_Click);
 			GotoQcButton.Click += new System.EventHandler(GotoQcButton_Click);

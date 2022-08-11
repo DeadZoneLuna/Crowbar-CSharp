@@ -1,19 +1,40 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Drawing;
 
 namespace Crowbar
 {
+	//TODO: Replace it with a cross-platform solution
 	public class Win32Api
 	{
+		// Clipboard formats used for cut/copy/drag operations
+		public const string CFSTR_PREFERREDDROPEFFECT = "Preferred DropEffect";
+		public const string CFSTR_PERFORMEDDROPEFFECT = "Performed DropEffect";
+		public const string CFSTR_FILEDESCRIPTORW = "FileGroupDescriptorW";
+		public const string CFSTR_FILECONTENTS = "FileContents";
+
+		// File Descriptor Flags
+		public const Int32 FD_CLSID = 0x1;
+		public const Int32 FD_SIZEPOINT = 0x2;
+		public const Int32 FD_ATTRIBUTES = 0x4;
+		public const Int32 FD_CREATETIME = 0x8;
+		public const Int32 FD_ACCESSTIME = 0x10;
+		public const Int32 FD_WRITESTIME = 0x20;
+		public const Int32 FD_FILESIZE = 0x40;
+		public const Int32 FD_PROGRESSUI = 0x4000;
+		public const Int32 FD_LINKUI = 0x8000;
+
+		// Global Memory Flags
+		public const Int32 GMEM_MOVEABLE = 0x2;
+		public const Int32 GMEM_ZEROINIT = 0x40;
+		public const Int32 GHND = (GMEM_MOVEABLE | GMEM_ZEROINIT);
+		public const Int32 GMEM_DDESHARE = 0x2000;
+
+		// IDataObject constants
+		public const Int32 DV_E_TYMED = unchecked((int)0x80040069);
 
 		/// <summary>Windows messages (WM_*, look in winuser.h)</summary>
 		public enum WindowsMessages
@@ -27,7 +48,7 @@ namespace Crowbar
 			//HWND_BROADCAST = &HFFFF
 		}
 
-		public enum DialogChangeStatus: long
+		public enum DialogChangeStatus : long
 		{
 			CDN_FIRST = 0xFFFFFDA7U,
 			CDN_INITDONE = (CDN_FIRST - 0x0),
@@ -341,11 +362,11 @@ namespace Crowbar
 			{
 				return new RECT(Rectangle.Left, Rectangle.Top, Rectangle.Right, Rectangle.Bottom);
 			}
-			public static bool operator == (RECT Rectangle1, RECT Rectangle2)
+			public static bool operator ==(RECT Rectangle1, RECT Rectangle2)
 			{
 				return Rectangle1.Equals(Rectangle2);
 			}
-			public static bool operator != (RECT Rectangle1, RECT Rectangle2)
+			public static bool operator !=(RECT Rectangle1, RECT Rectangle2)
 			{
 				return !Rectangle1.Equals(Rectangle2);
 			}
@@ -362,13 +383,9 @@ namespace Crowbar
 			public override bool Equals(object Object)
 			{
 				if (Object is RECT)
-				{
 					return Equals((RECT)Object);
-				}
 				else if (Object is Rectangle)
-				{
 					return Equals(new RECT((Rectangle)Object));
-				}
 
 				return false;
 			}
@@ -391,7 +408,7 @@ namespace Crowbar
 
 		public delegate bool EnumWindowsProc(IntPtr Handle, IntPtr Parameter);
 
-		[DllImport("kernel32.dll", SetLastError=true)]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public extern static bool CloseHandle(IntPtr hObject);
 
@@ -401,22 +418,22 @@ namespace Crowbar
 		[DllImport("shell32.dll")]
 		private extern static Int32 SHGetFolderPath(IntPtr hwndOwner, Int32 nFolder, IntPtr hToken, Int32 dwFlags, StringBuilder pszPath);
 
-		[DllImport("user32.dll", CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", CharSet = CharSet.Unicode)]
 		public extern static bool EnumChildWindows(System.IntPtr hWndParent, EnumWindowsProc lpEnumFunc, int lParam);
 
-		[DllImport("user32.dll", CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", CharSet = CharSet.Unicode)]
 		public extern static void GetClassName(System.IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
 
 		[DllImport("user32.dll")]
 		public extern static int GetDlgCtrlID(System.IntPtr hwndCtl);
 
-		[DllImport("user32.dll", CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", CharSet = CharSet.Unicode)]
 		public extern static IntPtr GetParent(IntPtr hWnd);
 
-		[DllImport("user32.dll", SetLastError=true)]
+		[DllImport("user32.dll", SetLastError = true)]
 		public extern static bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
 
-		[DllImport("user32.dll", SetLastError=true)]
+		[DllImport("user32.dll", SetLastError = true)]
 		public extern static int GetWindowThreadProcessId(IntPtr hwnd, ref IntPtr lpdwProcessId);
 
 		/// <summary>Send message to a window (platform invoke)</summary>
@@ -425,22 +442,22 @@ namespace Crowbar
 		/// <param name="wParam">wParam</param>
 		/// <param name="lParam">lParam</param>
 		/// <returns>Zero if failure, otherwise non-zero</returns>
-		[DllImport("user32.dll", SetLastError=true)]
+		[DllImport("user32.dll", SetLastError = true)]
 		public extern static bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-		[DllImport("user32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		public extern static IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-		[DllImport("user32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		public extern static IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, LV_ITEM lParam);
 
-		[DllImport("user32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		public extern static IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
 
-		[DllImport("user32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		public extern static IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 
-		[DllImport("kernel32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+		[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		public extern static bool CreateHardLink(string lpNewFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
 
 		public enum SymbolicLink
@@ -449,7 +466,7 @@ namespace Crowbar
 			Directory = 1
 		}
 
-		[DllImport("kernel32.dll", SetLastError=true)]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		public extern static bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
 
 		private const int MAX_PATH = 260;
@@ -470,16 +487,16 @@ namespace Crowbar
 			public IntPtr hIcon;
 			public int iIcon;
 			public int dwAttributes;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)]
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)]
 			public string szDisplayName;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst=NAMESIZE)]
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = NAMESIZE)]
 			public string szTypeName;
 		}
 
 		[DllImport("Shell32.dll")]
 		private extern static IntPtr SHGetFileInfo(string pszPath, int dwFileAttributes, ref SHFILEINFO psfi, int cbFileInfo, int uFlags);
 
-		[DllImport("user32.dll", SetLastError=true)]
+		[DllImport("user32.dll", SetLastError = true)]
 		private extern static bool DestroyIcon(IntPtr hIcon);
 
 		public static Bitmap GetShellIcon(string path, int fileAttributes = 0)
@@ -735,38 +752,10 @@ namespace Crowbar
 			return true;
 		}
 
-		[DllImport("kernel32.dll", CharSet=CharSet.Auto, ExactSpelling=true)]
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
 		public extern static IntPtr GlobalAlloc(int uFlags, int dwBytes);
 
-		[DllImport("kernel32.dll", CharSet=CharSet.Auto, ExactSpelling=true)]
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
 		public extern static IntPtr GlobalFree(HandleRef handle);
-
-		// Clipboard formats used for cut/copy/drag operations
-		public const string CFSTR_PREFERREDDROPEFFECT = "Preferred DropEffect";
-		public const string CFSTR_PERFORMEDDROPEFFECT = "Performed DropEffect";
-		public const string CFSTR_FILEDESCRIPTORW = "FileGroupDescriptorW";
-		public const string CFSTR_FILECONTENTS = "FileContents";
-
-		// File Descriptor Flags
-		public const Int32 FD_CLSID = 0x1;
-		public const Int32 FD_SIZEPOINT = 0x2;
-		public const Int32 FD_ATTRIBUTES = 0x4;
-		public const Int32 FD_CREATETIME = 0x8;
-		public const Int32 FD_ACCESSTIME = 0x10;
-		public const Int32 FD_WRITESTIME = 0x20;
-		public const Int32 FD_FILESIZE = 0x40;
-		public const Int32 FD_PROGRESSUI = 0x4000;
-		public const Int32 FD_LINKUI = 0x8000;
-
-		// Global Memory Flags
-		public const Int32 GMEM_MOVEABLE = 0x2;
-		public const Int32 GMEM_ZEROINIT = 0x40;
-		public const Int32 GHND = (GMEM_MOVEABLE | GMEM_ZEROINIT);
-		public const Int32 GMEM_DDESHARE = 0x2000;
-
-		// IDataObject constants
-		public const Int32 DV_E_TYMED = unchecked((int)0x80040069);
-
 	}
-
 }

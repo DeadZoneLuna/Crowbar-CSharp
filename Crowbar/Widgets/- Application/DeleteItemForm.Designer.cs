@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -92,7 +91,6 @@ namespace Crowbar
 			ResumeLayout(false);
 			PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			DeleteButton.Click += new System.EventHandler(DeleteButton_Click);
 			CancelDeleteButton.Click += new System.EventHandler(CancelDeleteButton_Click);
 		}

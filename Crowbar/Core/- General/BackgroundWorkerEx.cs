@@ -1,10 +1,6 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
 using System.Windows.Forms;
 using System.ComponentModel;
 
@@ -12,8 +8,13 @@ namespace Crowbar
 {
 	public class BackgroundWorkerEx : BackgroundWorker
 	{
-#region Create and Destroy
+		#region Data
+		private DoWorkEventHandler theDoWorkHandler;
+		private ProgressChangedEventHandler theProgressChangedHandler;
+		private RunWorkerCompletedEventHandler theExternalRunWorkerCompletedHandler;
+		#endregion
 
+		#region Create and Destroy
 		public static BackgroundWorkerEx RunBackgroundWorker(BackgroundWorkerEx bw, DoWorkEventHandler bw_DoWork, ProgressChangedEventHandler bw_ProgressChanged, RunWorkerCompletedEventHandler bw_RunWorkerCompleted, object bw_argument)
 		{
 			if (bw == null)
@@ -37,14 +38,11 @@ namespace Crowbar
 			bw.ExternalRunWorkerCompletedHandler = bw_RunWorkerCompleted;
 
 			bw.RunWorkerAsync(bw_argument);
-
 			return bw;
 		}
+		#endregion
 
-#endregion
-
-#region Properties
-
+		#region Properties
 		public DoWorkEventHandler DoWorkHandler
 		{
 			get
@@ -82,22 +80,18 @@ namespace Crowbar
 				theExternalRunWorkerCompletedHandler = value;
 			}
 		}
+		#endregion
 
-#endregion
-
-#region Methods
-
+		#region Methods
 		public void Kill()
 		{
 			DoWork -= theDoWorkHandler;
 			ProgressChanged -= theProgressChangedHandler;
 			RunWorkerCompleted -= BWE_RunWorkerCompleted;
 		}
+		#endregion
 
-#endregion
-
-#region Private Methods
-
+		#region Private Methods
 		private void BWE_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			//Dim bw As BackgroundWorkerEx = CType(sender, BackgroundWorkerEx)
@@ -110,19 +104,9 @@ namespace Crowbar
 			Kill();
 			theExternalRunWorkerCompletedHandler(this, e);
 		}
+		#endregion
 
-#endregion
-
-#region Data
-
-		private DoWorkEventHandler theDoWorkHandler;
-		private ProgressChangedEventHandler theProgressChangedHandler;
-		private RunWorkerCompletedEventHandler theExternalRunWorkerCompletedHandler;
-
-#endregion
-
-#region Example Usage Class Template
-
+		#region Example Usage Class Template
 		//Public Sub New()
 		//	MyBase.New()
 
@@ -163,9 +147,6 @@ namespace Crowbar
 		//End Sub
 
 		//Private isRunning As Boolean
-
-#endregion
-
+		#endregion
 	}
-
 }

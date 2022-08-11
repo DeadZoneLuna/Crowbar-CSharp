@@ -10,7 +10,6 @@
 
 
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,7 +71,6 @@ namespace CrowbarLauncher
 		}
 	}
 
-//INSTANT C# NOTE: This block was only required to support 'My.Settings' in VB. 'Properties.Settings' is used in C#:
 //Namespace My
 //
 //	<Microsoft.VisualBasic.HideModuleNameAttribute(), System.Diagnostics.DebuggerNonUserCodeAttribute(), System.Runtime.CompilerServices.CompilerGeneratedAttribute()> Friend Module MySettingsProperty

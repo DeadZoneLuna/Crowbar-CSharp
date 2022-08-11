@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -279,12 +278,12 @@ namespace Crowbar
 					aVertex = theVvdFileData.theFixedVertexesByLod[0][vertexIndex];
 				}
 
-				positionX = aVertex.positionX + aVertAnim.get_flDelta(0).TheFloatValue;
-				positionY = aVertex.positionY + aVertAnim.get_flDelta(1).TheFloatValue;
-				positionZ = aVertex.positionZ + aVertAnim.get_flDelta(2).TheFloatValue;
-				normalX = aVertex.normalX + aVertAnim.get_flNDelta(0).TheFloatValue;
-				normalY = aVertex.normalY + aVertAnim.get_flNDelta(1).TheFloatValue;
-				normalZ = aVertex.normalZ + aVertAnim.get_flNDelta(2).TheFloatValue;
+				positionX = aVertex.positionX + aVertAnim.flDelta(0).TheFloatValue;
+				positionY = aVertex.positionY + aVertAnim.flDelta(1).TheFloatValue;
+				positionZ = aVertex.positionZ + aVertAnim.flDelta(2).TheFloatValue;
+				normalX = aVertex.normalX + aVertAnim.flNDelta(0).TheFloatValue;
+				normalY = aVertex.normalY + aVertAnim.flNDelta(1).TheFloatValue;
+				normalZ = aVertex.normalZ + aVertAnim.flNDelta(2).TheFloatValue;
 				line = "    ";
 				line += vertexIndex.ToString(MainCROWBAR.TheApp.InternalNumberFormat);
 				line += " ";

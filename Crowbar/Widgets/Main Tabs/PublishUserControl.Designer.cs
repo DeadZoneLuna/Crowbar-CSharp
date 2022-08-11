@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -855,7 +854,6 @@ namespace Crowbar
 			((System.ComponentModel.ISupportInitialize)ItemPreviewImagePictureBox).EndInit();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(PublishUserControl_Load);
 			RefreshGameItemsButton.Click += new System.EventHandler(RefreshGameItemsButton_Click);
 			OpenSteamSubscriberAgreementButton.Click += new System.EventHandler(OpenSteamSubscriberAgreementButton_Click);

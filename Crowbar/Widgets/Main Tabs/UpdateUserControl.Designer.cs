@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -375,7 +374,6 @@ namespace Crowbar
 			UpdateGroupBox.PerformLayout();
 			ResumeLayout(false);
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			base.Load += new System.EventHandler(UpdateUserControl_Load);
 			CheckForUpdateButton.Click += new System.EventHandler(CheckForUpdateButton_Click);
 			DownloadFolderTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(DownloadFolderTextBox_DragDrop);

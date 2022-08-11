@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -34,31 +33,20 @@ namespace Crowbar
 		{
 			if (theMdlFileData.theBones != null)
 			{
-				string line = "";
-				SourceMdlBone aBone = null;
-				SourceMdlBone aParentBone = null;
-				SourceMdlBone aControlBone = null;
-				SourceMdlBone aParentControlBone = null;
-				SourceMdlQuatInterpBoneInfo aTrigger = null;
-				SourceVector aTriggerTrigger = null;
-				SourceVector aTriggerQuat = null;
-				string aBoneName = null;
-				string aParentBoneName = null;
-				string aParentControlBoneName = null;
-				string aControlBoneName = null;
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string anAimName = null;
+				string line = string.Empty;
 				for (int i = 0; i < theMdlFileData.theBones.Count; i++)
 				{
-					aBone = theMdlFileData.theBones[i];
+					string aBoneName;
+					string aParentBoneName;
+					SourceMdlBone aParentBone;
+					SourceMdlBone aBone = theMdlFileData.theBones[i];
 
 					if (aBone.proceduralRuleOffset != 0)
 					{
-						if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AXISINTERP)
-						{
-						}
-						else if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_QUATINTERP)
+						//if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AXISINTERP)
+						//{
+						//}
+						if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_QUATINTERP)
 						{
 							//<helper> Bip01_L_Elbow Bip01_L_UpperArm Bip01_L_UpperArm Bip01_L_Forearm
 							//<display> 1.5 3 3 100
@@ -68,8 +56,8 @@ namespace Crowbar
 
 							//int i = sscanf( g_szLine, "%s %s %s %s %s", cmd, pBone->bonename, pBone->parentname, pBone->controlparentname, pBone->controlname );
 							aParentBone = theMdlFileData.theBones[aBone.parentBoneIndex];
-							aControlBone = theMdlFileData.theBones[aBone.theQuatInterpBone.controlBoneIndex];
-							aParentControlBone = theMdlFileData.theBones[aControlBone.parentBoneIndex];
+							SourceMdlBone aControlBone = theMdlFileData.theBones[aBone.theQuatInterpBone.controlBoneIndex];
+							SourceMdlBone aParentControlBone = theMdlFileData.theBones[aControlBone.parentBoneIndex];
 
 							//NOTE: A bone name in a VRD file must have its characters up to and including the first dot removed.
 							//aBoneName = aBone.theName.Replace("ValveBiped.", "")
@@ -78,8 +66,8 @@ namespace Crowbar
 							//aControlBoneName = aControlBone.theName.Replace("ValveBiped.", "")
 							aBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aBone.theName);
 							aParentBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentBone.theName);
-							aParentControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentControlBone.theName);
-							aControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aControlBone.theName);
+							string aParentControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentControlBone.theName);
+							string aControlBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aControlBone.theName);
 
 							theOutputFileStreamWriter.WriteLine();
 
@@ -120,10 +108,10 @@ namespace Crowbar
 
 							for (int triggerIndex = 0; triggerIndex < aBone.theQuatInterpBone.theTriggers.Count; triggerIndex++)
 							{
-								aTrigger = aBone.theQuatInterpBone.theTriggers[triggerIndex];
+								SourceMdlQuatInterpBoneInfo aTrigger = aBone.theQuatInterpBone.theTriggers[triggerIndex];
 
-								aTriggerTrigger = MathModule.ToEulerAngles(aTrigger.trigger);
-								aTriggerQuat = MathModule.ToEulerAngles(aTrigger.quat);
+								SourceVector aTriggerTrigger = MathModule.ToEulerAngles(aTrigger.trigger);
+								SourceVector aTriggerQuat = MathModule.ToEulerAngles(aTrigger.quat);
 
 								line = "<trigger>";
 								line += " ";
@@ -181,7 +169,7 @@ namespace Crowbar
 							aParentBone = theMdlFileData.theBones[aBone.theAimAtBone.parentBoneIndex];
 							aParentBoneName = StringClass.RemoveUptoAndIncludingFirstDotCharacterFromString(aParentBone.theName);
 
-	//						Dim anAimName As String
+							string anAimName;
 							if (aBone.proceduralRuleType == SourceMdlBone.STUDIO_PROC_AIMATBONE)
 							{
 								SourceMdlBone anAimBone = theMdlFileData.theBones[aBone.theAimAtBone.aimBoneOrAttachmentIndex];

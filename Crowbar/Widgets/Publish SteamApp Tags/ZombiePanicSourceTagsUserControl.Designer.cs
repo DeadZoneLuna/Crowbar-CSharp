@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -306,7 +305,6 @@ namespace Crowbar
 			ResumeLayout(false);
 			PerformLayout();
 
-//INSTANT C# NOTE: Converted design-time event handler wireups:
 			GameModeRadioButton.CheckedChanged += new System.EventHandler(GameModeRadioButton_CheckedChanged);
 			CustomModelsRadioButton.CheckedChanged += new System.EventHandler(CustomModelsRadioButton_CheckedChanged);
 			CustomSoundsRadioButton.CheckedChanged += new System.EventHandler(CustomSoundsRadioButton_CheckedChanged);

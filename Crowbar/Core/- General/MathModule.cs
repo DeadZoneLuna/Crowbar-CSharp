@@ -1,57 +1,48 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Crowbar
 {
 	internal static class MathModule
 	{
+		public const double MeterInInches = 1 / 0.0254;
 
+		private enum EulerParity
+		{
+			Even,
+			Odd
+		}
+
+		private enum EulerRepeat
+		{
+			No,
+			Yes
+		}
+
+		private enum EulerFrame
+		{
+			S,
+			R
+		}
+
+		private const double FLT_EPSILON = 0.00001;
+
+		static DateTime m_dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 		public static DateTime UnixTimeStampToDateTime(long unixTimeStamp)
 		{
-			DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-			dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-			return dtDateTime;
+			return m_dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
 		}
 
 		public static long DateTimeToUnixTimeStamp(DateTime iDateTime)
 		{
-			DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-			TimeSpan span = (iDateTime.ToUniversalTime() - dtDateTime);
-			return Convert.ToInt64(span.TotalSeconds);
+			return Convert.ToInt64((iDateTime.ToUniversalTime() - m_dateTime).TotalSeconds);
 		}
-
-		//Public Function ByteUnitsConversion(ByVal iBytes As ULong) As String
-		//	Dim value As Double = iBytes
-		//	Dim suffix() As String = {"Bytes", "KB", "MB", "TB", "PB", "EB"}
-		//	Dim factor As ULong = 1024
-		//	Dim index As Integer = 0
-		//	Dim suffixIndex As Integer = 0
-
-		//	While iBytes > factor And index < suffix.Length
-		//		value = iBytes / factor
-		//		suffixIndex = index
-
-		//		factor *= 1024UL
-		//		index = index + 1
-		//	End While
-		//	'If index > 0 Then
-		//	'	value = iBytes / factor
-		//	'End If
-
-		//	Return value.ToString("####.##") + " " + suffix(suffixIndex)
-		//End Function
 
 		public static string ByteUnitsConversion(ulong iBytes)
 		{
 			double value = iBytes;
 			string suffix = "Bytes";
-
 			if (iBytes >= 1073741824)
 			{
 				value = Convert.ToDouble(iBytes / (decimal)(1024 * 1024 * 1024));
@@ -76,8 +67,7 @@ namespace Crowbar
 		{
 			// File seek to next nearest start of 4-byte block. 
 			//      In C++: #define ALIGN4( a ) a = (byte *)((int)((byte *)a + 3) & ~ 3)
-			long result = (currentValue + alignmentValue - 1) & ~(alignmentValue - 1);
-			return result;
+			return (currentValue + alignmentValue - 1) & ~(alignmentValue - 1);
 		}
 
 		public static double DegreesToRadians(double degrees)
@@ -92,6 +82,39 @@ namespace Crowbar
 			// 57.29578 = 180 / pi
 			//Return radians * 57.29578
 			return radians * 180 / 3.1415926535897931;
+		}
+
+		//#define clamp(val, min, max) (((val) > (max)) ? (max) : (((val) < (min)) ? (min) : (val)))
+		public static double Clamp(double val, double min, double max)
+		{
+			if (val > max)
+				return max;
+			else if (val < min)
+				return min;
+			else
+				return val;
+		}
+
+		//inline float RemapValClamped( float val, float A, float B, float C, float D)
+		//{
+		//	if ( A == B )
+		//		return val >= B ? D : C;
+		//	float cVal = (val - A) / (B - A);
+		//	cVal = clamp( cVal, 0.0f, 1.0f );
+
+		//	return C + (D - C) * cVal;
+		//}
+		public static double RemapValClamped(double val, double A, double B, double C, double D)
+		{
+			if (A == B)
+			{
+				return 0;
+			}
+
+			double cVal = (val - A) / (B - A);
+			cVal = Clamp(cVal, 0.0F, 1.0F);
+
+			return C + (D - C) * cVal;
 		}
 
 		////Purpose: Converts 3x3 rotation matrix to degrees (XYZ).
@@ -121,23 +144,18 @@ namespace Crowbar
 		//}
 		public static void ConvertRotationMatrixToDegrees(float m0, float m1, float m2, float m3, float m4, float m5, float m8, ref double angleX, ref double angleY, ref double angleZ)
 		{
-			double c = 0;
-			double translateX = 0;
-			double translateY = 0;
-
 			//NOTE: For Math.Asin, return value is NaN if d < -1 or d > 1 or d equals NaN.
 			//      Therefore, change value outside of domain to edge of domain.
 			if (m2 < -1)
-			{
 				m2 = -1;
-			}
 			else if (m2 > 1)
-			{
 				m2 = 1;
-			}
+
 			angleY = -Math.Asin(Math.Round(m2, 6));
 
-			c = Math.Cos(angleY);
+			double translateX;
+			double translateY;
+			double c = Math.Cos(angleY);
 			angleY = RadiansToDegrees(angleY);
 			if (Math.Abs(c) > 0.005)
 			{
@@ -147,14 +165,13 @@ namespace Crowbar
 				translateX = Math.Round(m0, 6) / c;
 				translateY = Math.Round(-m1, 6) / c;
 				angleZ = RadiansToDegrees(Math.Atan2(translateY, translateX));
+				return;
 			}
-			else
-			{
-				angleX = 0;
-				translateX = Math.Round(m4, 6);
-				translateY = Math.Round(m3, 6);
-				angleZ = RadiansToDegrees(Math.Atan2(translateY, translateX));
-			}
+
+			angleX = 0;
+			translateX = Math.Round(m4, 6);
+			translateY = Math.Round(m3, 6);
+			angleZ = RadiansToDegrees(Math.Atan2(translateY, translateX));
 		}
 
 		//FROM: http://www.j3d.org/matrix_faq/matrfaq_latest.html#Q60
@@ -179,14 +196,9 @@ namespace Crowbar
 		//   }
 		public static SourceQuaternion EulerAnglesToQuaternion(SourceVector angleVector)
 		{
-			double fPitch = 0;
-			double fYaw = 0;
-			double fRoll = 0;
-			SourceQuaternion rot = new SourceQuaternion();
-
-			fPitch = angleVector.x;
-			fYaw = angleVector.y;
-			fRoll = angleVector.z;
+			double fPitch = angleVector.x;
+			double fYaw = angleVector.y;
+			double fRoll = angleVector.z;
 
 			double fSinPitch = Math.Sin(fPitch * 0.5F);
 			double fCosPitch = Math.Cos(fPitch * 0.5F);
@@ -197,6 +209,7 @@ namespace Crowbar
 			double fCosPitchCosYaw = fCosPitch * fCosYaw;
 			double fSinPitchSinYaw = fSinPitch * fSinYaw;
 
+			SourceQuaternion rot = new SourceQuaternion();
 			rot.x = fSinRoll * fCosPitchCosYaw - fCosRoll * fSinPitchSinYaw;
 			rot.y = fCosRoll * fSinPitch * fCosYaw + fSinRoll * fCosPitch * fSinYaw;
 			rot.z = fCosRoll * fCosPitch * fSinYaw - fSinRoll * fSinPitch * fCosYaw;
@@ -268,26 +281,12 @@ namespace Crowbar
 		//'Public Sub AngleMatrix(ByVal pitchDegrees As Double, ByVal yawDegrees As Double, ByVal rollDegrees As Double, ByRef matrixColumn0 As SourceVector, ByRef matrixColumn1 As SourceVector, ByRef matrixColumn2 As SourceVector)
 		public static void AngleMatrix(double pitchRadians, double yawRadians, double rollRadians, ref SourceVector matrixColumn0, ref SourceVector matrixColumn1, ref SourceVector matrixColumn2, ref SourceVector matrixColumn3)
 		{
-			//Dim pitchRadians As Double
-			//Dim yawRadians As Double
-			//Dim rollRadians As Double
-			double sr = 0;
-			double sp = 0;
-			double sy = 0;
-			double cr = 0;
-			double cp = 0;
-			double cy = 0;
-
-			//pitchRadians = DegreesToRadians(pitchDegrees)
-			//yawRadians = DegreesToRadians(yawDegrees)
-			//rollRadians = DegreesToRadians(rollDegrees)
-
-			sy = Math.Sin(yawRadians);
-			cy = Math.Cos(yawRadians);
-			sp = Math.Sin(pitchRadians);
-			cp = Math.Cos(pitchRadians);
-			sr = Math.Sin(rollRadians);
-			cr = Math.Cos(rollRadians);
+			double sy = Math.Sin(yawRadians);
+			double cy = Math.Cos(yawRadians);
+			double sp = Math.Sin(pitchRadians);
+			double cp = Math.Cos(pitchRadians);
+			double sr = Math.Sin(rollRadians);
+			double cr = Math.Cos(rollRadians);
 
 			matrixColumn0.x = cp * cy;
 			matrixColumn0.y = cp * sy;
@@ -368,19 +367,17 @@ namespace Crowbar
 			up.z = matrixColumn2.z;
 
 			double xyDist = Math.Sqrt(forward.x * forward.x + forward.y * forward.y);
-
 			if (xyDist > 0.001)
 			{
-				yawDegrees = MathModule.RadiansToDegrees(Math.Atan2(forward.y, forward.x));
-				pitchDegrees = MathModule.RadiansToDegrees(Math.Atan2(-forward.z, xyDist));
-				rollDegrees = MathModule.RadiansToDegrees(Math.Atan2(left.z, up.z));
+				yawDegrees = RadiansToDegrees(Math.Atan2(forward.y, forward.x));
+				pitchDegrees = RadiansToDegrees(Math.Atan2(-forward.z, xyDist));
+				rollDegrees = RadiansToDegrees(Math.Atan2(left.z, up.z));
+				return;
 			}
-			else
-			{
-				yawDegrees = MathModule.RadiansToDegrees(Math.Atan2(-left.x, left.y));
-				pitchDegrees = MathModule.RadiansToDegrees(Math.Atan2(-forward.z, xyDist));
-				rollDegrees = 0;
-			}
+
+			yawDegrees = RadiansToDegrees(Math.Atan2(-left.x, left.y));
+			pitchDegrees = RadiansToDegrees(Math.Atan2(-forward.z, xyDist));
+			rollDegrees = 0;
 		}
 
 		public static void MatrixAnglesInRadians(SourceVector matrixColumn0, SourceVector matrixColumn1, SourceVector matrixColumn2, SourceVector matrixColumn3, ref double pitchRadians, ref double yawRadians, ref double rollRadians)
@@ -398,19 +395,17 @@ namespace Crowbar
 			up.z = matrixColumn2.z;
 
 			double xyDist = Math.Sqrt(forward.x * forward.x + forward.y * forward.y);
-
 			if (xyDist > 0.001)
 			{
 				yawRadians = Math.Atan2(forward.y, forward.x);
 				pitchRadians = Math.Atan2(-forward.z, xyDist);
 				rollRadians = Math.Atan2(left.z, up.z);
+				return;
 			}
-			else
-			{
-				yawRadians = Math.Atan2(-left.x, left.y);
-				pitchRadians = Math.Atan2(-forward.z, xyDist);
-				rollRadians = 0;
-			}
+
+			yawRadians = Math.Atan2(-left.x, left.y);
+			pitchRadians = Math.Atan2(-forward.z, xyDist);
+			rollRadians = 0;
 		}
 
 		//FROM: [1999] HLStandardSDK\SourceCode\utils\common\mathlib.c
@@ -508,7 +503,6 @@ namespace Crowbar
 			out_matrixColumn2.z = in_matrixColumn2.z;
 
 			SourceVector temp = new SourceVector();
-
 			temp.x = in_matrixColumn3.x;
 			temp.y = in_matrixColumn3.y;
 			temp.z = in_matrixColumn3.z;
@@ -518,7 +512,34 @@ namespace Crowbar
 			out_matrixColumn3.z = -DotProduct(temp, out_matrixColumn2);
 		}
 
+		public static void SetIdentityMatrix(ref SourceVector matrixColumn0, ref SourceVector matrixColumn1, ref SourceVector matrixColumn2, ref SourceVector matrixColumn3)
+		{
+			//matrix[0][0] = 1.0; matrixColumn0.x
+			//matrix[1][1] = 1.0; matrixColumn1.y
+			//matrix[2][2] = 1.0; matrixColumn2.z
+			matrixColumn0.x = 1.0;
+			matrixColumn1.y = 1.0;
+			matrixColumn2.z = 1.0;
+			matrixColumn3 = matrixColumn3;
+		}
 
+		public static void MatrixCopy(SourceVector mat0, SourceVector mat1, SourceVector mat2, SourceVector mat3, ref SourceVector outMat0, ref SourceVector outMat1, ref SourceVector outMat2, ref SourceVector outMat3)
+		{
+			outMat0.x = mat0.x;
+			outMat1.x = mat1.x;
+			outMat2.x = mat2.x;
+			outMat3.x = mat3.x;
+
+			outMat0.y = mat0.y;
+			outMat1.y = mat1.y;
+			outMat2.y = mat2.y;
+			outMat3.y = mat3.y;
+
+			outMat0.z = mat0.z;
+			outMat1.z = mat1.z;
+			outMat2.z = mat2.z;
+			outMat3.z = mat3.z;
+		}
 
 		//FROM: SourceEngine2003_source HL2 Beta 2003\src_main\public\mathlib.h
 		//FORCEINLINE vec_t DotProduct(const vec_t *v1, const vec_t *v2)
@@ -529,7 +550,6 @@ namespace Crowbar
 		{
 			return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 		}
-
 
 		public static void VectorCopy(SourceVector input, ref SourceVector output)
 		{
@@ -547,15 +567,10 @@ namespace Crowbar
 		//}
 		public static SourceVector VectorRotate(SourceVector input, SourceVector matrixColumn0, SourceVector matrixColumn1, SourceVector matrixColumn2, SourceVector matrixColumn3)
 		{
-			SourceVector output = null;
-			SourceVector matrixRow0 = null;
-			SourceVector matrixRow1 = null;
-			SourceVector matrixRow2 = null;
-
-			output = new SourceVector();
-			matrixRow0 = new SourceVector();
-			matrixRow1 = new SourceVector();
-			matrixRow2 = new SourceVector();
+			SourceVector output = new SourceVector();
+			SourceVector matrixRow0 = new SourceVector();
+			SourceVector matrixRow1 = new SourceVector();
+			SourceVector matrixRow2 = new SourceVector();
 
 			matrixRow0.x = matrixColumn0.x;
 			matrixRow0.y = matrixColumn1.x;
@@ -586,8 +601,6 @@ namespace Crowbar
 		public static SourceVector VectorIRotate(SourceVector input, SourceVector matrixColumn0, SourceVector matrixColumn1, SourceVector matrixColumn2, SourceVector matrixColumn3)
 		{
 			SourceVector output = new SourceVector();
-
-
 			output.x = input.x * matrixColumn0.x + input.y * matrixColumn0.y + input.z * matrixColumn0.z;
 			output.y = input.x * matrixColumn1.x + input.y * matrixColumn1.y + input.z * matrixColumn1.z;
 			output.z = input.x * matrixColumn2.x + input.y * matrixColumn2.y + input.z * matrixColumn2.z;
@@ -618,25 +631,15 @@ namespace Crowbar
 		//}
 		public static double VectorNormalize(ref SourceVector ioVector)
 		{
-			double length = 0;
-
-			length += ioVector.x * ioVector.x;
-			length += ioVector.y * ioVector.y;
-			length += ioVector.z * ioVector.z;
-			length = Math.Sqrt(length);
+			double length = Math.Sqrt((ioVector.x * ioVector.x) + (ioVector.y * ioVector.y) + (ioVector.z * ioVector.z));
 			if (length == 0)
-			{
 				return 0;
-			}
 
 			ioVector.x /= length;
 			ioVector.y /= length;
 			ioVector.z /= length;
-
 			return length;
 		}
-
-
 
 		//FROM: SourceEngine2003_source HL2 Beta 2003\src_main\public\mathlib.cpp
 		//void VectorTransform (const float *in1, const matrix3x4_t& in2, float *out)
@@ -649,15 +652,9 @@ namespace Crowbar
 		//}
 		public static SourceVector VectorTransform(SourceVector input, SourceVector matrixColumn0, SourceVector matrixColumn1, SourceVector matrixColumn2, SourceVector matrixColumn3)
 		{
-			SourceVector output = null;
-			SourceVector matrixRow0 = null;
-			SourceVector matrixRow1 = null;
-			SourceVector matrixRow2 = null;
-
-			output = new SourceVector();
-			matrixRow0 = new SourceVector();
-			matrixRow1 = new SourceVector();
-			matrixRow2 = new SourceVector();
+			SourceVector matrixRow0 = new SourceVector();
+			SourceVector matrixRow1 = new SourceVector();
+			SourceVector matrixRow2 = new SourceVector();
 
 			matrixRow0.x = matrixColumn0.x;
 			matrixRow0.y = matrixColumn1.x;
@@ -671,14 +668,12 @@ namespace Crowbar
 			matrixRow2.y = matrixColumn1.z;
 			matrixRow2.z = matrixColumn2.z;
 
+			SourceVector output = new SourceVector();
 			output.x = DotProduct(input, matrixRow0) + matrixColumn3.x;
 			output.y = DotProduct(input, matrixRow1) + matrixColumn3.y;
 			output.z = DotProduct(input, matrixRow2) + matrixColumn3.z;
-
 			return output;
 		}
-
-
 
 		//FROM: http://code.google.com/p/hl2sources/source/browse/trunk/public/mathlib.cpp
 		//void VectorITransform (const float *in1, const matrix3x4_t& in2, float *out)
@@ -696,11 +691,8 @@ namespace Crowbar
 		//}
 		public static SourceVector VectorITransform(SourceVector input, SourceVector matrixColumn0, SourceVector matrixColumn1, SourceVector matrixColumn2, SourceVector matrixColumn3)
 		{
-			SourceVector output = null;
-			SourceVector temp = null;
-
-			output = new SourceVector();
-			temp = new SourceVector();
+			SourceVector output = new SourceVector();
+			SourceVector temp = new SourceVector();
 
 			temp.x = input.x - matrixColumn3.x;
 			temp.y = input.y - matrixColumn3.y;
@@ -709,7 +701,6 @@ namespace Crowbar
 			output.x = temp.x * matrixColumn0.x + temp.y * matrixColumn0.y + temp.z * matrixColumn0.z;
 			output.y = temp.x * matrixColumn1.x + temp.y * matrixColumn1.y + temp.z * matrixColumn1.z;
 			output.z = temp.x * matrixColumn2.x + temp.y * matrixColumn2.y + temp.z * matrixColumn2.z;
-
 			return output;
 		}
 
@@ -734,32 +725,25 @@ namespace Crowbar
 		//}
 		public static SourceVector VectorYawRotate(SourceVector input, double yawInRadians)
 		{
+			double sy = Math.Sin(yawInRadians);
+			double cy = Math.Cos(yawInRadians);
+
 			SourceVector output = new SourceVector();
-			double sy = 0;
-			double cy = 0;
-
-			sy = Math.Sin(yawInRadians);
-			cy = Math.Cos(yawInRadians);
-
 			output.x = input.x * cy - input.y * sy;
 			output.y = input.x * sy + input.y * cy;
 			output.z = input.z;
-
 			return output;
 		}
+
 		public static SourceVector VectorYawRotateXandYSwap(SourceVector input, double yawInRadians)
 		{
+			double sy = Math.Sin(yawInRadians);
+			double cy = Math.Cos(yawInRadians);
+
 			SourceVector output = new SourceVector();
-			double sy = 0;
-			double cy = 0;
-
-			sy = Math.Sin(yawInRadians);
-			cy = Math.Cos(yawInRadians);
-
 			output.x = input.x * sy + input.y * cy;
 			output.y = input.x * cy - input.y * sy;
 			output.z = input.z;
-
 			return output;
 		}
 		//------
@@ -1021,7 +1005,7 @@ namespace Crowbar
 			//Return MathModule.Eul_FromQuat(q, 2, 0, 1, 0, EulerParity.Odd, EulerRepeat.No, EulerFrame.R)
 
 			//NOTE: Good arms, good clip, good view.
-			return MathModule.Eul_FromQuat(q, 0, 1, 2, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S);
+			return Eul_FromQuat(q, 0, 1, 2, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S);
 			//NOTE: Bad arms, bad clip, good view.
 			//Return MathModule.Eul_FromQuat(q, 1, 2, 0, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S)
 			//NOTE:  arms, clip,  view.
@@ -1051,7 +1035,7 @@ namespace Crowbar
 			//Return MathModule.Eul_FromQuat(q, 2, 0, 1, 0, EulerParity.Odd, EulerRepeat.No, EulerFrame.R)
 
 			//NOTE: Not completely correct.
-			return MathModule.Eul_FromQuat(q, 0, 1, 2, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S);
+			return Eul_FromQuat(q, 0, 1, 2, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S);
 			//NOTE: Incorrect.
 			//Return MathModule.Eul_FromQuat(q, 1, 2, 0, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S)
 			//Return MathModule.Eul_FromQuat(q, 2, 0, 1, 0, EulerParity.Even, EulerRepeat.No, EulerFrame.S)
@@ -1303,12 +1287,6 @@ namespace Crowbar
 		private static SourceVector Eul_FromHMatrix(double[,] M, int i, int j, int k, int h, EulerParity parity, EulerRepeat repeat, EulerFrame frame)
 		{
 			SourceVector ea = new SourceVector();
-
-			//Dim i As Integer, j As Integer, k As Integer, h As Integer, n As Integer, r As Integer, _
-			// f As Integer
-			//EulGetOrd(order, i, j, k, h, n, _
-			// r, f)
-
 			if (repeat == EulerRepeat.Yes)
 			{
 				double sy = Math.Sqrt(M[i, j] * M[i, j] + M[i, k] * M[i, k]);
@@ -1369,43 +1347,25 @@ namespace Crowbar
 				{0, 0, 0, 0},
 				{0, 0, 0, 0}
 			};
-			double Nq = 0;
+
 			double s = 0;
-			double xs = 0;
-			double ys = 0;
-			double zs = 0;
-			double wx = 0;
-			double wy = 0;
-			double wz = 0;
-			double xx = 0;
-			double xy = 0;
-			double xz = 0;
-			double yy = 0;
-			double yz = 0;
-			double zz = 0;
-
-			Nq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
+			double Nq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
 			if (Nq > 0)
-			{
 				s = 2.0 / Nq;
-			}
-			else
-			{
-				s = 0;
-			}
-			xs = q.x * s;
-			ys = q.y * s;
-			zs = q.z * s;
 
-			wx = q.w * xs;
-			wy = q.w * ys;
-			wz = q.w * zs;
-			xx = q.x * xs;
-			xy = q.x * ys;
-			xz = q.x * zs;
-			yy = q.y * ys;
-			yz = q.y * zs;
-			zz = q.z * zs;
+			double xs = q.x * s;
+			double ys = q.y * s;
+			double zs = q.z * s;
+
+			double wx = q.w * xs;
+			double wy = q.w * ys;
+			double wz = q.w * zs;
+			double xx = q.x * xs;
+			double xy = q.x * ys;
+			double xz = q.x * zs;
+			double yy = q.y * ys;
+			double yz = q.y * zs;
+			double zz = q.z * zs;
 
 			M[0, 0] = 1.0 - (yy + zz);
 			M[0, 1] = xy - wz;
@@ -1417,30 +1377,7 @@ namespace Crowbar
 			M[2, 1] = yz + wx;
 			M[2, 2] = 1.0 - (xx + yy);
 			M[3, 3] = 1.0;
-
 			return Eul_FromHMatrix(M, i, j, k, h, parity, repeat, frame);
 		}
-
-		private enum EulerParity
-		{
-			Even,
-			Odd
-		}
-
-		private enum EulerRepeat
-		{
-			No,
-			Yes
-		}
-
-		private enum EulerFrame
-		{
-			S,
-			R
-		}
-
-		private const double FLT_EPSILON = 0.00001;
-
 	}
-
 }

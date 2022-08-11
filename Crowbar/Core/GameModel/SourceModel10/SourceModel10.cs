@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -108,23 +107,19 @@ namespace Crowbar
 				mdlExtension = Path.GetExtension(theMdlPathFileName);
 
 				theSequenceGroupMdlPathFileNames = new List<string>(theMdlFileData.sequenceGroupCount);
-
 				theSequenceGroupMdlPathFileNames.Add(theMdlPathFileName);
+
 				//NOTE: Start index at 1 because 0 is the main MDL file, handled above.
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string aSequenceGroupMdlFileName = null;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-				string aSequenceGroupMdlPathFileName = null;
 				for (int sequenceGroupIndex = 1; sequenceGroupIndex < theMdlFileData.sequenceGroupCount; sequenceGroupIndex++)
 				{
-	//				Dim aSequenceGroupMdlFileName As String
-	//				Dim aSequenceGroupMdlPathFileName As String
+					//Dim aSequenceGroupMdlFileName As String
+					//Dim aSequenceGroupMdlPathFileName As String
 					//sequenceGroupMdlFileName = Path.GetFileName(aSequenceGroup.theFileName)
 					//sequenceGroupMdlPathFileName = Path.Combine(mdlPath, sequenceGroupMdlFileName)
 					//NOTE: Ignore internal name for sequence group file names and use file name of MDL file (not the internal name).
 					//      This seems to be how it is handled by Half-Life and all the tools for it.
-					aSequenceGroupMdlFileName = mdlFileNameWithoutExtension + sequenceGroupIndex.ToString("00") + mdlExtension;
-					aSequenceGroupMdlPathFileName = Path.Combine(mdlPath, aSequenceGroupMdlFileName);
+					string aSequenceGroupMdlFileName = mdlFileNameWithoutExtension + sequenceGroupIndex.ToString("00") + mdlExtension;
+					string aSequenceGroupMdlPathFileName = Path.Combine(mdlPath, aSequenceGroupMdlFileName);
 					//If Not File.Exists(aSequenceGroupMdlPathFileName) Then
 					//	status = StatusMessage.Error
 					//End If

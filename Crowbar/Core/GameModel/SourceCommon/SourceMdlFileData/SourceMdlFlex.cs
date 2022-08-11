@@ -1,17 +1,11 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Crowbar
 {
 	public class SourceMdlFlex
 	{
-
 		//FROM: SourceEngineXXXX_source\public\studio.h
 		//struct mstudioflex_t
 		//{
@@ -37,9 +31,6 @@ namespace Crowbar
 		//	unsigned char		unusedchar[3];
 		//	int					unused[6];
 		//};
-
-
-
 		public int flexDescIndex;
 
 		public double target0;
@@ -55,12 +46,7 @@ namespace Crowbar
 		public char[] unusedChar = new char[3];
 		public int[] unused = new int[6];
 
-
-
 		public List<SourceMdlVertAnim> theVertAnims;
-
-
-
 		//Enum StudioVertAnimType_t
 		//{
 		//	STUDIO_VERT_ANIM_NORMAL = 0,
@@ -69,6 +55,31 @@ namespace Crowbar
 		public byte STUDIO_VERT_ANIM_NORMAL = 0;
 		public byte STUDIO_VERT_ANIM_WRINKLE = 1;
 
-	}
+		public override string ToString()
+		{
+			string temp = $"\tflexDescIndex = {flexDescIndex}\n";
 
+			temp += $"\ttarget0 = {target0}\n";
+			temp += $"\ttarget1 = {target1}\n";
+			temp += $"\ttarget2 = {target2}\n";
+			temp += $"\ttarget3 = {target3}\n";
+
+			temp += $"\tvertCount = {vertCount}\n";
+			temp += $"\tvertOffset = {vertOffset}\n";
+
+			temp += $"\tflexDescPartnerIndex = {flexDescPartnerIndex}\n";
+			temp += $"\tvertAnimType = {vertAnimType}\n";
+			for(int i = 0; i < 3; i++)
+				temp += $"\tunusedChar({i}) = {(unusedChar[i] == '\0' ? '0' : unusedChar[i])}\n";
+			for (int i = 0; i < 6; i++)
+				temp += $"\tunused({i}) = {unused[i]}\n";
+
+			return temp;
+		}
+
+		public double GetPosition()
+        {
+			return ((target0 == -11 && target1 == -10) || (target2 == 10 && target3 == 11)) ? 1 : target1;
+        }
+	}
 }

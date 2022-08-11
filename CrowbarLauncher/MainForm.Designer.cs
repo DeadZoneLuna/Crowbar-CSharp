@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 
-//INSTANT C# NOTE: Formerly VB project-level imports:
 using System;
 using System.Collections;
 using System.Collections.Generic;

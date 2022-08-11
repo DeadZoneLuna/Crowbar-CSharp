@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +10,6 @@ namespace Crowbar
 {
 	public class SourceMdlVertAnim
 	{
-
 		//FROM: SourceEngineXXXX_source\public\studio.h
 		//// this is the memory image of vertex anims (16-bit fixed point)
 		//struct mstudiovertanim_t
@@ -111,27 +109,25 @@ namespace Crowbar
 		//	End Set
 		//End Property
 
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
-//ORIGINAL LINE: Public Property deltaUShort(ByVal index As Integer) As UShort
-		public ushort get_deltaUShort(int index)
+		//NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
+		//ORIGINAL LINE: Public Property deltaUShort(ByVal index As Integer) As UShort
+		public ushort deltaUShort(int index, ushort? value = null)
 		{
-			return theDelta[index].the16BitValue;
-		}
-			public void set_deltaUShort(int index, ushort value)
-			{
-				theDelta[index].the16BitValue = value;
-			}
+			if (!value.HasValue)
+				return theDelta[index].the16BitValue;
 
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
-//ORIGINAL LINE: Public Property flDelta(ByVal index As Integer) As SourceFloat16bits
-		public SourceFloat16bits get_flDelta(int index)
-		{
-			return theDelta[index];
+			return theDelta[index].the16BitValue = value.Value;
 		}
-			public void set_flDelta(int index, SourceFloat16bits value)
-			{
-				theDelta[index] = value;
-			}
+
+		//NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
+		//ORIGINAL LINE: Public Property flDelta(ByVal index As Integer) As SourceFloat16bits
+		public SourceFloat16bits flDelta(int index, SourceFloat16bits value = null)
+		{
+			if (ReferenceEquals(value, null))
+				return theDelta[index];
+
+			return theDelta[index] = value;
+		}
 
 		//Public Property nDelta(ByVal index As Integer) As Short
 		//	Get
@@ -142,28 +138,25 @@ namespace Crowbar
 		//	End Set
 		//End Property
 
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
-//ORIGINAL LINE: Public Property nDeltaUShort(ByVal index As Integer) As UShort
-		public ushort get_nDeltaUShort(int index)
+		//NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
+		//ORIGINAL LINE: Public Property nDeltaUShort(ByVal index As Integer) As UShort
+		public ushort nDeltaUShort(int index, ushort? value = null)
 		{
-			return theNDelta[index].the16BitValue;
-		}
-			public void set_nDeltaUShort(int index, ushort value)
-			{
-				theNDelta[index].the16BitValue = value;
-			}
+			if (!value.HasValue)
+				return theNDelta[index].the16BitValue;
 
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
-//ORIGINAL LINE: Public Property flNDelta(ByVal index As Integer) As SourceFloat16bits
-		public SourceFloat16bits get_flNDelta(int index)
+			return theNDelta[index].the16BitValue = value.Value;
+		}
+
+		//NOTE: C# does not support parameterized properties - the following property has been divided into two methods:
+		//ORIGINAL LINE: Public Property flNDelta(ByVal index As Integer) As SourceFloat16bits
+		public SourceFloat16bits flNDelta(int index, SourceFloat16bits value = null)
 		{
-			return theNDelta[index];
-		}
-			public void set_flNDelta(int index, SourceFloat16bits value)
-			{
-				theNDelta[index] = value;
-			}
+			if (ReferenceEquals(value, null))
+				return theNDelta[index];
 
+			return theNDelta[index] = value;
+		}
 
 		private SourceFloat16bits[] theDelta = new SourceFloat16bits[3];
 		private SourceFloat16bits[] theNDelta = new SourceFloat16bits[3];
@@ -171,15 +164,10 @@ namespace Crowbar
 		public SourceMdlVertAnim()
 		{
 			for (int x = 0; x <= 2; x++)
-			{
 				theDelta[x] = new SourceFloat16bits();
-			}
 			for (int x = 0; x <= 2; x++)
-			{
 				theNDelta[x] = new SourceFloat16bits();
-			}
 		}
 
 	}
-
 }

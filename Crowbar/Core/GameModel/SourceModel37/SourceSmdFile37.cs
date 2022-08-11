@@ -1,5 +1,4 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -621,30 +620,18 @@ namespace Crowbar
 				if (movements != null && frameIndex > 0)
 				{
 					int previousFrameIndex = 0;
-					SourceVector vecPos = null;
-					SourceVector vecAngle = null;
-
-					previousFrameIndex = 0;
-					vecPos = new SourceVector();
-					vecAngle = new SourceVector();
-
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double f = 0;
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
-					double d = 0;
+					SourceVector vecPos = new SourceVector();
+					SourceVector vecAngle = new SourceVector();
 					foreach (SourceMdlMovement aMovement in movements)
 					{
 						if (frameIndex <= aMovement.endframeIndex)
 						{
-	//						Dim f As Double
-	//						Dim d As Double
-							f = (frameIndex - previousFrameIndex) / (double)(aMovement.endframeIndex - previousFrameIndex);
-							d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
+							double f = (frameIndex - previousFrameIndex) / (double)(aMovement.endframeIndex - previousFrameIndex);
+							double d = aMovement.v0 * f + 0.5 * (aMovement.v1 - aMovement.v0) * f * f;
 							vecPos.x = vecPos.x + d * aMovement.vector.x;
 							vecPos.y = vecPos.y + d * aMovement.vector.y;
 							vecPos.z = vecPos.z + d * aMovement.vector.z;
 							vecAngle.y = vecAngle.y * (1 - f) + MathModule.DegreesToRadians(aMovement.angle) * f;
-
 							break;
 						}
 						else

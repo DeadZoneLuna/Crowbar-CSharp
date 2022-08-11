@@ -1,24 +1,41 @@
-﻿//INSTANT C# NOTE: Formerly VB project-level imports:
-using System;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-
 using System.ComponentModel;
-using System.IO;
 
 namespace Crowbar
 {
 	public class Decompiler : BackgroundWorker
 	{
-#region Create and Destroy
+		#region Data
+		private bool theSkipCurrentModelIsActive;
+		private string theInputMdlPathName;
+		private string theOutputPath;
+		private string theModelOutputPath;
+		private string theOutputPathOrModelOutputFileName;
 
+		private StreamWriter theLogFileStream;
+
+		private BindingListEx<string> theDecompiledQcFiles;
+		private BindingListEx<string> theDecompiledFirstRefSmdFiles;
+		private BindingListEx<string> theDecompiledFirstLodSmdFiles;
+		private BindingListEx<string> theDecompiledPhysicsFiles;
+		private BindingListEx<string> theDecompiledVtaFiles;
+		private BindingListEx<string> theDecompiledFirstBoneAnimSmdFiles;
+		private BindingListEx<string> theDecompiledVrdFiles;
+		private BindingListEx<string> theDecompiledDeclareSequenceQciFiles;
+		private BindingListEx<string> theDecompiledFirstTextureBmpFiles;
+		private BindingListEx<string> theDecompiledLogFiles;
+		private BindingListEx<string> theDecompiledFirstDebugFiles;
+
+		private AppEnums.DecompiledFileType theDecompiledFileType;
+		private bool theFirstDecompiledFileHasBeenAdded;
+		#endregion
+
+		#region Create and Destroy
 		public Decompiler() : base()
 		{
-
 			theDecompiledQcFiles = new BindingListEx<string>();
 			theDecompiledFirstRefSmdFiles = new BindingListEx<string>();
 			theDecompiledFirstLodSmdFiles = new BindingListEx<string>();
@@ -35,15 +52,12 @@ namespace Crowbar
 			WorkerSupportsCancellation = true;
 			DoWork += Decompiler_DoWork;
 		}
+		#endregion
 
-#endregion
+		#region Properties
+		#endregion
 
-#region Properties
-
-#endregion
-
-#region Methods
-
+		#region Methods
 		public void Run()
 		{
 			RunWorkerAsync();
@@ -57,153 +71,84 @@ namespace Crowbar
 
 		public string GetOutputPathFileName(string relativePathFileName)
 		{
-			string pathFileName = Path.Combine(theOutputPath, relativePathFileName);
-
-			pathFileName = Path.GetFullPath(pathFileName);
-
-			return pathFileName;
+			return Path.GetFullPath(Path.Combine(theOutputPath, relativePathFileName));
 		}
 
 		public string GetOutputPathFolderOrFileName()
 		{
 			return theOutputPathOrModelOutputFileName;
 		}
+		#endregion
 
-#endregion
+		#region Private Methods
+		#endregion
 
-#region Private Methods
-
-#endregion
-
-#region Private Methods in Background Thread
-
-		private void Decompiler_DoWork(System.Object sender, System.ComponentModel.DoWorkEventArgs e)
+		#region Private Methods in Background Thread
+		private void Decompiler_DoWork(object sender, DoWorkEventArgs e)
 		{
-			ReportProgress(0, "");
+			ReportProgress(0, string.Empty);
 
 			theOutputPath = GetOutputPath();
 
-			AppEnums.StatusMessage status = 0;
+			AppEnums.StatusMessage status = AppEnums.StatusMessage.Error;
 			if (DecompilerInputsAreValid())
-			{
 				status = Decompile();
-			}
-			else
-			{
-				status = AppEnums.StatusMessage.Error;
-			}
-			e.Result = GetDecompilerOutputs(status);
 
+			e.Result = GetDecompilerOutputs(status);
 			if (CancellationPending)
-			{
 				e.Cancel = true;
-			}
 		}
 
 		private string GetOutputPath()
 		{
-			string outputPath = null;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileOutputFolderOption == AppEnums.DecompileOutputPathOptions.Subfolder)
 			{
 				if (File.Exists(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName))
-				{
-					outputPath = Path.Combine(FileManager.GetPath(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName), MainCROWBAR.TheApp.Settings.DecompileOutputSubfolderName);
-				}
+					return Path.Combine(FileManager.GetPath(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName), MainCROWBAR.TheApp.Settings.DecompileOutputSubfolderName);
 				else if (Directory.Exists(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName))
-				{
-					outputPath = Path.GetFullPath(Path.Combine(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName, MainCROWBAR.TheApp.Settings.DecompileOutputSubfolderName));
-				}
+					return Path.GetFullPath(Path.Combine(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName, MainCROWBAR.TheApp.Settings.DecompileOutputSubfolderName));
 				else
-				{
-					outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-				}
-			}
-			else
-			{
-				outputPath = MainCROWBAR.TheApp.Settings.DecompileOutputFullPath;
+					return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			}
 
-			return outputPath;
+			return MainCROWBAR.TheApp.Settings.DecompileOutputFullPath;
 		}
 
 		private bool DecompilerInputsAreValid()
 		{
-			bool inputsAreValid = false;
-
-			if (string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName))
-			{
-				inputsAreValid = false;
-			}
-			else
-			{
-				inputsAreValid = FileManager.PathExistsAfterTryToCreate(theOutputPath);
-			}
-
-			return inputsAreValid;
+			return string.IsNullOrEmpty(MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName) ? false : FileManager.PathExistsAfterTryToCreate(theOutputPath);
 		}
 
 		private DecompilerOutputInfo GetDecompilerOutputs(AppEnums.StatusMessage status)
 		{
-			DecompilerOutputInfo decompileResultInfo = new DecompilerOutputInfo();
-
-			decompileResultInfo.theStatus = status;
+			DecompilerOutputInfo decompileResultInfo = new DecompilerOutputInfo { theStatus = status };
 
 			if (MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledQcFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledFirstRefSmdFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileLodMeshSmdFilesIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledFirstLodSmdFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledPhysicsFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledVtaFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledFirstBoneAnimSmdFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledVrdFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileDeclareSequenceQciFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledDeclareSequenceQciFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileTextureBmpFilesIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledFirstTextureBmpFiles;
-			}
 			else if (MainCROWBAR.TheApp.Settings.DecompileLogFileIsChecked)
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledLogFiles;
-			}
 			else
-			{
 				decompileResultInfo.theDecompiledRelativePathFileNames = theDecompiledFirstDebugFiles;
-			}
 
+			theOutputPathOrModelOutputFileName = theOutputPath;
 			if (decompileResultInfo.theDecompiledRelativePathFileNames.Count <= 0 || theDecompiledQcFiles.Count <= 0)
-			{
-				theOutputPathOrModelOutputFileName = "";
-				//ElseIf decompileResultInfo.theDecompiledRelativePathFileNames.Count = 1 Then
-				//	Me.theOutputPathOrModelOutputFileName = decompileResultInfo.theDecompiledRelativePathFileNames(0)
-			}
-			else
-			{
-				theOutputPathOrModelOutputFileName = theOutputPath;
-			}
+				theOutputPathOrModelOutputFileName = string.Empty;
 
 			return decompileResultInfo;
 		}
@@ -228,13 +173,9 @@ namespace Crowbar
 
 			string mdlPathFileName = MainCROWBAR.TheApp.Settings.DecompileMdlPathFileName;
 			if (File.Exists(mdlPathFileName))
-			{
 				theInputMdlPathName = FileManager.GetPath(mdlPathFileName);
-			}
 			else if (Directory.Exists(mdlPathFileName))
-			{
 				theInputMdlPathName = mdlPathFileName;
-			}
 
 			string progressDescriptionText = "Decompiling with " + MainCROWBAR.TheApp.GetProductNameAndVersion() + ": ";
 
@@ -296,55 +237,42 @@ namespace Crowbar
 			}
 
 			UpdateProgressStop("... " + progressDescriptionText + " finished.");
-
 			return status;
 		}
 
 		private AppEnums.StatusMessage DecompileModelsInFolderRecursively(string modelsPathName)
 		{
-			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
+			AppEnums.StatusMessage status = DecompileModelsInFolder(modelsPathName);
 
-			status = DecompileModelsInFolder(modelsPathName);
 			if (CancellationPending)
-			{
-				status = AppEnums.StatusMessage.Canceled;
-				return status;
-			}
+				return AppEnums.StatusMessage.Canceled;
 
 			foreach (string aPathName in Directory.GetDirectories(modelsPathName))
 			{
 				status = DecompileModelsInFolderRecursively(aPathName);
 				if (CancellationPending)
-				{
-					status = AppEnums.StatusMessage.Canceled;
-					return status;
-				}
+					return AppEnums.StatusMessage.Canceled;
 			}
-//INSTANT C# NOTE: Inserted the following 'return' since all code paths must return a value in C#:
-			return 0;
+
+			return status;
 		}
 
 		private AppEnums.StatusMessage DecompileModelsInFolder(string modelsPathName)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			foreach (string aPathFileName in Directory.GetFiles(modelsPathName, "*.mdl"))
 			{
 				status = DecompileOneModel(aPathFileName);
 
 				if (CancellationPending)
-				{
-					status = AppEnums.StatusMessage.Canceled;
-					return status;
-				}
+					return AppEnums.StatusMessage.Canceled;
 				else if (theSkipCurrentModelIsActive)
 				{
 					theSkipCurrentModelIsActive = false;
 					continue;
 				}
 			}
-//INSTANT C# NOTE: Inserted the following 'return' since all code paths must return a value in C#:
-			return 0;
+			return status;
 		}
 
 		private AppEnums.StatusMessage DecompileOneModel(string mdlPathFileName)
@@ -353,39 +281,21 @@ namespace Crowbar
 
 			try
 			{
-				string mdlFileName = null;
-				string mdlRelativePathName = null;
-				string mdlRelativePathFileName = null;
-				mdlFileName = Path.GetFileName(mdlPathFileName);
-				mdlRelativePathName = FileManager.GetRelativePathFileName(theInputMdlPathName, FileManager.GetPath(mdlPathFileName));
-				mdlRelativePathFileName = Path.Combine(mdlRelativePathName, mdlFileName);
+				string mdlFileName = Path.GetFileName(mdlPathFileName);
+				string mdlRelativePathName = FileManager.GetRelativePathFileName(theInputMdlPathName, FileManager.GetPath(mdlPathFileName));
+				string mdlRelativePathFileName = Path.Combine(mdlRelativePathName, mdlFileName);
 
 				string modelName = Path.GetFileNameWithoutExtension(mdlPathFileName);
 
 				theModelOutputPath = Path.Combine(theOutputPath, mdlRelativePathName);
 				theModelOutputPath = Path.GetFullPath(theModelOutputPath);
 				if (MainCROWBAR.TheApp.Settings.DecompileFolderForEachModelIsChecked)
-				{
 					theModelOutputPath = Path.Combine(theModelOutputPath, modelName);
-				}
 
 				FileManager.CreatePath(theModelOutputPath);
 
-				//Try
-				//	Me.CreateLogTextFile(mdlPathFileName)
-				//Catch ex As Exception
-				//	Me.UpdateProgress()
-				//	Me.UpdateProgress(2, "ERROR: Crowbar tried to write the decompile log file but the system gave this message: " + ex.Message)
-				//	status = StatusMessage.Error
-				//	Return status
-				//End Try
 				if (MainCROWBAR.TheApp.Settings.DecompileMode == AppEnums.InputOptions.File)
-				{
 					status = CreateLogTextFile(mdlPathFileName);
-					//If status = StatusMessage.Error Then
-					//	Return status
-					//End If
-				}
 
 				UpdateProgress();
 				UpdateProgress(1, "Decompiling \"" + mdlRelativePathFileName + "\" ...");
@@ -398,13 +308,9 @@ namespace Crowbar
 					if (model != null)
 					{
 						if (MainCROWBAR.TheApp.Settings.DecompileOverrideMdlVersion == AppEnums.SupportedMdlVersion.DoNotOverride)
-						{
 							UpdateProgress(2, "Model version " + model.Version.ToString() + " detected.");
-						}
 						else
-						{
 							UpdateProgress(2, "Model version overridden to be " + model.Version.ToString() + ".");
-						}
 					}
 					else
 					{
@@ -433,40 +339,13 @@ namespace Crowbar
 
 				UpdateProgress(2, "Reading MDL file header ...");
 				status = model.ReadMdlFileHeader();
-				//If status = StatusMessage.ErrorInvalidMdlFileId Then
-				//	Me.UpdateProgress(2, "ERROR: File does not have expected MDL header ID (first 4 bytes of file) of 'IDST' (without quotes). MDL file is not a GoldSource- or Source-engine MDL file.")
-				//	Return status
-				//ElseIf status = StatusMessage.ErrorInvalidInternalMdlFileSize Then
-				//	Me.UpdateProgress(3, "WARNING: The internally recorded file size is different than the actual file size. Some data might not decompile correctly.")
-				//ElseIf status = StatusMessage.ErrorRequiredMdlFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: MDL file not found.")
-				//	Return status
-				//End If
+
 				if (status == AppEnums.StatusMessage.ErrorInvalidInternalMdlFileSize)
-				{
 					UpdateProgress(3, "WARNING: The internally recorded file size is different than the actual file size. Some data might not decompile correctly.");
-				}
 				UpdateProgress(2, "... Reading MDL file header finished.");
 
 				UpdateProgress(2, "Checking for required files ...");
 				AppEnums.FilesFoundFlags filesFoundFlags = model.CheckForRequiredFiles();
-				//If status = StatusMessage.ErrorRequiredSequenceGroupMdlFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: Sequence Group MDL file not found.")
-				//	Return status
-				//ElseIf status = StatusMessage.ErrorRequiredTextureMdlFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: Texture MDL file not found.")
-				//	Return status
-				//ElseIf status = StatusMessage.ErrorRequiredAniFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: ANI file not found.")
-				//	Return status
-				//ElseIf status = StatusMessage.ErrorRequiredVtxFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: VTX file not found.")
-				//	Return status
-				//ElseIf status = StatusMessage.ErrorRequiredVvdFileNotFound Then
-				//	Me.UpdateProgress(2, "ERROR: VVD file not found.")
-				//	Return status
-				//End If
-				//Me.UpdateProgress(2, "... All required files found.")
 				if (filesFoundFlags == AppEnums.FilesFoundFlags.ErrorRequiredSequenceGroupMdlFileNotFound)
 				{
 					UpdateProgress(2, "ERROR: Sequence Group MDL file not found.");
@@ -478,34 +357,20 @@ namespace Crowbar
 					return AppEnums.StatusMessage.ErrorRequiredTextureMdlFileNotFound;
 				}
 				if ((filesFoundFlags & AppEnums.FilesFoundFlags.ErrorRequiredAniFileNotFound) > 0)
-				{
 					UpdateProgress(3, "WARNING: ANI file not found.");
-				}
 				if ((filesFoundFlags & AppEnums.FilesFoundFlags.ErrorRequiredVtxFileNotFound) > 0)
-				{
 					UpdateProgress(3, "WARNING: VTX file not found.");
-				}
 				if ((filesFoundFlags & AppEnums.FilesFoundFlags.ErrorRequiredVvdFileNotFound) > 0)
-				{
 					UpdateProgress(3, "WARNING: VVD file not found.");
-				}
 				if (filesFoundFlags == AppEnums.FilesFoundFlags.AllFilesFound)
-				{
 					UpdateProgress(2, "... All required files found.");
-				}
 				else
-				{
 					UpdateProgress(2, "... Not all required files found, but decompiling available files.");
-				}
 
 				if (CancellationPending)
-				{
 					return status;
-				}
 				else if (theSkipCurrentModelIsActive)
-				{
 					return status;
-				}
 
 				UpdateProgress(2, "Reading data ...");
 				status = ReadCompiledFiles(mdlPathFileName, model);
@@ -536,13 +401,7 @@ namespace Crowbar
 					return status;
 				}
 				else
-				{
 					UpdateProgress(2, "... Reading data finished.");
-				}
-
-				//Me.UpdateProgress(2, "Processinging data ...")
-				//status = Me.ProcessData(model)
-				//Me.UpdateProgress(2, "... Processinging data finished.")
 
 				//NOTE: Write log files before data files, in case something goes wrong with writing data files.
 				if (MainCROWBAR.TheApp.Settings.DecompileDebugInfoFilesIsChecked)
@@ -562,9 +421,7 @@ namespace Crowbar
 						return status;
 					}
 					else
-					{
 						UpdateProgress(2, "... Writing decompile-info files finished.");
-					}
 				}
 
 				UpdateProgress(2, "Writing data ...");
@@ -582,13 +439,11 @@ namespace Crowbar
 					return status;
 				}
 				else
-				{
 					UpdateProgress(2, "... Writing data finished.");
-				}
 
 				UpdateProgress(1, "... Decompiling \"" + mdlRelativePathFileName + "\" finished.");
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				int debug = 4242;
 				//Finally
@@ -604,20 +459,16 @@ namespace Crowbar
 		private AppEnums.StatusMessage CreateLogTextFile(string mdlPathFileName)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileLogFileIsChecked)
 			{
-				string mdlFileName = null;
-				string logPath = null;
-				string logFileName = null;
-				string logPathFileName = null;
-
 				try
 				{
+					string logPath;
+					string logFileName;
 					if (!string.IsNullOrEmpty(mdlPathFileName))
 					{
 						logPath = theModelOutputPath;
-						mdlFileName = Path.GetFileNameWithoutExtension(mdlPathFileName);
+						string mdlFileName = Path.GetFileNameWithoutExtension(mdlPathFileName);
 						logFileName = mdlFileName + " " + Properties.Resources.Decompile_LogFileNameSuffix;
 					}
 					else
@@ -625,16 +476,15 @@ namespace Crowbar
 						logPath = theOutputPath;
 						logFileName = Properties.Resources.Decompile_LogFileNameSuffix;
 					}
+
 					FileManager.CreatePath(logPath);
-					logPathFileName = Path.Combine(logPath, logFileName);
+					string logPathFileName = Path.Combine(logPath, logFileName);
 
 					theLogFileStream = File.CreateText(logPathFileName);
 					theLogFileStream.AutoFlush = true;
 
 					if (File.Exists(logPathFileName))
-					{
 						theDecompiledLogFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, logPathFileName));
-					}
 
 					theLogFileStream.WriteLine("// " + MainCROWBAR.TheApp.GetHeaderComment());
 					theLogFileStream.Flush();
@@ -647,9 +497,7 @@ namespace Crowbar
 				}
 			}
 			else
-			{
 				theLogFileStream = null;
-			}
 
 			return status;
 		}
@@ -661,9 +509,7 @@ namespace Crowbar
 			UpdateProgress(3, "Reading MDL file ...");
 			status = model.ReadMdlFile();
 			if (status == AppEnums.StatusMessage.Success)
-			{
 				UpdateProgress(3, "... Reading MDL file finished.");
-			}
 			else if (status == AppEnums.StatusMessage.Error)
 			{
 				UpdateProgress(3, "... Reading MDL file FAILED. (Probably unexpected format.)");
@@ -675,13 +521,9 @@ namespace Crowbar
 				UpdateProgress(3, "Reading sequence group MDL files ...");
 				status = model.ReadSequenceGroupMdlFiles();
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading sequence group MDL files finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading sequence group MDL files FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			if (model.TextureMdlFileIsUsed)
@@ -689,13 +531,9 @@ namespace Crowbar
 				UpdateProgress(3, "Reading texture MDL file ...");
 				status = model.ReadTextureMdlFile();
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading texture MDL file finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading texture MDL file FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			if (model.PhyFileIsUsed)
@@ -705,13 +543,9 @@ namespace Crowbar
 				status = model.ReadPhyFile();
 				model.SourceModelProgress -= Model_SourceModelProgress;
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading PHY file finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading PHY file FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			if (model.VtxFileIsUsed)
@@ -719,13 +553,9 @@ namespace Crowbar
 				UpdateProgress(3, "Reading VTX file ...");
 				status = model.ReadVtxFile();
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading VTX file finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading VTX file FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			if (model.AniFileIsUsed && MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked)
@@ -733,13 +563,9 @@ namespace Crowbar
 				UpdateProgress(3, "Reading ANI file ...");
 				status = model.ReadAniFile();
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading ANI file finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading ANI file FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			if (model.VvdFileIsUsed)
@@ -747,13 +573,9 @@ namespace Crowbar
 				UpdateProgress(3, "Reading VVD file ...");
 				status = model.ReadVvdFile();
 				if (status == AppEnums.StatusMessage.Success)
-				{
 					UpdateProgress(3, "... Reading VVD file finished.");
-				}
 				else if (status == AppEnums.StatusMessage.Error)
-				{
 					UpdateProgress(3, "... Reading VVD file FAILED. (Probably unexpected format.)");
-				}
 			}
 
 			return status;
@@ -771,96 +593,60 @@ namespace Crowbar
 
 		private AppEnums.StatusMessage WriteDecompiledFiles(SourceModel model)
 		{
-			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			MainCROWBAR.TheApp.SmdFileNames.Clear();
 
 			//TEST:
 			//Me.TestWriteDmx()
 
-			status = WriteQcFile(model);
+			AppEnums.StatusMessage status = WriteQcFile(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteReferenceMeshFiles(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteLodMeshFiles(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WritePhysicsMeshFile(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteProceduralBonesFile(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteVertexAnimationFiles(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteBoneAnimationFiles(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
 			status = WriteTextureFiles(model);
 			if (status == AppEnums.StatusMessage.Canceled)
-			{
 				return status;
-			}
 			else if (status == AppEnums.StatusMessage.Skipped)
-			{
 				return status;
-			}
 
-			status = WriteDeclareSequenceQciFile(model);
-
-			return status;
+			return WriteDeclareSequenceQciFile(model);
 		}
 
 		//Private Sub TestWriteDmx()
@@ -881,48 +667,26 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteQcFile(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileQcFileIsChecked)
 			{
-				if (MainCROWBAR.TheApp.Settings.DecompileGroupIntoQciFilesIsChecked)
-				{
-					//Me.UpdateProgress(3, "Writing QC and QCI files ...")
-					UpdateProgress(3, "QC and QCI files: ");
-				}
-				else
-				{
-					//Me.UpdateProgress(3, "Writing QC file ...")
-					UpdateProgress(3, "QC file: ");
-				}
+				UpdateProgress(3, MainCROWBAR.TheApp.Settings.DecompileGroupIntoQciFilesIsChecked ? "QC and QCI files: " : "QC file: ");
 				theDecompiledFileType = AppEnums.DecompiledFileType.QC;
 				theFirstDecompiledFileHasBeenAdded = false;
 				model.SourceModelProgress += Model_SourceModelProgress;
 
 				string qcPathFileName = Path.Combine(theModelOutputPath, model.Name + ".qc");
-
 				status = model.WriteQcFile(qcPathFileName);
 
 				if (File.Exists(qcPathFileName))
-				{
 					theDecompiledQcFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, qcPathFileName));
-				}
 
 				model.SourceModelProgress -= Model_SourceModelProgress;
-				//If TheApp.Settings.DecompileGroupIntoQciFilesIsChecked Then
-				//	Me.UpdateProgress(3, "... Writing QC and QCI files finished.")
-				//Else
-				//	Me.UpdateProgress(3, "... Writing QC file finished.")
-				//End If
 			}
 
 			if (CancellationPending)
-			{
 				status = AppEnums.StatusMessage.Canceled;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				status = AppEnums.StatusMessage.Skipped;
-			}
 
 			return status;
 		}
@@ -930,12 +694,10 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteReferenceMeshFiles(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked)
 			{
 				if (model.HasMeshData)
 				{
-					//Me.UpdateProgress(3, "Writing reference mesh files ...")
 					UpdateProgress(3, "Reference mesh files: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.ReferenceMesh;
 					theFirstDecompiledFileHasBeenAdded = false;
@@ -944,7 +706,6 @@ namespace Crowbar
 					status = model.WriteReferenceMeshFiles(theModelOutputPath);
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing reference mesh files finished.")
 				}
 			}
 
@@ -954,12 +715,10 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteLodMeshFiles(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileLodMeshSmdFilesIsChecked)
 			{
 				if (model.HasLodMeshData)
 				{
-					//Me.UpdateProgress(3, "Writing LOD mesh files ...")
 					UpdateProgress(3, "LOD mesh files: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.LodMesh;
 					theFirstDecompiledFileHasBeenAdded = false;
@@ -968,7 +727,6 @@ namespace Crowbar
 					status = model.WriteLodMeshFiles(theModelOutputPath);
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing LOD mesh files finished.")
 				}
 			}
 
@@ -978,12 +736,10 @@ namespace Crowbar
 		private AppEnums.StatusMessage WritePhysicsMeshFile(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked)
 			{
 				if (model.HasPhysicsMeshData)
 				{
-					//Me.UpdateProgress(3, "Writing physics mesh file ...")
 					UpdateProgress(3, "Physics mesh file: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.PhysicsMesh;
 					theFirstDecompiledFileHasBeenAdded = false;
@@ -992,18 +748,13 @@ namespace Crowbar
 					status = model.WritePhysicsMeshSmdFile(theModelOutputPath);
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing physics mesh file finished.")
 				}
 			}
 
 			if (CancellationPending)
-			{
 				status = AppEnums.StatusMessage.Canceled;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				status = AppEnums.StatusMessage.Skipped;
-			}
 
 			return status;
 		}
@@ -1011,40 +762,25 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteVertexAnimationFiles(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked)
 			{
 				if (model.HasVertexAnimationData)
 				{
-					//Me.UpdateProgress(3, "Writing VTA file ...")
 					UpdateProgress(3, "Vertex animation files: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.VertexAnimation;
 					theFirstDecompiledFileHasBeenAdded = false;
 					model.SourceModelProgress += Model_SourceModelProgress;
 
-					//Dim vtaPathFileName As String
-					//vtaPathFileName = Path.Combine(Me.theModelOutputPath, SourceFileNamesModule.GetVtaFileName(model.Name))
-
-					//status = model.WriteVertexAnimationVtaFile(vtaPathFileName)
 					status = model.WriteVertexAnimationVtaFiles(theModelOutputPath);
 
-					//If File.Exists(vtaPathFileName) Then
-					//	Me.theDecompiledVtaFiles.Add(FileManager.GetRelativePathFileName(Me.theOutputPath, vtaPathFileName))
-					//End If
-
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing VTA file finished.")
 				}
 			}
 
 			if (CancellationPending)
-			{
 				status = AppEnums.StatusMessage.Canceled;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				status = AppEnums.StatusMessage.Skipped;
-			}
 
 			return status;
 		}
@@ -1052,7 +788,6 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteBoneAnimationFiles(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked)
 			{
 				if (model.HasBoneAnimationData)
@@ -1060,7 +795,6 @@ namespace Crowbar
 					string outputPath = Path.Combine(theModelOutputPath, SourceFileNamesModule.GetAnimationSmdRelativePath(model.Name));
 					if (FileManager.PathExistsAfterTryToCreate(outputPath))
 					{
-						//Me.UpdateProgress(3, "Writing bone animation SMD files ...")
 						UpdateProgress(3, "Bone animation files: ");
 						theDecompiledFileType = AppEnums.DecompiledFileType.BoneAnimation;
 						theFirstDecompiledFileHasBeenAdded = false;
@@ -1069,12 +803,9 @@ namespace Crowbar
 						status = model.WriteBoneAnimationSmdFiles(theModelOutputPath);
 
 						model.SourceModelProgress -= Model_SourceModelProgress;
-						//Me.UpdateProgress(3, "... Writing bone animation SMD files finished.")
 					}
 					else
-					{
 						UpdateProgress(3, "WARNING: Unable to create \"" + outputPath + "\" where bone animation SMD files would be written.");
-					}
 				}
 			}
 
@@ -1084,12 +815,10 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteProceduralBonesFile(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked)
 			{
 				if (model.HasProceduralBonesData)
 				{
-					//Me.UpdateProgress(3, "Writing VRD file ...")
 					UpdateProgress(3, "Procedural bones file: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.ProceduralBones;
 					theFirstDecompiledFileHasBeenAdded = false;
@@ -1100,23 +829,16 @@ namespace Crowbar
 					status = model.WriteVrdFile(vrdPathFileName);
 
 					if (File.Exists(vrdPathFileName))
-					{
 						theDecompiledVrdFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, vrdPathFileName));
-					}
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing VRD file finished.")
 				}
 			}
 
 			if (CancellationPending)
-			{
 				status = AppEnums.StatusMessage.Canceled;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				status = AppEnums.StatusMessage.Skipped;
-			}
 
 			return status;
 		}
@@ -1124,7 +846,6 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteDeclareSequenceQciFile(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileDeclareSequenceQciFileIsChecked)
 			{
 				if (model.HasBoneAnimationData)
@@ -1139,22 +860,16 @@ namespace Crowbar
 					status = model.WriteDeclareSequenceQciFile(declareSequenceQciPathFileName);
 
 					if (File.Exists(declareSequenceQciPathFileName))
-					{
 						theDecompiledDeclareSequenceQciFiles.Add(FileManager.GetRelativePathFileName(theOutputPath, declareSequenceQciPathFileName));
-					}
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
 				}
 			}
 
 			if (CancellationPending)
-			{
 				status = AppEnums.StatusMessage.Canceled;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				status = AppEnums.StatusMessage.Skipped;
-			}
 
 			return status;
 		}
@@ -1162,12 +877,10 @@ namespace Crowbar
 		private AppEnums.StatusMessage WriteTextureFiles(SourceModel model)
 		{
 			AppEnums.StatusMessage status = AppEnums.StatusMessage.Success;
-
 			if (MainCROWBAR.TheApp.Settings.DecompileTextureBmpFilesIsChecked)
 			{
 				if (model.HasTextureFileData)
 				{
-					//Me.UpdateProgress(3, "Writing texture files ...")
 					UpdateProgress(3, "Texture files: ");
 					theDecompiledFileType = AppEnums.DecompiledFileType.TextureBmp;
 					theFirstDecompiledFileHasBeenAdded = false;
@@ -1176,7 +889,6 @@ namespace Crowbar
 					status = model.WriteTextureFiles(theModelOutputPath);
 
 					model.SourceModelProgress -= Model_SourceModelProgress;
-					//Me.UpdateProgress(3, "... Writing texture files finished.")
 				}
 			}
 
@@ -1195,24 +907,11 @@ namespace Crowbar
 
 			model.WriteAccessedBytesDebugFiles(debugPath);
 			if (CancellationPending)
-			{
 				return;
-			}
 			else if (theSkipCurrentModelIsActive)
-			{
 				return;
-			}
 
 			model.SourceModelProgress -= Model_SourceModelProgress;
-
-			//Dim debug3File As AppDebug3File
-			//debug3File = New AppDebug3File()
-			//debugPathFileName = Path.Combine(debugPathName, model.Name + " debug - unknown bytes.txt")
-			//debug3File.WriteFile(debugPathFileName, model.MdlFileData.theUnknownValues)
-
-			//	Dim debugFile As AppDebug1File
-			//	debugFile = New AppDebug1File()
-			//	debugPathFileName = Path.Combine(debugPathName, TheSourceEngineModel.ModelName + " debug - Structure info.txt")
 		}
 
 		private void UpdateProgressStart(string line)
@@ -1232,8 +931,7 @@ namespace Crowbar
 
 		private void UpdateProgress(int indentLevel, string line)
 		{
-			string indentedLine = "";
-
+			string indentedLine = string.Empty;
 			for (int i = 1; i <= indentLevel; i++)
 			{
 				indentedLine += "  ";
@@ -1253,124 +951,72 @@ namespace Crowbar
 			ReportProgress(progressValue, line);
 		}
 
-#endregion
+		#endregion
 
-#region Event Handlers
-
+		#region Event Handlers
 		private void Model_SourceModelProgress(object sender, SourceModelProgressEventArgs e)
 		{
 			if (e.Progress == AppEnums.ProgressOptions.WarningPhyFileChecksumDoesNotMatchMdlFileChecksum)
 			{
 				//TODO: Test that this shows when needed.
 				UpdateProgress(4, "WARNING: The PHY file's checksum value does not match the MDL file's checksum value.");
-			//ElseIf e.Progress = ProgressOptions.WritingFileStarted Then
-			//	Dim pathFileName As String
-			//	Dim fileName As String
-			//	pathFileName = e.Message
-			//	fileName = Path.GetFileName(pathFileName)
-			//	'TODO: Figure out how to rename SMD file if already written in a previous step, which might happen if, for example, an anim is named "<modelname>_reference" or "<modelname>_physics".
-			//	'      Could also happen if the loop through SequenceDescs has already created the SMD file before the loop through AnimationDescs.
-			//	'      The same name can be used by multiple sequences, as is the case for 3 "frontkick" sequences in Half-Life Opposing Force "massn.mdl".
-			//	If TheApp.SmdFileNames.Contains(pathFileName) Then
-			//		Dim model As SourceModel
-			//		model = CType(sender, SourceModel)
-			//		model.WritingSingleFileIsCanceled = True
-			//		'Me.UpdateProgress(4, "WARNING: The file, """ + smdFileName + """, was written already in a previous step.")
-			//		'Else
-			//		'	Me.UpdateProgress(4, "Writing """ + fileName + """ file ...")
-			//	End If
+				//ElseIf e.Progress = ProgressOptions.WritingFileStarted Then
+				//	Dim pathFileName As String
+				//	Dim fileName As String
+				//	pathFileName = e.Message
+				//	fileName = Path.GetFileName(pathFileName)
+				//	'TODO: Figure out how to rename SMD file if already written in a previous step, which might happen if, for example, an anim is named "<modelname>_reference" or "<modelname>_physics".
+				//	'      Could also happen if the loop through SequenceDescs has already created the SMD file before the loop through AnimationDescs.
+				//	'      The same name can be used by multiple sequences, as is the case for 3 "frontkick" sequences in Half-Life Opposing Force "massn.mdl".
+				//	If TheApp.SmdFileNames.Contains(pathFileName) Then
+				//		Dim model As SourceModel
+				//		model = CType(sender, SourceModel)
+				//		model.WritingSingleFileIsCanceled = True
+				//		'Me.UpdateProgress(4, "WARNING: The file, """ + smdFileName + """, was written already in a previous step.")
+				//		'Else
+				//		'	Me.UpdateProgress(4, "Writing """ + fileName + """ file ...")
+				//	End If
 			}
 			else if (e.Progress == AppEnums.ProgressOptions.WritingFileFailed)
-			{
 				UpdateProgress(4, e.Message);
-			}
 			else if (e.Progress == AppEnums.ProgressOptions.WritingFileFinished)
 			{
-				string pathFileName = null;
-				string fileName = null;
-				pathFileName = e.Message;
-				fileName = Path.GetFileName(pathFileName);
+				string pathFileName = e.Message;
+				string fileName = Path.GetFileName(pathFileName);
 				//Me.UpdateProgress(4, "... Writing """ + fileName + """ file finished.")
 				UpdateProgress(4, fileName);
 
 				if (!theFirstDecompiledFileHasBeenAdded && File.Exists(pathFileName))
 				{
 					string relativePathFileName = FileManager.GetRelativePathFileName(theOutputPath, pathFileName);
-
 					if (theDecompiledFileType == AppEnums.DecompiledFileType.ReferenceMesh)
-					{
 						theDecompiledFirstRefSmdFiles.Add(relativePathFileName);
-					}
 					else if (theDecompiledFileType == AppEnums.DecompiledFileType.LodMesh)
-					{
 						theDecompiledFirstLodSmdFiles.Add(relativePathFileName);
-					}
 					else if (theDecompiledFileType == AppEnums.DecompiledFileType.BoneAnimation)
-					{
 						theDecompiledFirstBoneAnimSmdFiles.Add(relativePathFileName);
-					}
 					else if (theDecompiledFileType == AppEnums.DecompiledFileType.PhysicsMesh)
-					{
 						theDecompiledPhysicsFiles.Add(relativePathFileName);
-					}
 					else if (theDecompiledFileType == AppEnums.DecompiledFileType.TextureBmp)
-					{
 						theDecompiledFirstTextureBmpFiles.Add(relativePathFileName);
-					}
 					else if (theDecompiledFileType == AppEnums.DecompiledFileType.Debug)
-					{
 						theDecompiledFirstDebugFiles.Add(relativePathFileName);
-					}
 
 					theFirstDecompiledFileHasBeenAdded = true;
 				}
-				//TheApp.SmdFileNames.Add(pathFileName)
 
 				SourceModel model = (SourceModel)sender;
 				if (CancellationPending)
-				{
-					//status = StatusMessage.Canceled
 					model.WritingIsCanceled = true;
-					//ElseIf Me.theSkipCurrentModelIsActive Then
-					//	'status = StatusMessage.Skipped
-					//	model.WritingSingleFileIsCanceled = True
-				}
 			}
+			#if DEBUG
 			else
 			{
-				int progressUnhandled = 4242;
+				if(e.Progress != AppEnums.ProgressOptions.WritingFileStarted)
+					Console.WriteLine(string.Format("Decompiler (Model_SourceModelProgress): ({0}) unhandled!", e.Progress));
 			}
+			#endif
 		}
-
-#endregion
-
-#region Data
-
-		private bool theSkipCurrentModelIsActive;
-		private string theInputMdlPathName;
-		private string theOutputPath;
-		private string theModelOutputPath;
-		private string theOutputPathOrModelOutputFileName;
-
-		private StreamWriter theLogFileStream;
-
-		private BindingListEx<string> theDecompiledQcFiles;
-		private BindingListEx<string> theDecompiledFirstRefSmdFiles;
-		private BindingListEx<string> theDecompiledFirstLodSmdFiles;
-		private BindingListEx<string> theDecompiledPhysicsFiles;
-		private BindingListEx<string> theDecompiledVtaFiles;
-		private BindingListEx<string> theDecompiledFirstBoneAnimSmdFiles;
-		private BindingListEx<string> theDecompiledVrdFiles;
-		private BindingListEx<string> theDecompiledDeclareSequenceQciFiles;
-		private BindingListEx<string> theDecompiledFirstTextureBmpFiles;
-		private BindingListEx<string> theDecompiledLogFiles;
-		private BindingListEx<string> theDecompiledFirstDebugFiles;
-
-		private AppEnums.DecompiledFileType theDecompiledFileType;
-		private bool theFirstDecompiledFileHasBeenAdded;
-
-#endregion
-
+		#endregion
 	}
-
 }
